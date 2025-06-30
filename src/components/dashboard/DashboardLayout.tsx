@@ -1,3 +1,4 @@
+
 import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -37,15 +38,15 @@ export const DashboardLayout = ({
     { id: "settings", label: "Settings", icon: SettingsIcon },
   ];
 
-  // Filter navigation based on user role - explicitly handle admin role
-  const filteredNavigation = navigationItems.filter(item => {
-    // Admin users can see all navigation items
+  // Filter navigation based on user role - using the corrected logic
+  const filteredNavigation = navigationItems.filter((item) => {
+    // Allow all items if user is an admin
     if (userProfile.role === 'admin') return true;
-    
-    // Non-admin users cannot see the users management section
-    if (item.id === 'users' && userProfile.role !== 'admin') return false;
-    
-    // All other items are visible to all roles
+
+    // Block non-admins from seeing the 'users' tab
+    if (item.id === 'users') return false;
+
+    // Allow all other tabs
     return true;
   });
 
