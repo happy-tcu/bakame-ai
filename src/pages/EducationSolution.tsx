@@ -1,191 +1,279 @@
 
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, Users, Wifi, WifiOff } from "lucide-react";
+import { ArrowLeft, BookOpen, Users, Wifi, WifiOff, Play, CheckCircle, TrendingUp } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const EducationSolution = () => {
   const navigate = useNavigate();
+  const [activeCard, setActiveCard] = useState(0);
+  const [studentCount, setStudentCount] = useState(0);
+  const [schoolCount, setSchoolCount] = useState(0);
+  const [completionRate, setCompletionRate] = useState(0);
+
+  // Animated counters
+  useEffect(() => {
+    const animateCounters = () => {
+      const duration = 2000;
+      const steps = 60;
+      const increment = duration / steps;
+
+      let currentStep = 0;
+      const timer = setInterval(() => {
+        currentStep++;
+        const progress = currentStep / steps;
+        
+        setStudentCount(Math.floor(25000 * progress));
+        setSchoolCount(Math.floor(150 * progress));
+        setCompletionRate(Math.floor(92 * progress));
+
+        if (currentStep >= steps) {
+          clearInterval(timer);
+        }
+      }, increment);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const statsSection = document.getElementById('stats-section');
+    if (statsSection) {
+      observer.observe(statsSection);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Auto-rotate feature cards
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveCard((prev) => (prev + 1) % 3);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10">
+      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10 backdrop-blur-sm sticky top-0 z-50">
         <div className="flex items-center space-x-4">
           <button 
             onClick={() => navigate('/')}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-105"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="text-2xl font-bold">Bakame Ai</div>
         </div>
         <div className="hidden md:flex space-x-8">
-          <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
-          <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
-          <a href="/team" className="text-white/70 hover:text-white transition-colors">Team</a>
-          <a href="/signup" className="text-white/70 hover:text-white transition-colors">Sign In</a>
+          <a href="/blog" className="text-white/70 hover:text-white transition-colors hover:scale-105 transform duration-200">Blog</a>
+          <a href="/resources" className="text-white/70 hover:text-white transition-colors hover:scale-105 transform duration-200">Resources</a>
+          <a href="/team" className="text-white/70 hover:text-white transition-colors hover:scale-105 transform duration-200">Team</a>
+          <a href="/signup" className="text-white/70 hover:text-white transition-colors hover:scale-105 transform duration-200">Sign In</a>
         </div>
       </nav>
 
       <div className="container mx-auto px-6 py-20">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+        {/* Hero Section with floating animation */}
+        <div className="text-center mb-16 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-3xl animate-pulse"></div>
+          <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce">
             <BookOpen className="w-8 h-8 text-blue-400" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-fade-in">
             Education Solutions
           </h1>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
+          <p className="text-xl text-white/70 max-w-3xl mx-auto animate-fade-in">
             Empowering educational institutions with offline-first IVR systems that work in any environment, from remote villages to urban campuses.
           </p>
+          
+          {/* Live Stats */}
+          <div id="stats-section" className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-400 mb-2">{studentCount.toLocaleString()}+</div>
+              <div className="text-white/60 text-sm">Students Reached</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-purple-400 mb-2">{schoolCount}+</div>
+              <div className="text-white/60 text-sm">Schools Connected</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green-400 mb-2">{completionRate}%</div>
+              <div className="text-white/60 text-sm">Completion Rate</div>
+            </div>
+          </div>
         </div>
 
-        {/* How It Works Section */}
+        {/* Interactive How It Works Section */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold mb-12 text-center">How Bakame AI Works for Education</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
-                <WifiOff className="w-6 h-6 text-blue-400" />
+            {[
+              {
+                icon: WifiOff,
+                title: "Offline-First Design",
+                description: "Works completely offline, perfect for schools in remote areas with limited internet connectivity. All processing happens locally on the device.",
+                color: "blue"
+              },
+              {
+                icon: Users,
+                title: "Multi-Language Support",
+                description: "Built-in support for Kinyarwanda, English, French, and Swahili, making education accessible to students in their native languages.",
+                color: "purple"
+              },
+              {
+                icon: BookOpen,
+                title: "Interactive Learning",
+                description: "Students can access course materials, submit assignments, and receive feedback through voice interactions, even without smartphones.",
+                color: "green"
+              }
+            ].map((feature, index) => (
+              <div 
+                key={index}
+                className={`bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 transition-all duration-500 hover:scale-105 hover:bg-white/10 cursor-pointer ${
+                  activeCard === index ? 'ring-2 ring-blue-400/50 scale-105' : ''
+                }`}
+                onMouseEnter={() => setActiveCard(index)}
+              >
+                <div className={`w-12 h-12 bg-${feature.color}-500/20 rounded-lg flex items-center justify-center mb-4 transition-all duration-300`}>
+                  <feature.icon className={`w-6 h-6 text-${feature.color}-400`} />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                <p className="text-white/70">{feature.description}</p>
+                <div className="mt-4 w-full bg-white/10 rounded-full h-1">
+                  <div 
+                    className={`h-1 bg-${feature.color}-400 rounded-full transition-all duration-1000 ${
+                      activeCard === index ? 'w-full' : 'w-0'
+                    }`}
+                  ></div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Offline-First Design</h3>
-              <p className="text-white/70">
-                Works completely offline, perfect for schools in remote areas with limited internet connectivity. All processing happens locally on the device.
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
-                <Users className="w-6 h-6 text-purple-400" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Multi-Language Support</h3>
-              <p className="text-white/70">
-                Built-in support for Kinyarwanda, English, French, and Swahili, making education accessible to students in their native languages.
-              </p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-              <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
-                <BookOpen className="w-6 h-6 text-green-400" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Interactive Learning</h3>
-              <p className="text-white/70">
-                Students can access course materials, submit assignments, and receive feedback through voice interactions, even without smartphones.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
 
-        {/* Use Cases Section */}
+        {/* Enhanced Use Cases Section */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold mb-12 text-center">Educational Use Cases</h2>
           <div className="space-y-8">
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
-              <h3 className="text-2xl font-semibold mb-4 text-blue-400">Remote Learning Support</h3>
-              <p className="text-white/70 mb-4">
-                Students in rural areas can access lectures, participate in discussions, and complete assignments using basic phones. 
-                The system works entirely offline, storing content locally and syncing when connectivity is available.
-              </p>
-              <ul className="list-disc list-inside text-white/60 space-y-2">
-                <li>Voice-based course delivery</li>
-                <li>Assignment submission via voice</li>
-                <li>Progress tracking without internet</li>
-              </ul>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
-              <h3 className="text-2xl font-semibold mb-4 text-purple-400">Language Learning</h3>
-              <p className="text-white/70 mb-4">
-                Interactive language learning programs that help students practice pronunciation, vocabulary, and conversation skills 
-                in multiple languages, with AI-powered feedback and corrections.
-              </p>
-              <ul className="list-disc list-inside text-white/60 space-y-2">
-                <li>Pronunciation practice and correction</li>
-                <li>Vocabulary building exercises</li>
-                <li>Conversational AI tutoring</li>
-              </ul>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
-              <h3 className="text-2xl font-semibold mb-4 text-green-400">Administrative Services</h3>
-              <p className="text-white/70 mb-4">
-                Automated systems for student enrollment, grade inquiries, schedule information, and parent-teacher communication, 
-                all accessible through simple phone calls.
-              </p>
-              <ul className="list-disc list-inside text-white/60 space-y-2">
-                <li>Student information systems</li>
-                <li>Grade and attendance queries</li>
-                <li>Parent communication portal</li>
-              </ul>
-            </div>
+            {[
+              {
+                title: "Remote Learning Support",
+                description: "Students in rural areas can access lectures, participate in discussions, and complete assignments using basic phones. The system works entirely offline, storing content locally and syncing when connectivity is available.",
+                features: ["Voice-based course delivery", "Assignment submission via voice", "Progress tracking without internet"],
+                color: "blue",
+                icon: Play
+              },
+              {
+                title: "Language Learning",
+                description: "Interactive language learning programs that help students practice pronunciation, vocabulary, and conversation skills in multiple languages, with AI-powered feedback and corrections.",
+                features: ["Pronunciation practice and correction", "Vocabulary building exercises", "Conversational AI tutoring"],
+                color: "purple",
+                icon: Users
+              },
+              {
+                title: "Administrative Services",
+                description: "Automated systems for student enrollment, grade inquiries, schedule information, and parent-teacher communication, all accessible through simple phone calls.",
+                features: ["Student information systems", "Grade and attendance queries", "Parent communication portal"],
+                color: "green",
+                icon: CheckCircle
+              }
+            ].map((useCase, index) => (
+              <div 
+                key={index}
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-500 group"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className={`w-12 h-12 bg-${useCase.color}-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <useCase.icon className={`w-6 h-6 text-${useCase.color}-400`} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`text-2xl font-semibold mb-4 text-${useCase.color}-400`}>{useCase.title}</h3>
+                    <p className="text-white/70 mb-4">{useCase.description}</p>
+                    <ul className="list-disc list-inside text-white/60 space-y-2">
+                      {useCase.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center space-x-2">
+                          <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Benefits Section */}
+        {/* Interactive Benefits Section */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold mb-12 text-center">Key Benefits</h2>
           <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6 text-blue-400">For Students</h3>
-              <ul className="space-y-4 text-white/70">
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Access education from anywhere, even without internet</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Learn in their native language</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>No need for expensive devices or data plans</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Personalized learning experiences</span>
-                </li>
-              </ul>
+            <div className="space-y-6">
+              <h3 className="text-2xl font-semibold mb-6 text-blue-400 flex items-center">
+                <TrendingUp className="w-6 h-6 mr-2" />
+                For Students
+              </h3>
+              {[
+                "Access education from anywhere, even without internet",
+                "Learn in their native language",
+                "No need for expensive devices or data plans",
+                "Personalized learning experiences"
+              ].map((benefit, index) => (
+                <div key={index} className="flex items-start group cursor-pointer">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
+                  <span className="text-white/70 group-hover:text-white transition-colors duration-300">{benefit}</span>
+                </div>
+              ))}
             </div>
-            <div>
-              <h3 className="text-2xl font-semibold mb-6 text-purple-400">For Institutions</h3>
-              <ul className="space-y-4 text-white/70">
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Reach students in remote areas</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Reduce infrastructure costs</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Automate administrative tasks</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                  <span>Improve student engagement and retention</span>
-                </li>
-              </ul>
+            <div className="space-y-6">
+              <h3 className="text-2xl font-semibold mb-6 text-purple-400 flex items-center">
+                <BookOpen className="w-6 h-6 mr-2" />
+                For Institutions
+              </h3>
+              {[
+                "Reach students in remote areas",
+                "Reduce infrastructure costs",
+                "Automate administrative tasks",
+                "Improve student engagement and retention"
+              ].map((benefit, index) => (
+                <div key={index} className="flex items-start group cursor-pointer">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
+                  <span className="text-white/70 group-hover:text-white transition-colors duration-300">{benefit}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center bg-white/5 backdrop-blur-sm rounded-3xl p-12 border border-white/10">
-          <h2 className="text-3xl font-bold mb-6">Ready to Transform Education?</h2>
-          <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
-            Join schools and universities already using Bakame AI to provide accessible, offline education to their students.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => navigate('/signup')}
-              className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105"
-            >
-              Get Started Today
-            </button>
-            <button className="border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105">
-              Schedule Demo
-            </button>
+        {/* Enhanced CTA Section */}
+        <div className="text-center bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-sm rounded-3xl p-12 border border-white/10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 animate-pulse"></div>
+          <div className="relative z-10">
+            <h2 className="text-3xl font-bold mb-6">Ready to Transform Education?</h2>
+            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
+              Join schools and universities already using Bakame AI to provide accessible, offline education to their students.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button 
+                onClick={() => navigate('/signup')}
+                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+              >
+                Get Started Today
+              </button>
+              <button className="border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-white/60">
+                Schedule Demo
+              </button>
+            </div>
           </div>
         </div>
       </div>
