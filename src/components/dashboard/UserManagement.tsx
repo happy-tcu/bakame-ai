@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -56,13 +55,13 @@ export const UserManagement = ({ userProfile }: UserManagementProps) => {
     try {
       const { error } = await supabase
         .from('profiles')
-        .update({ role: newRole })
+        .update({ role: newRole as UserProfile['role'] })
         .eq('id', userId);
 
       if (error) throw error;
 
       setUsers(users.map(user => 
-        user.id === userId ? { ...user, role: newRole as any } : user
+        user.id === userId ? { ...user, role: newRole as UserProfile['role'] } : user
       ));
 
       toast({
