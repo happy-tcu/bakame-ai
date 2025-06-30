@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 const Index = () => {
@@ -5,16 +6,23 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Space-time warping background */}
+      {/* Enhanced space-time warping background */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Warped grid lines */}
+        {/* Complex warped grid system */}
         <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
-            <pattern id="warpedGrid" width="10" height="10" patternUnits="userSpaceOnUse">
-              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.1"/>
+            <pattern id="baseGrid" width="5" height="5" patternUnits="userSpaceOnUse">
+              <path d="M 5 0 L 0 0 0 5" fill="none" stroke="rgba(59,130,246,0.15)" strokeWidth="0.05"/>
             </pattern>
             <filter id="glow">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+              <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="strongGlow">
+              <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
               <feMerge> 
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
@@ -22,40 +30,89 @@ const Index = () => {
             </filter>
           </defs>
           
-          {/* Warped grid sections */}
-          <g transform="translate(0,0)">
-            <path d="M0,20 Q25,15 50,20 T100,20" fill="none" stroke="rgba(59,130,246,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
-            <path d="M0,40 Q25,35 50,40 T100,40" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.2"/>
-            <path d="M0,60 Q25,55 50,60 T100,60" fill="none" stroke="rgba(59,130,246,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
-            <path d="M0,80 Q25,75 50,80 T100,80" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.2"/>
+          {/* Base grid pattern */}
+          <rect width="100" height="100" fill="url(#baseGrid)" opacity="0.3"/>
+          
+          {/* Gravity well 1 - Top left quadrant */}
+          <g transform="translate(25,25)">
+            {/* Concentric curved lines creating gravity well effect */}
+            <circle cx="0" cy="0" r="8" fill="none" stroke="rgba(59,130,246,0.4)" strokeWidth="0.1" filter="url(#glow)"/>
+            <circle cx="0" cy="0" r="12" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.08"/>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="rgba(59,130,246,0.2)" strokeWidth="0.06"/>
+            <circle cx="0" cy="0" r="20" fill="none" stroke="rgba(59,130,246,0.15)" strokeWidth="0.04"/>
+            
+            {/* Radial grid lines bending toward center */}
+            {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
+              <path 
+                key={angle}
+                d={`M 0,0 Q ${8 * Math.cos(angle * Math.PI / 180)},${8 * Math.sin(angle * Math.PI / 180)} ${20 * Math.cos(angle * Math.PI / 180)},${20 * Math.sin(angle * Math.PI / 180)}`} 
+                fill="none" 
+                stroke="rgba(59,130,246,0.2)" 
+                strokeWidth="0.05"
+              />
+            ))}
           </g>
           
-          {/* Vertical warped lines */}
-          <g>
-            <path d="M20,0 Q15,25 20,50 T20,100" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.2"/>
-            <path d="M40,0 Q35,25 40,50 T40,100" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.2"/>
-            <path d="M60,0 Q55,25 60,50 T60,100" fill="none" stroke="rgba(59,130,246,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
-            <path d="M80,0 Q75,25 80,50 T80,100" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.2"/>
+          {/* Gravity well 2 - Bottom right */}
+          <g transform="translate(75,75)">
+            <circle cx="0" cy="0" r="6" fill="none" stroke="rgba(147,51,234,0.5)" strokeWidth="0.12" filter="url(#strongGlow)"/>
+            <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(147,51,234,0.4)" strokeWidth="0.1"/>
+            <circle cx="0" cy="0" r="14" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
+            <circle cx="0" cy="0" r="18" fill="none" stroke="rgba(147,51,234,0.2)" strokeWidth="0.06"/>
+            
+            {/* Spiral arms */}
+            <path d="M 0,0 Q 5,-3 10,-2 T 18,2" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
+            <path d="M 0,0 Q -3,5 -2,10 T 2,18" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
+            <path d="M 0,0 Q -5,3 -10,2 T -18,-2" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
+            <path d="M 0,0 Q 3,-5 2,-10 T -2,-18" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
           </g>
+          
+          {/* Gravity well 3 - Top right */}
+          <g transform="translate(75,25)">
+            <ellipse cx="0" cy="0" rx="12" ry="8" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.1" filter="url(#glow)"/>
+            <ellipse cx="0" cy="0" rx="16" ry="12" fill="none" stroke="rgba(34,197,94,0.3)" strokeWidth="0.08"/>
+            <ellipse cx="0" cy="0" rx="20" ry="16" fill="none" stroke="rgba(34,197,94,0.2)" strokeWidth="0.06"/>
+          </g>
+          
+          {/* Curved connecting lines showing space-time fabric */}
+          <path d="M 25,25 Q 50,35 75,25" fill="none" stroke="rgba(59,130,246,0.25)" strokeWidth="0.1" filter="url(#glow)"/>
+          <path d="M 25,25 Q 35,50 75,75" fill="none" stroke="rgba(147,51,234,0.25)" strokeWidth="0.1" filter="url(#glow)"/>
+          <path d="M 75,25 Q 65,50 75,75" fill="none" stroke="rgba(34,197,94,0.25)" strokeWidth="0.1" filter="url(#glow)"/>
+          
+          {/* Warped horizontal lines */}
+          <path d="M 0,20 Q 25,15 50,20 Q 75,25 100,20" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.08"/>
+          <path d="M 0,40 Q 25,45 50,40 Q 75,35 100,40" fill="none" stroke="rgba(147,51,234,0.25)" strokeWidth="0.08"/>
+          <path d="M 0,60 Q 25,55 50,60 Q 75,65 100,60" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.08"/>
+          <path d="M 0,80 Q 25,85 50,80 Q 75,75 100,80" fill="none" stroke="rgba(147,51,234,0.25)" strokeWidth="0.08"/>
+          
+          {/* Warped vertical lines */}
+          <path d="M 20,0 Q 15,25 20,50 Q 25,75 20,100" fill="none" stroke="rgba(59,130,246,0.25)" strokeWidth="0.08"/>
+          <path d="M 40,0 Q 45,25 40,50 Q 35,75 40,100" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
+          <path d="M 60,0 Q 55,25 60,50 Q 65,75 60,100" fill="none" stroke="rgba(59,130,246,0.25)" strokeWidth="0.08"/>
+          <path d="M 80,0 Q 85,25 80,50 Q 75,75 80,100" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
         </svg>
 
-        {/* Gravitational wave effect */}
+        {/* Enhanced gravitational wave effects */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-r from-indigo-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/8 via-blue-500/4 to-transparent rounded-full blur-2xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-purple-500/10 via-purple-500/5 to-transparent rounded-full blur-2xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-radial from-green-500/6 via-green-500/3 to-transparent rounded-full blur-2xl animate-pulse delay-2000"></div>
+          
+          {/* Subtle ripple effects */}
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 border border-blue-400/20 rounded-full animate-ping"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-24 h-24 border border-purple-400/20 rounded-full animate-ping delay-1000"></div>
         </div>
 
-        {/* Floating connection points */}
-        {[...Array(30)].map((_, i) => (
+        {/* Enhanced connection points with subtle movement */}
+        {[...Array(40)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-blue-400/40 rounded-full animate-pulse"
+            className="absolute w-0.5 h-0.5 bg-blue-400/30 rounded-full animate-pulse"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
+              animationDelay: `${Math.random() * 4}s`,
+              animationDuration: `${3 + Math.random() * 3}s`,
             }}
           />
         ))}
