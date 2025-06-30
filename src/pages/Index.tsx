@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 
 const Index = () => {
@@ -169,7 +170,6 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Product Categories */}
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105">
                 <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
@@ -222,7 +222,6 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Progress Section */}
             <div className="mb-16">
               <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                 <div className="flex justify-between items-center mb-4">
@@ -365,3 +364,4 @@ const Index = () => {
 };
 
 export default Index;
+
