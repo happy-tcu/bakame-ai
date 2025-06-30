@@ -7,39 +7,39 @@ import { ArrowLeft, Download, ExternalLink, FileText, Video, Headphones, Code } 
 const Resources = () => {
   const resourceCategories = [
     {
-      title: "Documentation",
+      title: "IVR Documentation",
       icon: FileText,
       resources: [
-        { name: "API Documentation", type: "PDF", size: "2.1 MB", description: "Complete API reference and integration guide" },
-        { name: "Dataset Guidelines", type: "PDF", size: "1.8 MB", description: "Standards and best practices for data collection" },
-        { name: "Research Methodology", type: "PDF", size: "3.2 MB", description: "Our approach to building Kinyarwanda AI models" }
+        { name: "IVR API Documentation", type: "PDF", size: "3.2 MB", description: "Complete API reference for IVR system integration" },
+        { name: "Deployment Guide", type: "PDF", size: "2.8 MB", description: "Step-by-step guide for offline IVR deployment" },
+        { name: "Configuration Manual", type: "PDF", size: "4.1 MB", description: "Advanced configuration options and best practices" }
       ]
     },
     {
-      title: "Audio Samples",
+      title: "Audio & Voice Samples",
       icon: Headphones,
       resources: [
-        { name: "Sample Dataset", type: "ZIP", size: "45.2 MB", description: "Sample Kinyarwanda audio recordings" },
-        { name: "Pronunciation Guide", type: "MP3", size: "12.1 MB", description: "Audio guide for proper Kinyarwanda pronunciation" },
-        { name: "Regional Dialects", type: "ZIP", size: "89.5 MB", description: "Samples from different Kinyarwanda dialects" }
+        { name: "IVR Voice Samples", type: "ZIP", size: "67.2 MB", description: "Sample voice prompts and responses" },
+        { name: "Kinyarwanda Dataset Sample", type: "ZIP", size: "45.2 MB", description: "Sample from our research dataset" },
+        { name: "Multi-language Pack", type: "ZIP", size: "156.8 MB", description: "Voice samples in multiple languages" }
       ]
     },
     {
       title: "Video Tutorials",
       icon: Video,
       resources: [
-        { name: "Getting Started", type: "MP4", size: "156 MB", description: "Introduction to our platform and tools" },
-        { name: "Data Collection", type: "MP4", size: "234 MB", description: "How to contribute to our voice dataset" },
-        { name: "API Integration", type: "MP4", size: "178 MB", description: "Step-by-step API integration tutorial" }
+        { name: "IVR System Setup", type: "MP4", size: "234 MB", description: "Complete setup tutorial for IVR systems" },
+        { name: "Enterprise Integration", type: "MP4", size: "189 MB", description: "How to integrate IVR with enterprise systems" },
+        { name: "Government Deployment", type: "MP4", size: "156 MB", description: "Best practices for government IVR deployment" }
       ]
     },
     {
-      title: "Code Examples",
+      title: "Development Tools",
       icon: Code,
       resources: [
-        { name: "Python SDK", type: "ZIP", size: "5.8 MB", description: "Complete Python SDK with examples" },
-        { name: "JavaScript Library", type: "ZIP", size: "3.2 MB", description: "JavaScript library for web integration" },
-        { name: "React Components", type: "ZIP", size: "2.1 MB", description: "Pre-built React components for voice recording" }
+        { name: "Python SDK", type: "ZIP", size: "8.9 MB", description: "Complete Python SDK with IVR integration tools" },
+        { name: "JavaScript Library", type: "ZIP", size: "5.2 MB", description: "JavaScript library for web-based IVR interfaces" },
+        { name: "Mobile SDK", type: "ZIP", size: "12.1 MB", description: "Mobile development tools for IVR applications" }
       ]
     }
   ];
@@ -56,8 +56,24 @@ const Resources = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Animated background */}
+      {/* Enhanced space-time background */}
       <div className="absolute inset-0 overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+              <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <g transform="translate(0,0)">
+            <path d="M0,25 Q25,20 50,25 T100,25" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
+            <path d="M0,50 Q25,45 50,50 T100,50" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.2"/>
+            <path d="M0,75 Q25,70 50,75 T100,75" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
+          </g>
+        </svg>
         <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/3 right-1/3 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
@@ -65,17 +81,17 @@ const Resources = () => {
       <div className="relative z-10">
         {/* Header */}
         <div className="container mx-auto px-6 py-8">
-          <Link to="/" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
+          <a href="/" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
-          </Link>
+          </a>
 
           <div className="mb-12">
             <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
               Resources
             </h1>
             <p className="text-xl text-white/70 max-w-2xl">
-              Tools, documentation, and assets to help you integrate and contribute to our Kinyarwanda AI ecosystem
+              Tools, documentation, and assets to help you deploy and integrate our offline IVR solutions
             </p>
           </div>
         </div>
@@ -136,15 +152,20 @@ const Resources = () => {
           <div className="mt-16 text-center">
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm max-w-2xl mx-auto">
               <CardHeader>
-                <CardTitle className="text-2xl text-white">Need More Resources?</CardTitle>
+                <CardTitle className="text-2xl text-white">Need Custom Solutions?</CardTitle>
                 <CardDescription className="text-white/70">
-                  Can't find what you're looking for? Contact our team for additional resources and support.
+                  Looking for custom IVR deployment or integration support? Our team is here to help.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="bg-white text-black hover:bg-white/90">
-                  Contact Support
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600">
+                    Contact Support
+                  </Button>
+                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                    Schedule Consultation
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>

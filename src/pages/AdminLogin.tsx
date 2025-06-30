@@ -26,23 +26,39 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Animated background elements */}
+      {/* Enhanced space-time background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+              <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <g transform="translate(0,0)">
+            <path d="M0,25 Q25,20 50,25 T100,25" fill="none" stroke="rgba(147,51,234,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
+            <path d="M0,50 Q25,45 50,50 T100,50" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.2"/>
+            <path d="M0,75 Q25,70 50,75 T100,75" fill="none" stroke="rgba(147,51,234,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
+          </g>
+        </svg>
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <div className="w-full max-w-md relative z-10">
-        <Link to="/" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
+        <a href="/" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Home
-        </Link>
+        </a>
 
         <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
           <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl text-center text-white">Admin Login</CardTitle>
+            <CardTitle className="text-2xl text-center text-white">Admin Portal</CardTitle>
             <CardDescription className="text-center text-white/70">
-              Enter your credentials to access the admin panel
+              Access the IVR system administration dashboard
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -82,10 +98,10 @@ const AdminLogin = () => {
               </div>
               <Button 
                 type="submit" 
-                className="w-full bg-white text-black hover:bg-white/90 transition-colors"
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
                 disabled={isLoading}
               >
-                {isLoading ? "Signing in..." : "Sign In"}
+                {isLoading ? "Signing in..." : "Access Dashboard"}
               </Button>
             </form>
           </CardContent>
