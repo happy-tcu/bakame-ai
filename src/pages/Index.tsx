@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 const Index = () => {
@@ -263,30 +262,23 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
             {[
-              { name: "University of Rwanda", logo: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=200&h=100&fit=crop&crop=center" },
-              { name: "Rwanda Academy of Sciences", logo: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=200&h=100&fit=crop&crop=center" }, 
-              { name: "Ministry of ICT", logo: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=200&h=100&fit=crop&crop=center" },
-              { name: "African Development Bank", logo: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200&h=100&fit=crop&crop=center" },
-              { name: "Google AI", logo: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=200&h=100&fit=crop&crop=center" },
-              { name: "OpenAI Research", logo: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=200&h=100&fit=crop&crop=center" },
-              { name: "Meta AI", logo: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=200&h=100&fit=crop&crop=center" },
-              { name: "Microsoft Research", logo: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=200&h=100&fit=crop&crop=center" }
+              "University of Rwanda",
+              "Rwanda Academy of Sciences", 
+              "Ministry of ICT",
+              "African Development Bank",
+              "Google AI",
+              "OpenAI Research",
+              "Meta AI",
+              "Microsoft Research"
             ].map((partner, index) => (
               <div
                 key={index}
-                className="group flex flex-col items-center justify-center h-32 w-48 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm p-4"
+                className="group flex items-center justify-center h-20 w-40 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
               >
-                <div className="h-16 w-full mb-2 rounded overflow-hidden bg-white/10 flex items-center justify-center">
-                  <img 
-                    src={partner.logo} 
-                    alt={`${partner.name} logo`}
-                    className="h-full w-full object-cover opacity-70 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0"
-                  />
-                </div>
-                <span className="text-white/70 group-hover:text-white text-xs font-medium text-center">
-                  {partner.name}
+                <span className="text-white/70 group-hover:text-white text-sm font-medium text-center px-4">
+                  {partner}
                 </span>
               </div>
             ))}
