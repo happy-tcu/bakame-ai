@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -131,8 +130,7 @@ const Index = () => {
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
           <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
           <a href="/team" className="text-white/70 hover:text-white transition-colors">Team</a>
-          <a href="/signup" className="text-white/70 hover:text-white transition-colors">Sign Up</a>
-          <a href="/admin" className="text-white/70 hover:text-white transition-colors">Admin</a>
+          <a href="/signup" className="text-white/70 hover:text-white transition-colors">Sign In</a>
         </div>
       </nav>
 
@@ -357,20 +355,17 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="container mx-auto px-6 py-12 border-t border-white/10">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-2xl font-bold mb-4 md:mb-0">Bakame Ai</div>
-            <div className="flex space-x-8 text-white/70">
-              <a href="/blog" className="hover:text-white transition-colors">Blog</a>
-              <a href="/resources" className="hover:text-white transition-colors">Resources</a>
-              <a href="/team" className="hover:text-white transition-colors">Team</a>
-              <a href="/signup" className="hover:text-white transition-colors">Sign Up</a>
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
-              <a href="/admin" className="hover:text-white transition-colors">Admin</a>
+          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
+            <div className="flex space-x-6 mb-4 md:mb-0">
+              <a href="/blog" className="text-white/60 hover:text-white/80 transition-colors">Blog</a>
+              <a href="/resources" className="text-white/60 hover:text-white/80 transition-colors">Resources</a>
+              <a href="/team" className="text-white/60 hover:text-white/80 transition-colors">Team</a>
+              <a href="/signup" className="text-white/60 hover:text-white/80 transition-colors">Sign In</a>
             </div>
+            <p className="text-white/40 text-sm">© 2024 Bakame AI. All rights reserved.</p>
           </div>
           <div className="mt-8 pt-8 border-t border-white/10 text-center text-white/50">
-            <p>&copy; 2024 Bakame Ai. Revolutionizing communication through intelligent offline IVR systems.</p>
+            <p>&copy; 2024 Bakame AI. Revolutionizing communication through intelligent offline IVR systems.</p>
           </div>
         </footer>
       </div>

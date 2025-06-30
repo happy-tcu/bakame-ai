@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, Shield } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface SecureAuthFormProps {
   onSuccess?: () => void;
@@ -18,6 +19,7 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState<string>("");
@@ -118,7 +120,7 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
             emailRedirectTo: `${window.location.origin}/`,
             data: {
               full_name: fullName.trim(),
-              role: 'creator'
+              role: isAdmin ? 'admin' : 'creator'
             }
           }
         });
@@ -306,6 +308,20 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
             </div>
           )}
 
+          {/* Admin checkbox for both sign up and sign in */}
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="admin"
+              checked={isAdmin}
+              onCheckedChange={(checked) => setIsAdmin(checked as boolean)}
+              disabled={isLoading}
+            />
+            <Label htmlFor="admin" className="flex items-center space-x-2 text-sm">
+              <Shield className="h-4 w-4" />
+              <span>{isSignUp ? "Create admin account" : "Sign in as admin"}</span>
+            </Label>
+          </div>
+
           <Button 
             type="submit" 
             className="w-full" 
@@ -323,6 +339,7 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
                 setPassword("");
                 setConfirmPassword("");
                 setPasswordStrength("");
+                setIsAdmin(false);
               }}
               disabled={isLoading}
             >
