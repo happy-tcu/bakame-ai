@@ -7,6 +7,7 @@ import { DashboardStats } from "@/components/dashboard/DashboardStats";
 import { UserManagement } from "@/components/dashboard/UserManagement";
 import { OrganizationManagement } from "@/components/dashboard/OrganizationManagement";
 import { Settings } from "@/components/dashboard/Settings";
+import { Team } from "@/components/dashboard/Team";
 
 export type UserProfile = {
   id: string;
@@ -190,6 +191,8 @@ const AdminDashboard = () => {
         return <UserManagement userProfile={userProfile} />;
       case "organizations":
         return <OrganizationManagement userProfile={userProfile} />;
+      case "team":
+        return <Team userProfile={userProfile} />;
       case "settings":
         return <Settings userProfile={userProfile} />;
       default:

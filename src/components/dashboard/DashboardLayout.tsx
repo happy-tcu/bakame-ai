@@ -1,4 +1,3 @@
-
 import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,7 +8,8 @@ import {
   BarChart3, 
   LogOut,
   Menu,
-  X
+  X,
+  UserCheck
 } from "lucide-react";
 import { UserProfile } from "@/pages/AdminDashboard";
 import { useState } from "react";
@@ -35,6 +35,7 @@ export const DashboardLayout = ({
     { id: "dashboard", label: "Dashboard", icon: BarChart3 },
     { id: "users", label: "Users", icon: Users },
     { id: "organizations", label: "Organizations", icon: Building2 },
+    { id: "team", label: "Team", icon: UserCheck },
     { id: "settings", label: "Settings", icon: SettingsIcon },
   ];
 
