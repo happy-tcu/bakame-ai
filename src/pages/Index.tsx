@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 const Index = () => {
@@ -64,7 +63,7 @@ const Index = () => {
 
       {/* Navigation */}  
       <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
-        <div className="text-2xl font-bold">DataAI</div>
+        <div className="text-2xl font-bold">Bakame Ai</div>
         <div className="hidden md:flex space-x-8">
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
           <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
@@ -290,7 +289,7 @@ const Index = () => {
         {/* Footer */}
         <footer className="container mx-auto px-6 py-12 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-2xl font-bold mb-4 md:mb-0">DataAI</div>
+            <div className="text-2xl font-bold mb-4 md:mb-0">Bakame Ai</div>
             <div className="flex space-x-8 text-white/70">
               <a href="/blog" className="hover:text-white transition-colors">Blog</a>
               <a href="/resources" className="hover:text-white transition-colors">Resources</a>
@@ -300,7 +299,7 @@ const Index = () => {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-white/10 text-center text-white/50">
-            <p>&copy; 2024 DataAI. Revolutionizing communication through intelligent offline IVR systems.</p>
+            <p>&copy; 2024 Bakame Ai. Revolutionizing communication through intelligent offline IVR systems.</p>
           </div>
         </footer>
       </div>
