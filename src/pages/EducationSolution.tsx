@@ -1,6 +1,5 @@
-
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, Users, Wifi, WifiOff, Play, CheckCircle, TrendingUp } from "lucide-react";
+import { ArrowLeft, BookOpen, Users, Wifi, WifiOff, Play, CheckCircle, TrendingUp, Languages } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const EducationSolution = () => {
@@ -83,24 +82,24 @@ const EducationSolution = () => {
       </nav>
 
       <div className="container mx-auto px-6 py-20">
-        {/* Hero Section with floating animation */}
+        {/* Hero Section with English Learning Focus */}
         <div className="text-center mb-16 relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-3xl animate-pulse"></div>
           <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce">
-            <BookOpen className="w-8 h-8 text-blue-400" />
+            <Languages className="w-8 h-8 text-blue-400" />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-fade-in">
-            Education Solutions
+            English Learning Solutions
           </h1>
           <p className="text-xl text-white/70 max-w-3xl mx-auto animate-fade-in">
-            Empowering educational institutions with offline-first IVR systems that work in any environment, from remote villages to urban campuses.
+            Master English through offline-first IVR technology that works anywhere, anytime. Perfect for students in remote areas or those without internet access.
           </p>
           
           {/* Live Stats */}
           <div id="stats-section" className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-400 mb-2">{studentCount.toLocaleString()}+</div>
-              <div className="text-white/60 text-sm">Students Reached</div>
+              <div className="text-white/60 text-sm">English Learners</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-400 mb-2">{schoolCount}+</div>
@@ -115,25 +114,25 @@ const EducationSolution = () => {
 
         {/* Interactive How It Works Section */}
         <div className="mb-20">
-          <h2 className="text-3xl font-bold mb-12 text-center">How Bakame AI Works for Education</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center">How Bakame AI Works for English Learning</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: WifiOff,
                 title: "Offline-First Design",
-                description: "Works completely offline, perfect for schools in remote areas with limited internet connectivity. All processing happens locally on the device.",
+                description: "Learn English completely offline using basic phones. No internet required - perfect for rural areas with limited connectivity.",
                 color: "blue"
               },
               {
-                icon: Users,
-                title: "Multi-Language Support",
-                description: "Built-in support for Kinyarwanda, English, French, and Swahili, making education accessible to students in their native languages.",
+                icon: Languages,
+                title: "Native Language Bridge",
+                description: "Start learning English from your native language - Kinyarwanda, French, or Swahili. Gradual transition to full English immersion.",
                 color: "purple"
               },
               {
-                icon: BookOpen,
-                title: "Interactive Learning",
-                description: "Students can access course materials, submit assignments, and receive feedback through voice interactions, even without smartphones.",
+                icon: Users,
+                title: "Interactive Conversations",
+                description: "Practice speaking, listening, and pronunciation through AI-powered conversations. Get instant feedback on your English skills.",
                 color: "green"
               }
             ].map((feature, index) => (
@@ -161,52 +160,88 @@ const EducationSolution = () => {
           </div>
         </div>
 
-        {/* Enhanced Use Cases Section */}
+        {/* English Learning Specific Features */}
         <div className="mb-20">
-          <h2 className="text-3xl font-bold mb-12 text-center">Educational Use Cases</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center">English Learning Features</h2>
           <div className="space-y-8">
             {[
               {
-                title: "Remote Learning Support",
-                description: "Students in rural areas can access lectures, participate in discussions, and complete assignments using basic phones. The system works entirely offline, storing content locally and syncing when connectivity is available.",
-                features: ["Voice-based course delivery", "Assignment submission via voice", "Progress tracking without internet"],
+                title: "Pronunciation Practice",
+                description: "Perfect your English pronunciation with AI-powered feedback. Practice individual sounds, words, and sentences with real-time corrections and suggestions for improvement.",
+                features: ["Phonetic sound practice", "Word pronunciation drills", "Sentence rhythm and intonation", "Accent reduction exercises"],
                 color: "blue",
-                icon: Play
+                icon: Languages
               },
               {
-                title: "Language Learning",
-                description: "Interactive language learning programs that help students practice pronunciation, vocabulary, and conversation skills in multiple languages, with AI-powered feedback and corrections.",
-                features: ["Pronunciation practice and correction", "Vocabulary building exercises", "Conversational AI tutoring"],
+                title: "Vocabulary Building",
+                description: "Expand your English vocabulary through interactive exercises and contextual learning. Learn new words in context with practical examples and usage scenarios.",
+                features: ["Daily vocabulary challenges", "Contextual word learning", "Synonyms and antonyms practice", "Industry-specific terminology"],
                 color: "purple",
-                icon: Users
+                icon: BookOpen
               },
               {
-                title: "Administrative Services",
-                description: "Automated systems for student enrollment, grade inquiries, schedule information, and parent-teacher communication, all accessible through simple phone calls.",
-                features: ["Student information systems", "Grade and attendance queries", "Parent communication portal"],
+                title: "Grammar Mastery",
+                description: "Master English grammar rules through interactive exercises and practical applications. From basic sentence structure to complex grammatical concepts.",
+                features: ["Tense practice and usage", "Sentence structure building", "Common grammar mistakes correction", "Advanced grammar concepts"],
                 color: "green",
                 icon: CheckCircle
               }
-            ].map((useCase, index) => (
+            ].map((feature, index) => (
               <div 
                 key={index}
                 className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-500 group"
               >
                 <div className="flex items-start space-x-4">
-                  <div className={`w-12 h-12 bg-${useCase.color}-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <useCase.icon className={`w-6 h-6 text-${useCase.color}-400`} />
+                  <div className={`w-12 h-12 bg-${feature.color}-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <feature.icon className={`w-6 h-6 text-${feature.color}-400`} />
                   </div>
                   <div className="flex-1">
-                    <h3 className={`text-2xl font-semibold mb-4 text-${useCase.color}-400`}>{useCase.title}</h3>
-                    <p className="text-white/70 mb-4">{useCase.description}</p>
+                    <h3 className={`text-2xl font-semibold mb-4 text-${feature.color}-400`}>{feature.title}</h3>
+                    <p className="text-white/70 mb-4">{feature.description}</p>
                     <ul className="list-disc list-inside text-white/60 space-y-2">
-                      {useCase.features.map((feature, featureIndex) => (
+                      {feature.features.map((feat, featureIndex) => (
                         <li key={featureIndex} className="flex items-center space-x-2">
                           <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                          <span>{feature}</span>
+                          <span>{feat}</span>
                         </li>
                       ))}
                     </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Other Educational Use Cases */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold mb-12 text-center">Other Educational Applications</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "Remote Learning Support",
+                description: "Access course materials, participate in discussions, and complete assignments using basic phones for any subject.",
+                icon: Play,
+                color: "blue"
+              },
+              {
+                title: "Administrative Services",
+                description: "Automated systems for student enrollment, grade inquiries, schedule information, and parent-teacher communication.",
+                icon: Users,
+                color: "purple"
+              }
+            ].map((useCase, index) => (
+              <div 
+                key={index}
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-500 group"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className={`w-10 h-10 bg-${useCase.color}-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <useCase.icon className={`w-5 h-5 text-${useCase.color}-400`} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`text-xl font-semibold mb-2 text-${useCase.color}-400`}>{useCase.title}</h3>
+                    <p className="text-white/70">{useCase.description}</p>
                   </div>
                 </div>
               </div>
@@ -221,13 +256,13 @@ const EducationSolution = () => {
             <div className="space-y-6">
               <h3 className="text-2xl font-semibold mb-6 text-blue-400 flex items-center">
                 <TrendingUp className="w-6 h-6 mr-2" />
-                For Students
+                For English Learners
               </h3>
               {[
-                "Access education from anywhere, even without internet",
-                "Learn in their native language",
+                "Learn English from anywhere, even without internet",
+                "Start from your native language and progress gradually",
                 "No need for expensive devices or data plans",
-                "Personalized learning experiences"
+                "Personalized learning pace and content"
               ].map((benefit, index) => (
                 <div key={index} className="flex items-start group cursor-pointer">
                   <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
@@ -238,13 +273,13 @@ const EducationSolution = () => {
             <div className="space-y-6">
               <h3 className="text-2xl font-semibold mb-6 text-purple-400 flex items-center">
                 <BookOpen className="w-6 h-6 mr-2" />
-                For Institutions
+                For Schools
               </h3>
               {[
-                "Reach students in remote areas",
-                "Reduce infrastructure costs",
-                "Automate administrative tasks",
-                "Improve student engagement and retention"
+                "Reach students in remote areas without internet",
+                "Reduce infrastructure costs for English programs",
+                "Track student progress and engagement",
+                "Support teachers with automated assessments"
               ].map((benefit, index) => (
                 <div key={index} className="flex items-start group cursor-pointer">
                   <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
@@ -259,16 +294,16 @@ const EducationSolution = () => {
         <div className="text-center bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-sm rounded-3xl p-12 border border-white/10 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 animate-pulse"></div>
           <div className="relative z-10">
-            <h2 className="text-3xl font-bold mb-6">Ready to Transform Education?</h2>
+            <h2 className="text-3xl font-bold mb-6">Ready to Transform English Learning?</h2>
             <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
-              Join schools and universities already using Bakame AI to provide accessible, offline education to their students.
+              Join thousands of students already improving their English skills with Bakame AI's offline-first approach.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={() => navigate('/signup')}
                 className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
               >
-                Get Started Today
+                Start Learning English
               </button>
               <button className="border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-white/60">
                 Schedule Demo
