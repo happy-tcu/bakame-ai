@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import VideoModal from "@/components/VideoModal";
 
 const Index = () => {
   const [currentProgress] = useState(67);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
     navigate('/signup');
+  };
+
+  const handleWatchDemo = () => {
+    setIsVideoModalOpen(true);
   };
 
   return (
@@ -160,7 +166,10 @@ const Index = () => {
                 </svg>
               </span>
             </button>
-            <button className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
+            <button 
+              onClick={handleWatchDemo}
+              className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+            >
               Watch Demo
             </button>
           </div>
@@ -346,7 +355,10 @@ const Index = () => {
                   </svg>
                 </span>
               </button>
-              <button className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
+              <button 
+                onClick={handleWatchDemo}
+                className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+              >
                 Schedule a Demo
               </button>
             </div>
@@ -369,6 +381,12 @@ const Index = () => {
           </div>
         </footer>
       </div>
+
+      <VideoModal 
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoId="dQw4w9WgXcQ"
+      />
     </div>
   );
 };
