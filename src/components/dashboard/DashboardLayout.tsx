@@ -38,10 +38,15 @@ export const DashboardLayout = ({
     { id: "settings", label: "Settings", icon: SettingsIcon },
   ];
 
-  // Filter navigation based on user role
+  // Filter navigation based on user role - explicitly handle admin role
   const filteredNavigation = navigationItems.filter(item => {
+    // Admin users can see all navigation items
     if (userProfile.role === 'admin') return true;
+    
+    // Non-admin users cannot see the users management section
     if (item.id === 'users' && userProfile.role !== 'admin') return false;
+    
+    // All other items are visible to all roles
     return true;
   });
 
