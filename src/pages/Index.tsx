@@ -123,6 +123,7 @@ const Index = () => {
         <div className="hidden md:flex space-x-8">
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
           <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
+          <a href="/team" className="text-white/70 hover:text-white transition-colors">Team</a>
           <a href="/admin" className="text-white/70 hover:text-white transition-colors">Admin</a>
         </div>
       </nav>
@@ -285,85 +286,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Leadership Team Section */}
-        <div className="container mx-auto px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Leadership Team
-              </h2>
-              <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Meet the visionary leaders driving innovation in offline AI and communication technology
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  name: "Dr. Sarah Uwimana",
-                  title: "Chief Executive Officer",
-                  bio: "Former AI researcher at MIT with 15+ years in natural language processing and offline systems.",
-                  image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face"
-                },
-                {
-                  name: "Jean-Claude Niyonsenga",
-                  title: "Chief Technology Officer",
-                  bio: "Expert in telecommunications infrastructure with deep experience in IVR systems across Africa.",
-                  image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=400&fit=crop&crop=face"
-                },
-                {
-                  name: "Dr. Aisha Mukamana",
-                  title: "Head of Research",
-                  bio: "Leading linguist specializing in Kinyarwanda language modeling and AI dataset development.",
-                  image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=400&fit=crop&crop=face"
-                },
-                {
-                  name: "Emmanuel Habimana",
-                  title: "VP of Engineering",
-                  bio: "Former Google engineer with expertise in scalable offline-first systems and edge computing.",
-                  image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=400&fit=crop&crop=face"
-                },
-                {
-                  name: "Grace Nyirahabimana",
-                  title: "VP of Operations",
-                  bio: "Operations leader with 12+ years scaling technology solutions across emerging markets.",
-                  image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=400&fit=crop&crop=face"
-                },
-                {
-                  name: "Patrick Nsengimana",
-                  title: "Head of Partnerships",
-                  bio: "Former World Bank advisor specializing in public-private partnerships for technology adoption.",
-                  image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=400&fit=crop&crop=face"
-                }
-              ].map((leader, index) => (
-                <div
-                  key={index}
-                  className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105"
-                >
-                  <div className="mb-6">
-                    <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-white/40 transition-colors">
-                      <img
-                        src={leader.image}
-                        alt={leader.name}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
-                      />
-                    </div>
-                    <h3 className="text-xl font-semibold text-white text-center mb-2">
-                      {leader.name}
-                    </h3>
-                    <p className="text-blue-400 font-medium text-center mb-4">
-                      {leader.title}
-                    </p>
-                  </div>
-                  <p className="text-white/70 text-sm leading-relaxed text-center">
-                    {leader.bio}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* Stats Section */}
         <div className="container mx-auto px-6 py-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -426,6 +348,7 @@ const Index = () => {
             <div className="flex space-x-8 text-white/70">
               <a href="/blog" className="hover:text-white transition-colors">Blog</a>
               <a href="/resources" className="hover:text-white transition-colors">Resources</a>
+              <a href="/team" className="hover:text-white transition-colors">Team</a>
               <a href="#" className="hover:text-white transition-colors">Privacy</a>
               <a href="#" className="hover:text-white transition-colors">Terms</a>
               <a href="/admin" className="hover:text-white transition-colors">Admin</a>
