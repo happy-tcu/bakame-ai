@@ -1,7 +1,14 @@
+
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [currentProgress] = useState(67);
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/signup');
+  };
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -124,6 +131,7 @@ const Index = () => {
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
           <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
           <a href="/team" className="text-white/70 hover:text-white transition-colors">Team</a>
+          <a href="/signup" className="text-white/70 hover:text-white transition-colors">Sign Up</a>
           <a href="/admin" className="text-white/70 hover:text-white transition-colors">Admin</a>
         </div>
       </nav>
@@ -143,7 +151,10 @@ const Index = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
-            <button className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <button 
+              onClick={handleGetStarted}
+              className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            >
               <span className="flex items-center justify-center">
                 Get Started
                 <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -326,7 +337,10 @@ const Index = () => {
               Deploy intelligent IVR systems that work anywhere, anytime. No internet required.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <button 
+                onClick={handleGetStarted}
+                className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              >
                 <span className="flex items-center justify-center">
                   Start Your Deployment
                   <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -349,6 +363,7 @@ const Index = () => {
               <a href="/blog" className="hover:text-white transition-colors">Blog</a>
               <a href="/resources" className="hover:text-white transition-colors">Resources</a>
               <a href="/team" className="hover:text-white transition-colors">Team</a>
+              <a href="/signup" className="hover:text-white transition-colors">Sign Up</a>
               <a href="#" className="hover:text-white transition-colors">Privacy</a>
               <a href="#" className="hover:text-white transition-colors">Terms</a>
               <a href="/admin" className="hover:text-white transition-colors">Admin</a>
