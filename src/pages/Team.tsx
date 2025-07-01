@@ -7,6 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/use-toast";
 import { MapPin, Clock, ArrowRight } from "lucide-react";
+import TypingAnimation from "@/components/TypingAnimation";
+
 const Careers = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -18,10 +20,13 @@ const Careers = () => {
   });
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredJob, setHoveredJob] = useState<number | null>(null);
+  const [titleHovered, setTitleHovered] = useState(false);
+
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Application submitted:", formData);
@@ -38,12 +43,14 @@ const Careers = () => {
       message: ""
     });
   };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
+
   const jobListings = [{
     title: "Senior AI Engineer",
     team: "Engineering",
@@ -81,6 +88,7 @@ const Careers = () => {
     type: "Internship",
     description: "Contribute to groundbreaking research in offline AI communication. Perfect for students passionate about AI innovation and social impact."
   }];
+
   const values = [{
     title: "Impact-driven",
     description: "We're building technology that connects people regardless of infrastructure limitations."
@@ -94,7 +102,9 @@ const Careers = () => {
     title: "Excellence",
     description: "We maintain the highest standards in everything we do, from code quality to user experience."
   }];
-  return <div className="min-h-screen text-white bg-slate-950">
+
+  return (
+    <div className="min-h-screen text-white bg-slate-950">
       {/* Navigation */}
       <nav className="flex justify-between items-center p-6 md:p-8 border-b border-gray-800">
         <div className="text-2xl font-bold text-white">Bakame AI</div>
@@ -109,8 +119,17 @@ const Careers = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Hero Section */}
         <div className={`text-center mb-20 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight">
-            Join us in building the future of communication
+          <h1 
+            className={`text-5xl md:text-6xl font-bold mb-6 leading-tight transition-all duration-300 cursor-pointer ${
+              titleHovered ? 'text-blue-400 scale-105' : 'text-white'
+            }`}
+            onMouseEnter={() => setTitleHovered(true)}
+            onMouseLeave={() => setTitleHovered(false)}
+          >
+            <TypingAnimation 
+              text="Join us in building the future of communication"
+              speed={50}
+            />
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Help us create AI-powered communication systems that work everywhere, 
@@ -122,14 +141,20 @@ const Careers = () => {
         <div className={`mb-20 transition-all duration-700 ease-out delay-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <h2 className="text-3xl font-bold mb-12 text-white">Our values</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {values.map((value, index) => <div key={index} className="group p-6 rounded-lg bg-gray-800/30 border border-gray-700/50 hover:bg-gray-800/50 hover:border-gray-600/50 transition-all duration-300 cursor-default" style={{
-            animationDelay: `${index * 100}ms`
-          }}>
+            {values.map((value, index) => (
+              <div 
+                key={index} 
+                className="group p-6 rounded-lg bg-gray-800/30 border border-gray-700/50 hover:bg-gray-800/50 hover:border-gray-600/50 transition-all duration-300 cursor-default hover:scale-105"
+                style={{
+                  animationDelay: `${index * 100}ms`
+                }}
+              >
                 <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors duration-200">
                   {value.title}
                 </h3>
                 <p className="text-gray-300 leading-relaxed">{value.description}</p>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
 
@@ -172,7 +197,17 @@ const Careers = () => {
         <div className={`mb-20 transition-all duration-700 ease-out delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <h2 className="text-3xl font-bold mb-12 text-white">Open roles</h2>
           <div className="space-y-6">
-            {jobListings.map((job, index) => <div key={index} className={`border border-gray-700 bg-gray-800/30 rounded-lg p-8 transition-all duration-300 cursor-pointer ${hoveredJob === index ? 'border-blue-500/50 bg-gray-800/50 shadow-lg shadow-blue-500/10 translate-y-[-2px]' : 'hover:border-gray-600 hover:bg-gray-800/40'}`} onMouseEnter={() => setHoveredJob(index)} onMouseLeave={() => setHoveredJob(null)}>
+            {jobListings.map((job, index) => (
+              <div 
+                key={index} 
+                className={`border border-gray-700 bg-gray-800/30 rounded-lg p-8 transition-all duration-300 cursor-pointer ${
+                  hoveredJob === index 
+                    ? 'border-blue-500/50 bg-gray-800/50 shadow-lg shadow-blue-500/10 translate-y-[-2px]' 
+                    : 'hover:border-gray-600 hover:bg-gray-800/40'
+                }`}
+                onMouseEnter={() => setHoveredJob(index)}
+                onMouseLeave={() => setHoveredJob(null)}
+              >
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-2 transition-colors duration-200">
@@ -192,21 +227,32 @@ const Careers = () => {
                       </div>
                     </div>
                   </div>
-                  <Button variant="outline" className={`group border-gray-600 bg-transparent text-white transition-all duration-200 ${hoveredJob === index ? 'border-blue-500 bg-blue-500/10 text-blue-400' : 'hover:bg-gray-700 hover:border-gray-500'}`} onClick={() => {
-                setFormData({
-                  ...formData,
-                  position: job.title
-                });
-                document.getElementById('application-form')?.scrollIntoView({
-                  behavior: 'smooth'
-                });
-              }}>
+                  <Button 
+                    variant="outline" 
+                    className={`group border-gray-600 bg-transparent text-white transition-all duration-200 ${
+                      hoveredJob === index 
+                        ? 'border-blue-500 bg-blue-500/10 text-blue-400' 
+                        : 'hover:bg-gray-700 hover:border-gray-500'
+                    }`}
+                    onClick={() => {
+                      setFormData({
+                        ...formData,
+                        position: job.title
+                      });
+                      document.getElementById('application-form')?.scrollIntoView({
+                        behavior: 'smooth'
+                      });
+                    }}
+                  >
                     Apply
-                    <ArrowRight className={`w-4 h-4 ml-2 transition-transform duration-200 ${hoveredJob === index ? 'translate-x-1' : 'group-hover:translate-x-1'}`} />
+                    <ArrowRight className={`w-4 h-4 ml-2 transition-transform duration-200 ${
+                      hoveredJob === index ? 'translate-x-1' : 'group-hover:translate-x-1'
+                    }`} />
                   </Button>
                 </div>
                 <p className="text-gray-300 leading-relaxed">{job.description}</p>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
 
@@ -226,13 +272,30 @@ const Careers = () => {
                   <Label htmlFor="name" className="text-white font-medium group-focus-within:text-blue-400 transition-colors">
                     Full Name
                   </Label>
-                  <Input id="name" name="name" value={formData.name} onChange={handleChange} required className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" placeholder="Enter your full name" />
+                  <Input 
+                    id="name" 
+                    name="name" 
+                    value={formData.name} 
+                    onChange={handleChange} 
+                    required 
+                    className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" 
+                    placeholder="Enter your full name" 
+                  />
                 </div>
                 <div className="space-y-2 group">
                   <Label htmlFor="email" className="text-white font-medium group-focus-within:text-blue-400 transition-colors">
                     Email Address
                   </Label>
-                  <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" placeholder="Enter your email" />
+                  <Input 
+                    id="email" 
+                    name="email" 
+                    type="email" 
+                    value={formData.email} 
+                    onChange={handleChange} 
+                    required 
+                    className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" 
+                    placeholder="Enter your email" 
+                  />
                 </div>
               </div>
 
@@ -241,13 +304,29 @@ const Careers = () => {
                   <Label htmlFor="position" className="text-white font-medium group-focus-within:text-blue-400 transition-colors">
                     Position of Interest
                   </Label>
-                  <Input id="position" name="position" value={formData.position} onChange={handleChange} required className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" placeholder="e.g., Senior AI Engineer" />
+                  <Input 
+                    id="position" 
+                    name="position" 
+                    value={formData.position} 
+                    onChange={handleChange} 
+                    required 
+                    className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" 
+                    placeholder="e.g., Senior AI Engineer" 
+                  />
                 </div>
                 <div className="space-y-2 group">
                   <Label htmlFor="experience" className="text-white font-medium group-focus-within:text-blue-400 transition-colors">
                     Years of Experience
                   </Label>
-                  <Input id="experience" name="experience" value={formData.experience} onChange={handleChange} required className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" placeholder="e.g., 3-5 years" />
+                  <Input 
+                    id="experience" 
+                    name="experience" 
+                    value={formData.experience} 
+                    onChange={handleChange} 
+                    required 
+                    className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" 
+                    placeholder="e.g., 3-5 years" 
+                  />
                 </div>
               </div>
 
@@ -255,17 +334,37 @@ const Careers = () => {
                 <Label htmlFor="resume" className="text-white font-medium group-focus-within:text-blue-400 transition-colors">
                   Resume/Portfolio Link
                 </Label>
-                <Input id="resume" name="resume" type="url" value={formData.resume} onChange={handleChange} className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" placeholder="https://your-portfolio.com or LinkedIn profile" />
+                <Input 
+                  id="resume" 
+                  name="resume" 
+                  type="url" 
+                  value={formData.resume} 
+                  onChange={handleChange} 
+                  className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-200" 
+                  placeholder="https://your-portfolio.com or LinkedIn profile" 
+                />
               </div>
 
               <div className="space-y-2 group">
                 <Label htmlFor="message" className="text-white font-medium group-focus-within:text-blue-400 transition-colors">
                   Why do you want to join Bakame AI?
                 </Label>
-                <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={4} className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 resize-none transition-all duration-200" placeholder="Tell us what excites you about our mission and how you'd contribute to our team..." />
+                <Textarea 
+                  id="message" 
+                  name="message" 
+                  value={formData.message} 
+                  onChange={handleChange} 
+                  required 
+                  rows={4} 
+                  className="border-gray-600 bg-gray-800/50 text-white focus:border-blue-500 focus:ring-blue-500/20 resize-none transition-all duration-200" 
+                  placeholder="Tell us what excites you about our mission and how you'd contribute to our team..." 
+                />
               </div>
 
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/20">
+              <Button 
+                type="submit" 
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/20"
+              >
                 Submit Application
               </Button>
             </form>
@@ -288,6 +387,8 @@ const Careers = () => {
           <p>&copy; 2024 Bakame AI. Revolutionizing communication through intelligent offline IVR systems.</p>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Careers;
