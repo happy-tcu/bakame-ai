@@ -127,7 +127,7 @@ const EducationSolution = () => {
                 color: "purple"
               },
               {
-                icon: BookOpen,
+                icon: Play,
                 title: "Interactive Learning",
                 description: "Students can access course materials, submit assignments, and receive feedback through voice interactions, even without smartphones.",
                 color: "green"
@@ -235,7 +235,7 @@ const EducationSolution = () => {
 
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 group">
               <h3 className="text-2xl font-semibold mb-6 text-purple-400 flex items-center group">
-                <BookOpen className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" />
+                <Users className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" />
                 For Institutions
               </h3>
               <div className="space-y-4">
