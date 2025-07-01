@@ -9,8 +9,6 @@ export interface Resource {
   description: string;
   type: string;
   category: string;
-  file_size: string;
-  file_extension: string;
   file_url?: string;
   external_url?: string;
   download_count: number;
@@ -51,19 +49,20 @@ export const useResources = () => {
 
   const downloadResource = async (resourceId: string) => {
     try {
-      // Track the download
-      await supabase
-        .from('resource_downloads')
-        .insert({
-          resource_id: resourceId,
-          ip_address: null, // Will be handled by server
-          user_agent: navigator.userAgent
-        });
+      // Update download count by fetching current count and incrementing
+      const { data: currentResource, error: fetchError } = await supabase
+        .from('resources')
+        .select('download_count')
+        .eq('id', resourceId)
+        .single();
 
-      // Update download count
+      if (fetchError) throw fetchError;
+
+      const newCount = (currentResource?.download_count || 0) + 1;
+      
       const { error } = await supabase
         .from('resources')
-        .update({ download_count: supabase.raw('download_count + 1') })
+        .update({ download_count: newCount })
         .eq('id', resourceId);
 
       if (error) throw error;

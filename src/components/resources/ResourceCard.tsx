@@ -33,6 +33,17 @@ export const ResourceCard = ({ resource, onDownload }: ResourceCardProps) => {
 
   const ResourceIcon = getIconForType(resource.type);
 
+  // Simulate file size based on type for display
+  const getFileSize = (type: string) => {
+    switch (type.toLowerCase()) {
+      case "pdf": return "2.5 MB";
+      case "mp3": return "8.2 MB";
+      case "mp4": return "125 MB";
+      case "zip": return "45 MB";
+      default: return "1.2 MB";
+    }
+  };
+
   return (
     <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group cursor-pointer relative">
       {resource.is_featured && (
@@ -48,7 +59,7 @@ export const ResourceCard = ({ resource, onDownload }: ResourceCardProps) => {
             <Badge className={getTypeColor(resource.type)}>
               {resource.type}
             </Badge>
-            <span className="text-xs text-white/50">{resource.file_size}</span>
+            <span className="text-xs text-white/50">{getFileSize(resource.type)}</span>
           </div>
         </div>
         <CardTitle className="text-lg text-white group-hover:text-blue-300 transition-colors">
