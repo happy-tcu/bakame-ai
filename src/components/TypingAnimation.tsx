@@ -7,7 +7,7 @@ interface TypingAnimationProps {
   className?: string;
 }
 
-const TypingAnimation = ({ text, speed = 100, className = "" }: TypingAnimationProps) => {
+const TypingAnimation = ({ text, speed = 150, className = "" }: TypingAnimationProps) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);

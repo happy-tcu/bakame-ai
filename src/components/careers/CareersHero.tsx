@@ -22,7 +22,7 @@ const CareersHero = () => {
       >
         <TypingAnimation 
           text="Join us in building the future of communication"
-          speed={50}
+          speed={120}
         />
       </h1>
       <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
