@@ -288,7 +288,10 @@ const Resources = () => {
                     </Button>
                   </Link>
                   <Link to="/schedule-consultation">
-                    <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 transition-all duration-300 w-full sm:w-auto">
+                    <Button 
+                      variant="outline" 
+                      className="border-white/20 text-white hover:bg-white/10 transition-all duration-300 w-full sm:w-auto min-h-[44px] px-6 py-2 whitespace-nowrap"
+                    >
                       Schedule Consultation
                     </Button>
                   </Link>
