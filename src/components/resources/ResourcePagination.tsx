@@ -47,13 +47,13 @@ export const ResourcePagination = ({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex items-center justify-center space-x-4 mt-8">
+    <div className="flex items-center justify-center space-x-4 mt-8 mb-8">
       <Button
         variant="outline"
         size="sm"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={!hasPrevious}
-        className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-black/50 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:border-white/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
       >
         <ChevronLeft className="h-4 w-4 mr-1" />
         Previous
@@ -72,7 +72,7 @@ export const ResourcePagination = ({
                   className={`cursor-pointer transition-colors ${
                     currentPage === page
                       ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-600'
-                      : 'border-white/20 text-white hover:bg-white/10 hover:text-white'
+                      : 'bg-black/30 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white hover:border-white/50'
                   }`}
                 >
                   {page}
@@ -88,7 +88,7 @@ export const ResourcePagination = ({
         size="sm"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={!hasNext}
-        className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="bg-black/50 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:border-white/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
       >
         Next
         <ChevronRight className="h-4 w-4 ml-1" />
