@@ -12,7 +12,7 @@ const GovernmentCTA = () => {
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <button 
-          onClick={() => navigate('/signup')}
+          onClick={() => navigate('/government-demo')}
           className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-green-600 hover:to-blue-600 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25"
         >
           Request Pilot Program

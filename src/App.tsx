@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import EducationSolution from "./pages/EducationSolution";
 import EnterpriseSolution from "./pages/EnterpriseSolution";
 import GovernmentSolution from "./pages/GovernmentSolution";
+import GovernmentDemo from "./pages/GovernmentDemo";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/solutions/education" element={<EducationSolution />} />
           <Route path="/solutions/enterprise" element={<EnterpriseSolution />} />
           <Route path="/solutions/government" element={<GovernmentSolution />} />
+          <Route path="/government-demo" element={<GovernmentDemo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
