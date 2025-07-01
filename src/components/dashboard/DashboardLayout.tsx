@@ -13,6 +13,7 @@ import {
   TrendingUp,
   LogOut
 } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { UserProfile } from "@/pages/AdminDashboard";
 
 interface DashboardLayoutProps {
@@ -43,12 +44,17 @@ export const DashboardLayout = ({
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-background flex">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-sm border-r border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h1 className="text-xl font-bold text-gray-900">Bakame AI</h1>
-          <p className="text-sm text-gray-600 mt-1">Admin Dashboard</p>
+      <div className="w-64 bg-card shadow-sm border-r border-border">
+        <div className="p-6 border-b border-border">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-xl font-bold text-foreground">Bakame AI</h1>
+              <p className="text-sm text-muted-foreground mt-1">Admin Dashboard</p>
+            </div>
+            <ThemeToggle />
+          </div>
         </div>
         
         <nav className="p-4 space-y-2">
@@ -60,8 +66,8 @@ export const DashboardLayout = ({
                 onClick={() => setActiveTab(item.id)}
                 className={`w-full flex items-center space-x-3 px-4 py-2 rounded-lg text-left transition-colors duration-200 ${
                   activeTab === item.id
-                    ? "bg-blue-50 text-blue-700 border border-blue-200"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    ? "bg-primary/10 text-primary border border-primary/20"
+                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -71,12 +77,12 @@ export const DashboardLayout = ({
           })}
         </nav>
         
-        <div className="absolute bottom-0 w-64 p-4 border-t border-gray-200 bg-white">
+        <div className="absolute bottom-0 w-64 p-4 border-t border-border bg-card">
           <div className="mb-4">
-            <p className="text-sm font-medium text-gray-900">
+            <p className="text-sm font-medium text-foreground">
               {userProfile.full_name || userProfile.email}
             </p>
-            <p className="text-xs text-gray-500 capitalize">{userProfile.role}</p>
+            <p className="text-xs text-muted-foreground capitalize">{userProfile.role}</p>
           </div>
           <Button
             onClick={onSignOut}
