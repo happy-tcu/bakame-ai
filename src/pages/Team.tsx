@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,7 +58,6 @@ const Team = () => {
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
           <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
           <a href="/team" className="text-white hover:text-white transition-colors border-b-2 border-blue-400">Team</a>
-          <a href="/admin" className="text-white/70 hover:text-white transition-colors">Admin</a>
         </div>
       </nav>
 
@@ -203,7 +201,6 @@ const Team = () => {
               <a href="/blog" className="hover:text-white transition-colors">Blog</a>
               <a href="/resources" className="hover:text-white transition-colors">Resources</a>
               <a href="/team" className="hover:text-white transition-colors">Team</a>
-              <a href="/admin" className="hover:text-white transition-colors">Admin</a>
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-white/10 text-center text-white/50">
