@@ -1,6 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Users, Wifi, WifiOff, Play, CheckCircle, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { DemoRequestForm } from "@/components/forms/DemoRequestForm";
+import { ContactForm } from "@/components/forms/ContactForm";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 const EducationSolution = () => {
   const navigate = useNavigate();
@@ -8,6 +13,7 @@ const EducationSolution = () => {
   const [studentCount, setStudentCount] = useState(0);
   const [schoolCount, setSchoolCount] = useState(0);
   const [completionRate, setCompletionRate] = useState(0);
+  const { trackButtonClick } = useAnalytics();
 
   // Animated counters
   useEffect(() => {
@@ -66,7 +72,10 @@ const EducationSolution = () => {
       <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10 backdrop-blur-sm sticky top-0 z-50">
         <div className="flex items-center space-x-4">
           <button 
-            onClick={() => navigate('/')}
+            onClick={() => {
+              trackButtonClick('back_to_home');
+              navigate('/');
+            }}
             className="p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-105"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -254,7 +263,7 @@ const EducationSolution = () => {
           </div>
         </div>
 
-        {/* Enhanced CTA Section */}
+        {/* Enhanced CTA Section with Forms */}
         <div className="text-center bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-sm rounded-3xl p-12 border border-white/10 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 animate-pulse"></div>
           <div className="relative z-10">
@@ -264,14 +273,43 @@ const EducationSolution = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
-                onClick={() => navigate('/signup')}
+                onClick={() => {
+                  trackButtonClick('get_started_education');
+                  navigate('/signup');
+                }}
                 className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
               >
                 Get Started Today
               </button>
-              <button className="border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-white/60">
-                Schedule Demo
-              </button>
+              
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-white/60"
+                    onClick={() => trackButtonClick('schedule_demo_education')}
+                  >
+                    Schedule Demo
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Schedule Your Education Demo</DialogTitle>
+                  </DialogHeader>
+                  <DemoRequestForm 
+                    defaultSolutionType="education"
+                    onSuccess={() => {
+                      // Dialog will close automatically after successful submission
+                    }}
+                  />
+                </DialogContent>
+              </Dialog>
+            </div>
+
+            {/* Contact Form Section */}
+            <div className="mt-16 max-w-2xl mx-auto">
+              <h3 className="text-2xl font-semibold mb-6">Have Questions? Get in Touch</h3>
+              <ContactForm defaultSolutionType="education" />
             </div>
           </div>
         </div>
