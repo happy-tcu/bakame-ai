@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, Users, Wifi, WifiOff, Play, CheckCircle, TrendingUp } from "lucide-react";
+import { ArrowLeft, Users, Wifi, WifiOff, Play, CheckCircle, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const EducationSolution = () => {
@@ -85,9 +85,6 @@ const EducationSolution = () => {
         {/* Hero Section with floating animation */}
         <div className="text-center mb-16 relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-3xl animate-pulse"></div>
-          <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 animate-bounce">
-            <BookOpen className="w-8 h-8 text-blue-400" />
-          </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-fade-in">
             Education Solutions
           </h1>
