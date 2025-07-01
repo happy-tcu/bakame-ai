@@ -20,18 +20,26 @@ const Index = () => {
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           {/* Space-time fabric effect: animated, warped grid lines */}
           <g>
-            {/* Small animated gravity contour circles */}
-            {[0, 1, 2, 3].map((i) => (
-              <ellipse
-                key={i}
-                cx={50 + 0.7 * Math.sin(Date.now() / 1200 + i)}
-                cy={50 + 0.7 * Math.cos(Date.now() / 1200 + i)}
-                rx={4 + i * 2 + 0.5 * Math.sin(Date.now() / 900 + i)}
-                ry={4 + i * 2 + 0.5 * Math.cos(Date.now() / 900 + i)}
+            {/* Warped horizontal lines */}
+            {[20, 35, 50, 65, 80].map((y, i) => (
+              <path
+                key={y}
+                d={`M 0,${y} Q 25,${y + (i % 2 === 0 ? 5 : -5)} 50,${y} Q 75,${y + (i % 2 === 0 ? -5 : 5)} 100,${y}`}
                 fill="none"
-                stroke="rgba(255,255,255,0.18)"
+                stroke="rgba(255,255,255,0.13)"
                 strokeWidth="0.09"
-                style={{ filter: 'url(#glow)', transition: 'all 0.5s cubic-bezier(0.4,0,0.2,1)' }}
+                style={{ filter: 'url(#glow)' }}
+              />
+            ))}
+            {/* Warped vertical lines */}
+            {[20, 35, 50, 65, 80].map((x, i) => (
+              <path
+                key={x}
+                d={`M ${x},0 Q ${x + (i % 2 === 0 ? 5 : -5)},25 ${x},50 Q ${x + (i % 2 === 0 ? -5 : 5)},75 ${x},100`}
+                fill="none"
+                stroke="rgba(255,255,255,0.13)"
+                strokeWidth="0.09"
+                style={{ filter: 'url(#glow)' }}
               />
             ))}
           </g>

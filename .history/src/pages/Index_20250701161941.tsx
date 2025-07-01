@@ -20,17 +20,17 @@ const Index = () => {
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           {/* Space-time fabric effect: animated, warped grid lines */}
           <g>
-            {/* Small animated gravity contour circles */}
-            {[0, 1, 2, 3].map((i) => (
+            {/* Animated gravity contour lines (concentric, warped ellipses) */}
+            {[0, 1, 2, 3, 4, 5].map((i) => (
               <ellipse
                 key={i}
-                cx={50 + 0.7 * Math.sin(Date.now() / 1200 + i)}
-                cy={50 + 0.7 * Math.cos(Date.now() / 1200 + i)}
-                rx={4 + i * 2 + 0.5 * Math.sin(Date.now() / 900 + i)}
-                ry={4 + i * 2 + 0.5 * Math.cos(Date.now() / 900 + i)}
+                cx={50 + 2 * Math.sin(Date.now() / 1200 + i)}
+                cy={50 + 2 * Math.cos(Date.now() / 1200 + i)}
+                rx={18 + i * 7 + 2 * Math.sin(Date.now() / 900 + i)}
+                ry={10 + i * 4 + 2 * Math.cos(Date.now() / 900 + i)}
                 fill="none"
-                stroke="rgba(255,255,255,0.18)"
-                strokeWidth="0.09"
+                stroke="rgba(255,255,255,0.16)"
+                strokeWidth="0.13"
                 style={{ filter: 'url(#glow)', transition: 'all 0.5s cubic-bezier(0.4,0,0.2,1)' }}
               />
             ))}

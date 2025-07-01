@@ -18,23 +18,7 @@ const Index = () => {
       <div className="absolute inset-0 overflow-hidden">
         {/* Complex warped grid system */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {/* Space-time fabric effect: animated, warped grid lines */}
-          <g>
-            {/* Small animated gravity contour circles */}
-            {[0, 1, 2, 3].map((i) => (
-              <ellipse
-                key={i}
-                cx={50 + 0.7 * Math.sin(Date.now() / 1200 + i)}
-                cy={50 + 0.7 * Math.cos(Date.now() / 1200 + i)}
-                rx={4 + i * 2 + 0.5 * Math.sin(Date.now() / 900 + i)}
-                ry={4 + i * 2 + 0.5 * Math.cos(Date.now() / 900 + i)}
-                fill="none"
-                stroke="rgba(255,255,255,0.18)"
-                strokeWidth="0.09"
-                style={{ filter: 'url(#glow)', transition: 'all 0.5s cubic-bezier(0.4,0,0.2,1)' }}
-              />
-            ))}
-          </g>
+          {/* (White animated lines removed as requested) */}
           <defs>
             <pattern id="baseGrid" width="5" height="5" patternUnits="userSpaceOnUse">
               <path d="M 5 0 L 0 0 0 5" fill="none" stroke="rgba(59,130,246,0.15)" strokeWidth="0.05" />
