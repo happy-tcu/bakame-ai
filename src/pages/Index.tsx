@@ -1,24 +1,12 @@
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
 
 const Index = () => {
   const [currentProgress] = useState(67);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setIsLoaded(true);
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const handleGetStarted = () => {
     navigate('/signup');
@@ -30,17 +18,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Enhanced space-time warping background with mouse interaction */}
+      {/* Enhanced space-time warping background */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Dynamic cursor effect */}
-        <div 
-          className="absolute w-96 h-96 bg-gradient-radial from-blue-500/5 via-purple-500/3 to-transparent rounded-full blur-3xl pointer-events-none transition-all duration-1000 ease-out"
-          style={{
-            left: mousePosition.x - 192,
-            top: mousePosition.y - 192,
-          }}
-        />
-
         {/* Complex warped grid system */}
         <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
@@ -125,7 +104,7 @@ const Index = () => {
           <path d="M 80,0 Q 85,25 80,50 Q 75,75 80,100" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
         </svg>
 
-        {/* Enhanced gravitational wave effects with staggered animations */}
+        {/* Enhanced gravitational wave effects */}
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/8 via-blue-500/4 to-transparent rounded-full blur-2xl animate-pulse"></div>
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-purple-500/10 via-purple-500/5 to-transparent rounded-full blur-2xl animate-pulse delay-1000"></div>
@@ -151,62 +130,57 @@ const Index = () => {
         ))}
       </div>
 
-      {/* Navigation with slide-in animation */}  
-      <nav className={`relative z-20 flex justify-between items-center p-6 md:p-8 transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
-        <div className="text-2xl font-bold hover:scale-105 transition-transform duration-300">Bakame Ai</div>
+      {/* Navigation */}  
+      <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
+        <div className="text-2xl font-bold">Bakame Ai</div>
         <div className="hidden md:flex space-x-8">
-          <a href="/blog" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-105 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full">Blog</a>
-          <a href="/resources" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-105 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full">Resources</a>
-          <a href="/team" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-105 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full">Team</a>
-          <a href="/signup" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-105 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full">Sign In</a>
+          <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
+          <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
+          <a href="/team" className="text-white/70 hover:text-white transition-colors">Team</a>
+          <a href="/signup" className="text-white/70 hover:text-white transition-colors">Sign In</a>
         </div>
       </nav>
 
       <div className="relative z-10">
-        {/* Hero Section with staggered animations */}
+        {/* Hero Section */}
         <div className="container mx-auto px-6 py-20 text-center">
-          <h1 className={`text-6xl md:text-8xl font-bold mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent transition-all duration-1000 delay-300 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
             IVR Offline<br />
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">
               Intelligence
             </span>
           </h1>
           
-          <p className={`text-xl md:text-2xl text-white/70 mb-12 max-w-4xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <p className="text-xl md:text-2xl text-white/70 mb-12 max-w-4xl mx-auto leading-relaxed">
             Revolutionizing communication with offline Interactive Voice Response systems for education, enterprise, and government. Powered by advanced AI that works without internet connectivity.
           </p>
           
-          <div className={`flex flex-col sm:flex-row gap-6 justify-center mb-20 transition-all duration-1000 delay-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
             <button 
               onClick={handleGetStarted}
-              className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-blue-500/25 transform-gpu"
+              className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
             >
               <span className="flex items-center justify-center">
                 Get Started
-                <svg className="ml-2 w-5 h-5 group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </span>
             </button>
             <button 
               onClick={handleWatchDemo}
-              className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 hover:border-white/50 transition-all duration-300 hover:scale-110 backdrop-blur-sm hover:shadow-xl hover:shadow-white/10"
+              className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
             >
-              <span className="flex items-center justify-center">
-                Watch Demo
-                <svg className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M12 5C8.686 5 6 7.686 6 11a8.978 8.978 0 001.5 5L9 18l1.5-2A8.978 8.978 0 0012 21a8.978 8.978 0 001.5-5l1.5 2 1.5-2a8.978 8.978 0 001.5-5c0-3.314-2.686-6-6-6z" />
-                </svg>
-              </span>
+              Watch Demo
             </button>
           </div>
         </div>
 
-        {/* Main Products Section with scroll-triggered animations */}
+        {/* Main Products Section */}
         <div className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent animate-fade-in">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
                 Our Solutions
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
@@ -215,57 +189,55 @@ const Index = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 mb-16">
-              {[
-                {
-                  path: '/solutions/education',
-                  color: 'blue',
-                  icon: (
+              <div 
+                onClick={() => navigate('/solutions/education')}
+                className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
+                  <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  ),
-                  title: 'Education',
-                  description: 'Offline IVR systems for schools and universities, enabling interactive learning experiences without internet dependency.'
-                },
-                {
-                  path: '/solutions/enterprise',
-                  color: 'purple',
-                  icon: (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  ),
-                  title: 'Enterprise',
-                  description: 'Advanced IVR solutions for businesses, providing customer service automation that works reliably in any environment.'
-                },
-                {
-                  path: '/solutions/government',
-                  color: 'green',
-                  icon: (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
-                  ),
-                  title: 'Government',
-                  description: 'Secure, offline-capable IVR systems for government services, ensuring citizen access regardless of connectivity.'
-                }
-              ].map((solution, index) => (
-                <div 
-                  key={solution.title}
-                  onClick={() => navigate(solution.path)}
-                  className={`group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-500 hover:scale-105 cursor-pointer hover:shadow-2xl hover:shadow-${solution.color}-500/10 animate-fade-in`}
-                  style={{ animationDelay: `${index * 200}ms` }}
-                >
-                  <div className={`w-12 h-12 bg-${solution.color}-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-${solution.color}-500/30 group-hover:scale-110 transition-all duration-300`}>
-                    <svg className={`w-6 h-6 text-${solution.color}-400 group-hover:scale-110 transition-transform duration-300`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      {solution.icon}
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-4 text-white group-hover:text-white/90 transition-colors duration-300">{solution.title}</h3>
-                  <p className="text-white/70 group-hover:text-white/80 transition-colors duration-300">
-                    {solution.description}
-                  </p>
+                  </svg>
                 </div>
-              ))}
+                <h3 className="text-xl font-semibold mb-4 text-white">Education</h3>
+                <p className="text-white/70">
+                  Offline IVR systems for schools and universities, enabling interactive learning experiences without internet dependency.
+                </p>
+              </div>
+
+              <div 
+                onClick={() => navigate('/solutions/enterprise')}
+                className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-purple-500/30 transition-colors">
+                  <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-white">Enterprise</h3>
+                <p className="text-white/70">
+                  Advanced IVR solutions for businesses, providing customer service automation that works reliably in any environment.
+                </p>
+              </div>
+
+              <div 
+                onClick={() => navigate('/solutions/government')}
+                className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-500/30 transition-colors">
+                  <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-white">Government</h3>
+                <p className="text-white/70">
+                  Secure, offline-capable IVR systems for government services, ensuring citizen access regardless of connectivity.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Research Initiative Section with animated progress bar */}
+        {/* Research Initiative Section */}
         <div className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -273,40 +245,42 @@ const Index = () => {
                 Research Initiative
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Alongside our main IVR solutions, we're pioneering <span className="text-blue-400 font-semibold animate-pulse">100,000 hours</span> of Kinyarwanda voice data collection to create the first comprehensive LLM-ready dataset.
+                Alongside our main IVR solutions, we're pioneering <span className="text-blue-400 font-semibold">100,000 hours</span> of Kinyarwanda voice data collection to create the first comprehensive LLM-ready dataset.
               </p>
             </div>
 
             <div className="mb-16">
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/8 transition-all duration-300 hover:scale-[1.02]">
+              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-lg font-semibold text-white">Kinyarwanda Dataset Progress</span>
-                  <span className="text-2xl font-bold text-green-400 animate-pulse">{currentProgress}%</span>
+                  <span className="text-2xl font-bold text-green-400">{currentProgress}%</span>
                 </div>
-                <div className="w-full bg-white/10 rounded-full h-3 mb-4 overflow-hidden">
+                <div className="w-full bg-white/10 rounded-full h-3 mb-4">
                   <div 
-                    className="bg-gradient-to-r from-green-400 to-blue-400 h-3 rounded-full transition-all duration-2000 ease-out animate-pulse"
+                    className="bg-gradient-to-r from-green-400 to-blue-400 h-3 rounded-full transition-all duration-1000 ease-out"
                     style={{ width: `${currentProgress}%` }}
                   ></div>
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-center">
-                  {[
-                    { value: '67,250', label: 'Hours Collected', color: 'blue' },
-                    { value: '15,400', label: 'Contributors', color: 'purple' },
-                    { value: '98.7%', label: 'Quality Score', color: 'green' }
-                  ].map((stat, index) => (
-                    <div key={stat.label} className={`hover:scale-110 transition-transform duration-300 animate-fade-in`} style={{ animationDelay: `${index * 100}ms` }}>
-                      <div className={`text-2xl font-bold text-${stat.color}-400 hover:text-${stat.color}-300 transition-colors duration-300`}>{stat.value}</div>
-                      <div className="text-sm text-white/60">{stat.label}</div>
-                    </div>
-                  ))}
+                  <div>
+                    <div className="text-2xl font-bold text-blue-400">67,250</div>
+                    <div className="text-sm text-white/60">Hours Collected</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-purple-400">15,400</div>
+                    <div className="text-sm text-white/60">Contributors</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-green-400">98.7%</div>
+                    <div className="text-sm text-white/60">Quality Score</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Partners Section with hover effects */}
+        {/* Partners Section */}
         <div className="container mx-auto px-6 py-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
@@ -330,10 +304,9 @@ const Index = () => {
             ].map((partner, index) => (
               <div
                 key={index}
-                className={`group flex items-center justify-center h-20 w-40 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-500 hover:scale-110 backdrop-blur-sm hover:shadow-xl hover:shadow-white/5 animate-fade-in`}
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="group flex items-center justify-center h-20 w-40 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
               >
-                <span className="text-white/70 group-hover:text-white text-sm font-medium text-center px-4 transition-colors duration-300">
+                <span className="text-white/70 group-hover:text-white text-sm font-medium text-center px-4">
                   {partner}
                 </span>
               </div>
@@ -341,28 +314,39 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Stats Section with animated counters */}
+        {/* Stats Section */}
         <div className="container mx-auto px-6 py-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { value: '500+', label: 'IVR Deployments', gradient: 'from-blue-400 to-purple-400' },
-              { value: '99.9%', label: 'Uptime', gradient: 'from-green-400 to-blue-400' },
-              { value: '50M+', label: 'Calls Processed', gradient: 'from-purple-400 to-pink-400' },
-              { value: '24/7', label: 'Offline Ready', gradient: 'from-yellow-400 to-orange-400' }
-            ].map((stat, index) => (
-              <div key={stat.label} className={`group animate-fade-in`} style={{ animationDelay: `${index * 150}ms` }}>
-                <div className={`text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent group-hover:scale-125 transition-all duration-500 cursor-default`}>
-                  {stat.value}
-                </div>
-                <div className="text-white/70 text-lg group-hover:text-white/90 transition-colors duration-300">{stat.label}</div>
+            <div className="group">
+              <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                500+
               </div>
-            ))}
+              <div className="text-white/70 text-lg">IVR Deployments</div>
+            </div>
+            <div className="group">
+              <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                99.9%
+              </div>
+              <div className="text-white/70 text-lg">Uptime</div>
+            </div>
+            <div className="group">
+              <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                50M+
+              </div>
+              <div className="text-white/70 text-lg">Calls Processed</div>
+            </div>
+            <div className="group">
+              <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                24/7
+              </div>
+              <div className="text-white/70 text-lg">Offline Ready</div>
+            </div>
           </div>
         </div>
 
-        {/* CTA Section with enhanced interactions */}
+        {/* CTA Section */}
         <div className="container mx-auto px-6 py-20 text-center">
-          <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-sm rounded-3xl p-12 border border-white/10 hover:bg-white/8 hover:border-white/20 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/10">
+          <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-sm rounded-3xl p-12 border border-white/10">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
               Ready to Transform Your Communication?
             </h2>
@@ -372,43 +356,38 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button 
                 onClick={handleGetStarted}
-                className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-blue-500/25 transform-gpu"
+                className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
               >
                 <span className="flex items-center justify-center">
                   Start Your Deployment
-                  <svg className="ml-2 w-5 h-5 group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </span>
               </button>
               <button 
                 onClick={handleWatchDemo}
-                className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 hover:border-white/50 transition-all duration-300 hover:scale-110 backdrop-blur-sm hover:shadow-xl hover:shadow-white/10"
+                className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
               >
-                <span className="flex items-center justify-center">
-                  Schedule a Demo
-                  <svg className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </span>
+                Schedule a Demo
               </button>
             </div>
           </div>
         </div>
 
-        {/* Footer with enhanced hover effects */}
+        {/* Footer */}
         <footer className="container mx-auto px-6 py-12 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
             <div className="flex space-x-6 mb-4 md:mb-0">
-              <a href="/blog" className="text-white/60 hover:text-white/80 transition-all duration-300 hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full">Blog</a>
-              <a href="/resources" className="text-white/60 hover:text-white/80 transition-all duration-300 hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full">Resources</a>
-              <a href="/team" className="text-white/60 hover:text-white/80 transition-all duration-300 hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full">Team</a>
-              <a href="/signup" className="text-white/60 hover:text-white/80 transition-all duration-300 hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-400 after:transition-all after:duration-300 hover:after:w-full">Sign In</a>
+              <a href="/blog" className="text-white/60 hover:text-white/80 transition-colors">Blog</a>
+              <a href="/resources" className="text-white/60 hover:text-white/80 transition-colors">Resources</a>
+              <a href="/team" className="text-white/60 hover:text-white/80 transition-colors">Team</a>
+              <a href="/signup" className="text-white/60 hover:text-white/80 transition-colors">Sign In</a>
             </div>
-            <p className="text-white/40 text-sm hover:text-white/60 transition-colors duration-300">© 2024 Bakame AI. All rights reserved.</p>
+            <p className="text-white/40 text-sm">© 2024 Bakame AI. All rights reserved.</p>
           </div>
           <div className="mt-8 pt-8 border-t border-white/10 text-center text-white/50">
-            <p className="hover:text-white/70 transition-colors duration-300">&copy; 2024 Bakame AI. Revolutionizing communication through intelligent offline IVR systems.</p>
+            <p>&copy; 2024 Bakame AI. Revolutionizing communication through intelligent offline IVR systems.</p>
           </div>
         </footer>
       </div>
