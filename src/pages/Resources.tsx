@@ -287,9 +287,11 @@ const Resources = () => {
                       Contact Support
                     </Button>
                   </Link>
-                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 transition-all duration-300">
-                    Schedule Consultation
-                  </Button>
+                  <Link to="/schedule-consultation">
+                    <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 transition-all duration-300 w-full sm:w-auto">
+                      Schedule Consultation
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
