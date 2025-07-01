@@ -23,7 +23,8 @@ export const NewsletterSignup = ({ source = 'general', className = "" }: Newslet
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      // Use type assertion for the newsletter subscriptions table
+      const { error } = await (supabase as any)
         .from('newsletter_subscriptions')
         .insert([{
           email,

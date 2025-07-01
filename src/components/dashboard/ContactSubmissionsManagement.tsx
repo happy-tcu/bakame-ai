@@ -49,7 +49,7 @@ export const ContactSubmissionsManagement = ({ userProfile }: ContactSubmissions
           variant: "destructive",
         });
       } else {
-        // Map the data to ensure all required fields are present
+        // Map the data to ensure all required fields are present with proper defaults
         const mappedData = (data || []).map(submission => ({
           id: submission.id,
           name: submission.name,
@@ -104,7 +104,7 @@ export const ContactSubmissionsManagement = ({ userProfile }: ContactSubmissions
     }
   };
 
-  const getStatusColor = (status: string | null) => {
+  function getStatusColor(status: string | null) {
     switch (status) {
       case 'new': return 'bg-blue-500';
       case 'in_progress': return 'bg-yellow-500';
@@ -112,9 +112,9 @@ export const ContactSubmissionsManagement = ({ userProfile }: ContactSubmissions
       case 'closed': return 'bg-gray-500';
       default: return 'bg-blue-500';
     }
-  };
+  }
 
-  const formatDate = (dateString: string) => {
+  function formatDate(dateString: string) {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
@@ -122,7 +122,7 @@ export const ContactSubmissionsManagement = ({ userProfile }: ContactSubmissions
       hour: '2-digit',
       minute: '2-digit'
     });
-  };
+  }
 
   if (userProfile.role !== 'admin') {
     return (
