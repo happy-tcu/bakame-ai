@@ -1,107 +1,93 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
-
 const Index = () => {
   const [currentProgress] = useState(67);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const navigate = useNavigate();
-
   const handleGetStarted = () => {
     navigate('/signup');
   };
-
   const handleWatchDemo = () => {
     setIsVideoModalOpen(true);
   };
-
-  return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+  return <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Enhanced space-time warping background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Complex warped grid system */}
         <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
             <pattern id="baseGrid" width="5" height="5" patternUnits="userSpaceOnUse">
-              <path d="M 5 0 L 0 0 0 5" fill="none" stroke="rgba(59,130,246,0.15)" strokeWidth="0.05"/>
+              <path d="M 5 0 L 0 0 0 5" fill="none" stroke="rgba(59,130,246,0.15)" strokeWidth="0.05" />
             </pattern>
             <filter id="glow">
-              <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
               <feMerge> 
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
             <filter id="strongGlow">
-              <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
               <feMerge> 
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
           </defs>
           
           {/* Base grid pattern */}
-          <rect width="100" height="100" fill="url(#baseGrid)" opacity="0.3"/>
+          <rect width="100" height="100" fill="url(#baseGrid)" opacity="0.3" />
           
           {/* Gravity well 1 - Top left quadrant */}
           <g transform="translate(25,25)">
             {/* Concentric curved lines creating gravity well effect */}
-            <circle cx="0" cy="0" r="8" fill="none" stroke="rgba(59,130,246,0.4)" strokeWidth="0.1" filter="url(#glow)"/>
-            <circle cx="0" cy="0" r="12" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.08"/>
-            <circle cx="0" cy="0" r="16" fill="none" stroke="rgba(59,130,246,0.2)" strokeWidth="0.06"/>
-            <circle cx="0" cy="0" r="20" fill="none" stroke="rgba(59,130,246,0.15)" strokeWidth="0.04"/>
+            <circle cx="0" cy="0" r="8" fill="none" stroke="rgba(59,130,246,0.4)" strokeWidth="0.1" filter="url(#glow)" />
+            <circle cx="0" cy="0" r="12" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.08" />
+            <circle cx="0" cy="0" r="16" fill="none" stroke="rgba(59,130,246,0.2)" strokeWidth="0.06" />
+            <circle cx="0" cy="0" r="20" fill="none" stroke="rgba(59,130,246,0.15)" strokeWidth="0.04" />
             
             {/* Radial grid lines bending toward center */}
-            {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
-              <path 
-                key={angle}
-                d={`M 0,0 Q ${8 * Math.cos(angle * Math.PI / 180)},${8 * Math.sin(angle * Math.PI / 180)} ${20 * Math.cos(angle * Math.PI / 180)},${20 * Math.sin(angle * Math.PI / 180)}`} 
-                fill="none" 
-                stroke="rgba(59,130,246,0.2)" 
-                strokeWidth="0.05"
-              />
-            ))}
+            {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => <path key={angle} d={`M 0,0 Q ${8 * Math.cos(angle * Math.PI / 180)},${8 * Math.sin(angle * Math.PI / 180)} ${20 * Math.cos(angle * Math.PI / 180)},${20 * Math.sin(angle * Math.PI / 180)}`} fill="none" stroke="rgba(59,130,246,0.2)" strokeWidth="0.05" />)}
           </g>
           
           {/* Gravity well 2 - Bottom right */}
           <g transform="translate(75,75)">
-            <circle cx="0" cy="0" r="6" fill="none" stroke="rgba(147,51,234,0.5)" strokeWidth="0.12" filter="url(#strongGlow)"/>
-            <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(147,51,234,0.4)" strokeWidth="0.1"/>
-            <circle cx="0" cy="0" r="14" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
-            <circle cx="0" cy="0" r="18" fill="none" stroke="rgba(147,51,234,0.2)" strokeWidth="0.06"/>
+            <circle cx="0" cy="0" r="6" fill="none" stroke="rgba(147,51,234,0.5)" strokeWidth="0.12" filter="url(#strongGlow)" />
+            <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(147,51,234,0.4)" strokeWidth="0.1" />
+            <circle cx="0" cy="0" r="14" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08" />
+            <circle cx="0" cy="0" r="18" fill="none" stroke="rgba(147,51,234,0.2)" strokeWidth="0.06" />
             
             {/* Spiral arms */}
-            <path d="M 0,0 Q 5,-3 10,-2 T 18,2" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
-            <path d="M 0,0 Q -3,5 -2,10 T 2,18" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
-            <path d="M 0,0 Q -5,3 -10,2 T -18,-2" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
-            <path d="M 0,0 Q 3,-5 2,-10 T -2,-18" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
+            <path d="M 0,0 Q 5,-3 10,-2 T 18,2" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08" />
+            <path d="M 0,0 Q -3,5 -2,10 T 2,18" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08" />
+            <path d="M 0,0 Q -5,3 -10,2 T -18,-2" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08" />
+            <path d="M 0,0 Q 3,-5 2,-10 T -2,-18" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08" />
           </g>
           
           {/* Gravity well 3 - Top right */}
           <g transform="translate(75,25)">
-            <ellipse cx="0" cy="0" rx="12" ry="8" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.1" filter="url(#glow)"/>
-            <ellipse cx="0" cy="0" rx="16" ry="12" fill="none" stroke="rgba(34,197,94,0.3)" strokeWidth="0.08"/>
-            <ellipse cx="0" cy="0" rx="20" ry="16" fill="none" stroke="rgba(34,197,94,0.2)" strokeWidth="0.06"/>
+            <ellipse cx="0" cy="0" rx="12" ry="8" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.1" filter="url(#glow)" />
+            <ellipse cx="0" cy="0" rx="16" ry="12" fill="none" stroke="rgba(34,197,94,0.3)" strokeWidth="0.08" />
+            <ellipse cx="0" cy="0" rx="20" ry="16" fill="none" stroke="rgba(34,197,94,0.2)" strokeWidth="0.06" />
           </g>
           
           {/* Curved connecting lines showing space-time fabric */}
-          <path d="M 25,25 Q 50,35 75,25" fill="none" stroke="rgba(59,130,246,0.25)" strokeWidth="0.1" filter="url(#glow)"/>
-          <path d="M 25,25 Q 35,50 75,75" fill="none" stroke="rgba(147,51,234,0.25)" strokeWidth="0.1" filter="url(#glow)"/>
-          <path d="M 75,25 Q 65,50 75,75" fill="none" stroke="rgba(34,197,94,0.25)" strokeWidth="0.1" filter="url(#glow)"/>
+          <path d="M 25,25 Q 50,35 75,25" fill="none" stroke="rgba(59,130,246,0.25)" strokeWidth="0.1" filter="url(#glow)" />
+          <path d="M 25,25 Q 35,50 75,75" fill="none" stroke="rgba(147,51,234,0.25)" strokeWidth="0.1" filter="url(#glow)" />
+          <path d="M 75,25 Q 65,50 75,75" fill="none" stroke="rgba(34,197,94,0.25)" strokeWidth="0.1" filter="url(#glow)" />
           
           {/* Warped horizontal lines */}
-          <path d="M 0,20 Q 25,15 50,20 Q 75,25 100,20" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.08"/>
-          <path d="M 0,40 Q 25,45 50,40 Q 75,35 100,40" fill="none" stroke="rgba(147,51,234,0.25)" strokeWidth="0.08"/>
-          <path d="M 0,60 Q 25,55 50,60 Q 75,65 100,60" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.08"/>
-          <path d="M 0,80 Q 25,85 50,80 Q 75,75 100,80" fill="none" stroke="rgba(147,51,234,0.25)" strokeWidth="0.08"/>
+          <path d="M 0,20 Q 25,15 50,20 Q 75,25 100,20" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.08" />
+          <path d="M 0,40 Q 25,45 50,40 Q 75,35 100,40" fill="none" stroke="rgba(147,51,234,0.25)" strokeWidth="0.08" />
+          <path d="M 0,60 Q 25,55 50,60 Q 75,65 100,60" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.08" />
+          <path d="M 0,80 Q 25,85 50,80 Q 75,75 100,80" fill="none" stroke="rgba(147,51,234,0.25)" strokeWidth="0.08" />
           
           {/* Warped vertical lines */}
-          <path d="M 20,0 Q 15,25 20,50 Q 25,75 20,100" fill="none" stroke="rgba(59,130,246,0.25)" strokeWidth="0.08"/>
-          <path d="M 40,0 Q 45,25 40,50 Q 35,75 40,100" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
-          <path d="M 60,0 Q 55,25 60,50 Q 65,75 60,100" fill="none" stroke="rgba(59,130,246,0.25)" strokeWidth="0.08"/>
-          <path d="M 80,0 Q 85,25 80,50 Q 75,75 80,100" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08"/>
+          <path d="M 20,0 Q 15,25 20,50 Q 25,75 20,100" fill="none" stroke="rgba(59,130,246,0.25)" strokeWidth="0.08" />
+          <path d="M 40,0 Q 45,25 40,50 Q 35,75 40,100" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08" />
+          <path d="M 60,0 Q 55,25 60,50 Q 65,75 60,100" fill="none" stroke="rgba(59,130,246,0.25)" strokeWidth="0.08" />
+          <path d="M 80,0 Q 85,25 80,50 Q 75,75 80,100" fill="none" stroke="rgba(147,51,234,0.3)" strokeWidth="0.08" />
         </svg>
 
         {/* Enhanced gravitational wave effects */}
@@ -116,18 +102,12 @@ const Index = () => {
         </div>
 
         {/* Enhanced connection points with subtle movement */}
-        {[...Array(40)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-0.5 h-0.5 bg-blue-400/30 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 4}s`,
-              animationDuration: `${3 + Math.random() * 3}s`,
-            }}
-          />
-        ))}
+        {[...Array(40)].map((_, i) => <div key={i} className="absolute w-0.5 h-0.5 bg-blue-400/30 rounded-full animate-pulse" style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 4}s`,
+        animationDuration: `${3 + Math.random() * 3}s`
+      }} />)}
       </div>
 
       {/* Navigation */}  
@@ -146,9 +126,7 @@ const Index = () => {
         <div className="container mx-auto px-6 py-20 text-center">
           <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
             IVR Offline<br />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">
-              Intelligence
-            </span>
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">Intelligence, Bakame</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-white/70 mb-12 max-w-4xl mx-auto leading-relaxed">
@@ -156,10 +134,7 @@ const Index = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
-            <button 
-              onClick={handleGetStarted}
-              className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-            >
+            <button onClick={handleGetStarted} className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
               <span className="flex items-center justify-center">
                 Get Started
                 <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,10 +142,7 @@ const Index = () => {
                 </svg>
               </span>
             </button>
-            <button 
-              onClick={handleWatchDemo}
-              className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
-            >
+            <button onClick={handleWatchDemo} className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
               Watch Demo
             </button>
           </div>
@@ -189,10 +161,7 @@ const Index = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 mb-16">
-              <div 
-                onClick={() => navigate('/solutions/education')}
-                className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer"
-              >
+              <div onClick={() => navigate('/solutions/education')} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer">
                 <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
                   <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -204,10 +173,7 @@ const Index = () => {
                 </p>
               </div>
 
-              <div 
-                onClick={() => navigate('/solutions/enterprise')}
-                className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer"
-              >
+              <div onClick={() => navigate('/solutions/enterprise')} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer">
                 <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-purple-500/30 transition-colors">
                   <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -219,10 +185,7 @@ const Index = () => {
                 </p>
               </div>
 
-              <div 
-                onClick={() => navigate('/solutions/government')}
-                className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer"
-              >
+              <div onClick={() => navigate('/solutions/government')} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer">
                 <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-500/30 transition-colors">
                   <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
@@ -256,10 +219,9 @@ const Index = () => {
                   <span className="text-2xl font-bold text-green-400">{currentProgress}%</span>
                 </div>
                 <div className="w-full bg-white/10 rounded-full h-3 mb-4">
-                  <div 
-                    className="bg-gradient-to-r from-green-400 to-blue-400 h-3 rounded-full transition-all duration-1000 ease-out"
-                    style={{ width: `${currentProgress}%` }}
-                  ></div>
+                  <div className="bg-gradient-to-r from-green-400 to-blue-400 h-3 rounded-full transition-all duration-1000 ease-out" style={{
+                  width: `${currentProgress}%`
+                }}></div>
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
@@ -292,25 +254,11 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
-            {[
-              "University of Rwanda",
-              "Rwanda Academy of Sciences", 
-              "Ministry of ICT",
-              "African Development Bank",
-              "Google AI",
-              "OpenAI Research",
-              "Meta AI",
-              "Microsoft Research"
-            ].map((partner, index) => (
-              <div
-                key={index}
-                className="group flex items-center justify-center h-20 w-40 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
-              >
+            {["University of Rwanda", "Rwanda Academy of Sciences", "Ministry of ICT", "African Development Bank", "Google AI", "OpenAI Research", "Meta AI", "Microsoft Research"].map((partner, index) => <div key={index} className="group flex items-center justify-center h-20 w-40 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
                 <span className="text-white/70 group-hover:text-white text-sm font-medium text-center px-4">
                   {partner}
                 </span>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
@@ -354,10 +302,7 @@ const Index = () => {
               Deploy intelligent IVR systems that work anywhere, anytime. No internet required.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button 
-                onClick={handleGetStarted}
-                className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-              >
+              <button onClick={handleGetStarted} className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                 <span className="flex items-center justify-center">
                   Start Your Deployment
                   <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -365,10 +310,7 @@ const Index = () => {
                   </svg>
                 </span>
               </button>
-              <button 
-                onClick={handleWatchDemo}
-                className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
-              >
+              <button onClick={handleWatchDemo} className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
                 Schedule a Demo
               </button>
             </div>
@@ -392,13 +334,7 @@ const Index = () => {
         </footer>
       </div>
 
-      <VideoModal 
-        isOpen={isVideoModalOpen}
-        onClose={() => setIsVideoModalOpen(false)}
-        videoId="dQw4w9WgXcQ"
-      />
-    </div>
-  );
+      <VideoModal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} videoId="dQw4w9WgXcQ" />
+    </div>;
 };
-
 export default Index;
