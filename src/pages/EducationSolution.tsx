@@ -214,41 +214,41 @@ const EducationSolution = () => {
           </div>
         </div>
 
-        {/* Interactive Benefits Section */}
+        {/* Interactive Enhanced Benefits Section */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold mb-12 text-center">Key Benefits</h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-6">
-              <h3 className="text-2xl font-semibold mb-6 text-blue-400 flex items-center">
-                <TrendingUp className="w-6 h-6 mr-2" />
+              <h3 className="text-2xl font-semibold mb-6 text-blue-400 flex items-center group">
+                <TrendingUp className="w-6 h-6 mr-2 group-hover:scale-110 transition-transform duration-300" />
                 For Students
               </h3>
               {[
-                "Access education from anywhere, even without internet",
-                "Learn in their native language",
-                "No need for expensive devices or data plans",
-                "Personalized learning experiences"
+                { text: "Access education from anywhere, even without internet", delay: "delay-0" },
+                { text: "Learn in their native language", delay: "delay-100" },
+                { text: "No need for expensive devices or data plans", delay: "delay-200" },
+                { text: "Personalized learning experiences", delay: "delay-300" }
               ].map((benefit, index) => (
-                <div key={index} className="flex items-start group cursor-pointer">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
-                  <span className="text-white/70 group-hover:text-white transition-colors duration-300">{benefit}</span>
+                <div key={index} className={`flex items-start group cursor-pointer hover:translate-x-2 transition-all duration-300 ${benefit.delay}`}>
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 group-hover:bg-blue-300 transition-all duration-300"></div>
+                  <span className="text-white/70 group-hover:text-white transition-colors duration-300">{benefit.text}</span>
                 </div>
               ))}
             </div>
             <div className="space-y-6">
-              <h3 className="text-2xl font-semibold mb-6 text-purple-400 flex items-center">
-                <BookOpen className="w-6 h-6 mr-2" />
+              <h3 className="text-2xl font-semibold mb-6 text-purple-400 flex items-center group">
+                <BookOpen className="w-6 h-6 mr-2 group-hover:scale-110 transition-transform duration-300" />
                 For Institutions
               </h3>
               {[
-                "Reach students in remote areas",
-                "Reduce infrastructure costs",
-                "Automate administrative tasks",
-                "Improve student engagement and retention"
+                { text: "Reach students in remote areas", delay: "delay-0" },
+                { text: "Reduce infrastructure costs", delay: "delay-100" },
+                { text: "Automate administrative tasks", delay: "delay-200" },
+                { text: "Improve student engagement and retention", delay: "delay-300" }
               ].map((benefit, index) => (
-                <div key={index} className="flex items-start group cursor-pointer">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></div>
-                  <span className="text-white/70 group-hover:text-white transition-colors duration-300">{benefit}</span>
+                <div key={index} className={`flex items-start group cursor-pointer hover:translate-x-2 transition-all duration-300 ${benefit.delay}`}>
+                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 group-hover:bg-purple-300 transition-all duration-300"></div>
+                  <span className="text-white/70 group-hover:text-white transition-colors duration-300">{benefit.text}</span>
                 </div>
               ))}
             </div>
