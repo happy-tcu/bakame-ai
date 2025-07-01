@@ -229,9 +229,17 @@ const EducationSolution = () => {
                 { text: "No need for expensive devices or data plans", delay: "delay-200" },
                 { text: "Personalized learning experiences", delay: "delay-300" }
               ].map((benefit, index) => (
-                <div key={index} className={`flex items-start group cursor-pointer hover:translate-x-2 transition-all duration-300 ${benefit.delay}`}>
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 group-hover:bg-blue-300 transition-all duration-300"></div>
-                  <span className="text-white/70 group-hover:text-white transition-colors duration-300">{benefit.text}</span>
+                <div key={index} className={`flex items-start group cursor-pointer hover:translate-x-2 transition-all duration-300 ${benefit.delay} relative overflow-hidden`}>
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 group-hover:bg-blue-300 transition-all duration-300 relative z-10"></div>
+                  <div className="flex-1 relative">
+                    <span className="text-white/70 group-hover:text-white transition-colors duration-300 relative z-10">{benefit.text}</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-blue-500/5 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 rounded"></div>
+                  </div>
+                  <div className="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-1 bg-blue-400/20 rounded-full overflow-hidden">
+                      <div className="h-full bg-blue-400 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 delay-200"></div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -246,9 +254,17 @@ const EducationSolution = () => {
                 { text: "Automate administrative tasks", delay: "delay-200" },
                 { text: "Improve student engagement and retention", delay: "delay-300" }
               ].map((benefit, index) => (
-                <div key={index} className={`flex items-start group cursor-pointer hover:translate-x-2 transition-all duration-300 ${benefit.delay}`}>
-                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 group-hover:bg-purple-300 transition-all duration-300"></div>
-                  <span className="text-white/70 group-hover:text-white transition-colors duration-300">{benefit.text}</span>
+                <div key={index} className={`flex items-start group cursor-pointer hover:translate-x-2 transition-all duration-300 ${benefit.delay} relative overflow-hidden`}>
+                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0 group-hover:scale-150 group-hover:bg-purple-300 transition-all duration-300 relative z-10"></div>
+                  <div className="flex-1 relative">
+                    <span className="text-white/70 group-hover:text-white transition-colors duration-300 relative z-10">{benefit.text}</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-purple-500/5 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 rounded"></div>
+                  </div>
+                  <div className="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-1 bg-purple-400/20 rounded-full overflow-hidden">
+                      <div className="h-full bg-purple-400 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-700 delay-200"></div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
