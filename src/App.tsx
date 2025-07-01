@@ -13,6 +13,7 @@ import Blog from "./pages/Blog";
 import Resources from "./pages/Resources";
 import Team from "./pages/Team";
 import Signup from "./pages/Signup";
+import Contact from "./pages/Contact";
 import EducationSolution from "./pages/EducationSolution";
 import EnterpriseSolution from "./pages/EnterpriseSolution";
 import GovernmentSolution from "./pages/GovernmentSolution";
@@ -35,6 +36,7 @@ const App = () => (
               <Route path="/blog" element={<Blog />} />
               <Route path="/resources" element={<Resources />} />
               <Route path="/team" element={<Team />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/solutions/education" element={<EducationSolution />} />
               <Route path="/solutions/enterprise" element={<EnterpriseSolution />} />
               <Route path="/solutions/government" element={<GovernmentSolution />} />

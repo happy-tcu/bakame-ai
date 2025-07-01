@@ -1,4 +1,3 @@
-
 import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -283,9 +282,11 @@ const Resources = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105">
-                    Contact Support
-                  </Button>
+                  <Link to="/contact">
+                    <Button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
+                      Contact Support
+                    </Button>
+                  </Link>
                   <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 transition-all duration-300">
                     Schedule Consultation
                   </Button>
