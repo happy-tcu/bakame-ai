@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -49,20 +50,7 @@ export const ContactSubmissionsManagement = ({ userProfile }: ContactSubmissions
           variant: "destructive",
         });
       } else {
-        // Map the data to ensure all required fields are present with proper defaults
-        const mappedData = (data || []).map(submission => ({
-          id: submission.id,
-          name: submission.name,
-          email: submission.email,
-          phone: submission.phone || null,
-          company: submission.company || null,
-          subject: submission.subject || null,
-          message: submission.message,
-          solution_type: submission.solution_type || null,
-          status: submission.status || null,
-          created_at: submission.created_at
-        }));
-        setSubmissions(mappedData);
+        setSubmissions(data || []);
       }
     } catch (error) {
       console.error('Error fetching submissions:', error);
