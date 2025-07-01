@@ -1,58 +1,99 @@
 
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Download, ExternalLink, FileText, Video, Headphones, Code } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { useResources } from "@/hooks/useResources";
+import { ResourceCard } from "@/components/resources/ResourceCard";
+import { ResourceFilters } from "@/components/resources/ResourceFilters";
 
 const Resources = () => {
-  const resourceCategories = [
-    {
-      title: "IVR Documentation",
-      icon: FileText,
-      resources: [
-        { name: "IVR API Documentation", type: "PDF", size: "3.2 MB", description: "Complete API reference for IVR system integration" },
-        { name: "Deployment Guide", type: "PDF", size: "2.8 MB", description: "Step-by-step guide for offline IVR deployment" },
-        { name: "Configuration Manual", type: "PDF", size: "4.1 MB", description: "Advanced configuration options and best practices" }
-      ]
-    },
-    {
-      title: "Audio & Voice Samples",
-      icon: Headphones,
-      resources: [
-        { name: "IVR Voice Samples", type: "ZIP", size: "67.2 MB", description: "Sample voice prompts and responses" },
-        { name: "Kinyarwanda Dataset Sample", type: "ZIP", size: "45.2 MB", description: "Sample from our research dataset" },
-        { name: "Multi-language Pack", type: "ZIP", size: "156.8 MB", description: "Voice samples in multiple languages" }
-      ]
-    },
-    {
-      title: "Video Tutorials",
-      icon: Video,
-      resources: [
-        { name: "IVR System Setup", type: "MP4", size: "234 MB", description: "Complete setup tutorial for IVR systems" },
-        { name: "Enterprise Integration", type: "MP4", size: "189 MB", description: "How to integrate IVR with enterprise systems" },
-        { name: "Government Deployment", type: "MP4", size: "156 MB", description: "Best practices for government IVR deployment" }
-      ]
-    },
-    {
-      title: "Development Tools",
-      icon: Code,
-      resources: [
-        { name: "Python SDK", type: "ZIP", size: "8.9 MB", description: "Complete Python SDK with IVR integration tools" },
-        { name: "JavaScript Library", type: "ZIP", size: "5.2 MB", description: "JavaScript library for web-based IVR interfaces" },
-        { name: "Mobile SDK", type: "ZIP", size: "12.1 MB", description: "Mobile development tools for IVR applications" }
-      ]
-    }
-  ];
+  const { resources, loading, error, downloadResource } = useResources();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedType, setSelectedType] = useState("all");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const getIconForType = (type: string) => {
-    switch (type) {
-      case "PDF": return FileText;
-      case "MP3": return Headphones;
-      case "MP4": return Video;
-      case "ZIP": return Download;
-      default: return FileText;
-    }
+  // Get unique values for filters
+  const { availableCategories, availableTypes, availableTags } = useMemo(() => {
+    const categories = [...new Set(resources.map(r => r.category).filter(Boolean))];
+    const types = [...new Set(resources.map(r => r.type).filter(Boolean))];
+    const tags = [...new Set(resources.flatMap(r => r.tags || []))];
+    
+    return {
+      availableCategories: categories,
+      availableTypes: types,
+      availableTags: tags
+    };
+  }, [resources]);
+
+  // Filter resources based on search and filters
+  const filteredResources = useMemo(() => {
+    return resources.filter(resource => {
+      const matchesSearch = !searchTerm || 
+        resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        resource.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+      const matchesCategory = selectedCategory === 'all' || resource.category === selectedCategory;
+      const matchesType = selectedType === 'all' || resource.type === selectedType;
+      const matchesTags = selectedTags.length === 0 || 
+        selectedTags.some(tag => resource.tags?.includes(tag));
+
+      return matchesSearch && matchesCategory && matchesType && matchesTags;
+    });
+  }, [resources, searchTerm, selectedCategory, selectedType, selectedTags]);
+
+  // Group filtered resources by category
+  const groupedResources = useMemo(() => {
+    const groups: Record<string, typeof filteredResources> = {};
+    filteredResources.forEach(resource => {
+      const category = resource.category || 'Other';
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category].push(resource);
+    });
+    return groups;
+  }, [filteredResources]);
+
+  const handleTagToggle = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
   };
+
+  const handleClearFilters = () => {
+    setSearchTerm("");
+    setSelectedCategory("all");
+    setSelectedType("all");
+    setSelectedTags([]);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Loading resources...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-red-400 mb-2">Error Loading Resources</h2>
+          <p className="text-white/70">{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -81,72 +122,75 @@ const Resources = () => {
       <div className="relative z-10">
         {/* Header */}
         <div className="container mx-auto px-6 py-8">
-          <a href="/" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
+          <Link to="/" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
-          </a>
+          </Link>
 
-          <div className="mb-12">
+          <div className="mb-8">
             <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
               Resources
             </h1>
             <p className="text-xl text-white/70 max-w-2xl">
               Tools, documentation, and assets to help you deploy and integrate our offline IVR solutions
             </p>
+            <div className="mt-4 flex items-center space-x-4 text-sm text-white/50">
+              <span>{resources.length} total resources</span>
+              <span>•</span>
+              <span>{filteredResources.length} shown</span>
+              <span>•</span>
+              <span>{resources.filter(r => r.is_featured).length} featured</span>
+            </div>
           </div>
+
+          {/* Filters */}
+          <ResourceFilters
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+            selectedType={selectedType}
+            onTypeChange={setSelectedType}
+            selectedTags={selectedTags}
+            onTagToggle={handleTagToggle}
+            availableCategories={availableCategories}
+            availableTypes={availableTypes}
+            availableTags={availableTags}
+            onClearFilters={handleClearFilters}
+          />
         </div>
 
         {/* Resources */}
         <div className="container mx-auto px-6 pb-16">
-          <div className="space-y-12">
-            {resourceCategories.map((category, categoryIndex) => {
-              const IconComponent = category.icon;
-              return (
-                <div key={categoryIndex}>
-                  <div className="flex items-center mb-6">
-                    <IconComponent className="h-6 w-6 mr-3 text-blue-400" />
-                    <h2 className="text-2xl font-semibold text-white">{category.title}</h2>
-                  </div>
+          {Object.keys(groupedResources).length === 0 ? (
+            <div className="text-center py-12">
+              <h3 className="text-xl font-semibold text-white/70 mb-2">No resources found</h3>
+              <p className="text-white/50">Try adjusting your search or filters</p>
+            </div>
+          ) : (
+            <div className="space-y-12">
+              {Object.entries(groupedResources).map(([category, categoryResources]) => (
+                <div key={category}>
+                  <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                    {category}
+                    <span className="ml-2 text-sm text-white/50 bg-white/10 px-2 py-1 rounded">
+                      {categoryResources.length}
+                    </span>
+                  </h2>
                   
                   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {category.resources.map((resource, resourceIndex) => {
-                      const ResourceIcon = getIconForType(resource.type);
-                      return (
-                        <Card key={resourceIndex} className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group cursor-pointer">
-                          <CardHeader>
-                            <div className="flex items-center justify-between mb-2">
-                              <ResourceIcon className="h-5 w-5 text-blue-400" />
-                              <div className="flex items-center space-x-2">
-                                <span className="text-xs text-white/50 bg-white/10 px-2 py-1 rounded">
-                                  {resource.type}
-                                </span>
-                                <span className="text-xs text-white/50">{resource.size}</span>
-                              </div>
-                            </div>
-                            <CardTitle className="text-lg text-white group-hover:text-blue-300 transition-colors">
-                              {resource.name}
-                            </CardTitle>
-                            <CardDescription className="text-white/70">
-                              {resource.description}
-                            </CardDescription>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="flex items-center justify-between">
-                              <Button size="sm" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                                <Download className="h-4 w-4 mr-2" />
-                                Download
-                              </Button>
-                              <ExternalLink className="h-4 w-4 text-white/40 group-hover:text-blue-400 transition-colors" />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      );
-                    })}
+                    {categoryResources.map((resource) => (
+                      <ResourceCard
+                        key={resource.id}
+                        resource={resource}
+                        onDownload={downloadResource}
+                      />
+                    ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* Contact Section */}
           <div className="mt-16 text-center">
