@@ -8,10 +8,12 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const GovernmentDemo = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -27,14 +29,70 @@ const GovernmentDemo = () => {
     budget: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Government demo request:", formData);
-    toast({
-      title: "Demo Request Submitted",
-      description: "We'll contact you within 24 hours to schedule your government pilot program demo.",
-    });
-    // Here you would typically send the data to your backend
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('government_demo_requests')
+        .insert([
+          {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            organization: formData.organization,
+            position: formData.position,
+            agency_type: formData.agencyType,
+            citizen_size: formData.citizenSize,
+            current_systems: formData.currentSystems,
+            primary_use_case: formData.primaryUseCase,
+            timeline: formData.timeline,
+            budget: formData.budget,
+            status: 'pending'
+          }
+        ]);
+
+      if (error) {
+        console.error('Error submitting government demo request:', error);
+        toast({
+          title: "Error",
+          description: "Failed to submit your demo request. Please try again.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Demo Request Submitted",
+          description: "We'll contact you within 24 hours to schedule your government pilot program demo.",
+        });
+        
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          organization: "",
+          position: "",
+          agencyType: "",
+          citizenSize: "",
+          currentSystems: "",
+          primaryUseCase: "",
+          timeline: "",
+          budget: ""
+        });
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -260,9 +318,10 @@ const GovernmentDemo = () => {
               <div className="flex justify-center pt-6">
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-12 py-4 rounded-full font-semibold text-lg hover:from-green-600 hover:to-blue-600 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25"
+                  disabled={isSubmitting}
+                  className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-12 py-4 rounded-full font-semibold text-lg hover:from-green-600 hover:to-blue-600 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Submit Demo Request
+                  {isSubmitting ? "Submitting..." : "Submit Demo Request"}
                 </Button>
               </div>
             </form>

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,6 +9,10 @@ import { UserManagement } from "@/components/dashboard/UserManagement";
 import { OrganizationManagement } from "@/components/dashboard/OrganizationManagement";
 import { Settings } from "@/components/dashboard/Settings";
 import { Team } from "@/components/dashboard/Team";
+import { GovernmentDemoManagement } from "@/components/dashboard/GovernmentDemoManagement";
+import { ContactSubmissionsManagement } from "@/components/dashboard/ContactSubmissionsManagement";
+import { NewsletterManagement } from "@/components/dashboard/NewsletterManagement";
+import { AnalyticsDashboard } from "@/components/dashboard/AnalyticsDashboard";
 
 export type UserProfile = {
   id: string;
@@ -193,6 +198,14 @@ const AdminDashboard = () => {
         return <OrganizationManagement userProfile={userProfile} />;
       case "team":
         return <Team userProfile={userProfile} />;
+      case "government-demos":
+        return <GovernmentDemoManagement userProfile={userProfile} />;
+      case "contact-submissions":
+        return <ContactSubmissionsManagement userProfile={userProfile} />;
+      case "newsletter":
+        return <NewsletterManagement userProfile={userProfile} />;
+      case "analytics":
+        return <AnalyticsDashboard userProfile={userProfile} />;
       case "settings":
         return <Settings userProfile={userProfile} />;
       default:

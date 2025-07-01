@@ -1,0 +1,102 @@
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
+
+interface NewsletterSignupProps {
+  source?: string;
+  className?: string;
+}
+
+export const NewsletterSignup = ({ source = 'general', className = "" }: NewsletterSignupProps) => {
+  const { toast } = useToast();
+  const { trackEvent } = useAnalytics();
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('newsletter_subscriptions')
+        .insert([{
+          email,
+          name: name || null,
+          source,
+          status: 'active'
+        }]);
+
+      if (error) {
+        if (error.code === '23505') { // Unique constraint violation
+          toast({
+            title: "Already Subscribed",
+            description: "You're already subscribed to our newsletter!",
+          });
+        } else {
+          console.error('Error subscribing to newsletter:', error);
+          toast({
+            title: "Error",
+            description: "Failed to subscribe. Please try again.",
+            variant: "destructive",
+          });
+        }
+      } else {
+        trackEvent('newsletter_signup', { source });
+        toast({
+          title: "Successfully Subscribed",
+          description: "Thank you for subscribing to our newsletter!",
+        });
+        
+        setEmail('');
+        setName('');
+      }
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className={`bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 ${className}`}>
+      <h3 className="text-xl font-semibold text-white mb-4">Stay Updated</h3>
+      <p className="text-white/70 mb-4">Get the latest updates on AI communication technology.</p>
+      
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          type="text"
+          placeholder="Your name (optional)"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+        />
+        <Input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+          required
+        />
+        <Button
+          type="submit"
+          disabled={isSubmitting || !email}
+          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-600 transition-all duration-300 disabled:opacity-50"
+        >
+          {isSubmitting ? "Subscribing..." : "Subscribe"}
+        </Button>
+      </form>
+    </div>
+  );
+};
