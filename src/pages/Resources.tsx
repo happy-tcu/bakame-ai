@@ -192,7 +192,7 @@ const Resources = () => {
                 onClick={handleRefresh}
                 variant="outline"
                 size="sm"
-                className="border-white/20 text-white hover:bg-white/10"
+                className="border-white/30 text-white bg-white/5 hover:bg-white/10 hover:border-blue-400/50 backdrop-blur-sm transition-all duration-300"
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
                 Refresh
