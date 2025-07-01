@@ -53,7 +53,7 @@ export const ResourcePagination = ({
         size="sm"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={!hasPrevious}
-        className="border-white/20 text-white hover:bg-white/10"
+        className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <ChevronLeft className="h-4 w-4 mr-1" />
         Previous
@@ -69,10 +69,10 @@ export const ResourcePagination = ({
                 <PaginationLink
                   onClick={() => onPageChange(page as number)}
                   isActive={currentPage === page}
-                  className={`cursor-pointer ${
+                  className={`cursor-pointer transition-colors ${
                     currentPage === page
-                      ? 'bg-blue-500 text-white border-blue-500'
-                      : 'border-white/20 text-white hover:bg-white/10'
+                      ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-600'
+                      : 'border-white/20 text-white hover:bg-white/10 hover:text-white'
                   }`}
                 >
                   {page}
@@ -88,7 +88,7 @@ export const ResourcePagination = ({
         size="sm"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={!hasNext}
-        className="border-white/20 text-white hover:bg-white/10"
+        className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Next
         <ChevronRight className="h-4 w-4 ml-1" />
