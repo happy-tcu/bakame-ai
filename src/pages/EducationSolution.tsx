@@ -213,43 +213,46 @@ const EducationSolution = () => {
           </div>
         </div>
 
-        {/* Interactive Enhanced Benefits Section */}
+        {/* Enhanced Benefits Section - Card Design */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold mb-12 text-center">Key Benefits</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 group">
               <h3 className="text-2xl font-semibold mb-6 text-blue-400 flex items-center group">
-                <TrendingUp className="w-6 h-6 mr-2 group-hover:scale-110 transition-transform duration-300" />
+                <TrendingUp className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" />
                 For Students
               </h3>
-              {[
-                { text: "Access education from anywhere, even without internet", delay: "delay-0" },
-                { text: "Learn in their native language", delay: "delay-100" },
-                { text: "No need for expensive devices or data plans", delay: "delay-200" },
-                { text: "Personalized learning experiences", delay: "delay-300" }
-              ].map((benefit, index) => (
-                <div key={index} className={`flex items-start group cursor-pointer transition-all duration-300 ${benefit.delay} hover:translate-x-1`}>
-                  <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-3 mr-4 flex-shrink-0 group-hover:bg-blue-300 transition-colors duration-300"></div>
-                  <span className="text-white/70 group-hover:text-white transition-colors duration-300 leading-relaxed">{benefit.text}</span>
-                </div>
-              ))}
+              <div className="space-y-4">
+                {[
+                  "Access education from anywhere, even without internet",
+                  "Learn in their native language",
+                  "No need for expensive devices or data plans",
+                  "Personalized learning experiences"
+                ].map((benefit, index) => (
+                  <div key={index} className={`bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300 delay-${index * 100} hover:scale-105`}>
+                    <span className="text-white/80 leading-relaxed">{benefit}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="space-y-6">
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 group">
               <h3 className="text-2xl font-semibold mb-6 text-purple-400 flex items-center group">
-                <BookOpen className="w-6 h-6 mr-2 group-hover:scale-110 transition-transform duration-300" />
+                <BookOpen className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" />
                 For Institutions
               </h3>
-              {[
-                { text: "Reach students in remote areas", delay: "delay-0" },
-                { text: "Reduce infrastructure costs", delay: "delay-100" },
-                { text: "Automate administrative tasks", delay: "delay-200" },
-                { text: "Improve student engagement and retention", delay: "delay-300" }
-              ].map((benefit, index) => (
-                <div key={index} className={`flex items-start group cursor-pointer transition-all duration-300 ${benefit.delay} hover:translate-x-1`}>
-                  <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-3 mr-4 flex-shrink-0 group-hover:bg-purple-300 transition-colors duration-300"></div>
-                  <span className="text-white/70 group-hover:text-white transition-colors duration-300 leading-relaxed">{benefit.text}</span>
-                </div>
-              ))}
+              <div className="space-y-4">
+                {[
+                  "Reach students in remote areas",
+                  "Reduce infrastructure costs",
+                  "Automate administrative tasks",
+                  "Improve student engagement and retention"
+                ].map((benefit, index) => (
+                  <div key={index} className={`bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300 delay-${index * 100} hover:scale-105`}>
+                    <span className="text-white/80 leading-relaxed">{benefit}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
