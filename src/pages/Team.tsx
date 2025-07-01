@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/use-toast";
-import { MapPin, Clock, DollarSign, Users, Heart, Zap, Target, Globe } from "lucide-react";
+import { MapPin, Clock, DollarSign, Heart, Zap, Target, Globe, Users, Coffee, Lightbulb, Award } from "lucide-react";
 import "../styles/animations.css";
 
 const Careers = () => {
@@ -58,8 +58,8 @@ const Careers = () => {
       location: "San Francisco, CA / Remote",
       type: "Full-time",
       salary: "$140k - $180k",
-      description: "Lead the development of our offline AI communication systems. Work with cutting-edge technology to revolutionize how people communicate.",
-      requirements: ["5+ years in AI/ML engineering", "Python, TensorFlow/PyTorch", "Experience with NLP models", "Strong problem-solving skills"]
+      description: "Lead the development of our offline AI communication systems. Work with cutting-edge technology to revolutionize how people communicate without traditional infrastructure.",
+      requirements: ["5+ years in AI/ML engineering", "Python, TensorFlow/PyTorch", "Experience with NLP models", "Strong problem-solving skills", "Experience with distributed systems"]
     },
     {
       title: "Product Manager - AI Solutions",
@@ -67,8 +67,8 @@ const Careers = () => {
       location: "New York, NY / Remote",
       type: "Full-time",
       salary: "$120k - $160k",
-      description: "Drive product strategy for our innovative offline IVR systems. Shape the future of communication technology.",
-      requirements: ["3+ years product management", "AI/tech product experience", "Strong analytical skills", "Excellent communication"]
+      description: "Drive product strategy for our innovative offline IVR systems. Shape the future of communication technology and make it accessible to everyone, everywhere.",
+      requirements: ["3+ years product management", "AI/tech product experience", "Strong analytical skills", "Excellent communication", "Experience with B2B/B2G products"]
     },
     {
       title: "UX/UI Designer",
@@ -76,8 +76,26 @@ const Careers = () => {
       location: "Austin, TX / Remote",
       type: "Full-time",
       salary: "$90k - $130k",
-      description: "Design intuitive interfaces for complex AI systems. Create user experiences that make advanced technology accessible.",
-      requirements: ["4+ years UX/UI design", "Figma, Adobe Creative Suite", "Experience with complex systems", "Portfolio required"]
+      description: "Design intuitive interfaces for complex AI systems. Create user experiences that make advanced technology accessible to users with varying technical backgrounds.",
+      requirements: ["4+ years UX/UI design", "Figma, Adobe Creative Suite", "Experience with complex systems", "Portfolio required", "Accessibility design knowledge"]
+    },
+    {
+      title: "AI Research Scientist",
+      department: "Research",
+      location: "Remote",
+      type: "Full-time",
+      salary: "$160k - $200k",
+      description: "Conduct groundbreaking research in offline AI communication. Publish papers and contribute to the advancement of accessible AI technology.",
+      requirements: ["PhD in CS/AI/ML", "Published research papers", "Python, PyTorch/TensorFlow", "Strong mathematical background", "Experience with NLP/Speech processing"]
+    },
+    {
+      title: "DevOps Engineer",
+      department: "Engineering",
+      location: "Remote",
+      type: "Full-time",
+      salary: "$110k - $150k",
+      description: "Build and maintain the infrastructure that powers our AI systems. Ensure scalability, reliability, and security of our offline communication platforms.",
+      requirements: ["3+ years DevOps experience", "AWS/GCP/Azure", "Docker, Kubernetes", "CI/CD pipelines", "Infrastructure as Code"]
     },
     {
       title: "AI Research Intern",
@@ -85,16 +103,41 @@ const Careers = () => {
       location: "Remote",
       type: "Internship",
       salary: "$25/hour",
-      description: "Contribute to groundbreaking research in offline AI communication. Perfect for students passionate about AI innovation.",
-      requirements: ["Currently pursuing CS/AI degree", "Python programming", "Machine learning fundamentals", "Research experience preferred"]
+      description: "Contribute to groundbreaking research in offline AI communication. Perfect for students passionate about AI innovation and social impact.",
+      requirements: ["Currently pursuing CS/AI degree", "Python programming", "Machine learning fundamentals", "Research experience preferred", "Strong academic record"]
+    }
+  ];
+
+  const companyValues = [
+    { 
+      icon: Heart, 
+      title: "Impact First", 
+      description: "We're building technology that connects people regardless of infrastructure limitations. Every line of code serves a greater purpose." 
+    },
+    { 
+      icon: Users, 
+      title: "Inclusive Innovation", 
+      description: "Diversity drives innovation. We welcome perspectives from all backgrounds to build truly accessible solutions." 
+    },
+    { 
+      icon: Lightbulb, 
+      title: "Continuous Learning", 
+      description: "The AI field evolves rapidly. We invest in our team's growth through conferences, courses, and research time." 
+    },
+    { 
+      icon: Award, 
+      title: "Excellence & Quality", 
+      description: "We maintain the highest standards in everything we do, from code quality to user experience." 
     }
   ];
 
   const perks = [
-    { icon: Heart, title: "Health & Wellness", description: "Comprehensive health, dental, and vision insurance" },
-    { icon: Zap, title: "Innovation Time", description: "20% time for personal projects and research" },
-    { icon: Target, title: "Professional Growth", description: "Annual learning budget and conference attendance" },
-    { icon: Globe, title: "Remote Flexibility", description: "Work from anywhere with flexible hours" }
+    { icon: Heart, title: "Health & Wellness", description: "Comprehensive health, dental, vision, and mental health coverage" },
+    { icon: Zap, title: "Innovation Time", description: "20% time for personal projects and research initiatives" },
+    { icon: Target, title: "Learning Budget", description: "$3,000 annual budget for conferences, courses, and certifications" },
+    { icon: Globe, title: "Remote Flexibility", description: "Work from anywhere with flexible hours and timezone support" },
+    { icon: Coffee, title: "Equipment & Setup", description: "Top-tier equipment plus $1,000 home office setup allowance" },
+    { icon: Users, title: "Team Retreats", description: "Quarterly team gatherings and annual company retreat" }
   ];
 
   return (
@@ -116,29 +159,54 @@ const Careers = () => {
           <div className="max-w-6xl mx-auto">
             <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
-                Join Our Mission
+                Build the Future of Communication
               </h1>
               <p className="text-xl text-white/70 max-w-3xl mx-auto mb-8">
-                Help us revolutionize communication through intelligent offline AI technology. 
-                Build the future where everyone can connect, regardless of infrastructure limitations.
+                Join our mission to make AI-powered communication accessible to everyone, everywhere. 
+                Help us create technology that works without traditional infrastructure limitations.
               </p>
               <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
             </div>
 
-            {/* Company Culture */}
-            <div className={`mb-20 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+            {/* Company Values */}
+            <div className={`mb-20 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
               <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Why Work With Us?
+                Our Values
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {perks.map((perk, index) => {
-                  const Icon = perk.icon;
+                {companyValues.map((value, index) => {
+                  const Icon = value.icon;
                   return (
                     <Card key={index} className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300">
                       <CardContent className="p-6 text-center">
                         <Icon className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-                        <h3 className="text-lg font-semibold text-white mb-2">{perk.title}</h3>
-                        <p className="text-white/70 text-sm">{perk.description}</p>
+                        <h3 className="text-lg font-semibold text-white mb-3">{value.title}</h3>
+                        <p className="text-white/70 text-sm leading-relaxed">{value.description}</p>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Benefits & Perks */}
+            <div className={`mb-20 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Why Join Bakame AI?
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {perks.map((perk, index) => {
+                  const Icon = perk.icon;
+                  return (
+                    <Card key={index} className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-start space-x-4">
+                          <Icon className="w-8 h-8 text-blue-400 mt-1 flex-shrink-0" />
+                          <div>
+                            <h3 className="text-lg font-semibold text-white mb-2">{perk.title}</h3>
+                            <p className="text-white/70 text-sm">{perk.description}</p>
+                          </div>
+                        </div>
                       </CardContent>
                     </Card>
                   );
@@ -186,7 +254,7 @@ const Careers = () => {
                           Apply Now
                         </Button>
                       </div>
-                      <p className="text-white/80 mb-4">{job.description}</p>
+                      <p className="text-white/80 mb-4 leading-relaxed">{job.description}</p>
                       <div>
                         <h4 className="text-white font-semibold mb-2">Requirements:</h4>
                         <ul className="text-white/70 space-y-1">
@@ -215,10 +283,10 @@ const Careers = () => {
                 
                 <CardHeader className="relative z-10 text-center">
                   <CardTitle className="text-3xl text-white mb-4">
-                    Ready to Join Us?
+                    Ready to Make an Impact?
                   </CardTitle>
                   <p className="text-white/70">
-                    Send us your application and let's build the future together
+                    Send us your application and let's revolutionize communication together
                   </p>
                 </CardHeader>
                 <CardContent className="relative z-10">
