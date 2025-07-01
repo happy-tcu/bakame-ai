@@ -289,8 +289,7 @@ const Resources = () => {
                   </Link>
                   <Link to="/schedule-consultation">
                     <Button 
-                      variant="outline" 
-                      className="border-2 border-gradient-to-r from-blue-400 to-purple-400 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-white font-semibold hover:from-blue-500/20 hover:to-purple-500/20 hover:border-blue-300 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto min-h-[44px] px-6 py-2 whitespace-nowrap backdrop-blur-sm"
+                      className="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold hover:from-blue-600 hover:to-blue-700 border border-blue-400 shadow-lg shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto min-h-[44px] px-6 py-2 whitespace-nowrap"
                     >
                       Schedule Consultation
                     </Button>
