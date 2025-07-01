@@ -31,7 +31,8 @@ export const NewsletterManagement = ({ userProfile }: NewsletterManagementProps)
 
   const fetchSubscriptions = async () => {
     try {
-      const { data, error } = await supabase
+      // Use type assertion for the newsletter subscriptions table
+      const { data, error } = await (supabase as any)
         .from('newsletter_subscriptions')
         .select('*')
         .order('subscribed_at', { ascending: false });
@@ -48,6 +49,8 @@ export const NewsletterManagement = ({ userProfile }: NewsletterManagementProps)
       }
     } catch (error) {
       console.error('Error fetching subscriptions:', error);
+      // If the table doesn't exist, show empty state
+      setSubscriptions([]);
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -42,7 +41,8 @@ export const GovernmentDemoManagement = ({ userProfile }: GovernmentDemoManageme
 
   const fetchRequests = async () => {
     try {
-      const { data, error } = await supabase
+      // Use type assertion for the new table
+      const { data, error } = await (supabase as any)
         .from('government_demo_requests')
         .select('*')
         .order('created_at', { ascending: false });
@@ -59,6 +59,8 @@ export const GovernmentDemoManagement = ({ userProfile }: GovernmentDemoManageme
       }
     } catch (error) {
       console.error('Error fetching requests:', error);
+      // If the table doesn't exist, show empty state
+      setRequests([]);
     } finally {
       setLoading(false);
     }
@@ -67,7 +69,7 @@ export const GovernmentDemoManagement = ({ userProfile }: GovernmentDemoManageme
   const updateStatus = async (id: string, newStatus: string) => {
     setUpdating(id);
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('government_demo_requests')
         .update({ status: newStatus })
         .eq('id', id);
