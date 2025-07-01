@@ -22,6 +22,7 @@ interface DashboardLayoutProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   onSignOut: () => void;
+  showThemeToggle?: boolean;
 }
 
 export const DashboardLayout = ({ 
@@ -29,7 +30,8 @@ export const DashboardLayout = ({
   userProfile, 
   activeTab, 
   setActiveTab, 
-  onSignOut 
+  onSignOut,
+  showThemeToggle = false
 }: DashboardLayoutProps) => {
   const navigationItems = [
     { id: "dashboard", label: "Dashboard", icon: BarChart3 },
@@ -53,7 +55,7 @@ export const DashboardLayout = ({
               <h1 className="text-xl font-bold text-foreground">Bakame AI</h1>
               <p className="text-sm text-muted-foreground mt-1">Admin Dashboard</p>
             </div>
-            <ThemeToggle />
+            {showThemeToggle && <ThemeToggle />}
           </div>
         </div>
         

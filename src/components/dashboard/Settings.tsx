@@ -13,9 +13,11 @@ import { UserProfile } from "@/pages/AdminDashboard";
 
 interface SettingsProps {
   userProfile: UserProfile;
+  showThemeToggle: boolean;
+  onThemeToggleChange: (enabled: boolean) => void;
 }
 
-export const Settings = ({ userProfile }: SettingsProps) => {
+export const Settings = ({ userProfile, showThemeToggle, onThemeToggleChange }: SettingsProps) => {
   const [profile, setProfile] = useState({
     full_name: userProfile.full_name || "",
     organization: userProfile.organization || "",
@@ -122,6 +124,25 @@ export const Settings = ({ userProfile }: SettingsProps) => {
           <Button onClick={updateProfile} disabled={isLoading}>
             {isLoading ? "Updating..." : "Update Profile"}
           </Button>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Interface Preferences</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <Label htmlFor="theme-toggle">Theme Switcher</Label>
+              <p className="text-sm text-gray-500">Enable dark/light mode toggle in the dashboard</p>
+            </div>
+            <Switch
+              id="theme-toggle"
+              checked={showThemeToggle}
+              onCheckedChange={onThemeToggleChange}
+            />
+          </div>
         </CardContent>
       </Card>
 
