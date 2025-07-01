@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/use-toast";
-import { MapPin, Clock, ArrowRight, Users, Lightbulb, Heart, Target, Sparkles, Building, Globe } from "lucide-react";
+import { MapPin, Clock, ArrowRight, Users, Globe, Building } from "lucide-react";
 
 const Careers = () => {
   const [formData, setFormData] = useState({
@@ -20,10 +20,9 @@ const Careers = () => {
   });
 
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 200);
+    const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -104,42 +103,33 @@ const Careers = () => {
 
   const values = [
     {
-      icon: Heart,
       title: "Impact-driven",
-      description: "We're building technology that connects people regardless of infrastructure limitations.",
-      color: "text-red-500"
+      description: "We're building technology that connects people regardless of infrastructure limitations."
     },
     {
-      icon: Users,
       title: "Collaborative",
-      description: "We believe diverse perspectives drive innovation and build truly accessible solutions.",
-      color: "text-blue-500"
+      description: "We believe diverse perspectives drive innovation and build truly accessible solutions."
     },
     {
-      icon: Lightbulb,
-      title: "Curious",
-      description: "We invest in continuous learning through research, conferences, and dedicated innovation time.",
-      color: "text-yellow-500"
-    },
-    {
-      icon: Target,
       title: "Excellence",
-      description: "We maintain the highest standards in everything we do, from code quality to user experience.",
-      color: "text-green-500"
+      description: "We maintain the highest standards in everything we do, from code quality to user experience."
+    },
+    {
+      title: "Continuous Learning",
+      description: "We invest in growth through research, conferences, and dedicated innovation time."
     }
   ];
 
   const stats = [
     { number: "50+", label: "Team Members", icon: Users },
     { number: "15+", label: "Countries", icon: Globe },
-    { number: "3", label: "Offices", icon: Building },
-    { number: "100%", label: "Remote-First", icon: Sparkles }
+    { number: "3", label: "Offices", icon: Building }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 bg-white/80 backdrop-blur-md border-b border-gray-200/50 sticky top-0 z-50">
+      <nav className="flex justify-between items-center p-6 md:p-8 bg-white/90 backdrop-blur-sm border-b border-gray-200/50 sticky top-0 z-50">
         <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Bakame AI
         </div>
@@ -153,34 +143,29 @@ const Careers = () => {
 
       <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Hero Section */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-6">
-            <Sparkles className="w-4 h-4 mr-2" />
-            We're hiring amazing people
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent leading-tight">
-            Join us in building the
-            <br />
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              future of communication
-            </span>
+        <div className={`text-center mb-20 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">
+            Join our team
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
             Help us create AI-powered communication systems that work everywhere, 
             for everyone, regardless of infrastructure limitations.
           </p>
+          <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+            We're hiring amazing people
+          </div>
         </div>
 
         {/* Stats Section */}
-        <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 mb-20 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <div key={index} className="text-center group">
-                <div className="bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-                  <Icon className="w-8 h-8 mx-auto mb-3 text-blue-600 group-hover:scale-110 transition-transform" />
-                  <div className="text-3xl font-bold text-gray-900 mb-1">{stat.number}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
+                <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
+                  <Icon className="w-6 h-6 mx-auto mb-4 text-blue-600" />
+                  <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
+                  <div className="text-gray-600">{stat.label}</div>
                 </div>
               </div>
             );
@@ -188,51 +173,40 @@ const Careers = () => {
         </div>
 
         {/* Values Section */}
-        <div className={`mb-20 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`mb-20 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our values</h2>
-            <p className="text-xl text-gray-600">The principles that guide everything we do</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our values</h2>
+            <p className="text-lg text-gray-600">The principles that guide everything we do</p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
-            {values.map((value, index) => {
-              const Icon = value.icon;
-              return (
-                <div key={index} className="group">
-                  <div className="bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100/50">
-                    <div className="flex items-start space-x-6">
-                      <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-xl group-hover:scale-110 transition-transform">
-                        <Icon className={`w-8 h-8 ${value.color}`} />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-3">{value.title}</h3>
-                        <p className="text-gray-600 leading-relaxed">{value.description}</p>
-                      </div>
-                    </div>
-                  </div>
+            {values.map((value, index) => (
+              <div key={index} className="group">
+                <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{value.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{value.description}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Benefits Section */}
-        <div className={`mb-20 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`mb-20 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Benefits & perks</h2>
-            <p className="text-xl text-gray-600">We invest in our people's growth and well-being</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Benefits & perks</h2>
+            <p className="text-lg text-gray-600">We invest in our people's growth and well-being</p>
           </div>
-          <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-sm border border-gray-100/50">
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { title: "Health & wellness", desc: "Comprehensive medical, dental, and vision coverage", icon: "🏥" },
-                { title: "Learning & development", desc: "$3,000 annual budget for conferences and courses", icon: "📚" },
-                { title: "Innovation time", desc: "20% time for personal projects and research", icon: "💡" },
-                { title: "Flexible work", desc: "Remote-first with flexible hours", icon: "🌍" },
-                { title: "Equipment", desc: "Top-tier equipment plus home office setup", icon: "💻" },
-                { title: "Team events", desc: "Quarterly gatherings and annual retreats", icon: "🎉" },
+                { title: "Health & wellness", desc: "Comprehensive medical, dental, and vision coverage" },
+                { title: "Learning & development", desc: "$3,000 annual budget for conferences and courses" },
+                { title: "Innovation time", desc: "20% time for personal projects and research" },
+                { title: "Flexible work", desc: "Remote-first with flexible hours" },
+                { title: "Equipment", desc: "Top-tier equipment plus home office setup" },
+                { title: "Team events", desc: "Quarterly gatherings and annual retreats" },
               ].map((benefit, index) => (
-                <div key={index} className="text-center group">
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{benefit.icon}</div>
+                <div key={index} className="text-center">
                   <h3 className="font-semibold text-gray-900 mb-2">{benefit.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{benefit.desc}</p>
                 </div>
@@ -242,36 +216,34 @@ const Careers = () => {
         </div>
 
         {/* Job Listings */}
-        <div className={`mb-20 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`mb-20 transition-all duration-700 delay-400 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Open roles</h2>
-            <p className="text-xl text-gray-600">Find your next opportunity with us</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Open roles</h2>
+            <p className="text-lg text-gray-600">Find your next opportunity with us</p>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-4">
             {jobListings.map((job, index) => (
               <div 
                 key={index} 
-                className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100/50 group"
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
+                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 group"
               >
-                <div className="flex items-start justify-between mb-6">
+                <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center mb-3">
-                      <h3 className="text-2xl font-semibold text-gray-900 mr-3">{job.title}</h3>
+                      <h3 className="text-xl font-semibold text-gray-900 mr-3">{job.title}</h3>
                       {job.isNew && (
                         <Badge className="bg-green-100 text-green-700 hover:bg-green-100">
                           New
                         </Badge>
                       )}
                     </div>
-                    <div className="flex items-center space-x-6 text-gray-600 mb-4">
+                    <div className="flex items-center space-x-4 text-gray-600 mb-4">
                       <span className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium">{job.team}</span>
-                      <div className="flex items-center">
+                      <div className="flex items-center text-sm">
                         <MapPin className="w-4 h-4 mr-1" />
                         {job.location}
                       </div>
-                      <div className="flex items-center">
+                      <div className="flex items-center text-sm">
                         <Clock className="w-4 h-4 mr-1" />
                         {job.type}
                       </div>
@@ -279,50 +251,50 @@ const Careers = () => {
                   </div>
                   <Button 
                     variant="outline"
-                    className={`group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 ${hoveredCard === index ? 'scale-105' : ''}`}
+                    className="group-hover:bg-blue-600 group-hover:text-white transition-all duration-300"
                     onClick={() => {
                       setFormData({ ...formData, position: job.title });
                       document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' });
                     }}
                   >
                     Apply
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>
-                <p className="text-gray-600 leading-relaxed text-lg">{job.description}</p>
+                <p className="text-gray-600 leading-relaxed">{job.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Application Form */}
-        <div id="application-form" className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 border border-gray-100/50">
+        <div id="application-form" className={`transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <div className="bg-white rounded-2xl p-12 shadow-sm border border-gray-100">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-blue-900 bg-clip-text text-transparent">
+              <h2 className="text-3xl font-bold mb-4 text-gray-900">
                 Apply to Bakame AI
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-lg text-gray-600">
                 Don't see a role that fits? We're always looking for exceptional talent.
               </p>
             </div>
             
-            <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl mx-auto">
+            <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-3">
-                  <Label htmlFor="name" className="text-gray-900 font-medium text-lg">Full Name</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-gray-900 font-medium">Full Name</Label>
                   <Input
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white/80 backdrop-blur-sm"
+                    className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Enter your full name"
                   />
                 </div>
-                <div className="space-y-3">
-                  <Label htmlFor="email" className="text-gray-900 font-medium text-lg">Email Address</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-gray-900 font-medium">Email Address</Label>
                   <Input
                     id="email"
                     name="email"
@@ -330,69 +302,69 @@ const Careers = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white/80 backdrop-blur-sm"
+                    className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Enter your email"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-3">
-                  <Label htmlFor="position" className="text-gray-900 font-medium text-lg">Position of Interest</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="position" className="text-gray-900 font-medium">Position of Interest</Label>
                   <Input
                     id="position"
                     name="position"
                     value={formData.position}
                     onChange={handleChange}
                     required
-                    className="h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white/80 backdrop-blur-sm"
+                    className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="e.g., Senior AI Engineer"
                   />
                 </div>
-                <div className="space-y-3">
-                  <Label htmlFor="experience" className="text-gray-900 font-medium text-lg">Years of Experience</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="experience" className="text-gray-900 font-medium">Years of Experience</Label>
                   <Input
                     id="experience"
                     name="experience"
                     value={formData.experience}
                     onChange={handleChange}
                     required
-                    className="h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white/80 backdrop-blur-sm"
+                    className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="e.g., 3-5 years"
                   />
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <Label htmlFor="resume" className="text-gray-900 font-medium text-lg">Resume/Portfolio Link</Label>
+              <div className="space-y-2">
+                <Label htmlFor="resume" className="text-gray-900 font-medium">Resume/Portfolio Link</Label>
                 <Input
                   id="resume"
                   name="resume"
                   type="url"
                   value={formData.resume}
                   onChange={handleChange}
-                  className="h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500 bg-white/80 backdrop-blur-sm"
+                  className="h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="https://your-portfolio.com or LinkedIn profile"
                 />
               </div>
 
-              <div className="space-y-3">
-                <Label htmlFor="message" className="text-gray-900 font-medium text-lg">Why do you want to join Bakame AI?</Label>
+              <div className="space-y-2">
+                <Label htmlFor="message" className="text-gray-900 font-medium">Why do you want to join Bakame AI?</Label>
                 <Textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={6}
-                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 resize-none bg-white/80 backdrop-blur-sm"
+                  rows={5}
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 resize-none"
                   placeholder="Tell us what excites you about our mission and how you'd contribute to our team..."
                 />
               </div>
 
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-4 rounded-xl transition-all duration-300 hover:scale-105 text-lg"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors duration-300"
               >
                 Submit Application
               </Button>
@@ -402,7 +374,7 @@ const Careers = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white/80 backdrop-blur-md border-t border-gray-200/50 py-12">
+      <footer className="bg-white border-t border-gray-200/50 py-12">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
           <div className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 md:mb-0">
             Bakame AI
