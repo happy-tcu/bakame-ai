@@ -43,6 +43,7 @@ const AdminDashboard = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [showThemeToggle, setShowThemeToggle] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -207,7 +208,13 @@ const AdminDashboard = () => {
       case "analytics":
         return <AnalyticsDashboard userProfile={userProfile} />;
       case "settings":
-        return <Settings userProfile={userProfile} />;
+        return (
+          <Settings 
+            userProfile={userProfile} 
+            showThemeToggle={showThemeToggle}
+            onThemeToggleChange={setShowThemeToggle}
+          />
+        );
       default:
         return <DashboardStats userProfile={userProfile} />;
     }
@@ -219,6 +226,7 @@ const AdminDashboard = () => {
       activeTab={activeTab}
       setActiveTab={setActiveTab}
       onSignOut={handleSignOut}
+      showThemeToggle={showThemeToggle}
     >
       {renderActiveTab()}
     </DashboardLayout>
