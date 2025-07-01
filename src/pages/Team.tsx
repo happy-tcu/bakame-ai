@@ -1,20 +1,22 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/use-toast";
-import { TeamMemberCard } from "@/components/team/TeamMemberCard";
-import { teamMembers } from "@/data/teamData";
+import { MapPin, Clock, DollarSign, Users, Heart, Zap, Target, Globe } from "lucide-react";
 import "../styles/animations.css";
 
-const Team = () => {
+const Careers = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     position: "",
     experience: "",
+    resume: "",
     message: ""
   });
 
@@ -27,16 +29,17 @@ const Team = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    console.log("Application submitted:", formData);
     toast({
       title: "Application Submitted!",
-      description: "Thank you for your interest. We'll be in touch soon.",
+      description: "Thank you for your interest. We'll be in touch within 48 hours.",
     });
     setFormData({
       name: "",
       email: "",
       position: "",
       experience: "",
+      resume: "",
       message: ""
     });
   };
@@ -48,6 +51,52 @@ const Team = () => {
     });
   };
 
+  const jobListings = [
+    {
+      title: "Senior AI Engineer",
+      department: "Engineering",
+      location: "San Francisco, CA / Remote",
+      type: "Full-time",
+      salary: "$140k - $180k",
+      description: "Lead the development of our offline AI communication systems. Work with cutting-edge technology to revolutionize how people communicate.",
+      requirements: ["5+ years in AI/ML engineering", "Python, TensorFlow/PyTorch", "Experience with NLP models", "Strong problem-solving skills"]
+    },
+    {
+      title: "Product Manager - AI Solutions",
+      department: "Product",
+      location: "New York, NY / Remote",
+      type: "Full-time",
+      salary: "$120k - $160k",
+      description: "Drive product strategy for our innovative offline IVR systems. Shape the future of communication technology.",
+      requirements: ["3+ years product management", "AI/tech product experience", "Strong analytical skills", "Excellent communication"]
+    },
+    {
+      title: "UX/UI Designer",
+      department: "Design",
+      location: "Austin, TX / Remote",
+      type: "Full-time",
+      salary: "$90k - $130k",
+      description: "Design intuitive interfaces for complex AI systems. Create user experiences that make advanced technology accessible.",
+      requirements: ["4+ years UX/UI design", "Figma, Adobe Creative Suite", "Experience with complex systems", "Portfolio required"]
+    },
+    {
+      title: "AI Research Intern",
+      department: "Research",
+      location: "Remote",
+      type: "Internship",
+      salary: "$25/hour",
+      description: "Contribute to groundbreaking research in offline AI communication. Perfect for students passionate about AI innovation.",
+      requirements: ["Currently pursuing CS/AI degree", "Python programming", "Machine learning fundamentals", "Research experience preferred"]
+    }
+  ];
+
+  const perks = [
+    { icon: Heart, title: "Health & Wellness", description: "Comprehensive health, dental, and vision insurance" },
+    { icon: Zap, title: "Innovation Time", description: "20% time for personal projects and research" },
+    { icon: Target, title: "Professional Growth", description: "Annual learning budget and conference attendance" },
+    { icon: Globe, title: "Remote Flexibility", description: "Work from anywhere with flexible hours" }
+  ];
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation */}  
@@ -57,46 +106,106 @@ const Team = () => {
           <a href="/" className="text-white/70 hover:text-white transition-colors">Home</a>
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
           <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
-          <a href="/team" className="text-white hover:text-white transition-colors border-b-2 border-blue-400">Team</a>
+          <a href="/team" className="text-white hover:text-white transition-colors border-b-2 border-blue-400">Careers</a>
         </div>
       </nav>
 
       <div className="relative z-10">
-        {/* Leadership Team Section */}
+        {/* Hero Section */}
         <div className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
-                Leadership Team
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
+                Join Our Mission
               </h1>
-              <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Meet the visionary leaders driving innovation in offline AI and communication technology
+              <p className="text-xl text-white/70 max-w-3xl mx-auto mb-8">
+                Help us revolutionize communication through intelligent offline AI technology. 
+                Build the future where everyone can connect, regardless of infrastructure limitations.
               </p>
               <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
             </div>
 
-            <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-              {teamMembers.map((member, index) => (
-                <TeamMemberCard key={member.name} member={member} index={index} />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Join Our Team Section */}
-        <div className="container mx-auto px-6 py-20">
-          <div className="max-w-4xl mx-auto">
-            <div className={`text-center mb-16 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Join Our Diverse Team
+            {/* Company Culture */}
+            <div className={`mb-20 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Why Work With Us?
               </h2>
-              <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                We're always looking for passionate individuals who share our vision of revolutionizing communication through offline AI technology.
-              </p>
-              <div className="mt-8 w-24 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto rounded-full"></div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {perks.map((perk, index) => {
+                  const Icon = perk.icon;
+                  return (
+                    <Card key={index} className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300">
+                      <CardContent className="p-6 text-center">
+                        <Icon className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+                        <h3 className="text-lg font-semibold text-white mb-2">{perk.title}</h3>
+                        <p className="text-white/70 text-sm">{perk.description}</p>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
             </div>
 
-            <div className={`transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Job Listings */}
+            <div className={`mb-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Open Positions
+              </h2>
+              <div className="space-y-6">
+                {jobListings.map((job, index) => (
+                  <Card key={index} className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300">
+                    <CardContent className="p-8">
+                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
+                        <div className="mb-4 lg:mb-0">
+                          <h3 className="text-2xl font-bold text-white mb-2">{job.title}</h3>
+                          <div className="flex flex-wrap gap-3">
+                            <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-500/30">
+                              {job.department}
+                            </Badge>
+                            <div className="flex items-center text-white/70 text-sm">
+                              <MapPin className="w-4 h-4 mr-1" />
+                              {job.location}
+                            </div>
+                            <div className="flex items-center text-white/70 text-sm">
+                              <Clock className="w-4 h-4 mr-1" />
+                              {job.type}
+                            </div>
+                            <div className="flex items-center text-white/70 text-sm">
+                              <DollarSign className="w-4 h-4 mr-1" />
+                              {job.salary}
+                            </div>
+                          </div>
+                        </div>
+                        <Button 
+                          className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300 hover:scale-105"
+                          onClick={() => {
+                            setFormData({ ...formData, position: job.title });
+                            document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' });
+                          }}
+                        >
+                          Apply Now
+                        </Button>
+                      </div>
+                      <p className="text-white/80 mb-4">{job.description}</p>
+                      <div>
+                        <h4 className="text-white font-semibold mb-2">Requirements:</h4>
+                        <ul className="text-white/70 space-y-1">
+                          {job.requirements.map((req, reqIndex) => (
+                            <li key={reqIndex} className="flex items-start">
+                              <span className="text-blue-400 mr-2">•</span>
+                              {req}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Application Form */}
+            <div id="application-form" className={`transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300 relative overflow-hidden">
                 {/* Animated background elements */}
                 <div className="absolute inset-0 overflow-hidden">
@@ -104,10 +213,13 @@ const Team = () => {
                   <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
                 </div>
                 
-                <CardHeader className="relative z-10">
-                  <CardTitle className="text-2xl text-white text-center">
-                    Career Application
+                <CardHeader className="relative z-10 text-center">
+                  <CardTitle className="text-3xl text-white mb-4">
+                    Ready to Join Us?
                   </CardTitle>
+                  <p className="text-white/70">
+                    Send us your application and let's build the future together
+                  </p>
                 </CardHeader>
                 <CardContent className="relative z-10">
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -139,34 +251,48 @@ const Team = () => {
                       </div>
                     </div>
 
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="position" className="text-white">Position of Interest</Label>
+                        <Input
+                          id="position"
+                          name="position"
+                          value={formData.position}
+                          onChange={handleChange}
+                          required
+                          className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 transition-colors"
+                          placeholder="e.g., Senior AI Engineer"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="experience" className="text-white">Years of Experience</Label>
+                        <Input
+                          id="experience"
+                          name="experience"
+                          value={formData.experience}
+                          onChange={handleChange}
+                          required
+                          className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 transition-colors"
+                          placeholder="e.g., 3-5 years"
+                        />
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="position" className="text-white">Position of Interest</Label>
+                      <Label htmlFor="resume" className="text-white">Resume/Portfolio Link</Label>
                       <Input
-                        id="position"
-                        name="position"
-                        value={formData.position}
+                        id="resume"
+                        name="resume"
+                        type="url"
+                        value={formData.resume}
                         onChange={handleChange}
-                        required
                         className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 transition-colors"
-                        placeholder="e.g., Software Engineer, AI Researcher, Product Manager"
+                        placeholder="https://your-portfolio.com or LinkedIn profile"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="experience" className="text-white">Years of Experience</Label>
-                      <Input
-                        id="experience"
-                        name="experience"
-                        value={formData.experience}
-                        onChange={handleChange}
-                        required
-                        className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 transition-colors"
-                        placeholder="e.g., 3-5 years"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message" className="text-white">Tell us about yourself</Label>
+                      <Label htmlFor="message" className="text-white">Why do you want to join Bakame AI?</Label>
                       <Textarea
                         id="message"
                         name="message"
@@ -175,7 +301,7 @@ const Team = () => {
                         required
                         rows={4}
                         className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue-400 transition-colors resize-none"
-                        placeholder="Why are you interested in joining our team? What unique skills and perspective would you bring?"
+                        placeholder="Tell us what excites you about our mission and how you'd contribute to our team..."
                       />
                     </div>
 
@@ -200,7 +326,7 @@ const Team = () => {
               <a href="/" className="hover:text-white transition-colors">Home</a>
               <a href="/blog" className="hover:text-white transition-colors">Blog</a>
               <a href="/resources" className="hover:text-white transition-colors">Resources</a>
-              <a href="/team" className="hover:text-white transition-colors">Team</a>
+              <a href="/team" className="hover:text-white transition-colors">Careers</a>
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-white/10 text-center text-white/50">
@@ -212,4 +338,4 @@ const Team = () => {
   );
 };
 
-export default Team;
+export default Careers;
