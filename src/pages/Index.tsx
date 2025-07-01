@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import VideoModal from '@/components/VideoModal';
 import { WaitlistForm } from '@/components/forms/WaitlistForm';
 import { ContactForm } from '@/components/forms/ContactForm';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { Monitor, Shield, Users, Zap, Play, CheckCircle, Star, ArrowRight } from 'lucide-react';
 
@@ -24,23 +25,28 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+      {/* Add theme toggle to top right */}
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 pt-20 pb-16">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-20 pb-16 transition-colors duration-300">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-8 animate-fade-in">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium mb-8 animate-fade-in transition-colors duration-300">
               <Star className="w-4 h-4 mr-2" />
               Trusted by 10,000+ educators worldwide
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight animate-fade-in-up">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight animate-fade-in-up transition-colors duration-300">
               Transform Education with
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> AI-Powered</span> Learning
             </h1>
             
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-100">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-100 transition-colors duration-300">
               Bakame AI revolutionizes how students learn and teachers teach with intelligent, adaptive technology that personalizes education for every learner.
             </p>
             
@@ -87,13 +93,13 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
               Why Choose Bakame AI?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto transition-colors duration-300">
               Our AI-powered platform adapts to every student's learning style, providing personalized education at scale.
             </p>
           </div>
@@ -143,14 +149,14 @@ const Index = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                 Transform Your Educational Experience
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-600 dark:text-gray-300 transition-colors duration-300">
                 Join thousands of educators who are already using AI to enhance learning outcomes.
               </p>
             </div>
@@ -230,19 +236,19 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                 Ready to Get Started?
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-600 dark:text-gray-300 transition-colors duration-300">
                 Contact us to learn more about how Bakame AI can transform your educational experience.
               </p>
             </div>
             
-            <div className="bg-gray-50 rounded-2xl p-8">
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-2xl p-8 transition-colors duration-300">
               <ContactForm />
             </div>
           </div>
@@ -250,7 +256,7 @@ const Index = () => {
       </section>
 
       {/* Waitlist Section */}
-      <section id="waitlist" className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section id="waitlist" className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 transition-colors duration-300">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold text-white mb-6">
@@ -260,7 +266,7 @@ const Index = () => {
               Be among the first to experience the future of AI-powered education.
             </p>
             
-            <div className="bg-white rounded-2xl p-8">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 transition-colors duration-300">
               <WaitlistForm />
             </div>
           </div>
