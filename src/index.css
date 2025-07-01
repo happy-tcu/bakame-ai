@@ -143,6 +143,10 @@ All colors MUST be HSL.
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;

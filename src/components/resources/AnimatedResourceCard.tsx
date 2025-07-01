@@ -50,13 +50,12 @@ export const AnimatedResourceCard = ({ resource, onDownload, index }: AnimatedRe
 
   return (
     <Card 
-      className={`bg-white/5 border-white/10 backdrop-blur-sm transition-all duration-500 group cursor-pointer relative overflow-hidden
+      className={`bg-white/5 border-white/10 backdrop-blur-sm transition-all duration-500 group cursor-pointer relative overflow-hidden animate-fadeInUp
         ${isHovered ? 'bg-white/10 scale-105 shadow-2xl border-blue-500/30' : ''}
         ${isExpanded ? 'row-span-2' : ''}
       `}
       style={{
         animationDelay: `${index * 100}ms`,
-        animation: 'fadeInUp 0.6s ease-out forwards'
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -143,19 +142,6 @@ export const AnimatedResourceCard = ({ resource, onDownload, index }: AnimatedRe
           </div>
         </div>
       </CardContent>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </Card>
   );
 };
