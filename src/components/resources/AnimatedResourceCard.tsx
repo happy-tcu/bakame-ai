@@ -71,7 +71,7 @@ export const AnimatedResourceCard = ({ resource, onDownload, index }: AnimatedRe
         </div>
       )}
       
-      <CardHeader className="relative z-10">
+      <CardHeader className="relative z-10 pb-4">
         <div className="flex items-center justify-between mb-2">
           <ResourceIcon className={`h-5 w-5 transition-colors duration-300 ${isHovered ? 'text-blue-300' : 'text-blue-400'}`} />
           <div className="flex items-center space-x-2">
@@ -113,14 +113,21 @@ export const AnimatedResourceCard = ({ resource, onDownload, index }: AnimatedRe
         )}
       </CardHeader>
       
-      <CardContent className="relative z-10">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+      <CardContent className="relative z-10 pt-0">
+        <div className="flex flex-col space-y-3">
+          <div className="flex items-center justify-between">
             <Button 
               size="sm" 
               variant="outline" 
-              className={`border-white/20 text-white transition-all duration-300 transform ${isHovered ? 'scale-105 bg-blue-500/20 border-blue-500/30' : 'hover:bg-white/10'}`}
-              onClick={() => onDownload(resource.id)}
+              className={`
+                border-white/30 text-white bg-white/5 hover:bg-blue-500/20 hover:border-blue-400/50
+                transition-all duration-300 transform backdrop-blur-sm
+                ${isHovered ? 'scale-105 shadow-lg border-blue-400/40 bg-blue-500/10' : ''}
+              `}
+              onClick={(e) => {
+                e.stopPropagation();
+                onDownload(resource.id);
+              }}
             >
               <Download className="h-4 w-4 mr-2" />
               Download
@@ -129,14 +136,19 @@ export const AnimatedResourceCard = ({ resource, onDownload, index }: AnimatedRe
               {resource.download_count} downloads
             </span>
           </div>
-          <div className="flex items-center space-x-2">
+          
+          <div className="flex items-center justify-between">
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-white/40 hover:text-blue-400 transition-colors p-1"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsExpanded(!isExpanded);
+              }}
+              className="text-white/40 hover:text-blue-400 hover:bg-white/10 transition-colors"
             >
-              {isExpanded ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              {isExpanded ? <EyeOff className="h-4 w-4 mr-1" /> : <Eye className="h-4 w-4 mr-1" />}
+              {isExpanded ? 'Less' : 'More'}
             </Button>
             <ExternalLink className={`h-4 w-4 transition-colors duration-300 ${isHovered ? 'text-blue-400' : 'text-white/40'}`} />
           </div>
