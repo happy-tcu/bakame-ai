@@ -13,6 +13,10 @@ import { GovernmentDemoManagement } from "@/components/dashboard/GovernmentDemoM
 import { ContactSubmissionsManagement } from "@/components/dashboard/ContactSubmissionsManagement";
 import { NewsletterManagement } from "@/components/dashboard/NewsletterManagement";
 import { AnalyticsDashboard } from "@/components/dashboard/AnalyticsDashboard";
+import { EnterpriseAdminDashboard } from "@/components/dashboard/EnterpriseAdminDashboard";
+import { GovernmentAdminDashboard } from "@/components/dashboard/GovernmentAdminDashboard";
+import { SchoolAdminDashboard } from "@/components/dashboard/SchoolAdminDashboard";
+import { PrivateUserDashboard } from "@/components/dashboard/PrivateUserDashboard";
 
 export type UserProfile = {
   id: string;
@@ -189,6 +193,24 @@ const AdminDashboard = () => {
     return null;
   }
 
+  // Role-specific dashboard routing
+  const getRoleSpecificDashboard = () => {
+    switch (userProfile.role) {
+      case 'government':
+        return <GovernmentAdminDashboard />;
+      case 'school':
+        return <SchoolAdminDashboard />;
+      case 'ngo':
+        return <EnterpriseAdminDashboard />;
+      case 'manager':
+        return <EnterpriseAdminDashboard />;
+      case 'creator':
+        return <PrivateUserDashboard />;
+      default:
+        return renderActiveTab(); // Admin users get full admin dashboard
+    }
+  };
+
   const renderActiveTab = () => {
     switch (activeTab) {
       case "dashboard":
@@ -220,6 +242,18 @@ const AdminDashboard = () => {
     }
   };
 
+  // For non-admin users, show role-specific dashboard without navigation
+  if (userProfile.role !== 'admin') {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="p-8">
+          {getRoleSpecificDashboard()}
+        </div>
+      </div>
+    );
+  }
+
+  // Admin users get the full dashboard with navigation
   return (
     <DashboardLayout
       userProfile={userProfile}

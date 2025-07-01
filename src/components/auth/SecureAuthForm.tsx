@@ -10,7 +10,7 @@ import { Eye, EyeOff, Lock, Mail, Shield } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 
 interface SecureAuthFormProps {
-  onSuccess?: () => void;
+  onSuccess?: (isAdmin: boolean) => void;
 }
 
 export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
@@ -137,7 +137,7 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
             title: "Account Created",
             description: "Your account has been created successfully",
           });
-          onSuccess?.();
+          onSuccess?.(isAdmin);
         }
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -152,7 +152,7 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
             title: "Welcome Back",
             description: "Successfully signed in",
           });
-          onSuccess?.();
+          onSuccess?.(isAdmin);
         }
       }
     } catch (error: any) {

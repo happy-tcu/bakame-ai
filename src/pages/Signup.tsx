@@ -18,9 +18,13 @@ const Signup = () => {
     checkAuth();
   }, [navigate]);
 
-  const handleAuthSuccess = () => {
-    // Redirect to home page after successful signup/login
-    navigate("/");
+  const handleAuthSuccess = (isAdmin: boolean) => {
+    // Redirect admin users to dashboard, regular users to home
+    if (isAdmin) {
+      navigate("/admin-dashboard");
+    } else {
+      navigate("/");
+    }
   };
 
   return (
