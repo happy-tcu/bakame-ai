@@ -269,7 +269,8 @@ const Index = () => {
 
       <VideoModal 
         isOpen={showVideoModal} 
-        onClose={() => setShowVideoModal(false)} 
+        onClose={() => setShowVideoModal(false)}
+        videoId="dQw4w9WgXcQ"
       />
     </div>
   );
