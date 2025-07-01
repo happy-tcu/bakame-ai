@@ -1,0 +1,98 @@
+
+import { Button } from "@/components/ui/button";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+interface ResourcePaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  hasNext: boolean;
+  hasPrevious: boolean;
+}
+
+export const ResourcePagination = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+  hasNext,
+  hasPrevious
+}: ResourcePaginationProps) => {
+  const getVisiblePages = () => {
+    const delta = 2;
+    const range = [];
+    const rangeWithDots = [];
+
+    for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
+      range.push(i);
+    }
+
+    if (currentPage - delta > 2) {
+      rangeWithDots.push(1, '...');
+    } else {
+      rangeWithDots.push(1);
+    }
+
+    rangeWithDots.push(...range);
+
+    if (currentPage + delta < totalPages - 1) {
+      rangeWithDots.push('...', totalPages);
+    } else {
+      rangeWithDots.push(totalPages);
+    }
+
+    return rangeWithDots;
+  };
+
+  if (totalPages <= 1) return null;
+
+  return (
+    <div className="flex items-center justify-center space-x-4 mt-8">
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={!hasPrevious}
+        className="border-white/20 text-white hover:bg-white/10"
+      >
+        <ChevronLeft className="h-4 w-4 mr-1" />
+        Previous
+      </Button>
+
+      <Pagination>
+        <PaginationContent>
+          {getVisiblePages().map((page, index) => (
+            <PaginationItem key={index}>
+              {page === '...' ? (
+                <span className="px-3 py-2 text-white/50">...</span>
+              ) : (
+                <PaginationLink
+                  onClick={() => onPageChange(page as number)}
+                  isActive={currentPage === page}
+                  className={`cursor-pointer ${
+                    currentPage === page
+                      ? 'bg-blue-500 text-white border-blue-500'
+                      : 'border-white/20 text-white hover:bg-white/10'
+                  }`}
+                >
+                  {page}
+                </PaginationLink>
+              )}
+            </PaginationItem>
+          ))}
+        </PaginationContent>
+      </Pagination>
+
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={!hasNext}
+        className="border-white/20 text-white hover:bg-white/10"
+      >
+        Next
+        <ChevronRight className="h-4 w-4 ml-1" />
+      </Button>
+    </div>
+  );
+};

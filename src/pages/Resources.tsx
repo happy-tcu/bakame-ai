@@ -1,19 +1,23 @@
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2, RotateCcw } from "lucide-react";
 import { useResources } from "@/hooks/useResources";
-import { ResourceCard } from "@/components/resources/ResourceCard";
+import { AnimatedResourceCard } from "@/components/resources/AnimatedResourceCard";
 import { ResourceFilters } from "@/components/resources/ResourceFilters";
+import { ResourceStats } from "@/components/resources/ResourceStats";
+import { ResourcePagination } from "@/components/resources/ResourcePagination";
+import { usePagination } from "@/hooks/usePagination";
 
 const Resources = () => {
-  const { resources, loading, error, downloadResource } = useResources();
+  const { resources, loading, error, downloadResource, refetch } = useResources();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [sortBy, setSortBy] = useState<"newest" | "oldest" | "popular" | "featured">("featured");
 
   // Get unique values for filters
   const { availableCategories, availableTypes, availableTags } = useMemo(() => {
@@ -28,9 +32,9 @@ const Resources = () => {
     };
   }, [resources]);
 
-  // Filter resources based on search and filters
-  const filteredResources = useMemo(() => {
-    return resources.filter(resource => {
+  // Filter and sort resources
+  const filteredAndSortedResources = useMemo(() => {
+    let filtered = resources.filter(resource => {
       const matchesSearch = !searchTerm || 
         resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -43,12 +47,55 @@ const Resources = () => {
 
       return matchesSearch && matchesCategory && matchesType && matchesTags;
     });
-  }, [resources, searchTerm, selectedCategory, selectedType, selectedTags]);
 
-  // Group filtered resources by category
+    // Sort resources
+    switch (sortBy) {
+      case "newest":
+        filtered.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        break;
+      case "oldest":
+        filtered.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+        break;
+      case "popular":
+        filtered.sort((a, b) => (b.download_count || 0) - (a.download_count || 0));
+        break;
+      case "featured":
+        filtered.sort((a, b) => {
+          if (a.is_featured && !b.is_featured) return -1;
+          if (!a.is_featured && b.is_featured) return 1;
+          return (b.download_count || 0) - (a.download_count || 0);
+        });
+        break;
+      default:
+        break;
+    }
+
+    return filtered;
+  }, [resources, searchTerm, selectedCategory, selectedType, selectedTags, sortBy]);
+
+  // Pagination
+  const {
+    currentPage,
+    totalPages,
+    paginatedItems: paginatedResources,
+    goToPage,
+    hasNext,
+    hasPrevious,
+    reset: resetPagination
+  } = usePagination({
+    items: filteredAndSortedResources,
+    itemsPerPage: 9
+  });
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    resetPagination();
+  }, [searchTerm, selectedCategory, selectedType, selectedTags, sortBy, resetPagination]);
+
+  // Group paginated resources by category
   const groupedResources = useMemo(() => {
-    const groups: Record<string, typeof filteredResources> = {};
-    filteredResources.forEach(resource => {
+    const groups: Record<string, typeof paginatedResources> = {};
+    paginatedResources.forEach(resource => {
       const category = resource.category || 'Other';
       if (!groups[category]) {
         groups[category] = [];
@@ -56,7 +103,7 @@ const Resources = () => {
       groups[category].push(resource);
     });
     return groups;
-  }, [filteredResources]);
+  }, [paginatedResources]);
 
   const handleTagToggle = (tag: string) => {
     setSelectedTags(prev => 
@@ -71,6 +118,11 @@ const Resources = () => {
     setSelectedCategory("all");
     setSelectedType("all");
     setSelectedTags([]);
+    setSortBy("featured");
+  };
+
+  const handleRefresh = () => {
+    refetch();
   };
 
   if (loading) {
@@ -89,7 +141,11 @@ const Resources = () => {
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-400 mb-2">Error Loading Resources</h2>
-          <p className="text-white/70">{error}</p>
+          <p className="text-white/70 mb-4">{error}</p>
+          <Button onClick={handleRefresh} variant="outline" className="border-white/20 text-white hover:bg-white/10">
+            <RotateCcw className="h-4 w-4 mr-2" />
+            Try Again
+          </Button>
         </div>
       </div>
     );
@@ -128,20 +184,27 @@ const Resources = () => {
           </Link>
 
           <div className="mb-8">
-            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
-              Resources
-            </h1>
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+                Resources
+              </h1>
+              <Button
+                onClick={handleRefresh}
+                variant="outline"
+                size="sm"
+                className="border-white/20 text-white hover:bg-white/10"
+              >
+                <RotateCcw className="h-4 w-4 mr-2" />
+                Refresh
+              </Button>
+            </div>
             <p className="text-xl text-white/70 max-w-2xl">
               Tools, documentation, and assets to help you deploy and integrate our offline IVR solutions
             </p>
-            <div className="mt-4 flex items-center space-x-4 text-sm text-white/50">
-              <span>{resources.length} total resources</span>
-              <span>•</span>
-              <span>{filteredResources.length} shown</span>
-              <span>•</span>
-              <span>{resources.filter(r => r.is_featured).length} featured</span>
-            </div>
           </div>
+
+          {/* Stats */}
+          <ResourceStats resources={resources} filteredResources={filteredAndSortedResources} />
 
           {/* Filters */}
           <ResourceFilters
@@ -157,6 +220,8 @@ const Resources = () => {
             availableTypes={availableTypes}
             availableTags={availableTags}
             onClearFilters={handleClearFilters}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
           />
         </div>
 
@@ -165,7 +230,10 @@ const Resources = () => {
           {Object.keys(groupedResources).length === 0 ? (
             <div className="text-center py-12">
               <h3 className="text-xl font-semibold text-white/70 mb-2">No resources found</h3>
-              <p className="text-white/50">Try adjusting your search or filters</p>
+              <p className="text-white/50 mb-4">Try adjusting your search or filters</p>
+              <Button onClick={handleClearFilters} variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                Clear All Filters
+              </Button>
             </div>
           ) : (
             <div className="space-y-12">
@@ -179,11 +247,12 @@ const Resources = () => {
                   </h2>
                   
                   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {categoryResources.map((resource) => (
-                      <ResourceCard
+                    {categoryResources.map((resource, index) => (
+                      <AnimatedResourceCard
                         key={resource.id}
                         resource={resource}
                         onDownload={downloadResource}
+                        index={index}
                       />
                     ))}
                   </div>
@@ -192,9 +261,20 @@ const Resources = () => {
             </div>
           )}
 
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <ResourcePagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={goToPage}
+              hasNext={hasNext}
+              hasPrevious={hasPrevious}
+            />
+          )}
+
           {/* Contact Section */}
           <div className="mt-16 text-center">
-            <Card className="bg-white/5 border-white/10 backdrop-blur-sm max-w-2xl mx-auto">
+            <Card className="bg-white/5 border-white/10 backdrop-blur-sm max-w-2xl mx-auto hover:bg-white/10 transition-all duration-300">
               <CardHeader>
                 <CardTitle className="text-2xl text-white">Need Custom Solutions?</CardTitle>
                 <CardDescription className="text-white/70">
@@ -203,10 +283,10 @@ const Resources = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600">
+                  <Button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105">
                     Contact Support
                   </Button>
-                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 transition-all duration-300">
                     Schedule Consultation
                   </Button>
                 </div>
