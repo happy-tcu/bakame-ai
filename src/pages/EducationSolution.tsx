@@ -8,6 +8,8 @@ const EducationSolution = () => {
   const [studentCount, setStudentCount] = useState(0);
   const [schoolCount, setSchoolCount] = useState(0);
   const [completionRate, setCompletionRate] = useState(0);
+  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+  const [progressAnimated, setProgressAnimated] = useState(false);
 
   // Animated counters
   useEffect(() => {
@@ -46,6 +48,28 @@ const EducationSolution = () => {
     const statsSection = document.getElementById('stats-section');
     if (statsSection) {
       observer.observe(statsSection);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Animate progress bars when section comes into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setProgressAnimated(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const featuresSection = document.getElementById('features-section');
+    if (featuresSection) {
+      observer.observe(featuresSection);
     }
 
     return () => observer.disconnect();
@@ -160,54 +184,146 @@ const EducationSolution = () => {
           </div>
         </div>
 
-        {/* English Learning Specific Features */}
-        <div className="mb-20">
+        {/* Enhanced English Learning Specific Features */}
+        <div id="features-section" className="mb-20">
           <h2 className="text-3xl font-bold mb-12 text-center">English Learning Features</h2>
           <div className="space-y-8">
             {[
               {
                 title: "Pronunciation Practice",
                 description: "Perfect your English pronunciation with AI-powered feedback. Practice individual sounds, words, and sentences with real-time corrections and suggestions for improvement.",
-                features: ["Phonetic sound practice", "Word pronunciation drills", "Sentence rhythm and intonation", "Accent reduction exercises"],
+                features: [
+                  { name: "Phonetic sound practice", progress: 95 },
+                  { name: "Word pronunciation drills", progress: 88 },
+                  { name: "Sentence rhythm and intonation", progress: 92 },
+                  { name: "Accent reduction exercises", progress: 85 }
+                ],
                 color: "blue",
-                icon: Languages
+                icon: Languages,
+                stats: { accuracy: "95%", improvement: "+23%" }
               },
               {
                 title: "Vocabulary Building",
                 description: "Expand your English vocabulary through interactive exercises and contextual learning. Learn new words in context with practical examples and usage scenarios.",
-                features: ["Daily vocabulary challenges", "Contextual word learning", "Synonyms and antonyms practice", "Industry-specific terminology"],
+                features: [
+                  { name: "Daily vocabulary challenges", progress: 90 },
+                  { name: "Contextual word learning", progress: 93 },
+                  { name: "Synonyms and antonyms practice", progress: 87 },
+                  { name: "Industry-specific terminology", progress: 82 }
+                ],
                 color: "purple",
-                icon: BookOpen
+                icon: BookOpen,
+                stats: { retention: "89%", newWords: "150/week" }
               },
               {
                 title: "Grammar Mastery",
                 description: "Master English grammar rules through interactive exercises and practical applications. From basic sentence structure to complex grammatical concepts.",
-                features: ["Tense practice and usage", "Sentence structure building", "Common grammar mistakes correction", "Advanced grammar concepts"],
+                features: [
+                  { name: "Tense practice and usage", progress: 91 },
+                  { name: "Sentence structure building", progress: 86 },
+                  { name: "Common grammar mistakes correction", progress: 94 },
+                  { name: "Advanced grammar concepts", progress: 79 }
+                ],
                 color: "green",
-                icon: CheckCircle
+                icon: CheckCircle,
+                stats: { accuracy: "91%", mastery: "78%" }
               }
             ].map((feature, index) => (
               <div 
                 key={index}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-500 group"
+                className={`bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 transition-all duration-500 group cursor-pointer transform ${
+                  hoveredFeature === index ? 'scale-[1.02] bg-white/10 shadow-2xl shadow-blue-500/10' : 'hover:bg-white/8'
+                }`}
+                onMouseEnter={() => setHoveredFeature(index)}
+                onMouseLeave={() => setHoveredFeature(null)}
               >
-                <div className="flex items-start space-x-4">
-                  <div className={`w-12 h-12 bg-${feature.color}-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className={`w-6 h-6 text-${feature.color}-400`} />
+                <div className="flex flex-col lg:flex-row items-start space-y-6 lg:space-y-0 lg:space-x-8">
+                  <div className="flex items-start space-x-4 flex-1">
+                    <div className={`w-16 h-16 bg-${feature.color}-500/20 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                      hoveredFeature === index ? 'scale-110 rotate-6' : 'group-hover:scale-105'
+                    }`}>
+                      <feature.icon className={`w-8 h-8 text-${feature.color}-400 transition-all duration-300`} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className={`text-2xl font-semibold mb-4 text-${feature.color}-400 transition-all duration-300`}>
+                        {feature.title}
+                      </h3>
+                      <p className="text-white/70 mb-6 transition-all duration-300 group-hover:text-white/90">
+                        {feature.description}
+                      </p>
+                      
+                      {/* Interactive Progress Bars */}
+                      <div className="space-y-4">
+                        {feature.features.map((feat, featureIndex) => (
+                          <div key={featureIndex} className="group/item">
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center space-x-2">
+                                <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                                <span className="text-sm text-white/80 transition-colors duration-300 group-hover/item:text-white">
+                                  {feat.name}
+                                </span>
+                              </div>
+                              <span className={`text-xs font-medium text-${feature.color}-400 transition-all duration-300`}>
+                                {feat.progress}%
+                              </span>
+                            </div>
+                            <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                              <div 
+                                className={`h-2 bg-gradient-to-r from-${feature.color}-400 to-${feature.color}-500 rounded-full transition-all duration-1000 ease-out ${
+                                  progressAnimated ? `w-[${feat.progress}%]` : 'w-0'
+                                }`}
+                                style={{ 
+                                  width: progressAnimated ? `${feat.progress}%` : '0%',
+                                  transitionDelay: `${featureIndex * 200}ms`
+                                }}
+                              >
+                                <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className={`text-2xl font-semibold mb-4 text-${feature.color}-400`}>{feature.title}</h3>
-                    <p className="text-white/70 mb-4">{feature.description}</p>
-                    <ul className="list-disc list-inside text-white/60 space-y-2">
-                      {feature.features.map((feat, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center space-x-2">
-                          <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                          <span>{feat}</span>
-                        </li>
+                  
+                  {/* Interactive Stats Panel */}
+                  <div className={`bg-white/5 rounded-lg p-4 border border-white/10 transition-all duration-500 ${
+                    hoveredFeature === index ? 'bg-white/10 scale-105' : ''
+                  }`}>
+                    <h4 className={`text-sm font-medium text-${feature.color}-400 mb-3`}>Performance Stats</h4>
+                    <div className="space-y-2">
+                      {Object.entries(feature.stats).map(([key, value], statIndex) => (
+                        <div key={key} className="flex justify-between items-center">
+                          <span className="text-xs text-white/60 capitalize">{key}:</span>
+                          <span className={`text-sm font-bold text-${feature.color}-400 transition-all duration-300 ${
+                            hoveredFeature === index ? 'scale-110' : ''
+                          }`}>
+                            {value}
+                          </span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
+                    
+                    {/* Mini Chart Visualization */}
+                    <div className="mt-3 flex space-x-1 h-8 items-end">
+                      {[65, 78, 85, 92, 88, 95].map((height, i) => (
+                        <div 
+                          key={i}
+                          className={`bg-${feature.color}-400/30 rounded-sm flex-1 transition-all duration-500`}
+                          style={{ 
+                            height: `${height * 0.3}px`,
+                            transitionDelay: hoveredFeature === index ? `${i * 50}ms` : '0ms'
+                          }}
+                        ></div>
+                      ))}
+                    </div>
                   </div>
                 </div>
+                
+                {/* Animated Border Effect */}
+                <div className={`absolute inset-0 rounded-xl bg-gradient-to-r from-${feature.color}-500/20 via-transparent to-${feature.color}-500/20 opacity-0 transition-opacity duration-500 ${
+                  hoveredFeature === index ? 'opacity-100' : ''
+                }`}></div>
               </div>
             ))}
           </div>
