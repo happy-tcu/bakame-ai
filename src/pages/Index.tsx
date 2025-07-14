@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import "../styles/warp-bg.css";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
 const Index = () => {
@@ -13,121 +12,7 @@ const Index = () => {
   const handleWatchDemo = () => {
     setIsVideoModalOpen(true);
   };
-  return <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Enhanced space-time warping background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Complex warped grid system */}
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {/* Space-time fabric effect: animated, warped grid lines */}
-          <g>
-            {/* Small animated gravity contour circles */}
-            {[0, 1, 2, 3].map((i) => (
-              <ellipse
-                key={i}
-                cx={50 + 0.7 * Math.sin(Date.now() / 1200 + i)}
-                cy={50 + 0.7 * Math.cos(Date.now() / 1200 + i)}
-                rx={4 + i * 2 + 0.5 * Math.sin(Date.now() / 900 + i)}
-                ry={4 + i * 2 + 0.5 * Math.cos(Date.now() / 900 + i)}
-                fill="none"
-                stroke="rgba(255,255,255,0.18)"
-                strokeWidth="0.09"
-                style={{ filter: 'url(#glow)', transition: 'all 0.5s cubic-bezier(0.4,0,0.2,1)' }}
-              />
-            ))}
-          </g>
-          <defs>
-            <pattern id="baseGrid" width="5" height="5" patternUnits="userSpaceOnUse">
-              <path d="M 5 0 L 0 0 0 5" fill="none" stroke="rgba(59,130,246,0.15)" strokeWidth="0.05" />
-            </pattern>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
-              <feMerge> 
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <filter id="strongGlow">
-              <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-              <feMerge> 
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-          
-          {/* Base grid pattern */}
-          <rect width="100" height="100" fill="url(#baseGrid)" opacity="0.12" />
-          
-          {/* Gravity well 1 - Top left quadrant */}
-          <g transform="translate(25,25)">
-            {/* Concentric curved lines creating gravity well effect */}
-            <circle cx="0" cy="0" r="8" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="0.1" filter="url(#glow)" />
-            <circle cx="0" cy="0" r="12" fill="none" stroke="rgba(255,255,255,0.13)" strokeWidth="0.08" />
-            <circle cx="0" cy="0" r="16" fill="none" stroke="rgba(255,255,255,0.09)" strokeWidth="0.06" />
-            <circle cx="0" cy="0" r="20" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="0.04" />
-            
-            {/* Radial grid lines bending toward center */}
-            {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => <path key={angle} d={`M 0,0 Q ${8 * Math.cos(angle * Math.PI / 180)},${8 * Math.sin(angle * Math.PI / 180)} ${20 * Math.cos(angle * Math.PI / 180)},${20 * Math.sin(angle * Math.PI / 180)}`} fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.05" />)}
-          </g>
-          
-          {/* Gravity well 2 - Bottom right */}
-          <g transform="translate(75,75)">
-            <circle cx="0" cy="0" r="6" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="0.12" filter="url(#strongGlow)" />
-            <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(255,255,255,0.13)" strokeWidth="0.1" />
-            <circle cx="0" cy="0" r="14" fill="none" stroke="rgba(255,255,255,0.09)" strokeWidth="0.08" />
-            <circle cx="0" cy="0" r="18" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="0.06" />
-            
-            {/* Spiral arms */}
-            <path d="M 0,0 Q 5,-3 10,-2 T 18,2" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-            <path d="M 0,0 Q -3,5 -2,10 T 2,18" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-            <path d="M 0,0 Q -5,3 -10,2 T -18,-2" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-            <path d="M 0,0 Q 3,-5 2,-10 T -2,-18" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-          </g>
-          
-          {/* Gravity well 3 - Top right */}
-          <g transform="translate(75,25)">
-            <ellipse cx="0" cy="0" rx="12" ry="8" fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth="0.1" filter="url(#glow)" />
-            <ellipse cx="0" cy="0" rx="16" ry="12" fill="none" stroke="rgba(255,255,255,0.13)" strokeWidth="0.08" />
-            <ellipse cx="0" cy="0" rx="20" ry="16" fill="none" stroke="rgba(255,255,255,0.09)" strokeWidth="0.06" />
-          </g>
-          
-          {/* Curved connecting lines showing space-time fabric */}
-          <path d="M 25,25 Q 50,35 75,25" fill="none" stroke="rgba(255,255,255,0.13)" strokeWidth="0.1" filter="url(#glow)" />
-          <path d="M 25,25 Q 35,50 75,75" fill="none" stroke="rgba(255,255,255,0.13)" strokeWidth="0.1" filter="url(#glow)" />
-          <path d="M 75,25 Q 65,50 75,75" fill="none" stroke="rgba(255,255,255,0.13)" strokeWidth="0.1" filter="url(#glow)" />
-          
-          {/* Warped horizontal lines */}
-          <path d="M 0,20 Q 25,15 50,20 Q 75,25 100,20" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-          <path d="M 0,40 Q 25,45 50,40 Q 75,35 100,40" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-          <path d="M 0,60 Q 25,55 50,60 Q 75,65 100,60" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-          <path d="M 0,80 Q 25,85 50,80 Q 75,75 100,80" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-          
-          {/* Warped vertical lines */}
-          <path d="M 20,0 Q 15,25 20,50 Q 25,75 20,100" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-          <path d="M 40,0 Q 45,25 40,50 Q 35,75 40,100" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-          <path d="M 60,0 Q 55,25 60,50 Q 65,75 60,100" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-          <path d="M 80,0 Q 85,25 80,50 Q 75,75 80,100" fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="0.08" />
-        </svg>
-
-        {/* Enhanced gravitational wave effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/8 via-blue-500/4 to-transparent rounded-full blur-2xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-purple-500/10 via-purple-500/5 to-transparent rounded-full blur-2xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-radial from-green-500/6 via-green-500/3 to-transparent rounded-full blur-2xl animate-pulse delay-2000"></div>
-          
-          {/* Subtle ripple effects */}
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 border border-blue-400/20 rounded-full animate-ping"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-24 h-24 border border-purple-400/20 rounded-full animate-ping delay-1000"></div>
-        </div>
-
-        {/* Enhanced connection points with subtle movement */}
-        {[...Array(40)].map((_, i) => <div key={i} className="absolute w-0.5 h-0.5 bg-blue-400/30 rounded-full animate-pulse" style={{
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 4}s`,
-        animationDuration: `${3 + Math.random() * 3}s`
-      }} />)}
-      </div>
+  return <div className="min-h-screen bg-black text-white relative overflow-hidden">{/* Clean black background */}
 
       {/* Navigation */}  
       <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
@@ -142,13 +27,13 @@ const Index = () => {
 
       <div className="relative z-10">
         {/* Hero Section */}
-        <div className="container mx-auto px-6 py-20 text-center">
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
+          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
             IVR Offline<br />
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">Intelligence, Bakame</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/70 mb-12 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl lg:text-2xl text-white/70 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
             Revolutionizing communication with offline Interactive Voice Response systems for education, enterprise, and government. Powered by advanced AI that works without internet connectivity.
           </p>
           
@@ -168,7 +53,7 @@ const Index = () => {
         </div>
 
         {/* Main Products Section */}
-        <div className="container mx-auto px-6 py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
@@ -179,7 +64,7 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
               <div onClick={() => navigate('/solutions/education')} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer">
                 <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
                   <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
