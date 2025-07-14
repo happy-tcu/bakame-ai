@@ -234,6 +234,7 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       setConversation(prev => [...prev, aiMessage]);
 
       // Convert to speech and play
+      console.log('AI Response received, converting to speech:', aiResponse);
       await speakText(aiResponse);
       
     } catch (error) {
