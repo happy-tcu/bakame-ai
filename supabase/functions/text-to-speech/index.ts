@@ -6,44 +6,85 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// ElevenLabs multilingual voices that work well with African languages
+const VOICE_IDS = {
+  // Professional, clear voices that work well for both English and Kinyarwanda
+  'multilingual': 'pNInz6obpgDQGcFmaJgB', // Adam - good for both languages
+  'female': 'EXAVITQu4vr4xnSDxMaL', // Sarah - clear female voice
+  'male': 'VR6AewLTigWG4xSOukaG', // Arnold - clear male voice
+  'default': 'pNInz6obpgDQGcFmaJgB' // Adam as default
+};
+
+// Detect if text contains Kinyarwanda by checking for common Kinyarwanda words/patterns
+function detectLanguage(text: string): 'kinyarwanda' | 'english' | 'mixed' {
+  const kinyarwandaWords = [
+    'murakoze', 'muraho', 'amakuru', 'ni gute', 'ndashaka', 'nigute', 'ariko',
+    'kwiga', 'icyongereza', 'kaminuza', 'irembo', 'amategeko', 'umuhanda',
+    'serivisi', 'leta', 'ubumenyi', 'igihugu', 'muri', 'kuri', 'mu', 'ku',
+    'gusaba', 'gukora', 'gutanga', 'bigire', 'mpigire', 'nitangire'
+  ];
+  
+  const lowerText = text.toLowerCase();
+  const kinyarwandaMatches = kinyarwandaWords.filter(word => lowerText.includes(word)).length;
+  const totalWords = text.split(' ').length;
+  
+  if (kinyarwandaMatches > totalWords * 0.3) return 'kinyarwanda';
+  if (kinyarwandaMatches > 0) return 'mixed';
+  return 'english';
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
 
   try {
-    const { text, voice = 'alloy' } = await req.json();
+    const { text, voice = 'default' } = await req.json();
 
     if (!text) {
       throw new Error('Text is required');
     }
 
-    const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
-    if (!openAIApiKey) {
-      throw new Error('OpenAI API key not configured');
+    const elevenlabsApiKey = Deno.env.get('ELEVENLABS_API_KEY');
+    if (!elevenlabsApiKey) {
+      throw new Error('ElevenLabs API key not configured');
     }
 
     console.log('Generating speech for text:', text.substring(0, 100) + '...');
-
-    // Generate speech from text
-    const response = await fetch('https://api.openai.com/v1/audio/speech', {
+    
+    // Detect language and choose appropriate voice settings
+    const detectedLang = detectLanguage(text);
+    console.log('Detected language:', detectedLang);
+    
+    // Select voice ID
+    const voiceId = VOICE_IDS[voice as keyof typeof VOICE_IDS] || VOICE_IDS.default;
+    
+    // ElevenLabs API call with multilingual model
+    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${openAIApiKey}`,
+        'Accept': 'audio/mpeg',
         'Content-Type': 'application/json',
+        'xi-api-key': elevenlabsApiKey,
       },
       body: JSON.stringify({
-        model: 'tts-1',
-        input: text,
-        voice: voice,
-        response_format: 'mp3',
+        text: text,
+        model_id: 'eleven_multilingual_v2', // Best model for multiple languages
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 0.75,
+          style: 0.0,
+          use_speaker_boost: true
+        },
+        // Optimize settings based on detected language
+        language_code: detectedLang === 'kinyarwanda' ? 'rw' : 'en',
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('OpenAI TTS API error:', errorText);
-      throw new Error(`Failed to generate speech: ${errorText}`);
+      console.error('ElevenLabs API error:', errorText);
+      throw new Error(`ElevenLabs API error: ${errorText}`);
     }
 
     // Convert audio buffer to base64
@@ -52,10 +93,14 @@ serve(async (req) => {
       String.fromCharCode(...new Uint8Array(arrayBuffer))
     );
 
-    console.log('Speech generation successful');
+    console.log('ElevenLabs speech generation successful');
 
     return new Response(
-      JSON.stringify({ audioContent: base64Audio }),
+      JSON.stringify({ 
+        audioContent: base64Audio,
+        detectedLanguage: detectedLang,
+        voiceUsed: voiceId
+      }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       },
