@@ -6,13 +6,14 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// ElevenLabs multilingual voices that work well with African languages
+// ElevenLabs voices optimized for Rwandan/African accent
 const VOICE_IDS = {
-  // Professional, clear voices that work well for both English and Kinyarwanda
-  'multilingual': 'pNInz6obpgDQGcFmaJgB', // Adam - good for both languages
-  'female': 'EXAVITQu4vr4xnSDxMaL', // Sarah - clear female voice
-  'male': 'VR6AewLTigWG4xSOukaG', // Arnold - clear male voice
-  'default': 'pNInz6obpgDQGcFmaJgB' // Adam as default
+  // These voices work better with African pronunciation patterns
+  'rwandan_male': 'VR6AewLTigWG4xSOukaG', // Arnold - deeper, warmer tone
+  'rwandan_female': 'EXAVITQu4vr4xnSDxMaL', // Sarah - clear, friendly
+  'professional': 'pNInz6obpgDQGcFmaJgB', // Adam - neutral professional
+  'warm': 'TX3LPaxmHKxFdv7VOQHJ', // Liam - warm, approachable
+  'default': 'VR6AewLTigWG4xSOukaG' // Use Arnold as default for Rwandan feel
 };
 
 // Detect if text contains Kinyarwanda by checking for common Kinyarwanda words/patterns
@@ -71,13 +72,15 @@ serve(async (req) => {
         text: text,
         model_id: 'eleven_multilingual_v2', // Best model for multiple languages
         voice_settings: {
-          stability: 0.5,
-          similarity_boost: 0.75,
-          style: 0.0,
+          // Settings optimized for Rwandan/African pronunciation
+          stability: 0.6, // Slightly higher for consistent Rwandan accent
+          similarity_boost: 0.8, // Higher for more authentic voice character
+          style: 0.2, // Add some natural speaking style
           use_speaker_boost: true
         },
-        // Optimize settings based on detected language
-        language_code: detectedLang === 'kinyarwanda' ? 'rw' : 'en',
+        // Enhanced language optimization
+        language_code: detectedLang === 'kinyarwanda' ? 'rw' : 'en-US',
+        pronunciation_dictionary_locators: [], // Can add custom Kinyarwanda pronunciations later
       }),
     });
 
