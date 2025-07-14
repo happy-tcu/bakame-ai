@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
@@ -47,9 +46,7 @@ const Index = () => {
                 </svg>
               </span>
             </button>
-            <button onClick={handleWatchDemo} className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
-              Watch Demo
-            </button>
+            
           </div>
         </div>
 
