@@ -59,8 +59,10 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
 
   const startCall = async () => {
     try {
+      console.log('Starting IVR call...');
       // Generate a new session ID for each call to avoid conflicts
       const newSessionId = generateSessionId();
+      console.log('Generated session ID:', newSessionId);
       setSessionId(newSessionId);
       setIsCallActive(true);
       
