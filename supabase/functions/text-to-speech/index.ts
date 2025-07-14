@@ -78,8 +78,7 @@ serve(async (req) => {
           style: 0.2, // Add some natural speaking style
           use_speaker_boost: true
         },
-        // Enhanced language optimization
-        language_code: detectedLang === 'kinyarwanda' ? 'rw' : 'en-US',
+        // Remove language_code as it's not supported by eleven_multilingual_v2
         pronunciation_dictionary_locators: [], // Can add custom Kinyarwanda pronunciations later
       }),
     });
