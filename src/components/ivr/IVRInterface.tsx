@@ -23,6 +23,7 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const [isCallActive, setIsCallActive] = useState(false);
   const [conversation, setConversation] = useState<ConversationMessage[]>([]);
   const [sessionId, setSessionId] = useState<string>('');
+  const [autoRecord, setAutoRecord] = useState(false);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
@@ -65,7 +66,8 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       
       setConversation([welcomeMessage]);
       
-      // Speak welcome message
+      // Speak welcome message and enable auto-recording
+      setAutoRecord(true);
       await speakText(welcomeMessage.content);
       
     } catch (error) {
@@ -83,6 +85,7 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       stopRecording();
       setIsCallActive(false);
       setConversation([]);
+      setAutoRecord(false);
       
       // End IVR session
       if (sessionId) {
@@ -272,6 +275,13 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
         audioRef.current.onended = () => {
           setIsSpeaking(false);
           URL.revokeObjectURL(audioUrl);
+          
+          // Auto-start recording after AI finishes speaking (if auto-record is enabled)
+          if (autoRecord && isCallActive && !isProcessing) {
+            setTimeout(() => {
+              startRecording();
+            }, 500); // Small delay to ensure audio has fully stopped
+          }
         };
         await audioRef.current.play();
       }
@@ -310,6 +320,16 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
     } else if (!isProcessing && !isSpeaking) {
       startRecording();
     }
+  };
+
+  const toggleAutoRecord = () => {
+    setAutoRecord(!autoRecord);
+    toast({
+      title: autoRecord ? "Auto-Record Disabled" : "Auto-Record Enabled",
+      description: autoRecord 
+        ? "Click microphone manually to speak" 
+        : "I'll automatically start recording after I finish speaking",
+    });
   };
 
   return (
@@ -351,22 +371,33 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
           {/* Microphone Control */}
           {isCallActive && (
             <div className="flex flex-col items-center gap-4">
-              <Button
-                onClick={handleMicClick}
-                disabled={isProcessing || isSpeaking}
-                className={`rounded-full w-20 h-20 ${
-                  isRecording 
-                    ? 'bg-red-600 hover:bg-red-700' 
-                    : 'bg-primary hover:bg-primary/90'
-                } ${(isProcessing || isSpeaking) ? 'opacity-50' : ''}`}
-                size="lg"
-              >
-                {isRecording ? (
-                  <MicOff className="h-8 w-8" />
-                ) : (
-                  <Mic className="h-8 w-8" />
-                )}
-              </Button>
+              <div className="flex items-center gap-4">
+                <Button
+                  onClick={handleMicClick}
+                  disabled={isProcessing || isSpeaking}
+                  className={`rounded-full w-20 h-20 ${
+                    isRecording 
+                      ? 'bg-red-600 hover:bg-red-700' 
+                      : 'bg-primary hover:bg-primary/90'
+                  } ${(isProcessing || isSpeaking) ? 'opacity-50' : ''}`}
+                  size="lg"
+                >
+                  {isRecording ? (
+                    <MicOff className="h-8 w-8" />
+                  ) : (
+                    <Mic className="h-8 w-8" />
+                  )}
+                </Button>
+                
+                <Button
+                  onClick={toggleAutoRecord}
+                  variant={autoRecord ? "default" : "outline"}
+                  size="sm"
+                  className="text-xs"
+                >
+                  {autoRecord ? "Auto On" : "Auto Off"}
+                </Button>
+              </div>
               
               <div className="text-center">
                 {isProcessing && (

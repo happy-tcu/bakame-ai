@@ -6,34 +6,19 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Process base64 in chunks to prevent memory issues
-function processBase64Chunks(base64String: string, chunkSize = 32768) {
-  const chunks: Uint8Array[] = [];
-  let position = 0;
-  
-  while (position < base64String.length) {
-    const chunk = base64String.slice(position, position + chunkSize);
-    const binaryChunk = atob(chunk);
-    const bytes = new Uint8Array(binaryChunk.length);
-    
-    for (let i = 0; i < binaryChunk.length; i++) {
-      bytes[i] = binaryChunk.charCodeAt(i);
+// Convert base64 to binary data
+function base64ToUint8Array(base64String: string): Uint8Array {
+  try {
+    const binaryString = atob(base64String);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
     }
-    
-    chunks.push(bytes);
-    position += chunkSize;
+    return bytes;
+  } catch (error) {
+    console.error('Error converting base64:', error);
+    throw new Error('Invalid base64 audio data');
   }
-
-  const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
-  const result = new Uint8Array(totalLength);
-  let offset = 0;
-
-  for (const chunk of chunks) {
-    result.set(chunk, offset);
-    offset += chunk.length;
-  }
-
-  return result;
 }
 
 serve(async (req) => {
@@ -53,8 +38,9 @@ serve(async (req) => {
       throw new Error('OpenAI API key not configured');
     }
 
-    // Process audio in chunks
-    const binaryAudio = processBase64Chunks(audio);
+    console.log('Converting base64 audio data...');
+    // Convert base64 to binary
+    const binaryAudio = base64ToUint8Array(audio);
     
     // Prepare form data
     const formData = new FormData();
