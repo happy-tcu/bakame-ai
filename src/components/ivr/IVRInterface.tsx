@@ -28,20 +28,28 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const audioChunksRef = useRef<Blob[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Generate session ID
-  useEffect(() => {
-    setSessionId(crypto.randomUUID() + '-' + Date.now());
-  }, []);
+  // Generate session ID function
+  const generateSessionId = () => {
+    return `ivr_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  };
 
   const startCall = async () => {
     try {
+      // Generate a new session ID for each call to avoid conflicts
+      const newSessionId = generateSessionId();
+      setSessionId(newSessionId);
       setIsCallActive(true);
       
       // Create IVR session
-      await supabase.from('ivr_sessions').insert({
-        session_id: sessionId,
+      const { error: sessionError } = await supabase.from('ivr_sessions').insert({
+        session_id: newSessionId,
         status: 'active'
       });
+
+      if (sessionError) {
+        console.error('Session creation error:', sessionError);
+        // Don't fail the call if session creation fails
+      }
 
       toast({
         title: "Call Started",
@@ -77,12 +85,18 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       setConversation([]);
       
       // End IVR session
-      await supabase.from('ivr_sessions')
-        .update({ 
-          status: 'completed',
-          ended_at: new Date().toISOString()
-        })
-        .eq('session_id', sessionId);
+      if (sessionId) {
+        const { error: updateError } = await supabase.from('ivr_sessions')
+          .update({ 
+            status: 'completed',
+            ended_at: new Date().toISOString()
+          })
+          .eq('session_id', sessionId);
+
+        if (updateError) {
+          console.error('Session update error:', updateError);
+        }
+      }
 
       toast({
         title: "Call Ended",
@@ -154,8 +168,8 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       const base64Audio = await blobToBase64(audioBlob);
       console.log('Audio converted to base64, length:', base64Audio.length);
       
-      // Send to voice-to-text
-      console.log('Sending to voice-to-text function...');
+      // Send to voice-to-text with better error handling
+      console.log('Sending audio to voice-to-text...');
       const { data: transcriptionData, error: transcriptionError } = await supabase.functions
         .invoke('voice-to-text', {
           body: { audio: base64Audio }
@@ -165,7 +179,7 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
 
       if (transcriptionError) {
         console.error('Transcription error details:', transcriptionError);
-        throw new Error(`Transcription failed: ${transcriptionError.message}`);
+        throw new Error(`Transcription failed: ${transcriptionError.message || 'Unknown error'}`);
       }
 
       const userText = transcriptionData.text;
@@ -188,8 +202,8 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       
       setConversation(prev => [...prev, userMessage]);
 
-      // Send to ChatGPT
-      console.log('Sending to ivr-chat function...');
+      // Send to ChatGPT with better error handling
+      console.log('Sending message to IVR chat...');
       const { data: chatData, error: chatError } = await supabase.functions
         .invoke('ivr-chat', {
           body: { 
@@ -198,11 +212,11 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
           }
         });
 
-      console.log('IVR-chat response:', { chatData, chatError });
+      console.log('IVR chat response:', { chatData, chatError });
 
       if (chatError) {
         console.error('Chat error details:', chatError);
-        throw new Error(`Chat failed: ${chatError.message}`);
+        throw new Error(`Chat failed: ${chatError.message || 'Unknown error'}`);
       }
 
       const aiResponse = chatData.response;
@@ -235,8 +249,8 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const speakText = async (text: string) => {
     try {
       setIsSpeaking(true);
-      console.log('Sending to text-to-speech function...');
       
+      console.log('Generating speech...');
       const { data: speechData, error: speechError } = await supabase.functions
         .invoke('text-to-speech', {
           body: { text }
@@ -246,7 +260,7 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
 
       if (speechError) {
         console.error('Speech error details:', speechError);
-        throw new Error(`Speech generation failed: ${speechError.message}`);
+        throw new Error(`Speech generation failed: ${speechError.message || 'Unknown error'}`);
       }
 
       // Play audio
