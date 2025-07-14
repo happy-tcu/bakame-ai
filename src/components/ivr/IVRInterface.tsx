@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { Mic, MicOff, Phone, PhoneOff, Volume2 } from 'lucide-react';
+import { Phone, PhoneOff, Volume2, Mic } from 'lucide-react';
 
 interface IVRInterfaceProps {
   className?: string;
@@ -23,16 +23,39 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const [isCallActive, setIsCallActive] = useState(false);
   const [conversation, setConversation] = useState<ConversationMessage[]>([]);
   const [sessionId, setSessionId] = useState<string>('');
-  const [autoRecord, setAutoRecord] = useState(false);
+  const [silenceTimer, setSilenceTimer] = useState<NodeJS.Timeout | null>(null);
+  const [isWaitingForSpeech, setIsWaitingForSpeech] = useState(false);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
 
   // Generate session ID function
   const generateSessionId = () => {
     return `ivr_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   };
+
+  // Clear any existing silence timer
+  const clearSilenceTimer = useCallback(() => {
+    if (silenceTimer) {
+      clearTimeout(silenceTimer);
+      setSilenceTimer(null);
+    }
+  }, [silenceTimer]);
+
+  // Start silence timer for automatic processing
+  const startSilenceTimer = useCallback(() => {
+    clearSilenceTimer();
+    console.log('Starting 4-second silence timer...');
+    const timer = setTimeout(() => {
+      console.log('4 seconds of silence detected, processing audio...');
+      if (isRecording && mediaRecorderRef.current) {
+        stopRecording();
+      }
+    }, 4000); // 4 seconds
+    setSilenceTimer(timer);
+  }, [isRecording, clearSilenceTimer]);
 
   const startCall = async () => {
     try {
@@ -53,8 +76,8 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       }
 
       toast({
-        title: "Call Started",
-        description: "IVR system is ready. Click the microphone to speak.",
+        title: "Call Connected",
+        description: "You are now connected to Bakame AI. Start speaking!",
       });
 
       // Add welcome message
@@ -66,9 +89,8 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       
       setConversation([welcomeMessage]);
       
-      // Speak welcome message and enable auto-recording
-      setAutoRecord(true);
-      await speakText(welcomeMessage.content);
+      // Speak welcome message and start recording immediately after
+      await speakText(welcomeMessage.content, true);
       
     } catch (error) {
       console.error('Error starting call:', error);
@@ -83,9 +105,11 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const endCall = async () => {
     try {
       stopRecording();
+      cleanupRecording();
       setIsCallActive(false);
       setConversation([]);
-      setAutoRecord(false);
+      clearSilenceTimer();
+      setIsWaitingForSpeech(false);
       
       // End IVR session
       if (sessionId) {
@@ -111,8 +135,17 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
     }
   };
 
+  const cleanupRecording = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
+    }
+  };
+
   const startRecording = async () => {
     try {
+      console.log('Starting continuous recording...');
+      
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: {
           sampleRate: 44100,
@@ -122,6 +155,8 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
         }
       });
 
+      streamRef.current = stream;
+      
       mediaRecorderRef.current = new MediaRecorder(stream, {
         mimeType: 'audio/webm;codecs=opus'
       });
@@ -131,19 +166,27 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       mediaRecorderRef.current.ondataavailable = (event) => {
         if (event.data.size > 0) {
           audioChunksRef.current.push(event.data);
+          console.log('Audio data received, restarting silence timer...');
+          startSilenceTimer(); // Reset timer when we receive audio data
         }
       };
 
       mediaRecorderRef.current.onstop = async () => {
+        console.log('Recording stopped, processing audio...');
+        clearSilenceTimer();
         const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        await processAudio(audioBlob);
-        
-        // Stop all tracks
-        stream.getTracks().forEach(track => track.stop());
+        if (audioBlob.size > 0) {
+          await processAudio(audioBlob);
+        }
       };
 
-      mediaRecorderRef.current.start();
+      // Start recording with data interval
+      mediaRecorderRef.current.start(1000); // Collect data every second for silence detection
       setIsRecording(true);
+      setIsWaitingForSpeech(true);
+      
+      // Start initial silence timer
+      startSilenceTimer();
       
     } catch (error) {
       console.error('Error starting recording:', error);
@@ -157,8 +200,10 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
 
   const stopRecording = () => {
     if (mediaRecorderRef.current && isRecording) {
+      clearSilenceTimer();
       mediaRecorderRef.current.stop();
       setIsRecording(false);
+      setIsWaitingForSpeech(false);
     }
   };
 
@@ -188,11 +233,11 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       const userText = transcriptionData.text;
       
       if (!userText.trim()) {
-        toast({
-          title: "No Speech Detected",
-          description: "Please try speaking again.",
-          variant: "destructive",
-        });
+        console.log('No speech detected, continuing to listen...');
+        // Restart recording if no speech was detected
+        if (isCallActive && !isSpeaking) {
+          setTimeout(() => startRecording(), 500);
+        }
         return;
       }
 
@@ -233,9 +278,9 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       
       setConversation(prev => [...prev, aiMessage]);
 
-      // Convert to speech and play
+      // Convert to speech and play, then restart recording
       console.log('AI Response received, converting to speech:', aiResponse);
-      await speakText(aiResponse);
+      await speakText(aiResponse, true);
       
     } catch (error) {
       console.error('Error processing audio:', error);
@@ -245,12 +290,17 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
         description: error instanceof Error ? error.message : "Failed to process your message",
         variant: "destructive",
       });
+      
+      // Restart recording even if there was an error
+      if (isCallActive && !isSpeaking) {
+        setTimeout(() => startRecording(), 1000);
+      }
     } finally {
       setIsProcessing(false);
     }
   };
 
-  const speakText = async (text: string) => {
+  const speakText = async (text: string, shouldContinueRecording = false) => {
     try {
       setIsSpeaking(true);
       
@@ -277,8 +327,9 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
           setIsSpeaking(false);
           URL.revokeObjectURL(audioUrl);
           
-          // Auto-start recording after AI finishes speaking (if auto-record is enabled)
-          if (autoRecord && isCallActive && !isProcessing) {
+          // Auto-start recording after AI finishes speaking (like a real phone call)
+          if (shouldContinueRecording && isCallActive && !isProcessing) {
+            console.log('AI finished speaking, starting recording...');
             setTimeout(() => {
               startRecording();
             }, 500); // Small delay to ensure audio has fully stopped
@@ -290,6 +341,11 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
     } catch (error) {
       console.error('Error speaking text:', error);
       setIsSpeaking(false);
+      
+      // Start recording even if speech generation failed
+      if (shouldContinueRecording && isCallActive && !isProcessing) {
+        setTimeout(() => startRecording(), 500);
+      }
     }
   };
 
@@ -313,25 +369,13 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
     return new Blob([array], { type: mimeType });
   };
 
-  const handleMicClick = () => {
-    if (!isCallActive) return;
-    
-    if (isRecording) {
-      stopRecording();
-    } else if (!isProcessing && !isSpeaking) {
-      startRecording();
-    }
-  };
-
-  const toggleAutoRecord = () => {
-    setAutoRecord(!autoRecord);
-    toast({
-      title: autoRecord ? "Auto-Record Disabled" : "Auto-Record Enabled",
-      description: autoRecord 
-        ? "Click microphone manually to speak" 
-        : "I'll automatically start recording after I finish speaking",
-    });
-  };
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      clearSilenceTimer();
+      cleanupRecording();
+    };
+  }, [clearSilenceTimer]);
 
   return (
     <div className={`w-full max-w-2xl mx-auto ${className}`}>
@@ -369,35 +413,16 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
             )}
           </div>
 
-          {/* Microphone Control */}
+          {/* Call Status Indicator */}
           {isCallActive && (
             <div className="flex flex-col items-center gap-4">
-              <div className="flex items-center gap-4">
-                <Button
-                  onClick={handleMicClick}
-                  disabled={isProcessing || isSpeaking}
-                  className={`rounded-full w-20 h-20 ${
-                    isRecording 
-                      ? 'bg-red-600 hover:bg-red-700' 
-                      : 'bg-primary hover:bg-primary/90'
-                  } ${(isProcessing || isSpeaking) ? 'opacity-50' : ''}`}
-                  size="lg"
-                >
-                  {isRecording ? (
-                    <MicOff className="h-8 w-8" />
-                  ) : (
-                    <Mic className="h-8 w-8" />
-                  )}
-                </Button>
-                
-                <Button
-                  onClick={toggleAutoRecord}
-                  variant={autoRecord ? "default" : "outline"}
-                  size="sm"
-                  className="text-xs"
-                >
-                  {autoRecord ? "Auto On" : "Auto Off"}
-                </Button>
+              <div className="flex items-center gap-2">
+                <div className={`w-4 h-4 rounded-full ${
+                  isRecording ? 'bg-red-500 animate-pulse' : 
+                  isSpeaking ? 'bg-blue-500 animate-pulse' :
+                  isProcessing ? 'bg-yellow-500 animate-pulse' : 'bg-green-500'
+                }`} />
+                <Mic className={`h-6 w-6 ${isRecording ? 'text-red-500' : 'text-muted-foreground'}`} />
               </div>
               
               <div className="text-center">
@@ -410,14 +435,14 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
                     AI is speaking...
                   </div>
                 )}
-                {!isProcessing && !isSpeaking && !isRecording && (
-                  <p className="text-sm text-muted-foreground">
-                    Click microphone to speak
-                  </p>
-                )}
                 {isRecording && (
                   <p className="text-sm text-red-600">
-                    Recording... Click to stop
+                    🎤 Listening... (will auto-process after 4 seconds of silence)
+                  </p>
+                )}
+                {isWaitingForSpeech && !isRecording && !isProcessing && !isSpeaking && (
+                  <p className="text-sm text-muted-foreground">
+                    Waiting for you to speak...
                   </p>
                 )}
               </div>
@@ -427,18 +452,18 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
           {/* Conversation History */}
           {conversation.length > 0 && (
             <div className="space-y-3 max-h-96 overflow-y-auto">
-              <h3 className="text-lg font-semibold">Conversation</h3>
+              <h3 className="text-lg font-semibold">Call Transcript</h3>
               {conversation.map((message, index) => (
                 <div
                   key={index}
-                  className={`p-3 rounded-lg ${
+                  className={`p-3 rounded-lg animate-fade-in ${
                     message.role === 'user'
                       ? 'bg-primary/10 ml-8'
                       : 'bg-muted mr-8'
                   }`}
                 >
                   <p className="text-sm font-medium mb-1">
-                    {message.role === 'user' ? 'You' : 'AI Assistant'}
+                    {message.role === 'user' ? '🗣️ You' : '🤖 AI Assistant'}
                   </p>
                   <p className="text-sm">{message.content}</p>
                   <p className="text-xs text-muted-foreground mt-1">
