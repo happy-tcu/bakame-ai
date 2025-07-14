@@ -1,13 +1,17 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { Phone, PhoneOff, Volume2, Mic } from 'lucide-react';
-
-interface IVRInterfaceProps {
-  className?: string;
-}
+import { useToast } from '@/hooks/use-toast';
+import { Phone, PhoneOff, Mic, MicOff, Volume2, Settings, Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface ConversationMessage {
   role: 'user' | 'assistant';
@@ -15,56 +19,64 @@ interface ConversationMessage {
   timestamp: Date;
 }
 
+interface IVRInterfaceProps {
+  className?: string;
+}
+
 const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const { toast } = useToast();
+  
+  // Core state
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isCallActive, setIsCallActive] = useState(false);
   const [conversation, setConversation] = useState<ConversationMessage[]>([]);
   const [sessionId, setSessionId] = useState<string>('');
-  const [silenceTimer, setSilenceTimer] = useState<NodeJS.Timeout | null>(null);
   const [isWaitingForSpeech, setIsWaitingForSpeech] = useState(false);
+  const [voiceId, setVoiceId] = useState('default');
 
+  // Refs
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const streamRef = useRef<MediaStream | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const silenceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Generate session ID function
+  // Voice options
+  const voiceOptions = [
+    { value: 'default', label: 'Arnold (Rwandan Male)', description: 'Default Rwandan voice' },
+    { value: 'rwandan_female', label: 'Sarah (Rwandan Female)', description: 'Clear, friendly voice' },
+    { value: 'professional', label: 'Adam (Professional)', description: 'Neutral professional voice' },
+    { value: 'warm', label: 'Liam (Warm)', description: 'Warm, approachable voice' }
+  ];
+
   const generateSessionId = () => {
-    return `ivr_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return 'ivr_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   };
 
-  // Clear any existing silence timer
-  const clearSilenceTimer = useCallback(() => {
-    if (silenceTimer) {
-      clearTimeout(silenceTimer);
-      setSilenceTimer(null);
+  const clearSilenceTimer = () => {
+    if (silenceTimerRef.current) {
+      clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = null;
     }
-  }, [silenceTimer]);
+  };
 
-  // Start silence timer for automatic processing
-  const startSilenceTimer = useCallback(() => {
+  const startSilenceTimer = () => {
     clearSilenceTimer();
-    console.log('Starting 4-second silence timer...');
-    const timer = setTimeout(() => {
-      console.log('4 seconds of silence detected, processing audio...');
-      if (isRecording && mediaRecorderRef.current) {
-        stopRecording();
-      }
-    }, 4000); // 4 seconds
-    setSilenceTimer(timer);
-  }, [isRecording, clearSilenceTimer]);
+    silenceTimerRef.current = setTimeout(() => {
+      console.log('Silence detected, stopping recording');
+      stopRecording();
+    }, 4000); // 4 seconds of silence
+  };
 
   const startCall = async () => {
     try {
       console.log('Starting IVR call...');
-      // Generate a new session ID for each call to avoid conflicts
       const newSessionId = generateSessionId();
-      console.log('Generated session ID:', newSessionId);
       setSessionId(newSessionId);
       setIsCallActive(true);
+      setConversation([]);
       
       // Create IVR session
       const { error: sessionError } = await supabase.from('ivr_sessions').insert({
@@ -74,31 +86,30 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
 
       if (sessionError) {
         console.error('Session creation error:', sessionError);
-        // Don't fail the call if session creation fails
       }
 
       toast({
-        title: "Call Connected",
-        description: "You are now connected to Bakame AI. Start speaking!",
+        title: "Call Started",
+        description: "You can now speak to the AI assistant",
       });
 
-      // Add welcome message
-      const welcomeMessage: ConversationMessage = {
+      // Start with welcome message
+      const welcomeMessage = "Muraho! Welcome to Bakame AI. I can help you learn English, navigate Irembo government services, or answer questions about Rwanda. How can I assist you today? Mpigire icyo nshobora kugufasha!";
+      
+      const welcomeMsg: ConversationMessage = {
         role: 'assistant',
-        content: "Hello! Welcome to Bakame AI. How can I help you today?",
+        content: welcomeMessage,
         timestamp: new Date()
       };
       
-      setConversation([welcomeMessage]);
-      
-      // Speak welcome message and start recording immediately after
-      await speakText(welcomeMessage.content, true);
+      setConversation([welcomeMsg]);
+      await speakText(welcomeMessage, true);
       
     } catch (error) {
       console.error('Error starting call:', error);
       toast({
         title: "Error",
-        description: "Failed to start call. Please try again.",
+        description: "Failed to start call",
         variant: "destructive",
       });
     }
@@ -106,30 +117,40 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
 
   const endCall = async () => {
     try {
-      stopRecording();
-      cleanupRecording();
+      console.log('Ending IVR call...');
       setIsCallActive(false);
-      setConversation([]);
-      clearSilenceTimer();
+      setIsRecording(false);
+      setIsProcessing(false);
+      setIsSpeaking(false);
       setIsWaitingForSpeech(false);
+      clearSilenceTimer();
+      cleanupRecording();
       
-      // End IVR session
       if (sessionId) {
-        const { error: updateError } = await supabase.from('ivr_sessions')
-          .update({ 
+        // Convert conversation to JSON-compatible format
+        const conversationJson = conversation.map(msg => ({
+          role: msg.role,
+          content: msg.content,
+          timestamp: msg.timestamp.toISOString()
+        }));
+        
+        await supabase
+          .from('ivr_sessions')
+          .update({
             status: 'completed',
-            ended_at: new Date().toISOString()
+            ended_at: new Date().toISOString(),
+            duration_seconds: Math.floor((new Date().getTime() - parseInt(sessionId.split('_')[1])) / 1000),
+            conversation_history: conversationJson
           })
           .eq('session_id', sessionId);
-
-        if (updateError) {
-          console.error('Session update error:', updateError);
-        }
       }
-
+      
+      setConversation([]);
+      setSessionId('');
+      
       toast({
         title: "Call Ended",
-        description: "Thank you for using Bakame AI IVR system.",
+        description: "Thank you for using Bakame AI",
       });
       
     } catch (error) {
@@ -138,111 +159,117 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   };
 
   const cleanupRecording = () => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
-      streamRef.current = null;
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach(track => track.stop());
+      mediaStreamRef.current = null;
     }
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current = null;
+    }
+    audioChunksRef.current = [];
   };
 
   const startRecording = async () => {
     try {
-      console.log('Starting continuous recording...');
+      setIsWaitingForSpeech(true);
+      console.log('Starting audio recording...');
       
-      const stream = await navigator.mediaDevices.getUserMedia({
+      const stream = await navigator.mediaDevices.getUserMedia({ 
         audio: {
-          sampleRate: 44100,
+          sampleRate: 16000,
           channelCount: 1,
           echoCancellation: true,
-          noiseSuppression: true,
-        }
+          noiseSuppression: true
+        } 
       });
-
-      streamRef.current = stream;
       
-      mediaRecorderRef.current = new MediaRecorder(stream, {
+      mediaStreamRef.current = stream;
+      audioChunksRef.current = [];
+      
+      const mediaRecorder = new MediaRecorder(stream, {
         mimeType: 'audio/webm;codecs=opus'
       });
-
-      audioChunksRef.current = [];
-
-      mediaRecorderRef.current.ondataavailable = (event) => {
+      
+      mediaRecorderRef.current = mediaRecorder;
+      
+      mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           audioChunksRef.current.push(event.data);
-          console.log('Audio data received, restarting silence timer...');
-          startSilenceTimer(); // Reset timer when we receive audio data
         }
       };
-
-      mediaRecorderRef.current.onstop = async () => {
-        console.log('Recording stopped, processing audio...');
-        clearSilenceTimer();
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        if (audioBlob.size > 0) {
+      
+      mediaRecorder.onstop = async () => {
+        console.log('MediaRecorder stopped, processing audio...');
+        setIsRecording(false);
+        setIsWaitingForSpeech(false);
+        
+        if (audioChunksRef.current.length > 0) {
+          const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
           await processAudio(audioBlob);
         }
       };
-
-      // Start recording with data interval
-      mediaRecorderRef.current.start(1000); // Collect data every second for silence detection
-      setIsRecording(true);
-      setIsWaitingForSpeech(true);
       
-      // Start initial silence timer
+      mediaRecorder.start();
+      setIsRecording(true);
       startSilenceTimer();
       
     } catch (error) {
       console.error('Error starting recording:', error);
+      setIsWaitingForSpeech(false);
       toast({
-        title: "Error",
-        description: "Failed to access microphone. Please check permissions.",
+        title: "Microphone Error",
+        description: "Please allow microphone access to use voice features",
         variant: "destructive",
       });
     }
   };
 
   const stopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      clearSilenceTimer();
+    console.log('Stopping recording...');
+    clearSilenceTimer();
+    
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
       mediaRecorderRef.current.stop();
-      setIsRecording(false);
-      setIsWaitingForSpeech(false);
+    }
+    
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach(track => track.stop());
     }
   };
 
   const processAudio = async (audioBlob: Blob) => {
-    setIsProcessing(true);
-    console.log('Processing audio with session:', sessionId);
-    
     try {
-      // Convert audio to base64
-      const base64Audio = await blobToBase64(audioBlob);
-      console.log('Audio converted to base64, length:', base64Audio.length);
+      setIsProcessing(true);
+      console.log('Processing audio blob, size:', audioBlob.size);
       
-      // Send to voice-to-text with better error handling
-      console.log('Sending audio to voice-to-text...');
-      const { data: transcriptionData, error: transcriptionError } = await supabase.functions
+      // Convert to base64
+      const audioBase64 = await blobToBase64(audioBlob);
+      console.log('Audio converted to base64, length:', audioBase64.length);
+      
+      // Send to voice-to-text
+      const { data: transcriptData, error: transcriptError } = await supabase.functions
         .invoke('voice-to-text', {
-          body: { audio: base64Audio }
+          body: { audio: audioBase64 }
         });
 
-      console.log('Voice-to-text response:', { transcriptionData, transcriptionError });
+      console.log('Voice-to-text response:', { transcriptData, transcriptError });
 
-      if (transcriptionError) {
-        console.error('Transcription error details:', transcriptionError);
-        throw new Error(`Transcription failed: ${transcriptionError.message || 'Unknown error'}`);
+      if (transcriptError) {
+        throw new Error(`Transcription failed: ${transcriptError.message || 'Unknown error'}`);
       }
 
-      const userText = transcriptionData.text;
+      const userText = transcriptData.text;
       
-      if (!userText.trim()) {
-        console.log('No speech detected, continuing to listen...');
-        // Restart recording if no speech was detected
-        if (isCallActive && !isSpeaking) {
+      if (!userText || userText.trim().length < 2) {
+        console.log('No meaningful speech detected, restarting recording');
+        if (isCallActive) {
           setTimeout(() => startRecording(), 500);
         }
         return;
       }
 
+      console.log('User said:', userText);
+      
       // Add user message to conversation
       const userMessage: ConversationMessage = {
         role: 'user',
@@ -252,20 +279,16 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       
       setConversation(prev => [...prev, userMessage]);
 
-      // Send to ChatGPT with better error handling
-      console.log('Sending message to IVR chat...');
+      // Send to IVR chat
       const { data: chatData, error: chatError } = await supabase.functions
         .invoke('ivr-chat', {
-          body: { 
+          body: {
             message: userText,
             sessionId: sessionId
           }
         });
 
-      console.log('IVR chat response:', { chatData, chatError });
-
       if (chatError) {
-        console.error('Chat error details:', chatError);
         throw new Error(`Chat failed: ${chatError.message || 'Unknown error'}`);
       }
 
@@ -280,21 +303,19 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       
       setConversation(prev => [...prev, aiMessage]);
 
-      // Convert to speech and play, then restart recording
-      console.log('AI Response received, converting to speech:', aiResponse);
+      // Convert to speech and play
       await speakText(aiResponse, true);
       
     } catch (error) {
       console.error('Error processing audio:', error);
-      console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
       toast({
         title: "Processing Error",
-        description: error instanceof Error ? error.message : "Failed to process your message",
+        description: "Failed to process your speech. Please try again.",
         variant: "destructive",
       });
       
-      // Restart recording even if there was an error
-      if (isCallActive && !isSpeaking) {
+      // Restart recording on error
+      if (isCallActive) {
         setTimeout(() => startRecording(), 1000);
       }
     } finally {
@@ -306,16 +327,16 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
     try {
       setIsSpeaking(true);
       
-      console.log('Generating speech...');
+      console.log('Generating speech with voice:', voiceId);
       const { data: speechData, error: speechError } = await supabase.functions
         .invoke('text-to-speech', {
-          body: { text }
+          body: { 
+            text,
+            voice: voiceId
+          }
         });
 
-      console.log('Text-to-speech response:', { speechData, speechError });
-
       if (speechError) {
-        console.error('Speech error details:', speechError);
         throw new Error(`Speech generation failed: ${speechError.message || 'Unknown error'}`);
       }
 
@@ -329,12 +350,12 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
           setIsSpeaking(false);
           URL.revokeObjectURL(audioUrl);
           
-          // Auto-start recording after AI finishes speaking (like a real phone call)
+          // Auto-start recording after AI finishes speaking
           if (shouldContinueRecording && isCallActive && !isProcessing) {
             console.log('AI finished speaking, starting recording...');
             setTimeout(() => {
               startRecording();
-            }, 500); // Small delay to ensure audio has fully stopped
+            }, 500);
           }
         };
         await audioRef.current.play();
@@ -352,23 +373,25 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   };
 
   const blobToBase64 = (blob: Blob): Promise<string> => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64 = (reader.result as string).split(',')[1];
-        resolve(base64);
+      reader.onload = () => {
+        const result = reader.result as string;
+        resolve(result.split(',')[1]); // Remove data:audio/webm;base64, prefix
       };
+      reader.onerror = reject;
       reader.readAsDataURL(blob);
     });
   };
 
   const base64ToBlob = (base64: string, mimeType: string): Blob => {
-    const bytes = atob(base64);
-    const array = new Uint8Array(bytes.length);
-    for (let i = 0; i < bytes.length; i++) {
-      array[i] = bytes.charCodeAt(i);
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
-    return new Blob([array], { type: mimeType });
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
   };
 
   // Cleanup on unmount
@@ -377,106 +400,157 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       clearSilenceTimer();
       cleanupRecording();
     };
-  }, [clearSilenceTimer]);
+  }, []);
+
+  const getCallStatus = () => {
+    if (!isCallActive) return 'Disconnected';
+    if (isSpeaking) return 'AI Speaking';
+    if (isProcessing) return 'Processing';
+    if (isRecording) return 'Listening';
+    if (isWaitingForSpeech) return 'Ready to Listen';
+    return 'Connected';
+  };
+
+  const getStatusColor = () => {
+    if (!isCallActive) return 'bg-red-500';
+    if (isSpeaking) return 'bg-blue-500';
+    if (isProcessing) return 'bg-yellow-500';
+    if (isRecording) return 'bg-green-500 animate-pulse';
+    return 'bg-gray-500';
+  };
 
   return (
-    <div className={`w-full max-w-2xl mx-auto ${className}`}>
-      <audio ref={audioRef} className="hidden" />
-      
-      <Card className="border-border/20 bg-card/50 backdrop-blur-sm">
-        <CardHeader className="text-center">
-          <CardTitle className="flex items-center justify-center gap-2">
-            <Phone className="h-6 w-6" />
-            Bakame AI IVR System
-          </CardTitle>
-        </CardHeader>
-        
-        <CardContent className="space-y-6">
-          {/* Call Controls */}
-          <div className="flex justify-center gap-4">
-            {!isCallActive ? (
-              <Button
-                onClick={startCall}
-                className="bg-green-600 hover:bg-green-700 text-white"
-                size="lg"
-              >
-                <Phone className="h-5 w-5 mr-2" />
-                Start Call
-              </Button>
-            ) : (
-              <Button
-                onClick={endCall}
-                variant="destructive"
-                size="lg"
-              >
-                <PhoneOff className="h-5 w-5 mr-2" />
-                End Call
-              </Button>
-            )}
+    <div className={`max-w-2xl mx-auto ${className}`}>
+      <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+        <CardContent className="p-8">
+          {/* Voice Settings */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Settings className="w-4 h-4" />
+              <span className="text-sm font-medium">Voice Settings</span>
+            </div>
+            <Select value={voiceId} onValueChange={setVoiceId} disabled={isCallActive}>
+              <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-slate-800 border-white/20">
+                {voiceOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value} className="text-white">
+                    <div className="flex flex-col">
+                      <span>{option.label}</span>
+                      <span className="text-xs text-gray-400">{option.description}</span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
-          {/* Call Status Indicator */}
+          {/* Call Status */}
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className={`w-3 h-3 rounded-full ${getStatusColor()}`}></div>
+              <Badge variant="outline" className="border-white/30 text-white">
+                {getCallStatus()}
+              </Badge>
+            </div>
+            
+            {/* Main Call Button */}
+            <div className="flex justify-center gap-4">
+              {!isCallActive ? (
+                <Button 
+                  onClick={startCall}
+                  size="lg"
+                  className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
+                >
+                  <Phone className="w-6 h-6" />
+                  Start Call
+                </Button>
+              ) : (
+                <Button 
+                  onClick={endCall}
+                  size="lg"
+                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
+                >
+                  <PhoneOff className="w-6 h-6" />
+                  End Call
+                </Button>
+              )}
+            </div>
+          </div>
+
+          {/* Activity Indicators */}
           {isCallActive && (
-            <div className="flex flex-col items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className={`w-4 h-4 rounded-full ${
-                  isRecording ? 'bg-red-500 animate-pulse' : 
-                  isSpeaking ? 'bg-blue-500 animate-pulse' :
-                  isProcessing ? 'bg-yellow-500 animate-pulse' : 'bg-green-500'
-                }`} />
-                <Mic className={`h-6 w-6 ${isRecording ? 'text-red-500' : 'text-muted-foreground'}`} />
+            <div className="flex justify-center gap-6 mb-6">
+              <div className={`flex items-center gap-2 ${isRecording ? 'text-green-400' : 'text-white/50'}`}>
+                <Mic className={`w-5 h-5 ${isRecording ? 'animate-pulse' : ''}`} />
+                <span className="text-sm">Microphone</span>
               </div>
               
-              <div className="text-center">
-                {isProcessing && (
-                  <p className="text-sm text-muted-foreground">Processing your message...</p>
-                )}
-                {isSpeaking && (
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Volume2 className="h-4 w-4" />
-                    AI is speaking...
-                  </div>
-                )}
-                {isRecording && (
-                  <p className="text-sm text-red-600">
-                    🎤 Listening... (will auto-process after 4 seconds of silence)
-                  </p>
-                )}
-                {isWaitingForSpeech && !isRecording && !isProcessing && !isSpeaking && (
-                  <p className="text-sm text-muted-foreground">
-                    Waiting for you to speak...
-                  </p>
-                )}
+              <div className={`flex items-center gap-2 ${isSpeaking ? 'text-blue-400' : 'text-white/50'}`}>
+                <Volume2 className={`w-5 h-5 ${isSpeaking ? 'animate-pulse' : ''}`} />
+                <span className="text-sm">Speaker</span>
+              </div>
+              
+              <div className={`flex items-center gap-2 ${isProcessing ? 'text-yellow-400' : 'text-white/50'}`}>
+                <Loader2 className={`w-5 h-5 ${isProcessing ? 'animate-spin' : ''}`} />
+                <span className="text-sm">Processing</span>
               </div>
             </div>
           )}
 
           {/* Conversation History */}
           {conversation.length > 0 && (
-            <div className="space-y-3 max-h-96 overflow-y-auto">
-              <h3 className="text-lg font-semibold">Call Transcript</h3>
-              {conversation.map((message, index) => (
-                <div
-                  key={index}
-                  className={`p-3 rounded-lg animate-fade-in ${
-                    message.role === 'user'
-                      ? 'bg-primary/10 ml-8'
-                      : 'bg-muted mr-8'
-                  }`}
-                >
-                  <p className="text-sm font-medium mb-1">
-                    {message.role === 'user' ? '🗣️ You' : '🤖 AI Assistant'}
-                  </p>
-                  <p className="text-sm">{message.content}</p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {message.timestamp.toLocaleTimeString()}
-                  </p>
-                </div>
-              ))}
+            <div className="mt-6">
+              <h3 className="text-sm font-medium text-white/80 mb-3 flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                Conversation
+              </h3>
+              <div className="space-y-3 max-h-64 overflow-y-auto">
+                {conversation.slice(-6).map((message, index) => (
+                  <div
+                    key={index}
+                    className={`p-3 rounded-lg ${
+                      message.role === 'user' 
+                        ? 'bg-blue-500/20 border border-blue-500/30 ml-8' 
+                        : 'bg-purple-500/20 border border-purple-500/30 mr-8'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <Badge variant="outline" className={`text-xs ${
+                        message.role === 'user' ? 'border-blue-400 text-blue-400' : 'border-purple-400 text-purple-400'
+                      }`}>
+                        {message.role === 'user' ? 'You' : 'AI'}
+                      </Badge>
+                      <span className="text-xs text-white/60">
+                        {message.timestamp.toLocaleTimeString()}
+                      </span>
+                    </div>
+                    <p className="text-sm text-white/90">{message.content}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Instructions */}
+          {!isCallActive && (
+            <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/10">
+              <h4 className="text-sm font-medium text-white/90 mb-2">How to use:</h4>
+              <ul className="text-xs text-white/70 space-y-1">
+                <li>1. Choose your preferred voice</li>
+                <li>2. Click "Start Call" and allow microphone access</li>
+                <li>3. Speak naturally in Kinyarwanda or English</li>
+                <li>4. Wait for the AI to respond</li>
+                <li>5. Continue the conversation naturally</li>
+              </ul>
             </div>
           )}
         </CardContent>
       </Card>
+      
+      {/* Hidden audio element for playback */}
+      <audio ref={audioRef} style={{ display: 'none' }} />
     </div>
   );
 };

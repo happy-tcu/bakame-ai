@@ -57,8 +57,10 @@ serve(async (req) => {
     const detectedLang = detectLanguage(text);
     console.log('Detected language:', detectedLang);
     
-    // Select voice ID
-    const voiceId = VOICE_IDS[voice as keyof typeof VOICE_IDS] || VOICE_IDS.default;
+    // Select voice ID - prioritize user custom voice if provided
+    const voiceId = voice && VOICE_IDS[voice as keyof typeof VOICE_IDS] 
+      ? VOICE_IDS[voice as keyof typeof VOICE_IDS] 
+      : VOICE_IDS.default;
     
     // ElevenLabs API call with multilingual model
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
