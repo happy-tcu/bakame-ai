@@ -57,10 +57,18 @@ serve(async (req) => {
     const detectedLang = detectLanguage(text);
     console.log('Detected language:', detectedLang);
     
-    // Select voice ID - prioritize user custom voice if provided
-    const voiceId = voice && VOICE_IDS[voice as keyof typeof VOICE_IDS] 
-      ? VOICE_IDS[voice as keyof typeof VOICE_IDS] 
-      : VOICE_IDS.default;
+    // Select voice ID - handle both string voice IDs and predefined keys
+    let voiceId = VOICE_IDS.default;
+    
+    if (voice) {
+      // Check if it's a predefined voice key
+      if (VOICE_IDS[voice as keyof typeof VOICE_IDS]) {
+        voiceId = VOICE_IDS[voice as keyof typeof VOICE_IDS];
+      } else {
+        // Assume it's a direct ElevenLabs voice ID
+        voiceId = voice;
+      }
+    }
     
     // ElevenLabs API call with multilingual model
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
@@ -88,6 +96,17 @@ serve(async (req) => {
     if (!response.ok) {
       const errorText = await response.text();
       console.error('ElevenLabs API error:', errorText);
+      console.error('Voice ID used:', voiceId);
+      console.error('Request body:', JSON.stringify({
+        text: text.substring(0, 100),
+        model_id: 'eleven_multilingual_v2',
+        voice_settings: {
+          stability: 0.6,
+          similarity_boost: 0.8,
+          style: 0.2,
+          use_speaker_boost: true
+        }
+      }));
       throw new Error(`ElevenLabs API error: ${errorText}`);
     }
 
