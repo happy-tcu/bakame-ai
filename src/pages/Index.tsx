@@ -18,6 +18,7 @@ const Index = () => {
       <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
         <div className="text-2xl font-bold">Bakame Ai</div>
         <div className="hidden md:flex space-x-8">
+          <a href="/ivr" className="text-white/70 hover:text-white transition-colors">IVR Demo</a>
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
           <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
           <a href="/team" className="text-white/70 hover:text-white transition-colors">Careers</a>
