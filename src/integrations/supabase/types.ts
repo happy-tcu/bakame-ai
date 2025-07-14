@@ -293,6 +293,42 @@ export type Database = {
         }
         Relationships: []
       }
+      user_sessions: {
+        Row: {
+          created_at: string
+          id: string
+          last_activity: string
+          pages_visited: number
+          referrer: string | null
+          session_id: string
+          updated_at: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_activity?: string
+          pages_visited?: number
+          referrer?: string | null
+          session_id: string
+          updated_at?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_activity?: string
+          pages_visited?: number
+          referrer?: string | null
+          session_id?: string
+          updated_at?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       waitlist: {
         Row: {
           company: string | null

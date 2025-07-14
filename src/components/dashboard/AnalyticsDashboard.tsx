@@ -33,18 +33,13 @@ export const AnalyticsDashboard = ({ userProfile }: AnalyticsDashboardProps) => 
         .select('*')
         .eq('event_type', 'page_view');
 
-      // Get all sessions using type assertion
-      let sessions: any[] = [];
-      try {
-        const { data: sessionsData, error: sessionsError } = await (supabase as any)
-          .from('user_sessions')
-          .select('*');
-        
-        if (!sessionsError) {
-          sessions = sessionsData || [];
-        }
-      } catch (error) {
-        console.warn('User sessions table not available, using fallback');
+      // Get all sessions
+      const { data: sessions = [], error: sessionsError } = await supabase
+        .from('user_sessions')
+        .select('*');
+
+      if (sessionsError) {
+        console.warn('Error fetching user sessions:', sessionsError);
       }
 
       // Get recent events

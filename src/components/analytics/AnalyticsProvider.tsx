@@ -55,9 +55,9 @@ export const AnalyticsProvider = ({ children }: AnalyticsProviderProps) => {
         user_agent: navigator.userAgent,
       });
 
-      // Update or create user session using type assertion for now
+      // Update or create user session
       try {
-        await (supabase as any).from('user_sessions').upsert({
+        await supabase.from('user_sessions').upsert({
           session_id: sessionId,
           user_id: user?.id || null,
           user_agent: navigator.userAgent,
