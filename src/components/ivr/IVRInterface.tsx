@@ -1,0 +1,396 @@
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import { Mic, MicOff, Phone, PhoneOff, Volume2 } from 'lucide-react';
+
+interface IVRInterfaceProps {
+  className?: string;
+}
+
+interface ConversationMessage {
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+}
+
+const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
+  const { toast } = useToast();
+  const [isRecording, setIsRecording] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isCallActive, setIsCallActive] = useState(false);
+  const [conversation, setConversation] = useState<ConversationMessage[]>([]);
+  const [sessionId, setSessionId] = useState<string>('');
+
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Generate session ID
+  useEffect(() => {
+    setSessionId(crypto.randomUUID());
+  }, []);
+
+  const startCall = async () => {
+    try {
+      setIsCallActive(true);
+      
+      // Create IVR session
+      await supabase.from('ivr_sessions').insert({
+        session_id: sessionId,
+        status: 'active'
+      });
+
+      toast({
+        title: "Call Started",
+        description: "IVR system is ready. Click the microphone to speak.",
+      });
+
+      // Add welcome message
+      const welcomeMessage: ConversationMessage = {
+        role: 'assistant',
+        content: "Hello! Welcome to Bakame AI. How can I help you today?",
+        timestamp: new Date()
+      };
+      
+      setConversation([welcomeMessage]);
+      
+      // Speak welcome message
+      await speakText(welcomeMessage.content);
+      
+    } catch (error) {
+      console.error('Error starting call:', error);
+      toast({
+        title: "Error",
+        description: "Failed to start call. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const endCall = async () => {
+    try {
+      stopRecording();
+      setIsCallActive(false);
+      setConversation([]);
+      
+      // End IVR session
+      await supabase.from('ivr_sessions')
+        .update({ 
+          status: 'completed',
+          ended_at: new Date().toISOString()
+        })
+        .eq('session_id', sessionId);
+
+      toast({
+        title: "Call Ended",
+        description: "Thank you for using Bakame AI IVR system.",
+      });
+      
+    } catch (error) {
+      console.error('Error ending call:', error);
+    }
+  };
+
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          sampleRate: 44100,
+          channelCount: 1,
+          echoCancellation: true,
+          noiseSuppression: true,
+        }
+      });
+
+      mediaRecorderRef.current = new MediaRecorder(stream, {
+        mimeType: 'audio/webm;codecs=opus'
+      });
+
+      audioChunksRef.current = [];
+
+      mediaRecorderRef.current.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      mediaRecorderRef.current.onstop = async () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        await processAudio(audioBlob);
+        
+        // Stop all tracks
+        stream.getTracks().forEach(track => track.stop());
+      };
+
+      mediaRecorderRef.current.start();
+      setIsRecording(true);
+      
+    } catch (error) {
+      console.error('Error starting recording:', error);
+      toast({
+        title: "Error",
+        description: "Failed to access microphone. Please check permissions.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
+  const processAudio = async (audioBlob: Blob) => {
+    setIsProcessing(true);
+    
+    try {
+      // Convert audio to base64
+      const base64Audio = await blobToBase64(audioBlob);
+      
+      // Send to voice-to-text
+      const { data: transcriptionData, error: transcriptionError } = await supabase.functions
+        .invoke('voice-to-text', {
+          body: { audio: base64Audio }
+        });
+
+      if (transcriptionError) {
+        throw new Error(`Transcription failed: ${transcriptionError.message}`);
+      }
+
+      const userText = transcriptionData.text;
+      
+      if (!userText.trim()) {
+        toast({
+          title: "No Speech Detected",
+          description: "Please try speaking again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Add user message to conversation
+      const userMessage: ConversationMessage = {
+        role: 'user',
+        content: userText,
+        timestamp: new Date()
+      };
+      
+      setConversation(prev => [...prev, userMessage]);
+
+      // Send to ChatGPT
+      const { data: chatData, error: chatError } = await supabase.functions
+        .invoke('ivr-chat', {
+          body: { 
+            message: userText,
+            sessionId: sessionId
+          }
+        });
+
+      if (chatError) {
+        throw new Error(`Chat failed: ${chatError.message}`);
+      }
+
+      const aiResponse = chatData.response;
+      
+      // Add AI response to conversation
+      const aiMessage: ConversationMessage = {
+        role: 'assistant',
+        content: aiResponse,
+        timestamp: new Date()
+      };
+      
+      setConversation(prev => [...prev, aiMessage]);
+
+      // Convert to speech and play
+      await speakText(aiResponse);
+      
+    } catch (error) {
+      console.error('Error processing audio:', error);
+      toast({
+        title: "Processing Error",
+        description: error instanceof Error ? error.message : "Failed to process your message",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const speakText = async (text: string) => {
+    try {
+      setIsSpeaking(true);
+      
+      const { data: speechData, error: speechError } = await supabase.functions
+        .invoke('text-to-speech', {
+          body: { text }
+        });
+
+      if (speechError) {
+        throw new Error(`Speech generation failed: ${speechError.message}`);
+      }
+
+      // Play audio
+      const audioBlob = base64ToBlob(speechData.audioContent, 'audio/mp3');
+      const audioUrl = URL.createObjectURL(audioBlob);
+      
+      if (audioRef.current) {
+        audioRef.current.src = audioUrl;
+        audioRef.current.onended = () => {
+          setIsSpeaking(false);
+          URL.revokeObjectURL(audioUrl);
+        };
+        await audioRef.current.play();
+      }
+      
+    } catch (error) {
+      console.error('Error speaking text:', error);
+      setIsSpeaking(false);
+    }
+  };
+
+  const blobToBase64 = (blob: Blob): Promise<string> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = (reader.result as string).split(',')[1];
+        resolve(base64);
+      };
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const base64ToBlob = (base64: string, mimeType: string): Blob => {
+    const bytes = atob(base64);
+    const array = new Uint8Array(bytes.length);
+    for (let i = 0; i < bytes.length; i++) {
+      array[i] = bytes.charCodeAt(i);
+    }
+    return new Blob([array], { type: mimeType });
+  };
+
+  const handleMicClick = () => {
+    if (!isCallActive) return;
+    
+    if (isRecording) {
+      stopRecording();
+    } else if (!isProcessing && !isSpeaking) {
+      startRecording();
+    }
+  };
+
+  return (
+    <div className={`w-full max-w-2xl mx-auto ${className}`}>
+      <audio ref={audioRef} className="hidden" />
+      
+      <Card className="border-border/20 bg-card/50 backdrop-blur-sm">
+        <CardHeader className="text-center">
+          <CardTitle className="flex items-center justify-center gap-2">
+            <Phone className="h-6 w-6" />
+            Bakame AI IVR System
+          </CardTitle>
+        </CardHeader>
+        
+        <CardContent className="space-y-6">
+          {/* Call Controls */}
+          <div className="flex justify-center gap-4">
+            {!isCallActive ? (
+              <Button
+                onClick={startCall}
+                className="bg-green-600 hover:bg-green-700 text-white"
+                size="lg"
+              >
+                <Phone className="h-5 w-5 mr-2" />
+                Start Call
+              </Button>
+            ) : (
+              <Button
+                onClick={endCall}
+                variant="destructive"
+                size="lg"
+              >
+                <PhoneOff className="h-5 w-5 mr-2" />
+                End Call
+              </Button>
+            )}
+          </div>
+
+          {/* Microphone Control */}
+          {isCallActive && (
+            <div className="flex flex-col items-center gap-4">
+              <Button
+                onClick={handleMicClick}
+                disabled={isProcessing || isSpeaking}
+                className={`rounded-full w-20 h-20 ${
+                  isRecording 
+                    ? 'bg-red-600 hover:bg-red-700' 
+                    : 'bg-primary hover:bg-primary/90'
+                } ${(isProcessing || isSpeaking) ? 'opacity-50' : ''}`}
+                size="lg"
+              >
+                {isRecording ? (
+                  <MicOff className="h-8 w-8" />
+                ) : (
+                  <Mic className="h-8 w-8" />
+                )}
+              </Button>
+              
+              <div className="text-center">
+                {isProcessing && (
+                  <p className="text-sm text-muted-foreground">Processing your message...</p>
+                )}
+                {isSpeaking && (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Volume2 className="h-4 w-4" />
+                    AI is speaking...
+                  </div>
+                )}
+                {!isProcessing && !isSpeaking && !isRecording && (
+                  <p className="text-sm text-muted-foreground">
+                    Click microphone to speak
+                  </p>
+                )}
+                {isRecording && (
+                  <p className="text-sm text-red-600">
+                    Recording... Click to stop
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Conversation History */}
+          {conversation.length > 0 && (
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              <h3 className="text-lg font-semibold">Conversation</h3>
+              {conversation.map((message, index) => (
+                <div
+                  key={index}
+                  className={`p-3 rounded-lg ${
+                    message.role === 'user'
+                      ? 'bg-primary/10 ml-8'
+                      : 'bg-muted mr-8'
+                  }`}
+                >
+                  <p className="text-sm font-medium mb-1">
+                    {message.role === 'user' ? 'You' : 'AI Assistant'}
+                  </p>
+                  <p className="text-sm">{message.content}</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {message.timestamp.toLocaleTimeString()}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default IVRInterface;

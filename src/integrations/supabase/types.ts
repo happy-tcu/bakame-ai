@@ -179,6 +179,84 @@ export type Database = {
         }
         Relationships: []
       }
+      ivr_content: {
+        Row: {
+          category: string | null
+          content: string
+          created_at: string
+          created_by: string | null
+          id: string
+          is_active: boolean | null
+          keywords: string[] | null
+          priority: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          content: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_active?: boolean | null
+          keywords?: string[] | null
+          priority?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          content?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          is_active?: boolean | null
+          keywords?: string[] | null
+          priority?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      ivr_sessions: {
+        Row: {
+          conversation_history: Json | null
+          created_at: string
+          duration_seconds: number | null
+          ended_at: string | null
+          id: string
+          session_id: string
+          started_at: string
+          status: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          conversation_history?: Json | null
+          created_at?: string
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          session_id: string
+          started_at?: string
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          conversation_history?: Json | null
+          created_at?: string
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          session_id?: string
+          started_at?: string
+          status?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       organizations: {
         Row: {
           contact_email: string | null

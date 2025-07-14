@@ -19,6 +19,7 @@ import EducationSolution from "./pages/EducationSolution";
 import EnterpriseSolution from "./pages/EnterpriseSolution";
 import GovernmentSolution from "./pages/GovernmentSolution";
 import GovernmentDemo from "./pages/GovernmentDemo";
+import IVR from "./pages/IVR";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="/solutions/enterprise" element={<EnterpriseSolution />} />
               <Route path="/solutions/government" element={<GovernmentSolution />} />
               <Route path="/government-demo" element={<GovernmentDemo />} />
+              <Route path="/ivr" element={<IVR />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
