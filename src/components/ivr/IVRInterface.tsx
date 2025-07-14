@@ -43,12 +43,14 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const silenceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Voice options
+  // Voice options for OpenAI TTS
   const voiceOptions = [
-    { value: 'default', label: 'Arnold (Rwandan Male)', description: 'Default Rwandan voice' },
-    { value: 'rwandan_female', label: 'Sarah (Rwandan Female)', description: 'Clear, friendly voice' },
-    { value: 'professional', label: 'Adam (Professional)', description: 'Neutral professional voice' },
-    { value: 'warm', label: 'Liam (Warm)', description: 'Warm, approachable voice' }
+    { value: 'default', label: 'Alloy (Professional)', description: 'Clear, neutral professional voice' },
+    { value: 'warm', label: 'Nova (Warm)', description: 'Warm, engaging voice' },
+    { value: 'friendly', label: 'Shimmer (Friendly)', description: 'Bright, upbeat voice' },
+    { value: 'deep', label: 'Onyx (Deep)', description: 'Deep, authoritative voice' },
+    { value: 'storyteller', label: 'Fable (Storyteller)', description: 'Expressive storytelling voice' },
+    { value: 'conversational', label: 'Echo (Conversational)', description: 'Natural conversational voice' }
   ];
 
   const generateSessionId = () => {

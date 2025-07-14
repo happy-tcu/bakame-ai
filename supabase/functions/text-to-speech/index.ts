@@ -6,33 +6,17 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// ElevenLabs voices optimized for Rwandan/African accent
+// OpenAI TTS voices optimized for different use cases
 const VOICE_IDS = {
-  // These voices work better with African pronunciation patterns
-  'rwandan_male': 'VR6AewLTigWG4xSOukaG', // Arnold - deeper, warmer tone
-  'rwandan_female': 'EXAVITQu4vr4xnSDxMaL', // Sarah - clear, friendly
-  'professional': 'pNInz6obpgDQGcFmaJgB', // Adam - neutral professional
-  'warm': 'TX3LPaxmHKxFdv7VOQHJ', // Liam - warm, approachable
-  'default': 'VR6AewLTigWG4xSOukaG' // Use Arnold as default for Rwandan feel
+  // Professional and clear voices
+  'professional': 'alloy', // Clear, neutral voice
+  'warm': 'nova', // Warm, engaging voice
+  'friendly': 'shimmer', // Bright, upbeat voice
+  'deep': 'onyx', // Deep, authoritative voice
+  'storyteller': 'fable', // Expressive storytelling voice
+  'conversational': 'echo', // Natural conversational voice
+  'default': 'alloy' // Default professional voice
 };
-
-// Detect if text contains Kinyarwanda by checking for common Kinyarwanda words/patterns
-function detectLanguage(text: string): 'kinyarwanda' | 'english' | 'mixed' {
-  const kinyarwandaWords = [
-    'murakoze', 'muraho', 'amakuru', 'ni gute', 'ndashaka', 'nigute', 'ariko',
-    'kwiga', 'icyongereza', 'kaminuza', 'irembo', 'amategeko', 'umuhanda',
-    'serivisi', 'leta', 'ubumenyi', 'igihugu', 'muri', 'kuri', 'mu', 'ku',
-    'gusaba', 'gukora', 'gutanga', 'bigire', 'mpigire', 'nitangire'
-  ];
-  
-  const lowerText = text.toLowerCase();
-  const kinyarwandaMatches = kinyarwandaWords.filter(word => lowerText.includes(word)).length;
-  const totalWords = text.split(' ').length;
-  
-  if (kinyarwandaMatches > totalWords * 0.3) return 'kinyarwanda';
-  if (kinyarwandaMatches > 0) return 'mixed';
-  return 'english';
-}
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -46,16 +30,12 @@ serve(async (req) => {
       throw new Error('Text is required');
     }
 
-    const elevenlabsApiKey = Deno.env.get('ELEVENLABS_API_KEY');
-    if (!elevenlabsApiKey) {
-      throw new Error('ElevenLabs API key not configured');
+    const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
+    if (!openAIApiKey) {
+      throw new Error('OpenAI API key not configured');
     }
 
     console.log('Generating speech for text:', text.substring(0, 100) + '...');
-    
-    // Detect language and choose appropriate voice settings
-    const detectedLang = detectLanguage(text);
-    console.log('Detected language:', detectedLang);
     
     // Select voice ID - handle both string voice IDs and predefined keys
     let voiceId = VOICE_IDS.default;
@@ -65,49 +45,39 @@ serve(async (req) => {
       if (VOICE_IDS[voice as keyof typeof VOICE_IDS]) {
         voiceId = VOICE_IDS[voice as keyof typeof VOICE_IDS];
       } else {
-        // Assume it's a direct ElevenLabs voice ID
+        // Assume it's a direct OpenAI voice ID
         voiceId = voice;
       }
     }
     
-    // ElevenLabs API call with multilingual model
-    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
+    console.log('Using voice:', voiceId);
+    
+    // OpenAI TTS API call
+    const response = await fetch('https://api.openai.com/v1/audio/speech', {
       method: 'POST',
       headers: {
-        'Accept': 'audio/mpeg',
+        'Authorization': `Bearer ${openAIApiKey}`,
         'Content-Type': 'application/json',
-        'xi-api-key': elevenlabsApiKey,
       },
       body: JSON.stringify({
-        text: text,
-        model_id: 'eleven_multilingual_v2', // Best model for multiple languages
-        voice_settings: {
-          // Settings optimized for Rwandan/African pronunciation
-          stability: 0.6, // Slightly higher for consistent Rwandan accent
-          similarity_boost: 0.8, // Higher for more authentic voice character
-          style: 0.2, // Add some natural speaking style
-          use_speaker_boost: true
-        },
-        // Remove language_code as it's not supported by eleven_multilingual_v2
-        pronunciation_dictionary_locators: [], // Can add custom Kinyarwanda pronunciations later
+        model: 'tts-1', // Use tts-1 for speed, tts-1-hd for higher quality
+        input: text,
+        voice: voiceId,
+        response_format: 'mp3',
+        speed: 1.0
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('ElevenLabs API error:', errorText);
+      console.error('OpenAI TTS API error:', errorText);
       console.error('Voice ID used:', voiceId);
-      console.error('Request body:', JSON.stringify({
-        text: text.substring(0, 100),
-        model_id: 'eleven_multilingual_v2',
-        voice_settings: {
-          stability: 0.6,
-          similarity_boost: 0.8,
-          style: 0.2,
-          use_speaker_boost: true
-        }
-      }));
-      throw new Error(`ElevenLabs API error: ${errorText}`);
+      console.error('Request details:', {
+        model: 'tts-1',
+        voice: voiceId,
+        textLength: text.length
+      });
+      throw new Error(`OpenAI TTS API error: ${errorText}`);
     }
 
     // Convert audio buffer to base64
@@ -116,13 +86,13 @@ serve(async (req) => {
       String.fromCharCode(...new Uint8Array(arrayBuffer))
     );
 
-    console.log('ElevenLabs speech generation successful');
+    console.log('OpenAI TTS generation successful');
 
     return new Response(
       JSON.stringify({ 
         audioContent: base64Audio,
-        detectedLanguage: detectedLang,
-        voiceUsed: voiceId
+        voiceUsed: voiceId,
+        provider: 'openai'
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
