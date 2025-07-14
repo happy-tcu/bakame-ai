@@ -19,6 +19,7 @@ const IVR = () => {
           Bakame AI
         </a>
         <div className="hidden md:flex space-x-8">
+          <a href="/" className="text-white/70 hover:text-white transition-colors">Home</a>
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
           <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
           <a href="/team" className="text-white/70 hover:text-white transition-colors">Team</a>

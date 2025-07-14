@@ -234,8 +234,8 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       console.log('Starting WebSocket connection...');
       setConnectionStatus('Connecting...');
       
-      // Connect to our edge function
-      const ws = new WebSocket('wss://wzjorefhpnkjsjciyozh.functions.supabase.co/realtime-chat');
+      // Connect to our edge function with the correct URL
+      const ws = new WebSocket('wss://wzjorefhpnkjsjciyozh.functions.supabase.co/functions/v1/realtime-chat');
       wsRef.current = ws;
 
       ws.onopen = () => {

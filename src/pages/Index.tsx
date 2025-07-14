@@ -204,14 +204,14 @@ const Index = () => {
               Deploy intelligent IVR systems that work anywhere, anytime. No internet required.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button onClick={handleGetStarted} className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <a href="/ivr" className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                 <span className="flex items-center justify-center">
-                  Start Your Deployment
+                  Try IVR Demo Now
                   <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </span>
-              </button>
+              </a>
               <button onClick={handleWatchDemo} className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
                 Schedule a Demo
               </button>
