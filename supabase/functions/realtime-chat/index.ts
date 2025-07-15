@@ -8,46 +8,49 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
-  console.log('Realtime chat function called:', req.method);
+  console.log('Realtime chat function called:', req.method, req.url);
   
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
-  const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
-  if (!openAIApiKey) {
-    console.error('OPENAI_API_KEY not found');
-    return new Response(
-      JSON.stringify({ error: 'OpenAI API key not configured' }),
-      { 
-        status: 500, 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-      }
-    );
-  }
-
-  console.log('OpenAI API key found, length:', openAIApiKey.length);
-
-  // Check if this is a WebSocket upgrade request
-  const upgradeHeader = req.headers.get('upgrade');
-  if (upgradeHeader !== 'websocket') {
-    console.log('Not a WebSocket request, upgrade header:', upgradeHeader);
-    return new Response(
-      JSON.stringify({ 
-        message: 'OpenAI Realtime API Proxy',
-        instructions: 'Connect via WebSocket for real-time conversation'
-      }),
-      { 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-      }
-    );
-  }
-
-  console.log('WebSocket connection requested');
-  
   try {
-    // Upgrade the incoming request to WebSocket first
+    const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
+    if (!openAIApiKey) {
+      console.error('OPENAI_API_KEY not found');
+      return new Response(
+        JSON.stringify({ error: 'OpenAI API key not configured' }),
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    console.log('OpenAI API key found');
+
+    // Check if this is a WebSocket upgrade request
+    const upgradeHeader = req.headers.get('upgrade');
+    console.log('Upgrade header:', upgradeHeader);
+    
+    if (upgradeHeader !== 'websocket') {
+      console.log('Not a WebSocket request');
+      return new Response(
+        JSON.stringify({ 
+          message: 'OpenAI Realtime API Proxy',
+          instructions: 'Connect via WebSocket for real-time conversation',
+          status: 'ready'
+        }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    console.log('WebSocket connection requested');
+    
+    // Upgrade the incoming request to WebSocket
     const { socket, response } = Deno.upgradeWebSocket(req);
     console.log('WebSocket upgrade successful');
     
@@ -73,7 +76,6 @@ serve(async (req) => {
         // Handle OpenAI WebSocket events
         openAIWS.onopen = () => {
           console.log('Connected to OpenAI Realtime API');
-          socket.send(JSON.stringify({ type: 'session.created' }));
         };
 
         openAIWS.onmessage = (event) => {
@@ -197,9 +199,9 @@ RESPONSE STYLE:
     return response;
 
   } catch (error) {
-    console.error('WebSocket setup error:', error);
+    console.error('Function error:', error);
     return new Response(
-      JSON.stringify({ error: 'Failed to establish WebSocket connection' }),
+      JSON.stringify({ error: 'Internal server error', details: error.message }),
       { 
         status: 500, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
