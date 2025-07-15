@@ -91,7 +91,7 @@ class RealtimeChat {
       console.log('Connecting to realtime chat...');
       
       // Connect to our WebSocket edge function
-      const wsUrl = `wss://wzjorefhpnkjsjciyozh.functions.supabase.co/realtime-chat`;
+      const wsUrl = `wss://wzjorefhpnkjsjciyozh.functions.supabase.co/functions/v1/realtime-chat`;
       console.log('Connecting to:', wsUrl);
       this.ws = new WebSocket(wsUrl);
       
