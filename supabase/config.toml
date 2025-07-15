@@ -31,3 +31,6 @@ verify_jwt = false
 
 [functions.ivr-chat]
 verify_jwt = false
+
+[functions.create-session]
+verify_jwt = false
