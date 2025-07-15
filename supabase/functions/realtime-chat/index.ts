@@ -31,6 +31,9 @@ serve(async (req) => {
     console.log('WebSocket connection requested');
     
     try {
+      // Upgrade the incoming request to WebSocket first
+      const { socket, response } = Deno.upgradeWebSocket(req);
+      
       // Create WebSocket connection to OpenAI
       const openAIWS = new WebSocket(
         'wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-10-01',
@@ -41,9 +44,6 @@ serve(async (req) => {
           }
         }
       );
-
-      // Upgrade the incoming request to WebSocket
-      const { socket, response } = Deno.upgradeWebSocket(req);
 
       let sessionConfigured = false;
 
