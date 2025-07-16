@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
@@ -57,27 +56,8 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
             Bakeme AI<br />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">Access</span>
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">Intelligence, Bakame</span>
           </h1>
-          
-          {/* Mathematical notation style display */}
-          <div className="text-lg sm:text-xl lg:text-2xl text-white/70 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
-            <div className="mb-4">
-              <span className="text-blue-400 font-mono">f(x) = Access</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-purple-400 font-mono mb-2 relative">
-                <span className="relative">
-                  modes
-                  <div className="absolute top-0 left-0 w-full h-0.5 bg-purple-400 transform -translate-y-1"></div>
-                </span>
-              </div>
-              <div className="text-white/60 text-base flex flex-col items-center space-y-1">
-                <div className="text-green-400">offline</div>
-                <div className="text-cyan-400">IVR</div>
-              </div>
-            </div>
-          </div>
           
           <p className="text-lg sm:text-xl lg:text-2xl text-white/70 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
             Revolutionizing communication with offline Interactive Voice Response systems for education, enterprise, and government. Powered by advanced AI that works without internet connectivity.
