@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
@@ -168,12 +169,14 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
-            {["University of Rwanda", "Rwanda Academy of Sciences", "Ministry of ICT", "African Development Bank", "Google AI", "OpenAI Research", "Meta AI", "Microsoft Research"].map((partner, index) => <div key={index} className="group flex items-center justify-center h-20 w-40 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
-                <span className="text-white/70 group-hover:text-white text-sm font-medium text-center px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center max-w-4xl mx-auto">
+            {["Institute for Entrepreneurship and Innovation (at TCU)", "Shaddock Seed Fund", "Values and Ventures"].map((partner, index) => (
+              <div key={index} className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6">
+                <span className="text-white/70 group-hover:text-white text-sm font-medium text-center">
                   {partner}
                 </span>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
 
