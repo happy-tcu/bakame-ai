@@ -1,19 +1,27 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
+
 const Index = () => {
   const [currentProgress] = useState(67);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const navigate = useNavigate();
+
   const handleGetStarted = () => {
     navigate('/signup');
   };
+
   const handleWatchDemo = () => {
     setIsVideoModalOpen(true);
   };
-  return <div className="min-h-screen bg-black text-white relative overflow-hidden">{/* Clean black background */}
 
-      {/* Navigation */}  
+  const handleScheduleDemo = () => {
+    navigate('/schedule-consultation');
+  };
+
+  return (
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Clean black background */}
       <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
         <div className="text-2xl font-bold">Bakame Ai</div>
         <div className="hidden md:flex space-x-8">
@@ -46,7 +54,6 @@ const Index = () => {
                 </svg>
               </span>
             </button>
-            
           </div>
         </div>
 
@@ -212,7 +219,7 @@ const Index = () => {
                   </svg>
                 </span>
               </a>
-              <button onClick={handleWatchDemo} className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
+              <button onClick={handleScheduleDemo} className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
                 Schedule a Demo
               </button>
             </div>
@@ -237,6 +244,8 @@ const Index = () => {
       </div>
 
       <VideoModal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} videoId="dQw4w9WgXcQ" />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
