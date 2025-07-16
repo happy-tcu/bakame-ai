@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
+import TypingAnimation from "@/components/TypingAnimation";
+
 const Index = () => {
   const [currentProgress] = useState(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -28,6 +30,7 @@ const Index = () => {
     name: "Values and Ventures",
     url: "https://valuesandventures.com/"
   }];
+
   return <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Clean black background */}
       <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
@@ -44,7 +47,11 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
             Bakeme AI<br />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse text-5xl"> f(x)=Access ; m=(offline/ivr) </span>
+            <TypingAnimation 
+              text="f(x)=Access ; m=(offline/ivr)" 
+              speed={200}
+              className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent text-5xl"
+            />
           </h1>
           
           <p className="text-lg sm:text-xl lg:text-2xl text-white/70 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
@@ -248,4 +255,5 @@ const Index = () => {
       <VideoModal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} videoId="dQw4w9WgXcQ" />
     </div>;
 };
+
 export default Index;
