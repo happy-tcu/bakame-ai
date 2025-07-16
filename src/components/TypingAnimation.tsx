@@ -4,16 +4,27 @@ import { useState, useEffect } from 'react';
 interface TypingAnimationProps {
   text: string;
   speed?: number;
+  pauseDuration?: number;
   className?: string;
 }
 
-const TypingAnimation = ({ text, speed = 150, className = "" }: TypingAnimationProps) => {
+const TypingAnimation = ({ text, speed = 150, pauseDuration = 2000, className = "" }: TypingAnimationProps) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
+  const [isPausing, setIsPausing] = useState(false);
 
   useEffect(() => {
-    if (currentIndex < text.length) {
+    if (isPausing) {
+      // During pause, wait then reset for next cycle
+      const pauseTimer = setTimeout(() => {
+        setDisplayText('');
+        setCurrentIndex(0);
+        setIsPausing(false);
+      }, pauseDuration);
+
+      return () => clearTimeout(pauseTimer);
+    } else if (currentIndex < text.length) {
+      // Continue typing
       const timer = setTimeout(() => {
         setDisplayText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
@@ -21,16 +32,15 @@ const TypingAnimation = ({ text, speed = 150, className = "" }: TypingAnimationP
 
       return () => clearTimeout(timer);
     } else {
-      setIsComplete(true);
+      // Finished typing, start pause
+      setIsPausing(true);
     }
-  }, [currentIndex, text, speed]);
+  }, [currentIndex, text, speed, pauseDuration, isPausing]);
 
   return (
     <span className={className}>
       {displayText}
-      {!isComplete && (
-        <span className="animate-pulse text-blue-400">|</span>
-      )}
+      <span className="animate-pulse text-blue-400">|</span>
     </span>
   );
 };
