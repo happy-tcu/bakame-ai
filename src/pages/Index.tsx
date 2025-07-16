@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
@@ -48,8 +47,6 @@ const Index = () => {
         <div className="hidden md:flex space-x-8">
           <a href="/ivr" className="text-white/70 hover:text-white transition-colors">IVR Demo</a>
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
-          <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
-          <a href="/team" className="text-white/70 hover:text-white transition-colors">Careers</a>
           <a href="/signup" className="text-white/70 hover:text-white transition-colors">Sign In</a>
         </div>
       </nav>
@@ -261,8 +258,6 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
             <div className="flex space-x-6 mb-4 md:mb-0">
               <a href="/blog" className="text-white/60 hover:text-white/80 transition-colors">Blog</a>
-              <a href="/resources" className="text-white/60 hover:text-white/80 transition-colors">Resources</a>
-              <a href="/team" className="text-white/60 hover:text-white/80 transition-colors">Careers</a>
               <a href="/signup" className="text-white/60 hover:text-white/80 transition-colors">Sign In</a>
             </div>
             <p className="text-white/40 text-sm">© 2024 Bakame AI. All rights reserved.</p>
