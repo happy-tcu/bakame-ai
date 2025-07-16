@@ -55,7 +55,7 @@ const Index = () => {
         {/* Hero Section */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-            IVR Offline<br />
+            Bakeme AI<br />
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">Intelligence, Bakame</span>
           </h1>
           
