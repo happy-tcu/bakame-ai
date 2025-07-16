@@ -2,11 +2,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
 import AnimatedContentCarousel from "@/components/AnimatedContentCarousel";
+import { useAdminContent } from "@/hooks/useAdminContent";
 
 const Index = () => {
   const [currentProgress] = useState(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  // Use admin-managed content
+  const contentItems = useAdminContent();
 
   const handleGetStarted = () => {
     navigate('/early-access');
@@ -41,28 +45,7 @@ const Index = () => {
   ];
 
   // Sample content items - replace with your backend data
-  const contentItems = [
-    {
-      id: "1",
-      title: "Voice-first and mobile-accessible",
-      description: "Learn through natural conversation"
-    },
-    {
-      id: "2", 
-      title: "Offline by design — no internet required",
-      description: "Works anywhere, anytime"
-    },
-    {
-      id: "3",
-      title: "Built in collaboration with educators", 
-      description: "Pedagogy-driven approach"
-    },
-    {
-      id: "4",
-      title: "Future-ready: supports local languages and custom content",
-      description: "Adaptable to any context"
-    }
-  ];
+  
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -75,6 +58,7 @@ const Index = () => {
           <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
           <a href="/team" className="text-white/70 hover:text-white transition-colors">Careers</a>
           <a href="/signup" className="text-white/70 hover:text-white transition-colors">Sign In</a>
+          <a href="/admin-settings" className="text-white/70 hover:text-white transition-colors">Admin</a>
         </div>
       </nav>
 

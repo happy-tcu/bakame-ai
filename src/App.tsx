@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +19,7 @@ import GovernmentSolution from "./pages/GovernmentSolution";
 import GovernmentDemo from "./pages/GovernmentDemo";
 import ScheduleConsultation from "./pages/ScheduleConsultation";
 import EarlyAccess from "./pages/EarlyAccess";
+import AdminSettings from "./pages/AdminSettings";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +45,7 @@ const App = () => (
             <Route path="/government-demo" element={<GovernmentDemo />} />
             <Route path="/schedule-consultation" element={<ScheduleConsultation />} />
             <Route path="/early-access" element={<EarlyAccess />} />
+            <Route path="/admin-settings" element={<AdminSettings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
