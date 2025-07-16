@@ -1,46 +1,34 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
-
 const Index = () => {
   const [currentProgress] = useState(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const navigate = useNavigate();
-
   const handleGetStarted = () => {
     navigate('/early-access');
   };
-
   const handleWatchDemo = () => {
     setIsVideoModalOpen(true);
   };
-
   const handleScheduleDemo = () => {
     navigate('/schedule-consultation');
   };
-
   const handleJoinContribution = () => {
     // For now, navigate to early access - can be updated when contribution platform is ready
     navigate('/early-access');
   };
-
-  const partners = [
-    {
-      name: "Institute for Entrepreneurship and Innovation (at TCU)",
-      url: "https://www.tcu.edu/business/institute-entrepreneurship-innovation/"
-    },
-    {
-      name: "Shaddock Seed Fund",
-      url: "https://magazine.tcu.edu/fall-2017/shaddock-venture-capital-fund-entrepreneurs-investors/"
-    },
-    {
-      name: "Values and Ventures",
-      url: "https://valuesandventures.com/"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+  const partners = [{
+    name: "Institute for Entrepreneurship and Innovation (at TCU)",
+    url: "https://www.tcu.edu/business/institute-entrepreneurship-innovation/"
+  }, {
+    name: "Shaddock Seed Fund",
+    url: "https://magazine.tcu.edu/fall-2017/shaddock-venture-capital-fund-entrepreneurs-investors/"
+  }, {
+    name: "Values and Ventures",
+    url: "https://valuesandventures.com/"
+  }];
+  return <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Clean black background */}
       <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
         <div className="text-2xl font-bold">Bakame Ai</div>
@@ -56,7 +44,7 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
             Bakeme AI<br />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">f(x)=Access; m=[offline/ivr]</span>
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse text-5xl">f(x)=Access; m=[offline/ivr]</span>
           </h1>
           
           <p className="text-lg sm:text-xl lg:text-2xl text-white/70 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
@@ -156,10 +144,7 @@ const Index = () => {
 
             {/* Contribution CTA Button */}
             <div className="text-center">
-              <button 
-                onClick={handleJoinContribution}
-                className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 hover:scale-105"
-              >
+              <button onClick={handleJoinContribution} className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 hover:scale-105">
                 Join the Contribution
               </button>
               
@@ -182,19 +167,11 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center max-w-4xl mx-auto">
-            {partners.map((partner, index) => (
-              <a 
-                key={index} 
-                href={partner.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6"
-              >
+            {partners.map((partner, index) => <a key={index} href={partner.url} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6">
                 <span className="text-white/70 group-hover:text-white text-sm font-medium text-center">
                   {partner.name}
                 </span>
-              </a>
-            ))}
+              </a>)}
           </div>
         </div>
 
@@ -269,8 +246,6 @@ const Index = () => {
       </div>
 
       <VideoModal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} videoId="dQw4w9WgXcQ" />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
