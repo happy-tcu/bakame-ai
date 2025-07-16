@@ -2,234 +2,276 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
-import { Phone, Zap, Brain, GraduationCap, Building, Landmark } from "lucide-react";
 
 const Index = () => {
+  const [currentProgress] = useState(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleScheduleDemo = () => {
-    window.open('https://calendly.com/bakame-ai/enterprise-demo', '_blank');
-  };
-
-  const handleContributeVoice = () => {
+  const handleGetStarted = () => {
     navigate('/early-access');
   };
 
-  const coreFeatures = [
-    {
-      icon: Phone,
-      title: "Voice-first & Mobile-friendly",
-      description: "Works on any phone — no smartphone needed"
-    },
-    {
-      icon: Zap,
-      title: "Offline by Design",
-      description: "No app. No data. Just a call."
-    },
-    {
-      icon: Brain,
-      title: "AI Tutoring in Local Languages",
-      description: "Supports English & Kinyarwanda (more coming)"
-    }
-  ];
+  const handleWatchDemo = () => {
+    setIsVideoModalOpen(true);
+  };
 
-  const useCases = [
+  const handleScheduleDemo = () => {
+    navigate('/schedule-consultation');
+  };
+
+  const handleJoinContribution = () => {
+    // For now, navigate to early access - can be updated when contribution platform is ready
+    navigate('/early-access');
+  };
+
+  const partners = [
     {
-      icon: GraduationCap,
-      title: "Education",
-      description: "For schools and universities — AI tutors that adapt to student needs."
+      name: "Institute for Entrepreneurship and Innovation (at TCU)",
+      url: "https://www.tcu.edu/business/institute-entrepreneurship-innovation/"
     },
     {
-      icon: Building,
-      title: "Enterprise",
-      description: "Voice-based automation for low-connectivity customer support."
+      name: "Shaddock Seed Fund",
+      url: "https://magazine.tcu.edu/fall-2017/shaddock-venture-capital-fund-entrepreneurs-investors/"
     },
     {
-      icon: Landmark,
-      title: "Government",
-      description: "Deliver civic education and services by voice, anywhere."
+      name: "Values and Ventures",
+      url: "https://valuesandventures.com/"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="border-b px-6 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold text-primary">
-            Bakame AI
-          </div>
-          <div className="hidden md:flex space-x-8">
-            <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
-            <a href="/resources" className="text-muted-foreground hover:text-foreground transition-colors">Resources</a>
-            <a href="/team" className="text-muted-foreground hover:text-foreground transition-colors">Careers</a>
-            <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
-            <a href="/admin-settings" className="text-muted-foreground hover:text-foreground transition-colors">Admin</a>
-          </div>
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Clean black background */}
+      <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
+        <div className="text-2xl font-bold">Bakame Ai</div>
+        <div className="hidden md:flex space-x-8">
+          <a href="/ivr" className="text-white/70 hover:text-white transition-colors">IVR Demo</a>
+          <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
+          <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
+          <a href="/team" className="text-white/70 hover:text-white transition-colors">Careers</a>
+          <a href="/signup" className="text-white/70 hover:text-white transition-colors">Sign In</a>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <div className="py-20 md:py-32 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
-            Empowering students in the Global South with voice-based AI tutors — no internet required.
+      <div className="relative z-10">
+        {/* Hero Section */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
+          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+            IVR Offline<br />
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">Intelligence, Bakame</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Just call and learn. No apps. No data.
+          <p className="text-lg sm:text-xl lg:text-2xl text-white/70 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
+            Revolutionizing communication with offline Interactive Voice Response systems for education, enterprise, and government. Powered by advanced AI that works without internet connectivity.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <a href="/ivr" className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              Try Live Demo
-            </a>
-            
-            <button onClick={handleScheduleDemo} className="bg-accent text-accent-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-accent/90 transition-all duration-300 hover:scale-105">
-              Schedule Enterprise Demo
-            </button>
-          </div>
-
-          {/* Hero Visual Placeholder */}
-          <div className="max-w-2xl mx-auto bg-muted rounded-2xl aspect-video flex items-center justify-center">
-            <div className="text-center">
-              <Phone className="w-16 h-16 text-primary mx-auto mb-4" />
-              <p className="text-muted-foreground">Product demo visual</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Core Features Section */}
-      <div className="py-20 px-6 bg-muted/20">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-12">
-            {coreFeatures.map((feature, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <feature.icon className="w-8 h-8 text-primary-foreground" />
-                </div>
-                <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Use Cases Section */}
-      <div className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
-            {useCases.map((useCase, index) => (
-              <div key={index} className="bg-card border rounded-xl p-8 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
-                  <useCase.icon className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold mb-4">{useCase.title}</h3>
-                <p className="text-muted-foreground">{useCase.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Kinyarwanda Dataset CTA */}
-      <div className="py-20 px-6 bg-primary/5">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-card border-2 border-primary/20 rounded-2xl p-12">
-            <Brain className="w-16 h-16 text-primary mx-auto mb-6" />
-            <h2 className="text-3xl font-bold mb-6">
-              We're building the first Kinyarwanda voice dataset for AI training. Be part of it.
-            </h2>
-            <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-              Join us in creating the foundation for AI that understands and speaks Kinyarwanda.
-            </p>
-            <button 
-              onClick={handleContributeVoice}
-              className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors"
-            >
-              Contribute Your Voice
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
+            <button onClick={handleGetStarted} className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <span className="flex items-center justify-center">
+                Request Early Access
+                <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Partners & Pilots Section */}
-      <div className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Partners & Pilots</h2>
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="bg-muted/30 rounded-lg p-6 h-24 flex items-center justify-center">
-                <span className="text-sm text-muted-foreground text-center">TCU Institute</span>
-              </div>
-              <div className="bg-muted/30 rounded-lg p-6 h-24 flex items-center justify-center">
-                <span className="text-sm text-muted-foreground text-center">Shaddock Fund</span>
-              </div>
-              <div className="bg-muted/30 rounded-lg p-6 h-24 flex items-center justify-center">
-                <span className="text-sm text-muted-foreground text-center">Values & Ventures</span>
-              </div>
-            </div>
-            
-            <div className="space-y-4 max-w-2xl mx-auto">
-              <p className="text-lg">✅ Currently piloting in 3 Rwandan schools</p>
-              <p className="text-lg">✅ Voice assistant tested with 50+ students</p>
-              <p className="text-lg">✅ First government call test completed in 2024</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <footer className="bg-muted/20 py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
-            <div>
-              <div className="text-xl font-bold text-primary mb-4">Bakame AI</div>
-              <p className="text-muted-foreground text-sm">
-                Voice-based AI education for the Global South
+        {/* Main Products Section */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Our Solutions
+              </h2>
+              <p className="text-xl text-white/70 max-w-3xl mx-auto">
+                Offline-first AI systems that work anywhere, anytime, for any organization
               </p>
             </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <div className="space-y-2 text-sm">
-                <a href="/blog" className="block text-muted-foreground hover:text-foreground">Blog</a>
-                <a href="/resources" className="block text-muted-foreground hover:text-foreground">Resources</a>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
+              <div onClick={() => navigate('/solutions/education')} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer">
+                <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
+                  <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-white">Education</h3>
+                <p className="text-white/70">
+                  Offline IVR systems for schools and universities, enabling interactive learning experiences without internet dependency.
+                </p>
+              </div>
+
+              <div onClick={() => navigate('/solutions/enterprise')} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer">
+                <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-purple-500/30 transition-colors">
+                  <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-white">Enterprise</h3>
+                <p className="text-white/70">
+                  Advanced IVR solutions for businesses, providing customer service automation that works reliably in any environment.
+                </p>
+              </div>
+
+              <div onClick={() => navigate('/solutions/government')} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 cursor-pointer">
+                <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-green-500/30 transition-colors">
+                  <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-white">Government</h3>
+                <p className="text-white/70">
+                  Secure, offline-capable IVR systems for government services, ensuring citizen access regardless of connectivity.
+                </p>
               </div>
             </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <div className="space-y-2 text-sm">
-                <a href="/team" className="block text-muted-foreground hover:text-foreground">Careers</a>
-                <a href="/contact" className="block text-muted-foreground hover:text-foreground">Contact</a>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Get Started</h4>
-              <div className="space-y-3">
-                <a href="/ivr" className="block bg-primary text-primary-foreground px-4 py-2 rounded text-sm text-center hover:bg-primary/90">
-                  Start Free Trial
-                </a>
-                <button 
-                  onClick={handleScheduleDemo}
-                  className="block w-full border border-border px-4 py-2 rounded text-sm text-center hover:bg-muted"
-                >
-                  Schedule Demo
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          <div className="border-t pt-8 text-center text-sm text-muted-foreground">
-            © 2024 Bakame AI. All rights reserved.
           </div>
         </div>
-      </footer>
+
+        {/* Research Initiative Section */}
+        <div className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Research Initiative
+              </h2>
+              <p className="text-xl text-white/70 max-w-3xl mx-auto">
+                Alongside our main IVR solutions, we're pioneering the collection of Kinyarwanda voice data to create the first comprehensive LLM-ready dataset. Join us in building this groundbreaking resource.
+              </p>
+            </div>
+
+            <div className="mb-16">
+              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <div className="text-center">
+                  <h3 className="text-2xl font-semibold text-white mb-4">Kinyarwanda Dataset Collection</h3>
+                  <p className="text-white/70 mb-6">
+                    We're building the foundation for AI that understands and speaks Kinyarwanda. Be part of this historic initiative.
+                  </p>
+                  <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-6">
+                    <div className="text-4xl font-bold text-blue-400 mb-2">Coming Soon</div>
+                    <div className="text-white/70">Voice contribution platform launching</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Contribution CTA Button */}
+            <div className="text-center">
+              <button 
+                onClick={handleJoinContribution}
+                className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 hover:scale-105"
+              >
+                Join the Contribution
+              </button>
+              
+              <p className="mt-4 text-white/60 text-base max-w-xl mx-auto">
+                Help shape the future of AI in Kinyarwanda
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Partners Section */}
+        <div className="container mx-auto px-6 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              Our Partners
+            </h2>
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+              Collaborating with leading organizations to advance AI research and offline communication solutions
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center max-w-4xl mx-auto">
+            {partners.map((partner, index) => (
+              <a 
+                key={index} 
+                href={partner.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6"
+              >
+                <span className="text-white/70 group-hover:text-white text-sm font-medium text-center">
+                  {partner.name}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="container mx-auto px-6 py-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="group">
+              <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                12
+              </div>
+              <div className="text-white/70 text-lg">Pilot Deployments</div>
+            </div>
+            <div className="group">
+              <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                3
+              </div>
+              <div className="text-white/70 text-lg">Partner Organizations</div>
+            </div>
+            <div className="group">
+              <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                2K+
+              </div>
+              <div className="text-white/70 text-lg">Beta Test Calls</div>
+            </div>
+            <div className="group">
+              <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                24/7
+              </div>
+              <div className="text-white/70 text-lg">Offline Ready</div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="container mx-auto px-6 py-20 text-center">
+          <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-sm rounded-3xl p-12 border border-white/10">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              Ready to Transform Your Communication?
+            </h2>
+            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
+              Deploy intelligent IVR systems that work anywhere, anytime. No internet required.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a href="/ivr" className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                <span className="flex items-center justify-center">
+                  Try IVR Demo Now
+                  <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </a>
+              <button onClick={handleScheduleDemo} className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
+                Schedule a Demo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <footer className="container mx-auto px-6 py-12 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
+            <div className="flex space-x-6 mb-4 md:mb-0">
+              <a href="/blog" className="text-white/60 hover:text-white/80 transition-colors">Blog</a>
+              <a href="/resources" className="text-white/60 hover:text-white/80 transition-colors">Resources</a>
+              <a href="/team" className="text-white/60 hover:text-white/80 transition-colors">Careers</a>
+              <a href="/signup" className="text-white/60 hover:text-white/80 transition-colors">Sign In</a>
+            </div>
+            <p className="text-white/40 text-sm">© 2024 Bakame AI. All rights reserved.</p>
+          </div>
+          <div className="mt-8 pt-8 border-t border-white/10 text-center text-white/50">
+            <p>&copy; 2024 Bakame AI. Revolutionizing communication through intelligent offline IVR systems.</p>
+          </div>
+        </footer>
+      </div>
 
       <VideoModal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} videoId="dQw4w9WgXcQ" />
     </div>
