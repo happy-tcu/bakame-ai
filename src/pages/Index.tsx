@@ -25,6 +25,21 @@ const Index = () => {
     navigate('/early-access');
   };
 
+  const partners = [
+    {
+      name: "Institute for Entrepreneurship and Innovation (at TCU)",
+      url: "https://www.tcu.edu/business/institute-entrepreneurship-innovation/"
+    },
+    {
+      name: "Shaddock Seed Fund",
+      url: "https://www.shaddockseedfund.com/"
+    },
+    {
+      name: "Values and Ventures",
+      url: "https://valuesandventures.com/"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Clean black background */}
@@ -170,12 +185,18 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center max-w-4xl mx-auto">
-            {["Institute for Entrepreneurship and Innovation (at TCU)", "Shaddock Seed Fund", "Values and Ventures"].map((partner, index) => (
-              <div key={index} className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6">
+            {partners.map((partner, index) => (
+              <a 
+                key={index} 
+                href={partner.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6"
+              >
                 <span className="text-white/70 group-hover:text-white text-sm font-medium text-center">
-                  {partner}
+                  {partner.name}
                 </span>
-              </div>
+              </a>
             ))}
           </div>
         </div>
