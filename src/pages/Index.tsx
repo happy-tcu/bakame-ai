@@ -206,21 +206,21 @@ const Index = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="group">
               <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                500+
+                12
               </div>
-              <div className="text-white/70 text-lg">IVR Deployments</div>
+              <div className="text-white/70 text-lg">Pilot Deployments</div>
             </div>
             <div className="group">
               <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                99.9%
+                3
               </div>
-              <div className="text-white/70 text-lg">Uptime</div>
+              <div className="text-white/70 text-lg">Partner Organizations</div>
             </div>
             <div className="group">
               <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                50M+
+                2K+
               </div>
-              <div className="text-white/70 text-lg">Calls Processed</div>
+              <div className="text-white/70 text-lg">Beta Test Calls</div>
             </div>
             <div className="group">
               <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
