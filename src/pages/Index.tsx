@@ -32,7 +32,7 @@ const Index = () => {
     },
     {
       name: "Shaddock Seed Fund",
-      url: "https://www.shaddockseedfund.com/"
+      url: "https://magazine.tcu.edu/fall-2017/shaddock-venture-capital-fund-entrepreneurs-investors/"
     },
     {
       name: "Values and Ventures",
