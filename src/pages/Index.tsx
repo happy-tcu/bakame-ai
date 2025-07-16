@@ -145,25 +145,13 @@ const Index = () => {
             <div className="text-center">
               <button 
                 onClick={handleJoinContribution}
-                className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white px-12 py-6 rounded-full font-bold text-xl hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 transition-all duration-500 hover:scale-110 hover:shadow-2xl shadow-lg"
+                className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 hover:scale-105"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative flex items-center justify-center">
-                  <svg className="mr-3 w-6 h-6 group-hover:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                  </svg>
-                  Be Among the First to Contribute
-                  <svg className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </span>
-                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 text-sm font-medium text-white/80 group-hover:text-white transition-colors">
-                  Join the Revolution
-                </div>
+                Join the Contribution
               </button>
               
-              <p className="mt-6 text-white/60 text-lg max-w-2xl mx-auto">
-                Shape the future of AI in Kinyarwanda. Your voice matters in creating technology that truly understands our language and culture.
+              <p className="mt-4 text-white/60 text-base max-w-xl mx-auto">
+                Help shape the future of AI in Kinyarwanda
               </p>
             </div>
           </div>
