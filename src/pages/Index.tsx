@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
 
 const Index = () => {
-  const [currentProgress] = useState(67);
+  const [currentProgress] = useState(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -118,33 +117,20 @@ const Index = () => {
                 Research Initiative
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Alongside our main IVR solutions, we're pioneering <span className="text-blue-400 font-semibold">100,000 hours</span> of Kinyarwanda voice data collection to create the first comprehensive LLM-ready dataset.
+                Alongside our main IVR solutions, we're pioneering the collection of Kinyarwanda voice data to create the first comprehensive LLM-ready dataset. Join us in building this groundbreaking resource.
               </p>
             </div>
 
             <div className="mb-16">
               <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-lg font-semibold text-white">Kinyarwanda Dataset Progress</span>
-                  <span className="text-2xl font-bold text-green-400">{currentProgress}%</span>
-                </div>
-                <div className="w-full bg-white/10 rounded-full h-3 mb-4">
-                  <div className="bg-gradient-to-r from-green-400 to-blue-400 h-3 rounded-full transition-all duration-1000 ease-out" style={{
-                  width: `${currentProgress}%`
-                }}></div>
-                </div>
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <div>
-                    <div className="text-2xl font-bold text-blue-400">67,250</div>
-                    <div className="text-sm text-white/60">Hours Collected</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-purple-400">15,400</div>
-                    <div className="text-sm text-white/60">Contributors</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-green-400">98.7%</div>
-                    <div className="text-sm text-white/60">Quality Score</div>
+                <div className="text-center">
+                  <h3 className="text-2xl font-semibold text-white mb-4">Kinyarwanda Dataset Collection</h3>
+                  <p className="text-white/70 mb-6">
+                    We're building the foundation for AI that understands and speaks Kinyarwanda. Be part of this historic initiative.
+                  </p>
+                  <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-6">
+                    <div className="text-4xl font-bold text-blue-400 mb-2">Coming Soon</div>
+                    <div className="text-white/70">Voice contribution platform launching</div>
                   </div>
                 </div>
               </div>
