@@ -30,7 +30,7 @@ const Index = () => {
     name: "Institute for Entrepreneurship and Innovation (at TCU)",
     url: "https://www.tcu.edu/business/institute-entrepreneurship-innovation/"
   }, {
-    name: "Shaddock Seed Fund",
+    name: "Shaddock Seed Fund", 
     url: "https://magazine.tcu.edu/fall-2017/shaddock-venture-capital-fund-entrepreneurs-investors/"
   }, {
     name: "Values and Ventures",
@@ -83,7 +83,7 @@ const Index = () => {
                   Our User Cases
                 </h2>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                  Offline-first AI systems that work anywhere, anytime, for any organization
+                  Built for learns; but with multiple applications: From Education to Corporate Solutions.
                 </p>
               </div>
 
