@@ -64,9 +64,21 @@ const AnimatedCounter = ({ end, duration = 5000, className = '' }: AnimatedCount
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
 
-      // Easing function for smooth animation
-      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-      const currentValue = startValue + (endValue - startValue) * easeOutCubic;
+      // Different easing function for bounce effect
+      const easeOutBounce = (t: number) => {
+        if (t < 1 / 2.75) {
+          return 7.5625 * t * t;
+        } else if (t < 2 / 2.75) {
+          return 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
+        } else if (t < 2.5 / 2.75) {
+          return 7.5625 * (t -= 2.25 / 2.75) * t + 0.9375;
+        } else {
+          return 7.5625 * (t -= 2.625 / 2.75) * t + 0.984375;
+        }
+      };
+
+      const easedProgress = easeOutBounce(progress);
+      const currentValue = startValue + (endValue - startValue) * easedProgress;
 
       setCount(currentValue);
 
@@ -85,7 +97,7 @@ const AnimatedCounter = ({ end, duration = 5000, className = '' }: AnimatedCount
   };
 
   return (
-    <div ref={countRef} className={className}>
+    <div ref={countRef} className={`${className} transform transition-all duration-300 hover:scale-110 animate-pulse`}>
       {formatValue(count)}
     </div>
   );
