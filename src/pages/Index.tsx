@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
 import TypingAnimation from "@/components/TypingAnimation";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 const Index = () => {
   const [currentProgress] = useState(0);
@@ -175,27 +176,35 @@ const Index = () => {
           <div className="container mx-auto px-6 py-20">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="group">
-                <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                  12
-                </div>
+                <AnimatedCounter 
+                  end="12" 
+                  duration={5000}
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300"
+                />
                 <div className="text-white/70 text-lg">Pilot Deployments</div>
               </div>
               <div className="group">
-                <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                  3
-                </div>
+                <AnimatedCounter 
+                  end="3" 
+                  duration={5000}
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300"
+                />
                 <div className="text-white/70 text-lg">Partner Organizations</div>
               </div>
               <div className="group">
-                <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                  2K+
-                </div>
+                <AnimatedCounter 
+                  end="2K+" 
+                  duration={5000}
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300"
+                />
                 <div className="text-white/70 text-lg">Beta Test Calls</div>
               </div>
               <div className="group">
-                <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                  24/7
-                </div>
+                <AnimatedCounter 
+                  end="24/7" 
+                  duration={5000}
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300"
+                />
                 <div className="text-white/70 text-lg">Offline Ready</div>
               </div>
             </div>
