@@ -60,7 +60,7 @@ const Index = () => {
             </h1>
             
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
-              Revolutionizing communication with offline Interactive Voice Response systems for education, enterprise, and government. Powered by advanced AI that works without internet connectivity.
+              Revolutionizing English language education (and IVR-powered communication) in Rwanda.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
