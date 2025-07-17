@@ -227,29 +227,27 @@ const Index = () => {
           </div>
 
           {/* Footer */}
-          <footer className="container mx-auto px-6 py-12 border-t border-border">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <footer className="container mx-auto px-6 py-8 border-t border-border">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               {/* Resources */}
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Resources</h3>
-                <ul className="space-y-2">
-                  <li><a href="/resources" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Documentation</a></li>
-                  <li><a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Blog</a></li>
-                  <li><a href="/schedule-consultation" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Support</a></li>
-                </ul>
+                <h3 className="text-base font-medium text-foreground mb-3">Resources</h3>
+                <div className="flex flex-wrap gap-4 text-sm">
+                  <a href="/resources" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</a>
+                  <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
+                  <a href="/schedule-consultation" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
+                </div>
               </div>
 
-              {/* Legal & Connect */}
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Legal & Connect</h3>
-                <ul className="space-y-2 mb-4">
-                  <li><a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Privacy Policy</a></li>
-                  <li><a href="/terms" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Terms of Service</a></li>
-                  <li><a href="/signup" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Sign In</a></li>
-                </ul>
+              {/* Legal & Social */}
+              <div className="flex flex-col md:items-end">
+                <div className="flex flex-wrap gap-4 text-sm mb-3">
+                  <a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
+                  <a href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms</a>
+                </div>
                 
                 {/* Social Links */}
-                <div className="flex space-x-4">
+                <div className="flex space-x-3">
                   <a href="https://twitter.com/bakameai" className="text-muted-foreground hover:text-foreground transition-colors">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -269,9 +267,9 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Bottom Bar */}
-            <div className="pt-6 border-t border-border text-center">
-              <p className="text-muted-foreground text-sm">
+            {/* Copyright */}
+            <div className="pt-4 mt-4 border-t border-border text-center">
+              <p className="text-muted-foreground text-xs">
                 © 2024 Bakame AI. All rights reserved.
               </p>
             </div>
