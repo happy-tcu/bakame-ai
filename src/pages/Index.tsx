@@ -80,7 +80,7 @@ const Index = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                  Our Solutions
+                  Our User Cases
                 </h2>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                   Offline-first AI systems that work anywhere, anytime, for any organization
