@@ -6,9 +6,10 @@ interface AnimatedCounterProps {
   className?: string;
 }
 
-const AnimatedCounter = ({ end, duration = 5000, className = '' }: AnimatedCounterProps) => {
+const AnimatedCounter = ({ end, duration = 10000, className = '' }: AnimatedCounterProps) => {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [shouldPulse, setShouldPulse] = useState(true);
   const countRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
 
@@ -59,6 +60,11 @@ const AnimatedCounter = ({ end, duration = 5000, className = '' }: AnimatedCount
     const startTime = Date.now();
     const startValue = 0;
 
+    // Stop pulsing after 5 seconds
+    const pulseTimer = setTimeout(() => {
+      setShouldPulse(false);
+    }, 5000);
+
     const animate = () => {
       const now = Date.now();
       const elapsed = now - startTime;
@@ -90,6 +96,10 @@ const AnimatedCounter = ({ end, duration = 5000, className = '' }: AnimatedCount
     };
 
     requestAnimationFrame(animate);
+
+    return () => {
+      clearTimeout(pulseTimer);
+    };
   }, [isVisible, endValue, duration]);
 
   const formatValue = (value: number) => {
@@ -97,7 +107,7 @@ const AnimatedCounter = ({ end, duration = 5000, className = '' }: AnimatedCount
   };
 
   return (
-    <div ref={countRef} className={`${className} transform transition-all duration-300 hover:scale-110 animate-pulse`}>
+    <div ref={countRef} className={`${className} transform transition-all duration-300 hover:scale-110 ${shouldPulse ? 'animate-pulse' : ''}`}>
       {formatValue(count)}
     </div>
   );
