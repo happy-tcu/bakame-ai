@@ -137,20 +137,6 @@ const Index = () => {
                 </p>
               </div>
 
-              <div className="mb-16">
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-                  <div className="text-center">
-                    
-                    <p className="text-white/70 mb-6">
-                      We're building the foundation for AI that understands and speaks Kinyarwanda. Be part of this historic initiative.
-                    </p>
-                    <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-6">
-                      <div className="text-4xl font-bold text-blue-400 mb-2">Coming Soon</div>
-                      <div className="text-white/70">Voice contribution platform launching</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               {/* Contribution CTA Button */}
               <div className="text-center">
