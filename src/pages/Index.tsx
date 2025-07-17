@@ -242,7 +242,6 @@ const Index = () => {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               {/* All Links */}
               <div className="flex flex-wrap gap-4 text-sm">
-                <a href="/resources" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</a>
                 <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
                 <a href="/schedule-consultation" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
                 <a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
