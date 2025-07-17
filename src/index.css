@@ -9,24 +9,24 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Company brand colors converted to HSL */
-    --background: 0 0% 100%;  /* White main background */
-    --foreground: 0 0% 0%;    /* Black main text */
+    /* Company brand colors converted to HSL - Default to dark theme */
+    --background: 0 0% 0%;      /* Black main background */
+    --foreground: 0 0% 100%;    /* White main text */
 
-    --card: 0 0% 100%;        /* White cards */
-    --card-foreground: 0 0% 0%; /* Black text on cards */
+    --card: 214 58% 11%;        /* Dark blue cards (#081a2e) */
+    --card-foreground: 0 0% 100%; /* White text on cards */
 
-    --popover: 0 0% 100%;     /* White popovers */
-    --popover-foreground: 0 0% 0%; /* Black text on popovers */
+    --popover: 214 58% 11%;     /* Dark blue popovers */
+    --popover-foreground: 0 0% 100%; /* White text on popovers */
 
-    --primary: 0 0% 0%;       /* Black primary */
-    --primary-foreground: 0 0% 100%; /* White text on primary */
+    --primary: 0 0% 100%;       /* White primary */
+    --primary-foreground: 0 0% 0%; /* Black text on primary */
 
     --secondary: 27 100% 65%; /* Orange secondary (#ff914d) */
     --secondary-foreground: 0 0% 100%; /* White text on orange */
 
-    --muted: 0 0% 96%;        /* Light gray muted */
-    --muted-foreground: 0 0% 45%; /* Medium gray text */
+    --muted: 214 40% 15%;     /* Dark muted */
+    --muted-foreground: 0 0% 65%; /* Light gray text */
 
     --accent: 218 91% 42%;    /* Blue accent (#0d4dcc) */
     --accent-foreground: 0 0% 100%; /* White text on blue */
@@ -34,8 +34,8 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%; /* Red for destructive actions */
     --destructive-foreground: 0 0% 100%; /* White text on red */
 
-    --border: 0 0% 90%;       /* Light gray borders */
-    --input: 0 0% 95%;        /* Light gray input backgrounds */
+    --border: 214 40% 20%;    /* Dark borders */
+    --input: 214 40% 15%;     /* Dark input backgrounds */
     --ring: 218 91% 42%;      /* Blue focus rings */
 
     --radius: 0.5rem;
