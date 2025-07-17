@@ -55,7 +55,7 @@ const Index = () => {
           {/* Hero Section */}
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
              <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-foreground via-accent to-secondary bg-clip-text text-transparent">
-              Bakeme AI<br />
+              Bakame AI<br />
               <TypingAnimation text="f(x)=Access ; m=(offline/ivr)" speed={200} pauseDuration={1500} className="bg-gradient-to-r from-accent via-secondary to-accent bg-clip-text text-transparent text-5xl" />
             </h1>
             
