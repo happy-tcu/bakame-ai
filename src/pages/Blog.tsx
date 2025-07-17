@@ -5,60 +5,33 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ArrowLeft, Calendar, User, ArrowRight } from "lucide-react";
 
 const Blog = () => {
-  const blogPosts = [
+  const mediaHits = [
     {
       id: 1,
-      title: "Revolutionizing IVR: The Offline Advantage",
-      excerpt: "How our offline-first approach to Interactive Voice Response systems is transforming communication in remote areas.",
-      author: "Engineering Team",
-      date: "December 2024",
-      readTime: "5 min read",
-      category: "Technology"
+      title: "Bakame AI Featured in Dallas Innovates",
+      excerpt: "Our innovative AI solutions and startup journey highlighted in Dallas's leading innovation publication.",
+      source: "Dallas Innovates",
+      date: "2024",
+      category: "Media Coverage",
+      url: "https://dallasinnovates.com/tag/bakame-ai/"
     },
     {
       id: 2,
-      title: "Deploying IVR Systems in Education",
-      excerpt: "Case studies of how educational institutions are leveraging our offline IVR solutions for better student engagement.",
-      author: "Education Team",
-      date: "November 2024",
-      readTime: "6 min read",
-      category: "Education"
+      title: "Higher Ed Leadership Recognition",
+      excerpt: "Bakame AI's impact on educational technology featured in Fort Worth Report's higher education coverage.",
+      source: "Fort Worth Report",
+      date: "May 2025",
+      category: "Education Coverage",
+      url: "https://fortworthreport.org/2025/05/26/higher-ed-footnotes-new-leadership-takes-helm-on-tcc-board/"
     },
     {
       id: 3,
-      title: "Enterprise Communication Without Boundaries",
-      excerpt: "How businesses are using our IVR systems to maintain customer service excellence regardless of connectivity.",
-      author: "Business Team",
-      date: "November 2024",
-      readTime: "4 min read",
-      category: "Enterprise"
-    },
-    {
-      id: 4,
-      title: "Government Services Made Accessible",
-      excerpt: "The role of offline IVR in making government services accessible to all citizens, regardless of location.",
-      author: "Government Relations",
-      date: "October 2024",
-      readTime: "5 min read",
-      category: "Government"
-    },
-    {
-      id: 5,
-      title: "Building the Kinyarwanda AI Dataset",
-      excerpt: "Our research initiative to create the first comprehensive Kinyarwanda dataset for AI applications.",
-      author: "Research Team",
-      date: "October 2024",
-      readTime: "7 min read",
-      category: "Research"
-    },
-    {
-      id: 6,
-      title: "The Future of Voice Technology",
-      excerpt: "Exploring how AI-powered voice systems will shape the future of human-computer interaction.",
-      author: "AI Team",
-      date: "September 2024",
-      readTime: "6 min read",
-      category: "Innovation"
+      title: "CREATE Competition Winner 2025",
+      excerpt: "Bakame AI recognized as winner in TCU Neeley's CREATE innovation competition for groundbreaking AI solutions.",
+      source: "TCU Neeley School of Business",
+      date: "2025",
+      category: "Innovation Award",
+      url: "https://www.neeley.tcu.edu/News/Events/CREATE-Winners-2025"
     }
   ];
 
@@ -99,7 +72,7 @@ const Blog = () => {
               Blog
             </h1>
             <p className="text-xl text-white/70 max-w-2xl">
-              Insights, updates, and stories from our journey to revolutionize offline communication
+              Media coverage and recognition highlighting Bakame AI's innovation in AI solutions
             </p>
           </div>
         </div>
@@ -107,19 +80,19 @@ const Blog = () => {
         {/* Blog Posts */}
         <div className="container mx-auto px-6 pb-16">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {blogPosts.map((post) => (
-              <a key={post.id} href={`/blog/${post.id}`} className="block">
+            {mediaHits.map((hit) => (
+              <a key={hit.id} href={hit.url} target="_blank" rel="noopener noreferrer" className="block">
                 <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group cursor-pointer h-full">
                   <CardHeader>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs text-blue-400 font-medium">{post.category}</span>
-                      <span className="text-xs text-white/50">{post.readTime}</span>
+                      <span className="text-xs text-blue-400 font-medium">{hit.category}</span>
+                      <span className="text-xs text-white/50">External Link</span>
                     </div>
                     <CardTitle className="text-xl text-white group-hover:text-blue-300 transition-colors">
-                      {post.title}
+                      {hit.title}
                     </CardTitle>
                     <CardDescription className="text-white/70">
-                      {post.excerpt}
+                      {hit.excerpt}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -127,11 +100,11 @@ const Blog = () => {
                       <div className="flex items-center space-x-4 text-sm text-white/60">
                         <div className="flex items-center">
                           <User className="h-4 w-4 mr-1" />
-                          {post.author}
+                          {hit.source}
                         </div>
                         <div className="flex items-center">
                           <Calendar className="h-4 w-4 mr-1" />
-                          {post.date}
+                          {hit.date}
                         </div>
                       </div>
                       <ArrowRight className="h-4 w-4 text-white/40 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
@@ -142,11 +115,11 @@ const Blog = () => {
             ))}
           </div>
 
-          {/* Load More */}
+          {/* More Coverage */}
           <div className="text-center mt-12">
-            <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
-              Load More Articles
-            </Button>
+            <p className="text-white/60 text-sm">
+              More media coverage coming soon as Bakame AI continues to innovate
+            </p>
           </div>
         </div>
       </div>
