@@ -46,6 +46,7 @@ const Index = () => {
           <div className="hidden md:flex space-x-8">
             <a href="/ivr" className="text-muted-foreground hover:text-foreground transition-colors">IVR Demo</a>
             <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
+            <a href="mailto:happy@bakame.org" className="text-muted-foreground hover:text-foreground transition-colors">Contact Us</a>
             <a href="/signup" className="text-muted-foreground hover:text-foreground transition-colors">Sign In</a>
           </div>
         </nav>
