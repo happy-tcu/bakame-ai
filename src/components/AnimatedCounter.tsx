@@ -16,9 +16,18 @@ const AnimatedCounter = ({ end, duration = 5000, className = '' }: AnimatedCount
   const getNumericParts = (value: string) => {
     const match = value.match(/^(\d+(?:\.\d+)?)(.*)/);
     if (match) {
+      let numeric = parseFloat(match[1]);
+      let suffix = match[2];
+      
+      // Convert K to actual thousands
+      if (suffix.includes('K')) {
+        numeric = numeric * 1000;
+        suffix = suffix.replace('K', '');
+      }
+      
       return {
-        numeric: parseFloat(match[1]),
-        suffix: match[2]
+        numeric,
+        suffix
       };
     }
     return { numeric: 0, suffix: value };
@@ -72,9 +81,6 @@ const AnimatedCounter = ({ end, duration = 5000, className = '' }: AnimatedCount
   }, [isVisible, endValue, duration]);
 
   const formatValue = (value: number) => {
-    if (suffix.includes('K')) {
-      return Math.floor(value).toString() + suffix;
-    }
     return Math.floor(value).toString() + suffix;
   };
 
