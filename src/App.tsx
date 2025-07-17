@@ -18,7 +18,6 @@ import EducationSolution from "./pages/EducationSolution";
 import EnterpriseSolution from "./pages/EnterpriseSolution";
 import GovernmentSolution from "./pages/GovernmentSolution";
 import GovernmentDemo from "./pages/GovernmentDemo";
-import ScheduleConsultation from "./pages/ScheduleConsultation";
 import EarlyAccess from "./pages/EarlyAccess";
 
 const queryClient = new QueryClient();
@@ -43,7 +42,6 @@ const App = () => (
             <Route path="/solutions/enterprise" element={<EnterpriseSolution />} />
             <Route path="/solutions/government" element={<GovernmentSolution />} />
             <Route path="/government-demo" element={<GovernmentDemo />} />
-            <Route path="/schedule-consultation" element={<ScheduleConsultation />} />
             <Route path="/early-access" element={<EarlyAccess />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

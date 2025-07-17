@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
@@ -18,7 +19,7 @@ const Index = () => {
   };
 
   const handleScheduleDemo = () => {
-    navigate('/schedule-consultation');
+    window.location.href = 'mailto:happy@bakame.org?subject=Schedule a Demo Request&body=Hello, I would like to schedule a demo of Bakame AI.';
   };
 
   const handleJoinContribution = () => {
@@ -138,7 +139,6 @@ const Index = () => {
                 </p>
               </div>
 
-
               {/* Contribution CTA Button */}
               <div className="text-center">
                 <button onClick={handleJoinContribution} className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 hover:scale-105">
@@ -243,7 +243,7 @@ const Index = () => {
               {/* All Links */}
               <div className="flex flex-wrap gap-4 text-sm">
                 <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
-                <a href="/schedule-consultation" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
+                <a href="mailto:happy@bakame.org" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
                 <a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
                 <a href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms</a>
               </div>
