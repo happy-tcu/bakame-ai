@@ -46,7 +46,7 @@ const Index = () => {
         {/* Hero Section */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-            Bakeme AI<br />
+            Bakame AI<br />
             <TypingAnimation 
               text="f(x)=Access ; m=(offline/ivr)" 
               speed={200}
@@ -56,7 +56,7 @@ const Index = () => {
           </h1>
           
           <p className="text-lg sm:text-xl lg:text-2xl text-white/70 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
-            Revolutionizing communication with offline Interactive Voice Response systems for education, enterprise, and government. Powered by advanced AI that works without internet connectivity.
+            Revolutionising PBL* English education (and IVR powered commmunication) in the Global South.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
@@ -76,10 +76,10 @@ const Index = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Our Solutions
+                Our User-Cases
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Offline-first AI systems that work anywhere, anytime, for any organization
+                Built for learners; But </with multiple applications
               </p>
             </div>
 
@@ -92,7 +92,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-white">Education</h3>
                 <p className="text-white/70">
-                  Offline IVR systems for schools and universities, enabling interactive learning experiences without internet dependency.
+                  Offline IVR systems for schools and universities, enabling interactive language learning experiences without internet dependency.
                 </p>
               </div>
 
@@ -128,10 +128,10 @@ const Index = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Research Initiative
+                The Dataset Problem
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Alongside our main IVR solutions, we're pioneering the collection of Kinyarwanda voice data to create the first comprehensive LLM-ready dataset. Join us in building this groundbreaking resource.
+                At least 500,000 Hours of audio dataset is needed to train a Kinyarwanda-proficient Ai Model. Only 45,000 Hours have been collected, i.e we're 91% short, a gap of 455,000 Hours. Alongside our main IVR solutions, we're building a foundation of Ai that fluents understands and speak low-resource languages like Kinyarwanda.
               </p>
             </div>
 
