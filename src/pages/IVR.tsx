@@ -1,16 +1,14 @@
 import React from 'react';
 import IVRInterface from '@/components/ivr/IVRInterface';
-
 const IVR = () => {
-  return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+  return <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-purple-400/20 to-cyan-400/20"></div>
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }}></div>
+        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+        backgroundSize: '40px 40px'
+      }}></div>
       </div>
 
       {/* Navigation */}
@@ -21,8 +19,8 @@ const IVR = () => {
         <div className="hidden md:flex space-x-8">
           <a href="/" className="text-white/70 hover:text-white transition-colors">Home</a>
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
-          <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
-          <a href="/team" className="text-white/70 hover:text-white transition-colors">Team</a>
+          
+          
         </div>
       </nav>
 
@@ -98,8 +96,6 @@ const IVR = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default IVR;
