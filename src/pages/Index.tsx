@@ -227,7 +227,7 @@ const Index = () => {
           </div>
 
           {/* Footer */}
-          <footer className="container mx-auto px-6 py-8 border-t border-white">
+          <footer className="container mx-auto px-6 py-8 border-t border-white/20">
             {/* Section Title */}
             <h3 className="text-sm font-bold text-foreground mb-4">Resources</h3>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -261,7 +261,7 @@ const Index = () => {
             </div>
 
             {/* Copyright */}
-            <div className="pt-4 mt-4 border-t border-white text-center">
+            <div className="pt-4 mt-4 border-t border-white/20 text-center">
               <p className="text-muted-foreground text-xs">
                 © 2024 Bakame AI. All rights reserved.
               </p>
