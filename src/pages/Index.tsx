@@ -60,7 +60,7 @@ const Index = () => {
             </h1>
             
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
-              Revolutionizing English language education (and IVR-powered communication) in Rwanda.
+              Revolutionizing English language education (and IVR-powered communication) in Rwanda and the Global South.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
