@@ -133,7 +133,7 @@ const Index = () => {
                   The Dataset Problem
                 </h2>
                 <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                  Alongside our main IVR solutions, we're pioneering the collection of Kinyarwanda voice data to create the first comprehensive LLM-ready dataset. Join us in building this groundbreaking resource.
+                  At least 500,000 hours of audio dataset are needed to train an Kinyarwanda-Proficient* AI Model. Only 45,000 hours have been collected. We're 91% short, and need to fill the 455,000 hours - (as soon as yesterday). We are building a foundation of Ai to fluently process and speak low-resource languages.
                 </p>
               </div>
 
