@@ -1,23 +1,24 @@
-
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { SecureAuthForm } from "@/components/auth/SecureAuthForm";
-
 const Signup = () => {
   const navigate = useNavigate();
 
   // Check if user is already logged in
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: {
+          session
+        }
+      } = await supabase.auth.getSession();
       if (session) {
         navigate("/");
       }
     };
     checkAuth();
   }, [navigate]);
-
   const handleAuthSuccess = (isAdmin: boolean) => {
     // Redirect admin users to dashboard, regular users to home
     if (isAdmin) {
@@ -26,9 +27,7 @@ const Signup = () => {
       navigate("/");
     }
   };
-
-  return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+  return <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Background effects similar to main page */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-blue-500/8 via-blue-500/4 to-transparent rounded-full blur-2xl animate-pulse"></div>
@@ -42,8 +41,8 @@ const Signup = () => {
         </a>
         <div className="hidden md:flex space-x-8">
           <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
-          <a href="/resources" className="text-white/70 hover:text-white transition-colors">Resources</a>
-          <a href="/team" className="text-white/70 hover:text-white transition-colors">Team</a>
+          
+          
         </div>
       </nav>
 
@@ -65,17 +64,12 @@ const Signup = () => {
         <div className="text-center mt-8">
           <p className="text-white/60">
             Already have an account?{' '}
-            <button 
-              onClick={() => navigate('/')} 
-              className="text-blue-400 hover:text-blue-300 underline"
-            >
+            <button onClick={() => navigate('/')} className="text-blue-400 hover:text-blue-300 underline">
               Go back to home
             </button>
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Signup;
