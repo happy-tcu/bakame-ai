@@ -1,9 +1,7 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
 import TypingAnimation from "@/components/TypingAnimation";
-
 const Index = () => {
   const [currentProgress] = useState(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -31,9 +29,7 @@ const Index = () => {
     name: "Values and Ventures",
     url: "https://valuesandventures.com/"
   }];
-
-  return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+  return <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Clean black background */}
       <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
         <div className="text-2xl font-bold">Bakame Ai</div>
@@ -48,17 +44,12 @@ const Index = () => {
         {/* Hero Section */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-            Bakame AI<br />
-            <TypingAnimation 
-              text="f(x)=Access ; m=(offline/ivr)" 
-              speed={200}
-              pauseDuration={1500}
-              className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent text-5xl"
-            />
+            Bakeme AI<br />
+            <TypingAnimation text="f(x)=Access ; m=(offline/ivr)" speed={200} pauseDuration={1500} className="bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent text-5xl" />
           </h1>
           
           <p className="text-lg sm:text-xl lg:text-2xl text-white/70 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
-            Revolutionising PBL* English education (and IVR powered commmunication) in the Global South.
+            Revolutionizing communication with offline Interactive Voice Response systems for education, enterprise, and government. Powered by advanced AI that works without internet connectivity.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
@@ -78,10 +69,10 @@ const Index = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Our User-Cases
+                Our Solutions
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Built for learners; But with multiple applications
+                Offline-first AI systems that work anywhere, anytime, for any organization
               </p>
             </div>
 
@@ -94,7 +85,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-white">Education</h3>
                 <p className="text-white/70">
-                  Offline IVR systems for schools and universities, enabling interactive language learning experiences without internet dependency.
+                  Offline IVR systems for schools and universities, enabling interactive learning experiences without internet dependency.
                 </p>
               </div>
 
@@ -130,17 +121,17 @@ const Index = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                The Dataset Problem
+                Research Initiative
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                At least 500,000 Hours of audio dataset is needed to train a Kinyarwanda-proficient Ai Model. Only 45,000 Hours have been collected, i.e we're 91% short, a gap of 455,000 Hours. Alongside our main IVR solutions, we're building a foundation of Ai that fluents understands and speak low-resource languages like Kinyarwanda.
+                Alongside our main IVR solutions, we're pioneering the collection of Kinyarwanda voice data to create the first comprehensive LLM-ready dataset. Join us in building this groundbreaking resource.
               </p>
             </div>
 
             <div className="mb-16">
               <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                 <div className="text-center">
-                  <h3 className="text-2xl font-semibold text-white mb-4">Kinyarwanda Dataset Collection</h3>
+                  
                   <p className="text-white/70 mb-6">
                     We're building the foundation for AI that understands and speaks Kinyarwanda. Be part of this historic initiative.
                   </p>
@@ -177,13 +168,11 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center max-w-4xl mx-auto">
-            {partners.map((partner, index) => (
-              <a key={index} href={partner.url} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6">
+            {partners.map((partner, index) => <a key={index} href={partner.url} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6">
                 <span className="text-white/70 group-hover:text-white text-sm font-medium text-center">
                   {partner.name}
                 </span>
-              </a>
-            ))}
+              </a>)}
           </div>
         </div>
 
@@ -258,8 +247,6 @@ const Index = () => {
       </div>
 
       <VideoModal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} videoId="dQw4w9WgXcQ" />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
