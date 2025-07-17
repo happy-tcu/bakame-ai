@@ -39,11 +39,7 @@ const Signup = () => {
         <a href="/" className="text-2xl font-bold hover:text-blue-400 transition-colors">
           Bakame Ai
         </a>
-        <div className="hidden md:flex space-x-8">
-          <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
-          
-          
-        </div>
+        
       </nav>
 
       {/* Main content */}
