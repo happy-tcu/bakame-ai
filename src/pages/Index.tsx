@@ -22,8 +22,7 @@ const Index = () => {
   };
 
   const handleJoinContribution = () => {
-    // For now, navigate to early access - can be updated when contribution platform is ready
-    navigate('/early-access');
+    navigate('/ivr');
   };
 
   const partners = [{
