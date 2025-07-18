@@ -112,7 +112,7 @@ const Terms = () => {
             Terms of Service
           </h1>
           <p className="text-lg text-muted-foreground">
-            Effective Date: December 2024
+            Effective Date: 2025
           </p>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             These Terms of Service govern your use of Bakame AI's services, including our IVR systems, 
