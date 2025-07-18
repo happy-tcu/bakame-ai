@@ -1,4 +1,3 @@
-
 const Privacy = () => {
   const sections = [
     {
@@ -97,7 +96,7 @@ const Privacy = () => {
             Privacy Policy
           </h1>
           <p className="text-lg text-muted-foreground">
-            Effective Date: December 2024
+            Effective Date: January 2025
           </p>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             This Privacy Policy explains how Bakame AI collects, uses, and protects your information when you use our services.
