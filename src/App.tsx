@@ -12,6 +12,9 @@ import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import Resources from "./pages/Resources";
 import Team from "./pages/Team";
+import Support from "./pages/Support";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/AdminDashboard";
 import EducationSolution from "./pages/EducationSolution";
@@ -37,6 +40,9 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/team" element={<Team />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/solutions/education" element={<EducationSolution />} />
             <Route path="/solutions/enterprise" element={<EnterpriseSolution />} />
