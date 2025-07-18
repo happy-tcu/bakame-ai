@@ -1,3 +1,4 @@
+
 const Terms = () => {
   const sections = [
     {
@@ -155,7 +156,7 @@ const Terms = () => {
           <div className="space-y-2 text-muted-foreground">
             <p><strong>Email:</strong> happy@bakame.org</p>
             <p><strong>Subject Line:</strong> Terms of Service Inquiry</p>
-            <p><strong>Business Hours:</strong> Monday - Friday, 9 AM - 5 PM (Central Africa Time)</p>
+            <p><strong>Business Hours:</strong> Monday - Friday, 9 AM - 5 PM (CDT)</p>
           </div>
         </div>
 
