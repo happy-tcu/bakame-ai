@@ -3,22 +3,30 @@ import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
 import TypingAnimation from "@/components/TypingAnimation";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import EarlyAccessModal from "@/components/EarlyAccessModal";
+
 const Index = () => {
   const [currentProgress] = useState(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
   const navigate = useNavigate();
+
   const handleGetStarted = () => {
-    navigate('/early-access');
+    setIsEarlyAccessModalOpen(true);
   };
+
   const handleWatchDemo = () => {
     setIsVideoModalOpen(true);
   };
+
   const handleScheduleDemo = () => {
     window.location.href = 'mailto:happy@bakame.org?subject=Schedule a Demo Request&body=Hello, I would like to schedule a demo of Bakame AI.';
   };
+
   const handleJoinContribution = () => {
     navigate('/ivr');
   };
+
   const partners = [{
     name: "Institute for Entrepreneurship and Innovation (at TCU)",
     url: "https://www.tcu.edu/business/institute-entrepreneurship-innovation/"
@@ -29,6 +37,7 @@ const Index = () => {
     name: "Values and Ventures",
     url: "https://valuesandventures.com/"
   }];
+
   return <>
       <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
         {/* Clean black background */}
@@ -253,7 +262,9 @@ const Index = () => {
         </div>
 
         <VideoModal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} videoId="dQw4w9WgXcQ" />
+        <EarlyAccessModal isOpen={isEarlyAccessModalOpen} onClose={() => setIsEarlyAccessModalOpen(false)} />
       </div>
     </>;
 };
+
 export default Index;
