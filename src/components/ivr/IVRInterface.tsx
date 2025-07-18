@@ -1,6 +1,7 @@
+
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { Phone, PhoneOff, Mic, MicOff, Volume2, Wifi, WifiOff } from 'lucide-react';
+import { Phone, PhoneOff, Mic, MicOff, Volume2, Wifi, WifiOff, BookOpen, Target, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -9,13 +10,20 @@ interface ConversationMessage {
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
+  type?: 'vocabulary' | 'grammar' | 'conversation' | 'general';
+}
+
+interface LearningStats {
+  wordsLearned: number;
+  conversationTime: number;
+  grammarTopics: number;
 }
 
 interface IVRInterfaceProps {
   className?: string;
 }
 
-// Simplified WebRTC RealtimeChat that works
+// Enhanced RealtimeChat class with learning focus
 class RealtimeChat {
   private pc: RTCPeerConnection | null = null;
   private dc: RTCDataChannel | null = null;
@@ -28,7 +36,7 @@ class RealtimeChat {
 
   async init() {
     try {
-      console.log('Initializing WebRTC connection...');
+      console.log('Initializing English learning session...');
       
       // Get ephemeral token from our edge function
       const response = await fetch('https://wzjorefhpnkjsjciyozh.functions.supabase.co/functions/v1/create-session', {
@@ -43,7 +51,7 @@ class RealtimeChat {
       }
 
       const data = await response.json();
-      console.log('Session response:', data);
+      console.log('English learning session response:', data);
       
       if (!data.client_secret?.value) {
         throw new Error("Failed to get ephemeral token");
@@ -103,13 +111,13 @@ class RealtimeChat {
       };
       
       await this.pc.setRemoteDescription(answer);
-      console.log("WebRTC connection established");
+      console.log("English learning WebRTC connection established");
       
       // Notify connection success
       this.onMessage({ type: 'session.created' });
 
     } catch (error) {
-      console.error("Error initializing chat:", error);
+      console.error("Error initializing English learning chat:", error);
       this.onMessage({ type: 'error', error: error.message });
       throw error;
     }
@@ -139,7 +147,7 @@ class RealtimeChat {
   }
 
   disconnect() {
-    console.log('Disconnecting...');
+    console.log('Disconnecting English learning session...');
     this.dc?.close();
     this.pc?.close();
     if (this.audioEl) {
@@ -156,29 +164,36 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [conversation, setConversation] = useState<ConversationMessage[]>([]);
-  const [connectionStatus, setConnectionStatus] = useState<string>('Disconnected');
+  const [connectionStatus, setConnectionStatus] = useState<string>('Ready to Learn');
+  const [learningStats, setLearningStats] = useState<LearningStats>({
+    wordsLearned: 0,
+    conversationTime: 0,
+    grammarTopics: 0
+  });
 
   // Refs
   const chatRef = useRef<RealtimeChat | null>(null);
   const currentTranscriptRef = useRef<string>('');
+  const sessionStartTime = useRef<Date | null>(null);
 
   const handleMessage = (event: any) => {
     console.log('Received message:', event.type);
     
     switch (event.type) {
       case 'session.created':
-        console.log('Session created');
-        setConnectionStatus('Ready to Talk');
+        console.log('English learning session created');
+        setConnectionStatus('Learning Session Active');
         setIsConnected(true);
+        sessionStartTime.current = new Date();
         break;
 
       case 'input_audio_buffer.speech_started':
-        console.log('Speech started');
+        console.log('Student speaking...');
         setIsRecording(true);
         break;
 
       case 'input_audio_buffer.speech_stopped':
-        console.log('Speech stopped');
+        console.log('Student stopped speaking');
         setIsRecording(false);
         break;
 
@@ -187,8 +202,13 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
         break;
 
       case 'response.audio.done':
-        console.log('Audio response completed');
+        console.log('AI finished speaking');
         setIsSpeaking(false);
+        // Update conversation time
+        if (sessionStartTime.current) {
+          const timeSpent = Math.floor((new Date().getTime() - sessionStartTime.current.getTime()) / 60000);
+          setLearningStats(prev => ({ ...prev, conversationTime: timeSpent }));
+        }
         break;
 
       case 'response.audio_transcript.delta':
@@ -202,9 +222,11 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
           const aiMessage: ConversationMessage = {
             role: 'assistant',
             content: currentTranscriptRef.current,
-            timestamp: new Date()
+            timestamp: new Date(),
+            type: detectMessageType(currentTranscriptRef.current)
           };
           setConversation(prev => [...prev, aiMessage]);
+          updateLearningStats(aiMessage);
           currentTranscriptRef.current = '';
         }
         break;
@@ -232,42 +254,61 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
     }
   };
 
+  const detectMessageType = (content: string): 'vocabulary' | 'grammar' | 'conversation' | 'general' => {
+    const lowerContent = content.toLowerCase();
+    if (lowerContent.includes('word') || lowerContent.includes('vocabulary') || lowerContent.includes('meaning')) {
+      return 'vocabulary';
+    } else if (lowerContent.includes('grammar') || lowerContent.includes('tense') || lowerContent.includes('rule')) {
+      return 'grammar';
+    } else if (lowerContent.includes('practice') || lowerContent.includes('conversation') || lowerContent.includes('interview')) {
+      return 'conversation';
+    }
+    return 'general';
+  };
+
+  const updateLearningStats = (message: ConversationMessage) => {
+    if (message.type === 'vocabulary') {
+      setLearningStats(prev => ({ ...prev, wordsLearned: prev.wordsLearned + 1 }));
+    } else if (message.type === 'grammar') {
+      setLearningStats(prev => ({ ...prev, grammarTopics: prev.grammarTopics + 1 }));
+    }
+  };
+
   const startConnection = async () => {
     try {
-      console.log('Starting real-time conversation...');
+      console.log('Starting English learning session...');
       setConnectionStatus('Connecting...');
       
       chatRef.current = new RealtimeChat(handleMessage);
       await chatRef.current.init();
       
       toast({
-        title: "Connected",
-        description: "Real-time conversation started!",
+        title: "Learning Session Started!",
+        description: "Your English tutor is ready to help you learn!",
       });
     } catch (error) {
-      console.error('Error starting conversation:', error);
+      console.error('Error starting learning session:', error);
       setConnectionStatus('Connection Failed');
       setIsConnected(false);
       toast({
         title: "Connection Error",
-        description: error instanceof Error ? error.message : 'Failed to start conversation',
+        description: error instanceof Error ? error.message : 'Failed to start learning session',
         variant: "destructive",
       });
     }
   };
 
   const endConnection = () => {
-    console.log('Ending connection...');
+    console.log('Ending learning session...');
     chatRef.current?.disconnect();
     setIsConnected(false);
-    setConnectionStatus('Disconnected');
+    setConnectionStatus('Session Ended');
     setIsRecording(false);
     setIsSpeaking(false);
-    setConversation([]);
     
     toast({
-      title: "Disconnected",
-      description: "Conversation ended",
+      title: "Learning Session Complete",
+      description: `Great job! You practiced for ${learningStats.conversationTime} minutes.`,
     });
   };
 
@@ -278,10 +319,10 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   }, []);
 
   const getStatusColor = () => {
-    if (!isConnected) return 'bg-red-500';
-    if (isSpeaking) return 'bg-blue-500 animate-pulse';
-    if (isRecording) return 'bg-green-500 animate-pulse';
-    return 'bg-green-500';
+    if (!isConnected) return 'bg-white';
+    if (isSpeaking) return 'bg-[#0d4dcc] animate-pulse';
+    if (isRecording) return 'bg-[#ff914d] animate-pulse';
+    return 'bg-[#ff914d]';
   };
 
   const getStatusIcon = () => {
@@ -290,9 +331,30 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   };
 
   return (
-    <div className={`max-w-2xl mx-auto ${className}`}>
-      <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+    <div className={`max-w-4xl mx-auto ${className}`}>
+      <Card className="bg-[#081a2e]/80 backdrop-blur-md border-white/20 text-white">
         <CardContent className="p-8">
+          {/* Learning Stats */}
+          {isConnected && (
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="text-center p-3 bg-[#ff914d]/10 rounded-lg border border-[#ff914d]/30">
+                <BookOpen className="w-5 h-5 text-[#ff914d] mx-auto mb-1" />
+                <div className="text-lg font-bold text-[#ff914d]">{learningStats.wordsLearned}</div>
+                <div className="text-xs text-white/70">Words Learned</div>
+              </div>
+              <div className="text-center p-3 bg-[#0d4dcc]/10 rounded-lg border border-[#0d4dcc]/30">
+                <Target className="w-5 h-5 text-[#0d4dcc] mx-auto mb-1" />
+                <div className="text-lg font-bold text-[#0d4dcc]">{learningStats.grammarTopics}</div>
+                <div className="text-xs text-white/70">Grammar Topics</div>
+              </div>
+              <div className="text-center p-3 bg-white/10 rounded-lg border border-white/30">
+                <MessageSquare className="w-5 h-5 text-white mx-auto mb-1" />
+                <div className="text-lg font-bold text-white">{learningStats.conversationTime}</div>
+                <div className="text-xs text-white/70">Minutes Practiced</div>
+              </div>
+            </div>
+          )}
+
           {/* Connection Status */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -309,19 +371,19 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
                 <Button 
                   onClick={startConnection}
                   size="lg"
-                  className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
+                  className="bg-[#ff914d] hover:bg-[#ff914d]/90 text-black px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
                 >
                   <Phone className="w-6 h-6" />
-                  Start Real-time Chat
+                  Start Learning Session
                 </Button>
               ) : (
                 <Button 
                   onClick={endConnection}
                   size="lg"
-                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
+                  className="bg-white hover:bg-white/90 text-black px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
                 >
                   <PhoneOff className="w-6 h-6" />
-                  End Chat
+                  End Session
                 </Button>
               )}
             </div>
@@ -330,14 +392,14 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
           {/* Activity Indicators */}
           {isConnected && (
             <div className="flex justify-center gap-6 mb-6">
-              <div className={`flex items-center gap-2 ${isRecording ? 'text-green-400' : 'text-white/50'}`}>
+              <div className={`flex items-center gap-2 ${isRecording ? 'text-[#ff914d]' : 'text-white/50'}`}>
                 <Mic className={`w-5 h-5 ${isRecording ? 'animate-pulse' : ''}`} />
-                <span className="text-sm">Listening</span>
+                <span className="text-sm">You're Speaking</span>
               </div>
               
-              <div className={`flex items-center gap-2 ${isSpeaking ? 'text-blue-400' : 'text-white/50'}`}>
+              <div className={`flex items-center gap-2 ${isSpeaking ? 'text-[#0d4dcc]' : 'text-white/50'}`}>
                 <Volume2 className={`w-5 h-5 ${isSpeaking ? 'animate-pulse' : ''}`} />
-                <span className="text-sm">AI Speaking</span>
+                <span className="text-sm">AI Teaching</span>
               </div>
             </div>
           )}
@@ -346,8 +408,8 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
           {conversation.length > 0 && (
             <div className="mt-6">
               <h3 className="text-sm font-medium text-white/80 mb-3 flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                Real-time Conversation
+                <div className="w-2 h-2 bg-[#ff914d] rounded-full"></div>
+                Learning Conversation
               </h3>
               <div className="space-y-3 max-h-64 overflow-y-auto">
                 {conversation.slice(-6).map((message, index) => (
@@ -355,16 +417,21 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
                     key={index}
                     className={`p-3 rounded-lg ${
                       message.role === 'user' 
-                        ? 'bg-blue-500/20 border border-blue-500/30 ml-8' 
-                        : 'bg-green-500/20 border border-green-500/30 mr-8'
+                        ? 'bg-[#0d4dcc]/20 border border-[#0d4dcc]/30 ml-8' 
+                        : 'bg-[#ff914d]/20 border border-[#ff914d]/30 mr-8'
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className={`text-xs font-medium ${
-                        message.role === 'user' ? 'text-blue-400' : 'text-green-400'
+                        message.role === 'user' ? 'text-[#0d4dcc]' : 'text-[#ff914d]'
                       }`}>
-                        {message.role === 'user' ? 'You' : 'Bakame AI'}
+                        {message.role === 'user' ? 'You' : 'Bakame AI Tutor'}
                       </span>
+                      {message.type && (
+                        <Badge variant="outline" className="text-xs border-white/30 text-white/70">
+                          {message.type}
+                        </Badge>
+                      )}
                       <span className="text-xs text-white/50">
                         {message.timestamp.toLocaleTimeString()}
                       </span>
