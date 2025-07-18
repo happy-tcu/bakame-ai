@@ -1,7 +1,6 @@
-
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { Phone, PhoneOff, Mic, MicOff, Volume2, Wifi, WifiOff, BookOpen, Target, MessageSquare } from 'lucide-react';
+import { Phone, PhoneOff, Mic, MicOff, Volume2, Wifi, WifiOff, BookOpen, Target, MessageSquare, Trophy, Clock, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -17,6 +16,9 @@ interface LearningStats {
   wordsLearned: number;
   conversationTime: number;
   grammarTopics: number;
+  currentLevel: string;
+  streakDays: number;
+  lessonsCompleted: number;
 }
 
 interface IVRInterfaceProps {
@@ -164,11 +166,14 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [conversation, setConversation] = useState<ConversationMessage[]>([]);
-  const [connectionStatus, setConnectionStatus] = useState<string>('Ready to Learn');
+  const [connectionStatus, setConnectionStatus] = useState<string>('Ready to Learn English');
   const [learningStats, setLearningStats] = useState<LearningStats>({
     wordsLearned: 0,
     conversationTime: 0,
-    grammarTopics: 0
+    grammarTopics: 0,
+    currentLevel: 'Beginner',
+    streakDays: 0,
+    lessonsCompleted: 0
   });
 
   // Refs
@@ -334,23 +339,38 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
     <div className={`max-w-4xl mx-auto ${className}`}>
       <Card className="bg-[#081a2e]/80 backdrop-blur-md border-white/20 text-white">
         <CardContent className="p-8">
-          {/* Learning Stats */}
+          {/* Enhanced Learning Stats */}
           {isConnected && (
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="text-center p-3 bg-[#ff914d]/10 rounded-lg border border-[#ff914d]/30">
-                <BookOpen className="w-5 h-5 text-[#ff914d] mx-auto mb-1" />
-                <div className="text-lg font-bold text-[#ff914d]">{learningStats.wordsLearned}</div>
-                <div className="text-xs text-white/70">Words Learned</div>
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-6">
+              <div className="text-center p-3 bg-gradient-to-br from-[#ff914d]/10 to-[#0d4dcc]/10 rounded-lg border border-white/20">
+                <BookOpen className="w-4 h-4 text-[#ff914d] mx-auto mb-1" />
+                <div className="text-sm font-bold bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent">{learningStats.wordsLearned}</div>
+                <div className="text-xs text-white/70">Words</div>
               </div>
-              <div className="text-center p-3 bg-[#0d4dcc]/10 rounded-lg border border-[#0d4dcc]/30">
-                <Target className="w-5 h-5 text-[#0d4dcc] mx-auto mb-1" />
-                <div className="text-lg font-bold text-[#0d4dcc]">{learningStats.grammarTopics}</div>
-                <div className="text-xs text-white/70">Grammar Topics</div>
+              <div className="text-center p-3 bg-gradient-to-br from-[#0d4dcc]/10 to-[#ff914d]/10 rounded-lg border border-white/20">
+                <Target className="w-4 h-4 text-[#0d4dcc] mx-auto mb-1" />
+                <div className="text-sm font-bold bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent">{learningStats.grammarTopics}</div>
+                <div className="text-xs text-white/70">Grammar</div>
               </div>
-              <div className="text-center p-3 bg-white/10 rounded-lg border border-white/30">
-                <MessageSquare className="w-5 h-5 text-white mx-auto mb-1" />
-                <div className="text-lg font-bold text-white">{learningStats.conversationTime}</div>
-                <div className="text-xs text-white/70">Minutes Practiced</div>
+              <div className="text-center p-3 bg-gradient-to-br from-white/10 to-[#0d4dcc]/10 rounded-lg border border-white/20">
+                <Clock className="w-4 h-4 text-white mx-auto mb-1" />
+                <div className="text-sm font-bold text-white">{learningStats.conversationTime}</div>
+                <div className="text-xs text-white/70">Minutes</div>
+              </div>
+              <div className="text-center p-3 bg-gradient-to-br from-[#ff914d]/10 to-white/10 rounded-lg border border-white/20">
+                <Trophy className="w-4 h-4 text-[#ff914d] mx-auto mb-1" />
+                <div className="text-sm font-bold bg-gradient-to-r from-[#ff914d] to-white bg-clip-text text-transparent">{learningStats.lessonsCompleted}</div>
+                <div className="text-xs text-white/70">Lessons</div>
+              </div>
+              <div className="text-center p-3 bg-gradient-to-br from-[#0d4dcc]/10 to-[#ff914d]/10 rounded-lg border border-white/20">
+                <Star className="w-4 h-4 text-[#0d4dcc] mx-auto mb-1" />
+                <div className="text-sm font-bold bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent">{learningStats.streakDays}</div>
+                <div className="text-xs text-white/70">Streak</div>
+              </div>
+              <div className="text-center p-3 bg-gradient-to-br from-[#ff914d]/10 to-[#0d4dcc]/10 rounded-lg border border-white/20">
+                <MessageSquare className="w-4 h-4 text-white mx-auto mb-1" />
+                <div className="text-sm font-bold text-white">{learningStats.currentLevel}</div>
+                <div className="text-xs text-white/70">Level</div>
               </div>
             </div>
           )}
@@ -360,7 +380,7 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className={`w-3 h-3 rounded-full ${getStatusColor()}`}></div>
               {getStatusIcon()}
-              <Badge variant="outline" className="border-white/30 text-white">
+              <Badge variant="outline" className="border-white/30 text-white bg-gradient-to-r from-[#ff914d]/10 to-[#0d4dcc]/10">
                 {connectionStatus}
               </Badge>
             </div>
@@ -371,7 +391,7 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
                 <Button 
                   onClick={startConnection}
                   size="lg"
-                  className="bg-[#ff914d] hover:bg-[#ff914d]/90 text-black px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105 drop-shadow-[0_0_15px_#0d4dcc] hover:drop-shadow-[0_0_20px_#0d4dcc]"
+                  className="bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] hover:from-[#0d4dcc] hover:to-[#ff914d] text-white px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-500 hover:scale-105 shadow-[0_0_20px_rgba(255,145,77,0.3),0_0_40px_rgba(13,77,204,0.3)] hover:shadow-[0_0_30px_rgba(255,145,77,0.5),0_0_60px_rgba(13,77,204,0.5)]"
                 >
                   <Phone className="w-6 h-6" />
                   Start Learning Session
@@ -408,7 +428,7 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
           {conversation.length > 0 && (
             <div className="mt-6">
               <h3 className="text-sm font-medium text-white/80 mb-3 flex items-center gap-2">
-                <div className="w-2 h-2 bg-[#ff914d] rounded-full"></div>
+                <div className="w-2 h-2 bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] rounded-full"></div>
                 Learning Conversation
               </h3>
               <div className="space-y-3 max-h-64 overflow-y-auto">
@@ -417,18 +437,20 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
                     key={index}
                     className={`p-3 rounded-lg ${
                       message.role === 'user' 
-                        ? 'bg-[#0d4dcc]/20 border border-[#0d4dcc]/30 ml-8' 
-                        : 'bg-[#ff914d]/20 border border-[#ff914d]/30 mr-8'
+                        ? 'bg-gradient-to-r from-[#0d4dcc]/20 to-[#ff914d]/10 border border-[#0d4dcc]/30 ml-8' 
+                        : 'bg-gradient-to-r from-[#ff914d]/20 to-[#0d4dcc]/10 border border-[#ff914d]/30 mr-8'
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className={`text-xs font-medium ${
-                        message.role === 'user' ? 'text-[#0d4dcc]' : 'text-[#ff914d]'
+                        message.role === 'user' 
+                          ? 'bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent' 
+                          : 'bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent'
                       }`}>
                         {message.role === 'user' ? 'You' : 'Bakame AI Tutor'}
                       </span>
                       {message.type && (
-                        <Badge variant="outline" className="text-xs border-white/30 text-white/70">
+                        <Badge variant="outline" className="text-xs border-white/30 text-white/70 bg-gradient-to-r from-[#ff914d]/5 to-[#0d4dcc]/5">
                           {message.type}
                         </Badge>
                       )}

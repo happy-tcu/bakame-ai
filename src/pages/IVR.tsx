@@ -16,7 +16,7 @@ const IVR = () => {
 
       {/* Navigation */}
       <nav className="relative z-20 flex justify-between items-center p-6 md:p-8 backdrop-blur-sm bg-white/5 border-b border-white/10">
-        <a href="/" className="text-2xl font-bold text-[#ff914d] hover:text-white transition-all duration-300 drop-shadow-[0_0_10px_#0d4dcc] hover:drop-shadow-[0_0_15px_#0d4dcc]">
+        <a href="/" className="text-2xl font-bold bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent hover:from-[#0d4dcc] hover:to-[#ff914d] transition-all duration-500">
           Bakame AI
         </a>
         <div className="hidden md:flex space-x-8">
@@ -29,28 +29,28 @@ const IVR = () => {
       <div className="relative z-10 container mx-auto px-6 py-8">
         {/* Header Section */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 mb-4 px-6 py-2 bg-[#ff914d]/10 backdrop-blur-sm rounded-full border border-[#ff914d]/30">
-            <div className="w-2 h-2 bg-[#ff914d] rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium text-[#ff914d]">LIVE ENGLISH TUTOR</span>
+          <div className="inline-flex items-center gap-3 mb-4 px-6 py-2 bg-gradient-to-r from-[#ff914d]/10 to-[#0d4dcc]/10 backdrop-blur-sm rounded-full border border-white/20">
+            <div className="w-2 h-2 bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent">LIVE ENGLISH TUTOR</span>
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Learn English with <span className="text-[#ff914d] drop-shadow-[0_0_8px_#0d4dcc]">Bakame AI</span>
+            Learn English with <span className="bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent">Bakame AI</span>
           </h1>
           
           <p className="text-lg text-white/80 max-w-2xl mx-auto mb-6">
             Your personal English learning assistant. Practice conversation, learn new vocabulary, 
-            and improve your pronunciation through real-time voice interaction in Kinyarwanda and English.
+            and improve your pronunciation through real-time voice interaction.
           </p>
           
           <div className="flex justify-center gap-3 text-sm text-white/60 mb-8 flex-wrap">
-            <span className="px-3 py-1 bg-[#0d4dcc]/20 rounded-lg border border-[#0d4dcc]/30 flex items-center gap-2">
+            <span className="px-3 py-1 bg-gradient-to-r from-[#0d4dcc]/20 to-[#ff914d]/20 rounded-lg border border-white/30 flex items-center gap-2">
               🗣️ Conversation Practice
             </span>
-            <span className="px-3 py-1 bg-[#ff914d]/20 rounded-lg border border-[#ff914d]/30 flex items-center gap-2">
+            <span className="px-3 py-1 bg-gradient-to-r from-[#ff914d]/20 to-[#0d4dcc]/20 rounded-lg border border-white/30 flex items-center gap-2">
               📚 Vocabulary Building
             </span>
-            <span className="px-3 py-1 bg-[#081a2e]/40 rounded-lg border border-white/30 flex items-center gap-2">
+            <span className="px-3 py-1 bg-gradient-to-r from-[#081a2e]/40 to-[#0d4dcc]/20 rounded-lg border border-white/30 flex items-center gap-2">
               🎯 Pronunciation Help
             </span>
           </div>
@@ -68,31 +68,28 @@ const IVR = () => {
           </h3>
           
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="group bg-[#081a2e]/60 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-[#081a2e]/80 transition-all duration-300 hover:border-[#ff914d]/50">
+            <div className="group bg-[#081a2e]/60 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-[#081a2e]/80 transition-all duration-300 hover:border-gradient-to-r hover:from-[#ff914d]/50 hover:to-[#0d4dcc]/50">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-[#ff914d] rounded-full"></div>
-                <span className="text-sm font-medium text-[#ff914d]">Vocabulary</span>
+                <div className="w-2 h-2 bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] rounded-full"></div>
+                <span className="text-sm font-medium bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent">Vocabulary</span>
               </div>
               <p className="text-sm text-white/80">"Teach me business English words"</p>
-              <p className="text-xs text-white/60 mt-1">"Mfasha kwiga amagambo y'ubucuruzi"</p>
             </div>
             
-            <div className="group bg-[#081a2e]/60 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-[#081a2e]/80 transition-all duration-300 hover:border-[#0d4dcc]/50">
+            <div className="group bg-[#081a2e]/60 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-[#081a2e]/80 transition-all duration-300 hover:border-gradient-to-r hover:from-[#0d4dcc]/50 hover:to-[#ff914d]/50">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-[#0d4dcc] rounded-full"></div>
-                <span className="text-sm font-medium text-[#0d4dcc]">Grammar</span>
+                <div className="w-2 h-2 bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] rounded-full"></div>
+                <span className="text-sm font-medium bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent">Grammar</span>
               </div>
               <p className="text-sm text-white/80">"Explain past tense in English"</p>
-              <p className="text-xs text-white/60 mt-1">"Mbabarira ibyahise mu Cyongereza"</p>
             </div>
             
             <div className="group bg-[#081a2e]/60 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-[#081a2e]/80 transition-all duration-300 hover:border-white/50">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="w-2 h-2 bg-gradient-to-r from-white to-[#0d4dcc] rounded-full"></div>
                 <span className="text-sm font-medium text-white">Interview Prep</span>
               </div>
               <p className="text-sm text-white/80">"Help me practice job interview"</p>
-              <p className="text-xs text-white/60 mt-1">"Mfashe kwimenyereza akazi"</p>
             </div>
           </div>
         </div>
