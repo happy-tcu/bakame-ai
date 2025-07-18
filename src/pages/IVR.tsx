@@ -16,7 +16,7 @@ const IVR = () => {
 
       {/* Navigation */}
       <nav className="relative z-20 flex justify-between items-center p-6 md:p-8 backdrop-blur-sm bg-white/5 border-b border-white/10">
-        <a href="/" className="text-2xl font-bold text-[#ff914d] hover:text-white transition-all duration-300">
+        <a href="/" className="text-2xl font-bold text-[#ff914d] hover:text-white transition-all duration-300 drop-shadow-[0_0_10px_#0d4dcc] hover:drop-shadow-[0_0_15px_#0d4dcc]">
           Bakame AI
         </a>
         <div className="hidden md:flex space-x-8">
@@ -35,7 +35,7 @@ const IVR = () => {
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Learn English with <span className="text-[#ff914d]">Bakame AI</span>
+            Learn English with <span className="text-[#ff914d] drop-shadow-[0_0_8px_#0d4dcc]">Bakame AI</span>
           </h1>
           
           <p className="text-lg text-white/80 max-w-2xl mx-auto mb-6">

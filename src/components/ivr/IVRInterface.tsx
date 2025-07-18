@@ -371,7 +371,7 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
                 <Button 
                   onClick={startConnection}
                   size="lg"
-                  className="bg-[#ff914d] hover:bg-[#ff914d]/90 text-black px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
+                  className="bg-[#ff914d] hover:bg-[#ff914d]/90 text-black px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105 drop-shadow-[0_0_15px_#0d4dcc] hover:drop-shadow-[0_0_20px_#0d4dcc]"
                 >
                   <Phone className="w-6 h-6" />
                   Start Learning Session
