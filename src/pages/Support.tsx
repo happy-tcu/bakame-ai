@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Mail, Phone, MessageCircle, Book, Users, Building, Shield } from "lucide-react";
 
@@ -117,7 +116,7 @@ const Support = () => {
           {contactMethods.map((method, index) => (
             <div key={index} className="bg-card/50 backdrop-blur-sm rounded-2xl p-6 border border-border hover:bg-card/80 transition-all duration-300">
               <method.icon className="w-8 h-8 text-accent mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{method.title}</h3>
+              <h3 className="text-xl font-bold text-white mb-2">{method.title}</h3>
               <p className="text-muted-foreground mb-4">{method.description}</p>
               <a 
                 href={method.action}
@@ -132,7 +131,7 @@ const Support = () => {
 
         {/* FAQ Section */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
           <div className="max-w-4xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <div key={index} className="bg-card/30 backdrop-blur-sm rounded-lg border border-border overflow-hidden">
@@ -140,7 +139,7 @@ const Support = () => {
                   onClick={() => toggleFaq(index)}
                   className="w-full flex justify-between items-center p-6 text-left hover:bg-card/50 transition-colors"
                 >
-                  <span className="font-semibold text-lg">{faq.question}</span>
+                  <span className="font-bold text-white text-lg">{faq.question}</span>
                   {openFaq === index ? (
                     <ChevronUp className="w-5 h-5 text-accent flex-shrink-0" />
                   ) : (
@@ -159,12 +158,12 @@ const Support = () => {
 
         {/* Resources Section */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">Resources & Documentation</h2>
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">Resources & Documentation</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {resources.map((resource, index) => (
               <div key={index} className="bg-card/30 backdrop-blur-sm rounded-2xl p-6 border border-border">
                 <resource.icon className="w-8 h-8 text-secondary mb-4" />
-                <h3 className="text-xl font-semibold mb-2">{resource.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-2">{resource.title}</h3>
                 <p className="text-muted-foreground mb-4">{resource.description}</p>
                 <ul className="space-y-2">
                   {resource.items.map((item, itemIndex) => (
@@ -181,7 +180,7 @@ const Support = () => {
         {/* Emergency Contact */}
         <div className="bg-gradient-to-r from-blue-500/10 via-orange-500/10 to-blue-500/10 rounded-2xl p-8 text-center border border-accent/20">
           <Shield className="w-12 h-12 text-accent mx-auto mb-4" />
-          <h3 className="text-2xl font-bold mb-4">Need Immediate Assistance?</h3>
+          <h3 className="text-2xl font-bold text-white mb-4">Need Immediate Assistance?</h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
             For urgent technical issues, security concerns, or critical deployment support, contact our priority support team.
           </p>

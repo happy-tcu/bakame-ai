@@ -1,4 +1,3 @@
-
 const Terms = () => {
   const sections = [
     {
@@ -11,7 +10,7 @@ const Terms = () => {
       ]
     },
     {
-      title: "User Responsibilities",
+      title: "User Responsibilities", 
       content: [
         "You must provide accurate information when registering for our services or contacting us.",
         "You are responsible for maintaining the confidentiality of any account credentials provided to you.",
@@ -123,7 +122,7 @@ const Terms = () => {
 
         {/* Acceptance Notice */}
         <div className="mb-12 p-6 bg-accent/10 backdrop-blur-sm rounded-lg border border-accent/20">
-          <h2 className="text-xl font-semibold mb-3 text-accent">Agreement to Terms</h2>
+          <h2 className="text-xl font-bold text-white mb-3">Agreement to Terms</h2>
           <p className="text-muted-foreground leading-relaxed">
             By accessing or using Bakame AI's services, you agree to be bound by these Terms of Service and our Privacy Policy. 
             If you do not agree to these terms, please do not use our services. These terms apply to all users, 
@@ -135,7 +134,7 @@ const Terms = () => {
         <div className="space-y-8">
           {sections.map((section, index) => (
             <div key={index} className="bg-card/20 backdrop-blur-sm rounded-lg border border-border p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-secondary">{section.title}</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">{section.title}</h2>
               <ul className="space-y-3">
                 {section.content.map((item, itemIndex) => (
                   <li key={itemIndex} className="text-muted-foreground leading-relaxed">
@@ -149,7 +148,7 @@ const Terms = () => {
 
         {/* Contact Information */}
         <div className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 via-orange-500/10 to-blue-500/10 rounded-lg border border-accent/20">
-          <h2 className="text-2xl font-semibold mb-4">Questions About These Terms</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">Questions About These Terms</h2>
           <p className="text-muted-foreground mb-4">
             If you have questions about these Terms of Service or need clarification on any provisions, please contact us:
           </p>

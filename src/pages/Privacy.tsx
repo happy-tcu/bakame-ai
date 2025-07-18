@@ -116,7 +116,7 @@ const Privacy = () => {
         <div className="space-y-8">
           {sections.map((section, index) => (
             <div key={index} className="bg-card/20 backdrop-blur-sm rounded-lg border border-border p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-accent">{section.title}</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">{section.title}</h2>
               <ul className="space-y-3">
                 {section.content.map((item, itemIndex) => (
                   <li key={itemIndex} className="text-muted-foreground leading-relaxed">
@@ -130,7 +130,7 @@ const Privacy = () => {
 
         {/* Contact Information */}
         <div className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 via-orange-500/10 to-blue-500/10 rounded-lg border border-accent/20">
-          <h2 className="text-2xl font-semibold mb-4">Contact Us About Privacy</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">Contact Us About Privacy</h2>
           <p className="text-muted-foreground mb-4">
             If you have questions about this Privacy Policy or want to exercise your privacy rights, please contact us:
           </p>
