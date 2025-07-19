@@ -4,26 +4,32 @@ import VideoModal from "@/components/VideoModal";
 import TypingAnimation from "@/components/TypingAnimation";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import EarlyAccessModal from "@/components/EarlyAccessModal";
+
 const Index = () => {
   const [currentProgress] = useState(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
   const navigate = useNavigate();
+
   const handleGetStarted = () => {
     setIsEarlyAccessModalOpen(true);
   };
+
   const handleWatchDemo = () => {
     setIsVideoModalOpen(true);
   };
+
   const handleScheduleDemo = () => {
     window.location.href = 'mailto:happy@bakame.org?subject=Schedule a Demo Request&body=Hello, I would like to schedule a demo of Bakame AI.';
   };
+
   const handleJoinContribution = () => {
     navigate('/ivr');
   };
+
   const partners = [{
     name: "Institute for Entrepreneurship and Innovation (at TCU)",
-    url: "https://www.tcu.edu/business/institute-entrepreneurship-innovation/"
+    url: "https://www.tcu.edu/academics/programs/entrepreneurship-innovation.php"
   }, {
     name: "Shaddock Seed Fund",
     url: "https://magazine.tcu.edu/fall-2017/shaddock-venture-capital-fund-entrepreneurs-investors/"
@@ -31,6 +37,7 @@ const Index = () => {
     name: "Values and Ventures",
     url: "https://valuesandventures.com/"
   }];
+
   return <>
       <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
         {/* Clean black background */}
@@ -257,4 +264,5 @@ const Index = () => {
       </div>
     </>;
 };
+
 export default Index;
