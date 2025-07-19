@@ -29,7 +29,7 @@ const Index = () => {
 
   const partners = [{
     name: "Institute for Entrepreneurship and Innovation (at TCU)",
-    url: "https://www.tcu.edu/academics/programs/entrepreneurship-innovation.php"
+    url: "https://www.neeley.tcu.edu/centers/institute-for-entrepreneurship-and-innovation/create"
   }, {
     name: "Shaddock Seed Fund",
     url: "https://magazine.tcu.edu/fall-2017/shaddock-venture-capital-fund-entrepreneurs-investors/"
