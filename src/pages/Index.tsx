@@ -112,7 +112,7 @@ const Index = () => {
                   </p>
                 </div>
 
-                <div onClick={() => navigate('/solutions/government')} className="group bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border hover:bg-card/80 transition-all duration-300 hover:scale-105 cursor-pointer">
+                <div className="group bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border hover:bg-card/80 transition-all duration-300 hover:scale-105">
                   <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-accent/30 transition-colors">
                     <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
