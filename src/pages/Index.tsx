@@ -245,7 +245,7 @@ const Index = () => {
 
             {/* Copyright */}
             <div className="pt-4 mt-4 border-t border-white/20 text-center">
-              <p className="text-muted-foreground text-xs">© 20245Bakame AI. All rights reserved.</p>
+              <p className="text-muted-foreground text-xs">© 2025Bakame AI. All rights reserved.</p>
             </div>
           </footer>
         </div>
