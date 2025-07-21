@@ -75,9 +75,7 @@ const Index = () => {
                 <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                   Our User Cases
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                  Built for learns; but with multiple applications: From Education to Corporate Solutions.
-                </p>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Built for learners; but with multiple applications: From Education to Corporate Solutions.</p>
               </div>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
@@ -245,7 +243,7 @@ const Index = () => {
 
             {/* Copyright */}
             <div className="pt-4 mt-4 border-t border-white/20 text-center">
-              <p className="text-muted-foreground text-xs">© 2025Bakame AI. All rights reserved.</p>
+              <p className="text-muted-foreground text-xs">© 2025 Bakame AI. All rights reserved.</p>
             </div>
           </footer>
         </div>
