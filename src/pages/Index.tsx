@@ -185,27 +185,7 @@ const Index = () => {
 
           {/* CTA Section */}
           <div className="container mx-auto px-6 py-20 text-center">
-            <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-sm rounded-3xl p-12 border border-white/10">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Ready to Transform Your Communication?
-              </h2>
-              <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
-                Deploy intelligent IVR systems that work anywhere, anytime. No internet required.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <a href="/ivr" className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                  <span className="flex items-center justify-center">
-                    Try IVR Demo Now
-                    <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
-                </a>
-                <button onClick={handleScheduleDemo} className="group border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
-                  Schedule a Demo
-                </button>
-              </div>
-            </div>
+            
           </div>
 
           {/* Footer */}
