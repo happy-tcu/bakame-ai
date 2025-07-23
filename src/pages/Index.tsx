@@ -1,26 +1,33 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import VideoModal from "@/components/VideoModal";
 import TypingAnimation from "@/components/TypingAnimation";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import EarlyAccessModal from "@/components/EarlyAccessModal";
+
 const Index = () => {
   const [currentProgress] = useState(0);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
   const navigate = useNavigate();
+
   const handleGetStarted = () => {
     setIsEarlyAccessModalOpen(true);
   };
+
   const handleWatchDemo = () => {
     setIsVideoModalOpen(true);
   };
+
   const handleScheduleDemo = () => {
     window.location.href = 'mailto:happy@bakame.org?subject=Schedule a Demo Request&body=Hello, I would like to schedule a demo of Bakame AI.';
   };
+
   const handleJoinContribution = () => {
     navigate('/ivr');
   };
+
   const partners = [{
     name: "Institute for Entrepreneurship and Innovation (at TCU)",
     url: "https://www.neeley.tcu.edu/centers/institute-for-entrepreneurship-and-innovation/create"
@@ -31,54 +38,104 @@ const Index = () => {
     name: "Values and Ventures",
     url: "https://valuesandventures.com/"
   }];
-  return <>
+
+  return (
+    <>
       <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-        {/* Clean black background */}
+        {/* Navigation */}
         <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
-          <div className="text-2xl font-bold">Bakame Ai</div>
+          <div className="text-2xl font-bold">Bakame AI</div>
           <div className="hidden md:flex space-x-8">
+            <a href="/solutions/education" className="text-muted-foreground hover:text-foreground transition-colors">Education</a>
+            <a href="/solutions/enterprise" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</a>
+            <a href="/solutions/government" className="text-muted-foreground hover:text-foreground transition-colors">Government</a>
             <a href="/ivr" className="text-muted-foreground hover:text-foreground transition-colors">IVR Demo</a>
             <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
-            <a href="mailto:happy@bakame.org" className="text-muted-foreground hover:text-foreground transition-colors">Contact Us</a>
-            
+            <a href="mailto:happy@bakame.org" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+          </div>
+          <div className="md:hidden">
+            <button className="text-muted-foreground hover:text-foreground">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
         </nav>
 
         <div className="relative z-10">
           {/* Hero Section */}
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 text-center">
-             <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-foreground via-accent to-secondary bg-clip-text text-transparent">
-              Bakame AI<br />
-              <TypingAnimation text="f(x)=Access ; m=(offline/ivr)" speed={200} pauseDuration={1500} className="bg-gradient-to-r from-accent via-secondary to-accent bg-clip-text text-transparent text-5xl" />
+            <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-foreground via-accent to-secondary bg-clip-text text-transparent">
+              Bakame AI
             </h1>
             
-            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
-              Revolutionizing English language education (and IVR-powered communication) in Rwanda and the Global South.
+            <div className="mb-6">
+              <TypingAnimation 
+                text="AI that works offline. Communication that works everywhere." 
+                speed={100} 
+                pauseDuration={2000} 
+                className="bg-gradient-to-r from-accent via-secondary to-accent bg-clip-text text-transparent text-2xl sm:text-3xl lg:text-4xl font-semibold" 
+              />
+            </div>
+            
+            <p className="text-lg sm:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed">
+              Advanced IVR systems powered by AI that bring communication and learning to everyone, regardless of internet connectivity or infrastructure.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
-              <button onClick={handleGetStarted} className="group bg-gradient-to-r from-accent to-secondary text-primary-foreground px-8 py-4 rounded-full font-semibold text-lg hover:opacity-90 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <button 
+                onClick={handleGetStarted} 
+                className="group bg-gradient-to-r from-accent to-secondary text-primary-foreground px-8 py-4 rounded-full font-semibold text-lg hover:opacity-90 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              >
                 <span className="flex items-center justify-center">
-                  Request Early Access
+                  Get Early Access
                   <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </span>
               </button>
+              <button 
+                onClick={handleWatchDemo} 
+                className="border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-white/50"
+              >
+                Watch Demo
+              </button>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-accent mb-1">24/7</div>
+                <div className="text-sm text-muted-foreground">Always Available</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-secondary mb-1">Offline</div>
+                <div className="text-sm text-muted-foreground">No Internet Needed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-accent mb-1">Multi-Language</div>
+                <div className="text-sm text-muted-foreground">Including Kinyarwanda</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-secondary mb-1">Secure</div>
+                <div className="text-sm text-muted-foreground">Enterprise Grade</div>
+              </div>
             </div>
           </div>
 
-          {/* Main Products Section */}
+          {/* Use Cases Section */}
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                  Our User Cases
+                  Use Cases
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Built for learners; but with multiple applications: From Education to Corporate Solutions.</p>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                  Versatile AI solutions for education, enterprise, and government applications
+                </p>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
+              <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
                 <div className="group bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border hover:bg-card/80 transition-all duration-300 hover:scale-105">
                   <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-accent/30 transition-colors">
                     <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,9 +143,15 @@ const Index = () => {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold mb-4 text-card-foreground">Education</h3>
-                  <p className="text-muted-foreground">
-                    Offline IVR systems for schools and universities, enabling interactive learning experiences without internet dependency.
+                  <p className="text-muted-foreground mb-4">
+                    Interactive English learning through offline IVR systems, perfect for schools and remote learning.
                   </p>
+                  <button 
+                    onClick={() => navigate('/solutions/education')}
+                    className="text-accent hover:text-accent/80 font-semibold transition-colors"
+                  >
+                    Learn More →
+                  </button>
                 </div>
 
                 <div className="group bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border hover:bg-card/80 transition-all duration-300 hover:scale-105">
@@ -98,9 +161,15 @@ const Index = () => {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold mb-4 text-card-foreground">Enterprise</h3>
-                  <p className="text-muted-foreground">
-                    Advanced IVR solutions for businesses, providing customer service automation that works reliably in any environment.
+                  <p className="text-muted-foreground mb-4">
+                    Reliable customer service automation and internal communication systems for businesses.
                   </p>
+                  <button 
+                    onClick={() => navigate('/solutions/enterprise')}
+                    className="text-secondary hover:text-secondary/80 font-semibold transition-colors"
+                  >
+                    Learn More →
+                  </button>
                 </div>
 
                 <div className="group bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border hover:bg-card/80 transition-all duration-300 hover:scale-105">
@@ -110,9 +179,15 @@ const Index = () => {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold mb-4 text-card-foreground">Government</h3>
-                  <p className="text-muted-foreground">
-                    Secure, offline-capable IVR systems for government services, ensuring citizen access regardless of connectivity.
+                  <p className="text-muted-foreground mb-4">
+                    Secure citizen services and information systems that work regardless of infrastructure.
                   </p>
+                  <button 
+                    onClick={() => navigate('/solutions/government')}
+                    className="text-accent hover:text-accent/80 font-semibold transition-colors"
+                  >
+                    Learn More →
+                  </button>
                 </div>
               </div>
             </div>
@@ -123,20 +198,48 @@ const Index = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                  The Dataset Problem
+                  Help Build the Future of AI
                 </h2>
                 <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                  At least 500,000 hours of audio dataset are needed to train an Kinyarwanda-Proficient* AI Model. Only 45,000 hours have been collected. We're 91% short, and need to fill the 455,000 hours - (as soon as yesterday). We are building a foundation of Ai to fluently process and speak low-resource languages.
+                  We need your voice to train AI models that understand and speak Kinyarwanda fluently. Join thousands contributing to this groundbreaking research.
                 </p>
               </div>
 
-              {/* Contribution CTA Button */}
+              <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-12 border border-white/10 mb-12">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <h3 className="text-3xl font-bold mb-6">The Dataset Challenge</h3>
+                    <p className="text-white/70 mb-6">
+                      Training a truly fluent Kinyarwanda AI requires 500,000+ hours of audio data. We've collected 45,000 hours—we need your help to bridge the gap.
+                    </p>
+                    <div className="space-y-4">
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-green-500 rounded-full mr-3"></div>
+                        <span>45,000 hours collected</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-red-500 rounded-full mr-3"></div>
+                        <span>455,000 hours needed</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-6xl font-bold text-red-400 mb-4">91%</div>
+                    <p className="text-white/70">Still needed to reach our goal</p>
+                  </div>
+                </div>
+              </div>
+
               <div className="text-center">
-                <button onClick={handleJoinContribution} className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 hover:scale-105">
-                  Join the Contribution
+                <button 
+                  onClick={handleJoinContribution} 
+                  className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-emerald-600 hover:to-cyan-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                >
+                  Contribute Your Voice
                 </button>
-                
-                <p className="mt-4 text-white/60 text-base max-w-xl mx-auto">Help shape the future of AI in i-Kinyarwanda</p>
+                <p className="mt-4 text-white/60 text-base max-w-xl mx-auto">
+                  Every contribution helps create more inclusive AI technology
+                </p>
               </div>
             </div>
           </div>
@@ -148,16 +251,24 @@ const Index = () => {
                 Our Partners
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Collaborating with leading organizations to advance AI research and offline communication solutions
+                Collaborating with leading organizations to advance AI research and communication solutions
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center max-w-4xl mx-auto">
-              {partners.map((partner, index) => <a key={index} href={partner.url} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6">
+              {partners.map((partner, index) => (
+                <a 
+                  key={index} 
+                  href={partner.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="group flex items-center justify-center h-24 w-full bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm px-6"
+                >
                   <span className="text-white/70 group-hover:text-white text-sm font-medium text-center">
                     {partner.name}
                   </span>
-                </a>)}
+                </a>
+              ))}
             </div>
           </div>
 
@@ -183,17 +294,36 @@ const Index = () => {
             </div>
           </div>
 
-          {/* CTA Section */}
+          {/* Final CTA Section */}
           <div className="container mx-auto px-6 py-20 text-center">
-            
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                Ready to Get Started?
+              </h2>
+              <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
+                Join organizations worldwide already using Bakame AI to transform their communication and learning systems.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  onClick={handleGetStarted} 
+                  className="bg-gradient-to-r from-accent to-secondary text-primary-foreground px-8 py-4 rounded-full font-semibold text-lg hover:opacity-90 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                >
+                  Start Free Trial
+                </button>
+                <button 
+                  onClick={handleScheduleDemo} 
+                  className="border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-white/50"
+                >
+                  Schedule Demo
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Footer */}
           <footer className="container mx-auto px-6 py-8 border-t border-white/20">
-            {/* Section Title */}
             <h3 className="text-sm font-bold text-foreground mb-4">Resources</h3>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-              {/* All Links */}
               <div className="flex flex-wrap gap-4 text-sm">
                 <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
                 <a href="mailto:happy@bakame.org" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
@@ -201,7 +331,6 @@ const Index = () => {
                 <a href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms</a>
               </div>
 
-              {/* Social Links */}
               <div className="flex space-x-3">
                 <a href="https://twitter.com/bakameai" className="text-muted-foreground hover:text-foreground transition-colors">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -221,7 +350,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Copyright */}
             <div className="pt-4 mt-4 border-t border-white/20 text-center">
               <p className="text-muted-foreground text-xs">© 2025 Bakame AI. All rights reserved.</p>
             </div>
@@ -231,6 +359,8 @@ const Index = () => {
         <VideoModal isOpen={isVideoModalOpen} onClose={() => setIsVideoModalOpen(false)} videoId="dQw4w9WgXcQ" />
         <EarlyAccessModal isOpen={isEarlyAccessModalOpen} onClose={() => setIsEarlyAccessModalOpen(false)} />
       </div>
-    </>;
+    </>
+  );
 };
+
 export default Index;
