@@ -1,413 +1,469 @@
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Menu, X, Phone, MessageSquare, Globe, Shield, Zap, Users, ChevronRight, Star, CheckCircle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import EarlyAccessModal from "@/components/EarlyAccessModal";
-import AnimatedCounter from "@/components/AnimatedCounter";
-import TypingAnimation from "@/components/TypingAnimation";
-import FAQ from "@/components/FAQ";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import TypingAnimation from '@/components/TypingAnimation';
+import EarlyAccessModal from '@/components/EarlyAccessModal';
+import VideoModal from '@/components/VideoModal';
+import FAQ from '@/components/FAQ';
 
 const Index = () => {
-  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [email, setEmail] = useState("");
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle newsletter signup
-    console.log("Newsletter signup:", email);
-    setEmail("");
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
+  const openEarlyAccess = () => {
+    setIsEarlyAccessOpen(true);
   };
 
-  const handleNavigation = (path: string) => {
-    navigate(path);
-    closeMobileMenu();
+  const openVideo = () => {
+    setIsVideoOpen(true);
   };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Enhanced space-time background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+              <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <g transform="translate(0,0)">
+            <path d="M0,25 Q25,20 50,25 T100,25" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
+            <path d="M0,50 Q25,45 50,50 T100,50" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.2"/>
+            <path d="M0,75 Q25,70 50,75 T100,75" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
+          </g>
+        </svg>
+        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
       {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 relative z-50">
-        <div className="text-2xl font-bold">Bakame AI</div>
+      <nav className="relative z-50 flex items-center justify-between p-6 md:p-8">
+        <div className="flex items-center space-x-4">
+          <div className="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+            Bakame AI
+          </div>
+          <Badge variant="outline" className="border-green-500/30 text-green-400 text-xs">
+            Beta
+          </Badge>
+        </div>
         
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-8">
-          <button onClick={() => navigate('/about')} className="text-white/70 hover:text-white transition-colors">About</button>
-          <button onClick={() => navigate('/solutions/education')} className="text-white/70 hover:text-white transition-colors">Solutions</button>
-          <button onClick={() => navigate('/ivr')} className="text-white/70 hover:text-white transition-colors">Demo</button>
-          <button onClick={() => navigate('/blog')} className="text-white/70 hover:text-white transition-colors">Blog</button>
-          <button onClick={() => navigate('/team')} className="text-white/70 hover:text-white transition-colors">Team</button>
-          <button onClick={() => navigate('/contact')} className="text-white/70 hover:text-white transition-colors">Contact</button>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button 
-          onClick={toggleMobileMenu}
-          className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
-        >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-
-        {/* Mobile Navigation Menu */}
-        {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-black border-t border-white/10 md:hidden">
-            <div className="flex flex-col space-y-4 p-6">
-              <button onClick={() => handleNavigation('/about')} className="text-white/70 hover:text-white transition-colors text-left">About</button>
-              <button onClick={() => handleNavigation('/solutions/education')} className="text-white/70 hover:text-white transition-colors text-left">Solutions</button>
-              <button onClick={() => handleNavigation('/ivr')} className="text-white/70 hover:text-white transition-colors text-left">Demo</button>
-              <button onClick={() => handleNavigation('/blog')} className="text-white/70 hover:text-white transition-colors text-left">Blog</button>
-              <button onClick={() => handleNavigation('/team')} className="text-white/70 hover:text-white transition-colors text-left">Team</button>
-              <button onClick={() => handleNavigation('/contact')} className="text-white/70 hover:text-white transition-colors text-left">Contact</button>
-              <Button 
-                onClick={() => {
-                  setIsEarlyAccessOpen(true);
-                  closeMobileMenu();
-                }} 
-                className="bg-blue-600 hover:bg-blue-700 text-white mt-4"
-              >
-                Get Early Access
-              </Button>
+        <div className="hidden md:flex items-center space-x-8">
+          <Link to="/" className="text-white hover:text-green-400 transition-colors">Home</Link>
+          <div className="relative group">
+            <button className="flex items-center text-white hover:text-green-400 transition-colors">
+              Solutions <ChevronDown className="ml-1 h-4 w-4" />
+            </button>
+            <div className="absolute top-full left-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-white/10">
+              <Link to="/government-solution" className="block px-4 py-2 text-white hover:bg-white/10 hover:text-green-400 transition-colors">Government</Link>
+              <Link to="/enterprise-solution" className="block px-4 py-2 text-white hover:bg-white/10 hover:text-green-400 transition-colors">Enterprise</Link>
+              <Link to="/education-solution" className="block px-4 py-2 text-white hover:bg-white/10 hover:text-green-400 transition-colors">Education</Link>
             </div>
           </div>
-        )}
+          <Link to="/about" className="text-white hover:text-green-400 transition-colors">About</Link>
+          <Link to="/team" className="text-white hover:text-green-400 transition-colors">Team</Link>
+          <Link to="/contact" className="text-white hover:text-green-400 transition-colors">Contact</Link>
+        </div>
+
+        {/* Mobile menu button */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu} className="text-white hover:text-green-400 transition-colors">
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Desktop CTA */}
+        <div className="hidden md:block">
+          <Button 
+            onClick={openEarlyAccess}
+            className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
+          >
+            Get Early Access
+          </Button>
+        </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-6 py-20 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Transform Communication with <span className="text-blue-400">Offline AI</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto">
-            <TypingAnimation 
-              text="Revolutionize customer service with AI that works without internet. Perfect for rural areas, emergencies, and secure environments."
-              speed={50}
-              pauseDuration={3000}
-            />
-          </p>
-          
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+      {/* Mobile Navigation Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-40 bg-black bg-opacity-95 backdrop-blur-sm">
+          <div className="flex flex-col items-center justify-center h-full space-y-8">
+            <Link to="/" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Home</Link>
+            <div className="text-center">
+              <div className="text-xl text-white mb-4">Solutions</div>
+              <div className="space-y-4">
+                <Link to="/government-solution" onClick={closeMenu} className="block text-white hover:text-green-400 transition-colors">Government</Link>
+                <Link to="/enterprise-solution" onClick={closeMenu} className="block text-white hover:text-green-400 transition-colors">Enterprise</Link>
+                <Link to="/education-solution" onClick={closeMenu} className="block text-white hover:text-green-400 transition-colors">Education</Link>
+              </div>
+            </div>
+            <Link to="/about" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">About</Link>
+            <Link to="/team" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Team</Link>
+            <Link to="/contact" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Contact</Link>
             <Button 
-              onClick={() => setIsEarlyAccessOpen(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
+              onClick={() => {
+                closeMenu();
+                openEarlyAccess();
+              }}
+              className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
             >
               Get Early Access
             </Button>
-            <Button 
-              onClick={() => navigate('/ivr')}
-              variant="outline" 
-              className="border-white/20 text-white hover:bg-white/10 px-8 py-3 text-lg"
-            >
-              Try Live Demo
-            </Button>
-            <Button 
-              onClick={() => navigate('/contact')}
-              variant="ghost" 
-              className="text-white hover:bg-white/10 px-8 py-3 text-lg"
-            >
-              Schedule Demo <ChevronRight className="ml-2 w-4 h-4" />
-            </Button>
-          </div>
-
-          {/* Trust Signals */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-white/60">
-            <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5" />
-              <span>Enterprise Security</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5" />
-              <span>99.9% Uptime</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="w-5 h-5" />
-              <span>1000+ Organizations</span>
-            </div>
           </div>
         </div>
-      </section>
+      )}
 
-      {/* Stats Section */}
-      <section className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <Card className="bg-white/5 border-white/10 text-center">
-            <CardContent className="p-6">
-              <AnimatedCounter end="50K+" className="text-3xl font-bold text-blue-400" />
-              <p className="text-white/80 mt-2">Daily Interactions</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/5 border-white/10 text-center">
-            <CardContent className="p-6">
-              <AnimatedCounter end="99.9%" className="text-3xl font-bold text-green-400" />
-              <p className="text-white/80 mt-2">Accuracy Rate</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/5 border-white/10 text-center">
-            <CardContent className="p-6">
-              <AnimatedCounter end="24/7" className="text-3xl font-bold text-purple-400" />
-              <p className="text-white/80 mt-2">Availability</p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Bakame AI?</h2>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto">
-            Our offline AI technology ensures your communication never stops, regardless of connectivity
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors">
-            <CardContent className="p-6">
-              <Globe className="w-12 h-12 text-blue-400 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Works Anywhere</h3>
-              <p className="text-white/80">Function perfectly in remote areas, underground locations, or during network outages</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors">
-            <CardContent className="p-6">
-              <Shield className="w-12 h-12 text-green-400 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Ultra Secure</h3>
-              <p className="text-white/80">Your data stays on your premises. No cloud dependency means ultimate privacy and security</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors">
-            <CardContent className="p-6">
-              <Zap className="w-12 h-12 text-yellow-400 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Lightning Fast</h3>
-              <p className="text-white/80">Local processing means instant responses without latency or bandwidth limitations</p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Use Cases Section */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Use Cases</h2>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto">
-            See how Bakame AI transforms communication across industries
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors cursor-pointer" onClick={() => navigate('/solutions/government')}>
-            <CardContent className="p-6">
-              <Badge className="mb-4 bg-blue-600">Government</Badge>
-              <h3 className="text-xl font-semibold mb-2">Emergency Services</h3>
-              <p className="text-white/80">Critical communication during disasters when traditional networks fail</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors cursor-pointer" onClick={() => navigate('/solutions/education')}>
-            <CardContent className="p-6">
-              <Badge className="mb-4 bg-green-600">Education</Badge>
-              <h3 className="text-xl font-semibold mb-2">Rural Schools</h3>
-              <p className="text-white/80">Provide AI-powered education tools in areas with limited internet access</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors cursor-pointer" onClick={() => navigate('/solutions/enterprise')}>
-            <CardContent className="p-6">
-              <Badge className="mb-4 bg-purple-600">Enterprise</Badge>
-              <h3 className="text-xl font-semibold mb-2">Customer Service</h3>
-              <p className="text-white/80">24/7 multilingual support that works even during outages</p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Users Say</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <Card className="bg-white/5 border-white/10">
-            <CardContent className="p-6">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-white/80 mb-4">"Bakame AI saved our emergency response system during the hurricane. When all networks went down, we could still communicate with residents."</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-3">
-                  <span className="text-white font-bold">JD</span>
-                </div>
-                <div>
-                  <p className="font-semibold">John Davis</p>
-                  <p className="text-white/60 text-sm">Emergency Coordinator</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/5 border-white/10">
-            <CardContent className="p-6">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-white/80 mb-4">"Our rural school district finally has access to AI-powered learning tools. The offline capability is a game-changer for our remote students."</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center mr-3">
-                  <span className="text-white font-bold">SM</span>
-                </div>
-                <div>
-                  <p className="font-semibold">Sarah Mitchell</p>
-                  <p className="text-white/60 text-sm">School Principal</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/5 border-white/10">
-            <CardContent className="p-6">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-white/80 mb-4">"The security and reliability of offline AI processing gives us confidence to handle sensitive customer data without compromise."</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center mr-3">
-                  <span className="text-white font-bold">MR</span>
-                </div>
-                <div>
-                  <p className="font-semibold">Michael Rodriguez</p>
-                  <p className="text-white/60 text-sm">IT Director</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="container mx-auto px-6 py-20">
-        <FAQ />
-      </section>
-
-      {/* Dataset Contribution Section */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Help Us Build Better AI</h2>
-          <p className="text-white/80 text-lg mb-8">
-            Contribute to our African language dataset and help create more inclusive AI technology. 
-            Your participation helps preserve and digitize African languages for future generations.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <Card className="bg-white/5 border-white/10">
-              <CardContent className="p-6">
-                <Phone className="w-12 h-12 text-blue-400 mb-4 mx-auto" />
-                <h3 className="text-xl font-semibold mb-2">Voice Contributions</h3>
-                <p className="text-white/80">Record speech samples in your native language to improve our voice recognition</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/5 border-white/10">
-              <CardContent className="p-6">
-                <MessageSquare className="w-12 h-12 text-green-400 mb-4 mx-auto" />
-                <h3 className="text-xl font-semibold mb-2">Text Contributions</h3>
-                <p className="text-white/80">Share written content to help train our language models</p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <Button 
-            onClick={() => navigate('/early-access')}
-            className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 text-lg"
-          >
-            Join the Dataset Initiative
-          </Button>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay Updated</h2>
-          <p className="text-white/80 text-lg mb-8">
-            Get the latest updates on offline AI technology and early access opportunities
-          </p>
-          
-          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="bg-white/10 border-white/20 text-white placeholder-white/50"
-              required
-            />
-            <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">
-              Subscribe
-            </Button>
-          </form>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-12">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">Bakame AI</h3>
-              <p className="text-white/80">Revolutionizing communication with offline AI technology</p>
+      {/* Main Content */}
+      <div className="relative z-10">
+        {/* Hero Section */}
+        <section className="container mx-auto px-6 py-20 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
+              Offline AI Voice Solutions for Critical Infrastructure
+            </h1>
+            
+            <div className="text-xl md:text-2xl text-white/80 mb-8 h-16 flex items-center justify-center">
+              <TypingAnimation 
+                text="Secure, reliable, and always available - even when the internet isn't."
+                className="text-white/80"
+              />
             </div>
-            <div>
-              <h4 className="font-semibold mb-4">Solutions</h4>
-              <ul className="space-y-2">
-                <li><button onClick={() => navigate('/solutions/government')} className="text-white/80 hover:text-white transition-colors">Government</button></li>
-                <li><button onClick={() => navigate('/solutions/education')} className="text-white/80 hover:text-white transition-colors">Education</button></li>
-                <li><button onClick={() => navigate('/solutions/enterprise')} className="text-white/80 hover:text-white transition-colors">Enterprise</button></li>
-              </ul>
+            
+            <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto">
+              We're building the next generation of IVR systems that work completely offline, 
+              ensuring your critical services stay operational when connectivity fails.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+              <Button 
+                onClick={openEarlyAccess}
+                className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4"
+              >
+                Join Beta Program
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              
+              <Button 
+                onClick={openVideo}
+                variant="outline" 
+                className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-lg px-8 py-4"
+              >
+                <Play className="mr-2 h-5 w-5" />
+                Watch Demo
+              </Button>
             </div>
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2">
-                <li><button onClick={() => navigate('/about')} className="text-white/80 hover:text-white transition-colors">About</button></li>
-                <li><button onClick={() => navigate('/team')} className="text-white/80 hover:text-white transition-colors">Team</button></li>
-                <li><button onClick={() => navigate('/blog')} className="text-white/80 hover:text-white transition-colors">Blog</button></li>
-                <li><button onClick={() => navigate('/contact')} className="text-white/80 hover:text-white transition-colors">Contact</button></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2">
-                <li><button onClick={() => navigate('/privacy')} className="text-white/80 hover:text-white transition-colors">Privacy Policy</button></li>
-                <li><button onClick={() => navigate('/terms')} className="text-white/80 hover:text-white transition-colors">Terms of Service</button></li>
-              </ul>
+
+            {/* Secondary CTAs */}
+            <div className="flex flex-wrap justify-center gap-4 mb-16">
+              <Link to="/government-demo">
+                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300">
+                  <Shield className="mr-2 h-4 w-4" />
+                  Government Demo
+                </Button>
+              </Link>
+              
+              <Link to="/contact">
+                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Schedule Consultation
+                </Button>
+              </Link>
+              
+              <Link to="/about">
+                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300">
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </div>
-          <div className="border-t border-white/10 mt-8 pt-8 text-center text-white/60">
-            <p>&copy; 2024 Bakame AI. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+        </section>
 
+        {/* Problem Statement */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">
+              When Connectivity Fails, Critical Services Must Continue
+            </h2>
+            <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto">
+              Natural disasters, cyber attacks, and infrastructure failures can disrupt internet connectivity. 
+              Our offline AI ensures your voice systems remain operational when your community needs them most.
+            </p>
+          </div>
+        </section>
+
+        {/* Use Cases */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+              Built for Critical Infrastructure
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Shield className="h-8 w-8 text-blue-400 mb-2" />
+                  <CardTitle className="text-white">Government Services</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Emergency services, citizen support, and public information systems that work even during disasters.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Users className="h-8 w-8 text-green-400 mb-2" />
+                  <CardTitle className="text-white">Healthcare</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Patient support hotlines and appointment systems that remain accessible during network outages.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Zap className="h-8 w-8 text-yellow-400 mb-2" />
+                  <CardTitle className="text-white">Utilities</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Power, water, and telecommunications companies maintaining customer service during outages.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+              Why Choose Offline AI?
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Complete Offline Operation</h3>
+                    <p className="text-white/70">No internet required - your system works independently of external connectivity.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Data Security</h3>
+                    <p className="text-white/70">All processing happens locally - no data leaves your premises.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Disaster Resilience</h3>
+                    <p className="text-white/70">Your systems stay operational during natural disasters and cyber attacks.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Easy Integration</h3>
+                    <p className="text-white/70">Seamlessly integrate with existing phone systems and infrastructure.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">24/7 Availability</h3>
+                    <p className="text-white/70">Always-on service that doesn't depend on cloud connectivity.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Cost Effective</h3>
+                    <p className="text-white/70">Reduce ongoing cloud and connectivity costs with local processing.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+              Early Partner Feedback
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
+                <CardContent className="p-8">
+                  <p className="text-white/80 italic mb-4">
+                    "The offline capability is exactly what we need for our emergency services. 
+                    During the last hurricane, traditional systems failed but this kept working."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold">JD</span>
+                    </div>
+                    <div>
+                      <p className="text-white font-semibold">John Doe</p>
+                      <p className="text-white/60 text-sm">Emergency Services Director</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
+                <CardContent className="p-8">
+                  <p className="text-white/80 italic mb-4">
+                    "Finally, a solution that prioritizes security and reliability. 
+                    Our patients can always reach us, even when the internet is down."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold">SM</span>
+                    </div>
+                    <div>
+                      <p className="text-white font-semibold">Sarah Miller</p>
+                      <p className="text-white/60 text-sm">Healthcare IT Manager</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+              Ready to Build Resilient Communications?
+            </h2>
+            <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
+              Join our beta program and be among the first to deploy offline AI voice solutions 
+              that keep your critical services running when connectivity fails.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                onClick={openEarlyAccess}
+                className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4"
+              >
+                Join Beta Program
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              
+              <Link to="/contact">
+                <Button 
+                  variant="outline" 
+                  className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-lg px-8 py-4"
+                >
+                  <MessageSquare className="mr-2 h-5 w-5" />
+                  Contact Sales
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="container mx-auto px-6 py-20">
+          <FAQ />
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-white/10 bg-white/5 backdrop-blur-sm">
+          <div className="container mx-auto px-6 py-12">
+            <div className="grid md:grid-cols-4 gap-8">
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-4">Company</h3>
+                <ul className="space-y-2">
+                  <li><Link to="/about" className="text-white/70 hover:text-white transition-colors">About</Link></li>
+                  <li><Link to="/team" className="text-white/70 hover:text-white transition-colors">Team</Link></li>
+                  <li><Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-4">Solutions</h3>
+                <ul className="space-y-2">
+                  <li><Link to="/government-solution" className="text-white/70 hover:text-white transition-colors">Government</Link></li>
+                  <li><Link to="/enterprise-solution" className="text-white/70 hover:text-white transition-colors">Enterprise</Link></li>
+                  <li><Link to="/education-solution" className="text-white/70 hover:text-white transition-colors">Education</Link></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-4">Support</h3>
+                <ul className="space-y-2">
+                  <li><Link to="/support" className="text-white/70 hover:text-white transition-colors">Help Center</Link></li>
+                  <li><Link to="/government-demo" className="text-white/70 hover:text-white transition-colors">Demo</Link></li>
+                  <li><Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact Support</Link></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-4">Legal</h3>
+                <ul className="space-y-2">
+                  <li><Link to="/privacy" className="text-white/70 hover:text-white transition-colors">Privacy Policy</Link></li>
+                  <li><Link to="/terms" className="text-white/70 hover:text-white transition-colors">Terms of Service</Link></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="border-t border-white/10 pt-8 mt-8 text-center">
+              <p className="text-white/60">
+                © 2024 Bakame AI. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+
+      {/* Modals */}
       <EarlyAccessModal 
         isOpen={isEarlyAccessOpen} 
         onClose={() => setIsEarlyAccessOpen(false)} 
+      />
+      
+      <VideoModal 
+        isOpen={isVideoOpen} 
+        onClose={() => setIsVideoOpen(false)} 
       />
     </div>
   );
