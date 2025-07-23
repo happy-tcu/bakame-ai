@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 
 interface EarlyAccessModalProps {
   isOpen: boolean;
@@ -19,13 +20,12 @@ const EarlyAccessModal = ({ isOpen, onClose }: EarlyAccessModalProps) => {
   const { toast } = useToast();
   const { trackEvent } = useAnalytics();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     email: '',
     name: '',
     company: '',
-    companySize: '',
     productUse: '',
-    industry: '',
     additionalInfo: ''
   });
 
@@ -40,7 +40,7 @@ const EarlyAccessModal = ({ isOpen, onClose }: EarlyAccessModalProps) => {
           email: formData.email,
           name: formData.name,
           company: formData.company,
-          solution_interest: `${formData.productUse} | ${formData.industry} | ${formData.companySize} | ${formData.additionalInfo}`
+          solution_interest: `${formData.productUse} | ${formData.additionalInfo}`
         }]);
 
       if (error) {
@@ -53,25 +53,23 @@ const EarlyAccessModal = ({ isOpen, onClose }: EarlyAccessModalProps) => {
       } else {
         trackEvent('early_access_request', { 
           product_use: formData.productUse,
-          industry: formData.industry,
-          company_size: formData.companySize
-        });
-        toast({
-          title: "Request Submitted!",
-          description: "Thank you for your interest! We'll be in touch soon with early access details.",
+          company: formData.company
         });
         
-        // Reset form and close modal
-        setFormData({
-          email: '',
-          name: '',
-          company: '',
-          companySize: '',
-          productUse: '',
-          industry: '',
-          additionalInfo: ''
-        });
-        onClose();
+        setStep(3); // Success step
+        
+        // Reset form after a delay
+        setTimeout(() => {
+          setFormData({
+            email: '',
+            name: '',
+            company: '',
+            productUse: '',
+            additionalInfo: ''
+          });
+          setStep(1);
+          onClose();
+        }, 3000);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -89,126 +87,156 @@ const EarlyAccessModal = ({ isOpen, onClose }: EarlyAccessModalProps) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const canProceedToStep2 = formData.email && formData.name && formData.company;
+  const canSubmit = canProceedToStep2 && formData.productUse;
+
+  if (step === 3) {
+    return (
+      <Dialog open={isOpen} onOpenChange={onClose}>
+        <DialogContent className="max-w-md">
+          <div className="text-center py-6">
+            <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
+            <p className="text-gray-600 mb-4">
+              Your request has been submitted successfully. We'll be in touch soon with early access details.
+            </p>
+            <div className="text-sm text-gray-500">
+              This window will close automatically...
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Request Early Access</DialogTitle>
           <DialogDescription>
-            Be among the first to experience the future of offline AI communication
+            Join the waitlist to be among the first to experience offline AI technology
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="name">Full Name *</Label>
-              <Input
-                id="name"
-                value={formData.name}
-                onChange={(e) => handleInputChange("name", e.target.value)}
-                placeholder="Your full name"
-                required
-              />
+        {/* Progress Indicator */}
+        <div className="flex items-center justify-center mb-6">
+          <div className="flex items-center space-x-4">
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+              step >= 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
+            }`}>
+              1
             </div>
-            <div>
-              <Label htmlFor="email">Email Address *</Label>
-              <Input
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-                placeholder="your@email.com"
-                required
-              />
+            <div className={`w-8 h-1 ${step >= 2 ? 'bg-blue-600' : 'bg-gray-200'}`}></div>
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+              step >= 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
+            }`}>
+              2
             </div>
           </div>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="company">Company/Organization *</Label>
-              <Input
-                id="company"
-                value={formData.company}
-                onChange={(e) => handleInputChange("company", e.target.value)}
-                placeholder="Your organization"
-                required
-              />
-            </div>
-            <div>
-              <Label>Company Size</Label>
-              <Select value={formData.companySize} onValueChange={(value) => handleInputChange("companySize", value)}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select company size" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1-10">1-10 employees</SelectItem>
-                  <SelectItem value="11-50">11-50 employees</SelectItem>
-                  <SelectItem value="51-200">51-200 employees</SelectItem>
-                  <SelectItem value="201-1000">201-1000 employees</SelectItem>
-                  <SelectItem value="1000+">1000+ employees</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {step === 1 && (
+            <>
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="name">Full Name *</Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    placeholder="Your full name"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="email">Email Address *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    placeholder="your@email.com"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="company">Company/Organization *</Label>
+                  <Input
+                    id="company"
+                    value={formData.company}
+                    onChange={(e) => handleInputChange("company", e.target.value)}
+                    placeholder="Your organization"
+                    required
+                  />
+                </div>
+              </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <Label>Primary Product Use *</Label>
-              <Select value={formData.productUse} onValueChange={(value) => handleInputChange("productUse", value)}>
-                <SelectTrigger>
-                  <SelectValue placeholder="How will you use our product?" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="customer-service">Customer Service</SelectItem>
-                  <SelectItem value="education">Education & Training</SelectItem>
-                  <SelectItem value="government-services">Government Services</SelectItem>
-                  <SelectItem value="healthcare">Healthcare</SelectItem>
-                  <SelectItem value="multilingual-support">Multilingual Support</SelectItem>
-                  <SelectItem value="emergency-services">Emergency Services</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label>Industry</Label>
-              <Select value={formData.industry} onValueChange={(value) => handleInputChange("industry", value)}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select your industry" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="technology">Technology</SelectItem>
-                  <SelectItem value="education">Education</SelectItem>
-                  <SelectItem value="government">Government</SelectItem>
-                  <SelectItem value="healthcare">Healthcare</SelectItem>
-                  <SelectItem value="finance">Finance</SelectItem>
-                  <SelectItem value="retail">Retail</SelectItem>
-                  <SelectItem value="manufacturing">Manufacturing</SelectItem>
-                  <SelectItem value="telecommunications">Telecommunications</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+              <div className="flex justify-end">
+                <Button
+                  type="button"
+                  onClick={() => setStep(2)}
+                  disabled={!canProceedToStep2}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  Next <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </div>
+            </>
+          )}
 
-          <div>
-            <Label htmlFor="additionalInfo">Additional Information</Label>
-            <Textarea
-              id="additionalInfo"
-              value={formData.additionalInfo}
-              onChange={(e) => handleInputChange("additionalInfo", e.target.value)}
-              placeholder="Tell us more about your specific needs or use case..."
-              className="min-h-[80px]"
-            />
-          </div>
+          {step === 2 && (
+            <>
+              <div className="space-y-4">
+                <div>
+                  <Label>Primary Use Case *</Label>
+                  <Select value={formData.productUse} onValueChange={(value) => handleInputChange("productUse", value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="How will you use our product?" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="customer-service">Customer Service</SelectItem>
+                      <SelectItem value="education">Education & Training</SelectItem>
+                      <SelectItem value="government-services">Government Services</SelectItem>
+                      <SelectItem value="healthcare">Healthcare Communication</SelectItem>
+                      <SelectItem value="emergency-services">Emergency Services</SelectItem>
+                      <SelectItem value="multilingual-support">Multilingual Support</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-          <Button
-            type="submit"
-            disabled={isSubmitting || !formData.email || !formData.name || !formData.company || !formData.productUse}
-            className="w-full"
-          >
-            {isSubmitting ? "Submitting..." : "Request Early Access"}
-          </Button>
+                <div>
+                  <Label htmlFor="additionalInfo">Tell us more about your needs</Label>
+                  <Textarea
+                    id="additionalInfo"
+                    value={formData.additionalInfo}
+                    onChange={(e) => handleInputChange("additionalInfo", e.target.value)}
+                    placeholder="What specific challenges are you hoping to solve? What's your timeline?"
+                    className="min-h-[80px]"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-between">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setStep(1)}
+                >
+                  Back
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting || !canSubmit}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  {isSubmitting ? "Submitting..." : "Request Early Access"}
+                </Button>
+              </div>
+            </>
+          )}
         </form>
       </DialogContent>
     </Dialog>

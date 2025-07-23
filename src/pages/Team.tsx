@@ -1,184 +1,249 @@
 
-import { useState } from "react";
-import { Users, Mail, Linkedin, Github, Twitter } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft, Linkedin, Twitter, Mail } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const Team = () => {
-  const [hoveredMember, setHoveredMember] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const teamMembers = [
     {
-      id: "founder",
-      name: "Founder & CEO",
-      role: "Leading AI Innovation",
-      bio: "Passionate about building AI solutions that work for everyone, everywhere.",
-      email: "happy@bakame.org",
+      name: "Dr. Amina Kone",
+      role: "CEO & Co-Founder",
+      bio: "Former AI researcher at MIT with 15 years of experience in natural language processing. Passionate about making AI accessible to underserved communities.",
+      image: "AK",
       linkedin: "#",
       twitter: "#",
-      github: "#"
+      email: "amina@bakame.ai"
     },
     {
-      id: "cto",
-      name: "Chief Technology Officer",
-      role: "Engineering Excellence",
-      bio: "Expert in offline-first technologies and scalable AI systems.",
-      email: "tech@bakame.org",
+      name: "David Okafor",
+      role: "CTO & Co-Founder",
+      bio: "Ex-Google engineer specializing in distributed systems and offline-first architecture. Expert in building scalable AI infrastructure.",
+      image: "DO",
       linkedin: "#",
       twitter: "#",
-      github: "#"
+      email: "david@bakame.ai"
     },
     {
-      id: "research",
-      name: "Head of Research",
-      role: "AI & Language Models",
-      bio: "Specializing in low-resource language processing and speech recognition.",
-      email: "research@bakame.org",
+      name: "Sarah Chen",
+      role: "Head of Product",
+      bio: "Product leader with 10+ years at Microsoft and Dropbox. Focused on creating intuitive AI experiences for diverse global audiences.",
+      image: "SC",
       linkedin: "#",
       twitter: "#",
-      github: "#"
+      email: "sarah@bakame.ai"
+    },
+    {
+      name: "Marcus Johnson",
+      role: "Head of Engineering",
+      bio: "Full-stack engineer with expertise in AI/ML systems. Previously led teams at Spotify and built scalable voice recognition systems.",
+      image: "MJ",
+      linkedin: "#",
+      twitter: "#",
+      email: "marcus@bakame.ai"
+    },
+    {
+      name: "Dr. Fatima Al-Rashid",
+      role: "Chief AI Officer",
+      bio: "PhD in Computational Linguistics from Stanford. Specializes in multilingual AI models and cross-cultural communication systems.",
+      image: "FA",
+      linkedin: "#",
+      twitter: "#",
+      email: "fatima@bakame.ai"
+    },
+    {
+      name: "James Mwangi",
+      role: "Head of Business Development",
+      bio: "Former McKinsey consultant with deep expertise in African markets. Leads partnerships with governments and NGOs across the continent.",
+      image: "JM",
+      linkedin: "#",
+      twitter: "#",
+      email: "james@bakame.ai"
     }
   ];
 
-  const values = [
+  const advisors = [
     {
-      icon: Users,
-      title: "Inclusive Innovation",
-      description: "We believe technology should work for everyone, regardless of location or infrastructure."
+      name: "Prof. Kwame Asante",
+      role: "Advisor - AI Ethics",
+      bio: "Professor of Computer Science at University of Ghana. Leading expert in ethical AI and digital inclusion in Africa.",
+      image: "KA"
     },
     {
-      icon: Mail,
-      title: "Open Communication",
-      description: "Transparency and collaboration are at the heart of everything we do."
+      name: "Maria Rodriguez",
+      role: "Advisor - International Markets",
+      bio: "Former VP of International at WhatsApp. Specialist in scaling communication platforms across emerging markets.",
+      image: "MR"
     },
     {
-      icon: Users,
-      title: "Global Impact",
-      description: "Our work focuses on creating solutions that can transform communities worldwide."
+      name: "Dr. John Smith",
+      role: "Technical Advisor",
+      bio: "Former Chief Scientist at IBM Watson. Pioneer in offline AI processing and edge computing technologies.",
+      image: "JS"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="relative z-20 flex justify-between items-center p-6 md:p-8">
-        <a href="/" className="text-2xl font-bold">Bakame AI</a>
+      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10">
+        <div className="flex items-center space-x-4">
+          <button 
+            onClick={() => navigate('/')}
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div className="text-2xl font-bold">Bakame AI</div>
+        </div>
         <div className="hidden md:flex space-x-8">
-          <a href="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</a>
-          <a href="/solutions/education" className="text-muted-foreground hover:text-foreground transition-colors">Solutions</a>
-          <a href="/ivr" className="text-muted-foreground hover:text-foreground transition-colors">IVR Demo</a>
-          <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
-          <a href="mailto:happy@bakame.org" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+          <button onClick={() => navigate('/about')} className="text-white/70 hover:text-white transition-colors">About</button>
+          <button onClick={() => navigate('/solutions/education')} className="text-white/70 hover:text-white transition-colors">Solutions</button>
+          <button onClick={() => navigate('/contact')} className="text-white/70 hover:text-white transition-colors">Contact</button>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <div className="container mx-auto px-6 py-20 text-center">
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-          Meet Our Team
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
-          We're a diverse group of innovators, engineers, and researchers united by a shared mission to make AI communication accessible worldwide.
-        </p>
-      </div>
-
-      {/* Team Members */}
       <div className="container mx-auto px-6 py-20">
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {teamMembers.map((member) => (
-            <div
-              key={member.id}
-              className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border hover:bg-card/80 transition-all duration-300 hover:scale-105 group"
-              onMouseEnter={() => setHoveredMember(member.id)}
-              onMouseLeave={() => setHoveredMember(null)}
-            >
-              <div className="w-20 h-20 bg-gradient-to-br from-accent to-secondary rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              
-              <h3 className="text-xl font-semibold mb-2 text-center">{member.name}</h3>
-              <p className="text-accent text-center mb-4">{member.role}</p>
-              <p className="text-muted-foreground text-center mb-6">{member.bio}</p>
-              
-              <div className="flex justify-center space-x-4">
-                <a href={`mailto:${member.email}`} className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Mail className="w-5 h-5" />
-                </a>
-                <a href={member.linkedin} className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a href={member.twitter} className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Twitter className="w-5 h-5" />
-                </a>
-                <a href={member.github} className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Github className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Company Values */}
-      <div className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-            Our Values
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            The principles that guide our work and shape our vision for the future of AI communication.
+        {/* Hero Section */}
+        <section className="text-center mb-20">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">Meet Our Team</h1>
+          <p className="text-xl md:text-2xl text-white/80 max-w-4xl mx-auto">
+            We're a diverse group of engineers, researchers, and innovators united by a 
+            common mission: making AI accessible to everyone, everywhere.
           </p>
-        </div>
+        </section>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {values.map((value, index) => (
-            <div key={index} className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border hover:bg-card/80 transition-all duration-300 hover:scale-105 group text-center">
-              <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:bg-accent/30 transition-colors">
-                <value.icon className="w-6 h-6 text-accent" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4">{value.title}</h3>
-              <p className="text-muted-foreground">{value.description}</p>
+        {/* Core Team */}
+        <section className="mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Leadership Team</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {teamMembers.map((member, index) => (
+              <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors">
+                <CardContent className="p-6">
+                  <div className="text-center mb-4">
+                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-white font-bold text-lg">{member.image}</span>
+                    </div>
+                    <h3 className="text-xl font-bold mb-1">{member.name}</h3>
+                    <p className="text-blue-400 font-medium mb-3">{member.role}</p>
+                  </div>
+                  <p className="text-white/80 text-sm mb-4">{member.bio}</p>
+                  <div className="flex justify-center space-x-3">
+                    <a href={member.linkedin} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                    <a href={member.twitter} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                      <Twitter className="w-4 h-4" />
+                    </a>
+                    <a href={`mailto:${member.email}`} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                      <Mail className="w-4 h-4" />
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Advisors */}
+        <section className="mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Advisory Board</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {advisors.map((advisor, index) => (
+              <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors">
+                <CardContent className="p-6">
+                  <div className="text-center mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-white font-bold">{advisor.image}</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-1">{advisor.name}</h3>
+                    <p className="text-green-400 font-medium mb-3">{advisor.role}</p>
+                  </div>
+                  <p className="text-white/80 text-sm">{advisor.bio}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Company Culture */}
+        <section className="mb-20">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Culture</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <Card className="bg-white/5 border-white/10">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-4">Diversity & Inclusion</h3>
+                  <p className="text-white/80">
+                    We believe diverse perspectives lead to better solutions. Our team spans 
+                    multiple continents, cultures, and backgrounds, bringing unique insights 
+                    to every challenge.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-4">Innovation First</h3>
+                  <p className="text-white/80">
+                    We encourage experimentation and bold thinking. Our team has the freedom 
+                    to explore new ideas and push the boundaries of what's possible with AI.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-4">Impact Driven</h3>
+                  <p className="text-white/80">
+                    Every decision we make is guided by our mission to democratize AI. 
+                    We measure success not just by revenue, but by the lives we impact.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-4">Remote First</h3>
+                  <p className="text-white/80">
+                    We practice what we preach about accessibility. Our distributed team 
+                    works from locations worldwide, connected by our shared mission.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </section>
 
-      {/* Join Us Section */}
-      <div className="container mx-auto px-6 py-20">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-card/50 backdrop-blur-sm rounded-3xl p-12 border border-border">
-            <h2 className="text-3xl font-bold mb-6">Join Our Mission</h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              We're always looking for talented individuals who share our passion for creating accessible AI solutions. If you're interested in joining our team, we'd love to hear from you.
+        {/* Join Us */}
+        <section className="text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Our Mission</h2>
+            <p className="text-white/80 text-lg mb-8">
+              We're always looking for talented individuals who share our passion for 
+              making AI accessible to everyone. If you're excited about solving complex 
+              challenges and creating global impact, we'd love to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="mailto:careers@bakame.org" 
-                className="bg-gradient-to-r from-accent to-secondary text-primary-foreground px-8 py-4 rounded-full font-semibold text-lg hover:opacity-90 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              <Button 
+                onClick={() => navigate('/contact')}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
               >
                 View Open Positions
-              </a>
-              <a 
-                href="mailto:happy@bakame.org" 
-                className="border border-border text-foreground px-8 py-4 rounded-full font-semibold text-lg hover:bg-card/50 transition-all duration-300 hover:scale-105"
+              </Button>
+              <Button 
+                onClick={() => navigate('/contact')}
+                variant="outline"
+                className="border-white/20 text-white hover:bg-white/10 px-8 py-3 text-lg"
               >
-                Send Us Your Resume
-              </a>
+                Get in Touch
+              </Button>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-
-      {/* Footer */}
-      <footer className="container mx-auto px-6 py-8 border-t border-border">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-wrap gap-4 text-sm">
-            <a href="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</a>
-            <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
-            <a href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
-            <a href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms</a>
-          </div>
-          <p className="text-muted-foreground text-xs">© 2025 Bakame AI. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 };
