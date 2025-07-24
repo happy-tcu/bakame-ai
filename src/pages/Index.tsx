@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -69,9 +68,10 @@ const Index = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-white hover:text-green-400 transition-colors">Home</Link>
+          <Link to="/ivr" className="text-white hover:text-green-400 transition-colors">Try English Learning</Link>
           <div className="relative group">
             <button className="flex items-center text-white hover:text-green-400 transition-colors">
-              Solutions <ChevronDown className="ml-1 h-4 w-4" />
+              Use Cases <ChevronDown className="ml-1 h-4 w-4" />
             </button>
             <div className="absolute top-full left-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-white/10">
               <Link to="/government-solution" className="block px-4 py-2 text-white hover:bg-white/10 hover:text-green-400 transition-colors">Government</Link>
@@ -93,12 +93,11 @@ const Index = () => {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Button 
-            onClick={openEarlyAccess}
-            className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
-          >
-            Get Early Access
-          </Button>
+          <Link to="/ivr">
+            <Button className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105">
+              Try English Learning
+            </Button>
+          </Link>
         </div>
       </nav>
 
@@ -107,8 +106,9 @@ const Index = () => {
         <div className="md:hidden fixed inset-0 z-40 bg-black bg-opacity-95 backdrop-blur-sm">
           <div className="flex flex-col items-center justify-center h-full space-y-8">
             <Link to="/" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Home</Link>
+            <Link to="/ivr" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Try English Learning</Link>
             <div className="text-center">
-              <div className="text-xl text-white mb-4">Solutions</div>
+              <div className="text-xl text-white mb-4">Use Cases</div>
               <div className="space-y-4">
                 <Link to="/government-solution" onClick={closeMenu} className="block text-white hover:text-green-400 transition-colors">Government</Link>
                 <Link to="/enterprise-solution" onClick={closeMenu} className="block text-white hover:text-green-400 transition-colors">Enterprise</Link>
@@ -118,15 +118,11 @@ const Index = () => {
             <Link to="/about" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">About</Link>
             <Link to="/team" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Team</Link>
             <Link to="/contact" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Contact</Link>
-            <Button 
-              onClick={() => {
-                closeMenu();
-                openEarlyAccess();
-              }}
-              className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
-            >
-              Get Early Access
-            </Button>
+            <Link to="/ivr" onClick={closeMenu}>
+              <Button className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105">
+                Try English Learning
+              </Button>
+            </Link>
           </div>
         </div>
       )}
@@ -137,30 +133,30 @@ const Index = () => {
         <section className="container mx-auto px-6 py-20 text-center">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
-              Offline AI Voice Solutions for Critical Infrastructure
+              Learn English with AI Voice Tutor
             </h1>
             
             <div className="text-xl md:text-2xl text-white/80 mb-8 h-16 flex items-center justify-center">
               <TypingAnimation 
-                text="Building reliable voice systems that work when the internet doesn't."
+                text="Your personal English tutor powered by AI - practice speaking, learn vocabulary, and improve pronunciation."
                 className="text-white/80"
               />
             </div>
             
             <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto">
-              We're developing the next generation of IVR systems that work completely offline, 
-              ensuring your critical services stay operational when connectivity fails.
+              Bakame AI is an English learning platform that helps you practice conversation, 
+              build vocabulary, and improve pronunciation through real-time voice interaction. 
+              Perfect for learners who want to speak English confidently.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Button 
-                onClick={openEarlyAccess}
-                className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4"
-              >
-                Join Beta Program
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/ivr">
+                <Button className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
+                  <GraduationCap className="mr-2 h-5 w-5" />
+                  Start Learning English
+                </Button>
+              </Link>
               
               <Button 
                 onClick={openVideo}
@@ -172,50 +168,91 @@ const Index = () => {
               </Button>
             </div>
 
-            {/* Secondary CTAs */}
+            {/* Learning Features */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <Link to="/government-demo">
-                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300">
-                  <Shield className="mr-2 h-4 w-4" />
-                  Government Demo
-                </Button>
-              </Link>
+              <div className="px-4 py-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg border border-white/30 flex items-center gap-2">
+                <Languages className="h-4 w-4 text-green-400" />
+                <span className="text-white/80">Conversation Practice</span>
+              </div>
               
-              <Link to="/contact">
-                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Schedule Consultation
-                </Button>
-              </Link>
+              <div className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-green-500/20 rounded-lg border border-white/30 flex items-center gap-2">
+                <BookOpen className="h-4 w-4 text-blue-400" />
+                <span className="text-white/80">Vocabulary Building</span>
+              </div>
               
-              <Link to="/about">
-                <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300">
-                  <BookOpen className="mr-2 h-4 w-4" />
-                  Learn More
-                </Button>
-              </Link>
+              <div className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg border border-white/30 flex items-center gap-2">
+                <Headphones className="h-4 w-4 text-purple-400" />
+                <span className="text-white/80">Pronunciation Help</span>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Problem Statement */}
+        {/* Why Learn English with AI */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">
-              When Connectivity Fails, Critical Services Must Continue
+              Why Learn English with Bakame AI?
             </h2>
             <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto">
-              Natural disasters, cyber attacks, and infrastructure failures can disrupt internet connectivity. 
-              Our offline AI ensures your voice systems remain operational when your community needs them most.
+              Traditional language learning can be expensive and time-consuming. 
+              Our AI tutor is available 24/7 to help you practice English at your own pace.
             </p>
           </div>
         </section>
 
-        {/* Use Cases */}
+        {/* Learning Methods */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
-              Built for Critical Infrastructure
+              How You'll Learn English
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Languages className="h-8 w-8 text-green-400 mb-2" />
+                  <CardTitle className="text-white">Conversation Practice</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Practice real conversations with AI. Discuss topics, ask questions, and get instant feedback on your speaking.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <BookOpen className="h-8 w-8 text-blue-400 mb-2" />
+                  <CardTitle className="text-white">Vocabulary Building</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Learn new words in context with explanations in both English and Kinyarwanda for better understanding.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Headphones className="h-8 w-8 text-purple-400 mb-2" />
+                  <CardTitle className="text-white">Pronunciation Help</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Get help with difficult sounds, stress patterns, and intonation to speak English more naturally.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Other Use Cases */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+              Our Voice AI Technology Powers More Than Learning
             </h2>
             
             <div className="grid md:grid-cols-3 gap-8">
@@ -226,7 +263,7 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-white/70">
-                    Emergency services, citizen support, and public information systems that work even during disasters.
+                    Emergency services, citizen support, and public information systems that work even during network outages.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -238,7 +275,7 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-white/70">
-                    Patient support hotlines and appointment systems that remain accessible during network outages.
+                    Patient support hotlines and appointment systems that remain accessible during network issues.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -246,11 +283,11 @@ const Index = () => {
               <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
                 <CardHeader>
                   <Zap className="h-8 w-8 text-yellow-400 mb-2" />
-                  <CardTitle className="text-white">Utilities</CardTitle>
+                  <CardTitle className="text-white">Enterprise</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-white/70">
-                    Power, water, and telecommunications companies maintaining customer service during outages.
+                    Customer service and internal communication systems that work reliably without internet dependency.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -262,7 +299,7 @@ const Index = () => {
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
-              Why Choose Offline AI?
+              Why Choose Bakame AI for English Learning?
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8">
@@ -270,24 +307,24 @@ const Index = () => {
                 <div className="flex items-start space-x-4">
                   <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Complete Offline Operation</h3>
-                    <p className="text-white/70">No internet required - your system works independently of external connectivity.</p>
+                    <h3 className="text-xl font-semibold text-white mb-2">Available 24/7</h3>
+                    <p className="text-white/70">Practice English anytime, anywhere. Your AI tutor never sleeps.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
                   <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Data Security</h3>
-                    <p className="text-white/70">All processing happens locally - no data leaves your premises.</p>
+                    <h3 className="text-xl font-semibold text-white mb-2">Personalized Learning</h3>
+                    <p className="text-white/70">Adapted to your level and learning pace, with support in Kinyarwanda when needed.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
                   <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Disaster Resilience</h3>
-                    <p className="text-white/70">Your systems stay operational during natural disasters and cyber attacks.</p>
+                    <h3 className="text-xl font-semibold text-white mb-2">Real Voice Interaction</h3>
+                    <p className="text-white/70">Practice speaking and listening with natural voice conversations, not just text.</p>
                   </div>
                 </div>
               </div>
@@ -296,24 +333,24 @@ const Index = () => {
                 <div className="flex items-start space-x-4">
                   <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Easy Integration</h3>
-                    <p className="text-white/70">Seamlessly integrate with existing phone systems and infrastructure.</p>
+                    <h3 className="text-xl font-semibold text-white mb-2">Instant Feedback</h3>
+                    <p className="text-white/70">Get immediate corrections and suggestions to improve your English quickly.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
                   <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">24/7 Availability</h3>
-                    <p className="text-white/70">Always-on service that doesn't depend on cloud connectivity.</p>
+                    <h3 className="text-xl font-semibold text-white mb-2">Practical Focus</h3>
+                    <p className="text-white/70">Learn English for real-world situations like job interviews, business meetings, and daily conversations.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
                   <CheckCircle className="h-6 w-6 text-green-400 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">Cost Effective</h3>
-                    <p className="text-white/70">Reduce ongoing cloud and connectivity costs with local processing.</p>
+                    <h3 className="text-xl font-semibold text-white mb-2">Culturally Aware</h3>
+                    <p className="text-white/70">Designed specifically for Rwandan learners with cultural context and local examples.</p>
                   </div>
                 </div>
               </div>
@@ -321,19 +358,19 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Testimonials */}
+        {/* User Testimonials */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
-              Early Partner Feedback
+              What Early Users Are Saying
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
                 <CardContent className="p-8">
                   <p className="text-white/80 italic mb-4">
-                    "The offline capability is exactly what we need for our emergency services. 
-                    We're excited to be part of the beta program."
+                    "This AI tutor is patient and helps me practice English conversations. 
+                    I'm excited to improve my speaking skills!"
                   </p>
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
@@ -341,7 +378,7 @@ const Index = () => {
                     </div>
                     <div>
                       <p className="text-white font-semibold">Alex M.</p>
-                      <p className="text-white/60 text-sm">Emergency Services Director</p>
+                      <p className="text-white/60 text-sm">University Student</p>
                     </div>
                   </div>
                 </CardContent>
@@ -350,8 +387,8 @@ const Index = () => {
               <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
                 <CardContent className="p-8">
                   <p className="text-white/80 italic mb-4">
-                    "Finally, a solution that prioritizes security and reliability. 
-                    Looking forward to testing this with our team."
+                    "Finally, a way to practice English speaking without feeling embarrassed. 
+                    The AI understands my accent and helps me improve."
                   </p>
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
@@ -359,7 +396,7 @@ const Index = () => {
                     </div>
                     <div>
                       <p className="text-white font-semibold">Sarah M.</p>
-                      <p className="text-white/60 text-sm">Healthcare IT Manager</p>
+                      <p className="text-white/60 text-sm">Business Professional</p>
                     </div>
                   </div>
                 </CardContent>
@@ -372,21 +409,20 @@ const Index = () => {
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              Ready to Build Resilient Communications?
+              Ready to Start Learning English?
             </h2>
             <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-              Join our beta program and be among the first to test offline AI voice solutions 
-              that keep your critical services running when connectivity fails.
+              Join thousands of learners who are improving their English speaking skills 
+              with our AI-powered voice tutor. Start your journey today.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button 
-                onClick={openEarlyAccess}
-                className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4"
-              >
-                Join Beta Program
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/ivr">
+                <Button className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
+                  <GraduationCap className="mr-2 h-5 w-5" />
+                  Try English Learning Now
+                </Button>
+              </Link>
               
               <Link to="/contact">
                 <Button 
@@ -420,20 +456,20 @@ const Index = () => {
               </div>
               
               <div>
-                <h3 className="text-lg font-semibold text-white mb-4">Solutions</h3>
+                <h3 className="text-lg font-semibold text-white mb-4">Learning</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/government-solution" className="text-white/70 hover:text-white transition-colors">Government</Link></li>
-                  <li><Link to="/enterprise-solution" className="text-white/70 hover:text-white transition-colors">Enterprise</Link></li>
-                  <li><Link to="/education-solution" className="text-white/70 hover:text-white transition-colors">Education</Link></li>
+                  <li><Link to="/ivr" className="text-white/70 hover:text-white transition-colors">Try English Learning</Link></li>
+                  <li><Link to="/support" className="text-white/70 hover:text-white transition-colors">Help Center</Link></li>
+                  <li><Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact Support</Link></li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="text-lg font-semibold text-white mb-4">Support</h3>
+                <h3 className="text-lg font-semibold text-white mb-4">Use Cases</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/support" className="text-white/70 hover:text-white transition-colors">Help Center</Link></li>
-                  <li><Link to="/government-demo" className="text-white/70 hover:text-white transition-colors">Demo</Link></li>
-                  <li><Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact Support</Link></li>
+                  <li><Link to="/government-solution" className="text-white/70 hover:text-white transition-colors">Government</Link></li>
+                  <li><Link to="/enterprise-solution" className="text-white/70 hover:text-white transition-colors">Enterprise</Link></li>
+                  <li><Link to="/education-solution" className="text-white/70 hover:text-white transition-colors">Education</Link></li>
                 </ul>
               </div>
               
