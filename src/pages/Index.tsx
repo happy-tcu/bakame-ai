@@ -142,13 +142,13 @@ const Index = () => {
             
             <div className="text-xl md:text-2xl text-white/80 mb-8 h-16 flex items-center justify-center">
               <TypingAnimation 
-                text="Secure, reliable, and always available - even when the internet isn't."
+                text="Building reliable voice systems that work when the internet doesn't."
                 className="text-white/80"
               />
             </div>
             
             <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto">
-              We're building the next generation of IVR systems that work completely offline, 
+              We're developing the next generation of IVR systems that work completely offline, 
               ensuring your critical services stay operational when connectivity fails.
             </p>
 
@@ -333,14 +333,14 @@ const Index = () => {
                 <CardContent className="p-8">
                   <p className="text-white/80 italic mb-4">
                     "The offline capability is exactly what we need for our emergency services. 
-                    During the last hurricane, traditional systems failed but this kept working."
+                    We're excited to be part of the beta program."
                   </p>
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold">JD</span>
+                      <span className="text-white font-bold">AM</span>
                     </div>
                     <div>
-                      <p className="text-white font-semibold">John Doe</p>
+                      <p className="text-white font-semibold">Alex M.</p>
                       <p className="text-white/60 text-sm">Emergency Services Director</p>
                     </div>
                   </div>
@@ -351,14 +351,14 @@ const Index = () => {
                 <CardContent className="p-8">
                   <p className="text-white/80 italic mb-4">
                     "Finally, a solution that prioritizes security and reliability. 
-                    Our patients can always reach us, even when the internet is down."
+                    Looking forward to testing this with our team."
                   </p>
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
                       <span className="text-white font-bold">SM</span>
                     </div>
                     <div>
-                      <p className="text-white font-semibold">Sarah Miller</p>
+                      <p className="text-white font-semibold">Sarah M.</p>
                       <p className="text-white/60 text-sm">Healthcare IT Manager</p>
                     </div>
                   </div>
@@ -375,7 +375,7 @@ const Index = () => {
               Ready to Build Resilient Communications?
             </h2>
             <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-              Join our beta program and be among the first to deploy offline AI voice solutions 
+              Join our beta program and be among the first to test offline AI voice solutions 
               that keep your critical services running when connectivity fails.
             </p>
             
@@ -394,7 +394,7 @@ const Index = () => {
                   className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-lg px-8 py-4"
                 >
                   <MessageSquare className="mr-2 h-5 w-5" />
-                  Contact Sales
+                  Contact Us
                 </Button>
               </Link>
             </div>
@@ -463,7 +463,8 @@ const Index = () => {
       
       <VideoModal 
         isOpen={isVideoOpen} 
-        onClose={() => setIsVideoOpen(false)} 
+        onClose={() => setIsVideoOpen(false)}
+        videoId="dQw4w9WgXcQ"
       />
     </div>
   );
