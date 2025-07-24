@@ -33,7 +33,13 @@ const IVRAnalyticsDashboard: React.FC = () => {
         totalSessions: sessions.length,
         activeUsers: new Set(sessions.map(s => s.user_id).filter(Boolean)).size,
         averageSessionDuration: sessions.reduce((acc, s) => acc + (s.duration_seconds || 0), 0) / sessions.length || 0,
-        totalMessages: sessions.reduce((acc, s) => acc + (s.conversation_history?.length || 0), 0),
+        totalMessages: sessions.reduce((acc, s) => {
+          const history = s.conversation_history;
+          if (Array.isArray(history)) {
+            return acc + history.length;
+          }
+          return acc;
+        }, 0),
         topLearningTopics: extractTopics(sessions),
         sessionsByMode: groupSessionsByMode(sessions)
       };
@@ -55,9 +61,10 @@ const IVRAnalyticsDashboard: React.FC = () => {
   const extractTopics = (sessions: any[]) => {
     const topics: { [key: string]: number } = {};
     sessions.forEach(session => {
-      if (session.conversation_history) {
-        session.conversation_history.forEach((msg: any) => {
-          if (msg.type) {
+      const history = session.conversation_history;
+      if (Array.isArray(history)) {
+        history.forEach((msg: any) => {
+          if (msg && typeof msg === 'object' && msg.type) {
             topics[msg.type] = (topics[msg.type] || 0) + 1;
           }
         });

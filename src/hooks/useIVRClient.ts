@@ -1,6 +1,7 @@
 
 import { useState, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { RealtimeChat } from '@/utils/RealtimeChat';
 
 export type IVRMode = 'webrtc' | 'websocket' | 'http';
 
@@ -23,7 +24,7 @@ export const useIVRClient = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
-  const rtcRef = useRef<any>(null);
+  const rtcRef = useRef<RealtimeChat | null>(null);
 
   const generateSessionId = () => `ivr_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
@@ -56,10 +57,7 @@ export const useIVRClient = () => {
   }, []);
 
   const startWebRTCSession = async (sessionId: string) => {
-    // Import the RealtimeChat class from existing implementation
-    const { RealtimeChat } = await import('@/components/ivr/IVRInterface');
-    
-    const rtcClient = new (RealtimeChat as any)((event: any) => {
+    const rtcClient = new RealtimeChat((event: any) => {
       handleRealtimeMessage(event);
     });
 
