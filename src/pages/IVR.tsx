@@ -1,6 +1,6 @@
 
 import React from 'react';
-import UnifiedIVRInterface from '@/components/ivr/UnifiedIVRInterface';
+import IVRInterface from '@/components/ivr/IVRInterface';
 
 const IVR = () => {
   return (
@@ -27,7 +27,7 @@ const IVR = () => {
 
       {/* Main content */}
       <div className="relative z-10">
-        <UnifiedIVRInterface />
+        <IVRInterface />
       </div>
     </div>
   );

@@ -1,9 +1,12 @@
+
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { Phone, PhoneOff, Mic, MicOff, Volume2, Wifi, WifiOff, BookOpen, Target, MessageSquare, Trophy, Clock, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { useDevinIntegration } from '@/hooks/useDevinIntegration';
+import DevinIntegrationPanel from './DevinIntegrationPanel';
 
 interface ConversationMessage {
   role: 'user' | 'assistant';
@@ -160,6 +163,7 @@ class RealtimeChat {
 
 const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   const { toast } = useToast();
+  const { devinSession, syncConversationToDevin } = useDevinIntegration();
   
   // Core state
   const [isConnected, setIsConnected] = useState(false);
@@ -230,7 +234,14 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
             timestamp: new Date(),
             type: detectMessageType(currentTranscriptRef.current)
           };
-          setConversation(prev => [...prev, aiMessage]);
+          setConversation(prev => {
+            const newConversation = [...prev, aiMessage];
+            // Sync to Devin if connected
+            if (devinSession?.status === 'connected') {
+              syncConversationToDevin(newConversation);
+            }
+            return newConversation;
+          });
           updateLearningStats(aiMessage);
           currentTranscriptRef.current = '';
         }
@@ -243,7 +254,14 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
             content: event.transcript,
             timestamp: new Date()
           };
-          setConversation(prev => [...prev, userMessage]);
+          setConversation(prev => {
+            const newConversation = [...prev, userMessage];
+            // Sync to Devin if connected
+            if (devinSession?.status === 'connected') {
+              syncConversationToDevin(newConversation);
+            }
+            return newConversation;
+          });
         }
         break;
 
@@ -336,136 +354,149 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
   };
 
   return (
-    <div className={`max-w-4xl mx-auto ${className}`}>
-      <Card className="bg-[#081a2e]/80 backdrop-blur-md border-white/20 text-white">
-        <CardContent className="p-8">
-          {/* Enhanced Learning Stats */}
-          {isConnected && (
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-6">
-              <div className="text-center p-3 bg-gradient-to-br from-[#ff914d]/10 to-[#0d4dcc]/10 rounded-lg border border-white/20">
-                <BookOpen className="w-4 h-4 text-[#ff914d] mx-auto mb-1" />
-                <div className="text-sm font-bold bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent">{learningStats.wordsLearned}</div>
-                <div className="text-xs text-white/70">Words</div>
+    <div className={`max-w-6xl mx-auto ${className} grid grid-cols-1 lg:grid-cols-3 gap-6 p-6`}>
+      {/* Main IVR Interface */}
+      <div className="lg:col-span-2">
+        <Card className="bg-[#081a2e]/80 backdrop-blur-md border-white/20 text-white">
+          <CardContent className="p-8">
+            {/* Enhanced Learning Stats */}
+            {isConnected && (
+              <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-6">
+                <div className="text-center p-3 bg-gradient-to-br from-[#ff914d]/10 to-[#0d4dcc]/10 rounded-lg border border-white/20">
+                  <BookOpen className="w-4 h-4 text-[#ff914d] mx-auto mb-1" />
+                  <div className="text-sm font-bold bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent">{learningStats.wordsLearned}</div>
+                  <div className="text-xs text-white/70">Words</div>
+                </div>
+                <div className="text-center p-3 bg-gradient-to-br from-[#0d4dcc]/10 to-[#ff914d]/10 rounded-lg border border-white/20">
+                  <Target className="w-4 h-4 text-[#0d4dcc] mx-auto mb-1" />
+                  <div className="text-sm font-bold bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent">{learningStats.grammarTopics}</div>
+                  <div className="text-xs text-white/70">Grammar</div>
+                </div>
+                <div className="text-center p-3 bg-gradient-to-br from-white/10 to-[#0d4dcc]/10 rounded-lg border border-white/20">
+                  <Clock className="w-4 h-4 text-white mx-auto mb-1" />
+                  <div className="text-sm font-bold text-white">{learningStats.conversationTime}</div>
+                  <div className="text-xs text-white/70">Minutes</div>
+                </div>
+                <div className="text-center p-3 bg-gradient-to-br from-[#ff914d]/10 to-white/10 rounded-lg border border-white/20">
+                  <Trophy className="w-4 h-4 text-[#ff914d] mx-auto mb-1" />
+                  <div className="text-sm font-bold bg-gradient-to-r from-[#ff914d] to-white bg-clip-text text-transparent">{learningStats.lessonsCompleted}</div>
+                  <div className="text-xs text-white/70">Lessons</div>
+                </div>
+                <div className="text-center p-3 bg-gradient-to-br from-[#0d4dcc]/10 to-[#ff914d]/10 rounded-lg border border-white/20">
+                  <Star className="w-4 h-4 text-[#0d4dcc] mx-auto mb-1" />
+                  <div className="text-sm font-bold bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent">{learningStats.streakDays}</div>
+                  <div className="text-xs text-white/70">Streak</div>
+                </div>
+                <div className="text-center p-3 bg-gradient-to-br from-[#ff914d]/10 to-[#0d4dcc]/10 rounded-lg border border-white/20">
+                  <MessageSquare className="w-4 h-4 text-white mx-auto mb-1" />
+                  <div className="text-sm font-bold text-white">{learningStats.currentLevel}</div>
+                  <div className="text-xs text-white/70">Level</div>
+                </div>
               </div>
-              <div className="text-center p-3 bg-gradient-to-br from-[#0d4dcc]/10 to-[#ff914d]/10 rounded-lg border border-white/20">
-                <Target className="w-4 h-4 text-[#0d4dcc] mx-auto mb-1" />
-                <div className="text-sm font-bold bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent">{learningStats.grammarTopics}</div>
-                <div className="text-xs text-white/70">Grammar</div>
-              </div>
-              <div className="text-center p-3 bg-gradient-to-br from-white/10 to-[#0d4dcc]/10 rounded-lg border border-white/20">
-                <Clock className="w-4 h-4 text-white mx-auto mb-1" />
-                <div className="text-sm font-bold text-white">{learningStats.conversationTime}</div>
-                <div className="text-xs text-white/70">Minutes</div>
-              </div>
-              <div className="text-center p-3 bg-gradient-to-br from-[#ff914d]/10 to-white/10 rounded-lg border border-white/20">
-                <Trophy className="w-4 h-4 text-[#ff914d] mx-auto mb-1" />
-                <div className="text-sm font-bold bg-gradient-to-r from-[#ff914d] to-white bg-clip-text text-transparent">{learningStats.lessonsCompleted}</div>
-                <div className="text-xs text-white/70">Lessons</div>
-              </div>
-              <div className="text-center p-3 bg-gradient-to-br from-[#0d4dcc]/10 to-[#ff914d]/10 rounded-lg border border-white/20">
-                <Star className="w-4 h-4 text-[#0d4dcc] mx-auto mb-1" />
-                <div className="text-sm font-bold bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent">{learningStats.streakDays}</div>
-                <div className="text-xs text-white/70">Streak</div>
-              </div>
-              <div className="text-center p-3 bg-gradient-to-br from-[#ff914d]/10 to-[#0d4dcc]/10 rounded-lg border border-white/20">
-                <MessageSquare className="w-4 h-4 text-white mx-auto mb-1" />
-                <div className="text-sm font-bold text-white">{learningStats.currentLevel}</div>
-                <div className="text-xs text-white/70">Level</div>
-              </div>
-            </div>
-          )}
+            )}
 
-          {/* Connection Status */}
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className={`w-3 h-3 rounded-full ${getStatusColor()}`}></div>
-              {getStatusIcon()}
-              <Badge variant="outline" className="border-white/30 text-white bg-gradient-to-r from-[#ff914d]/10 to-[#0d4dcc]/10">
-                {connectionStatus}
-              </Badge>
-            </div>
-            
-            {/* Main Call Button */}
-            <div className="flex justify-center gap-4">
-              {!isConnected ? (
-                <Button 
-                  onClick={startConnection}
-                  size="lg"
-                  className="bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] hover:from-[#0d4dcc] hover:to-[#ff914d] text-white px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-500 hover:scale-105 shadow-[0_0_20px_rgba(255,145,77,0.3),0_0_40px_rgba(13,77,204,0.3)] hover:shadow-[0_0_30px_rgba(255,145,77,0.5),0_0_60px_rgba(13,77,204,0.5)]"
-                >
-                  <Phone className="w-6 h-6" />
-                  Start Learning Session
-                </Button>
-              ) : (
-                <Button 
-                  onClick={endConnection}
-                  size="lg"
-                  className="bg-white hover:bg-white/90 text-black px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
-                >
-                  <PhoneOff className="w-6 h-6" />
-                  End Session
-                </Button>
-              )}
-            </div>
-          </div>
-
-          {/* Activity Indicators */}
-          {isConnected && (
-            <div className="flex justify-center gap-6 mb-6">
-              <div className={`flex items-center gap-2 ${isRecording ? 'text-[#ff914d]' : 'text-white/50'}`}>
-                <Mic className={`w-5 h-5 ${isRecording ? 'animate-pulse' : ''}`} />
-                <span className="text-sm">You're Speaking</span>
+            {/* Connection Status */}
+            <div className="text-center mb-8">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className={`w-3 h-3 rounded-full ${getStatusColor()}`}></div>
+                {getStatusIcon()}
+                <Badge variant="outline" className="border-white/30 text-white bg-gradient-to-r from-[#ff914d]/10 to-[#0d4dcc]/10">
+                  {connectionStatus}
+                </Badge>
+                {devinSession?.status === 'connected' && (
+                  <Badge className="bg-green-500 text-white">
+                    Devin Connected
+                  </Badge>
+                )}
               </div>
               
-              <div className={`flex items-center gap-2 ${isSpeaking ? 'text-[#0d4dcc]' : 'text-white/50'}`}>
-                <Volume2 className={`w-5 h-5 ${isSpeaking ? 'animate-pulse' : ''}`} />
-                <span className="text-sm">AI Teaching</span>
-              </div>
-            </div>
-          )}
-
-          {/* Conversation History */}
-          {conversation.length > 0 && (
-            <div className="mt-6">
-              <h3 className="text-sm font-medium text-white/80 mb-3 flex items-center gap-2">
-                <div className="w-2 h-2 bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] rounded-full"></div>
-                Learning Conversation
-              </h3>
-              <div className="space-y-3 max-h-64 overflow-y-auto">
-                {conversation.slice(-6).map((message, index) => (
-                  <div
-                    key={index}
-                    className={`p-3 rounded-lg ${
-                      message.role === 'user' 
-                        ? 'bg-gradient-to-r from-[#0d4dcc]/20 to-[#ff914d]/10 border border-[#0d4dcc]/30 ml-8' 
-                        : 'bg-gradient-to-r from-[#ff914d]/20 to-[#0d4dcc]/10 border border-[#ff914d]/30 mr-8'
-                    }`}
+              {/* Main Call Button */}
+              <div className="flex justify-center gap-4">
+                {!isConnected ? (
+                  <Button 
+                    onClick={startConnection}
+                    size="lg"
+                    className="bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] hover:from-[#0d4dcc] hover:to-[#ff914d] text-white px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-500 hover:scale-105 shadow-[0_0_20px_rgba(255,145,77,0.3),0_0_40px_rgba(13,77,204,0.3)] hover:shadow-[0_0_30px_rgba(255,145,77,0.5),0_0_60px_rgba(13,77,204,0.5)]"
                   >
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className={`text-xs font-medium ${
-                        message.role === 'user' 
-                          ? 'bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent' 
-                          : 'bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent'
-                      }`}>
-                        {message.role === 'user' ? 'You' : 'Bakame AI Tutor'}
-                      </span>
-                      {message.type && (
-                        <Badge variant="outline" className="text-xs border-white/30 text-white/70 bg-gradient-to-r from-[#ff914d]/5 to-[#0d4dcc]/5">
-                          {message.type}
-                        </Badge>
-                      )}
-                      <span className="text-xs text-white/50">
-                        {message.timestamp.toLocaleTimeString()}
-                      </span>
-                    </div>
-                    <p className="text-sm text-white/90">{message.content}</p>
-                  </div>
-                ))}
+                    <Phone className="w-6 h-6" />
+                    Start Learning Session
+                  </Button>
+                ) : (
+                  <Button 
+                    onClick={endConnection}
+                    size="lg"
+                    className="bg-white hover:bg-white/90 text-black px-8 py-4 rounded-full flex items-center gap-3 text-lg font-semibold transition-all duration-300 hover:scale-105"
+                  >
+                    <PhoneOff className="w-6 h-6" />
+                    End Session
+                  </Button>
+                )}
               </div>
             </div>
-          )}
-        </CardContent>
-      </Card>
+
+            {/* Activity Indicators */}
+            {isConnected && (
+              <div className="flex justify-center gap-6 mb-6">
+                <div className={`flex items-center gap-2 ${isRecording ? 'text-[#ff914d]' : 'text-white/50'}`}>
+                  <Mic className={`w-5 h-5 ${isRecording ? 'animate-pulse' : ''}`} />
+                  <span className="text-sm">You're Speaking</span>
+                </div>
+                
+                <div className={`flex items-center gap-2 ${isSpeaking ? 'text-[#0d4dcc]' : 'text-white/50'}`}>
+                  <Volume2 className={`w-5 h-5 ${isSpeaking ? 'animate-pulse' : ''}`} />
+                  <span className="text-sm">AI Teaching</span>
+                </div>
+              </div>
+            )}
+
+            {/* Conversation History */}
+            {conversation.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-sm font-medium text-white/80 mb-3 flex items-center gap-2">
+                  <div className="w-2 h-2 bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] rounded-full"></div>
+                  Learning Conversation
+                </h3>
+                <div className="space-y-3 max-h-64 overflow-y-auto">
+                  {conversation.slice(-6).map((message, index) => (
+                    <div
+                      key={index}
+                      className={`p-3 rounded-lg ${
+                        message.role === 'user' 
+                          ? 'bg-gradient-to-r from-[#0d4dcc]/20 to-[#ff914d]/10 border border-[#0d4dcc]/30 ml-8' 
+                          : 'bg-gradient-to-r from-[#ff914d]/20 to-[#0d4dcc]/10 border border-[#ff914d]/30 mr-8'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`text-xs font-medium ${
+                          message.role === 'user' 
+                            ? 'bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent' 
+                            : 'bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent'
+                        }`}>
+                          {message.role === 'user' ? 'You' : 'Bakame AI Tutor'}
+                        </span>
+                        {message.type && (
+                          <Badge variant="outline" className="text-xs border-white/30 text-white/70 bg-gradient-to-r from-[#ff914d]/5 to-[#0d4dcc]/5">
+                            {message.type}
+                          </Badge>
+                        )}
+                        <span className="text-xs text-white/50">
+                          {message.timestamp.toLocaleTimeString()}
+                        </span>
+                      </div>
+                      <p className="text-sm text-white/90">{message.content}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Devin Integration Panel */}
+      <div className="lg:col-span-1">
+        <DevinIntegrationPanel />
+      </div>
     </div>
   );
 };
