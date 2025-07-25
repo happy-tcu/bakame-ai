@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { Phone, PhoneOff, Mic, MicOff, Volume2, Wifi, WifiOff, BookOpen, Target, MessageSquare, Trophy, Clock, Star } from 'lucide-react';
+import { Phone, PhoneOff, Mic, MicOff, Volume2, Wifi, WifiOff, BookOpen, Target, MessageSquare, Trophy, Clock, Star, PhoneCall } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -359,6 +359,24 @@ const IVRInterface: React.FC<IVRInterfaceProps> = ({ className = '' }) => {
       <div className="lg:col-span-2">
         <Card className="bg-[#081a2e]/80 backdrop-blur-md border-white/20 text-white">
           <CardContent className="p-8">
+            {/* Offline Phone Number CTA */}
+            <div className="mb-8 p-6 bg-gradient-to-r from-[#ff914d]/10 to-[#0d4dcc]/10 rounded-2xl border border-white/20">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <PhoneCall className="w-6 h-6 text-[#ff914d]" />
+                <h3 className="text-xl font-bold bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent">
+                  Learn English Offline
+                </h3>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white mb-2">
+                  📞 Call: 885 471 1896
+                </div>
+                <p className="text-white/70 text-sm">
+                  Start learning anytime - no internet required!
+                </p>
+              </div>
+            </div>
+
             {/* Enhanced Learning Stats */}
             {isConnected && (
               <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-6">
