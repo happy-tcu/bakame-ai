@@ -35,10 +35,10 @@ const Index = () => {
           Bakame AI
         </div>
         <div className="hidden md:flex space-x-8">
-          <a href="/blog" className="text-white/70 hover:text-white transition-colors">Blog</a>
-          <a href="/careers" className="text-white/70 hover:text-white transition-colors">Careers</a>
-          <a href="/about" className="text-white/70 hover:text-white transition-colors">About</a>
-          <a href="/contact" className="text-white/70 hover:text-white transition-colors">Contact</a>
+          <span className="text-white/70">Blog</span>
+          <span className="text-white/70">Careers</span>
+          <span className="text-white/70">About</span>
+          <span className="text-white/70">Contact</span>
         </div>
       </nav>
 
