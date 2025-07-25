@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,8 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Shield, Globe, Zap, Phone, PhoneCall } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FAQ from "@/components/FAQ";
-import NewsletterSignup from "@/components/forms/NewsletterSignup";
-import ContactForm from "@/components/forms/ContactForm";
+import { NewsletterSignup } from "@/components/forms/NewsletterSignup";
+import { ContactForm } from "@/components/forms/ContactForm";
 import TypingAnimation from "@/components/TypingAnimation";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import EarlyAccessModal from "@/components/EarlyAccessModal";
@@ -103,21 +102,21 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           <div className="text-center">
             <div className="text-4xl font-bold text-[#ff914d] mb-2">
-              <AnimatedCounter end={24} duration={2000} />
+              <AnimatedCounter end="24" duration={2000} />
               /7
             </div>
             <p className="text-white/70">Always Available</p>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-[#0d4dcc] mb-2">
-              <AnimatedCounter end={100} duration={2000} />
+              <AnimatedCounter end="100" duration={2000} />
               %
             </div>
             <p className="text-white/70">Offline Capable</p>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-white mb-2">
-              <AnimatedCounter end={0} duration={2000} />
+              <AnimatedCounter end="0" duration={2000} />
               ms
             </div>
             <p className="text-white/70">Response Time</p>
