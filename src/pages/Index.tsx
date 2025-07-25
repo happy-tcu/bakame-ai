@@ -8,46 +8,39 @@ import TypingAnimation from '@/components/TypingAnimation';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import VideoModal from '@/components/VideoModal';
 import FAQ from '@/components/FAQ';
-
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-
   const openEarlyAccess = () => {
     setIsEarlyAccessOpen(true);
   };
-
   const openVideo = () => {
     setIsVideoOpen(true);
   };
-
-  return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+  return <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Enhanced space-time background */}
       <div className="absolute inset-0 overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
             <filter id="glow">
-              <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="1" result="coloredBlur" />
               <feMerge> 
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
           </defs>
           <g transform="translate(0,0)">
-            <path d="M0,25 Q25,20 50,25 T100,25" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
-            <path d="M0,50 Q25,45 50,50 T100,50" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.2"/>
-            <path d="M0,75 Q25,70 50,75 T100,75" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
+            <path d="M0,25 Q25,20 50,25 T100,25" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)" />
+            <path d="M0,50 Q25,45 50,50 T100,50" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.2" />
+            <path d="M0,75 Q25,70 50,75 T100,75" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)" />
           </g>
         </svg>
         <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
@@ -102,8 +95,7 @@ const Index = () => {
       </nav>
 
       {/* Mobile Navigation Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-black bg-opacity-95 backdrop-blur-sm">
+      {isMenuOpen && <div className="md:hidden fixed inset-0 z-40 bg-black bg-opacity-95 backdrop-blur-sm">
           <div className="flex flex-col items-center justify-center h-full space-y-8">
             <Link to="/" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Home</Link>
             <Link to="/ivr" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Try English Learning</Link>
@@ -124,8 +116,7 @@ const Index = () => {
               </Button>
             </Link>
           </div>
-        </div>
-      )}
+        </div>}
 
       {/* Main Content */}
       <div className="relative z-10">
@@ -137,10 +128,7 @@ const Index = () => {
             </h1>
             
             <div className="text-xl md:text-2xl text-white/80 mb-8 h-16 flex items-center justify-center">
-              <TypingAnimation 
-                text="Your personal English tutor powered by AI - practice speaking, learn vocabulary, and improve pronunciation."
-                className="text-white/80"
-              />
+              <TypingAnimation text="Your personal English tutor powered by AI - practice speaking, learn vocabulary, and improve pronunciation." className="text-white/80" />
             </div>
             
             <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto">
@@ -158,14 +146,7 @@ const Index = () => {
                 </Button>
               </Link>
               
-              <Button 
-                onClick={openVideo}
-                variant="outline" 
-                className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-lg px-8 py-4"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Watch Demo
-              </Button>
+              
             </div>
 
             {/* Learning Features */}
@@ -425,10 +406,7 @@ const Index = () => {
               </Link>
               
               <Link to="/contact">
-                <Button 
-                  variant="outline" 
-                  className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-lg px-8 py-4"
-                >
+                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300 text-lg px-8 py-4">
                   <MessageSquare className="mr-2 h-5 w-5" />
                   Contact Us
                 </Button>
@@ -492,18 +470,9 @@ const Index = () => {
       </div>
 
       {/* Modals */}
-      <EarlyAccessModal 
-        isOpen={isEarlyAccessOpen} 
-        onClose={() => setIsEarlyAccessOpen(false)} 
-      />
+      <EarlyAccessModal isOpen={isEarlyAccessOpen} onClose={() => setIsEarlyAccessOpen(false)} />
       
-      <VideoModal 
-        isOpen={isVideoOpen} 
-        onClose={() => setIsVideoOpen(false)}
-        videoId="dQw4w9WgXcQ"
-      />
-    </div>
-  );
+      <VideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} videoId="dQw4w9WgXcQ" />
+    </div>;
 };
-
 export default Index;
