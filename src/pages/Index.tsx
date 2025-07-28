@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones, Brain, Mic, Database, Globe, BarChart3, Volume2, Newspaper } from 'lucide-react';
@@ -76,9 +77,9 @@ const Index = () => {
           <Link to="/ivr" className="text-white hover:text-green-400 transition-colors">Try English Learning</Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center text-white hover:text-green-400 transition-colors">
+              <span className="flex items-center text-white hover:text-green-400 transition-colors cursor-pointer">
                 Use Cases <ChevronDown className="ml-1 h-4 w-4" />
-              </button>
+              </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-gray-900 border-white/10 z-50">
               <DropdownMenuItem asChild>
