@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones, Brain, Mic, Database, Globe, BarChart3, Volume2, Newspaper } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -146,7 +147,10 @@ const Index = () => {
                 </Button>
               </Link>
               
-              
+              <div className="flex items-center gap-2 text-white/70">
+                <Phone className="h-4 w-4" />
+                <span>Call: 885 471 1896</span>
+              </div>
             </div>
 
             {/* Learning Features */}
@@ -165,6 +169,195 @@ const Index = () => {
                 <Headphones className="h-4 w-4 text-purple-400" />
                 <span className="text-white/80">Pronunciation Help</span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Core Learning Modules */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+              Core Learning Modules
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Languages className="h-8 w-8 text-green-400 mb-2" />
+                  <CardTitle className="text-white">English Practice</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Grammar correction, pronunciation feedback, and conversation practice to improve your English fluency.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Brain className="h-8 w-8 text-blue-400 mb-2" />
+                  <CardTitle className="text-white">Math Module</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Mental math problems with adaptive difficulty progression to strengthen your mathematical skills.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <BookOpen className="h-8 w-8 text-purple-400 mb-2" />
+                  <CardTitle className="text-white">Reading Comprehension</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Story-based learning with questions to improve your reading and understanding skills.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <MessageSquare className="h-8 w-8 text-orange-400 mb-2" />
+                  <CardTitle className="text-white">Debate Practice</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Structured debate topics with counter-arguments to enhance your critical thinking and communication.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Target className="h-8 w-8 text-red-400 mb-2" />
+                  <CardTitle className="text-white">General Q&A</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Multi-topic conversations and help system for general knowledge and assistance.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Technical Infrastructure */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+              Technical Infrastructure
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Phone className="h-8 w-8 text-green-400 mb-2" />
+                  <CardTitle className="text-white">Voice & SMS Access</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Twilio integration for phone-based learning, accessible from any phone without internet.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Zap className="h-8 w-8 text-blue-400 mb-2" />
+                  <CardTitle className="text-white">AI Integration</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Llama API with OpenAI fallback for response generation, ensuring reliable AI interactions.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Mic className="h-8 w-8 text-purple-400 mb-2" />
+                  <CardTitle className="text-white">Voice Transcription</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    OpenAI Whisper for accurate speech-to-text processing in multiple languages.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Database className="h-8 w-8 text-orange-400 mb-2" />
+                  <CardTitle className="text-white">Memory System</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Redis-based conversation history and user context for personalized learning experiences.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Advanced Features */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+              Advanced Features
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Globe className="h-8 w-8 text-green-400 mb-2" />
+                  <CardTitle className="text-white">Cultural Integration</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    Rwanda-specific content with Kinyarwanda phrases for better cultural understanding.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <BarChart3 className="h-8 w-8 text-blue-400 mb-2" />
+                  <CardTitle className="text-white">Admin Dashboard</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    User analytics, session tracking, and curriculum alignment for comprehensive insights.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Volume2 className="h-8 w-8 text-purple-400 mb-2" />
+                  <CardTitle className="text-white">Deepgram TTS</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    High-quality voice synthesis for better audio experience and natural conversations.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                <CardHeader>
+                  <Newspaper className="h-8 w-8 text-orange-400 mb-2" />
+                  <CardTitle className="text-white">Dynamic Content</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-white/70">
+                    NewsAPI integration for trending debate topics and current events discussions.
+                  </CardDescription>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
