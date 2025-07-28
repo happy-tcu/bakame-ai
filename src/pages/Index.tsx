@@ -86,10 +86,7 @@ const Index = () => {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Button 
-            onClick={openEarlyAccess}
-            className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
-          >
+          <Button onClick={openEarlyAccess} className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105">
             Sign Up for Early Access
           </Button>
         </div>
@@ -111,13 +108,10 @@ const Index = () => {
             <Link to="/about" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">About</Link>
             <Link to="/team" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Team</Link>
             <Link to="/contact" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Contact</Link>
-            <Button 
-              onClick={() => {
-                closeMenu();
-                openEarlyAccess();
-              }}
-              className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
-            >
+            <Button onClick={() => {
+          closeMenu();
+          openEarlyAccess();
+        }} className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105">
               Sign Up for Early Access
             </Button>
           </div>
@@ -144,18 +138,12 @@ const Index = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Button 
-                onClick={openEarlyAccess}
-                className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4"
-              >
+              <Button onClick={openEarlyAccess} className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
                 <GraduationCap className="mr-2 h-5 w-5" />
                 Sign Up for Early Access
               </Button>
               
-              <div className="flex items-center gap-2 text-white/70">
-                <Phone className="h-4 w-4" />
-                <span>Call: 885 471 1896</span>
-              </div>
+              
             </div>
 
             {/* Learning Features */}
@@ -596,10 +584,7 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button 
-                onClick={openEarlyAccess}
-                className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4"
-              >
+              <Button onClick={openEarlyAccess} className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
                 <GraduationCap className="mr-2 h-5 w-5" />
                 Sign Up for Early Access
               </Button>
