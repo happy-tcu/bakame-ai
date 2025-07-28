@@ -4,26 +4,38 @@ import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRi
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import TypingAnimation from '@/components/TypingAnimation';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import VideoModal from '@/components/VideoModal';
 import FAQ from '@/components/FAQ';
+
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
   const openEarlyAccess = () => {
     setIsEarlyAccessOpen(true);
   };
+
   const openVideo = () => {
     setIsVideoOpen(true);
   };
+
   return <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Enhanced space-time background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -62,16 +74,30 @@ const Index = () => {
         <div className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-white hover:text-green-400 transition-colors">Home</Link>
           <Link to="/ivr" className="text-white hover:text-green-400 transition-colors">Try English Learning</Link>
-          <div className="relative group">
-            <button className="flex items-center text-white hover:text-green-400 transition-colors">
-              Use Cases <ChevronDown className="ml-1 h-4 w-4" />
-            </button>
-            <div className="absolute top-full left-0 mt-2 w-48 bg-gray-900 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-white/10">
-              <Link to="/government-solution" className="block px-4 py-2 text-white hover:bg-white/10 hover:text-green-400 transition-colors">Government</Link>
-              <Link to="/enterprise-solution" className="block px-4 py-2 text-white hover:bg-white/10 hover:text-green-400 transition-colors">Enterprise</Link>
-              <Link to="/education-solution" className="block px-4 py-2 text-white hover:bg-white/10 hover:text-green-400 transition-colors">Education</Link>
-            </div>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center text-white hover:text-green-400 transition-colors">
+                Use Cases <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-gray-900 border-white/10 z-50">
+              <DropdownMenuItem asChild>
+                <Link to="/government-solution" className="text-white hover:text-green-400 transition-colors">
+                  Government
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/enterprise-solution" className="text-white hover:text-green-400 transition-colors">
+                  Enterprise
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/education-solution" className="text-white hover:text-green-400 transition-colors">
+                  Education
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Link to="/about" className="text-white hover:text-green-400 transition-colors">About</Link>
           <Link to="/team" className="text-white hover:text-green-400 transition-colors">Team</Link>
           <Link to="/contact" className="text-white hover:text-green-400 transition-colors">Contact</Link>
@@ -659,4 +685,5 @@ const Index = () => {
       <VideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} videoId="dQw4w9WgXcQ" />
     </div>;
 };
+
 export default Index;
