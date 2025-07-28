@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones, Brain, Mic, Database, Globe, BarChart3, Volume2, Newspaper } from 'lucide-react';
@@ -148,8 +147,8 @@ const Index = () => {
               </Link>
               
               <div className="flex items-center gap-2 text-white/70">
-                <Phone className="h-4 w-4" />
-                <span>Call: 885 471 1896</span>
+                
+                
               </div>
             </div>
 
