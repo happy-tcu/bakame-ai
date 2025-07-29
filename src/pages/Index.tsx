@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones, Brain, Mic, Database, Globe, BarChart3, Volume2, Newspaper } from 'lucide-react';
@@ -82,20 +81,14 @@ const Index = () => {
               </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-gray-900 border-white/10 z-50">
-              <DropdownMenuItem asChild>
-                <Link to="/government-solution" className="text-white hover:text-green-400 transition-colors">
-                  Government
-                </Link>
+              <DropdownMenuItem>
+                <span className="text-white">Government</span>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/enterprise-solution" className="text-white hover:text-green-400 transition-colors">
-                  Enterprise
-                </Link>
+              <DropdownMenuItem>
+                <span className="text-white">Enterprise</span>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/education-solution" className="text-white hover:text-green-400 transition-colors">
-                  Education
-                </Link>
+              <DropdownMenuItem>
+                <span className="text-white">Education</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -127,9 +120,9 @@ const Index = () => {
             <div className="text-center">
               <div className="text-xl text-white mb-4">Use Cases</div>
               <div className="space-y-4">
-                <Link to="/government-solution" onClick={closeMenu} className="block text-white hover:text-green-400 transition-colors">Government</Link>
-                <Link to="/enterprise-solution" onClick={closeMenu} className="block text-white hover:text-green-400 transition-colors">Enterprise</Link>
-                <Link to="/education-solution" onClick={closeMenu} className="block text-white hover:text-green-400 transition-colors">Education</Link>
+                <span className="block text-white">Government</span>
+                <span className="block text-white">Enterprise</span>
+                <span className="block text-white">Education</span>
               </div>
             </div>
             <Link to="/about" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">About</Link>
