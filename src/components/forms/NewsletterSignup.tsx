@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { useRateLimit } from '@/hooks/useRateLimit';
 import { supabase } from '@/integrations/supabase/client';
 import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
+import { sanitizeInput, validateEmail, logSecurityEvent } from '@/utils/security';
 
 interface NewsletterSignupProps {
   source?: string;
@@ -14,21 +16,52 @@ interface NewsletterSignupProps {
 export const NewsletterSignup = ({ source = 'general', className = "" }: NewsletterSignupProps) => {
   const { toast } = useToast();
   const { trackEvent } = useAnalytics();
+  const { isBlocked, checkLimit } = useRateLimit();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (isBlocked) {
+      toast({
+        title: "Too Many Requests",
+        description: "Please wait before subscribing again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate email
+    if (!validateEmail(email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check rate limit (2 subscriptions per 10 minutes)
+    const canProceed = await checkLimit('newsletter_signup', 2, 10);
+    if (!canProceed) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
+      // Sanitize inputs
+      const sanitizedEmail = sanitizeInput(email, 254).toLowerCase();
+      const sanitizedName = sanitizeInput(name, 100);
+
       // Use type assertion for the newsletter subscriptions table
       const { error } = await (supabase as any)
         .from('newsletter_subscriptions')
         .insert([{
-          email,
-          name: name || null,
+          email: sanitizedEmail,
+          name: sanitizedName || null,
           source,
           status: 'active'
         }]);
@@ -41,6 +74,13 @@ export const NewsletterSignup = ({ source = 'general', className = "" }: Newslet
           });
         } else {
           console.error('Error subscribing to newsletter:', error);
+          
+          await logSecurityEvent({
+            event_type: 'newsletter_subscription_error',
+            details: { error: error.message, source },
+            severity: 'medium'
+          });
+
           toast({
             title: "Error",
             description: "Failed to subscribe. Please try again.",
@@ -49,6 +89,13 @@ export const NewsletterSignup = ({ source = 'general', className = "" }: Newslet
         }
       } else {
         trackEvent('newsletter_signup', { source });
+        
+        await logSecurityEvent({
+          event_type: 'newsletter_subscription_success',
+          details: { source },
+          severity: 'low'
+        });
+
         toast({
           title: "Successfully Subscribed",
           description: "Thank you for subscribing to our newsletter!",
@@ -59,6 +106,13 @@ export const NewsletterSignup = ({ source = 'general', className = "" }: Newslet
       }
     } catch (error) {
       console.error('Error subscribing:', error);
+      
+      await logSecurityEvent({
+        event_type: 'newsletter_subscription_exception',
+        details: { source },
+        severity: 'high'
+      });
+
       toast({
         title: "Error",
         description: "An unexpected error occurred. Please try again.",

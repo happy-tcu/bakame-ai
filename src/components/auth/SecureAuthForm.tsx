@@ -6,8 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useRateLimit } from "@/hooks/useRateLimit";
 import { Eye, EyeOff, Lock, Mail, Shield } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { sanitizeInput, logSecurityEvent } from "@/utils/security";
 
 interface SecureAuthFormProps {
   onSuccess?: (isAdmin: boolean) => void;
@@ -23,7 +25,9 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState<string>("");
+  const [loginAttempts, setLoginAttempts] = useState(0);
   const { toast } = useToast();
+  const { isBlocked, checkLimit } = useRateLimit();
 
   // Password strength validation
   const validatePasswordStrength = (pwd: string) => {
@@ -107,25 +111,58 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (isBlocked) {
+      toast({
+        title: "Account Temporarily Locked",
+        description: "Too many failed attempts. Please wait before trying again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (!validateForm()) return;
+
+    // Rate limiting for auth attempts
+    const action = isSignUp ? 'signup' : 'signin';
+    const canProceed = await checkLimit(action, 5, 30); // 5 attempts per 30 minutes
+    if (!canProceed) {
+      return;
+    }
 
     setIsLoading(true);
 
     try {
+      const sanitizedEmail = sanitizeInput(email, 254).toLowerCase();
+      const sanitizedFullName = sanitizeInput(fullName, 100);
+
       if (isSignUp) {
         const { data, error } = await supabase.auth.signUp({
-          email: email.trim().toLowerCase(),
+          email: sanitizedEmail,
           password,
           options: {
             emailRedirectTo: `${window.location.origin}/`,
             data: {
-              full_name: fullName.trim(),
+              full_name: sanitizedFullName,
               role: isAdmin ? 'admin' : 'creator'
             }
           }
         });
 
-        if (error) throw error;
+        if (error) {
+          await logSecurityEvent({
+            event_type: 'signup_failed',
+            details: { email: sanitizedEmail, error: error.message },
+            severity: 'medium'
+          });
+          throw error;
+        }
+
+        await logSecurityEvent({
+          event_type: 'signup_success',
+          user_id: data.user?.id,
+          details: { email: sanitizedEmail, role: isAdmin ? 'admin' : 'creator' },
+          severity: 'low'
+        });
 
         if (data.user && !data.user.email_confirmed_at) {
           toast({
@@ -141,13 +178,35 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
         }
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({
-          email: email.trim().toLowerCase(),
+          email: sanitizedEmail,
           password,
         });
 
-        if (error) throw error;
+        if (error) {
+          setLoginAttempts(prev => prev + 1);
+          
+          await logSecurityEvent({
+            event_type: 'signin_failed',
+            details: { 
+              email: sanitizedEmail, 
+              error: error.message,
+              attempt: loginAttempts + 1
+            },
+            severity: loginAttempts >= 3 ? 'high' : 'medium'
+          });
+          
+          throw error;
+        }
+
+        await logSecurityEvent({
+          event_type: 'signin_success',
+          user_id: data.user?.id,
+          details: { email: sanitizedEmail },
+          severity: 'low'
+        });
 
         if (data.user) {
+          setLoginAttempts(0); // Reset on successful login
           toast({
             title: "Welcome Back",
             description: "Successfully signed in",
@@ -158,19 +217,15 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
     } catch (error: any) {
       console.error('Auth error:', error);
       
-      // Provide user-friendly error messages
-      let errorMessage = "An unexpected error occurred";
+      // Provide user-friendly error messages without leaking sensitive info
+      let errorMessage = "Authentication failed. Please try again.";
       
       if (error.message?.includes("Invalid login credentials")) {
-        errorMessage = "Invalid email or password";
+        errorMessage = "Invalid credentials. Please check your email and password.";
       } else if (error.message?.includes("User already registered")) {
-        errorMessage = "An account with this email already exists";
-      } else if (error.message?.includes("Password should be")) {
-        errorMessage = "Password does not meet requirements";
+        errorMessage = "An account with this email already exists. Try signing in instead.";
       } else if (error.message?.includes("Email not confirmed")) {
-        errorMessage = "Please confirm your email before signing in";
-      } else if (error.message) {
-        errorMessage = error.message;
+        errorMessage = "Please confirm your email before signing in.";
       }
 
       toast({
