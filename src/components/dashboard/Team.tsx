@@ -9,47 +9,76 @@ interface TeamProps {
   userProfile: UserProfile;
 }
 
-// Mock team data - in a real app, this would come from your database
+// Updated team data based on the provided reference
 const teamMembers = [
   {
     id: "1",
-    name: "Sarah Johnson",
-    role: "Product Manager",
-    email: "sarah@bakame.ai",
-    joinDate: "2024-01-15",
-    location: "San Francisco, CA",
+    name: "Happy Herman",
+    role: "CEO",
+    email: "happy@bakame.ai",
+    joinDate: "2023-01-15",
+    location: "Rwanda",
     status: "active",
-    avatar: "SJ"
+    avatar: "HH",
+    description: "Ex. Rwandan Civics Ambassador to Qatar, Economics + Finance Double Degree at TCU"
   },
   {
     id: "2",
-    name: "Michael Chen",
-    role: "Lead Developer",
-    email: "michael@bakame.ai",
-    joinDate: "2023-11-20",
-    location: "New York, NY",
+    name: "Aime Byiringiro",
+    role: "CTO",
+    email: "aime@bakame.ai",
+    joinDate: "2023-01-15",
+    location: "Rwanda",
     status: "active",
-    avatar: "MC"
+    avatar: "AB",
+    description: "Software Engineer at Dell"
   },
   {
     id: "3",
-    name: "Emily Rodriguez",
-    role: "UX Designer",
-    email: "emily@bakame.ai",
-    joinDate: "2024-02-01",
-    location: "Austin, TX",
+    name: "Chretien Igiraneza",
+    role: "GRAPHIC DESIGNER",
+    email: "chretien@bakame.ai",
+    joinDate: "2023-02-01",
+    location: "Rwanda",
     status: "active",
-    avatar: "ER"
-  },
+    avatar: "CI",
+    description: "CEO, Co-founder of KORIKORI CREATIVE AGENCY"
+  }
+];
+
+const advisors = [
   {
     id: "4",
-    name: "David Kim",
-    role: "Data Scientist",
-    email: "david@bakame.ai",
-    joinDate: "2023-12-10",
-    location: "Seattle, WA",
-    status: "away",
-    avatar: "DK"
+    name: "Twagirayezu Gaspard",
+    role: "ADVISOR (STRATEGY)",
+    email: "gaspard@bakame.ai",
+    joinDate: "2023-03-01",
+    location: "Rwanda",
+    status: "advisor",
+    avatar: "TG",
+    description: "CEO of Rwanda Space Agency and Former Minister of Education"
+  },
+  {
+    id: "5",
+    name: "Natasha Harris",
+    role: "ADVISOR (VENTURES)",
+    email: "natasha@bakame.ai",
+    joinDate: "2023-03-01",
+    location: "USA",
+    status: "advisor",
+    avatar: "NH",
+    description: "Principle of Biegert Group, Inc. and Chairperson of Hope Haven"
+  },
+  {
+    id: "6",
+    name: "J. Dr. Jean Pierre",
+    role: "ADVISOR (COMPLIANCY)",
+    email: "jeanpierre@bakame.ai",
+    joinDate: "2023-03-01",
+    location: "Rwanda",
+    status: "advisor",
+    avatar: "JP",
+    description: "President of the High Court of the Republic of Rwanda, and Chair of the AU Constitutional Steering Committee"
   }
 ];
 
@@ -59,7 +88,7 @@ export const Team = ({ userProfile }: TeamProps) => {
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Team</h1>
         <p className="text-gray-600 mt-2">
-          Meet the amazing people behind Bakame AI
+          We've built civic, cloud, and scalable systems
         </p>
       </div>
 
@@ -67,7 +96,7 @@ export const Team = ({ userProfile }: TeamProps) => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Members</CardTitle>
+            <CardTitle className="text-sm font-medium">Core Team</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{teamMembers.length}</div>
@@ -76,76 +105,125 @@ export const Team = ({ userProfile }: TeamProps) => {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active</CardTitle>
+            <CardTitle className="text-sm font-medium">Advisors</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {teamMembers.filter(m => m.status === 'active').length}
-            </div>
+            <div className="text-2xl font-bold">{advisors.length}</div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Departments</CardTitle>
+            <CardTitle className="text-sm font-medium">Funding Round</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">4</div>
+            <div className="text-2xl font-bold">$100K</div>
+            <p className="text-xs text-muted-foreground">Seed Round</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Locations</CardTitle>
+            <CardTitle className="text-sm font-medium">Founded</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {new Set(teamMembers.map(m => m.location.split(',')[1]?.trim())).size}
-            </div>
+            <div className="text-2xl font-bold">June 2025</div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Team Members Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {teamMembers.map((member) => (
-          <Card key={member.id} className="hover:shadow-md transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-4 mb-4">
-                <Avatar className="h-12 w-12">
-                  <AvatarFallback className="bg-blue-500 text-white font-semibold">
-                    {member.avatar}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900">{member.name}</h3>
-                  <p className="text-sm text-gray-600">{member.role}</p>
+      {/* Core Team Members */}
+      <div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Leadership Team</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {teamMembers.map((member) => (
+            <Card key={member.id} className="hover:shadow-md transition-shadow">
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-4 mb-4">
+                  <Avatar className="h-16 w-16">
+                    <AvatarFallback className="bg-blue-500 text-white font-semibold text-lg">
+                      {member.avatar}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-gray-900 text-lg">{member.name}</h3>
+                    <p className="text-sm font-medium text-blue-600 uppercase tracking-wide">{member.role}</p>
+                    <Badge 
+                      variant="default"
+                      className="bg-green-100 text-green-800 mt-1"
+                    >
+                      {member.status}
+                    </Badge>
+                  </div>
                 </div>
-                <Badge 
-                  variant={member.status === 'active' ? 'default' : 'secondary'}
-                  className={member.status === 'active' ? 'bg-green-100 text-green-800' : ''}
-                >
-                  {member.status}
-                </Badge>
-              </div>
 
-              <div className="space-y-2 text-sm text-gray-600">
-                <div className="flex items-center space-x-2">
-                  <Mail className="h-4 w-4" />
-                  <span>{member.email}</span>
+                <p className="text-sm text-gray-600 mb-4">{member.description}</p>
+
+                <div className="space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center space-x-2">
+                    <Mail className="h-4 w-4" />
+                    <span>{member.email}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>Joined {new Date(member.joinDate).toLocaleDateString()}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="h-4 w-4" />
+                    <span>{member.location}</span>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Calendar className="h-4 w-4" />
-                  <span>Joined {new Date(member.joinDate).toLocaleDateString()}</span>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Advisory Board */}
+      <div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Advisory Board</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {advisors.map((advisor) => (
+            <Card key={advisor.id} className="hover:shadow-md transition-shadow border-orange-200">
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-4 mb-4">
+                  <Avatar className="h-16 w-16">
+                    <AvatarFallback className="bg-orange-500 text-white font-semibold text-lg">
+                      {advisor.avatar}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-gray-900 text-lg">{advisor.name}</h3>
+                    <p className="text-sm font-medium text-orange-600 uppercase tracking-wide">{advisor.role}</p>
+                    <Badge 
+                      variant="secondary"
+                      className="bg-orange-100 text-orange-800 mt-1"
+                    >
+                      {advisor.status}
+                    </Badge>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <MapPin className="h-4 w-4" />
-                  <span>{member.location}</span>
+
+                <p className="text-sm text-gray-600 mb-4">{advisor.description}</p>
+
+                <div className="space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center space-x-2">
+                    <Mail className="h-4 w-4" />
+                    <span>{advisor.email}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>Joined {new Date(advisor.joinDate).toLocaleDateString()}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="h-4 w-4" />
+                    <span>{advisor.location}</span>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );
