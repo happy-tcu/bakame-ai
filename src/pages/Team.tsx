@@ -1,88 +1,66 @@
-
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Linkedin, Twitter, Mail } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
 const Team = () => {
   const navigate = useNavigate();
-
-  const teamMembers = [
-    {
-      name: "Happy Herman",
-      role: "CEO",
-      bio: "Civics Action leader, Startups Expert, Qatar Foundation Amb. and Founder of The Street Bridge Inc.",
-      image: "HH",
-      linkedin: "#",
-      twitter: "#",
-      email: "happy@bakame.ai"
-    },
-    {
-      name: "Aime Byiringiro", 
-      role: "CTO",
-      bio: "Serial Entrepreneur, Organizational Strategist, and Seasoned Software Developer. Currently works at Dell Technologies",
-      image: "AB",
-      linkedin: "#",
-      twitter: "#",
-      email: "aime@bakame.ai"
-    }
-  ];
-
-  const coaches = [
-    {
-      name: "Angelo Biasi",
-      role: "COACH",
-      bio: "Coach, World Class Entrepreneur & CEO of Solvably and Credibly.ai",
-      image: "AB"
-    }
-  ];
-
-  const mentors = [
-    {
-      name: "Paul Evans",
-      role: "MENTOR", 
-      bio: "Associate Director, Institute for Entrepreneurship and Innovation",
-      image: "PE"
-    }
-  ];
-
-  const advisors = [
-    {
-      name: "Annelise Joy",
-      role: "ADVISOR (STRATEGY)",
-      bio: "Philanthropist, Spaceship & Robotics Investor at E Space",
-      image: "AJ"
-    },
-    {
-      name: "Natasha Harris",
-      role: "ADVISOR (VENTURES)",
-      bio: "Principle of Biegert Group, Inc. and Chairperson of Hope Haven",
-      image: "NH"
-    },
-    {
-      name: "J. Dr. Jean Pierre",
-      role: "ADVISOR (COMPLIANCY)",
-      bio: "President of the High Court HQ of the Republic of Rwanda",
-      image: "JP"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-black text-white">
+  const teamMembers = [{
+    name: "Happy Herman",
+    role: "CEO",
+    bio: "Civics Action leader, Startups Expert, Qatar Foundation Amb. and Founder of The Street Bridge Inc.",
+    image: "HH",
+    linkedin: "#",
+    twitter: "#",
+    email: "happy@bakame.ai"
+  }, {
+    name: "Aime Byiringiro",
+    role: "CTO",
+    bio: "Serial Entrepreneur, Organizational Strategist, and Seasoned Software Developer. Currently works at Dell Technologies",
+    image: "AB",
+    linkedin: "#",
+    twitter: "#",
+    email: "aime@bakame.ai"
+  }];
+  const coaches = [{
+    name: "Angelo Biasi",
+    role: "COACH",
+    bio: "Coach, World Class Entrepreneur & CEO of Solvably and Credibly.ai",
+    image: "AB"
+  }];
+  const mentors = [{
+    name: "Paul Evans",
+    role: "MENTOR",
+    bio: "Associate Director, Institute for Entrepreneurship and Innovation",
+    image: "PE"
+  }];
+  const advisors = [{
+    name: "Annelise Joy",
+    role: "ADVISOR (STRATEGY)",
+    bio: "Philanthropist, Spaceship & Robotics Investor at E Space",
+    image: "AJ"
+  }, {
+    name: "Natasha Harris",
+    role: "ADVISOR (VENTURES)",
+    bio: "Principle of Biegert Group, Inc. and Chairperson of Hope Haven",
+    image: "NH"
+  }, {
+    name: "J. Dr. Jean Pierre",
+    role: "ADVISOR (COMPLIANCY)",
+    bio: "President of the High Court HQ of the Republic of Rwanda",
+    image: "JP"
+  }];
+  return <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
       <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10">
         <div className="flex items-center space-x-4">
-          <button 
-            onClick={() => navigate('/')}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-          >
+          <button onClick={() => navigate('/')} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="text-2xl font-bold">Bakame AI</div>
         </div>
         <div className="hidden md:flex space-x-8">
           <button onClick={() => navigate('/about')} className="text-white/70 hover:text-white transition-colors">About</button>
-          <button onClick={() => navigate('/solutions/education')} className="text-white/70 hover:text-white transition-colors">Solutions</button>
+          
           <button onClick={() => navigate('/contact')} className="text-white/70 hover:text-white transition-colors">Contact</button>
         </div>
       </nav>
@@ -100,8 +78,7 @@ const Team = () => {
         <section className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Leadership Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {teamMembers.map((member, index) => (
-              <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors">
+            {teamMembers.map((member, index) => <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
                     <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -123,8 +100,7 @@ const Team = () => {
                     </a>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </section>
 
@@ -132,8 +108,7 @@ const Team = () => {
         <section className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Coaches</h2>
           <div className="grid grid-cols-1 max-w-md mx-auto">
-            {coaches.map((coach, index) => (
-              <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors border-green-200">
+            {coaches.map((coach, index) => <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors border-green-200">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -144,8 +119,7 @@ const Team = () => {
                   </div>
                   <p className="text-white/80 text-sm">{coach.bio}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </section>
 
@@ -153,8 +127,7 @@ const Team = () => {
         <section className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Mentors</h2>
           <div className="grid grid-cols-1 max-w-md mx-auto">
-            {mentors.map((mentor, index) => (
-              <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors border-purple-200">
+            {mentors.map((mentor, index) => <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors border-purple-200">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -165,8 +138,7 @@ const Team = () => {
                   </div>
                   <p className="text-white/80 text-sm">{mentor.bio}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </section>
 
@@ -174,8 +146,7 @@ const Team = () => {
         <section className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Advisory Board</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {advisors.map((advisor, index) => (
-              <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors border-orange-200">
+            {advisors.map((advisor, index) => <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors border-orange-200">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -186,8 +157,7 @@ const Team = () => {
                   </div>
                   <p className="text-white/80 text-sm">{advisor.bio}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </section>
 
@@ -250,25 +220,16 @@ const Team = () => {
               challenges and creating global impact, we'd love to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => navigate('/contact')}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
-              >
+              <Button onClick={() => navigate('/contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg">
                 View Open Positions
               </Button>
-              <Button 
-                onClick={() => navigate('/contact')}
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10 px-8 py-3 text-lg"
-              >
+              <Button onClick={() => navigate('/contact')} variant="outline" className="border-white/20 text-white hover:bg-white/10 px-8 py-3 text-lg">
                 Get in Touch
               </Button>
             </div>
           </div>
         </section>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Team;
