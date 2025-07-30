@@ -4,38 +4,27 @@ import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRi
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import TypingAnimation from '@/components/TypingAnimation';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import VideoModal from '@/components/VideoModal';
 import FAQ from '@/components/FAQ';
-
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-
   const openEarlyAccess = () => {
     setIsEarlyAccessOpen(true);
   };
-
   const openVideo = () => {
     setIsVideoOpen(true);
   };
-
   return <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Enhanced space-time background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -106,9 +95,7 @@ const Index = () => {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Button onClick={openEarlyAccess} className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105">
-            Sign Up for Early Access
-          </Button>
+          
         </div>
       </nav>
 
@@ -679,5 +666,4 @@ const Index = () => {
       <VideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} videoId="dQw4w9WgXcQ" />
     </div>;
 };
-
 export default Index;
