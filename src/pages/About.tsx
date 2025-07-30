@@ -44,11 +44,7 @@ const About = () => {
                 sufficient for truly global accessibility. This led to the development of 
                 our groundbreaking offline AI technology.
               </p>
-              <p className="text-white/80 text-lg">
-                Today, Bakame AI serves thousands of organizations worldwide, from government 
-                agencies managing emergency communications to schools providing AI-powered 
-                education in remote areas. We're proud to be making AI truly universal.
-              </p>
+              <p className="text-white/80 text-lg">Today, Bakame AI intends to serves thousands of organizations worldwide, from government agencies managing emergency communications to schools providing AI-powered education in remote areas. We're proud to be making AI truly universal.</p>
             </div>
           </div>
         </section>
