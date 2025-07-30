@@ -1,47 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Users, Wifi, WifiOff, Play, CheckCircle, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
+
 const EducationSolution = () => {
   const navigate = useNavigate();
   const [activeCard, setActiveCard] = useState(0);
-  const [studentCount, setStudentCount] = useState(0);
-  const [schoolCount, setSchoolCount] = useState(0);
-  const [completionRate, setCompletionRate] = useState(0);
-
-  // Animated counters
-  useEffect(() => {
-    const animateCounters = () => {
-      const duration = 2000;
-      const steps = 60;
-      const increment = duration / steps;
-      let currentStep = 0;
-      const timer = setInterval(() => {
-        currentStep++;
-        const progress = currentStep / steps;
-        setStudentCount(Math.floor(25000 * progress));
-        setSchoolCount(Math.floor(150 * progress));
-        setCompletionRate(Math.floor(92 * progress));
-        if (currentStep >= steps) {
-          clearInterval(timer);
-        }
-      }, increment);
-    };
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounters();
-          observer.disconnect();
-        }
-      });
-    }, {
-      threshold: 0.5
-    });
-    const statsSection = document.getElementById('stats-section');
-    if (statsSection) {
-      observer.observe(statsSection);
-    }
-    return () => observer.disconnect();
-  }, []);
 
   // Auto-rotate feature cards
   useEffect(() => {
@@ -50,7 +13,9 @@ const EducationSolution = () => {
     }, 4000);
     return () => clearInterval(interval);
   }, []);
-  return <div className="min-h-screen bg-black text-white overflow-hidden">
+
+  return (
+    <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Navigation */}
       <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10 backdrop-blur-sm sticky top-0 z-50">
         <div className="flex items-center space-x-4">
@@ -61,38 +26,19 @@ const EducationSolution = () => {
         </div>
         <div className="hidden md:flex space-x-8">
           <a href="/blog" className="text-white/70 hover:text-white transition-colors hover:scale-105 transform duration-200">Blog</a>
-          
-          
           <a href="/signup" className="text-white/70 hover:text-white transition-colors hover:scale-105 transform duration-200">Sign In</a>
         </div>
       </nav>
 
       <div className="container mx-auto px-6 py-20">
-        {/* Hero Section with floating animation */}
+        {/* Hero Section */}
         <div className="text-center mb-16 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-3xl animate-pulse"></div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-fade-in">
             Education Solutions
           </h1>
           <p className="text-xl text-white/70 max-w-3xl mx-auto animate-fade-in">
             Empowering educational institutions with offline-first IVR systems that work in any environment, from remote villages to urban campuses.
           </p>
-          
-          {/* Live Stats */}
-          <div id="stats-section" className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400 mb-2">{studentCount.toLocaleString()}+</div>
-              <div className="text-white/60 text-sm">Students Reached</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400 mb-2">{schoolCount}+</div>
-              <div className="text-white/60 text-sm">Schools Connected</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-400 mb-2">{completionRate}%</div>
-              <div className="text-white/60 text-sm">Completion Rate</div>
-            </div>
-          </div>
         </div>
 
         {/* Interactive How It Works Section */}
@@ -218,6 +164,8 @@ const EducationSolution = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default EducationSolution;
