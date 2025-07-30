@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Linkedin, Twitter, Mail } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -29,9 +30,9 @@ const Team = () => {
 
   const coaches = [
     {
-      name: "Angelo Blasi",
+      name: "Angelo Biasi",
       role: "COACH",
-      bio: "Coach, World Class Entrepreneur & CEO of Cradlpoint and Credibly.ai",
+      bio: "Coach, World Class Entrepreneur & CEO of Solvably and Credibly.ai",
       image: "AB"
     }
   ];
