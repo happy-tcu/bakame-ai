@@ -1,21 +1,14 @@
-
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Target, Eye, Heart, Users, Globe, Shield, Zap } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
 const About = () => {
   const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-black text-white">
+  return <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
       <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10">
         <div className="flex items-center space-x-4">
-          <button 
-            onClick={() => navigate('/')}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-          >
+          <button onClick={() => navigate('/')} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="text-2xl font-bold">Bakame AI</div>
@@ -44,11 +37,7 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Our Story</h2>
             <div className="prose prose-lg prose-invert max-w-none">
-              <p className="text-white/80 text-lg mb-6">
-                Founded in 2024, Bakame AI emerged from a simple yet powerful observation: 
-                billions of people worldwide lack reliable internet access, yet they deserve 
-                the same advanced AI capabilities available in connected urban centers.
-              </p>
+              <p className="text-white/80 text-lg mb-6">Founded in 2025, Bakame AI emerged from a simple yet powerful observation: billions of people worldwide lack reliable internet access, yet they deserve the same advanced AI capabilities available in connected urban centers.</p>
               <p className="text-white/80 text-lg mb-6">
                 Our founders, having experienced firsthand the communication challenges in 
                 rural Africa, recognized that traditional cloud-based AI solutions weren't 
@@ -189,25 +178,16 @@ const About = () => {
               critical communication needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => navigate('/contact')}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
-              >
+              <Button onClick={() => navigate('/contact')} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg">
                 Get Started Today
               </Button>
-              <Button 
-                onClick={() => navigate('/ivr')}
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10 px-8 py-3 text-lg"
-              >
+              <Button onClick={() => navigate('/ivr')} variant="outline" className="border-white/20 text-white hover:bg-white/10 px-8 py-3 text-lg">
                 Try Our Demo
               </Button>
             </div>
           </div>
         </section>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default About;
