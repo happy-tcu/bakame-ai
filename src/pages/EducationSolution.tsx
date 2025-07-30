@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Users, Wifi, WifiOff, Play, CheckCircle, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
-
 const EducationSolution = () => {
   const navigate = useNavigate();
   const [activeCard, setActiveCard] = useState(0);
@@ -13,9 +12,7 @@ const EducationSolution = () => {
     }, 4000);
     return () => clearInterval(interval);
   }, []);
-
-  return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+  return <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Navigation */}
       <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10 backdrop-blur-sm sticky top-0 z-50">
         <div className="flex items-center space-x-4">
@@ -26,7 +23,7 @@ const EducationSolution = () => {
         </div>
         <div className="hidden md:flex space-x-8">
           <a href="/blog" className="text-white/70 hover:text-white transition-colors hover:scale-105 transform duration-200">Blog</a>
-          <a href="/signup" className="text-white/70 hover:text-white transition-colors hover:scale-105 transform duration-200">Sign In</a>
+          
         </div>
       </nav>
 
@@ -164,8 +161,6 @@ const EducationSolution = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default EducationSolution;
