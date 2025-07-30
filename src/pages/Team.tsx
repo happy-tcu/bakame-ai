@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Linkedin, Twitter, Mail } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,7 +9,7 @@ const Team = () => {
   const teamMembers = [
     {
       name: "Happy Herman",
-      role: "CEO",
+      role: "CEO", 
       bio: "Ex. Rwandan Civics Ambassador to Qatar, Economics + Finance Double Degree at TCU",
       image: "HH",
       linkedin: "#",
@@ -21,7 +20,7 @@ const Team = () => {
       name: "Aime Byiringiro",
       role: "CTO",
       bio: "Software Engineer at Dell",
-      image: "AB",
+      image: "AB", 
       linkedin: "#",
       twitter: "#",
       email: "aime@bakame.ai"
@@ -32,18 +31,12 @@ const Team = () => {
       bio: "CEO, Co-founder of KORIKORI CREATIVE AGENCY",
       image: "CI",
       linkedin: "#",
-      twitter: "#",
+      twitter: "#", 
       email: "chretien@bakame.ai"
     }
   ];
 
   const advisors = [
-    {
-      name: "Twagirayezu Gaspard",
-      role: "ADVISOR (STRATEGY)",
-      bio: "CEO of Rwanda Space Agency and Former Minister of Education",
-      image: "TG"
-    },
     {
       name: "Natasha Harris",
       role: "ADVISOR (VENTURES)",
