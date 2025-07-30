@@ -9,34 +9,49 @@ const Team = () => {
   const teamMembers = [
     {
       name: "Happy Herman",
-      role: "CEO", 
-      bio: "Ex. Rwandan Civics Ambassador to Qatar, Economics + Finance Double Degree at TCU",
+      role: "CEO",
+      bio: "Civics Action leader, Startups Expert, Qatar Foundation Amb. and Founder of The Street Bridge Inc.",
       image: "HH",
       linkedin: "#",
       twitter: "#",
       email: "happy@bakame.ai"
     },
     {
-      name: "Aime Byiringiro",
+      name: "Aime Byiringiro", 
       role: "CTO",
-      bio: "Software Engineer at Dell",
-      image: "AB", 
+      bio: "Serial Entrepreneur, Organizational Strategist, and Seasoned Software Developer. Currently works at Dell Technologies",
+      image: "AB",
       linkedin: "#",
       twitter: "#",
       email: "aime@bakame.ai"
-    },
+    }
+  ];
+
+  const coaches = [
     {
-      name: "Chretien Igiraneza",
-      role: "GRAPHIC DESIGNER",
-      bio: "CEO, Co-founder of KORIKORI CREATIVE AGENCY",
-      image: "CI",
-      linkedin: "#",
-      twitter: "#", 
-      email: "chretien@bakame.ai"
+      name: "Angelo Blasi",
+      role: "COACH",
+      bio: "Coach, World Class Entrepreneur & CEO of Cradlpoint and Credibly.ai",
+      image: "AB"
+    }
+  ];
+
+  const mentors = [
+    {
+      name: "Paul Evans",
+      role: "MENTOR", 
+      bio: "Associate Director, Institute for Entrepreneurship and Innovation",
+      image: "PE"
     }
   ];
 
   const advisors = [
+    {
+      name: "Annelise Joy",
+      role: "ADVISOR (STRATEGY)",
+      bio: "Philanthropist, Spaceship & Robotics Investor at E Space",
+      image: "AJ"
+    },
     {
       name: "Natasha Harris",
       role: "ADVISOR (VENTURES)",
@@ -74,7 +89,7 @@ const Team = () => {
       <div className="container mx-auto px-6 py-20">
         {/* Hero Section */}
         <section className="text-center mb-20">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Meet Our Team</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">Meet The Team and Advisors</h1>
           <p className="text-xl md:text-2xl text-white/80 max-w-4xl mx-auto">
             We've built civic, cloud, and scalable systems
           </p>
@@ -83,7 +98,7 @@ const Team = () => {
         {/* Core Team */}
         <section className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Leadership Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {teamMembers.map((member, index) => (
               <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors">
                 <CardContent className="p-6">
@@ -112,10 +127,52 @@ const Team = () => {
           </div>
         </section>
 
-        {/* Advisors */}
+        {/* Coaches */}
+        <section className="mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Coaches</h2>
+          <div className="grid grid-cols-1 max-w-md mx-auto">
+            {coaches.map((coach, index) => (
+              <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors border-green-200">
+                <CardContent className="p-6">
+                  <div className="text-center mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-white font-bold">{coach.image}</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-1">{coach.name}</h3>
+                    <p className="text-green-400 font-medium mb-3 uppercase tracking-wide">{coach.role}</p>
+                  </div>
+                  <p className="text-white/80 text-sm">{coach.bio}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Mentors */}
+        <section className="mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Mentors</h2>
+          <div className="grid grid-cols-1 max-w-md mx-auto">
+            {mentors.map((mentor, index) => (
+              <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors border-purple-200">
+                <CardContent className="p-6">
+                  <div className="text-center mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-white font-bold">{mentor.image}</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-1">{mentor.name}</h3>
+                    <p className="text-purple-400 font-medium mb-3 uppercase tracking-wide">{mentor.role}</p>
+                  </div>
+                  <p className="text-white/80 text-sm">{mentor.bio}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Advisory Board */}
         <section className="mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Advisory Board</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {advisors.map((advisor, index) => (
               <Card key={index} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors border-orange-200">
                 <CardContent className="p-6">
