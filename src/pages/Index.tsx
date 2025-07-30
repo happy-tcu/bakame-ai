@@ -652,9 +652,7 @@ const Index = () => {
             </div>
             
             <div className="border-t border-white/10 pt-8 mt-8 text-center">
-              <p className="text-white/60">
-                © 2024 Bakame AI. All rights reserved.
-              </p>
+              <p className="text-white/60">© 2025 Bakame AI. All rights reserved.</p>
             </div>
           </div>
         </footer>
