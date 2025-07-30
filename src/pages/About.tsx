@@ -142,27 +142,7 @@ const About = () => {
 
         {/* Impact Numbers */}
         <section className="mb-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">Our Impact</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div>
-                <div className="text-4xl font-bold text-blue-400 mb-2">1000+</div>
-                <p className="text-white/80">Organizations Served</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-green-400 mb-2">50+</div>
-                <p className="text-white/80">Countries Reached</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-purple-400 mb-2">25+</div>
-                <p className="text-white/80">Languages Supported</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-yellow-400 mb-2">1M+</div>
-                <p className="text-white/80">Lives Impacted</p>
-              </div>
-            </div>
-          </div>
+          
         </section>
 
         {/* CTA Section */}
