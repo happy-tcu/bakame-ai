@@ -62,7 +62,7 @@ const Team = () => {
     {
       name: "J. Dr. Jean Pierre",
       role: "ADVISOR (COMPLIANCY)",
-      bio: "President of the High Court of the Republic of Rwanda, and Chair of the AU Constitutional Steering Committee",
+      bio: "President of the High Court HQ of the Republic of Rwanda",
       image: "JP"
     }
   ];
