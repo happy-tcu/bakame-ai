@@ -14,7 +14,7 @@ const About = () => {
           <div className="text-2xl font-bold">Bakame AI</div>
         </div>
         <div className="hidden md:flex space-x-8">
-          <button onClick={() => navigate('/solutions/education')} className="text-white/70 hover:text-white transition-colors">Solutions</button>
+          
           <button onClick={() => navigate('/ivr')} className="text-white/70 hover:text-white transition-colors">Demo</button>
           <button onClick={() => navigate('/team')} className="text-white/70 hover:text-white transition-colors">Team</button>
           <button onClick={() => navigate('/contact')} className="text-white/70 hover:text-white transition-colors">Contact</button>
