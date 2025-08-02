@@ -9,6 +9,7 @@ import TypingAnimation from '@/components/TypingAnimation';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import VideoModal from '@/components/VideoModal';
 import FAQ from '@/components/FAQ';
+import "@/styles/vibrant-waves.css";
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
@@ -26,26 +27,34 @@ const Index = () => {
     setIsVideoOpen(true);
   };
   return <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Enhanced space-time background */}
+      {/* Vibrant Waves Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <defs>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="1" result="coloredBlur" />
-              <feMerge> 
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-          <g transform="translate(0,0)">
-            <path d="M0,25 Q25,20 50,25 T100,25" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)" />
-            <path d="M0,50 Q25,45 50,50 T100,50" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.2" />
-            <path d="M0,75 Q25,70 50,75 T100,75" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)" />
-          </g>
-        </svg>
-        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 bg-black"></div>
+        
+        {/* Vibrant Waves Animation */}
+        <div className="vibrant-waves-container">
+          <div className="wave-layer wave-1"></div>
+          <div className="wave-layer wave-2"></div>
+          <div className="wave-layer wave-3"></div>
+          
+          {/* Energy Particles */}
+          <div className="energy-particles">
+            <div className="particle"></div>
+            <div className="particle"></div>
+            <div className="particle"></div>
+            <div className="particle"></div>
+            <div className="particle"></div>
+            <div className="particle"></div>
+            <div className="particle"></div>
+            <div className="particle"></div>
+          </div>
+        </div>
+        
+        {/* Subtle overlay for content readability */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/10 to-black/40"></div>
+        
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent"></div>
       </div>
 
       {/* Navigation */}
