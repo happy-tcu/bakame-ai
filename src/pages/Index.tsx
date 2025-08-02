@@ -153,21 +153,26 @@ const Index = () => {
               
             </div>
 
-            {/* Learning Features */}
+            {/* AI Model Use Cases */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               <div className="px-4 py-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg border border-white/30 flex items-center gap-2">
                 <Languages className="h-4 w-4 text-green-400" />
-                <span className="text-white/80">Conversation Practice</span>
+                <span className="text-white/80">Education & Learning</span>
               </div>
               
-              <div className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-green-500/20 rounded-lg border border-white/30 flex items-center gap-2">
+              <div className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg border border-white/30 flex items-center gap-2">
                 <BookOpen className="h-4 w-4 text-blue-400" />
-                <span className="text-white/80">Vocabulary Building</span>
+                <span className="text-white/80">Government Services</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg border border-white/30 flex items-center gap-2">
                 <Headphones className="h-4 w-4 text-purple-400" />
-                <span className="text-white/80">Pronunciation Help</span>
+                <span className="text-white/80">Healthcare Support</span>
+              </div>
+              
+              <div className="px-4 py-2 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-lg border border-white/30 flex items-center gap-2">
+                <Brain className="h-4 w-4 text-orange-400" />
+                <span className="text-white/80">Enterprise Solutions</span>
               </div>
             </div>
           </div>
