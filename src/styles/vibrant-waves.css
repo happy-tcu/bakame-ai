@@ -1,76 +1,71 @@
-/* Vibrant Waves Animation */
+/* Vibrant Wave Lines Animation */
 @keyframes wave-flow-1 {
   0% { 
-    transform: translateX(-100%) scaleY(1);
+    stroke-dashoffset: 0;
     opacity: 0.8;
   }
   50% { 
-    transform: translateX(-50%) scaleY(1.2);
+    stroke-dashoffset: -100;
     opacity: 1;
   }
   100% { 
-    transform: translateX(0%) scaleY(1);
+    stroke-dashoffset: -200;
     opacity: 0.8;
   }
 }
 
 @keyframes wave-flow-2 {
   0% { 
-    transform: translateX(-120%) scaleY(0.8);
+    stroke-dashoffset: 0;
     opacity: 0.6;
   }
   50% { 
-    transform: translateX(-60%) scaleY(1.4);
+    stroke-dashoffset: -80;
     opacity: 0.9;
   }
   100% { 
-    transform: translateX(0%) scaleY(0.8);
+    stroke-dashoffset: -160;
     opacity: 0.6;
   }
 }
 
 @keyframes wave-flow-3 {
   0% { 
-    transform: translateX(-80%) scaleY(1.1);
+    stroke-dashoffset: 0;
     opacity: 0.7;
   }
   50% { 
-    transform: translateX(-40%) scaleY(0.9);
+    stroke-dashoffset: -120;
     opacity: 1;
   }
   100% { 
-    transform: translateX(20%) scaleY(1.1);
+    stroke-dashoffset: -240;
     opacity: 0.7;
   }
 }
 
-@keyframes particle-drift {
-  0% { 
-    transform: translateX(-10px) translateY(0px);
-    opacity: 0;
-  }
-  20% { 
-    opacity: 1;
-  }
-  80% { 
-    opacity: 1;
-  }
-  100% { 
-    transform: translateX(100vw) translateY(-20px);
-    opacity: 0;
-  }
+@keyframes color-shift-1 {
+  0% { stroke: #ff1493; }
+  25% { stroke: #8a2be2; }
+  50% { stroke: #1e90ff; }
+  75% { stroke: #00bfff; }
+  100% { stroke: #ff1493; }
 }
 
-@keyframes gradient-shift {
-  0% { 
-    background-position: 0% 50%;
-  }
-  50% { 
-    background-position: 100% 50%;
-  }
-  100% { 
-    background-position: 0% 50%;
-  }
+@keyframes color-shift-2 {
+  0% { stroke: #00ff7f; }
+  25% { stroke: #ffd700; }
+  50% { stroke: #ff4500; }
+  75% { stroke: #ff69b4; }
+  100% { stroke: #00ff7f; }
+}
+
+@keyframes color-shift-3 {
+  0% { stroke: #00ffff; }
+  25% { stroke: #9400d3; }
+  50% { stroke: #32cd32; }
+  75% { stroke: #ff6347; }
+  100% { stroke: #00ffff; }
 }
 
 .vibrant-waves-container {
@@ -83,83 +78,7 @@
   z-index: 1;
 }
 
-.wave-layer {
-  position: absolute;
-  width: 200%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
-.wave-1 {
-  background: linear-gradient(45deg, 
-    rgba(255, 20, 147, 0.3) 0%,
-    rgba(138, 43, 226, 0.4) 25%,
-    rgba(30, 144, 255, 0.3) 50%,
-    rgba(0, 191, 255, 0.4) 75%,
-    rgba(50, 205, 50, 0.3) 100%
-  );
-  background-size: 400% 400%;
-  animation: wave-flow-1 8s ease-in-out infinite, gradient-shift 6s ease-in-out infinite;
-  clip-path: polygon(
-    0% 70%,
-    15% 65%,
-    30% 75%,
-    45% 60%,
-    60% 80%,
-    75% 55%,
-    90% 70%,
-    100% 65%,
-    100% 100%,
-    0% 100%
-  );
-}
-
-.wave-2 {
-  background: linear-gradient(135deg, 
-    rgba(255, 105, 180, 0.25) 0%,
-    rgba(148, 0, 211, 0.35) 25%,
-    rgba(0, 100, 255, 0.3) 50%,
-    rgba(0, 255, 255, 0.35) 75%,
-    rgba(124, 252, 0, 0.25) 100%
-  );
-  background-size: 300% 300%;
-  animation: wave-flow-2 12s ease-in-out infinite reverse, gradient-shift 8s ease-in-out infinite;
-  clip-path: polygon(
-    0% 85%,
-    20% 75%,
-    40% 90%,
-    60% 70%,
-    80% 85%,
-    100% 75%,
-    100% 100%,
-    0% 100%
-  );
-}
-
-.wave-3 {
-  background: linear-gradient(90deg, 
-    rgba(255, 69, 0, 0.2) 0%,
-    rgba(255, 20, 147, 0.3) 20%,
-    rgba(138, 43, 226, 0.25) 40%,
-    rgba(30, 144, 255, 0.3) 60%,
-    rgba(0, 255, 127, 0.2) 80%,
-    rgba(255, 215, 0, 0.25) 100%
-  );
-  background-size: 500% 500%;
-  animation: wave-flow-3 10s ease-in-out infinite, gradient-shift 4s ease-in-out infinite;
-  clip-path: polygon(
-    0% 60%,
-    25% 80%,
-    50% 55%,
-    75% 75%,
-    100% 50%,
-    100% 100%,
-    0% 100%
-  );
-}
-
-.energy-particles {
+.wave-svg {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -167,90 +86,133 @@
   left: 0;
 }
 
-.particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: particle-drift linear infinite;
+.wave-line-1 {
+  fill: none;
+  stroke: #ff1493;
+  stroke-width: 1.5;
+  stroke-dasharray: 8 4;
+  opacity: 0.8;
+  animation: wave-flow-1 4s ease-in-out infinite, color-shift-1 8s linear infinite;
+  filter: drop-shadow(0 0 3px currentColor);
 }
 
-.particle:nth-child(1) {
-  top: 70%;
-  animation-duration: 15s;
+.wave-line-2 {
+  fill: none;
+  stroke: #00ff7f;
+  stroke-width: 1.2;
+  stroke-dasharray: 6 3;
+  opacity: 0.7;
+  animation: wave-flow-2 5s ease-in-out infinite, color-shift-2 10s linear infinite;
+  filter: drop-shadow(0 0 2px currentColor);
+}
+
+.wave-line-3 {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 1;
+  stroke-dasharray: 4 2;
+  opacity: 0.6;
+  animation: wave-flow-3 6s ease-in-out infinite, color-shift-3 12s linear infinite;
+  filter: drop-shadow(0 0 2px currentColor);
+}
+
+.wave-line-4 {
+  fill: none;
+  stroke: #8a2be2;
+  stroke-width: 0.8;
+  stroke-dasharray: 3 2;
+  opacity: 0.5;
+  animation: wave-flow-1 7s ease-in-out infinite reverse, color-shift-1 6s linear infinite;
+  filter: drop-shadow(0 0 1px currentColor);
+}
+
+.wave-line-5 {
+  fill: none;
+  stroke: #ffd700;
+  stroke-width: 0.6;
+  stroke-dasharray: 5 3;
+  opacity: 0.4;
+  animation: wave-flow-2 8s ease-in-out infinite reverse, color-shift-2 14s linear infinite;
+  filter: drop-shadow(0 0 1px currentColor);
+}
+
+/* Particle dots along the lines */
+.particle-dot {
+  fill: #ffffff;
+  opacity: 0.8;
+  animation: particle-drift 15s linear infinite;
+}
+
+@keyframes particle-drift {
+  0% { 
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  10% { 
+    opacity: 1;
+  }
+  90% { 
+    opacity: 1;
+  }
+  100% { 
+    opacity: 0;
+    transform: translateX(100vw);
+  }
+}
+
+.particle-dot:nth-child(1) {
   animation-delay: 0s;
-  background: radial-gradient(circle, rgba(255, 20, 147, 0.9) 0%, transparent 70%);
+  fill: #ff1493;
 }
 
-.particle:nth-child(2) {
-  top: 75%;
-  animation-duration: 18s;
+.particle-dot:nth-child(2) {
   animation-delay: 2s;
-  background: radial-gradient(circle, rgba(0, 191, 255, 0.8) 0%, transparent 70%);
+  fill: #00ff7f;
 }
 
-.particle:nth-child(3) {
-  top: 65%;
-  animation-duration: 12s;
+.particle-dot:nth-child(3) {
   animation-delay: 4s;
-  background: radial-gradient(circle, rgba(50, 205, 50, 0.9) 0%, transparent 70%);
+  fill: #00ffff;
 }
 
-.particle:nth-child(4) {
-  top: 80%;
-  animation-duration: 20s;
+.particle-dot:nth-child(4) {
+  animation-delay: 6s;
+  fill: #8a2be2;
+}
+
+.particle-dot:nth-child(5) {
+  animation-delay: 8s;
+  fill: #ffd700;
+}
+
+.particle-dot:nth-child(6) {
   animation-delay: 1s;
-  background: radial-gradient(circle, rgba(138, 43, 226, 0.8) 0%, transparent 70%);
+  fill: #ff4500;
 }
 
-.particle:nth-child(5) {
-  top: 68%;
-  animation-duration: 16s;
+.particle-dot:nth-child(7) {
   animation-delay: 3s;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.9) 0%, transparent 70%);
+  fill: #ff69b4;
 }
 
-.particle:nth-child(6) {
-  top: 72%;
-  animation-duration: 14s;
+.particle-dot:nth-child(8) {
   animation-delay: 5s;
-  background: radial-gradient(circle, rgba(255, 105, 180, 0.8) 0%, transparent 70%);
-}
-
-.particle:nth-child(7) {
-  top: 77%;
-  animation-duration: 22s;
-  animation-delay: 2.5s;
-  background: radial-gradient(circle, rgba(0, 255, 255, 0.9) 0%, transparent 70%);
-}
-
-.particle:nth-child(8) {
-  top: 63%;
-  animation-duration: 13s;
-  animation-delay: 4.5s;
-  background: radial-gradient(circle, rgba(255, 69, 0, 0.8) 0%, transparent 70%);
+  fill: #32cd32;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .wave-layer {
-    width: 300%;
-  }
-  
-  .particle {
-    width: 2px;
-    height: 2px;
-  }
+  .wave-line-1 { stroke-width: 1.2; }
+  .wave-line-2 { stroke-width: 1; }
+  .wave-line-3 { stroke-width: 0.8; }
+  .wave-line-4 { stroke-width: 0.6; }
+  .wave-line-5 { stroke-width: 0.5; }
 }
 
 @media (max-width: 480px) {
-  .wave-layer {
-    width: 400%;
-  }
-  
-  .particle {
-    width: 1.5px;
-    height: 1.5px;
-  }
+  .wave-line-1 { stroke-width: 1; }
+  .wave-line-2 { stroke-width: 0.8; }
+  .wave-line-3 { stroke-width: 0.6; }
+  .wave-line-4 { stroke-width: 0.5; }
+  .wave-line-5 { stroke-width: 0.4; }
 }
