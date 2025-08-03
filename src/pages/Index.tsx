@@ -26,7 +26,7 @@ const Index = () => {
   const openVideo = () => {
     setIsVideoOpen(true);
   };
-  return <div className="min-h-screen bg-black text-white relative overflow-hidden">
+  return <div className="min-h-screen text-white relative overflow-hidden">
       {/* Animated Gradient Background */}
       <div className="animated-bg"></div>
 
