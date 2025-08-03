@@ -27,25 +27,8 @@ const Index = () => {
     setIsVideoOpen(true);
   };
   return <div className="min-h-screen text-white relative overflow-hidden">
-      {/* Small Animated Lines Background */}
-      <div className="animated-bg">
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-        <div className="small-line"></div>
-      </div>
+      {/* Simple Black Background */}
+      <div className="fixed inset-0 bg-black"></div>
 
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-6 md:p-8">
