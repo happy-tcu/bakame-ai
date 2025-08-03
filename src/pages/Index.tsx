@@ -27,54 +27,8 @@ const Index = () => {
     setIsVideoOpen(true);
   };
   return <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Vibrant Waves Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-black"></div>
-        
-        
-        {/* Vibrant Wave Lines Animation */}
-        <div className="vibrant-waves-container">
-          <svg className="wave-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-            {/* Multiple wave lines with different patterns */}
-            <path 
-              d="M0,400 Q150,350 300,400 T600,400 T900,400 T1200,400" 
-              className="wave-line-1"
-            />
-            <path 
-              d="M0,450 Q200,400 400,450 T800,450 T1200,450" 
-              className="wave-line-2"
-            />
-            <path 
-              d="M0,500 Q100,480 200,500 T400,500 T600,500 T800,500 T1000,500 T1200,500" 
-              className="wave-line-3"
-            />
-            <path 
-              d="M0,350 Q250,320 500,350 T1000,350 T1200,350" 
-              className="wave-line-4"
-            />
-            <path 
-              d="M0,550 Q180,530 360,550 T720,550 T1200,550" 
-              className="wave-line-5"
-            />
-            
-            {/* Animated particle dots */}
-            <circle cx="50" cy="400" r="1.5" className="particle-dot" />
-            <circle cx="150" cy="450" r="1" className="particle-dot" />
-            <circle cx="250" cy="500" r="1.2" className="particle-dot" />
-            <circle cx="350" cy="350" r="0.8" className="particle-dot" />
-            <circle cx="450" cy="550" r="1.3" className="particle-dot" />
-            <circle cx="550" cy="400" r="1" className="particle-dot" />
-            <circle cx="650" cy="450" r="1.1" className="particle-dot" />
-            <circle cx="750" cy="500" r="0.9" className="particle-dot" />
-          </svg>
-        </div>
-        
-        {/* Subtle overlay for content readability */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/10 to-black/40"></div>
-        
-        {/* Bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent"></div>
-      </div>
+      {/* Animated Gradient Background */}
+      <div className="animated-bg"></div>
 
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-6 md:p-8">
