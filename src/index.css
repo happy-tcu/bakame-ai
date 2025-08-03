@@ -10,93 +10,85 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Company brand colors converted to HSL - Default to dark theme */
-    --background: 0 0% 3%;           /* Very dark background */
-    --foreground: 0 0% 98%;          /* Near white text */
+    --background: 0 0% 0%;      /* Black main background */
+    --foreground: 0 0% 100%;    /* White main text */
 
-    --card: 220 26% 8%;              /* Dark blue-gray cards */
-    --card-foreground: 0 0% 98%;     /* White text on cards */
+    --card: 214 58% 11%;        /* Dark blue cards (#081a2e) */
+    --card-foreground: 0 0% 100%; /* White text on cards */
 
-    --popover: 220 26% 8%;           /* Dark blue-gray popovers */
-    --popover-foreground: 0 0% 98%;  /* White text on popovers */
+    --popover: 214 58% 11%;     /* Dark blue popovers */
+    --popover-foreground: 0 0% 100%; /* White text on popovers */
 
-    --primary: 142 76% 36%;          /* Green primary for education theme */
-    --primary-foreground: 0 0% 98%;  /* White text on primary */
+    --primary: 0 0% 100%;       /* White primary */
+    --primary-foreground: 0 0% 0%; /* Black text on primary */
 
-    --secondary: 217 91% 60%;        /* Blue secondary */
-    --secondary-foreground: 0 0% 98%; /* White text on secondary */
+    --secondary: 27 100% 65%; /* Orange secondary (#ff914d) */
+    --secondary-foreground: 0 0% 100%; /* White text on orange */
 
-    --accent: 142 70% 45%;           /* Lighter green accent */
-    --accent-foreground: 0 0% 3%;    /* Dark text on accent */
+    --muted: 214 40% 15%;     /* Dark muted */
+    --muted-foreground: 0 0% 65%; /* Light gray text */
 
-    --muted: 220 26% 12%;            /* Muted backgrounds */
-    --muted-foreground: 0 0% 65%;    /* Light gray text */
+    --accent: 218 91% 42%;    /* Blue accent (#0d4dcc) */
+    --accent-foreground: 0 0% 100%; /* White text on blue */
 
-    --destructive: 0 84% 60%;        /* Red for destructive actions */
-    --destructive-foreground: 0 0% 98%; /* White text on red */
+    --destructive: 0 84% 60%; /* Red for destructive actions */
+    --destructive-foreground: 0 0% 100%; /* White text on red */
 
-    --border: 220 26% 15%;           /* Border color */
-    --input: 220 26% 12%;            /* Input backgrounds */
-    --ring: 142 76% 36%;             /* Green focus rings */
+    --border: 214 40% 20%;    /* Dark borders */
+    --input: 214 40% 15%;     /* Dark input backgrounds */
+    --ring: 218 91% 42%;      /* Blue focus rings */
 
-    --success: 142 76% 36%;          /* Success green */
-    --warning: 38 92% 50%;           /* Warning orange */
-    --info: 217 91% 60%;             /* Info blue */
+    --radius: 0.5rem;
 
-    --radius: 0.75rem;
-
-    /* Sidebar colors */
-    --sidebar-background: 220 26% 6%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 142 76% 36%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 217 91% 60%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 220 26% 15%;
-    --sidebar-ring: 142 76% 36%;
+    /* Company dark blue for sidebar (#081a2e) */
+    --sidebar-background: 214 58% 11%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 27 100% 65%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 214 40% 20%;
+    --sidebar-ring: 218 91% 42%;
   }
 
   .dark {
-    /* Dark mode: Enhanced education-focused colors */
-    --background: 0 0% 3%;            /* Very dark background */
-    --foreground: 0 0% 98%;           /* Near white text */
+    /* Dark mode: Black background, white text */
+    --background: 0 0% 0%;    /* Black background */
+    --foreground: 0 0% 100%;  /* White text */
 
-    --card: 220 26% 8%;               /* Dark blue-gray cards */
-    --card-foreground: 0 0% 98%;      /* White text on cards */
+    --card: 214 58% 11%;      /* Dark blue cards (#081a2e) */
+    --card-foreground: 0 0% 100%; /* White text on cards */
 
-    --popover: 220 26% 8%;            /* Dark blue-gray popovers */
-    --popover-foreground: 0 0% 98%;   /* White text on popovers */
+    --popover: 214 58% 11%;   /* Dark blue popovers */
+    --popover-foreground: 0 0% 100%; /* White text on popovers */
 
-    --primary: 142 76% 36%;           /* Green primary for education */
-    --primary-foreground: 0 0% 98%;   /* White text on primary */
+    --primary: 0 0% 100%;     /* White primary in dark mode */
+    --primary-foreground: 0 0% 0%; /* Black text on white */
 
-    --secondary: 217 91% 60%;         /* Blue secondary */
-    --secondary-foreground: 0 0% 98%; /* White text on secondary */
+    --secondary: 27 100% 65%; /* Orange secondary */
+    --secondary-foreground: 0 0% 0%; /* Black text on orange */
 
-    --accent: 142 70% 45%;            /* Lighter green accent */
-    --accent-foreground: 0 0% 3%;     /* Dark text on accent */
+    --muted: 214 40% 15%;     /* Dark muted */
+    --muted-foreground: 0 0% 65%; /* Light gray text */
 
-    --muted: 220 26% 12%;             /* Muted backgrounds */
-    --muted-foreground: 0 0% 65%;     /* Light gray text */
+    --accent: 218 91% 42%;    /* Blue accent */
+    --accent-foreground: 0 0% 100%; /* White text on blue */
 
-    --destructive: 0 84% 60%;         /* Red for destructive actions */
-    --destructive-foreground: 0 0% 98%; /* White text on red */
+    --destructive: 0 84% 60%; /* Red for destructive actions */
+    --destructive-foreground: 0 0% 100%; /* White text on red */
 
-    --border: 220 26% 15%;            /* Border color */
-    --input: 220 26% 12%;             /* Input backgrounds */
-    --ring: 142 76% 36%;              /* Green focus rings */
+    --border: 214 40% 20%;    /* Dark borders */
+    --input: 214 40% 15%;     /* Dark input backgrounds */
+    --ring: 218 91% 42%;      /* Blue focus rings */
 
-    --success: 142 76% 36%;           /* Success green */
-    --warning: 38 92% 50%;            /* Warning orange */
-    --info: 217 91% 60%;              /* Info blue */
-
-    --sidebar-background: 220 26% 6%; /* Darker sidebar */
-    --sidebar-foreground: 0 0% 98%;   /* White sidebar text */
-    --sidebar-primary: 142 76% 36%;   /* Green sidebar primary */
-    --sidebar-primary-foreground: 0 0% 98%; /* White text on green */
-    --sidebar-accent: 217 91% 60%;    /* Blue sidebar accent */
-    --sidebar-accent-foreground: 0 0% 98%; /* White text on blue */
-    --sidebar-border: 220 26% 15%;    /* Sidebar borders */
-    --sidebar-ring: 142 76% 36%;      /* Green sidebar rings */
+    --sidebar-background: 214 58% 11%; /* Dark blue sidebar */
+    --sidebar-foreground: 0 0% 100%;   /* White sidebar text */
+    --sidebar-primary: 0 0% 100%;      /* White sidebar primary */
+    --sidebar-primary-foreground: 0 0% 0%; /* Black text on white */
+    --sidebar-accent: 27 100% 65%;     /* Orange sidebar accent */
+    --sidebar-accent-foreground: 0 0% 0%; /* Black text on orange */
+    --sidebar-border: 214 40% 20%;     /* Dark sidebar borders */
+    --sidebar-ring: 218 91% 42%;       /* Blue sidebar rings */
   }
 }
 
