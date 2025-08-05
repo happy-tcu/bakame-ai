@@ -9,6 +9,7 @@ import TypingAnimation from '@/components/TypingAnimation';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import VideoModal from '@/components/VideoModal';
 import FAQ from '@/components/FAQ';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
@@ -84,6 +85,7 @@ const Index = () => {
           <Link to="/about" className="text-white hover:text-green-400 transition-colors">About</Link>
           <Link to="/team" className="text-white hover:text-green-400 transition-colors">Team</Link>
           <Link to="/contact" className="text-white hover:text-green-400 transition-colors">Contact</Link>
+          <ThemeToggle />
         </div>
 
         {/* Mobile menu button */}
@@ -115,6 +117,9 @@ const Index = () => {
             <Link to="/about" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">About</Link>
             <Link to="/team" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Team</Link>
             <Link to="/contact" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Contact</Link>
+            <div className="pt-4">
+              <ThemeToggle />
+            </div>
             <Button onClick={() => {
           closeMenu();
           openEarlyAccess();
