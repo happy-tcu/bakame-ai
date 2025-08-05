@@ -47,16 +47,16 @@ const GovernmentUseCases = () => {
 
   return (
     <div className="mb-20">
-      <h2 className="text-3xl font-bold mb-12 text-center animate-fade-in">Government Use Cases</h2>
+      <h2 className="text-3xl font-bold mb-12 text-center animate-fade-in text-foreground">Government Use Cases</h2>
       <div className="space-y-6">
         {useCases.map((useCase, index) => (
           <div 
             key={useCase.id}
-            className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-500 animate-fade-in"
+            className="bg-card/50 backdrop-blur-sm rounded-xl border border-border hover:border-border/50 transition-all duration-500 animate-fade-in"
             style={{animationDelay: `${index * 0.1}s`}}
           >
             <div 
-              className="p-8 cursor-pointer hover:bg-white/5 transition-all duration-300"
+              className="p-8 cursor-pointer hover:bg-card transition-all duration-300"
               onClick={() => toggleUseCase(useCase.id)}
             >
               <div className="flex justify-between items-center">
@@ -69,7 +69,7 @@ const GovernmentUseCases = () => {
                   />
                 </h3>
               </div>
-              <p className="text-white/70 mt-4 transition-all duration-300">
+              <p className="text-muted-foreground mt-4 transition-all duration-300">
                 {useCase.description}
               </p>
             </div>
@@ -80,14 +80,14 @@ const GovernmentUseCases = () => {
               <div className="px-8 pb-8">
                 <div className="grid md:grid-cols-3 gap-4 mt-6">
                   {useCase.subcategories.map((sub, subIndex) => (
-                    <div 
-                      key={subIndex}
-                      className="bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300 hover:scale-105"
-                      style={{animationDelay: `${subIndex * 0.1}s`}}
-                    >
-                      <h4 className={`font-semibold text-${useCase.color}-300 mb-2`}>{sub.title}</h4>
-                      <p className="text-white/60 text-sm">{sub.description}</p>
-                    </div>
+                  <div 
+                    key={subIndex}
+                    className="bg-card rounded-lg p-4 hover:bg-muted transition-all duration-300 hover:scale-105"
+                    style={{animationDelay: `${subIndex * 0.1}s`}}
+                  >
+                    <h4 className={`font-semibold text-${useCase.color}-400 mb-2`}>{sub.title}</h4>
+                    <p className="text-muted-foreground text-sm">{sub.description}</p>
+                  </div>
                   ))}
                 </div>
               </div>

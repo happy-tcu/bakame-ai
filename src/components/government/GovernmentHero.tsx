@@ -10,7 +10,7 @@ const GovernmentHero = () => {
       <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent animate-fade-in" style={{animationDelay: '0.2s'}}>
         Government Solutions
       </h1>
-      <p className="text-xl text-white/70 max-w-3xl mx-auto animate-fade-in" style={{animationDelay: '0.4s'}}>
+      <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{animationDelay: '0.4s'}}>
         Secure, accessible, and reliable IVR systems that bring government services directly to citizens, regardless of location or connectivity.
       </p>
     </div>

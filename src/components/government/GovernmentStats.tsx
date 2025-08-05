@@ -63,18 +63,18 @@ const GovernmentStats = () => {
 
   return (
     <div className="mb-20" ref={statsRef}>
-      <h2 className="text-3xl font-bold mb-12 text-center animate-fade-in">Impact & Benefits</h2>
+      <h2 className="text-3xl font-bold mb-12 text-center animate-fade-in text-foreground">Impact & Benefits</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, index) => (
           <div 
             key={stat.key}
-            className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 hover:scale-105 hover:bg-white/10 transition-all duration-500 animate-fade-in group"
+            className="text-center bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-border/50 hover:scale-105 hover:bg-card transition-all duration-500 animate-fade-in group"
             style={{animationDelay: `${index * 0.1}s`}}
           >
             <div className={`text-3xl font-bold text-${stat.color}-400 mb-2 group-hover:scale-110 transition-transform duration-300`}>
               {animatedCounts[stat.key as keyof typeof animatedCounts]}{stat.suffix}
             </div>
-            <div className="text-white/70 group-hover:text-white/90 transition-colors duration-300">{stat.label}</div>
+            <div className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{stat.label}</div>
           </div>
         ))}
       </div>
