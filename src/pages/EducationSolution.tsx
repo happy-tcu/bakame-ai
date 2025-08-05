@@ -62,7 +62,7 @@ const EducationSolution = () => {
                   <feature.icon className={`w-6 h-6 text-${feature.color}-400`} />
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-white/70">{feature.description}</p>
+                <p className="text-muted-foreground">{feature.description}</p>
                 <div className="mt-4 w-full bg-white/10 rounded-full h-1">
                   <div className={`h-1 bg-${feature.color}-400 rounded-full transition-all duration-1000 ${activeCard === index ? 'w-full' : 'w-0'}`}></div>
                 </div>
@@ -99,8 +99,8 @@ const EducationSolution = () => {
                   </div>
                   <div className="flex-1">
                     <h3 className={`text-2xl font-semibold mb-4 text-${useCase.color}-400`}>{useCase.title}</h3>
-                    <p className="text-white/70 mb-4">{useCase.description}</p>
-                    <ul className="list-disc list-inside text-white/60 space-y-2">
+                    <p className="text-muted-foreground mb-4">{useCase.description}</p>
+                    <ul className="list-disc list-inside text-muted-foreground space-y-2">
                       {useCase.features.map((feature, featureIndex) => <li key={featureIndex} className="flex items-center space-x-2">
                           <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
                           <span>{feature}</span>
@@ -123,7 +123,7 @@ const EducationSolution = () => {
               </h3>
               <div className="space-y-4">
                 {["Access education from anywhere, even without internet", "Learn in their native language", "No need for expensive devices or data plans", "Personalized learning experiences"].map((benefit, index) => <div key={index} className={`bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300 delay-${index * 100} hover:scale-105`}>
-                    <span className="text-white/80 leading-relaxed">{benefit}</span>
+                    <span className="text-foreground leading-relaxed">{benefit}</span>
                   </div>)}
               </div>
             </div>
@@ -135,7 +135,7 @@ const EducationSolution = () => {
               </h3>
               <div className="space-y-4">
                 {["Reach students in remote areas", "Reduce infrastructure costs", "Automate administrative tasks", "Improve student engagement and retention"].map((benefit, index) => <div key={index} className={`bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300 delay-${index * 100} hover:scale-105`}>
-                    <span className="text-white/80 leading-relaxed">{benefit}</span>
+                    <span className="text-foreground leading-relaxed">{benefit}</span>
                   </div>)}
               </div>
             </div>
@@ -147,7 +147,7 @@ const EducationSolution = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 animate-pulse"></div>
           <div className="relative z-10">
             <h2 className="text-3xl font-bold mb-6">Ready to Transform Education?</h2>
-            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Join schools and universities already using Bakame AI to provide accessible, offline education to their students.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

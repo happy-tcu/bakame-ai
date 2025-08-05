@@ -166,8 +166,8 @@ const EnterpriseSolution = () => {
                 <div className={`w-12 h-12 bg-${item.color}-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <item.icon className={`w-6 h-6 text-${item.color}-400 group-hover:animate-pulse`} />
                 </div>
-                <h3 className="text-lg font-semibold mb-3 group-hover:text-white transition-colors duration-300">{item.title}</h3>
-                <p className="text-white/70 text-sm group-hover:text-white/90 transition-colors duration-300">
+                <h3 className="text-lg font-semibold mb-3 group-hover:text-foreground transition-colors duration-300">{item.title}</h3>
+                <p className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-300">
                   {item.description}
                 </p>
               </div>)}
@@ -187,12 +187,12 @@ const EnterpriseSolution = () => {
                       {useCase.title}
                     </h3>
                     <div className={`transform transition-transform duration-300 ${activeUseCase === index ? 'rotate-180' : ''}`}>
-                      <svg className="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
                   </div>
-                  <p className="text-white/70 mt-4 group-hover:text-white/90 transition-colors duration-300">
+                  <p className="text-muted-foreground mt-4 group-hover:text-foreground transition-colors duration-300">
                     {useCase.description}
                   </p>
                 </div>
@@ -204,7 +204,7 @@ const EnterpriseSolution = () => {
                     animationDelay: `${itemIndex * 0.1}s`
                   }}>
                           <h4 className={`font-semibold text-${useCase.color}-300 mb-2`}>{item.title}</h4>
-                          <p className="text-white/60 text-sm">{item.desc}</p>
+                          <p className="text-muted-foreground text-sm">{item.desc}</p>
                         </div>)}
                     </div>
                   </div>
@@ -243,7 +243,7 @@ const EnterpriseSolution = () => {
                 <div className={`text-3xl font-bold text-${stat.color}-400 mb-2 group-hover:scale-110 transition-transform duration-300`}>
                   {stat.value}{stat.suffix}
                 </div>
-                <div className="text-white/70 group-hover:text-white/90 transition-colors duration-300">{stat.label}</div>
+                <div className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{stat.label}</div>
               </div>)}
           </div>
         </div>
@@ -251,7 +251,7 @@ const EnterpriseSolution = () => {
         {/* CTA Section */}
         <div className="text-center bg-white/5 backdrop-blur-sm rounded-3xl p-12 border border-white/10 hover:border-white/20 transition-all duration-500 animate-fade-in">
           <h2 className="text-3xl font-bold mb-6">Scale Your Business with AI</h2>
-          <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Join leading enterprises already using Bakame AI to transform their customer experience and operational efficiency.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
