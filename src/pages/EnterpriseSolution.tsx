@@ -97,19 +97,19 @@ const EnterpriseSolution = () => {
       desc: "Automated scheduling and calendar integration"
     }]
   }];
-  return <div className="min-h-screen bg-black text-white overflow-x-hidden">
+  return <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10 animate-fade-in">
+      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border animate-fade-in">
         <div className="flex items-center space-x-4">
-          <button onClick={() => navigate('/')} className="p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-110 group">
+          <button onClick={() => navigate('/')} className="p-2 hover:bg-muted rounded-lg transition-all duration-300 hover:scale-110 group">
             <ArrowLeft className="w-5 h-5 group-hover:transform group-hover:-translate-x-1 transition-transform duration-300" />
           </button>
           <div className="text-2xl font-bold">Bakame Ai</div>
         </div>
         <div className="hidden md:flex space-x-8">
-          <a href="/blog" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Blog</a>
+          <a href="/blog" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Blog</a>
           
-          <a href="/team" className="text-white/70 hover:text-white transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Team</a>
+          <a href="/team" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Team</a>
           
         </div>
       </nav>
@@ -125,7 +125,7 @@ const EnterpriseSolution = () => {
         }}>
             Enterprise Solutions
           </h1>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto animate-fade-in" style={{
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{
           animationDelay: '0.4s'
         }}>
             Scalable, secure, and reliable IVR systems that transform customer service and internal communications for businesses of all sizes.

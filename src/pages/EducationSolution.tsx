@@ -12,17 +12,17 @@ const EducationSolution = () => {
     }, 4000);
     return () => clearInterval(interval);
   }, []);
-  return <div className="min-h-screen bg-black text-white overflow-hidden">
+  return <div className="min-h-screen bg-background text-foreground overflow-hidden">
       {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-white/10 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border backdrop-blur-sm sticky top-0 z-50">
         <div className="flex items-center space-x-4">
-          <button onClick={() => navigate('/')} className="p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-105">
+          <button onClick={() => navigate('/')} className="p-2 hover:bg-muted rounded-lg transition-all duration-300 hover:scale-105">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="text-2xl font-bold">Bakame Ai</div>
         </div>
         <div className="hidden md:flex space-x-8">
-          <a href="/blog" className="text-white/70 hover:text-white transition-colors hover:scale-105 transform duration-200">Blog</a>
+          <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors hover:scale-105 transform duration-200">Blog</a>
           
         </div>
       </nav>
@@ -33,7 +33,7 @@ const EducationSolution = () => {
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-fade-in">
             Education Solutions
           </h1>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto animate-fade-in">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in">
             Empowering educational institutions with offline-first IVR systems that work in any environment, from remote villages to urban campuses.
           </p>
         </div>
