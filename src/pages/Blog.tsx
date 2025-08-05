@@ -36,7 +36,7 @@ const Blog = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       {/* Enhanced space-time background */}
       <div className="absolute inset-0 overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -62,16 +62,16 @@ const Blog = () => {
       <div className="relative z-10">
         {/* Header */}
         <div className="container mx-auto px-6 py-8">
-          <a href="/" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
+          <a href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </a>
 
           <div className="mb-12">
-            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
               Blog
             </h1>
-            <p className="text-xl text-white/70 max-w-2xl">
+            <p className="text-xl text-muted-foreground max-w-2xl">
               Media coverage and recognition highlighting Bakame AI's innovation in AI solutions
             </p>
           </div>
@@ -82,22 +82,22 @@ const Blog = () => {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {mediaHits.map((hit) => (
               <a key={hit.id} href={hit.url} target="_blank" rel="noopener noreferrer" className="block">
-                <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group cursor-pointer h-full">
+                <Card className="bg-card/50 border-border backdrop-blur-sm hover:bg-card transition-all duration-300 group cursor-pointer h-full">
                   <CardHeader>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs text-blue-400 font-medium">{hit.category}</span>
-                      <span className="text-xs text-white/50">External Link</span>
+                      <span className="text-xs text-muted-foreground">External Link</span>
                     </div>
-                    <CardTitle className="text-xl text-white group-hover:text-blue-300 transition-colors">
+                    <CardTitle className="text-xl text-foreground group-hover:text-blue-300 transition-colors">
                       {hit.title}
                     </CardTitle>
-                    <CardDescription className="text-white/70">
+                    <CardDescription className="text-muted-foreground">
                       {hit.excerpt}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4 text-sm text-white/60">
+                      <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                         <div className="flex items-center">
                           <User className="h-4 w-4 mr-1" />
                           {hit.source}
@@ -107,7 +107,7 @@ const Blog = () => {
                           {hit.date}
                         </div>
                       </div>
-                      <ArrowRight className="h-4 w-4 text-white/40 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                      <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
                     </div>
                   </CardContent>
                 </Card>
@@ -117,7 +117,7 @@ const Blog = () => {
 
           {/* More Coverage */}
           <div className="text-center mt-12">
-            <p className="text-white/60 text-sm">
+            <p className="text-muted-foreground text-sm">
               More media coverage coming soon as Bakame AI continues to innovate
             </p>
           </div>
