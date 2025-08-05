@@ -37,12 +37,12 @@ const UnifiedIVRInterface: React.FC = () => {
   };
 
   const getStatusColor = () => {
-    if (!session) return 'bg-white/50';
+    if (!session) return 'bg-muted';
     switch (session.status) {
-      case 'connected': return isSpeaking ? 'bg-[#0d4dcc] animate-pulse' : 'bg-[#ff914d]';
-      case 'connecting': return 'bg-yellow-500 animate-pulse';
-      case 'error': return 'bg-red-500';
-      default: return 'bg-white/50';
+      case 'connected': return isSpeaking ? 'bg-accent animate-pulse' : 'bg-primary';
+      case 'connecting': return 'bg-secondary animate-pulse';
+      case 'error': return 'bg-destructive';
+      default: return 'bg-muted';
     }
   };
 
@@ -59,13 +59,13 @@ const UnifiedIVRInterface: React.FC = () => {
 
   if (showAnalytics) {
     return (
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-background text-foreground">
         <div className="container mx-auto p-6">
           <div className="flex items-center justify-between mb-6">
             <Button
               onClick={() => setShowAnalytics(false)}
               variant="outline"
-              className="border-white/30 text-white hover:bg-white/10"
+              className="border-border text-foreground hover:bg-muted"
             >
               ← Back to Chat
             </Button>
@@ -78,16 +78,16 @@ const UnifiedIVRInterface: React.FC = () => {
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-background text-foreground">
         <div className="container mx-auto p-6">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Bakame AI - English Learning Platform
             </h1>
             <Button
               onClick={() => setShowAnalytics(true)}
               variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 flex items-center gap-2"
+              className="border-border text-foreground hover:bg-muted flex items-center gap-2"
             >
               <BarChart3 className="w-4 h-4" />
               Analytics
@@ -103,13 +103,13 @@ const UnifiedIVRInterface: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
             <div className={`w-3 h-3 rounded-full ${getStatusColor()}`}></div>
-            <Badge variant="outline" className="border-white/30 text-white">
+            <Badge variant="outline" className="border-border text-foreground">
               {getConnectionStatus()}
             </Badge>
           </div>
@@ -118,7 +118,7 @@ const UnifiedIVRInterface: React.FC = () => {
               onClick={() => setShowAnalytics(true)}
               variant="outline"
               size="sm"
-              className="border-white/30 text-white hover:bg-white/10"
+              className="border-border text-foreground hover:bg-muted"
             >
               <BarChart3 className="w-4 h-4" />
             </Button>
@@ -126,7 +126,7 @@ const UnifiedIVRInterface: React.FC = () => {
               onClick={endSession}
               variant="outline"
               size="sm"
-              className="border-white/30 text-white hover:bg-white/10"
+              className="border-border text-foreground hover:bg-muted"
             >
               <PhoneOff className="w-4 h-4" />
             </Button>
@@ -134,16 +134,16 @@ const UnifiedIVRInterface: React.FC = () => {
         </div>
 
         {/* Main Chat Interface */}
-        <Card className="bg-[#081a2e]/80 backdrop-blur-md border-white/20 mb-6">
+        <Card className="bg-card/80 backdrop-blur-md border-border mb-6">
           <CardContent className="p-6">
             {/* Activity Indicators */}
             {session.mode !== 'http' && (
               <div className="flex justify-center gap-6 mb-6">
-                <div className={`flex items-center gap-2 ${isRecording ? 'text-[#ff914d]' : 'text-white/50'}`}>
+                <div className={`flex items-center gap-2 ${isRecording ? 'text-primary' : 'text-muted-foreground'}`}>
                   <Mic className={`w-5 h-5 ${isRecording ? 'animate-pulse' : ''}`} />
                   <span className="text-sm">You're Speaking</span>
                 </div>
-                <div className={`flex items-center gap-2 ${isSpeaking ? 'text-[#0d4dcc]' : 'text-white/50'}`}>
+                <div className={`flex items-center gap-2 ${isSpeaking ? 'text-accent' : 'text-muted-foreground'}`}>
                   <Volume2 className={`w-5 h-5 ${isSpeaking ? 'animate-pulse' : ''}`} />
                   <span className="text-sm">AI Teaching</span>
                 </div>
@@ -154,10 +154,10 @@ const UnifiedIVRInterface: React.FC = () => {
             <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
               {session.messages.length === 0 ? (
                 <div className="text-center py-8">
-                  <div className="text-white/50 mb-2">
+                  <div className="text-muted-foreground mb-2">
                     Connected via {session.mode.toUpperCase()}
                   </div>
-                  <div className="text-sm text-white/30">
+                  <div className="text-sm text-muted-foreground">
                     Start your English learning conversation...
                   </div>
                 </div>
@@ -167,28 +167,28 @@ const UnifiedIVRInterface: React.FC = () => {
                     key={index}
                     className={`p-4 rounded-lg ${
                       message.role === 'user'
-                        ? 'bg-gradient-to-r from-[#0d4dcc]/20 to-[#ff914d]/10 border border-[#0d4dcc]/30 ml-8'
-                        : 'bg-gradient-to-r from-[#ff914d]/20 to-[#0d4dcc]/10 border border-[#ff914d]/30 mr-8'
+                        ? 'bg-gradient-to-r from-accent/20 to-primary/10 border border-accent/30 ml-8'
+                        : 'bg-gradient-to-r from-primary/20 to-accent/10 border border-primary/30 mr-8'
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-2">
                       <span className={`text-sm font-medium ${
                         message.role === 'user'
-                          ? 'bg-gradient-to-r from-[#0d4dcc] to-[#ff914d] bg-clip-text text-transparent'
-                          : 'bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] bg-clip-text text-transparent'
+                          ? 'bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent'
+                          : 'bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent'
                       }`}>
                         {message.role === 'user' ? 'You' : 'Bakame AI'}
                       </span>
                       {message.type && (
-                        <Badge variant="outline" className="text-xs border-white/30 text-white/70">
+                        <Badge variant="outline" className="text-xs border-border text-muted-foreground">
                           {message.type}
                         </Badge>
                       )}
-                      <span className="text-xs text-white/50">
+                      <span className="text-xs text-muted-foreground">
                         {message.timestamp.toLocaleTimeString()}
                       </span>
                     </div>
-                    <p className="text-white/90">{message.content}</p>
+                    <p className="text-foreground">{message.content}</p>
                   </div>
                 ))
               )}
@@ -201,12 +201,12 @@ const UnifiedIVRInterface: React.FC = () => {
                 onChange={(e) => setCurrentInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message or question..."
-                className="flex-1 bg-white/10 border-white/20 text-white placeholder-white/50"
+                className="flex-1 bg-input border-border text-foreground placeholder-muted-foreground"
               />
               <Button
                 onClick={handleSendMessage}
                 disabled={!currentInput.trim()}
-                className="bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] hover:opacity-90"
+                className="bg-gradient-to-r from-primary to-accent hover:opacity-90"
               >
                 <Send className="w-4 h-4" />
               </Button>
@@ -219,31 +219,31 @@ const UnifiedIVRInterface: React.FC = () => {
           <Button
             onClick={() => sendMessage("Teach me new vocabulary words for business English")}
             variant="outline"
-            className="border-white/30 text-white hover:bg-white/10 p-4 h-auto"
+            className="border-border text-foreground hover:bg-muted p-4 h-auto"
           >
             <div className="text-left">
               <div className="font-medium">Vocabulary Practice</div>
-              <div className="text-sm text-white/70">Learn business English words</div>
+              <div className="text-sm text-muted-foreground">Learn business English words</div>
             </div>
           </Button>
           <Button
             onClick={() => sendMessage("Help me practice a job interview")}
             variant="outline"
-            className="border-white/30 text-white hover:bg-white/10 p-4 h-auto"
+            className="border-border text-foreground hover:bg-muted p-4 h-auto"
           >
             <div className="text-left">
               <div className="font-medium">Interview Practice</div>
-              <div className="text-sm text-white/70">Prepare for job interviews</div>
+              <div className="text-sm text-muted-foreground">Prepare for job interviews</div>
             </div>
           </Button>
           <Button
             onClick={() => sendMessage("Explain English grammar rules")}
             variant="outline"
-            className="border-white/30 text-white hover:bg-white/10 p-4 h-auto"
+            className="border-border text-foreground hover:bg-muted p-4 h-auto"
           >
             <div className="text-left">
               <div className="font-medium">Grammar Help</div>
-              <div className="text-sm text-white/70">Understanding English grammar</div>
+              <div className="text-sm text-muted-foreground">Understanding English grammar</div>
             </div>
           </Button>
         </div>

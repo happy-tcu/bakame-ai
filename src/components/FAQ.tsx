@@ -50,7 +50,7 @@ const FAQ = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
         Frequently Asked Questions
       </h2>
       
@@ -58,25 +58,25 @@ const FAQ = () => {
         {faqItems.map((item, index) => (
           <div 
             key={index}
-            className="bg-white/5 border-white/10 backdrop-blur-sm rounded-lg border overflow-hidden"
+            className="bg-card border-border backdrop-blur-sm rounded-lg border overflow-hidden"
           >
             <button
               onClick={() => toggleItem(index)}
-              className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-white/10 transition-all duration-200"
+              className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-all duration-200"
             >
-              <span className="text-white font-semibold pr-4">
+              <span className="text-foreground font-semibold pr-4">
                 {item.question}
               </span>
               {openItems.includes(index) ? (
-                <ChevronUp className="h-5 w-5 text-white/70 flex-shrink-0" />
+                <ChevronUp className="h-5 w-5 text-muted-foreground flex-shrink-0" />
               ) : (
-                <ChevronDown className="h-5 w-5 text-white/70 flex-shrink-0" />
+                <ChevronDown className="h-5 w-5 text-muted-foreground flex-shrink-0" />
               )}
             </button>
             
             {openItems.includes(index) && (
               <div className="px-6 pb-4">
-                <p className="text-white/70 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {item.answer}
                 </p>
               </div>
