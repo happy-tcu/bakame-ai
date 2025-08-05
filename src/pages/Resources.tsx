@@ -126,7 +126,7 @@ const Resources = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="flex items-center space-x-2">
           <Loader2 className="h-6 w-6 animate-spin" />
           <span>Loading resources...</span>
@@ -137,11 +137,11 @@ const Resources = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-red-400 mb-2">Error Loading Resources</h2>
-          <p className="text-white/70 mb-4">{error}</p>
-          <Button onClick={handleRefresh} variant="outline" className="border-white/20 text-white hover:bg-white/10">
+          <h2 className="text-2xl font-bold text-destructive mb-2">Error Loading Resources</h2>
+          <p className="text-muted-foreground mb-4">{error}</p>
+          <Button onClick={handleRefresh} variant="outline" className="border-border text-foreground hover:bg-muted">
             <RotateCcw className="h-4 w-4 mr-2" />
             Try Again
           </Button>
@@ -151,7 +151,7 @@ const Resources = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       {/* Enhanced space-time background */}
       <div className="absolute inset-0 overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -165,39 +165,39 @@ const Resources = () => {
             </filter>
           </defs>
           <g transform="translate(0,0)">
-            <path d="M0,25 Q25,20 50,25 T100,25" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
-            <path d="M0,50 Q25,45 50,50 T100,50" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.2"/>
-            <path d="M0,75 Q25,70 50,75 T100,75" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)"/>
+            <path d="M0,25 Q25,20 50,25 T100,25" fill="none" stroke="hsl(var(--primary) / 0.4)" strokeWidth="0.2" filter="url(#glow)"/>
+            <path d="M0,50 Q25,45 50,50 T100,50" fill="none" stroke="hsl(var(--accent) / 0.3)" strokeWidth="0.2"/>
+            <path d="M0,75 Q25,70 50,75 T100,75" fill="none" stroke="hsl(var(--primary) / 0.4)" strokeWidth="0.2" filter="url(#glow)"/>
           </g>
         </svg>
-        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-72 h-72 bg-accent/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <div className="relative z-10">
         {/* Header */}
         <div className="container mx-auto px-6 py-8">
-          <Link to="/" className="inline-flex items-center text-white/70 hover:text-white mb-8 transition-colors">
+          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
 
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                 Resources
               </h1>
               <Button
                 onClick={handleRefresh}
                 variant="outline"
                 size="sm"
-                className="border-white/30 text-white bg-white/5 hover:bg-white/10 hover:border-blue-400/50 backdrop-blur-sm transition-all duration-300"
+                className="border-border text-foreground bg-card/50 hover:bg-card backdrop-blur-sm transition-all duration-300"
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
                 Refresh
               </Button>
             </div>
-            <p className="text-xl text-white/70 max-w-2xl">
+            <p className="text-xl text-muted-foreground max-w-2xl">
               Tools, documentation, and assets to help you deploy and integrate our offline IVR solutions
             </p>
           </div>
@@ -228,9 +228,9 @@ const Resources = () => {
         <div className="container mx-auto px-6 pb-16">
           {Object.keys(groupedResources).length === 0 ? (
             <div className="text-center py-12">
-              <h3 className="text-xl font-semibold text-white/70 mb-2">No resources found</h3>
-              <p className="text-white/50 mb-4">Try adjusting your search or filters</p>
-              <Button onClick={handleClearFilters} variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <h3 className="text-xl font-semibold text-muted-foreground mb-2">No resources found</h3>
+              <p className="text-muted-foreground/70 mb-4">Try adjusting your search or filters</p>
+              <Button onClick={handleClearFilters} variant="outline" className="border-border text-foreground hover:bg-muted">
                 Clear All Filters
               </Button>
             </div>
@@ -238,9 +238,9 @@ const Resources = () => {
             <div className="space-y-12">
               {Object.entries(groupedResources).map(([category, categoryResources]) => (
                 <div key={category}>
-                  <h2 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                  <h2 className="text-2xl font-semibold text-foreground mb-6 flex items-center">
                     {category}
-                    <span className="ml-2 text-sm text-white/50 bg-white/10 px-2 py-1 rounded">
+                    <span className="ml-2 text-sm text-muted-foreground bg-muted px-2 py-1 rounded">
                       {categoryResources.length}
                     </span>
                   </h2>
@@ -273,23 +273,23 @@ const Resources = () => {
 
           {/* Contact Section */}
           <div className="mt-16 text-center">
-            <Card className="bg-white/5 border-white/10 backdrop-blur-sm max-w-2xl mx-auto hover:bg-white/10 transition-all duration-300">
+            <Card className="bg-card/50 border-border backdrop-blur-sm max-w-2xl mx-auto hover:bg-card/80 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-2xl text-white">Need Custom Solutions?</CardTitle>
-                <CardDescription className="text-white/70">
+                <CardTitle className="text-2xl text-foreground">Need Custom Solutions?</CardTitle>
+                <CardDescription className="text-muted-foreground">
                   Looking for custom IVR deployment or integration support? Our team is here to help.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link to="/contact">
-                    <Button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
+                    <Button className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
                       Contact Support
                     </Button>
                   </Link>
                   <Link to="/schedule-consultation">
                     <Button 
-                      className="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold hover:from-blue-600 hover:to-blue-700 border border-blue-400 shadow-lg shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto min-h-[44px] px-6 py-2 whitespace-nowrap"
+                      className="bg-gradient-to-r from-accent to-primary text-primary-foreground font-semibold hover:opacity-90 border border-border shadow-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto min-h-[44px] px-6 py-2 whitespace-nowrap"
                     >
                       Schedule Consultation
                     </Button>
