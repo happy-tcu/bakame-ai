@@ -26,7 +26,7 @@ const Index = () => {
   const openVideo = () => {
     setIsVideoOpen(true);
   };
-  return <div className="min-h-screen bg-black text-white relative overflow-hidden">
+  return <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       {/* Enhanced space-time background */}
       <div className="absolute inset-0 overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -62,35 +62,35 @@ const Index = () => {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="text-white hover:text-green-400 transition-colors">Home</Link>
-          <Link to="/ivr" className="text-white hover:text-green-400 transition-colors">Try English Learning</Link>
+          <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
+          <Link to="/ivr" className="text-foreground hover:text-primary transition-colors">Try English Learning</Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <span className="flex items-center text-white hover:text-green-400 transition-colors cursor-pointer">
+              <span className="flex items-center text-foreground hover:text-primary transition-colors cursor-pointer">
                 Use Cases <ChevronDown className="ml-1 h-4 w-4" />
               </span>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-gray-900 border-white/10 z-50">
+            <DropdownMenuContent className="bg-background border-border z-50">
               <DropdownMenuItem>
-                <span className="text-white">Government</span>
+                <span className="text-foreground">Government</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <span className="text-white">Enterprise</span>
+                <span className="text-foreground">Enterprise</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <span className="text-white">Education</span>
+                <span className="text-foreground">Education</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link to="/about" className="text-white hover:text-green-400 transition-colors">About</Link>
-          <Link to="/team" className="text-white hover:text-green-400 transition-colors">Team</Link>
-          <Link to="/contact" className="text-white hover:text-green-400 transition-colors">Contact</Link>
+          <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
+          <Link to="/team" className="text-foreground hover:text-primary transition-colors">Team</Link>
+          <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
           <ThemeToggle />
         </div>
 
         {/* Mobile menu button */}
         <div className="md:hidden">
-          <button onClick={toggleMenu} className="text-white hover:text-green-400 transition-colors">
+          <button onClick={toggleMenu} className="text-foreground hover:text-primary transition-colors">
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -102,21 +102,21 @@ const Index = () => {
       </nav>
 
       {/* Mobile Navigation Menu */}
-      {isMenuOpen && <div className="md:hidden fixed inset-0 z-40 bg-black bg-opacity-95 backdrop-blur-sm">
+      {isMenuOpen && <div className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-sm">
           <div className="flex flex-col items-center justify-center h-full space-y-8">
-            <Link to="/" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Home</Link>
-            <Link to="/ivr" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Try English Learning</Link>
+            <Link to="/" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Home</Link>
+            <Link to="/ivr" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Try English Learning</Link>
             <div className="text-center">
-              <div className="text-xl text-white mb-4">Use Cases</div>
+              <div className="text-xl text-foreground mb-4">Use Cases</div>
               <div className="space-y-4">
-                <span className="block text-white">Government</span>
-                <span className="block text-white">Enterprise</span>
-                <span className="block text-white">Education</span>
+                <span className="block text-foreground">Government</span>
+                <span className="block text-foreground">Enterprise</span>
+                <span className="block text-foreground">Education</span>
               </div>
             </div>
-            <Link to="/about" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">About</Link>
-            <Link to="/team" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Team</Link>
-            <Link to="/contact" onClick={closeMenu} className="text-2xl text-white hover:text-green-400 transition-colors">Contact</Link>
+            <Link to="/about" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">About</Link>
+            <Link to="/team" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Team</Link>
+            <Link to="/contact" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Contact</Link>
             <div className="pt-4">
               <ThemeToggle />
             </div>
@@ -134,15 +134,15 @@ const Index = () => {
         {/* Hero Section */}
         <section className="container mx-auto px-6 py-20 text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent leading-tight">
               Learn English with AI Voice Tutor
             </h1>
             
-            <div className="text-xl md:text-2xl text-white/80 mb-8 h-16 flex items-center justify-center">
-              <TypingAnimation text="Your personal English tutor powered by AI - practice speaking, learn vocabulary, and improve pronunciation." className="text-white/80" />
+            <div className="text-xl md:text-2xl text-muted-foreground mb-8 h-16 flex items-center justify-center">
+              <TypingAnimation text="Your personal English tutor powered by AI - practice speaking, learn vocabulary, and improve pronunciation." className="text-muted-foreground" />
             </div>
             
-            <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
               Bakame AI is an English learning platform that helps you practice conversation, 
               build vocabulary, and improve pronunciation through real-time voice interaction. 
               Perfect for learners who want to speak English confidently.
@@ -162,17 +162,17 @@ const Index = () => {
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               <div className="px-4 py-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg border border-white/30 flex items-center gap-2">
                 <Languages className="h-4 w-4 text-green-400" />
-                <span className="text-white/80">Conversation Practice</span>
+                <span className="text-muted-foreground">Conversation Practice</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-green-500/20 rounded-lg border border-white/30 flex items-center gap-2">
                 <BookOpen className="h-4 w-4 text-blue-400" />
-                <span className="text-white/80">Vocabulary Building</span>
+                <span className="text-muted-foreground">Vocabulary Building</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg border border-white/30 flex items-center gap-2">
                 <Headphones className="h-4 w-4 text-purple-400" />
-                <span className="text-white/80">Pronunciation Help</span>
+                <span className="text-muted-foreground">Pronunciation Help</span>
               </div>
             </div>
           </div>
@@ -181,66 +181,66 @@ const Index = () => {
         {/* Core Learning Modules */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
               Core Learning Modules
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
                   <Languages className="h-8 w-8 text-green-400 mb-2" />
-                  <CardTitle className="text-white">English Practice</CardTitle>
+                  <CardTitle className="text-card-foreground">English Practice</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-white/70">
+                  <CardDescription className="text-muted-foreground">
                     Grammar correction, pronunciation feedback, and conversation practice to improve your English fluency.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
                   <Brain className="h-8 w-8 text-blue-400 mb-2" />
-                  <CardTitle className="text-white">Math Module</CardTitle>
+                  <CardTitle className="text-card-foreground">Math Module</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-white/70">
+                  <CardDescription className="text-muted-foreground">
                     Mental math problems with adaptive difficulty progression to strengthen your mathematical skills.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
                   <BookOpen className="h-8 w-8 text-purple-400 mb-2" />
-                  <CardTitle className="text-white">Reading Comprehension</CardTitle>
+                  <CardTitle className="text-card-foreground">Reading Comprehension</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-white/70">
+                  <CardDescription className="text-muted-foreground">
                     Story-based learning with questions to improve your reading and understanding skills.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
                   <MessageSquare className="h-8 w-8 text-orange-400 mb-2" />
-                  <CardTitle className="text-white">Debate Practice</CardTitle>
+                  <CardTitle className="text-card-foreground">Debate Practice</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-white/70">
+                  <CardDescription className="text-muted-foreground">
                     Structured debate topics with counter-arguments to enhance your critical thinking and communication.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
                   <Target className="h-8 w-8 text-red-400 mb-2" />
-                  <CardTitle className="text-white">General Q&A</CardTitle>
+                  <CardTitle className="text-card-foreground">General Q&A</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-white/70">
+                  <CardDescription className="text-muted-foreground">
                     Multi-topic conversations and help system for general knowledge and assistance.
                   </CardDescription>
                 </CardContent>
@@ -252,7 +252,7 @@ const Index = () => {
         {/* Technical Infrastructure */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
               Technical Infrastructure
             </h2>
             
@@ -617,7 +617,7 @@ const Index = () => {
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-white/10 bg-white/5 backdrop-blur-sm">
+        <footer className="border-t border-border bg-card/50 backdrop-blur-sm">
           <div className="container mx-auto px-6 py-12">
             <div className="grid md:grid-cols-4 gap-8">
               <div>
