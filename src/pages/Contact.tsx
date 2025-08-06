@@ -35,20 +35,20 @@ const Contact = () => {
                   <p className="text-muted-foreground mb-4">
                     Our support team typically responds within 24 hours during business days.
                   </p>
-                  <ul className="space-y-2 text-muted-foreground border border-border/50 rounded-lg p-4 bg-background/50">
-                    <li className="flex items-center hover:text-foreground transition-colors">
+                  <ul className="space-y-3 text-muted-foreground">
+                    <li className="flex items-center hover:text-foreground transition-colors p-3 border border-border/50 rounded-lg bg-background/30 hover:bg-background/50">
                       <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
                       Technical support
                     </li>
-                    <li className="flex items-center hover:text-foreground transition-colors">
+                    <li className="flex items-center hover:text-foreground transition-colors p-3 border border-border/50 rounded-lg bg-background/30 hover:bg-background/50">
                       <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
                       Implementation guidance
                     </li>
-                    <li className="flex items-center hover:text-foreground transition-colors">
+                    <li className="flex items-center hover:text-foreground transition-colors p-3 border border-border/50 rounded-lg bg-background/30 hover:bg-background/50">
                       <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
                       Custom solution design
                     </li>
-                    <li className="flex items-center hover:text-foreground transition-colors">
+                    <li className="flex items-center hover:text-foreground transition-colors p-3 border border-border/50 rounded-lg bg-background/30 hover:bg-background/50">
                       <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
                       Training and documentation
                     </li>
