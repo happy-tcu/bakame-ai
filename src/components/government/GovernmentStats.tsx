@@ -55,10 +55,10 @@ const GovernmentStats = () => {
   };
 
   const stats = [
-    { key: 'service', label: "Reduced Service Time", color: "green", suffix: "%" },
-    { key: 'satisfaction', label: "Citizen Satisfaction", color: "blue", suffix: "%" },
-    { key: 'savings', label: "Cost Savings", color: "purple", suffix: "%" },
-    { key: 'availability', label: "Service Availability", color: "orange", suffix: "/7" }
+    { key: 'service', label: "Reduced Service Time", suffix: "%" },
+    { key: 'satisfaction', label: "Citizen Satisfaction", suffix: "%" },
+    { key: 'savings', label: "Cost Savings", suffix: "%" },
+    { key: 'availability', label: "Service Availability", suffix: "/7" }
   ];
 
   return (
@@ -71,7 +71,7 @@ const GovernmentStats = () => {
             className="text-center bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-border/50 hover:scale-105 hover:bg-card transition-all duration-500 animate-fade-in group"
             style={{animationDelay: `${index * 0.1}s`}}
           >
-            <div className={`text-3xl font-bold text-${stat.color}-400 mb-2 group-hover:scale-110 transition-transform duration-300`}>
+            <div className="text-3xl font-bold text-foreground mb-2 group-hover:scale-110 transition-transform duration-300">
               {animatedCounts[stat.key as keyof typeof animatedCounts]}{stat.suffix}
             </div>
             <div className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{stat.label}</div>
