@@ -11,9 +11,9 @@ const Contact = () => {
 
       <div className="relative z-10">
         <div className="container mx-auto px-6 py-12">
-          <Link to="/resources" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors">
+          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Resources
+            Back to Home
           </Link>
 
           <div className="max-w-4xl mx-auto">
