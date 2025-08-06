@@ -402,7 +402,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <BookOpen className="h-8 w-8 text-accent mb-2" />
+                  <BookOpen className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Vocabulary Building</CardTitle>
                 </CardHeader>
                 <CardContent>
