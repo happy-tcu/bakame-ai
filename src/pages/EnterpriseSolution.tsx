@@ -237,7 +237,7 @@ const EnterpriseSolution = () => {
             suffix: "%",
             label: "Customer Satisfaction",
             color: "orange"
-          }].map((stat, index) => <div key={index} className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-102 hover:bg-white/8 hover:shadow-lg hover:shadow-white/5 group animate-fade-in" style={{
+          }].map((stat, index) => <div key={index} className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-primary/30 transition-all duration-300 hover:bg-gradient-to-br hover:from-white/8 hover:to-primary/5 group animate-fade-in relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/5 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700" style={{
             animationDelay: `${index * 0.1}s`
           }}>
                 <div className={`text-3xl font-bold text-${stat.color}-400 mb-2 group-hover:scale-110 transition-transform duration-300`}>
