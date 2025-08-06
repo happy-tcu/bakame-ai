@@ -117,7 +117,7 @@ const EnterpriseSolution = () => {
       <div className="container mx-auto px-6 py-20">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 animate-float animate-pulse-glow">
+          <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Building2 className="w-8 h-8 text-purple-400" />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent animate-fade-in" style={{
