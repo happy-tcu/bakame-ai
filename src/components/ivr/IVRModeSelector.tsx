@@ -98,7 +98,7 @@ const IVRModeSelector: React.FC<IVRModeSelectorProps> = ({ onModeSelect, isConne
       <div className="text-center mt-8">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#ff914d]/10 to-[#0d4dcc]/10 rounded-full border border-white/20">
           <Wifi className="w-4 h-4 text-[#0d4dcc]" />
-          <span className="text-sm text-white/80">Connected to Devin Infrastructure</span>
+          <span className="text-sm text-foreground">Connected to Devin Infrastructure</span>
         </div>
       </div>
     </div>
