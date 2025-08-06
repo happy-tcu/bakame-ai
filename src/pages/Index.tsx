@@ -264,6 +264,18 @@ const Index = () => {
                   </CardDescription>
                 </CardContent>
               </Card>
+
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+                <CardHeader>
+                  <Building className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Business Solutions</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Enterprise support, customer service automation, and professional communication assistance.
+                  </CardDescription>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
