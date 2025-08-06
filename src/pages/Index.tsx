@@ -64,7 +64,7 @@ const Index = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
-          <Link to="/ivr" className="text-foreground hover:text-primary transition-colors">Try English Learning</Link>
+          <Link to="/ivr" className="text-foreground hover:text-primary transition-colors">Try Prototype</Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <span className="flex items-center text-foreground hover:text-primary transition-colors cursor-pointer">
