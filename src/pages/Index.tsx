@@ -10,6 +10,7 @@ import EarlyAccessModal from '@/components/EarlyAccessModal';
 import VideoModal from '@/components/VideoModal';
 import FAQ from '@/components/FAQ';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import LiveChat from '@/components/chat/LiveChat';
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
@@ -667,6 +668,9 @@ const Index = () => {
       <EarlyAccessModal isOpen={isEarlyAccessOpen} onClose={() => setIsEarlyAccessOpen(false)} />
       
       <VideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} videoId="dQw4w9WgXcQ" />
+      
+      {/* Live Chat */}
+      <LiveChat />
     </div>;
 };
 export default Index;
