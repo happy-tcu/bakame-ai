@@ -131,55 +131,55 @@ export const ContactForm = ({ className = "" }: ContactFormProps) => {
   };
 
   return (
-    <div className={`bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 ${className}`}>
-      <h2 className="text-2xl font-bold text-white mb-6">Get in Touch</h2>
+    <div className={`bg-card backdrop-blur-sm rounded-3xl p-8 border border-border ${className}`}>
+      <h2 className="text-2xl font-bold text-card-foreground mb-6">Get in Touch</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <Label htmlFor="name" className="text-white">Name *</Label>
+            <Label htmlFor="name" className="text-foreground">Name *</Label>
             <Input
               id="name"
               value={formData.name}
               onChange={(e) => handleInputChange("name", e.target.value)}
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground"
               required
             />
           </div>
           <div>
-            <Label htmlFor="email" className="text-white">Email *</Label>
+            <Label htmlFor="email" className="text-foreground">Email *</Label>
             <Input
               id="email"
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange("email", e.target.value)}
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground"
               required
             />
           </div>
           <div>
-            <Label htmlFor="phone" className="text-white">Phone</Label>
+            <Label htmlFor="phone" className="text-foreground">Phone</Label>
             <Input
               id="phone"
               value={formData.phone}
               onChange={(e) => handleInputChange("phone", e.target.value)}
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground"
             />
           </div>
           <div>
-            <Label htmlFor="company" className="text-white">Company</Label>
+            <Label htmlFor="company" className="text-foreground">Company</Label>
             <Input
               id="company"
               value={formData.company}
               onChange={(e) => handleInputChange("company", e.target.value)}
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground"
             />
           </div>
         </div>
 
         <div>
-          <Label className="text-white">Solution Interest</Label>
+          <Label className="text-foreground">Solution Interest</Label>
           <Select value={formData.solution_type} onValueChange={(value) => handleInputChange("solution_type", value)}>
-            <SelectTrigger className="bg-white/10 border-white/20 text-white">
+            <SelectTrigger className="bg-input border-border text-foreground">
               <SelectValue placeholder="Select a solution" />
             </SelectTrigger>
             <SelectContent>
@@ -192,22 +192,22 @@ export const ContactForm = ({ className = "" }: ContactFormProps) => {
         </div>
 
         <div>
-          <Label htmlFor="subject" className="text-white">Subject</Label>
+          <Label htmlFor="subject" className="text-foreground">Subject</Label>
           <Input
             id="subject"
             value={formData.subject}
             onChange={(e) => handleInputChange("subject", e.target.value)}
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+            className="bg-input border-border text-foreground placeholder:text-muted-foreground"
           />
         </div>
 
         <div>
-          <Label htmlFor="message" className="text-white">Message *</Label>
+          <Label htmlFor="message" className="text-foreground">Message *</Label>
           <Textarea
             id="message"
             value={formData.message}
             onChange={(e) => handleInputChange("message", e.target.value)}
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/50 min-h-[120px]"
+            className="bg-input border-border text-foreground placeholder:text-muted-foreground min-h-[120px]"
             placeholder="Tell us about your needs..."
             required
           />
@@ -216,7 +216,7 @@ export const ContactForm = ({ className = "" }: ContactFormProps) => {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 disabled:opacity-50"
+          className="w-full bg-primary text-primary-foreground py-3 rounded-full font-semibold text-lg hover:bg-primary/90 transition-all duration-300 disabled:opacity-50"
         >
           {isSubmitting ? "Sending..." : "Send Message"}
         </Button>
