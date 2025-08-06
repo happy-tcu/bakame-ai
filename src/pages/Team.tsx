@@ -115,7 +115,7 @@ const Team = () => {
                       <img src={coach.image} alt={coach.name} className="w-full h-full object-cover grayscale" />
                     </div>
                     <h3 className="text-lg font-bold mb-1">{coach.name}</h3>
-                    <p className="text-secondary font-medium mb-3 uppercase tracking-wide">{coach.role}</p>
+                    <p className="text-foreground font-medium mb-3 uppercase tracking-wide">{coach.role}</p>
                   </div>
                   <p className="text-muted-foreground text-sm">{coach.bio}</p>
                 </CardContent>
