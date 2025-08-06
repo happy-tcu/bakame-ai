@@ -11,7 +11,7 @@ const Blog = () => {
       title: "Bakame AI Featured in Dallas Innovates",
       excerpt: "Our innovative AI solutions and startup journey highlighted in Dallas's leading innovation publication.",
       source: "Dallas Innovates",
-      date: "2024",
+      date: "2025",
       category: "Media Coverage",
       url: "https://dallasinnovates.com/tag/bakame-ai/"
     },
