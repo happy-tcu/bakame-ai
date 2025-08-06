@@ -437,7 +437,7 @@ const Index = () => {
             <div className="grid md:grid-cols-3 gap-8">
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Shield className="h-8 w-8 text-accent mb-2" />
+                  <Shield className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Government Services</CardTitle>
                 </CardHeader>
                 <CardContent>
