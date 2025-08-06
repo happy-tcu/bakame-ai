@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones, Brain, Mic, Database, Globe, BarChart3, Volume2, Newspaper } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones, Brain, Mic, Database, Globe, BarChart3, Volume2, Newspaper, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -174,6 +174,24 @@ const Index = () => {
               <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
                 <Mic className="h-4 w-4 text-foreground" />
                 <span className="text-muted-foreground">Pronunciation Help</span>
+              </div>
+            </div>
+
+            {/* Other Use Cases */}
+            <div className="flex flex-wrap justify-center gap-4 mb-16">
+              <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
+                <Building className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Enterprise Solutions</span>
+              </div>
+              
+              <div className="px-4 py-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg border border-border flex items-center gap-2">
+                <Shield className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Government Services</span>
+              </div>
+              
+              <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
+                <Users className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Customer Support</span>
               </div>
             </div>
           </div>
