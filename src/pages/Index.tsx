@@ -162,17 +162,17 @@ const Index = () => {
             {/* Learning Features */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <MessageSquare className="h-4 w-4 text-primary" />
+                <MessageSquare className="h-4 w-4 text-foreground" />
                 <span className="text-muted-foreground">Conversation Practice</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg border border-border flex items-center gap-2">
-                <Brain className="h-4 w-4 text-accent" />
+                <Brain className="h-4 w-4 text-foreground" />
                 <span className="text-muted-foreground">Vocabulary Building</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Mic className="h-4 w-4 text-secondary" />
+                <Mic className="h-4 w-4 text-foreground" />
                 <span className="text-muted-foreground">Pronunciation Help</span>
               </div>
             </div>
