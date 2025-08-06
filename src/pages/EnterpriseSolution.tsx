@@ -107,9 +107,9 @@ const EnterpriseSolution = () => {
           <div className="text-2xl font-bold">Bakame Ai</div>
         </div>
         <div className="hidden md:flex space-x-8">
-          <a href="/blog" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Blog</a>
+          <a href="/blog" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-foreground after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Blog</a>
           
-          <a href="/team" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-purple-400 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Team</a>
+          <a href="/team" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-foreground after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Team</a>
           
         </div>
       </nav>
@@ -117,10 +117,10 @@ const EnterpriseSolution = () => {
       <div className="container mx-auto px-6 py-20">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Building2 className="w-8 h-8 text-purple-400" />
+          <div className="w-16 h-16 bg-muted/50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Building2 className="w-8 h-8 text-foreground" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent animate-fade-in" style={{
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground animate-fade-in" style={{
           animationDelay: '0.2s'
         }}>
             Enterprise Solutions
@@ -140,31 +140,27 @@ const EnterpriseSolution = () => {
             icon: Shield,
             title: "Enterprise Security",
             description: "Bank-level encryption and security protocols with on-premise deployment options for complete data control.",
-            color: "purple",
             delay: "0s"
           }, {
             icon: Clock,
             title: "24/7 Availability",
             description: "Always-on customer service that works even during internet outages or network failures.",
-            color: "blue",
             delay: "0.1s"
           }, {
             icon: BarChart3,
             title: "Advanced Analytics",
             description: "Real-time insights and reporting to optimize customer interactions and business processes.",
-            color: "green",
             delay: "0.2s"
           }, {
             icon: Building2,
             title: "Seamless Integration",
             description: "Easy integration with existing CRM, ERP, and business systems through robust APIs.",
-            color: "orange",
             delay: "0.3s"
-          }].map((item, index) => <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:bg-white/10 animate-fade-in group cursor-pointer" style={{
+          }].map((item, index) => <div key={index} className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-border/50 transition-all duration-300 hover:bg-card animate-fade-in group cursor-pointer" style={{
             animationDelay: item.delay
           }}>
-                <div className={`w-12 h-12 bg-${item.color}-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <item.icon className={`w-6 h-6 text-${item.color}-400 group-hover:animate-pulse`} />
+                <div className="w-12 h-12 bg-muted/50 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <item.icon className="w-6 h-6 text-foreground" />
                 </div>
                 <h3 className="text-lg font-semibold mb-3 group-hover:text-foreground transition-colors duration-300">{item.title}</h3>
                 <p className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-300">
@@ -178,12 +174,12 @@ const EnterpriseSolution = () => {
         <div className="mb-20">
           <h2 className="text-3xl font-bold mb-12 text-center animate-fade-in">Enterprise Use Cases</h2>
           <div className="space-y-6">
-            {useCases.map((useCase, index) => <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-500 animate-fade-in overflow-hidden" style={{
+            {useCases.map((useCase, index) => <div key={index} className="bg-card/50 backdrop-blur-sm rounded-xl border border-border hover:border-border/50 transition-all duration-300 animate-fade-in overflow-hidden" style={{
             animationDelay: `${index * 0.1}s`
           }}>
                 <div className="p-8 cursor-pointer group" onClick={() => toggleUseCase(index)}>
                   <div className="flex items-center justify-between">
-                    <h3 className={`text-2xl font-semibold text-${useCase.color}-400 group-hover:text-${useCase.color}-300 transition-colors duration-300`}>
+                    <h3 className="text-2xl font-semibold text-foreground group-hover:text-muted-foreground transition-colors duration-300">
                       {useCase.title}
                     </h3>
                     <div className={`transform transition-transform duration-300 ${activeUseCase === index ? 'rotate-180' : ''}`}>
@@ -199,11 +195,11 @@ const EnterpriseSolution = () => {
                 
                 <div className={`overflow-hidden transition-all duration-500 ${activeUseCase === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                   <div className="px-8 pb-8">
-                    <div className="grid md:grid-cols-3 gap-4 pt-4 border-t border-white/10">
-                      {useCase.items.map((item, itemIndex) => <div key={itemIndex} className="bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300 hover:scale-105" style={{
+                    <div className="grid md:grid-cols-3 gap-4 pt-4 border-t border-border">
+                      {useCase.items.map((item, itemIndex) => <div key={itemIndex} className="bg-muted/50 rounded-lg p-4 hover:bg-muted transition-all duration-300" style={{
                     animationDelay: `${itemIndex * 0.1}s`
                   }}>
-                          <h4 className={`font-semibold text-${useCase.color}-300 mb-2`}>{item.title}</h4>
+                          <h4 className="font-semibold text-foreground mb-2">{item.title}</h4>
                           <p className="text-muted-foreground text-sm">{item.desc}</p>
                         </div>)}
                     </div>
@@ -220,27 +216,23 @@ const EnterpriseSolution = () => {
             {[{
             value: animatedStats.cost,
             suffix: "%",
-            label: "Cost Reduction",
-            color: "green"
+            label: "Cost Reduction"
           }, {
             value: animatedStats.response,
             suffix: "%",
-            label: "Faster Response",
-            color: "blue"
+            label: "Faster Response"
           }, {
             value: animatedStats.uptime,
             suffix: "%",
-            label: "Uptime",
-            color: "purple"
+            label: "Uptime"
           }, {
             value: animatedStats.satisfaction,
             suffix: "%",
-            label: "Customer Satisfaction",
-            color: "orange"
-          }].map((stat, index) => <div key={index} className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-primary/30 transition-all duration-300 hover:bg-gradient-to-br hover:from-white/8 hover:to-primary/5 group animate-fade-in relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/5 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700" style={{
+            label: "Customer Satisfaction"
+          }].map((stat, index) => <div key={index} className="text-center bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-border/50 transition-all duration-300 hover:bg-card group animate-fade-in" style={{
             animationDelay: `${index * 0.1}s`
           }}>
-                <div className={`text-3xl font-bold text-${stat.color}-400 mb-2 group-hover:scale-110 transition-transform duration-300`}>
+                <div className="text-3xl font-bold text-foreground mb-2 group-hover:scale-110 transition-transform duration-300">
                   {stat.value}{stat.suffix}
                 </div>
                 <div className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{stat.label}</div>
@@ -249,15 +241,14 @@ const EnterpriseSolution = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center bg-white/5 backdrop-blur-sm rounded-3xl p-12 border border-white/10 hover:border-white/20 transition-all duration-500 animate-fade-in">
+        <div className="text-center bg-card/50 backdrop-blur-sm rounded-3xl p-12 border border-border hover:border-border/50 transition-all duration-300 animate-fade-in">
           <h2 className="text-3xl font-bold mb-6">Scale Your Business with AI</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Join leading enterprises already using Bakame AI to transform their customer experience and operational efficiency.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => navigate('/signup')} className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 group relative overflow-hidden">
+            <button onClick={() => navigate('/signup')} className="bg-foreground text-background px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted-foreground transition-all duration-300 hover:scale-105 group relative overflow-hidden">
               <span className="relative z-10">Request Free Trial</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
             <button className="border border-border text-foreground px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted transition-all duration-300 hover:scale-105 hover:border-muted-foreground hover:shadow-lg hover:shadow-muted/25">
               Enterprise Demo
