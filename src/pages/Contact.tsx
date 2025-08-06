@@ -1,11 +1,8 @@
-
 import { ContactForm } from '@/components/forms/ContactForm';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-
 const Contact = () => {
-  return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+  return <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
@@ -50,7 +47,7 @@ const Contact = () => {
                   <h3 className="text-xl font-semibold text-card-foreground mb-4">Alternative Support</h3>
                   <div className="space-y-3 text-muted-foreground">
                     <p>📧 Email: support@bakame.ai</p>
-                    <p>📞 Phone: +1 (555) 123-4567</p>
+                    
                     <p>💬 Live Chat: Available on our main website</p>
                   </div>
                 </div>
@@ -59,8 +56,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
