@@ -129,7 +129,7 @@ const LiveChat = () => {
               <div className="space-y-4">
                 {messages.length === 0 && (
                   <div className="text-center text-muted-foreground text-sm py-8">
-                    Hi! I'm your AI assistant. How can I help you learn English today?
+                    Hi! I'm here to help you learn about Bakame AI and answer any questions about our platform.
                   </div>
                 )}
                 {messages.map((message) => (
