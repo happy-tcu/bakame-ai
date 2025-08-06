@@ -188,7 +188,7 @@ const Index = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Languages className="h-8 w-8 text-primary mb-2" />
+                  <Languages className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">English Practice</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -200,7 +200,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Brain className="h-8 w-8 text-accent mb-2" />
+                  <Brain className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Math Module</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -212,7 +212,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <BookOpen className="h-8 w-8 text-secondary mb-2" />
+                  <BookOpen className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Reading Comprehension</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -224,7 +224,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <MessageSquare className="h-8 w-8 text-primary mb-2" />
+                  <MessageSquare className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Debate Practice</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -236,7 +236,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Target className="h-8 w-8 text-accent mb-2" />
+                  <Target className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">General Q&A</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -259,7 +259,7 @@ const Index = () => {
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Phone className="h-8 w-8 text-primary mb-2" />
+                  <Phone className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Voice & SMS Access</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -271,7 +271,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Zap className="h-8 w-8 text-accent mb-2" />
+                  <Zap className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">AI Integration</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -283,7 +283,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Mic className="h-8 w-8 text-secondary mb-2" />
+                  <Mic className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Voice Transcription</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -295,7 +295,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Database className="h-8 w-8 text-primary mb-2" />
+                  <Database className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Memory System</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -318,7 +318,7 @@ const Index = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Globe className="h-8 w-8 text-primary mb-2" />
+                  <Globe className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Cultural Integration</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -330,7 +330,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <BarChart3 className="h-8 w-8 text-accent mb-2" />
+                  <BarChart3 className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Admin Dashboard</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -342,7 +342,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Volume2 className="h-8 w-8 text-secondary mb-2" />
+                  <Volume2 className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Deepgram TTS</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -354,7 +354,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Newspaper className="h-8 w-8 text-primary mb-2" />
+                  <Newspaper className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Dynamic Content</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -390,7 +390,7 @@ const Index = () => {
             <div className="grid md:grid-cols-3 gap-8">
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Languages className="h-8 w-8 text-primary mb-2" />
+                  <Languages className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Conversation Practice</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -449,7 +449,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Users className="h-8 w-8 text-primary mb-2" />
+                  <Users className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Healthcare</CardTitle>
                 </CardHeader>
                 <CardContent>
