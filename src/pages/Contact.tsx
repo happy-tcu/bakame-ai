@@ -49,6 +49,8 @@ const Contact = () => {
                     <p>📧 Email: support@bakame.ai</p>
                     
                     <p>💬 Live Chat: Available on our main website</p>
+                    
+                    <p>🎧 Live Agent: Request immediate assistance</p>
                   </div>
                 </div>
               </div>
