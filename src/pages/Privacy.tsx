@@ -155,7 +155,7 @@ const Privacy = () => {
       <footer className="border-t border-border mt-16 p-6">
         <div className="container mx-auto text-center">
           <p className="text-muted-foreground text-sm">
-            © 2024 Bakame AI. All rights reserved. | 
+            © 2025 Bakame AI. All rights reserved. | 
             <a href="/support" className="hover:text-foreground ml-1">Support</a> | 
             <a href="/terms" className="hover:text-foreground ml-1">Terms</a>
           </p>

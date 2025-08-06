@@ -33,7 +33,7 @@ const CareersLayout = ({ children }: CareersLayoutProps) => {
           </div>
         </div>
         <div className="max-w-4xl mx-auto px-6 mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
-          <p>&copy; 2024 Bakame AI. Revolutionizing communication through intelligent offline IVR systems.</p>
+          <p>&copy; 2025 Bakame AI. Revolutionizing communication through intelligent offline IVR systems.</p>
         </div>
       </footer>
     </div>
