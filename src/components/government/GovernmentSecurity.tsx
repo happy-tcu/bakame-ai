@@ -8,7 +8,7 @@ const GovernmentSecurity = () => {
       <div className="bg-card/50 backdrop-blur-sm rounded-xl p-8 border border-border hover:border-border/50 transition-all duration-500 animate-fade-in">
         <div className="grid md:grid-cols-2 gap-8">
           <div className="animate-fade-in" style={{animationDelay: '0.2s'}}>
-            <h3 className="text-xl font-semibold mb-4 text-green-400">Data Protection</h3>
+            <h3 className="text-xl font-semibold mb-4 text-foreground">Data Protection</h3>
             <ul className="space-y-3 text-muted-foreground">
               {[
                 "End-to-end encryption for all voice data",
@@ -17,14 +17,14 @@ const GovernmentSecurity = () => {
                 "Regular security audits and updates"
               ].map((item, index) => (
                 <li key={index} className="flex items-start hover:text-foreground transition-colors duration-300" style={{animationDelay: `${0.3 + index * 0.1}s`}}>
-                  <Shield className="w-4 h-4 mt-1 mr-3 text-green-400 flex-shrink-0 animate-pulse" style={{animationDelay: `${index * 0.2}s`}} />
+                  <Shield className="w-4 h-4 mt-1 mr-3 text-foreground flex-shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
           <div className="animate-fade-in" style={{animationDelay: '0.4s'}}>
-            <h3 className="text-xl font-semibold mb-4 text-blue-400">Government Standards</h3>
+            <h3 className="text-xl font-semibold mb-4 text-foreground">Government Standards</h3>
             <ul className="space-y-3 text-muted-foreground">
               {[
                 "Accessibility compliance (WCAG)",
@@ -33,7 +33,7 @@ const GovernmentSecurity = () => {
                 "Audit trails and reporting"
               ].map((item, index) => (
                 <li key={index} className="flex items-start hover:text-foreground transition-colors duration-300" style={{animationDelay: `${0.5 + index * 0.1}s`}}>
-                  <Building className="w-4 h-4 mt-1 mr-3 text-blue-400 flex-shrink-0 animate-pulse" style={{animationDelay: `${index * 0.2 + 0.1}s`}} />
+                  <Building className="w-4 h-4 mt-1 mr-3 text-foreground flex-shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}

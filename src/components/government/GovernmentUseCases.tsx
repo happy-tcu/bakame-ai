@@ -13,7 +13,6 @@ const GovernmentUseCases = () => {
     {
       id: "citizen-services",
       title: "Citizen Services",
-      color: "green",
       description: "Provide essential government services through voice interactions, from document requests to benefit applications, making services accessible to all citizens regardless of literacy or technology access.",
       subcategories: [
         { title: "Document Services", description: "Birth certificates, ID cards, passport applications" },
@@ -24,7 +23,6 @@ const GovernmentUseCases = () => {
     {
       id: "emergency-services",
       title: "Emergency Services",
-      color: "blue",
       description: "Critical emergency response systems that work even when traditional infrastructure fails. Provide real-time information, coordinate responses, and ensure citizen safety during crises.",
       subcategories: [
         { title: "Disaster Response", description: "Emergency alerts, evacuation instructions, resource coordination" },
@@ -35,7 +33,6 @@ const GovernmentUseCases = () => {
     {
       id: "public-information",
       title: "Public Information",
-      color: "purple",
       description: "Disseminate important public information, policy updates, and educational content to citizens in multiple languages, ensuring everyone stays informed about government initiatives.",
       subcategories: [
         { title: "Policy Updates", description: "New regulations, law changes, public consultations" },
@@ -60,7 +57,7 @@ const GovernmentUseCases = () => {
               onClick={() => toggleUseCase(useCase.id)}
             >
               <div className="flex justify-between items-center">
-                <h3 className={`text-2xl font-semibold text-${useCase.color}-400 flex items-center`}>
+                <h3 className="text-2xl font-semibold text-foreground flex items-center">
                   {useCase.title}
                   <ChevronDown 
                     className={`ml-4 w-6 h-6 transition-transform duration-300 ${
@@ -82,10 +79,10 @@ const GovernmentUseCases = () => {
                   {useCase.subcategories.map((sub, subIndex) => (
                   <div 
                     key={subIndex}
-                    className="bg-card rounded-lg p-4 hover:bg-muted transition-all duration-300 hover:scale-105"
+                    className="bg-card rounded-lg p-4 hover:bg-muted transition-all duration-300"
                     style={{animationDelay: `${subIndex * 0.1}s`}}
                   >
-                    <h4 className={`font-semibold text-${useCase.color}-400 mb-2`}>{sub.title}</h4>
+                    <h4 className="font-semibold text-foreground mb-2">{sub.title}</h4>
                     <p className="text-muted-foreground text-sm">{sub.description}</p>
                   </div>
                   ))}
