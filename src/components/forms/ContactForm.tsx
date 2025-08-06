@@ -29,6 +29,55 @@ export const ContactForm = ({ className = "" }: ContactFormProps) => {
     solution_type: '',
   });
 
+  const validateForm = (): boolean => {
+    if (!formData.name.trim()) {
+      toast({
+        title: "Validation Error",
+        description: "Name is required",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (!validateEmail(formData.email)) {
+      toast({
+        title: "Validation Error",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (formData.phone && !validatePhone(formData.phone)) {
+      toast({
+        title: "Validation Error",
+        description: "Please enter a valid phone number",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (!formData.message.trim()) {
+      toast({
+        title: "Validation Error",
+        description: "Message is required",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (formData.message.length < 10) {
+      toast({
+        title: "Validation Error",
+        description: "Message must be at least 10 characters long",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -41,8 +90,12 @@ export const ContactForm = ({ className = "" }: ContactFormProps) => {
       return;
     }
 
+    if (!validateForm()) {
+      return;
+    }
+
     // Check rate limit (3 submissions per 15 minutes)
-    const canProceed = await checkLimit('contact_form', 3, 15);
+    const canProceed = await checkLimit('contact_form', 3);
     if (!canProceed) {
       return;
     }

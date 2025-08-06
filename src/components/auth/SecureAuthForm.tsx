@@ -124,7 +124,7 @@ export const SecureAuthForm = ({ onSuccess }: SecureAuthFormProps) => {
 
     // Rate limiting for auth attempts
     const action = isSignUp ? 'signup' : 'signin';
-    const canProceed = await checkLimit(action, 5, 30); // 5 attempts per 30 minutes
+    const canProceed = await checkLimit(action, 5); // 5 attempts per 15 minutes
     if (!canProceed) {
       return;
     }

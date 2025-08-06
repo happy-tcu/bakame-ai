@@ -1,61 +1,83 @@
 
 import { useState } from 'react';
-import { checkRateLimit, getClientIdentifier, RateLimitOptions } from '@/utils/security';
+import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 interface UseRateLimitResult {
   isBlocked: boolean;
   remaining: number;
-  checkLimit: (action: string, maxRequests?: number, windowMinutes?: number) => Promise<boolean>;
+  resetTime: string | null;
+  checkLimit: (action: string, limit?: number) => Promise<boolean>;
   resetBlock: () => void;
 }
 
 export const useRateLimit = (): UseRateLimitResult => {
   const [isBlocked, setIsBlocked] = useState(false);
   const [remaining, setRemaining] = useState(0);
+  const [resetTime, setResetTime] = useState<string | null>(null);
   const { toast } = useToast();
 
   const checkLimit = async (
     action: string, 
-    maxRequests: number = 5, 
-    windowMinutes: number = 15
+    limit: number = 5
   ): Promise<boolean> => {
-    const options: RateLimitOptions = {
-      identifier: getClientIdentifier(),
-      action,
-      maxRequests,
-      windowMinutes
-    };
-
-    const result = await checkRateLimit(options);
-    setRemaining(result.remaining);
-
-    if (!result.allowed) {
-      setIsBlocked(true);
-      toast({
-        title: "Too Many Requests",
-        description: `Please wait ${windowMinutes} minutes before trying again.`,
-        variant: "destructive",
+    try {
+      const { data, error } = await supabase.functions.invoke('rate-limit-check', {
+        body: { action, limit }
       });
-      
-      // Auto-reset block after window period
-      setTimeout(() => {
-        setIsBlocked(false);
-      }, windowMinutes * 60 * 1000);
-      
-      return false;
-    }
 
-    return true;
+      if (error) {
+        console.error('Rate limit check failed:', error);
+        // Fail open - allow the action if rate limiting fails
+        setIsBlocked(false);
+        setRemaining(limit - 1);
+        return true;
+      }
+
+      const allowed = data?.allowed || false;
+      setIsBlocked(!allowed);
+      setRemaining(data?.remaining || 0);
+      
+      if (data?.resetTime) {
+        setResetTime(data.resetTime);
+      }
+
+      if (!allowed) {
+        const resetDate = data?.resetTime ? new Date(data.resetTime) : new Date(Date.now() + 15 * 60 * 1000);
+        const minutesUntilReset = Math.ceil((resetDate.getTime() - Date.now()) / (1000 * 60));
+        
+        toast({
+          title: "Too Many Requests",
+          description: `Please wait ${minutesUntilReset} minutes before trying again.`,
+          variant: "destructive",
+        });
+        
+        // Auto-reset block after window period
+        setTimeout(() => {
+          setIsBlocked(false);
+          setResetTime(null);
+        }, minutesUntilReset * 60 * 1000);
+      }
+
+      return allowed;
+    } catch (error) {
+      console.error('Rate limit check failed:', error);
+      // Fail open - allow the action if rate limiting fails
+      setIsBlocked(false);
+      setRemaining(limit - 1);
+      return true;
+    }
   };
 
   const resetBlock = () => {
     setIsBlocked(false);
+    setResetTime(null);
   };
 
   return {
     isBlocked,
     remaining,
+    resetTime,
     checkLimit,
     resetBlock
   };

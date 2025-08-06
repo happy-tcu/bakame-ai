@@ -95,7 +95,7 @@ export const SecureContactForm = ({ className = "" }: SecureContactFormProps) =>
     }
 
     // Check rate limit
-    const canProceed = await checkLimit('contact_form', 3, 15); // 3 submissions per 15 minutes
+    const canProceed = await checkLimit('contact_form', 3); // 3 submissions per 15 minutes
     if (!canProceed) {
       return;
     }

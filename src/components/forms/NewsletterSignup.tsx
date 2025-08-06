@@ -44,7 +44,7 @@ export const NewsletterSignup = ({ source = 'general', className = "" }: Newslet
     }
 
     // Check rate limit (2 subscriptions per 10 minutes)
-    const canProceed = await checkLimit('newsletter_signup', 2, 10);
+    const canProceed = await checkLimit('newsletter_signup', 2);
     if (!canProceed) {
       return;
     }
