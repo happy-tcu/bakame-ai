@@ -259,7 +259,7 @@ const EnterpriseSolution = () => {
               <span className="relative z-10">Request Free Trial</span>
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
-            <button className="border border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-white/50 hover:shadow-lg hover:shadow-white/25">
+            <button className="border border-border text-foreground px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted transition-all duration-300 hover:scale-105 hover:border-muted-foreground hover:shadow-lg hover:shadow-muted/25">
               Enterprise Demo
             </button>
           </div>
