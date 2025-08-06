@@ -82,7 +82,7 @@ const Team = () => {
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
                     <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                      <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale" />
                     </div>
                     <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                     <p className="text-primary font-medium mb-3 uppercase tracking-wide">{member.role}</p>
@@ -112,7 +112,7 @@ const Team = () => {
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
                     <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                      <img src={coach.image} alt={coach.name} className="w-full h-full object-cover" />
+                      <img src={coach.image} alt={coach.name} className="w-full h-full object-cover grayscale" />
                     </div>
                     <h3 className="text-lg font-bold mb-1">{coach.name}</h3>
                     <p className="text-secondary font-medium mb-3 uppercase tracking-wide">{coach.role}</p>
@@ -131,7 +131,7 @@ const Team = () => {
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
                     <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
-                      <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover" />
+                      <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover grayscale" />
                     </div>
                     <h3 className="text-lg font-bold mb-1">{mentor.name}</h3>
                     <p className="text-accent font-medium mb-3 uppercase tracking-wide">{mentor.role}</p>
@@ -151,7 +151,7 @@ const Team = () => {
                   <div className="text-center mb-4">
                     <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
                       {typeof advisor.image === 'string' && advisor.image.startsWith('/lovable-uploads/') ? (
-                        <img src={advisor.image} alt={advisor.name} className="w-full h-full object-cover" />
+                        <img src={advisor.image} alt={advisor.name} className="w-full h-full object-cover grayscale" />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-muted-foreground to-muted-foreground/80 rounded-full flex items-center justify-center">
                           <span className="text-background font-bold">{advisor.image}</span>
