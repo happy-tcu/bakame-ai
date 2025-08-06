@@ -8,7 +8,7 @@ const Team = () => {
     name: "Happy Herman",
     role: "CEO",
     bio: "Civics Action leader, Startups Expert, Qatar Foundation Amb. and Founder of The Street Bridge Inc.",
-    image: "HH",
+    image: "/lovable-uploads/5a0d8cef-f727-4d56-8b84-f064ace377c7.png",
     linkedin: "#",
     twitter: "#",
     email: "happy@bakame.ai"
@@ -16,7 +16,7 @@ const Team = () => {
     name: "Aime Byiringiro",
     role: "CTO",
     bio: "Serial Entrepreneur, Organizational Strategist, and Seasoned Software Developer. Currently works at Dell Technologies",
-    image: "AB",
+    image: "/lovable-uploads/a40d3f7c-3281-41fc-8a55-76ebc92497e5.png",
     linkedin: "#",
     twitter: "#",
     email: "aime@bakame.ai"
@@ -25,13 +25,13 @@ const Team = () => {
     name: "Angelo Biasi",
     role: "COACH",
     bio: "Coach, World Class Entrepreneur & CEO of Solvably and Credibly.ai",
-    image: "AB"
+    image: "/lovable-uploads/88b689c6-a4ac-4cd6-9dd7-2eca68783445.png"
   }];
   const mentors = [{
     name: "Paul Evans",
     role: "MENTOR",
     bio: "Associate Director, Institute for Entrepreneurship and Innovation",
-    image: "PE"
+    image: "/lovable-uploads/e1929865-9927-4756-b9df-1201237e6e30.png"
   }];
   const advisors = [{
     name: "Annelise Joy",
@@ -42,12 +42,12 @@ const Team = () => {
     name: "Natasha Harris",
     role: "ADVISOR (VENTURES)",
     bio: "Principle of Biegert Group, Inc. and Chairperson of Hope Haven",
-    image: "NH"
+    image: "/lovable-uploads/ea1da17e-f6ff-4f7b-a322-92f8e97a7a0e.png"
   }, {
     name: "J. Dr. Jean Pierre",
     role: "ADVISOR (COMPLIANCY)",
     bio: "President of the High Court HQ of the Republic of Rwanda",
-    image: "JP"
+    image: "/lovable-uploads/1f2b26b5-04d9-4467-8c6a-01448669e2c3.png"
   }];
   return <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
@@ -81,8 +81,8 @@ const Team = () => {
             {teamMembers.map((member, index) => <Card key={index} className="bg-card/50 border-border hover:bg-card transition-colors">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
-                    <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-primary-foreground font-bold text-lg">{member.image}</span>
+                    <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
+                      <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
                     </div>
                     <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                     <p className="text-primary font-medium mb-3 uppercase tracking-wide">{member.role}</p>
@@ -111,8 +111,8 @@ const Team = () => {
             {coaches.map((coach, index) => <Card key={index} className="bg-card/50 border-secondary hover:bg-card transition-colors">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/80 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-secondary-foreground font-bold">{coach.image}</span>
+                    <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                      <img src={coach.image} alt={coach.name} className="w-full h-full object-cover" />
                     </div>
                     <h3 className="text-lg font-bold mb-1">{coach.name}</h3>
                     <p className="text-secondary font-medium mb-3 uppercase tracking-wide">{coach.role}</p>
@@ -130,8 +130,8 @@ const Team = () => {
             {mentors.map((mentor, index) => <Card key={index} className="bg-card/50 border-accent hover:bg-card transition-colors">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-accent-foreground font-bold">{mentor.image}</span>
+                    <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                      <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover" />
                     </div>
                     <h3 className="text-lg font-bold mb-1">{mentor.name}</h3>
                     <p className="text-accent font-medium mb-3 uppercase tracking-wide">{mentor.role}</p>
@@ -149,8 +149,14 @@ const Team = () => {
             {advisors.map((advisor, index) => <Card key={index} className="bg-card/50 border-muted hover:bg-card transition-colors">
                 <CardContent className="p-6">
                   <div className="text-center mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-muted-foreground to-muted-foreground/80 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-background font-bold">{advisor.image}</span>
+                    <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
+                      {typeof advisor.image === 'string' && advisor.image.startsWith('/lovable-uploads/') ? (
+                        <img src={advisor.image} alt={advisor.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-muted-foreground to-muted-foreground/80 rounded-full flex items-center justify-center">
+                          <span className="text-background font-bold">{advisor.image}</span>
+                        </div>
+                      )}
                     </div>
                     <h3 className="text-lg font-bold mb-1">{advisor.name}</h3>
                     <p className="text-muted-foreground font-medium mb-3 uppercase tracking-wide">{advisor.role}</p>
