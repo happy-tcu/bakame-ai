@@ -35,11 +35,23 @@ const Contact = () => {
                   <p className="text-muted-foreground mb-4">
                     Our support team typically responds within 24 hours during business days.
                   </p>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>• Technical support</li>
-                    <li>• Implementation guidance</li>
-                    <li>• Custom solution design</li>
-                    <li>• Training and documentation</li>
+                  <ul className="space-y-2 text-muted-foreground border border-border/50 rounded-lg p-4 bg-background/50">
+                    <li className="flex items-center hover:text-foreground transition-colors">
+                      <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                      Technical support
+                    </li>
+                    <li className="flex items-center hover:text-foreground transition-colors">
+                      <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                      Implementation guidance
+                    </li>
+                    <li className="flex items-center hover:text-foreground transition-colors">
+                      <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                      Custom solution design
+                    </li>
+                    <li className="flex items-center hover:text-foreground transition-colors">
+                      <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
+                      Training and documentation
+                    </li>
                   </ul>
                 </div>
 
