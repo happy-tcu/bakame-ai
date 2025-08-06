@@ -461,7 +461,7 @@ const Index = () => {
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Zap className="h-8 w-8 text-secondary mb-2" />
+                  <Zap className="h-8 w-8 text-foreground mb-2" />
                   <CardTitle className="text-card-foreground">Enterprise</CardTitle>
                 </CardHeader>
                 <CardContent>
