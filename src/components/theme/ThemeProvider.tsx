@@ -27,9 +27,11 @@ export function ThemeProvider({
   storageKey = 'ui-theme',
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    const stored = localStorage.getItem(storageKey) as Theme;
+    // Always default to light theme, ignore stored system theme
+    return stored && stored !== 'system' ? stored : defaultTheme;
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
