@@ -120,8 +120,8 @@ const IVRAnalyticsDashboard: React.FC = () => {
               onClick={() => setTimeRange(range as any)}
               className={`px-3 py-1 rounded-lg text-sm transition-all ${
                 timeRange === range
-                  ? 'bg-gradient-to-r from-[#ff914d] to-[#0d4dcc] text-white'
-                  : 'bg-white/10 text-white/70 hover:bg-white/20'
+                  ? 'bg-foreground text-background'
+                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
               }`}
             >
               {range}
