@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Calendar, User, ArrowRight, Instagram, ExternalLink } from "lucide-react";
+import { ArrowLeft, Calendar, User, ArrowRight, Instagram, ExternalLink, Heart, MessageCircle } from "lucide-react";
 
 const Blog = () => {
   const mediaHits = [
@@ -32,6 +32,51 @@ const Blog = () => {
       date: "2025",
       category: "Innovation Award",
       url: "https://www.neeley.tcu.edu/News/Events/CREATE-Winners-2025"
+    }
+  ];
+
+  const instagramPosts = [
+    {
+      id: 1,
+      image: "/lovable-uploads/07b35d7d-a106-42c9-b489-2d86597f0ac7.png",
+      caption: "🚀 Exciting news! Bakame AI has been featured in Dallas Innovates! Our journey in revolutionizing AI education continues to make waves. #BakameAI #Innovation #EdTech",
+      likes: 124,
+      date: "2 days ago"
+    },
+    {
+      id: 2,
+      image: "/lovable-uploads/1f2b26b5-04d9-4467-8c6a-01448669e2c3.png",
+      caption: "🏆 Proud to announce our win at TCU Neeley's CREATE Competition 2025! This recognition fuels our mission to make AI education accessible worldwide. #TCU #CREATE2025 #Winner",
+      likes: 89,
+      date: "1 week ago"
+    },
+    {
+      id: 3,
+      image: "/lovable-uploads/5a0d8cef-f727-4d56-8b84-f064ace377c7.png",
+      caption: "💡 Behind the scenes at Bakame AI! Our team working hard on the next generation of voice AI technology for education. #TeamWork #AI #Development",
+      likes: 156,
+      date: "2 weeks ago"
+    },
+    {
+      id: 4,
+      image: "/lovable-uploads/88b689c6-a4ac-4cd6-9dd7-2eca68783445.png",
+      caption: "🌍 Bridging cultures through AI! Our Kinyarwanda integration helps students learn English while staying connected to their roots. #CulturalBridge #Language #AI",
+      likes: 203,
+      date: "3 weeks ago"
+    },
+    {
+      id: 5,
+      image: "/lovable-uploads/9fedb475-4a0b-4ff1-ac9e-d868f9fdd6f9.png",
+      caption: "📚 Education meets innovation! Discover how our AI tutors are transforming the learning experience for students worldwide. #Education #Innovation #FutureOfLearning",
+      likes: 178,
+      date: "1 month ago"
+    },
+    {
+      id: 6,
+      image: "/lovable-uploads/a40d3f7c-3281-41fc-8a55-76ebc92497e5.png",
+      caption: "🎯 Focus on what matters! Our AI-powered learning platform adapts to each student's unique needs and learning style. #PersonalizedLearning #EdTech #AI",
+      likes: 145,
+      date: "1 month ago"
     }
   ];
 
@@ -126,47 +171,76 @@ const Blog = () => {
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <Card className="bg-gradient-to-br from-card/50 to-muted/30 border-border backdrop-blur-sm">
-                <CardContent className="p-12 text-center">
-                  <div className="w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
-                    <Instagram className="h-12 w-12 text-white" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-foreground mb-4">@bakame.ai</h3>
-                  
-                  <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                    Join our community and get exclusive insights into our AI development process, 
-                    team updates, and the future of educational technology.
-                  </p>
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                  <Instagram className="h-12 w-12 text-white" />
+                </div>
+                
+                <h3 className="text-2xl font-bold text-foreground mb-4">@bakame.ai</h3>
+                
+                <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+                  Join our community and get exclusive insights into our AI development process, 
+                  team updates, and the future of educational technology.
+                </p>
+              </div>
 
-                  <div className="grid grid-cols-3 gap-4 mb-8 max-w-md mx-auto">
-                    {/* Placeholder Instagram posts */}
-                    <div className="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
-                      <Instagram className="h-8 w-8 text-muted-foreground" />
+              {/* Instagram Posts Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                {instagramPosts.map((post) => (
+                  <Card key={post.id} className="bg-card/80 border-border backdrop-blur-sm overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div className="aspect-square relative overflow-hidden">
+                      <img 
+                        src={post.image} 
+                        alt={`Instagram post ${post.id}`}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
-                    <div className="aspect-square bg-gradient-to-br from-accent/20 to-secondary/20 rounded-lg flex items-center justify-center">
-                      <Instagram className="h-8 w-8 text-muted-foreground" />
-                    </div>
-                    <div className="aspect-square bg-gradient-to-br from-secondary/20 to-primary/20 rounded-lg flex items-center justify-center">
-                      <Instagram className="h-8 w-8 text-muted-foreground" />
-                    </div>
-                  </div>
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                            <Instagram className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <p className="font-semibold text-sm text-foreground">bakame.ai</p>
+                            <p className="text-xs text-muted-foreground">{post.date}</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <p className="text-sm text-foreground mb-3 line-clamp-3">
+                        {post.caption}
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className="flex items-center space-x-1">
+                            <Heart className="h-4 w-4 text-muted-foreground" />
+                            <span className="text-sm text-muted-foreground">{post.likes}</span>
+                          </div>
+                          <MessageCircle className="h-4 w-4 text-muted-foreground" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
 
-                  <a 
-                    href="https://instagram.com/bakame.ai" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-block"
-                  >
-                    <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0">
-                      <Instagram className="mr-2 h-5 w-5" />
-                      Follow on Instagram
-                      <ExternalLink className="ml-2 h-4 w-4" />
-                    </Button>
-                  </a>
-                </CardContent>
-              </Card>
+              <div className="text-center">
+                <a 
+                  href="https://instagram.com/bakame.ai" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                >
+                  <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0">
+                    <Instagram className="mr-2 h-5 w-5" />
+                    Follow on Instagram
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </Button>
+                </a>
+              </div>
             </div>
           </div>
 
