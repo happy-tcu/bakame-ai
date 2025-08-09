@@ -642,6 +642,97 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Blog Section */}
+        <section className="container mx-auto px-6 py-20 bg-muted/30">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Latest News & Updates
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Stay updated with our latest developments, media coverage, and industry insights
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <Card className="bg-card/80 backdrop-blur-sm border-border hover:shadow-lg transition-all duration-300">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-primary font-medium">Media Coverage</span>
+                  <span className="text-sm text-muted-foreground">2025</span>
+                </div>
+                <CardTitle className="text-xl">Bakame AI Featured in Dallas Innovates</CardTitle>
+                <CardDescription>
+                  Our innovative AI solutions and startup journey highlighted in Dallas's leading innovation publication.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <a 
+                  href="https://dallasinnovates.com/tag/bakame-ai/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+                >
+                  Read Article <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card/80 backdrop-blur-sm border-border hover:shadow-lg transition-all duration-300">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-primary font-medium">Innovation Award</span>
+                  <span className="text-sm text-muted-foreground">2025</span>
+                </div>
+                <CardTitle className="text-xl">CREATE Competition Winner 2025</CardTitle>
+                <CardDescription>
+                  Bakame AI recognized as winner in TCU Neeley's CREATE innovation competition for groundbreaking AI solutions.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <a 
+                  href="https://www.neeley.tcu.edu/News/Events/CREATE-Winners-2025" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+                >
+                  Read More <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card/80 backdrop-blur-sm border-border hover:shadow-lg transition-all duration-300">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-primary font-medium">Education Coverage</span>
+                  <span className="text-sm text-muted-foreground">May 2025</span>
+                </div>
+                <CardTitle className="text-xl">Higher Ed Leadership Recognition</CardTitle>
+                <CardDescription>
+                  Bakame AI's impact on educational technology featured in Fort Worth Report's higher education coverage.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <a 
+                  href="https://fortworthreport.org/2025/05/26/higher-ed-footnotes-new-leadership-takes-helm-on-tcc-board/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+                >
+                  Read Article <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center">
+            <Link to="/blog">
+              <Button variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300">
+                View All Articles <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <section className="container mx-auto px-6 py-20">
           <FAQ />
