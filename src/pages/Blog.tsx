@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Calendar, User, ArrowRight } from "lucide-react";
+import { ArrowLeft, Calendar, User, ArrowRight, Instagram, ExternalLink } from "lucide-react";
 
 const Blog = () => {
   const mediaHits = [
@@ -113,6 +113,61 @@ const Blog = () => {
                 </Card>
               </a>
             ))}
+          </div>
+
+          {/* Instagram Section */}
+          <div className="mt-20 border-t border-border pt-16">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                Follow Us on Instagram
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Stay connected with our latest updates, behind-the-scenes content, and AI innovations
+              </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <Card className="bg-gradient-to-br from-card/50 to-muted/30 border-border backdrop-blur-sm">
+                <CardContent className="p-12 text-center">
+                  <div className="w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                    <Instagram className="h-12 w-12 text-white" />
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-foreground mb-4">@bakame.ai</h3>
+                  
+                  <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    Join our community and get exclusive insights into our AI development process, 
+                    team updates, and the future of educational technology.
+                  </p>
+
+                  <div className="grid grid-cols-3 gap-4 mb-8 max-w-md mx-auto">
+                    {/* Placeholder Instagram posts */}
+                    <div className="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
+                      <Instagram className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                    <div className="aspect-square bg-gradient-to-br from-accent/20 to-secondary/20 rounded-lg flex items-center justify-center">
+                      <Instagram className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                    <div className="aspect-square bg-gradient-to-br from-secondary/20 to-primary/20 rounded-lg flex items-center justify-center">
+                      <Instagram className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                  </div>
+
+                  <a 
+                    href="https://instagram.com/bakame.ai" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block"
+                  >
+                    <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0">
+                      <Instagram className="mr-2 h-5 w-5" />
+                      Follow on Instagram
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           {/* More Coverage */}
