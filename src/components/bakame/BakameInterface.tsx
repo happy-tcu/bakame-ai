@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { BakameRealtimeChat, BakameSession } from '@/utils/BakameRealtimeAudio';
-import { Mic, MicOff, Phone, PhoneOff, BookOpen, Calculator, Users, Brain } from 'lucide-react';
+import { BakameLlamaChat, BakameSession } from '@/utils/BakameLlamaAudio';
+import { Mic, MicOff, Phone, PhoneOff, BookOpen, Calculator, Users, Brain, Send, Volume2 } from 'lucide-react';
 
 const SUBJECTS = [
   { id: 'english', name: 'English', icon: BookOpen, color: 'bg-blue-500' },
@@ -25,35 +26,32 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
   const [session, setSession] = useState<BakameSession | null>(null);
   const [messages, setMessages] = useState<any[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const chatRef = useRef<BakameRealtimeChat | null>(null);
+  const [isListening, setIsListening] = useState(false);
+  const [textInput, setTextInput] = useState('');
+  const chatRef = useRef<BakameLlamaChat | null>(null);
 
   const handleMessage = (event: any) => {
     console.log('Bakame message:', event);
     
-    // Handle different event types
-    if (event.type === 'response.audio.delta') {
-      setIsSpeaking(true);
-      onSpeakingChange?.(true);
-    } else if (event.type === 'response.audio.done') {
-      setIsSpeaking(false);
-      onSpeakingChange?.(false);
-    } else if (event.type === 'conversation.item.created') {
-      setMessages(prev => [...prev, event.item]);
-    } else if (event.type === 'response.text.delta') {
-      // Update the last message with new text
-      setMessages(prev => {
-        const newMessages = [...prev];
-        if (newMessages.length > 0 && newMessages[newMessages.length - 1].role === 'assistant') {
-          newMessages[newMessages.length - 1].content = (newMessages[newMessages.length - 1].content || '') + event.delta;
-        } else {
-          newMessages.push({
-            role: 'assistant',
-            content: event.delta,
-            id: Date.now()
-          });
-        }
-        return newMessages;
-      });
+    if (event.type === 'listening_started') {
+      setIsListening(true);
+    } else if (event.type === 'listening_stopped') {
+      setIsListening(false);
+    } else if (event.type === 'user_message' || event.type === 'ai_message') {
+      setMessages(prev => [...prev, {
+        role: event.type === 'user_message' ? 'user' : 'assistant',
+        content: event.content,
+        timestamp: new Date(),
+        id: Date.now() + Math.random()
+      }]);
+    } else if (event.type === 'error') {
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: event.content,
+        timestamp: new Date(),
+        id: Date.now() + Math.random(),
+        isError: true
+      }]);
     }
   };
 
@@ -61,18 +59,23 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
     setSession(updatedSession);
   };
 
+  const handleSpeakingChange = (speaking: boolean) => {
+    setIsSpeaking(speaking);
+    onSpeakingChange?.(speaking);
+  };
+
   const startSession = async (subject: string) => {
     setIsLoading(true);
     try {
-      chatRef.current = new BakameRealtimeChat(handleMessage, handleSessionUpdate);
+      chatRef.current = new BakameLlamaChat(handleMessage, handleSessionUpdate, handleSpeakingChange);
       await chatRef.current.init(subject);
       setIsConnected(true);
       setCurrentSubject(subject);
       setMessages([]);
       
       toast({
-        title: "Connected to Bakame",
-        description: `Started ${subject} tutoring session`,
+        title: "Connected to Bakame AI",
+        description: `Started ${subject} tutoring with Llama`,
       });
     } catch (error) {
       console.error('Error starting Bakame session:', error);
@@ -97,11 +100,36 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
     }
   };
 
+  const toggleListening = () => {
+    if (!chatRef.current) return;
+    
+    if (isListening) {
+      chatRef.current.stopListening();
+    } else {
+      chatRef.current.startListening();
+    }
+  };
+
+  const sendTextMessage = async () => {
+    if (!textInput.trim() || !chatRef.current) return;
+    
+    await chatRef.current.sendTextMessage(textInput);
+    setTextInput('');
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendTextMessage();
+    }
+  };
+
   const endSession = () => {
     chatRef.current?.endSession();
     setIsConnected(false);
     setCurrentSubject(null);
     setIsSpeaking(false);
+    setIsListening(false);
     setMessages([]);
     onSpeakingChange?.(false);
     
@@ -128,15 +156,18 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-4">
               <Brain className="h-12 w-12 text-primary" />
-              <h1 className="text-4xl font-bold text-primary">Bakame AI</h1>
+              <div>
+                <h1 className="text-4xl font-bold text-primary">Bakame AI</h1>
+                <p className="text-sm text-muted-foreground">Powered by Llama</p>
+              </div>
             </div>
             <p className="text-lg text-muted-foreground">
-              Your AI-powered voice tutoring system
+              Your AI-powered voice tutoring system using Llama AI
             </p>
             <p className="text-sm text-muted-foreground mt-2">
-              Choose a subject to start learning with voice conversation
+              Choose a subject to start learning with voice conversation or text chat
             </p>
           </div>
 
@@ -189,10 +220,16 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
             <Brain className="h-8 w-8 text-primary" />
             <div>
               <h1 className="text-2xl font-bold text-primary">Bakame AI</h1>
-              <div className="flex items-center gap-2">
-                <Badge variant={isSpeaking ? "default" : "secondary"}>
-                  {isSpeaking ? <Mic className="h-3 w-3 mr-1" /> : <MicOff className="h-3 w-3 mr-1" />}
-                  {isSpeaking ? 'Bakame Speaking' : 'Listening'}
+              <p className="text-xs text-muted-foreground">Powered by Llama</p>
+              <div className="flex items-center gap-2 mt-1">
+                <Badge variant={isSpeaking ? "default" : isListening ? "secondary" : "outline"}>
+                  {isSpeaking ? (
+                    <><Volume2 className="h-3 w-3 mr-1" />Bakame Speaking</>
+                  ) : isListening ? (
+                    <><Mic className="h-3 w-3 mr-1" />Listening...</>
+                  ) : (
+                    <><MicOff className="h-3 w-3 mr-1" />Ready</>
+                  )}
                 </Badge>
                 <Badge variant="outline">{currentSubject}</Badge>
               </div>
@@ -240,27 +277,72 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
           </Card>
         )}
 
-        {/* Voice Interface */}
         <Card className="mb-6">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Mic className="h-5 w-5" />
-              Voice Conversation
+              Voice & Text Conversation
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-center py-8">
-              <div className={`w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center transition-all ${
-                isSpeaking ? 'bg-primary animate-pulse' : 'bg-muted'
-              }`}>
-                <Brain className={`h-12 w-12 ${isSpeaking ? 'text-white' : 'text-muted-foreground'}`} />
+            <div className="flex flex-col items-center gap-4">
+              {/* Voice Controls */}
+              <div className="text-center">
+                <div className={`w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center transition-all cursor-pointer ${
+                  isSpeaking ? 'bg-primary animate-pulse' : 
+                  isListening ? 'bg-secondary animate-pulse' : 'bg-muted hover:bg-muted/80'
+                }`} onClick={toggleListening}>
+                  {isSpeaking ? (
+                    <Volume2 className="h-12 w-12 text-white" />
+                  ) : isListening ? (
+                    <Mic className="h-12 w-12 text-primary animate-pulse" />
+                  ) : (
+                    <Mic className="h-12 w-12 text-muted-foreground" />
+                  )}
+                </div>
+                <Button 
+                  onClick={toggleListening}
+                  variant={isListening ? "secondary" : "default"}
+                  disabled={isSpeaking}
+                >
+                  {isListening ? (
+                    <>
+                      <MicOff className="h-4 w-4 mr-2" />
+                      Stop Listening
+                    </>
+                  ) : (
+                    <>
+                      <Mic className="h-4 w-4 mr-2" />
+                      Start Talking
+                    </>
+                  )}
+                </Button>
+                <p className="text-sm text-muted-foreground mt-2">
+                  {isSpeaking ? 'Bakame is speaking...' : 
+                   isListening ? 'Listening to your voice...' : 
+                   'Click to start voice conversation'}
+                </p>
               </div>
-              <p className="text-lg font-semibold mb-2">
-                {isSpeaking ? 'Bakame is speaking...' : 'Speak naturally to Bakame'}
-              </p>
-              <p className="text-muted-foreground">
-                Your microphone is active. Just start talking!
-              </p>
+
+              {/* Text Input */}
+              <div className="w-full max-w-md">
+                <div className="flex gap-2">
+                  <Input
+                    value={textInput}
+                    onChange={(e) => setTextInput(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Or type your message here..."
+                    disabled={isSpeaking || isListening}
+                  />
+                  <Button 
+                    onClick={sendTextMessage}
+                    disabled={!textInput.trim() || isSpeaking || isListening}
+                    size="icon"
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -277,16 +359,19 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
                   <div key={message.id || index} className={`p-3 rounded-lg ${
                     message.role === 'user' 
                       ? 'bg-blue-50 ml-8' 
+                      : message.isError
+                      ? 'bg-red-50 mr-8'
                       : 'bg-gray-50 mr-8'
                   }`}>
-                    <div className="font-semibold text-sm mb-1">
+                    <div className="font-semibold text-sm mb-1 flex items-center gap-2">
                       {message.role === 'user' ? 'You' : 'Bakame'}
+                      {message.isError && <span className="text-red-500 text-xs">(Error)</span>}
+                      <span className="text-xs text-muted-foreground">
+                        {message.timestamp?.toLocaleTimeString()}
+                      </span>
                     </div>
                     <div className="text-sm">
-                      {typeof message.content === 'string' 
-                        ? message.content 
-                        : message.content?.map((c: any) => c.text || c.transcript || '').join(' ') || ''
-                      }
+                      {message.content}
                     </div>
                   </div>
                 ))}
