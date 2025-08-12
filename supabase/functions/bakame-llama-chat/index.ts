@@ -66,25 +66,87 @@ Challenge students to think critically while being supportive. Help them structu
       ...messages
     ];
 
-    // Call Llama API (using Groq endpoint which supports Llama models)
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${LLAMA_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama-3.1-8b-instant', // Fast Llama model for real-time tutoring
-        messages: llamaMessages,
-        max_tokens: 150, // Keep responses concise for voice conversation
-        temperature: 0.7,
-        stream: false
-      }),
-    });
+    // Try different Llama API endpoints
+    let response;
+    let apiError = null;
+    
+    // First try Groq (common for Llama models)
+    try {
+      response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${LLAMA_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'llama-3.1-8b-instant',
+          messages: llamaMessages,
+          max_tokens: 150,
+          temperature: 0.7,
+          stream: false
+        }),
+      });
+      
+      if (response.ok) {
+        console.log('Successfully connected to Groq API');
+      } else {
+        throw new Error('Groq API failed');
+      }
+    } catch (groqError) {
+      console.log('Groq API failed, trying Together AI...', groqError);
+      
+      // Try Together AI
+      try {
+        response = await fetch('https://api.together.xyz/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${LLAMA_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'meta-llama/Llama-3-8b-chat-hf',
+            messages: llamaMessages,
+            max_tokens: 150,
+            temperature: 0.7,
+            stream: false
+          }),
+        });
+        
+        if (response.ok) {
+          console.log('Successfully connected to Together AI');
+        } else {
+          throw new Error('Together AI failed');
+        }
+      } catch (togetherError) {
+        console.log('Together AI failed, trying OpenAI as fallback...', togetherError);
+        
+        // Fallback to OpenAI if both Llama providers fail
+        response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${LLAMA_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'gpt-4o-mini',
+            messages: llamaMessages,
+            max_tokens: 150,
+            temperature: 0.7,
+            stream: false
+          }),
+        });
+        
+        if (!response.ok) {
+          apiError = await response.json();
+          throw new Error(`All APIs failed. Last error: ${apiError.error?.message || 'Unknown error'}`);
+        }
+        console.log('Using OpenAI as fallback');
+      }
+    }
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(`Llama API error: ${errorData.error?.message || 'Unknown error'}`);
+      throw new Error(`API error: ${errorData.error?.message || response.statusText}`);
     }
 
     const data = await response.json();
