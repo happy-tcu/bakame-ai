@@ -19,37 +19,37 @@ import {
   Volume2, 
   BarChart3,
   PhoneOff,
-  Settings,
-  VolumeX
+  Type,
+  Loader2
 } from 'lucide-react';
 
 const SUBJECTS = [
-  { id: 'english', name: 'English', icon: BookOpen, color: 'bg-blue-500' },
-  { id: 'math', name: 'Math', icon: Calculator, color: 'bg-green-500' },
-  { id: 'reading', name: 'Reading', icon: BookOpen, color: 'bg-purple-500' },
-  { id: 'debate', name: 'Debate', icon: Users, color: 'bg-orange-500' }
+  { id: 'english', name: 'English', icon: '📚', color: 'text-blue-500' },
+  { id: 'math', name: 'Math', icon: '🧮', color: 'text-green-500' },
+  { id: 'reading', name: 'Reading', icon: '📖', color: 'text-purple-500' },
+  { id: 'debate', name: 'Debate', icon: '🗣️', color: 'text-orange-500' }
 ];
 
 const QUICK_ACTIONS = {
   english: [
-    { text: "Help me practice English conversation", label: "Conversation Practice", desc: "Natural dialogue practice" },
-    { text: "Teach me new vocabulary words", label: "Vocabulary Building", desc: "Learn new words and meanings" },
-    { text: "Help me with English grammar", label: "Grammar Help", desc: "Understanding grammar rules" }
+    { prompt: "Help me practice English conversation", title: "Conversation Practice", description: "Natural dialogue practice" },
+    { prompt: "Teach me new vocabulary words", title: "Vocabulary Building", description: "Learn new words and meanings" },
+    { prompt: "Help me with English grammar", title: "Grammar Help", description: "Understanding grammar rules" }
   ],
   math: [
-    { text: "Help me solve algebra problems", label: "Algebra Practice", desc: "Step-by-step problem solving" },
-    { text: "Explain geometry concepts", label: "Geometry Help", desc: "Visual and spatial concepts" },
-    { text: "Practice word problems", label: "Word Problems", desc: "Real-world math applications" }
+    { prompt: "Help me solve algebra problems", title: "Algebra Practice", description: "Step-by-step problem solving" },
+    { prompt: "Explain geometry concepts", title: "Geometry Help", description: "Visual and spatial concepts" },
+    { prompt: "Practice word problems", title: "Word Problems", description: "Real-world math applications" }
   ],
   reading: [
-    { text: "Help me improve reading comprehension", label: "Comprehension", desc: "Understanding text better" },
-    { text: "Recommend good books to read", label: "Book Recommendations", desc: "Find your next great read" },
-    { text: "Help me analyze this text", label: "Text Analysis", desc: "Deep reading skills" }
+    { prompt: "Help me improve reading comprehension", title: "Comprehension", description: "Understanding text better" },
+    { prompt: "Recommend good books to read", title: "Book Recommendations", description: "Find your next great read" },
+    { prompt: "Help me analyze this text", title: "Text Analysis", description: "Deep reading skills" }
   ],
   debate: [
-    { text: "Help me practice debating skills", label: "Debate Practice", desc: "Argumentation techniques" },
-    { text: "Teach me logical reasoning", label: "Logic Training", desc: "Critical thinking skills" },
-    { text: "Help me prepare counterarguments", label: "Counter Arguments", desc: "Anticipate opposing views" }
+    { prompt: "Help me practice debating skills", title: "Debate Practice", description: "Argumentation techniques" },
+    { prompt: "Teach me logical reasoning", title: "Logic Training", description: "Critical thinking skills" },
+    { prompt: "Help me prepare counterarguments", title: "Counter Arguments", description: "Anticipate opposing views" }
   ]
 };
 
@@ -69,12 +69,13 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
   const { toast } = useToast();
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentSubject, setCurrentSubject] = useState<string | null>(null);
+  const [currentSubject, setCurrentSubject] = useState<string>('english');
+  const [selectedMode, setSelectedMode] = useState<'text' | 'voice'>('text');
   const [session, setSession] = useState<BakameSession | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [textInput, setTextInput] = useState('');
+  const [currentInput, setCurrentInput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [voiceMode, setVoiceMode] = useState(false);
+  const [isVoiceMode, setIsVoiceMode] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [showAnalytics, setShowAnalytics] = useState(false);
@@ -93,7 +94,7 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
         content: event.content,
         timestamp: new Date(),
         id: Date.now() + Math.random().toString(),
-        type: voiceMode ? 'voice' : 'text'
+        type: isVoiceMode ? 'voice' : 'text'
       }]);
     } else if (event.type === 'error') {
       setMessages(prev => [...prev, {
@@ -115,16 +116,18 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
     onSpeakingChange?.(speaking);
   };
 
-  const startSession = async (subject: string) => {
+  const startSession = async (mode: 'text' | 'voice') => {
     setIsLoading(true);
+    setSelectedMode(mode);
+    setIsVoiceMode(mode === 'voice');
+    
     try {
-      if (voiceMode) {
+      if (mode === 'voice') {
         chatRef.current = new BakameLlamaChat(handleMessage, handleSessionUpdate, handleSpeakingChange);
-        await chatRef.current.init(subject);
+        await chatRef.current.init(currentSubject);
       }
       
       setIsConnected(true);
-      setCurrentSubject(subject);
       setMessages([]);
       
       // Add welcome message
@@ -135,23 +138,19 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
         debate: "Greetings! I'm Bakame, your Debate coach. I'll help you develop your argumentation and critical thinking skills. What topic interests you for discussion?"
       };
 
-      const welcomeMessage = welcomeMessages[subject as keyof typeof welcomeMessages] || welcomeMessages.english;
+      const welcomeMessage = welcomeMessages[currentSubject as keyof typeof welcomeMessages] || welcomeMessages.english;
       
       setMessages([{
         role: 'assistant',
         content: welcomeMessage,
         timestamp: new Date(),
         id: Date.now().toString(),
-        type: voiceMode ? 'voice' : 'text'
+        type: mode
       }]);
-      
-      if (voiceMode && chatRef.current) {
-        // Voice mode handles its own welcome message
-      }
       
       toast({
         title: "Connected to Bakame AI",
-        description: `Started ${subject} tutoring session${voiceMode ? ' with voice' : ''}`,
+        description: `Started ${currentSubject} tutoring session in ${mode} mode`,
       });
     } catch (error) {
       console.error('Error starting Bakame session:', error);
@@ -167,24 +166,24 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
 
   const switchSubject = (newSubject: string) => {
     if (currentSubject !== newSubject) {
-      if (voiceMode && chatRef.current) {
+      if (isVoiceMode && chatRef.current) {
         chatRef.current.switchSubject(newSubject);
       }
       setCurrentSubject(newSubject);
-      if (!voiceMode) {
+      if (!isVoiceMode) {
         setMessages([]); // Clear conversation history for text mode
-        startSession(newSubject);
+        startSession('text');
       }
     }
   };
 
   const sendMessage = async (messageText?: string) => {
-    const messageToSend = messageText || textInput.trim();
+    const messageToSend = messageText || currentInput.trim();
     if (!messageToSend || isProcessing) return;
 
-    if (voiceMode && chatRef.current) {
+    if (isVoiceMode && chatRef.current) {
       await chatRef.current.sendTextMessage(messageToSend);
-      if (!messageText) setTextInput('');
+      if (!messageText) setCurrentInput('');
       return;
     }
 
@@ -198,7 +197,7 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
     };
 
     setMessages(prev => [...prev, userMessage]);
-    if (!messageText) setTextInput('');
+    if (!messageText) setCurrentInput('');
     setIsProcessing(true);
 
     try {
@@ -261,15 +260,8 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
     }
   };
 
-  const toggleVoiceMode = () => {
-    if (voiceMode && chatRef.current) {
-      chatRef.current.endSession();
-    }
-    setVoiceMode(!voiceMode);
-  };
-
   const toggleListening = () => {
-    if (!chatRef.current || !voiceMode) return;
+    if (!chatRef.current || !isVoiceMode) return;
     
     if (isListening) {
       chatRef.current.stopListening();
@@ -286,11 +278,10 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
   };
 
   const endSession = () => {
-    if (voiceMode && chatRef.current) {
+    if (isVoiceMode && chatRef.current) {
       chatRef.current.endSession();
     }
     setIsConnected(false);
-    setCurrentSubject(null);
     setMessages([]);
     setIsSpeaking(false);
     setIsListening(false);
@@ -304,58 +295,71 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
   const getConnectionStatus = () => {
     if (!isConnected) return 'Ready to Learn';
     if (isProcessing) return 'Processing...';
-    if (voiceMode) {
+    if (isVoiceMode) {
       if (isSpeaking) return 'Bakame Speaking';
       if (isListening) return 'Listening...';
-      return 'Voice Mode Active';
+      return `Connected via VOICE`;
     }
-    return 'Text Mode Active';
+    return `Connected via TEXT`;
   };
 
   const getStatusColor = () => {
     if (!isConnected) return 'bg-muted';
     if (isProcessing) return 'bg-secondary animate-pulse';
-    if (voiceMode) {
+    if (isVoiceMode) {
       if (isSpeaking) return 'bg-accent animate-pulse';
       if (isListening) return 'bg-primary animate-pulse';
       return 'bg-primary';
     }
-    return 'bg-green-500';
+    return 'bg-primary';
   };
 
   if (showAnalytics) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="min-h-screen bg-background text-foreground">
+        <div className="container mx-auto p-6">
           <div className="flex items-center justify-between mb-6">
             <Button
               onClick={() => setShowAnalytics(false)}
               variant="outline"
+              className="border-border text-foreground hover:bg-muted"
             >
-              ← Back to Learning
+              ← Back to Chat
             </Button>
           </div>
-          <Card>
-            <CardHeader>
-              <CardTitle>Learning Analytics</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{messages.length}</div>
-                  <div className="text-sm text-muted-foreground">Total Messages</div>
+          
+          {/* Basic Analytics Display */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="bg-card/80 backdrop-blur-md border-border">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2 text-foreground">Learning Sessions</h3>
+                <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  {messages.filter(m => m.role === 'assistant').length}
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{currentSubject || 'None'}</div>
-                  <div className="text-sm text-muted-foreground">Current Subject</div>
+                <p className="text-sm text-muted-foreground mt-1">AI responses received</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-card/80 backdrop-blur-md border-border">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2 text-foreground">Current Subject</h3>
+                <div className="text-2xl font-bold text-primary capitalize">
+                  {currentSubject}
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{voiceMode ? 'Voice' : 'Text'}</div>
-                  <div className="text-sm text-muted-foreground">Learning Mode</div>
+                <p className="text-sm text-muted-foreground mt-1">Active learning focus</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-card/80 backdrop-blur-md border-border">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-2 text-foreground">Mode</h3>
+                <div className="text-2xl font-bold text-accent">
+                  {isVoiceMode ? 'Voice' : 'Text'}
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+                <p className="text-sm text-muted-foreground mt-1">Learning interface</p>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     );
@@ -363,101 +367,85 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
 
   if (!isConnected) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Brain className="h-12 w-12 text-primary" />
-              <h1 className="text-4xl font-bold text-primary">Bakame AI</h1>
-            </div>
-            <p className="text-lg text-muted-foreground">
-              Your AI-powered tutoring system
-            </p>
-            <p className="text-sm text-muted-foreground mt-2">
-              Choose a subject and learning mode to start
-            </p>
+      <div className="min-h-screen bg-background text-foreground">
+        <div className="container mx-auto p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Bakame AI - English Learning Platform
+            </h1>
+            <Button
+              onClick={() => setShowAnalytics(true)}
+              variant="outline"
+              className="border-border text-foreground hover:bg-muted flex items-center gap-2"
+            >
+              <BarChart3 className="w-4 h-4" />
+              Analytics
+            </Button>
           </div>
 
           {/* Mode Selection */}
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-center">Learning Mode</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex justify-center gap-4">
-                <Button
-                  variant={!voiceMode ? "default" : "outline"}
-                  onClick={() => setVoiceMode(false)}
-                  className="flex items-center gap-2"
-                >
-                  <MessageSquare className="h-4 w-4" />
-                  Text Chat
-                </Button>
-                <Button
-                  variant={voiceMode ? "default" : "outline"}
-                  onClick={() => setVoiceMode(true)}
-                  className="flex items-center gap-2"
-                >
-                  <Mic className="h-4 w-4" />
-                  Voice Chat
-                </Button>
-              </div>
-              <p className="text-center text-sm text-muted-foreground mt-2">
-                {voiceMode 
-                  ? "Speak naturally with voice conversations" 
-                  : "Type messages for reliable text conversations"
-                }
-              </p>
-            </CardContent>
-          </Card>
+          <div className="mb-8 text-center">
+            <h2 className="text-xl font-semibold mb-4 text-foreground">Choose Your Learning Mode</h2>
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={() => startSession('text')}
+                variant={selectedMode === 'text' ? 'default' : 'outline'}
+                disabled={isLoading}
+                className="flex items-center gap-2"
+              >
+                <Type className="w-4 h-4" />
+                Text Chat
+              </Button>
+              <Button
+                onClick={() => startSession('voice')}
+                variant={selectedMode === 'voice' ? 'default' : 'outline'}
+                disabled={isLoading}
+                className="flex items-center gap-2"
+              >
+                <Mic className="w-4 h-4" />
+                Voice Chat
+              </Button>
+            </div>
+          </div>
 
           {/* Subject Selection */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            {SUBJECTS.map((subject) => {
-              const Icon = subject.icon;
-              return (
-                <Card key={subject.id} className="hover:shadow-lg transition-shadow cursor-pointer">
-                  <CardHeader className="text-center">
-                    <div className={`w-16 h-16 rounded-full ${subject.color} flex items-center justify-center mx-auto mb-4`}>
-                      <Icon className="h-8 w-8 text-white" />
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold mb-4 text-center text-foreground">Select Your Subject</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {SUBJECTS.map((subject) => (
+                <Card 
+                  key={subject.id} 
+                  className={`cursor-pointer transition-all duration-300 bg-card/80 backdrop-blur-md border-2 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 ${
+                    currentSubject === subject.id ? 'border-primary bg-primary/5' : 'border-border'
+                  }`}
+                  onClick={() => setCurrentSubject(subject.id)}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className={`text-4xl mb-3 ${subject.color}`}>
+                      {subject.icon}
                     </div>
-                    <CardTitle className="text-xl">{subject.name} Tutoring</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
+                    <h4 className="font-semibold text-foreground mb-2">{subject.name}</h4>
                     <Button
-                      onClick={() => startSession(subject.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentSubject(subject.id);
+                        startSession('text');
+                      }}
+                      variant="outline"
+                      size="sm"
                       disabled={isLoading}
-                      className="w-full"
-                      size="lg"
+                      className="w-full border-border text-foreground hover:bg-muted"
                     >
-                      {isLoading ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                          Connecting...
-                        </>
+                      {isLoading && currentSubject === subject.id ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
                       ) : (
-                        <>
-                          {voiceMode ? <Mic className="h-4 w-4 mr-2" /> : <MessageSquare className="h-4 w-4 mr-2" />}
-                          Start {subject.name} Session
-                        </>
+                        'Start Session'
                       )}
                     </Button>
                   </CardContent>
                 </Card>
-              );
-            })}
-          </div>
-
-          {/* Analytics Button */}
-          <div className="text-center">
-            <Button
-              onClick={() => setShowAnalytics(true)}
-              variant="outline"
-              className="flex items-center gap-2"
-            >
-              <BarChart3 className="h-4 w-4" />
-              View Analytics
-            </Button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -465,227 +453,173 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="container mx-auto p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
             <div className={`w-3 h-3 rounded-full ${getStatusColor()}`}></div>
-            <div>
-              <h1 className="text-2xl font-bold text-primary">Bakame AI</h1>
-              <div className="flex items-center gap-2 mt-1">
-                <Badge variant="outline">
-                  {getConnectionStatus()}
-                </Badge>
-                <Badge variant="outline">{currentSubject}</Badge>
-                <Badge variant={voiceMode ? "default" : "secondary"}>
-                  {voiceMode ? 'Voice Mode' : 'Text Mode'}
-                </Badge>
-              </div>
-            </div>
+            <Badge variant="outline" className="border-border text-foreground">
+              {getConnectionStatus()}
+            </Badge>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              onClick={toggleVoiceMode}
-              variant="outline"
-              size="sm"
-              disabled={isListening || isSpeaking}
-            >
-              {voiceMode ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-            </Button>
             <Button
               onClick={() => setShowAnalytics(true)}
               variant="outline"
               size="sm"
+              className="border-border text-foreground hover:bg-muted"
             >
-              <BarChart3 className="h-4 w-4" />
+              <BarChart3 className="w-4 h-4" />
             </Button>
             <Button
               onClick={endSession}
-              variant="destructive"
+              variant="outline"
               size="sm"
+              className="border-border text-foreground hover:bg-muted"
             >
-              <PhoneOff className="h-4 w-4" />
+              <PhoneOff className="w-4 h-4" />
             </Button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Main Chat Interface */}
-          <div className="lg:col-span-3">
-            <Card className="h-96 mb-4">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2">
-                    {voiceMode ? <Mic className="h-5 w-5" /> : <MessageSquare className="h-5 w-5" />}
-                    Conversation
-                  </CardTitle>
-                  {voiceMode && (
-                    <div className="flex items-center gap-4">
-                      <div className={`flex items-center gap-2 ${isListening ? 'text-primary' : 'text-muted-foreground'}`}>
-                        <Mic className={`w-4 h-4 ${isListening ? 'animate-pulse' : ''}`} />
-                        <span className="text-sm">Listening</span>
-                      </div>
-                      <div className={`flex items-center gap-2 ${isSpeaking ? 'text-accent' : 'text-muted-foreground'}`}>
-                        <Volume2 className={`w-4 h-4 ${isSpeaking ? 'animate-pulse' : ''}`} />
-                        <span className="text-sm">Speaking</span>
-                      </div>
-                    </div>
-                  )}
+        {/* Main Chat Interface */}
+        <Card className="bg-card/80 backdrop-blur-md border-border mb-6">
+          <CardContent className="p-6">
+            {/* Activity Indicators */}
+            {isVoiceMode && (
+              <div className="flex justify-center gap-6 mb-6">
+                <div className={`flex items-center gap-2 ${isListening ? 'text-primary' : 'text-muted-foreground'}`}>
+                  <Mic className={`w-5 h-5 ${isListening ? 'animate-pulse' : ''}`} />
+                  <span className="text-sm">You're Speaking</span>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4 h-64 overflow-y-auto">
-                  {messages.length === 0 ? (
-                    <div className="text-center py-8">
-                      <div className="text-muted-foreground mb-2">
-                        Connected in {voiceMode ? 'Voice' : 'Text'} Mode
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Start your {currentSubject} learning conversation...
-                      </div>
-                    </div>
-                  ) : (
-                    messages.map((message) => (
-                      <div key={message.id} className={`p-3 rounded-lg ${
-                        message.role === 'user' 
-                          ? 'bg-blue-50 ml-8 border border-blue-200' 
-                          : message.type === 'error'
-                          ? 'bg-red-50 mr-8 border border-red-200'
-                          : 'bg-gray-50 mr-8 border border-gray-200'
-                      }`}>
-                        <div className="font-semibold text-sm mb-1 flex items-center gap-2">
-                          {message.role === 'user' ? 'You' : 'Bakame'}
-                          {message.type && (
-                            <Badge variant="outline" className="text-xs">
-                              {message.type}
-                            </Badge>
-                          )}
-                          <span className="text-xs text-muted-foreground">
-                            {message.timestamp.toLocaleTimeString()}
-                          </span>
-                        </div>
-                        <div className="text-sm">
-                          {message.content}
-                        </div>
-                      </div>
-                    ))
-                  )}
-                  {isProcessing && (
-                    <div className="bg-gray-50 mr-8 p-3 rounded-lg border border-gray-200">
-                      <div className="font-semibold text-sm mb-1">Bakame</div>
-                      <div className="text-sm flex items-center gap-2">
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary" />
-                        Thinking...
-                      </div>
-                    </div>
-                  )}
+                <div className={`flex items-center gap-2 ${isSpeaking ? 'text-accent' : 'text-muted-foreground'}`}>
+                  <Volume2 className={`w-5 h-5 ${isSpeaking ? 'animate-pulse' : ''}`} />
+                  <span className="text-sm">AI Teaching</span>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            )}
 
-            {/* Input Area */}
-            <Card>
-              <CardContent className="pt-4">
-                <div className="space-y-4">
-                  {voiceMode && (
-                    <div className="text-center">
-                      <Button 
-                        onClick={toggleListening}
-                        variant={isListening ? "secondary" : "default"}
-                        disabled={isSpeaking}
-                        size="lg"
-                        className="w-full mb-4"
-                      >
-                        {isListening ? (
-                          <>
-                            <MicOff className="h-4 w-4 mr-2" />
-                            Stop Listening
-                          </>
-                        ) : (
-                          <>
-                            <Mic className="h-4 w-4 mr-2" />
-                            Start Talking
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  )}
-                  
-                  <div className="flex gap-2">
-                    <Textarea
-                      value={textInput}
-                      onChange={(e) => setTextInput(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                      placeholder={voiceMode ? "Or type your message here..." : "Type your message here..."}
-                      disabled={isProcessing || (voiceMode && (isListening || isSpeaking))}
-                      rows={2}
-                      className="flex-1"
-                    />
-                    <Button 
-                      onClick={() => sendMessage()}
-                      disabled={!textInput.trim() || isProcessing || (voiceMode && (isListening || isSpeaking))}
-                      size="lg"
-                    >
-                      <Send className="h-4 w-4" />
-                    </Button>
+            {/* Conversation History */}
+            <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
+              {messages.length === 0 ? (
+                <div className="text-center py-8">
+                  <div className="text-muted-foreground mb-2">
+                    Connected via {isVoiceMode ? 'VOICE' : 'TEXT'}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Start your {currentSubject} learning conversation...
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              ) : (
+                messages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={`p-4 rounded-lg ${
+                      message.role === 'user'
+                        ? 'bg-gradient-to-r from-accent/20 to-primary/10 border border-accent/30 ml-8'
+                        : 'bg-gradient-to-r from-primary/20 to-accent/10 border border-primary/30 mr-8'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className={`text-sm font-medium ${
+                        message.role === 'user'
+                          ? 'bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent'
+                          : 'bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent'
+                      }`}>
+                        {message.role === 'user' ? 'You' : 'Bakame AI'}
+                      </span>
+                      {message.type && (
+                        <Badge variant="outline" className="text-xs border-border text-muted-foreground">
+                          {message.type}
+                        </Badge>
+                      )}
+                      <span className="text-xs text-muted-foreground">
+                        {message.timestamp.toLocaleTimeString()}
+                      </span>
+                    </div>
+                    <p className="text-foreground">{message.content}</p>
+                  </div>
+                ))
+              )}
+            </div>
 
-          {/* Sidebar - Quick Actions & Controls */}
-          <div className="space-y-4">
-            {/* Subject Switch */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-sm">Switch Subject</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {SUBJECTS.filter(s => s.id !== currentSubject).map((subject) => (
-                    <Button
-                      key={subject.id}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => switchSubject(subject.id)}
-                      className="w-full justify-start"
-                    >
-                      <subject.icon className="h-4 w-4 mr-2" />
-                      {subject.name}
-                    </Button>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            {/* Input Area */}
+            {!isVoiceMode ? (
+              <div className="flex gap-2">
+                <Input
+                  value={currentInput}
+                  onChange={(e) => setCurrentInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Type your message or question..."
+                  disabled={isProcessing}
+                  className="flex-1 bg-input border-border text-foreground placeholder-muted-foreground"
+                />
+                <Button
+                  onClick={() => sendMessage()}
+                  disabled={!currentInput.trim() || isProcessing}
+                  className="bg-gradient-to-r from-primary to-accent hover:opacity-90"
+                >
+                  {isProcessing ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Send className="w-4 h-4" />
+                  )}
+                </Button>
+              </div>
+            ) : (
+              <div className="text-center">
+                <Button
+                  onClick={toggleListening}
+                  variant={isListening ? "destructive" : "default"}
+                  size="lg"
+                  className="rounded-full w-16 h-16"
+                >
+                  <Mic className="w-6 h-6" />
+                </Button>
+                <p className="text-sm text-muted-foreground mt-2">
+                  {isListening ? 'Tap to stop listening' : 'Tap to speak'}
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-sm">Quick Actions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {currentSubject && QUICK_ACTIONS[currentSubject as keyof typeof QUICK_ACTIONS]?.map((action, index) => (
-                    <Button
-                      key={index}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => sendMessage(action.text)}
-                      className="w-full text-left h-auto p-2"
-                      disabled={isProcessing}
-                    >
-                      <div>
-                        <div className="font-medium text-xs">{action.label}</div>
-                        <div className="text-xs text-muted-foreground">{action.desc}</div>
-                      </div>
-                    </Button>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+        {/* Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Button
+            onClick={() => sendMessage("Teach me new vocabulary words for business English")}
+            variant="outline"
+            className="border-border text-foreground hover:bg-muted p-4 h-auto"
+            disabled={isProcessing}
+          >
+            <div className="text-left">
+              <div className="font-medium">Vocabulary Practice</div>
+              <div className="text-sm text-muted-foreground">Learn business English words</div>
+            </div>
+          </Button>
+          <Button
+            onClick={() => sendMessage("Help me practice a job interview")}
+            variant="outline"
+            className="border-border text-foreground hover:bg-muted p-4 h-auto"
+            disabled={isProcessing}
+          >
+            <div className="text-left">
+              <div className="font-medium">Interview Practice</div>
+              <div className="text-sm text-muted-foreground">Prepare for job interviews</div>
+            </div>
+          </Button>
+          <Button
+            onClick={() => sendMessage("Explain English grammar rules")}
+            variant="outline"
+            className="border-border text-foreground hover:bg-muted p-4 h-auto"
+            disabled={isProcessing}
+          >
+            <div className="text-left">
+              <div className="font-medium">Grammar Help</div>
+              <div className="text-sm text-muted-foreground">Understanding English grammar</div>
+            </div>
+          </Button>
         </div>
       </div>
     </div>
