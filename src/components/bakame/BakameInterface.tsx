@@ -75,7 +75,7 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
       
       toast({
         title: "Connected to Bakame AI",
-        description: `Started ${subject} tutoring with Llama`,
+        description: `Started ${subject} tutoring session`,
       });
     } catch (error) {
       console.error('Error starting Bakame session:', error);
@@ -160,11 +160,10 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
               <Brain className="h-12 w-12 text-primary" />
               <div>
                 <h1 className="text-4xl font-bold text-primary">Bakame AI</h1>
-                <p className="text-sm text-muted-foreground">Powered by Llama</p>
               </div>
             </div>
             <p className="text-lg text-muted-foreground">
-              Your AI-powered voice tutoring system using Llama AI
+              Your AI-powered voice tutoring system
             </p>
             <p className="text-sm text-muted-foreground mt-2">
               Choose a subject to start learning with voice conversation or text chat
@@ -220,7 +219,6 @@ const BakameInterface: React.FC<BakameInterfaceProps> = ({ onSpeakingChange }) =
             <Brain className="h-8 w-8 text-primary" />
             <div>
               <h1 className="text-2xl font-bold text-primary">Bakame AI</h1>
-              <p className="text-xs text-muted-foreground">Powered by Llama</p>
               <div className="flex items-center gap-2 mt-1">
                 <Badge variant={isSpeaking ? "default" : isListening ? "secondary" : "outline"}>
                   {isSpeaking ? (
