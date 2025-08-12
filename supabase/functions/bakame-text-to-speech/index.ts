@@ -45,8 +45,9 @@ serve(async (req) => {
 
     // Convert audio buffer to base64
     const arrayBuffer = await response.arrayBuffer();
+    const uint8Array = new Uint8Array(arrayBuffer);
     const base64Audio = btoa(
-      String.fromCharCode(...new Uint8Array(arrayBuffer))
+      String.fromCharCode.apply(null, Array.from(uint8Array))
     );
 
     console.log('Bakame speech generated:', { textLength: text.length, voice });
