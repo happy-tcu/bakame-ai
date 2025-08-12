@@ -64,8 +64,7 @@ const Index = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
-          <Link to="/ivr" className="text-foreground hover:text-primary transition-colors">Try Prototype</Link>
-          <Link to="/bakame" className="text-foreground hover:text-primary transition-colors font-semibold">
+          <Link to="/ivr" className="text-foreground hover:text-primary transition-colors font-semibold">
             <span className="flex items-center gap-1">
               <Brain className="h-4 w-4" />
               Bakame AI

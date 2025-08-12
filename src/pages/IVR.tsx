@@ -1,6 +1,6 @@
 
 import React from 'react';
-import UnifiedIVRInterface from '@/components/ivr/UnifiedIVRInterface';
+import UnifiedBakameInterface from '@/components/bakame/UnifiedBakameInterface';
 
 const IVR = () => {
   return (
@@ -27,7 +27,7 @@ const IVR = () => {
 
       {/* Main content */}
       <div className="relative z-10">
-        <UnifiedIVRInterface />
+        <UnifiedBakameInterface />
       </div>
     </div>
   );
