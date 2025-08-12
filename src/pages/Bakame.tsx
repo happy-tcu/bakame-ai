@@ -1,8 +1,8 @@
 import React from 'react';
-import BakameTextInterface from '@/components/bakame/BakameTextInterface';
+import UnifiedBakameInterface from '@/components/bakame/UnifiedBakameInterface';
 
 const Bakame = () => {
-  return <BakameTextInterface />;
+  return <UnifiedBakameInterface />;
 };
 
 export default Bakame;
