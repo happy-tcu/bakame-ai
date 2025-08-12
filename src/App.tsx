@@ -23,6 +23,7 @@ import NotFound from "./pages/NotFound";
 import EarlyAccess from "./pages/EarlyAccess";
 import Signup from "./pages/Signup";
 import AdminDashboard from "./pages/AdminDashboard";
+import Bakame from "./pages/Bakame";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
               <Route path="/early-access" element={<EarlyAccess />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path="/bakame" element={<Bakame />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
