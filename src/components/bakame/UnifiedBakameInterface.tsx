@@ -24,32 +24,104 @@ import {
 } from 'lucide-react';
 
 const SUBJECTS = [
-  { id: 'english', name: 'English', icon: '📚', color: 'text-blue-500' },
-  { id: 'math', name: 'Math', icon: '🧮', color: 'text-green-500' },
-  { id: 'reading', name: 'Reading', icon: '📖', color: 'text-purple-500' },
-  { id: 'debate', name: 'Debate', icon: '🗣️', color: 'text-orange-500' }
+  { 
+    id: 'english', 
+    name: 'English', 
+    icon: BookOpen, 
+    color: 'text-blue-500',
+    description: 'Master English conversation, grammar, and vocabulary with personalized practice sessions'
+  },
+  { 
+    id: 'math', 
+    name: 'Math', 
+    icon: Calculator, 
+    color: 'text-green-500',
+    description: 'Solve complex problems step-by-step from algebra to calculus with guided explanations'
+  },
+  { 
+    id: 'reading', 
+    name: 'Reading', 
+    icon: Brain, 
+    color: 'text-purple-500',
+    description: 'Improve comprehension, critical thinking, and analytical skills through guided reading'
+  },
+  { 
+    id: 'debate', 
+    name: 'Debate', 
+    icon: Users, 
+    color: 'text-orange-500',
+    description: 'Develop argumentation skills, logical reasoning, and persuasive communication techniques'
+  }
 ];
 
 const QUICK_ACTIONS = {
   english: [
-    { prompt: "Help me practice English conversation", title: "Conversation Practice", description: "Natural dialogue practice" },
-    { prompt: "Teach me new vocabulary words", title: "Vocabulary Building", description: "Learn new words and meanings" },
-    { prompt: "Help me with English grammar", title: "Grammar Help", description: "Understanding grammar rules" }
+    { 
+      prompt: "Help me practice English conversation for business meetings", 
+      title: "Business Conversation", 
+      description: "Practice professional dialogue, presentations, and networking scenarios"
+    },
+    { 
+      prompt: "Teach me advanced vocabulary words with examples and usage", 
+      title: "Advanced Vocabulary", 
+      description: "Learn sophisticated words with context, etymology, and practice sentences"
+    },
+    { 
+      prompt: "Help me understand complex English grammar rules with examples", 
+      title: "Grammar Mastery", 
+      description: "Master tenses, conditionals, subjunctive mood, and advanced structures"
+    }
   ],
   math: [
-    { prompt: "Help me solve algebra problems", title: "Algebra Practice", description: "Step-by-step problem solving" },
-    { prompt: "Explain geometry concepts", title: "Geometry Help", description: "Visual and spatial concepts" },
-    { prompt: "Practice word problems", title: "Word Problems", description: "Real-world math applications" }
+    { 
+      prompt: "Help me solve step-by-step algebra equations with detailed explanations", 
+      title: "Algebra Mastery", 
+      description: "Linear equations, quadratics, polynomials with complete solution methods"
+    },
+    { 
+      prompt: "Explain geometry concepts with visual examples and proofs", 
+      title: "Geometry & Proofs", 
+      description: "Theorems, constructions, coordinate geometry with visual demonstrations"
+    },
+    { 
+      prompt: "Practice complex word problems from real-world scenarios", 
+      title: "Applied Mathematics", 
+      description: "Finance, physics, engineering problems with practical applications"
+    }
   ],
   reading: [
-    { prompt: "Help me improve reading comprehension", title: "Comprehension", description: "Understanding text better" },
-    { prompt: "Recommend good books to read", title: "Book Recommendations", description: "Find your next great read" },
-    { prompt: "Help me analyze this text", title: "Text Analysis", description: "Deep reading skills" }
+    { 
+      prompt: "Help me analyze literary techniques and deeper meanings in texts", 
+      title: "Literary Analysis", 
+      description: "Symbolism, themes, character development, and literary devices"
+    },
+    { 
+      prompt: "Recommend books based on my interests and reading level", 
+      title: "Personalized Reading", 
+      description: "Curated suggestions with reading guides and discussion questions"
+    },
+    { 
+      prompt: "Improve my critical reading and comprehension strategies", 
+      title: "Reading Strategies", 
+      description: "Speed reading, note-taking, summarization, and retention techniques"
+    }
   ],
   debate: [
-    { prompt: "Help me practice debating skills", title: "Debate Practice", description: "Argumentation techniques" },
-    { prompt: "Teach me logical reasoning", title: "Logic Training", description: "Critical thinking skills" },
-    { prompt: "Help me prepare counterarguments", title: "Counter Arguments", description: "Anticipate opposing views" }
+    { 
+      prompt: "Help me construct logical arguments with evidence and reasoning", 
+      title: "Argument Construction", 
+      description: "Build compelling cases with logical flow, evidence, and rebuttals"
+    },
+    { 
+      prompt: "Teach me formal logic principles and fallacy identification", 
+      title: "Logic & Fallacies", 
+      description: "Deductive reasoning, syllogisms, and common logical errors"
+    },
+    { 
+      prompt: "Practice public speaking and persuasive communication techniques", 
+      title: "Public Speaking", 
+      description: "Voice modulation, body language, audience engagement, and rhetoric"
+    }
   ]
 };
 
@@ -293,14 +365,14 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
   };
 
   const getConnectionStatus = () => {
-    if (!isConnected) return 'Ready to Learn';
-    if (isProcessing) return 'Processing...';
+    if (!isConnected) return 'Ready to Learn - Select mode and subject to begin';
+    if (isProcessing) return 'AI Processing your request...';
     if (isVoiceMode) {
-      if (isSpeaking) return 'Bakame Speaking';
-      if (isListening) return 'Listening...';
-      return `Connected via VOICE`;
+      if (isSpeaking) return 'Bakame AI is speaking - Listen carefully';
+      if (isListening) return 'Listening for your voice input...';
+      return `Voice Mode Active - Real-time conversation enabled`;
     }
-    return `Connected via TEXT`;
+    return `Text Mode Active - Type your questions and responses`;
   };
 
   const getStatusColor = () => {
@@ -328,38 +400,118 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
             </Button>
           </div>
           
-          {/* Basic Analytics Display */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Detailed Analytics Display */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <Card className="bg-card/80 backdrop-blur-md border-border">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2 text-foreground">Learning Sessions</h3>
-                <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  {messages.filter(m => m.role === 'assistant').length}
+                <div className="flex items-center gap-3 mb-3">
+                  <MessageSquare className="w-5 h-5 text-primary" />
+                  <h3 className="text-lg font-semibold text-foreground">Total Messages</h3>
                 </div>
-                <p className="text-sm text-muted-foreground mt-1">AI responses received</p>
+                <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  {messages.length}
+                </div>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {messages.filter(m => m.role === 'user').length} questions asked, {messages.filter(m => m.role === 'assistant').length} AI responses
+                </p>
               </CardContent>
             </Card>
             
             <Card className="bg-card/80 backdrop-blur-md border-border">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2 text-foreground">Current Subject</h3>
-                <div className="text-2xl font-bold text-primary capitalize">
+                <div className="flex items-center gap-3 mb-3">
+                  <Brain className="w-5 h-5 text-accent" />
+                  <h3 className="text-lg font-semibold text-foreground">Current Subject</h3>
+                </div>
+                <div className="text-2xl font-bold text-primary capitalize mb-2">
                   {currentSubject}
                 </div>
-                <p className="text-sm text-muted-foreground mt-1">Active learning focus</p>
+                <p className="text-sm text-muted-foreground">
+                  {SUBJECTS.find(s => s.id === currentSubject)?.description}
+                </p>
               </CardContent>
             </Card>
             
             <Card className="bg-card/80 backdrop-blur-md border-border">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-2 text-foreground">Mode</h3>
-                <div className="text-2xl font-bold text-accent">
-                  {isVoiceMode ? 'Voice' : 'Text'}
+                <div className="flex items-center gap-3 mb-3">
+                  {isVoiceMode ? <Mic className="w-5 h-5 text-accent" /> : <Type className="w-5 h-5 text-accent" />}
+                  <h3 className="text-lg font-semibold text-foreground">Learning Mode</h3>
                 </div>
-                <p className="text-sm text-muted-foreground mt-1">Learning interface</p>
+                <div className="text-2xl font-bold text-accent mb-2">
+                  {isVoiceMode ? 'Voice Interactive' : 'Text Based'}
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {isVoiceMode 
+                    ? 'Real-time voice conversation with AI tutor'
+                    : 'Traditional text-based Q&A learning'
+                  }
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card/80 backdrop-blur-md border-border">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <BarChart3 className="w-5 h-5 text-green-500" />
+                  <h3 className="text-lg font-semibold text-foreground">Session Status</h3>
+                </div>
+                <div className="text-2xl font-bold text-green-500 mb-2">
+                  {isConnected ? 'Active' : 'Inactive'}
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {isConnected 
+                    ? 'Learning session in progress'
+                    : 'Ready to start new session'
+                  }
+                </p>
               </CardContent>
             </Card>
           </div>
+
+          {/* Recent Activity */}
+          <Card className="bg-card/80 backdrop-blur-md border-border">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <MessageSquare className="w-5 h-5" />
+                Recent Learning Activity
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {messages.length > 0 ? (
+                <div className="space-y-3">
+                  {messages.slice(-5).map((message, index) => (
+                    <div key={message.id} className="flex items-start gap-3 p-3 rounded-lg bg-muted/30">
+                      <div className={`w-2 h-2 rounded-full mt-2 ${
+                        message.role === 'user' ? 'bg-primary' : 'bg-accent'
+                      }`}></div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-sm font-medium">
+                            {message.role === 'user' ? 'Your Question' : 'AI Response'}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            {message.timestamp.toLocaleTimeString()}
+                          </span>
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          {message.content.length > 100 
+                            ? `${message.content.substring(0, 100)}...`
+                            : message.content
+                          }
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground">
+                  <MessageSquare className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                  <p>No learning activity yet. Start a session to see your progress!</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </div>
     );
@@ -410,41 +562,55 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
 
           {/* Subject Selection */}
           <div className="mb-8">
-            <h3 className="text-lg font-semibold mb-4 text-center text-foreground">Select Your Subject</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {SUBJECTS.map((subject) => (
-                <Card 
-                  key={subject.id} 
-                  className={`cursor-pointer transition-all duration-300 bg-card/80 backdrop-blur-md border-2 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 ${
-                    currentSubject === subject.id ? 'border-primary bg-primary/5' : 'border-border'
-                  }`}
-                  onClick={() => setCurrentSubject(subject.id)}
-                >
-                  <CardContent className="p-6 text-center">
-                    <div className={`text-4xl mb-3 ${subject.color}`}>
-                      {subject.icon}
-                    </div>
-                    <h4 className="font-semibold text-foreground mb-2">{subject.name}</h4>
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setCurrentSubject(subject.id);
-                        startSession('text');
-                      }}
-                      variant="outline"
-                      size="sm"
-                      disabled={isLoading}
-                      className="w-full border-border text-foreground hover:bg-muted"
-                    >
-                      {isLoading && currentSubject === subject.id ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        'Start Session'
-                      )}
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+            <h3 className="text-lg font-semibold mb-4 text-center text-foreground">Select Your Learning Subject</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {SUBJECTS.map((subject) => {
+                const IconComponent = subject.icon;
+                return (
+                  <Card 
+                    key={subject.id} 
+                    className={`cursor-pointer transition-all duration-300 bg-card/80 backdrop-blur-md border-2 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 ${
+                      currentSubject === subject.id ? 'border-primary bg-primary/5' : 'border-border'
+                    }`}
+                    onClick={() => setCurrentSubject(subject.id)}
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4">
+                        <div className={`p-3 rounded-lg bg-background/50 ${subject.color}`}>
+                          <IconComponent className="w-6 h-6" />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-foreground mb-2">{subject.name} Tutoring</h4>
+                          <p className="text-sm text-muted-foreground mb-4">{subject.description}</p>
+                          <Button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setCurrentSubject(subject.id);
+                              startSession('text');
+                            }}
+                            variant="outline"
+                            size="sm"
+                            disabled={isLoading}
+                            className="w-full border-border text-foreground hover:bg-muted"
+                          >
+                            {isLoading && currentSubject === subject.id ? (
+                              <>
+                                <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                                Connecting...
+                              </>
+                            ) : (
+                              <>
+                                <MessageSquare className="w-4 h-4 mr-2" />
+                                Start {subject.name} Session
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -456,29 +622,49 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
     <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto p-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6 gap-4">
           <div className="flex items-center gap-4">
             <div className={`w-3 h-3 rounded-full ${getStatusColor()}`}></div>
-            <Badge variant="outline" className="border-border text-foreground">
-              {getConnectionStatus()}
-            </Badge>
+            <div className="flex flex-col lg:flex-row lg:items-center gap-2">
+              <Badge variant="outline" className="border-border text-foreground">
+                {getConnectionStatus()}
+              </Badge>
+              <Badge variant="secondary" className="border-border text-foreground capitalize">
+                Subject: {currentSubject}
+              </Badge>
+              <Badge variant={isVoiceMode ? "default" : "outline"} className="border-border">
+                {isVoiceMode ? (
+                  <>
+                    <Mic className="w-3 h-3 mr-1" />
+                    Voice Mode
+                  </>
+                ) : (
+                  <>
+                    <Type className="w-3 h-3 mr-1" />
+                    Text Mode
+                  </>
+                )}
+              </Badge>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <Button
               onClick={() => setShowAnalytics(true)}
               variant="outline"
               size="sm"
-              className="border-border text-foreground hover:bg-muted"
+              className="border-border text-foreground hover:bg-muted flex items-center gap-2"
             >
               <BarChart3 className="w-4 h-4" />
+              Analytics
             </Button>
             <Button
               onClick={endSession}
               variant="outline"
               size="sm"
-              className="border-border text-foreground hover:bg-muted"
+              className="border-border text-foreground hover:bg-muted flex items-center gap-2"
             >
               <PhoneOff className="w-4 h-4" />
+              End Session
             </Button>
           </div>
         </div>
@@ -504,11 +690,21 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
             <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
               {messages.length === 0 ? (
                 <div className="text-center py-8">
-                  <div className="text-muted-foreground mb-2">
-                    Connected via {isVoiceMode ? 'VOICE' : 'TEXT'}
+                  <div className="mb-4">
+                    {isVoiceMode ? (
+                      <Mic className="w-12 h-12 mx-auto text-primary mb-3" />
+                    ) : (
+                      <MessageSquare className="w-12 h-12 mx-auto text-primary mb-3" />
+                    )}
+                  </div>
+                  <div className="text-foreground font-medium mb-2">
+                    Connected via {isVoiceMode ? 'Voice Mode' : 'Text Mode'}
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    Start your {currentSubject} learning conversation...
+                    {isVoiceMode 
+                      ? `Ready for voice conversation in ${currentSubject}. Speak naturally with your AI tutor.`
+                      : `Ready for text-based learning in ${currentSubject}. Type your questions below.`
+                    }
                   </div>
                 </div>
               ) : (
@@ -585,41 +781,39 @@ const UnifiedBakameInterface: React.FC<UnifiedBakameInterfaceProps> = ({ onSpeak
           </CardContent>
         </Card>
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Button
-            onClick={() => sendMessage("Teach me new vocabulary words for business English")}
-            variant="outline"
-            className="border-border text-foreground hover:bg-muted p-4 h-auto"
-            disabled={isProcessing}
-          >
-            <div className="text-left">
-              <div className="font-medium">Vocabulary Practice</div>
-              <div className="text-sm text-muted-foreground">Learn business English words</div>
-            </div>
-          </Button>
-          <Button
-            onClick={() => sendMessage("Help me practice a job interview")}
-            variant="outline"
-            className="border-border text-foreground hover:bg-muted p-4 h-auto"
-            disabled={isProcessing}
-          >
-            <div className="text-left">
-              <div className="font-medium">Interview Practice</div>
-              <div className="text-sm text-muted-foreground">Prepare for job interviews</div>
-            </div>
-          </Button>
-          <Button
-            onClick={() => sendMessage("Explain English grammar rules")}
-            variant="outline"
-            className="border-border text-foreground hover:bg-muted p-4 h-auto"
-            disabled={isProcessing}
-          >
-            <div className="text-left">
-              <div className="font-medium">Grammar Help</div>
-              <div className="text-sm text-muted-foreground">Understanding English grammar</div>
-            </div>
-          </Button>
+        {/* Subject-Specific Quick Actions */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-2 mb-4">
+            {(() => {
+              const subject = SUBJECTS.find(s => s.id === currentSubject);
+              const IconComponent = subject?.icon || BookOpen;
+              return (
+                <>
+                  <IconComponent className="w-5 h-5 text-primary" />
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {subject?.name} Quick Actions
+                  </h3>
+                </>
+              );
+            })()}
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {QUICK_ACTIONS[currentSubject as keyof typeof QUICK_ACTIONS]?.map((action, index) => (
+              <Button
+                key={index}
+                onClick={() => sendMessage(action.prompt)}
+                variant="outline"
+                className="border-border text-foreground hover:bg-muted p-4 h-auto text-left"
+                disabled={isProcessing}
+              >
+                <div className="w-full">
+                  <div className="font-medium mb-1">{action.title}</div>
+                  <div className="text-sm text-muted-foreground">{action.description}</div>
+                </div>
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
