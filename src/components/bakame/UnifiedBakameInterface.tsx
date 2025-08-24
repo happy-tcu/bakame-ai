@@ -32,33 +32,6 @@ const SUBJECTS = [
     description: 'Master English conversation, grammar, and vocabulary with personalized practice sessions',
     skills: ['Conversation', 'Grammar', 'Vocabulary', 'Writing', 'Pronunciation'],
     levels: ['Beginner', 'Intermediate', 'Advanced', 'Fluent']
-  },
-  { 
-    id: 'math', 
-    name: 'Math', 
-    icon: Calculator, 
-    color: 'text-green-500',
-    description: 'Solve complex problems step-by-step from algebra to calculus with guided explanations',
-    skills: ['Algebra', 'Geometry', 'Calculus', 'Statistics', 'Problem Solving'],
-    levels: ['Elementary', 'Middle School', 'High School', 'College']
-  },
-  { 
-    id: 'reading', 
-    name: 'Reading', 
-    icon: Brain, 
-    color: 'text-purple-500',
-    description: 'Improve comprehension, critical thinking, and analytical skills through guided reading',
-    skills: ['Comprehension', 'Analysis', 'Speed Reading', 'Critical Thinking', 'Literature'],
-    levels: ['Basic', 'Intermediate', 'Advanced', 'Expert']
-  },
-  { 
-    id: 'debate', 
-    name: 'Debate', 
-    icon: Users, 
-    color: 'text-orange-500',
-    description: 'Develop argumentation skills, logical reasoning, and persuasive communication techniques',
-    skills: ['Argumentation', 'Logic', 'Public Speaking', 'Research', 'Persuasion'],
-    levels: ['Novice', 'Intermediate', 'Advanced', 'Expert']
   }
 ];
 
@@ -87,84 +60,6 @@ const QUICK_ACTIONS = {
       difficulty: 'Intermediate',
       estimatedTime: '20-25 minutes',
       skills: ['Grammar', 'Sentence Structure']
-    }
-  ],
-  math: [
-    { 
-      prompt: "Help me solve step-by-step algebra equations with detailed explanations and multiple solution methods", 
-      title: "Algebra Mastery", 
-      description: "Linear equations, quadratics, polynomials with complete solution methods and real-world applications",
-      difficulty: 'Intermediate',
-      estimatedTime: '15-20 minutes',
-      skills: ['Algebra', 'Problem Solving']
-    },
-    { 
-      prompt: "Explain geometry concepts with visual examples, proofs, and interactive demonstrations", 
-      title: "Geometry & Proofs", 
-      description: "Theorems, constructions, coordinate geometry with visual demonstrations and proof techniques",
-      difficulty: 'Advanced',
-      estimatedTime: '25-30 minutes',
-      skills: ['Geometry', 'Mathematical Reasoning']
-    },
-    { 
-      prompt: "Practice complex word problems from real-world scenarios in finance, physics, and engineering", 
-      title: "Applied Mathematics", 
-      description: "Finance, physics, engineering problems with practical applications and step-by-step solutions",
-      difficulty: 'Advanced',
-      estimatedTime: '20-25 minutes',
-      skills: ['Applied Math', 'Problem Solving']
-    }
-  ],
-  reading: [
-    { 
-      prompt: "Help me analyze literary techniques and deeper meanings in texts with guided discussion", 
-      title: "Literary Analysis", 
-      description: "Symbolism, themes, character development, and literary devices with critical thinking exercises",
-      difficulty: 'Advanced',
-      estimatedTime: '20-30 minutes',
-      skills: ['Literary Analysis', 'Critical Thinking']
-    },
-    { 
-      prompt: "Recommend books based on my interests and reading level with detailed reading guides", 
-      title: "Personalized Reading", 
-      description: "Curated suggestions with reading guides, discussion questions, and comprehension strategies",
-      difficulty: 'Beginner',
-      estimatedTime: '10-15 minutes',
-      skills: ['Reading Selection', 'Comprehension']
-    },
-    { 
-      prompt: "Improve my critical reading and comprehension strategies with advanced techniques", 
-      title: "Reading Strategies", 
-      description: "Speed reading, note-taking, summarization, and retention techniques for academic success",
-      difficulty: 'Intermediate',
-      estimatedTime: '15-20 minutes',
-      skills: ['Speed Reading', 'Comprehension Strategies']
-    }
-  ],
-  debate: [
-    { 
-      prompt: "Help me construct logical arguments with evidence, reasoning, and persuasive techniques", 
-      title: "Argument Construction", 
-      description: "Build compelling cases with logical flow, evidence evaluation, and effective rebuttal strategies",
-      difficulty: 'Intermediate',
-      estimatedTime: '20-25 minutes',
-      skills: ['Argumentation', 'Logic']
-    },
-    { 
-      prompt: "Teach me formal logic principles and how to identify and avoid logical fallacies", 
-      title: "Logic & Fallacies", 
-      description: "Deductive reasoning, syllogisms, and common logical errors with practical identification exercises",
-      difficulty: 'Advanced',
-      estimatedTime: '25-30 minutes',
-      skills: ['Formal Logic', 'Critical Analysis']
-    },
-    { 
-      prompt: "Practice public speaking and persuasive communication with confidence-building exercises", 
-      title: "Public Speaking", 
-      description: "Voice modulation, body language, audience engagement, and rhetoric with practical speaking exercises",
-      difficulty: 'Intermediate',
-      estimatedTime: '15-20 minutes',
-      skills: ['Public Speaking', 'Persuasion']
     }
   ]
 };
