@@ -90,7 +90,7 @@ export const useIVRClient = () => {
   };
 
   const startHTTPSession = async (sessionId: string) => {
-    // HTTP mode uses the existing ivr-chat edge function
+    // HTTP mode uses the bakame-llama-chat edge function with Groq Llama model
     setSession(prev => prev ? { ...prev, status: 'connected' } : null);
   };
 
@@ -164,10 +164,16 @@ export const useIVRClient = () => {
           }
           break;
         case 'http':
-          const { data } = await supabase.functions.invoke('ivr-chat', {
+          // Build conversation history for context
+          const conversationMessages = session.messages.map(msg => ({
+            role: msg.role,
+            content: msg.content
+          }));
+          
+          const { data } = await supabase.functions.invoke('bakame-llama-chat', {
             body: {
-              message: content,
-              sessionId: session.sessionId
+              messages: conversationMessages,
+              subject: 'english' // Since IVR is focused on English learning
             }
           });
           
@@ -178,6 +184,8 @@ export const useIVRClient = () => {
               timestamp: new Date(),
               type: detectMessageType(data.response)
             });
+          } else if (data?.error) {
+            throw new Error(data.error);
           }
           break;
       }

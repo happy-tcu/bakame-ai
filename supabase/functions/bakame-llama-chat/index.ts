@@ -12,9 +12,9 @@ serve(async (req) => {
   }
 
   try {
-    const LLAMA_API_KEY = Deno.env.get('LLAMA_API_KEY');
-    if (!LLAMA_API_KEY) {
-      throw new Error('LLAMA_API_KEY is not set');
+    const GROQ_API_KEY = Deno.env.get('GROQ_API_KEY');
+    if (!GROQ_API_KEY) {
+      throw new Error('GROQ_API_KEY is not set');
     }
 
     const { messages, subject } = await req.json();
@@ -66,19 +66,19 @@ Challenge students to think critically while being supportive. Help them structu
       ...messages
     ];
 
-    // Use OpenAI API as the primary endpoint since LLAMA_API_KEY might be an OpenAI key
-    console.log('Attempting to call AI API...');
+    // Use Groq API with Llama model
+    console.log('Calling Groq API with Llama model...');
     
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${LLAMA_API_KEY}`,
+        'Authorization': `Bearer ${GROQ_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'llama-3.1-8b-instant',
         messages: llamaMessages,
-        max_tokens: 150,
+        max_tokens: 200,
         temperature: 0.7,
         stream: false
       }),
@@ -97,7 +97,8 @@ Challenge students to think critically while being supportive. Help them structu
     return new Response(JSON.stringify({ 
       response: aiResponse,
       model: 'llama-3.1-8b-instant',
-      subject 
+      subject,
+      provider: 'groq'
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
