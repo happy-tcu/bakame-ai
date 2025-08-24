@@ -43,12 +43,20 @@ serve(async (req) => {
       throw new Error(error.error?.message || 'Failed to generate speech');
     }
 
-    // Convert audio buffer to base64
+    // Convert audio buffer to base64 using chunked processing to avoid stack overflow
     const arrayBuffer = await response.arrayBuffer();
     const uint8Array = new Uint8Array(arrayBuffer);
-    const base64Audio = btoa(
-      String.fromCharCode.apply(null, Array.from(uint8Array))
-    );
+    
+    // Process in chunks to avoid "Maximum call stack size exceeded" error
+    let binaryString = '';
+    const chunkSize = 0x8000; // 32KB chunks
+    
+    for (let i = 0; i < uint8Array.length; i += chunkSize) {
+      const chunk = uint8Array.subarray(i, Math.min(i + chunkSize, uint8Array.length));
+      binaryString += String.fromCharCode.apply(null, Array.from(chunk));
+    }
+    
+    const base64Audio = btoa(binaryString);
 
     console.log('Bakame speech generated:', { textLength: text.length, voice });
 

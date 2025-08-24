@@ -23,8 +23,34 @@ export const useIVRClient = () => {
   const [session, setSession] = useState<IVRSession | null>(null);
   const [isRecording, setIsRecording] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [errorCount, setErrorCount] = useState(0);
+  const [lastErrorTime, setLastErrorTime] = useState<number | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
   const rtcRef = useRef<RealtimeChat | null>(null);
+
+  // Circuit breaker pattern to prevent cascading failures
+  const MAX_ERRORS = 3;
+  const ERROR_RESET_TIME = 60000; // 1 minute
+
+  const isCircuitBroken = () => {
+    if (errorCount >= MAX_ERRORS) {
+      const now = Date.now();
+      if (lastErrorTime && now - lastErrorTime < ERROR_RESET_TIME) {
+        return true;
+      } else {
+        // Reset circuit breaker
+        setErrorCount(0);
+        setLastErrorTime(null);
+        return false;
+      }
+    }
+    return false;
+  };
+
+  const recordError = () => {
+    setErrorCount(prev => prev + 1);
+    setLastErrorTime(Date.now());
+  };
 
   const generateSessionId = () => `ivr_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
@@ -136,6 +162,18 @@ export const useIVRClient = () => {
   const sendMessage = useCallback(async (content: string) => {
     if (!session) return;
 
+    // Check circuit breaker
+    if (isCircuitBroken()) {
+      console.warn('Circuit breaker is open, skipping message send');
+      addMessage({
+        role: 'assistant',
+        content: 'I\'m experiencing some technical difficulties. Please wait a moment before trying again.',
+        timestamp: new Date(),
+        type: 'general'
+      });
+      return;
+    }
+
     const userMessage: IVRMessage = {
       role: 'user',
       content,
@@ -170,12 +208,16 @@ export const useIVRClient = () => {
             content: msg.content
           }));
           
-          const { data } = await supabase.functions.invoke('bakame-llama-chat', {
+          const { data, error } = await supabase.functions.invoke('bakame-llama-chat', {
             body: {
               messages: conversationMessages,
               subject: 'english' // Since IVR is focused on English learning
             }
           });
+
+          if (error) {
+            throw new Error(`Function error: ${error.message}`);
+          }
           
           if (data?.response) {
             addMessage({
@@ -184,15 +226,29 @@ export const useIVRClient = () => {
               timestamp: new Date(),
               type: detectMessageType(data.response)
             });
+            // Reset error count on success
+            setErrorCount(0);
+            setLastErrorTime(null);
           } else if (data?.error) {
             throw new Error(data.error);
+          } else {
+            throw new Error('No response received from AI');
           }
           break;
       }
     } catch (error) {
       console.error('Failed to send message:', error);
+      recordError();
+      
+      // Add user-friendly error message
+      addMessage({
+        role: 'assistant',
+        content: 'I apologize, but I\'m having trouble processing your request right now. Please try again in a moment.',
+        timestamp: new Date(),
+        type: 'general'
+      });
     }
-  }, [session]);
+  }, [session, isCircuitBroken, recordError]);
 
   const addMessage = (message: IVRMessage) => {
     setSession(prev => prev ? {

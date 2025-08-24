@@ -902,28 +902,36 @@ What specific area would you like to focus on today?`;
           <div className="flex items-center gap-4">
             <div className={`w-3 h-3 rounded-full ${getStatusColor()}`}></div>
             <div className="flex flex-col lg:flex-row lg:items-center gap-2">
-              <Badge variant="outline" className="border-border text-foreground text-xs">
+              <Badge variant="outline" className="border-border text-foreground text-xs max-w-[400px] truncate">
                 {getConnectionStatus()}
               </Badge>
-              <Badge variant="secondary" className="border-border text-foreground capitalize">
-                Subject: {currentSubject} • Level: {learningStats.skillLevel}
-              </Badge>
-              <Badge variant={isVoiceMode ? "default" : "outline"} className="border-border">
-                {isVoiceMode ? (
-                  <>
-                    <Mic className="w-3 h-3 mr-1" />
-                    Voice Mode
-                  </>
-                ) : (
-                  <>
-                    <Type className="w-3 h-3 mr-1" />
-                    Text Mode
-                  </>
-                )}
-              </Badge>
-              <Badge variant="outline" className="border-border text-xs">
-                Session: {getDetailedStatus().sessionDuration}
-              </Badge>
+              {isConnected && (
+                <>
+                  <Badge variant="secondary" className="border-border text-foreground capitalize">
+                    Subject: {currentSubject} • Level: {learningStats.skillLevel}
+                  </Badge>
+                  <Badge variant={isVoiceMode ? "default" : "outline"} className="border-border">
+                    {isVoiceMode ? (
+                      <>
+                        <Mic className="w-3 h-3 mr-1" />
+                        Voice Mode
+                        {(isSpeaking || isListening) && (
+                          <span className="ml-1 text-xs">({isSpeaking ? 'AI Speaking' : 'You Speaking'})</span>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <Type className="w-3 h-3 mr-1" />
+                        Text Mode
+                        {isProcessing && <Loader2 className="w-3 h-3 ml-1 animate-spin" />}
+                      </>
+                    )}
+                  </Badge>
+                  <Badge variant="outline" className="border-border text-xs">
+                    Session: {getDetailedStatus().sessionDuration}
+                  </Badge>
+                </>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-2">

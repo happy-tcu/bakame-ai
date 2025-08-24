@@ -220,11 +220,23 @@ export class BakameLlamaChat {
     } catch (error) {
       console.error('Error getting AI response:', error);
       const errorMessage = "I'm sorry, I'm having trouble right now. Please try again.";
+      
+      // Add error message to session without trying to speak it (to prevent cascading failures)
+      if (this.session) {
+        this.session.messages.push({
+          role: 'assistant',
+          content: errorMessage,
+          timestamp: new Date()
+        });
+        this.onSessionUpdate(this.session);
+      }
+
       this.onMessage({
         type: 'ai_message', 
         content: errorMessage
       });
-      await this.speakText(errorMessage);
+      
+      // Don't attempt TTS for error messages to prevent cascading failures
     }
   }
 
@@ -237,7 +249,10 @@ export class BakameLlamaChat {
       });
 
       if (ttsError || !ttsData?.audioContent) {
-        throw new Error('Failed to generate speech');
+        console.warn('TTS failed, falling back to text-only mode:', ttsError);
+        this.onSpeakingChange(false);
+        // Don't throw error - just fall back to text-only mode
+        return;
       }
 
       // Play the audio
@@ -247,15 +262,17 @@ export class BakameLlamaChat {
         this.onSpeakingChange(false);
       };
 
-      audio.onerror = () => {
+      audio.onerror = (e) => {
+        console.warn('Audio playback failed:', e);
         this.onSpeakingChange(false);
       };
 
       await audio.play();
 
     } catch (error) {
-      console.error('Error playing speech:', error);
+      console.warn('Error in speech synthesis, continuing in text-only mode:', error);
       this.onSpeakingChange(false);
+      // Don't re-throw the error to prevent cascading failures
     }
   }
 
