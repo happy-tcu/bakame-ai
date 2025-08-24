@@ -1,0 +1,290 @@
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft, Check, Building, Users, Shield, Zap, Phone, Star } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+const Pricing = () => {
+  const navigate = useNavigate();
+
+  const plans = [
+    {
+      name: "Starter",
+      price: "$99",
+      period: "/month",
+      description: "Perfect for small government departments or educational institutions",
+      features: [
+        "Up to 1,000 voice interactions/month",
+        "Basic IVR functionality", 
+        "English language support",
+        "Email support",
+        "Basic analytics dashboard",
+        "Standard security features"
+      ],
+      cta: "Start Free Trial",
+      popular: false,
+      icon: Users
+    },
+    {
+      name: "Professional",
+      price: "$499",
+      period: "/month", 
+      description: "Ideal for mid-size organizations and enterprises",
+      features: [
+        "Up to 10,000 voice interactions/month",
+        "Advanced IVR with custom workflows",
+        "Multi-language support (5+ languages)",
+        "Priority phone & email support",
+        "Advanced analytics & reporting",
+        "Enhanced security & compliance",
+        "API access & integrations",
+        "Custom voice models"
+      ],
+      cta: "Schedule Demo",
+      popular: true,
+      icon: Building
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      period: "pricing",
+      description: "Comprehensive solution for large government agencies and corporations",
+      features: [
+        "Unlimited voice interactions",
+        "Fully customizable IVR systems",
+        "All languages supported",
+        "24/7 dedicated support team",
+        "White-label solutions",
+        "Advanced security certifications",
+        "On-premise deployment options",
+        "Custom AI model training",
+        "SLA guarantees (99.9% uptime)",
+        "Dedicated account manager"
+      ],
+      cta: "Contact Sales",
+      popular: false,
+      icon: Shield
+    }
+  ];
+
+  const additionalFeatures = [
+    {
+      icon: Phone,
+      title: "Works Offline",
+      description: "Full functionality without internet connectivity"
+    },
+    {
+      icon: Shield, 
+      title: "Government Compliant",
+      description: "Meets GDPR, HIPAA, and SOC 2 requirements"
+    },
+    {
+      icon: Zap,
+      title: "Rapid Deployment", 
+      description: "Get up and running in less than 24 hours"
+    },
+    {
+      icon: Users,
+      title: "Multi-Tenant",
+      description: "Serve multiple departments or organizations"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Navigation */}
+      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border">
+        <div className="flex items-center space-x-4">
+          <button 
+            onClick={() => navigate('/')} 
+            className="p-2 hover:bg-muted rounded-lg transition-all duration-300 hover:scale-110"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div className="text-2xl font-bold">Bakame AI</div>
+        </div>
+        <div className="hidden md:flex space-x-8">
+          <button 
+            onClick={() => navigate('/enterprise-solution')} 
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Enterprise
+          </button>
+          <button 
+            onClick={() => navigate('/government-solution')} 
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Government
+          </button>
+          <button 
+            onClick={() => navigate('/demo-scheduling')} 
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Demo
+          </button>
+          <button 
+            onClick={() => navigate('/contact')} 
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Contact
+          </button>
+        </div>
+      </nav>
+
+      <div className="container mx-auto px-6 py-20">
+        {/* Header */}
+        <section className="text-center mb-16">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+            Simple, Transparent Pricing
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            Choose the perfect plan for your organization. All plans include our core AI voice technology with offline capabilities.
+          </p>
+          <Badge variant="outline" className="border-primary/30 text-primary">
+            30-day free trial • No setup fees • Cancel anytime
+          </Badge>
+        </section>
+
+        {/* Pricing Cards */}
+        <section className="mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {plans.map((plan, index) => {
+              const IconComponent = plan.icon;
+              return (
+                <Card 
+                  key={index} 
+                  className={`relative bg-card border-border ${plan.popular ? 'ring-2 ring-primary shadow-lg scale-105' : ''} hover:shadow-lg transition-all duration-300`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <Badge className="bg-primary text-primary-foreground px-4 py-1">
+                        <Star className="w-3 h-3 mr-1" />
+                        Most Popular
+                      </Badge>
+                    </div>
+                  )}
+                  
+                  <CardHeader className="text-center pb-2">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                      <IconComponent className="w-6 h-6 text-primary" />
+                    </div>
+                    <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
+                    <div className="flex items-baseline justify-center gap-1 mb-2">
+                      <span className="text-4xl font-bold">{plan.price}</span>
+                      <span className="text-muted-foreground">{plan.period}</span>
+                    </div>
+                    <p className="text-muted-foreground text-sm">{plan.description}</p>
+                  </CardHeader>
+                  
+                  <CardContent className="pt-4">
+                    <ul className="space-y-3 mb-8">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start gap-3">
+                          <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <span className="text-sm text-muted-foreground">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <Button 
+                      onClick={() => navigate('/demo-scheduling')}
+                      className={`w-full ${plan.popular ? 'bg-primary hover:opacity-90' : 'bg-muted hover:bg-muted/80'} text-primary-foreground transition-all duration-300 hover:scale-105`}
+                    >
+                      {plan.cta}
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Additional Features */}
+        <section className="mb-20">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-12">Why Organizations Choose Bakame AI</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {additionalFeatures.map((feature, index) => {
+                const IconComponent = feature.icon;
+                return (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <IconComponent className="w-5 h-5 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">{feature.title}</h3>
+                      <p className="text-muted-foreground">{feature.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="mb-20">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+            <div className="space-y-6">
+              <Card className="bg-card border-border">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">Can I upgrade or downgrade my plan?</h3>
+                  <p className="text-muted-foreground">Yes, you can change your plan at any time. Changes take effect at your next billing cycle, and we'll prorate any differences.</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-card border-border">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">What happens if I exceed my monthly interaction limit?</h3>
+                  <p className="text-muted-foreground">We'll notify you when you reach 80% of your limit. If exceeded, additional interactions are charged at $0.10 per interaction, or you can upgrade your plan.</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-card border-border">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">Is there a setup fee?</h3>
+                  <p className="text-muted-foreground">No setup fees for Starter and Professional plans. Enterprise deployments may include one-time implementation costs depending on customization requirements.</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-card border-border">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">Do you offer government or educational discounts?</h3>
+                  <p className="text-muted-foreground">Yes! We offer special pricing for government agencies, educational institutions, and non-profit organizations. Contact our sales team for details.</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="text-center">
+          <div className="max-w-3xl mx-auto bg-gradient-to-r from-card/50 to-card/30 rounded-3xl p-12 border border-border">
+            <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
+            <p className="text-muted-foreground text-lg mb-8">
+              Join hundreds of organizations already using Bakame AI to deliver accessible, secure voice services.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                onClick={() => navigate('/demo-scheduling')}
+                className="bg-primary hover:opacity-90 text-primary-foreground px-8 py-3 text-lg"
+              >
+                Schedule a Demo
+              </Button>
+              <Button 
+                onClick={() => navigate('/contact')}
+                variant="outline" 
+                className="border-border text-foreground hover:bg-muted px-8 py-3 text-lg"
+              >
+                Contact Sales
+              </Button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+};
+
+export default Pricing;

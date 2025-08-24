@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones, Brain, Mic, Database, Globe, BarChart3, Volume2, Newspaper, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,6 +12,7 @@ import FAQ from '@/components/FAQ';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import LiveChat from '@/components/chat/LiveChat';
 const Index = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -70,24 +71,18 @@ const Index = () => {
               Bakame AI
             </span>
           </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <span className="flex items-center text-foreground hover:text-primary transition-colors cursor-pointer">
-                Use Cases <ChevronDown className="ml-1 h-4 w-4" />
-              </span>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-background border-border z-50">
-              <DropdownMenuItem>
-                <span className="text-foreground">Government</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <span className="text-foreground">Enterprise</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <span className="text-foreground">Education</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Link to="/enterprise-solution" className="text-foreground hover:text-primary transition-colors font-semibold">
+            Enterprise
+          </Link>
+          <Link to="/government-solution" className="text-foreground hover:text-primary transition-colors font-semibold">
+            Government
+          </Link>
+          <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
+            Pricing
+          </Link>
+          <Link to="/demo-scheduling" className="text-foreground hover:text-primary transition-colors">
+            Demo
+          </Link>
           <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
           <Link to="/team" className="text-foreground hover:text-primary transition-colors">Team</Link>
           <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
@@ -111,13 +106,14 @@ const Index = () => {
       {isMenuOpen && <div className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-sm">
           <div className="flex flex-col items-center justify-center h-full space-y-8">
             <Link to="/" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Home</Link>
-            <Link to="/ivr" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Try English Learning</Link>
+            <Link to="/demo-scheduling" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Schedule Demo</Link>
+            <Link to="/pricing" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Pricing</Link>
             <div className="text-center">
-              <div className="text-xl text-foreground mb-4">Use Cases</div>
+              <div className="text-xl text-foreground mb-4">Solutions</div>
               <div className="space-y-4">
-                <span className="block text-foreground">Government</span>
-                <span className="block text-foreground">Enterprise</span>
-                <span className="block text-foreground">Education</span>
+                <Link to="/government-solution" onClick={closeMenu} className="block text-foreground hover:text-primary transition-colors">Government</Link>
+                <Link to="/enterprise-solution" onClick={closeMenu} className="block text-foreground hover:text-primary transition-colors">Enterprise</Link>
+                <Link to="/education-solution" onClick={closeMenu} className="block text-foreground hover:text-primary transition-colors">Education</Link>
               </div>
             </div>
             <Link to="/about" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">About</Link>
@@ -128,9 +124,9 @@ const Index = () => {
             </div>
             <Button onClick={() => {
           closeMenu();
-          openEarlyAccess();
+          navigate('/demo-scheduling');
         }} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105">
-              Sign Up for Early Access
+              Schedule Demo
             </Button>
           </div>
         </div>}
@@ -141,48 +137,50 @@ const Index = () => {
         <section className="container mx-auto px-6 py-20 text-center">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent leading-tight">
-              Learn English with AI Voice Tutor
+              AI Voice Solutions That Work Everywhere
             </h1>
             
             <div className="text-xl md:text-2xl text-muted-foreground mb-8 h-16 flex items-center justify-center">
-              <TypingAnimation text="Your personal English tutor powered by AI - practice speaking, learn vocabulary, and improve pronunciation." className="text-muted-foreground" />
+              <TypingAnimation text="Offline-first AI voice technology for government, enterprise, and educational organizations worldwide." className="text-muted-foreground" />
             </div>
             
             <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Bakame AI is an English learning platform that helps you practice conversation, 
-              build vocabulary, and improve pronunciation through real-time voice interaction. 
-              Perfect for learners who want to speak English confidently.
+              Bakame AI delivers secure, accessible voice services that work without internet connectivity. 
+              Perfect for government agencies, enterprises, and educational institutions serving diverse populations 
+              in any location or connectivity scenario.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Button onClick={openEarlyAccess} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
-                <GraduationCap className="mr-2 h-5 w-5" />
-                Sign Up for Early Access
+              <Button onClick={() => navigate('/demo-scheduling')} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule a Demo
               </Button>
-              
-              
+              <Button onClick={() => navigate('/pricing')} variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
+                <ArrowRight className="mr-2 h-5 w-5" />
+                View Pricing
+              </Button>
             </div>
 
-            {/* Learning Features */}
+            {/* Use Case Features */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <MessageSquare className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Conversation Practice</span>
+                <Shield className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Offline Capability</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg border border-border flex items-center gap-2">
-                <Brain className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Vocabulary Building</span>
+                <Zap className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Instant Response</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Mic className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Pronunciation Help</span>
+                <Globe className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Multi-Language</span>
               </div>
             </div>
 
-            {/* Other Use Cases */}
+            {/* Solution Categories */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
                 <Building className="h-4 w-4 text-foreground" />
@@ -196,76 +194,28 @@ const Index = () => {
               
               <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
                 <Users className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Customer Support</span>
+                <span className="text-muted-foreground">Educational Institutions</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Core Learning Modules */}
+        {/* Core Solutions */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Core Learning Modules
+              Enterprise-Ready Solutions
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Languages className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">English Practice</CardTitle>
+                  <Shield className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Government Services</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Grammar correction, pronunciation feedback, and conversation practice to improve your English fluency.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Brain className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Math Module</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Mental math problems with adaptive difficulty progression to strengthen your mathematical skills.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <BookOpen className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Reading Comprehension</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Story-based learning with questions to improve your reading and understanding skills.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <MessageSquare className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Debate Practice</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Structured debate topics with counter-arguments to enhance your critical thinking and communication.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Target className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">General Q&A</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Multi-topic conversations and help system for general knowledge and assistance.
+                    Secure, accessible citizen services that work offline. Perfect for emergency response and public information systems.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -273,11 +223,59 @@ const Index = () => {
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
                   <Building className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Business Solutions</CardTitle>
+                  <CardTitle className="text-card-foreground">Enterprise Support</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Enterprise support, customer service automation, and professional communication assistance.
+                    Customer service automation and internal communication systems that maintain reliability without internet dependency.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+                <CardHeader>
+                  <GraduationCap className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Educational Institutions</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    AI-powered learning platforms that work in any connectivity scenario, bringing quality education to all locations.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+                <CardHeader>
+                  <Headphones className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Healthcare Communication</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Patient support hotlines and appointment systems that remain accessible during network outages or emergencies.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+                <CardHeader>
+                  <Phone className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Multi-Language Support</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Serve diverse populations with AI that understands multiple languages and cultural contexts for inclusive communication.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+                <CardHeader>
+                  <Target className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Custom Integration</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Flexible API and webhook integrations that connect with existing systems and workflows seamlessly.
                   </CardDescription>
                 </CardContent>
               </Card>
