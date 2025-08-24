@@ -12,14 +12,14 @@ const Pricing = () => {
       name: "Starter",
       price: "$99",
       period: "/month",
-      description: "Perfect for small government departments or educational institutions",
+      description: "Perfect for small schools starting their English learning program",
       features: [
-        "Up to 1,000 voice interactions/month",
-        "Basic IVR functionality", 
-        "English language support",
+        "Up to 500 students",
+        "Basic English conversation practice", 
+        "Student progress tracking",
+        "Teacher dashboard access",
         "Email support",
-        "Basic analytics dashboard",
-        "Standard security features"
+        "Works offline"
       ],
       cta: "Start Free Trial",
       popular: false,
@@ -29,16 +29,16 @@ const Pricing = () => {
       name: "Professional",
       price: "$499",
       period: "/month", 
-      description: "Ideal for mid-size organizations and enterprises",
+      description: "Ideal for medium to large schools with 500+ students",
       features: [
-        "Up to 10,000 voice interactions/month",
-        "Advanced IVR with custom workflows",
-        "Multi-language support (5+ languages)",
-        "Priority phone & email support",
-        "Advanced analytics & reporting",
-        "Enhanced security & compliance",
-        "API access & integrations",
-        "Custom voice models"
+        "Up to 2,500 students",
+        "Advanced English curriculum integration",
+        "Detailed learning analytics",
+        "Priority support",
+        "Teacher training included",
+        "Custom lesson plans",
+        "Parent progress reports",
+        "Pronunciation assessment"
       ],
       cta: "Schedule Demo",
       popular: true,
@@ -48,16 +48,16 @@ const Pricing = () => {
       name: "Enterprise",
       price: "Custom",
       period: "pricing",
-      description: "Comprehensive solution for large government agencies and corporations",
+      description: "Comprehensive solution for school districts and large institutions",
       features: [
-        "Unlimited voice interactions",
-        "Fully customizable IVR systems",
-        "All languages supported",
+        "Unlimited students",
+        "District-wide deployment",
+        "Custom English curriculum development",
         "24/7 dedicated support team",
         "White-label solutions",
-        "Advanced security certifications",
+        "Advanced security & compliance",
         "On-premise deployment options",
-        "Custom AI model training",
+        "Custom AI tutor training",
         "SLA guarantees (99.9% uptime)",
         "Dedicated account manager"
       ],
@@ -138,7 +138,7 @@ const Pricing = () => {
             Simple, Transparent Pricing
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Choose the perfect plan for your organization. All plans include our core AI voice technology with offline capabilities.
+            Choose the perfect plan for your school. All plans include our AI English tutoring with offline capabilities.
           </p>
           <Badge variant="outline" className="border-primary/30 text-primary">
             30-day free trial • No setup fees • Cancel anytime
@@ -202,7 +202,7 @@ const Pricing = () => {
         {/* Additional Features */}
         <section className="mb-20">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Why Organizations Choose Bakame AI</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">Why Schools Choose Bakame AI for English Learning</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {additionalFeatures.map((feature, index) => {
                 const IconComponent = feature.icon;

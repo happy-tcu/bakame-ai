@@ -28,12 +28,13 @@ const DemoScheduling = () => {
   });
 
   const useCases = [
-    "Government Services",
-    "Enterprise Customer Support", 
-    "Educational Institution",
-    "Healthcare Communication",
-    "Emergency Response",
-    "Multi-language Support",
+    "Elementary School English Program",
+    "Middle School English Learning", 
+    "High School English Enhancement",
+    "ESL/EFL Programs",
+    "Special Education English Support",
+    "After-School English Programs",
+    "District-Wide Implementation",
     "Other"
   ];
 
@@ -134,10 +135,10 @@ const DemoScheduling = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Schedule Your Personalized Demo
+              Schedule Your School Demo
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              See Bakame AI in action with a live demonstration tailored to your organization's needs.
+              See how Bakame AI transforms English learning in schools with a live demonstration tailored to your educational needs.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Badge variant="outline" className="border-primary/30 text-primary">
@@ -214,13 +215,14 @@ const DemoScheduling = () => {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="company">Organization *</Label>
+                      <Label htmlFor="company">School/District *</Label>
                       <Input 
                         id="company"
                         required
                         value={formData.company}
                         onChange={(e) => handleInputChange('company', e.target.value)}
                         className="mt-1"
+                        placeholder="e.g., Lincoln Elementary School"
                       />
                     </div>
                     <div>
@@ -231,7 +233,7 @@ const DemoScheduling = () => {
                         value={formData.role}
                         onChange={(e) => handleInputChange('role', e.target.value)}
                         className="mt-1"
-                        placeholder="e.g., IT Director, CTO"
+                        placeholder="e.g., English Teacher, Principal, IT Coordinator"
                       />
                     </div>
                   </div>
@@ -289,7 +291,7 @@ const DemoScheduling = () => {
                       value={formData.requirements}
                       onChange={(e) => handleInputChange('requirements', e.target.value)}
                       className="mt-1"
-                      placeholder="Tell us about your specific needs, expected user volume, integration requirements, etc."
+                      placeholder="Tell us about your English curriculum, number of students, current challenges, integration needs, etc."
                       rows={4}
                     />
                   </div>
@@ -313,8 +315,8 @@ const DemoScheduling = () => {
                       <Phone className="w-3 h-3 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold">Live Voice Interaction</h4>
-                      <p className="text-muted-foreground text-sm">Experience real-time AI voice conversations tailored to your use case</p>
+                      <h4 className="font-semibold">Student English Conversation</h4>
+                      <p className="text-muted-foreground text-sm">Watch students interact with AI tutors for speaking and pronunciation practice</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -322,8 +324,8 @@ const DemoScheduling = () => {
                       <Building className="w-3 h-3 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold">Custom Configuration</h4>
-                      <p className="text-muted-foreground text-sm">See how to configure the system for your organization's workflows</p>
+                      <h4 className="font-semibold">Teacher Dashboard</h4>
+                      <p className="text-muted-foreground text-sm">Explore progress tracking, analytics, and lesson planning features for educators</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -331,8 +333,8 @@ const DemoScheduling = () => {
                       <Mail className="w-3 h-3 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold">Integration Options</h4>
-                      <p className="text-muted-foreground text-sm">Learn about API integrations and deployment options</p>
+                      <h4 className="font-semibold">Curriculum Integration</h4>
+                      <p className="text-muted-foreground text-sm">Learn how to integrate with your existing English curriculum and LMS</p>
                     </div>
                   </div>
                 </CardContent>
@@ -347,28 +349,28 @@ const DemoScheduling = () => {
                     To make the most of your demo session, please prepare:
                   </p>
                   <ul className="space-y-2 text-muted-foreground text-sm">
-                    <li>• Specific use cases you want to explore</li>
-                    <li>• Expected user volume and usage patterns</li>
-                    <li>• Integration requirements with existing systems</li>
-                    <li>• Timeline for potential deployment</li>
-                    <li>• Key stakeholders who should attend</li>
+                    <li>• Current English curriculum and learning objectives</li>
+                    <li>• Number of students and grade levels</li>
+                    <li>• Existing technology infrastructure and LMS</li>
+                    <li>• Timeline for implementation</li>
+                    <li>• Key teachers and administrators to include</li>
                   </ul>
                 </CardContent>
               </Card>
 
               <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Need Enterprise Solutions?</h3>
+                  <h3 className="font-semibold mb-2">Need District-Wide Solutions?</h3>
                   <p className="text-muted-foreground text-sm mb-4">
-                    For large deployments requiring custom features, white-labeling, or on-premise installation, 
-                    our enterprise team can provide specialized demonstrations.
+                    For large school districts requiring custom curriculum integration, white-labeling, or on-premise installation, 
+                    our education specialists can provide specialized demonstrations.
                   </p>
                   <Button 
                     onClick={() => navigate('/contact')} 
                     variant="outline" 
                     size="sm"
                   >
-                    Contact Enterprise Sales
+                    Contact Education Team
                   </Button>
                 </CardContent>
               </Card>

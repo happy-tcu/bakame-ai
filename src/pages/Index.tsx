@@ -137,17 +137,17 @@ const Index = () => {
         <section className="container mx-auto px-6 py-20 text-center">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent leading-tight">
-              AI Voice Solutions That Work Everywhere
+              AI-Powered English Learning for Schools
             </h1>
             
             <div className="text-xl md:text-2xl text-muted-foreground mb-8 h-16 flex items-center justify-center">
-              <TypingAnimation text="Offline-first AI voice technology for government, enterprise, and educational organizations worldwide." className="text-muted-foreground" />
+              <TypingAnimation text="Revolutionize English education with offline-first AI tutoring that works in any classroom." className="text-muted-foreground" />
             </div>
             
             <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Bakame AI delivers secure, accessible voice services that work without internet connectivity. 
-              Perfect for government agencies, enterprises, and educational institutions serving diverse populations 
-              in any location or connectivity scenario.
+              Bakame AI transforms English learning in schools with personalized AI tutoring that works without internet connectivity. 
+              Perfect for schools seeking to improve student outcomes, support teachers, and provide 24/7 English practice 
+              regardless of infrastructure limitations.
             </p>
 
             {/* CTA Buttons */}
@@ -162,39 +162,39 @@ const Index = () => {
               </Button>
             </div>
 
-            {/* Use Case Features */}
+            {/* Educational Features */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Shield className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Offline Capability</span>
+                <GraduationCap className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Personalized Learning</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg border border-border flex items-center gap-2">
-                <Zap className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Instant Response</span>
+                <Volume2 className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Speaking Practice</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Globe className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Multi-Language</span>
+                <Shield className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Works Offline</span>
               </div>
             </div>
 
-            {/* Solution Categories */}
+            {/* School Benefits */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Building className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Enterprise Solutions</span>
+                <Users className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Teacher Support Tools</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg border border-border flex items-center gap-2">
-                <Shield className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Government Services</span>
+                <BarChart3 className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Progress Tracking</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Users className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Educational Institutions</span>
+                <BookOpen className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Curriculum Integration</span>
               </div>
             </div>
           </div>
@@ -204,78 +204,78 @@ const Index = () => {
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Enterprise-Ready Solutions
+              Transform English Learning in Your School
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
+                  <Volume2 className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Interactive Speaking Practice</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Students practice English conversation with AI tutors, improving pronunciation, fluency, and confidence through personalized feedback.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+                <CardHeader>
+                  <Users className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Teacher Dashboard</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Comprehensive analytics and progress tracking help teachers identify student needs and customize lesson plans effectively.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+                <CardHeader>
+                  <BookOpen className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Curriculum Integration</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Seamlessly integrates with existing English curricula, supporting lesson objectives and learning standards.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+                <CardHeader>
                   <Shield className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Government Services</CardTitle>
+                  <CardTitle className="text-card-foreground">Offline Learning</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Secure, accessible citizen services that work offline. Perfect for emergency response and public information systems.
+                    Works without internet connectivity, ensuring uninterrupted learning regardless of school infrastructure limitations.
                   </CardDescription>
                 </CardContent>
               </Card>
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Building className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Enterprise Support</CardTitle>
+                  <BarChart3 className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Progress Tracking</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Customer service automation and internal communication systems that maintain reliability without internet dependency.
+                    Real-time monitoring of student progress with detailed reports on speaking, listening, and vocabulary development.
                   </CardDescription>
                 </CardContent>
               </Card>
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <GraduationCap className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Educational Institutions</CardTitle>
+                  <Brain className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Adaptive Learning</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    AI-powered learning platforms that work in any connectivity scenario, bringing quality education to all locations.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Headphones className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Healthcare Communication</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Patient support hotlines and appointment systems that remain accessible during network outages or emergencies.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Phone className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Multi-Language Support</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Serve diverse populations with AI that understands multiple languages and cultural contexts for inclusive communication.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Target className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Custom Integration</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Flexible API and webhook integrations that connect with existing systems and workflows seamlessly.
+                    AI adapts to each student's learning pace and style, providing personalized English lessons that maximize learning outcomes.
                   </CardDescription>
                 </CardContent>
               </Card>
