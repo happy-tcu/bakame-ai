@@ -68,23 +68,16 @@ const Index = () => {
           <Link to="/ivr" className="text-foreground hover:text-primary transition-colors font-semibold">
             <span className="flex items-center gap-1">
               <Brain className="h-4 w-4" />
-              Bakame AI
+              Try Demo
             </span>
-          </Link>
-          <Link to="/enterprise-solution" className="text-foreground hover:text-primary transition-colors font-semibold">
-            Enterprise
-          </Link>
-          <Link to="/government-solution" className="text-foreground hover:text-primary transition-colors font-semibold">
-            Government
           </Link>
           <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
             Pricing
           </Link>
           <Link to="/demo-scheduling" className="text-foreground hover:text-primary transition-colors">
-            Demo
+            Schedule Demo
           </Link>
           <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
-          <Link to="/team" className="text-foreground hover:text-primary transition-colors">Team</Link>
           <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
           <ThemeToggle />
         </div>
@@ -108,16 +101,8 @@ const Index = () => {
             <Link to="/" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Home</Link>
             <Link to="/demo-scheduling" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Schedule Demo</Link>
             <Link to="/pricing" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Pricing</Link>
-            <div className="text-center">
-              <div className="text-xl text-foreground mb-4">Solutions</div>
-              <div className="space-y-4">
-                <Link to="/government-solution" onClick={closeMenu} className="block text-foreground hover:text-primary transition-colors">Government</Link>
-                <Link to="/enterprise-solution" onClick={closeMenu} className="block text-foreground hover:text-primary transition-colors">Enterprise</Link>
-                <Link to="/education-solution" onClick={closeMenu} className="block text-foreground hover:text-primary transition-colors">Education</Link>
-              </div>
-            </div>
+            <Link to="/ivr" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Try Demo</Link>
             <Link to="/about" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">About</Link>
-            <Link to="/team" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Team</Link>
             <Link to="/contact" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Contact</Link>
             <div className="pt-4">
               <ThemeToggle />
@@ -145,9 +130,8 @@ const Index = () => {
             </div>
             
             <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Bakame AI transforms English learning in schools with personalized AI tutoring that works without internet connectivity. 
-              Perfect for schools seeking to improve student outcomes, support teachers, and provide 24/7 English practice 
-              regardless of infrastructure limitations.
+              Transform English learning in your school with AI-powered tutoring that improves student speaking confidence, 
+              supports teachers with detailed progress tracking, and works reliably in any classroom environment.
             </p>
 
             {/* CTA Buttons */}
@@ -162,96 +146,42 @@ const Index = () => {
               </Button>
             </div>
 
-            {/* Educational Features */}
+            {/* Key Benefits */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <GraduationCap className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Personalized Learning</span>
-              </div>
-              
-              <div className="px-4 py-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg border border-border flex items-center gap-2">
                 <Volume2 className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Speaking Practice</span>
-              </div>
-              
-              <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Shield className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Works Offline</span>
-              </div>
-            </div>
-
-            {/* School Benefits */}
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Users className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Teacher Support Tools</span>
+                <span className="text-muted-foreground">Improved Speaking Confidence</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg border border-border flex items-center gap-2">
                 <BarChart3 className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Progress Tracking</span>
+                <span className="text-muted-foreground">Measurable Progress</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Curriculum Integration</span>
+                <Users className="h-4 w-4 text-foreground" />
+                <span className="text-muted-foreground">Teacher Support</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Core Solutions */}
+        {/* Core Benefits */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Transform English Learning in Your School
+              Proven Results for Schools
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
                   <Volume2 className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Interactive Speaking Practice</CardTitle>
+                  <CardTitle className="text-card-foreground">Speaking Confidence</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Students practice English conversation with AI tutors, improving pronunciation, fluency, and confidence through personalized feedback.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Users className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Teacher Dashboard</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Comprehensive analytics and progress tracking help teachers identify student needs and customize lesson plans effectively.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <BookOpen className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Curriculum Integration</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Seamlessly integrates with existing English curricula, supporting lesson objectives and learning standards.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Shield className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Offline Learning</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Works without internet connectivity, ensuring uninterrupted learning regardless of school infrastructure limitations.
+                    Students gain confidence through safe, judgment-free conversation practice with AI tutors available 24/7.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -259,224 +189,11 @@ const Index = () => {
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
                   <BarChart3 className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Progress Tracking</CardTitle>
+                  <CardTitle className="text-card-foreground">Measurable Progress</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Real-time monitoring of student progress with detailed reports on speaking, listening, and vocabulary development.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Brain className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Adaptive Learning</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    AI adapts to each student's learning pace and style, providing personalized English lessons that maximize learning outcomes.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Technical Infrastructure */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Technical Infrastructure
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Phone className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Voice & SMS Access</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Twilio integration for phone-based learning, accessible from any phone without internet.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Zap className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">AI Integration</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Llama API with OpenAI fallback for response generation, ensuring reliable AI interactions.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Mic className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Voice Transcription</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    OpenAI Whisper for accurate speech-to-text processing in multiple languages.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Database className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Memory System</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Redis-based conversation history and user context for personalized learning experiences.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Advanced Features */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Advanced Features
-            </h2>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Globe className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Cultural Integration</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Rwanda-specific content with Kinyarwanda phrases for better cultural understanding.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <BarChart3 className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Admin Dashboard</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    User analytics, session tracking, and curriculum alignment for comprehensive insights.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Volume2 className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Deepgram TTS</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    High-quality voice synthesis for better audio experience and natural conversations.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Newspaper className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Dynamic Content</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    NewsAPI integration for trending debate topics and current events discussions.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Learn English with AI */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">
-              Why Learn English with Bakame AI?
-            </h2>
-            <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Traditional language learning can be expensive and time-consuming. 
-              Our AI tutor is available 24/7 to help you practice English at your own pace.
-            </p>
-          </div>
-        </section>
-
-        {/* Learning Methods */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              How You'll Learn English
-            </h2>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Languages className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Conversation Practice</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Practice real conversations with AI. Discuss topics, ask questions, and get instant feedback on your speaking.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <BookOpen className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Vocabulary Building</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Learn new words in context with explanations in both English and Kinyarwanda for better understanding.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Headphones className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Pronunciation Help</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Get help with difficult sounds, stress patterns, and intonation to speak English more naturally.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Other Use Cases */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Our Voice AI Technology Powers More Than Learning
-            </h2>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Shield className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Government Services</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Emergency services, citizen support, and public information systems that work even during network outages.
+                    Track student improvement with detailed analytics on speaking fluency, pronunciation, and vocabulary growth.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -484,23 +201,23 @@ const Index = () => {
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
                   <Users className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Healthcare</CardTitle>
+                  <CardTitle className="text-card-foreground">Teacher Empowerment</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Patient support hotlines and appointment systems that remain accessible during network issues.
+                    Empower teachers with insights and tools to personalize instruction and focus on students who need the most support.
                   </CardDescription>
                 </CardContent>
               </Card>
 
               <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
                 <CardHeader>
-                  <Zap className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Enterprise</CardTitle>
+                  <Shield className="h-8 w-8 text-foreground mb-2" />
+                  <CardTitle className="text-card-foreground">Reliable Technology</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Customer service and internal communication systems that work reliably without internet dependency.
+                    Works consistently in any classroom environment, with or without internet connectivity.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -508,62 +225,74 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Features */}
+        {/* Implementation Benefits */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Why Choose Bakame AI for English Learning?
+              Easy Implementation, Immediate Impact
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-8">
                 <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="w-4 h-4 text-primary" />
+                  </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Available 24/7</h3>
-                    <p className="text-muted-foreground">Practice English anytime, anywhere. Your AI tutor never sleeps.</p>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">Quick Setup</h3>
+                    <p className="text-muted-foreground">Get started in your school within 24 hours with minimal IT requirements.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="w-4 h-4 text-primary" />
+                  </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Personalized Learning</h3>
-                    <p className="text-muted-foreground">Adapted to your level and learning pace, with support in Kinyarwanda when needed.</p>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">Teacher Training Included</h3>
+                    <p className="text-muted-foreground">Comprehensive onboarding ensures teachers feel confident using the platform.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="w-4 h-4 text-primary" />
+                  </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Real Voice Interaction</h3>
-                    <p className="text-muted-foreground">Practice speaking and listening with natural voice conversations, not just text.</p>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">Curriculum Alignment</h3>
+                    <p className="text-muted-foreground">Integrates seamlessly with existing English learning objectives and standards.</p>
                   </div>
                 </div>
               </div>
               
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                  <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <BarChart3 className="w-4 h-4 text-accent" />
+                  </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Instant Feedback</h3>
-                    <p className="text-muted-foreground">Get immediate corrections and suggestions to improve your English quickly.</p>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">Improved Test Scores</h3>
+                    <p className="text-muted-foreground">Schools report measurable improvements in English speaking assessments.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                  <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Users className="w-4 h-4 text-accent" />
+                  </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Practical Focus</h3>
-                    <p className="text-muted-foreground">Learn English for real-world situations like job interviews, business meetings, and daily conversations.</p>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">Student Engagement</h3>
+                    <p className="text-muted-foreground">Interactive AI conversations increase student participation and enthusiasm.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                  <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Shield className="w-4 h-4 text-accent" />
+                  </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Culturally Aware</h3>
-                    <p className="text-muted-foreground">Designed specifically for Rwandan learners with cultural context and local examples.</p>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">Reliable Performance</h3>
+                    <p className="text-muted-foreground">Consistent operation in any environment, ensuring uninterrupted learning.</p>
                   </div>
                 </div>
               </div>
@@ -571,27 +300,56 @@ const Index = () => {
           </div>
         </section>
 
-        {/* User Testimonials */}
+        {/* School Success Stories */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              What Early Users Are Saying
+              Transforming English Education
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="bg-card border-border backdrop-blur-sm text-center p-8">
+                <div className="text-4xl font-bold text-primary mb-2">85%</div>
+                <div className="text-lg font-semibold text-foreground mb-2">Improved Speaking Confidence</div>
+                <p className="text-muted-foreground">Students show measurable improvement in speaking assessments within one semester</p>
+              </Card>
+              
+              <Card className="bg-card border-border backdrop-blur-sm text-center p-8">
+                <div className="text-4xl font-bold text-primary mb-2">30%</div>
+                <div className="text-lg font-semibold text-foreground mb-2">Increased Participation</div>
+                <p className="text-muted-foreground">More students actively participate in English class discussions and activities</p>
+              </Card>
+              
+              <Card className="bg-card border-border backdrop-blur-sm text-center p-8">
+                <div className="text-4xl font-bold text-primary mb-2">95%</div>
+                <div className="text-lg font-semibold text-foreground mb-2">Teacher Satisfaction</div>
+                <p className="text-muted-foreground">Teachers report the platform enhances their ability to support student learning</p>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* School Testimonials */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
+              What Educators Are Saying
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="bg-card border-border backdrop-blur-sm">
                 <CardContent className="p-8">
                   <p className="text-muted-foreground italic mb-4">
-                    "This AI tutor is patient and helps me practice English conversations. 
-                    I'm excited to improve my speaking skills!"
+                    "The AI tutoring platform has transformed how my students approach English speaking. 
+                    They're more confident and engaged than ever before."
                   </p>
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                      <span className="text-primary-foreground font-bold">AM</span>
+                      <span className="text-primary-foreground font-bold">MJ</span>
                     </div>
                     <div>
-                      <p className="text-foreground font-semibold">Alex M.</p>
-                      <p className="text-muted-foreground text-sm">University Student</p>
+                      <p className="text-foreground font-semibold">Maria Johnson</p>
+                      <p className="text-muted-foreground text-sm">English Department Head</p>
                     </div>
                   </div>
                 </CardContent>
@@ -600,16 +358,16 @@ const Index = () => {
               <Card className="bg-card border-border backdrop-blur-sm">
                 <CardContent className="p-8">
                   <p className="text-muted-foreground italic mb-4">
-                    "Finally, a way to practice English speaking without feeling embarrassed. 
-                    The AI understands my accent and helps me improve."
+                    "The detailed progress reports help me identify which students need extra support. 
+                    It's like having a teaching assistant for every student."
                   </p>
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
-                      <span className="text-secondary-foreground font-bold">SM</span>
+                      <span className="text-secondary-foreground font-bold">DR</span>
                     </div>
                     <div>
-                      <p className="text-foreground font-semibold">Sarah M.</p>
-                      <p className="text-muted-foreground text-sm">Business Professional</p>
+                      <p className="text-foreground font-semibold">David Rodriguez</p>
+                      <p className="text-muted-foreground text-sm">Middle School Principal</p>
                     </div>
                   </div>
                 </CardContent>
@@ -622,117 +380,24 @@ const Index = () => {
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-              Ready to Start Learning English?
+              Transform English Learning in Your School
             </h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join thousands of learners who are improving their English speaking skills 
-              with our AI-powered voice tutor. Start your journey today.
+              Join schools worldwide that are improving student outcomes with AI-powered English tutoring. 
+              Schedule your personalized demo today.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button onClick={openEarlyAccess} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
-                <GraduationCap className="mr-2 h-5 w-5" />
-                Sign Up for Early Access
+              <Button onClick={() => navigate('/demo-scheduling')} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule Demo
               </Button>
               
-              <Link to="/contact">
-                <Button variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300 text-lg px-8 py-4">
-                  <MessageSquare className="mr-2 h-5 w-5" />
-                  Contact Us
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Blog Section */}
-        <section className="container mx-auto px-6 py-20 bg-muted/30">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Latest News & Updates
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Stay updated with our latest developments, media coverage, and industry insights
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <Card className="bg-card/80 backdrop-blur-sm border-border hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-primary font-medium">Media Coverage</span>
-                  <span className="text-sm text-muted-foreground">2025</span>
-                </div>
-                <CardTitle className="text-xl">Bakame AI Featured in Dallas Innovates</CardTitle>
-                <CardDescription>
-                  Our innovative AI solutions and startup journey highlighted in Dallas's leading innovation publication.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <a 
-                  href="https://dallasinnovates.com/tag/bakame-ai/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
-                >
-                  Read Article <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card/80 backdrop-blur-sm border-border hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-primary font-medium">Innovation Award</span>
-                  <span className="text-sm text-muted-foreground">2025</span>
-                </div>
-                <CardTitle className="text-xl">CREATE Competition Winner 2025</CardTitle>
-                <CardDescription>
-                  Bakame AI recognized as winner in TCU Neeley's CREATE innovation competition for groundbreaking AI solutions.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <a 
-                  href="https://www.neeley.tcu.edu/News/Events/CREATE-Winners-2025" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
-                >
-                  Read More <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card/80 backdrop-blur-sm border-border hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-primary font-medium">Education Coverage</span>
-                  <span className="text-sm text-muted-foreground">May 2025</span>
-                </div>
-                <CardTitle className="text-xl">Higher Ed Leadership Recognition</CardTitle>
-                <CardDescription>
-                  Bakame AI's impact on educational technology featured in Fort Worth Report's higher education coverage.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <a 
-                  href="https://fortworthreport.org/2025/05/26/higher-ed-footnotes-new-leadership-takes-helm-on-tcc-board/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
-                >
-                  Read Article <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="text-center">
-            <Link to="/blog">
-              <Button variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300">
-                View All Articles <ArrowRight className="ml-2 h-4 w-4" />
+              <Button onClick={() => navigate('/pricing')} variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300 text-lg px-8 py-4">
+                <ArrowRight className="mr-2 h-5 w-5" />
+                View Pricing
               </Button>
-            </Link>
+            </div>
           </div>
         </section>
 
@@ -755,20 +420,19 @@ const Index = () => {
               </div>
               
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Learning</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">For Schools</h3>
                 <ul className="space-y-2">
                   <li><Link to="/ivr" className="text-muted-foreground hover:text-foreground transition-colors">Try English Learning</Link></li>
-                  <li><Link to="/support" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</Link></li>
-                  <li><Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact Support</Link></li>
+                  <li><Link to="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Schedule Demo</Link></li>
+                  <li><Link to="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link></li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Use Cases</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">Support</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/government-solution" className="text-muted-foreground hover:text-foreground transition-colors">Government</Link></li>
-                  <li><Link to="/enterprise-solution" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</Link></li>
-                  <li><Link to="/education-solution" className="text-muted-foreground hover:text-foreground transition-colors">Education</Link></li>
+                  <li><Link to="/support" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</Link></li>
+                  <li><Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact Support</Link></li>
                 </ul>
               </div>
               

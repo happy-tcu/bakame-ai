@@ -116,12 +116,6 @@ const DemoScheduling = () => {
             Pricing
           </button>
           <button 
-            onClick={() => navigate('/enterprise-solution')} 
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Enterprise
-          </button>
-          <button 
             onClick={() => navigate('/contact')} 
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
@@ -362,7 +356,7 @@ const DemoScheduling = () => {
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2">Need District-Wide Solutions?</h3>
                   <p className="text-muted-foreground text-sm mb-4">
-                    For large school districts requiring custom curriculum integration, white-labeling, or on-premise installation, 
+                    For large school districts requiring custom curriculum integration, white-labeling, or dedicated deployment, 
                     our education specialists can provide specialized demonstrations.
                   </p>
                   <Button 

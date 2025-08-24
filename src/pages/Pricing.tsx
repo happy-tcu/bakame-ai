@@ -70,23 +70,23 @@ const Pricing = () => {
   const additionalFeatures = [
     {
       icon: Phone,
-      title: "Works Offline",
-      description: "Full functionality without internet connectivity"
+      title: "Works Anywhere",
+      description: "Full functionality with or without internet connectivity"
     },
     {
-      icon: Shield, 
-      title: "Government Compliant",
-      description: "Meets GDPR, HIPAA, and SOC 2 requirements"
+      icon: Shield,
+      title: "Secure & Compliant",
+      description: "Meets educational data privacy and security requirements"
     },
     {
       icon: Zap,
-      title: "Rapid Deployment", 
-      description: "Get up and running in less than 24 hours"
+      title: "Quick Implementation", 
+      description: "Get up and running in your school within 24 hours"
     },
     {
       icon: Users,
-      title: "Multi-Tenant",
-      description: "Serve multiple departments or organizations"
+      title: "Scalable Solution",
+      description: "Grows with your school from pilot to district-wide"
     }
   ];
 
@@ -105,22 +105,10 @@ const Pricing = () => {
         </div>
         <div className="hidden md:flex space-x-8">
           <button 
-            onClick={() => navigate('/enterprise-solution')} 
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Enterprise
-          </button>
-          <button 
-            onClick={() => navigate('/government-solution')} 
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Government
-          </button>
-          <button 
             onClick={() => navigate('/demo-scheduling')} 
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
-            Demo
+            Schedule Demo
           </button>
           <button 
             onClick={() => navigate('/contact')} 
@@ -250,8 +238,8 @@ const Pricing = () => {
               
               <Card className="bg-card border-border">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Do you offer government or educational discounts?</h3>
-                  <p className="text-muted-foreground">Yes! We offer special pricing for government agencies, educational institutions, and non-profit organizations. Contact our sales team for details.</p>
+                  <h3 className="font-semibold mb-2">Do you offer educational discounts?</h3>
+                  <p className="text-muted-foreground">Yes! We offer special pricing for schools, educational institutions, and non-profit organizations. Contact our sales team for details.</p>
                 </CardContent>
               </Card>
             </div>
@@ -263,7 +251,7 @@ const Pricing = () => {
           <div className="max-w-3xl mx-auto bg-gradient-to-r from-card/50 to-card/30 rounded-3xl p-12 border border-border">
             <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
             <p className="text-muted-foreground text-lg mb-8">
-              Join hundreds of organizations already using Bakame AI to deliver accessible, secure voice services.
+              Join schools worldwide that are improving English learning outcomes with AI-powered tutoring technology.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
