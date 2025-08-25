@@ -402,7 +402,20 @@ What specific area would you like to focus on today?`;
       
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : 'Failed to get AI response',
+        description: (() => {
+          if (error instanceof Error) {
+            if (error.message.includes('API key')) {
+              return "Authentication error. Please check your configuration.";
+            } else if (error.message.includes('Rate limit')) {
+              return "Too many requests. Please wait a moment.";
+            } else if (error.message.includes('service error')) {
+              return "AI service is temporarily unavailable.";
+            } else {
+              return error.message;
+            }
+          }
+          return 'Failed to get AI response';
+        })(),
         variant: "destructive",
       });
     } finally {

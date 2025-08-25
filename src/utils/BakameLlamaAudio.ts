@@ -219,7 +219,17 @@ export class BakameLlamaChat {
 
     } catch (error) {
       console.error('Error getting AI response:', error);
-      const errorMessage = "I'm sorry, I'm having trouble right now. Please try again.";
+      
+      let errorMessage = "I'm sorry, I'm having trouble right now. Please try again.";
+      if (error instanceof Error) {
+        if (error.message.includes('API key')) {
+          errorMessage = "Authentication error. Please check your API configuration.";
+        } else if (error.message.includes('Rate limit')) {
+          errorMessage = "Too many requests. Please wait a moment and try again.";
+        } else if (error.message.includes('service error')) {
+          errorMessage = "AI service is temporarily unavailable. Please try again.";
+        }
+      }
       
       // Add error message to session without trying to speak it (to prevent cascading failures)
       if (this.session) {

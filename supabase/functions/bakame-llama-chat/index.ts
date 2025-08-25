@@ -12,12 +12,31 @@ serve(async (req) => {
   }
 
   try {
+    console.log('Bakame Llama Chat function started');
+    
     const GROQ_API_KEY = Deno.env.get('GROQ_API_KEY');
+    console.log('GROQ_API_KEY status:', GROQ_API_KEY ? 'found' : 'missing');
+    
     if (!GROQ_API_KEY) {
-      throw new Error('GROQ_API_KEY is not set');
+      console.error('GROQ_API_KEY environment variable is not set');
+      throw new Error('GROQ API key is not configured. Please contact support.');
     }
 
-    const { messages, subject } = await req.json();
+    if (!GROQ_API_KEY.startsWith('gsk_')) {
+      console.error('Invalid GROQ_API_KEY format');
+      throw new Error('Invalid API key format. Please check your configuration.');
+    }
+
+    let requestBody;
+    try {
+      requestBody = await req.json();
+    } catch (parseError) {
+      console.error('Failed to parse request body:', parseError);
+      throw new Error('Invalid request format. Please check your input.');
+    }
+
+    const { messages, subject } = requestBody;
+    console.log('Request parsed successfully:', { messageCount: messages?.length, subject });
 
     // Define subject-specific system prompts for Llama
     const systemPrompts = {
@@ -85,8 +104,23 @@ Challenge students to think critically while being supportive. Help them structu
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`API error: ${errorData.error?.message || response.statusText}`);
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch {
+        errorData = { error: { message: response.statusText } };
+      }
+      
+      const errorMessage = errorData.error?.message || response.statusText || 'Unknown API error';
+      console.error('Groq API error:', { status: response.status, error: errorMessage });
+      
+      if (response.status === 401) {
+        throw new Error('Invalid or expired API key. Please check your GROQ configuration.');
+      } else if (response.status === 429) {
+        throw new Error('Rate limit exceeded. Please try again in a few moments.');
+      } else {
+        throw new Error(`AI service error: ${errorMessage}`);
+      }
     }
 
     const data = await response.json();
@@ -105,8 +139,16 @@ Challenge students to think critically while being supportive. Help them structu
 
   } catch (error) {
     console.error("Bakame Llama API Error:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
+    
+    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+    const statusCode = errorMessage.includes('API key') ? 401 : 
+                      errorMessage.includes('Rate limit') ? 429 : 500;
+    
+    return new Response(JSON.stringify({ 
+      error: errorMessage,
+      details: error instanceof Error ? error.stack : undefined
+    }), {
+      status: statusCode,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
