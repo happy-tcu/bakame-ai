@@ -31,8 +31,9 @@ const About = () => {
             <span className="text-foreground"> Everywhere</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{animationDelay: '0.2s'}}>
-            We're building AI technology that works without internet connectivity. 
-            Making advanced AI accessible to everyone, everywhere.
+            <strong>2.9 billion people</strong> lack reliable internet access. 
+            We're building AI technology that works without connectivity, 
+            making advanced AI accessible to everyone, everywhere.
           </p>
           <div className="flex items-center justify-center gap-6 mt-8 animate-fade-in" style={{animationDelay: '0.4s'}}>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -48,39 +49,78 @@ const About = () => {
 
         {/* Our Story */}
         <section className="mb-20">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">Our Story</h2>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">The Numbers Tell the Story</h2>
+            
+            {/* Problem Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              <div className="text-center p-6 bg-muted/30 rounded-lg">
+                <div className="text-3xl font-bold mb-2">2.9B</div>
+                <p className="text-sm text-muted-foreground">People without reliable internet access globally</p>
+              </div>
+              <div className="text-center p-6 bg-muted/30 rounded-lg">
+                <div className="text-3xl font-bold mb-2">244M</div>
+                <p className="text-sm text-muted-foreground">Children out of school worldwide</p>
+              </div>
+              <div className="text-center p-6 bg-muted/30 rounded-lg">
+                <div className="text-3xl font-bold mb-2">70%</div>
+                <p className="text-sm text-muted-foreground">Of sub-Saharan Africa lacks internet access</p>
+              </div>
+            </div>
             
             <div className="space-y-8">
               <Card className="bg-card border-border">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">The Problem</h3>
+                  <h3 className="font-bold mb-2">The Digital Divide</h3>
                   <p>
-                    Billions of people lack reliable internet access, yet current AI solutions require constant connectivity. 
-                    This creates a digital divide that limits opportunities.
+                    In rural Africa, <strong>only 28% have internet access</strong> compared to 80% in urban areas. 
+                    This gap prevents billions from accessing AI-powered education, healthcare, and services that could transform their lives.
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="bg-card border-border">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">Our Solution</h3>
+                  <h3 className="font-bold mb-2">Education Crisis</h3>
                   <p>
-                    We're developing AI that works completely offline. Full-powered artificial intelligence 
-                    that runs locally, making advanced technology accessible regardless of internet connectivity.
+                    <strong>617 million children</strong> worldwide cannot read or do basic math. 
+                    AI tutoring could address this, but current solutions require constant connectivity that doesn't exist in most rural areas.
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="bg-card border-border">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">The Vision</h3>
+                  <h3 className="font-bold mb-2">Market Opportunity</h3>
                   <p>
-                    A world where your location doesn't determine your access to AI technology. 
-                    Where a student in rural Rwanda has the same AI capabilities as someone in New York.
+                    The global AI market is projected to reach <strong>$1.8 trillion by 2030</strong>. 
+                    Yet most of this value is concentrated in connected regions. Offline AI could unlock this potential for the remaining 40% of the world.
                   </p>
                 </CardContent>
               </Card>
+            </div>
+            
+            {/* Potential Impact Stats */}
+            <div className="mt-12 p-8 bg-card border border-border rounded-lg">
+              <h3 className="text-xl font-bold mb-6 text-center">The Potential</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div>
+                  <strong>If we could provide offline AI tutoring:</strong>
+                  <ul className="mt-2 space-y-1 text-muted-foreground">
+                    <li>• 244M out-of-school children could access personalized education</li>
+                    <li>• Rural schools could offer advanced language learning</li>
+                    <li>• Emergency services could reach remote communities</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>Market size in underconnected regions:</strong>
+                  <ul className="mt-2 space-y-1 text-muted-foreground">
+                    <li>• $47B education technology market in developing countries</li>
+                    <li>• $12B government digital services market</li>
+                    <li>• $8B healthcare AI market in rural areas</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </section>
