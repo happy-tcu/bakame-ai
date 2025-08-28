@@ -54,46 +54,46 @@ const About = () => {
             
             {/* Problem Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <div className="text-center p-6 bg-muted/30 rounded-lg">
-                <div className="text-3xl font-bold mb-2">2.9B</div>
+              <div className="text-center p-6 bg-card/50 border border-border/50 rounded-lg hover:bg-card/70 transition-colors">
+                <div className="text-4xl font-bold mb-2 text-foreground">2.9B</div>
                 <p className="text-sm text-muted-foreground">People without reliable internet access globally</p>
               </div>
-              <div className="text-center p-6 bg-muted/30 rounded-lg">
-                <div className="text-3xl font-bold mb-2">244M</div>
+              <div className="text-center p-6 bg-card/50 border border-border/50 rounded-lg hover:bg-card/70 transition-colors">
+                <div className="text-4xl font-bold mb-2 text-foreground">244M</div>
                 <p className="text-sm text-muted-foreground">Children out of school worldwide</p>
               </div>
-              <div className="text-center p-6 bg-muted/30 rounded-lg">
-                <div className="text-3xl font-bold mb-2">70%</div>
+              <div className="text-center p-6 bg-card/50 border border-border/50 rounded-lg hover:bg-card/70 transition-colors">
+                <div className="text-4xl font-bold mb-2 text-foreground">70%</div>
                 <p className="text-sm text-muted-foreground">Of sub-Saharan Africa lacks internet access</p>
               </div>
             </div>
             
             <div className="space-y-8">
-              <Card className="bg-card border-border">
+              <Card className="bg-card border-border shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">The Digital Divide</h3>
-                  <p>
-                    In rural Africa, <strong>only 28% have internet access</strong> compared to 80% in urban areas. 
+                  <h3 className="font-bold mb-2 text-foreground">The Digital Divide</h3>
+                  <p className="text-foreground/90">
+                    In rural Africa, <strong className="text-foreground">only 28% have internet access</strong> compared to 80% in urban areas. 
                     This gap prevents billions from accessing AI-powered education, healthcare, and services that could transform their lives.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="bg-card border-border">
+              <Card className="bg-card border-border shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">Education Crisis</h3>
-                  <p>
-                    <strong>617 million children</strong> worldwide cannot read or do basic math. 
+                  <h3 className="font-bold mb-2 text-foreground">Education Crisis</h3>
+                  <p className="text-foreground/90">
+                    <strong className="text-foreground">617 million children</strong> worldwide cannot read or do basic math. 
                     AI tutoring could address this, but current solutions require constant connectivity that doesn't exist in most rural areas.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="bg-card border-border">
+              <Card className="bg-card border-border shadow-sm hover:shadow-md transition-shadow">
                 <CardContent className="p-6">
-                  <h3 className="font-bold mb-2">Market Opportunity</h3>
-                  <p>
-                    The global AI market is projected to reach <strong>$1.8 trillion by 2030</strong>. 
+                  <h3 className="font-bold mb-2 text-foreground">Market Opportunity</h3>
+                  <p className="text-foreground/90">
+                    The global AI market is projected to reach <strong className="text-foreground">$1.8 trillion by 2030</strong>. 
                     Yet most of this value is concentrated in connected regions. Offline AI could unlock this potential for the remaining 40% of the world.
                   </p>
                 </CardContent>
@@ -101,23 +101,23 @@ const About = () => {
             </div>
             
             {/* Potential Impact Stats */}
-            <div className="mt-12 p-8 bg-card border border-border rounded-lg">
-              <h3 className="text-xl font-bold mb-6 text-center">The Potential</h3>
+            <div className="mt-12 p-8 bg-card border border-border rounded-lg shadow-sm">
+              <h3 className="text-xl font-bold mb-6 text-center text-foreground">The Potential</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                 <div>
-                  <strong>If we could provide offline AI tutoring:</strong>
-                  <ul className="mt-2 space-y-1 text-muted-foreground">
-                    <li>• 244M out-of-school children could access personalized education</li>
+                  <strong className="text-foreground">If we could provide offline AI tutoring:</strong>
+                  <ul className="mt-2 space-y-1 text-foreground/80">
+                    <li>• <span className="font-medium">244M</span> out-of-school children could access personalized education</li>
                     <li>• Rural schools could offer advanced language learning</li>
                     <li>• Emergency services could reach remote communities</li>
                   </ul>
                 </div>
                 <div>
-                  <strong>Market size in underconnected regions:</strong>
-                  <ul className="mt-2 space-y-1 text-muted-foreground">
-                    <li>• $47B education technology market in developing countries</li>
-                    <li>• $12B government digital services market</li>
-                    <li>• $8B healthcare AI market in rural areas</li>
+                  <strong className="text-foreground">Market size in underconnected regions:</strong>
+                  <ul className="mt-2 space-y-1 text-foreground/80">
+                    <li>• <span className="font-medium">$47B</span> education technology market in developing countries</li>
+                    <li>• <span className="font-medium">$12B</span> government digital services market</li>
+                    <li>• <span className="font-medium">$8B</span> healthcare AI market in rural areas</li>
                   </ul>
                 </div>
               </div>
@@ -128,37 +128,37 @@ const About = () => {
         {/* Mission, Vision, Values */}
         <section className="mb-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Card className="bg-card border-border text-center">
+            <Card className="bg-card border-border text-center shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
               <CardContent className="p-8">
-                <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="w-6 h-6" />
+                <div className="w-12 h-12 bg-muted/60 border border-border rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Target className="w-6 h-6 text-foreground" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Mission</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-xl font-bold mb-3 text-foreground">Mission</h3>
+                <p className="text-foreground/80">
                   Make AI accessible to everyone, regardless of internet connectivity.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border text-center">
+            <Card className="bg-card border-border text-center shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
               <CardContent className="p-8">
-                <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Eye className="w-6 h-6" />
+                <div className="w-12 h-12 bg-muted/60 border border-border rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Eye className="w-6 h-6 text-foreground" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Vision</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-xl font-bold mb-3 text-foreground">Vision</h3>
+                <p className="text-foreground/80">
                   A world where location doesn't determine access to AI technology.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border text-center">
+            <Card className="bg-card border-border text-center shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
               <CardContent className="p-8">
-                <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="w-6 h-6" />
+                <div className="w-12 h-12 bg-muted/60 border border-border rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="w-6 h-6 text-foreground" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Values</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-xl font-bold mb-3 text-foreground">Values</h3>
+                <p className="text-foreground/80">
                   Humanity first. Technology should serve people, not the other way around.
                 </p>
               </CardContent>
