@@ -176,7 +176,11 @@ const Pricing = () => {
                     
                     <Button 
                       onClick={() => navigate('/demo-scheduling')}
-                      className={`w-full ${plan.popular ? 'bg-primary hover:opacity-90' : 'bg-muted hover:bg-muted/80'} text-primary-foreground transition-all duration-300 hover:scale-105`}
+                      className={`w-full transition-all duration-300 hover:scale-105 ${
+                        plan.popular 
+                          ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
+                          : 'bg-secondary hover:bg-secondary/80 text-secondary-foreground border border-border'
+                      }`}
                     >
                       {plan.cta}
                     </Button>
