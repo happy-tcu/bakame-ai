@@ -27,12 +27,10 @@ export const AnalyticsProvider = ({ children }: AnalyticsProviderProps) => {
 
   const trackEvent = async (eventType: string, eventData: any = {}) => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
       await supabase.from('analytics').insert({
         event_type: eventType,
         event_data: eventData,
-        user_id: user?.id || null,
+        user_id: null,
         session_id: sessionId,
         page_path: window.location.pathname,
         user_agent: navigator.userAgent,
@@ -44,12 +42,10 @@ export const AnalyticsProvider = ({ children }: AnalyticsProviderProps) => {
 
   const trackPageView = async (pagePath: string) => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
       await supabase.from('analytics').insert({
         event_type: 'page_view',
         event_data: { path: pagePath },
-        user_id: user?.id || null,
+        user_id: null,
         session_id: sessionId,
         page_path: pagePath,
         user_agent: navigator.userAgent,
@@ -59,7 +55,7 @@ export const AnalyticsProvider = ({ children }: AnalyticsProviderProps) => {
       try {
         await supabase.from('user_sessions').upsert({
           session_id: sessionId,
-          user_id: user?.id || null,
+          user_id: null,
           user_agent: navigator.userAgent,
           last_activity: new Date().toISOString(),
           pages_visited: 1,

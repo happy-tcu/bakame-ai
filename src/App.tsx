@@ -21,8 +21,6 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import EarlyAccess from "./pages/EarlyAccess";
-import Signup from "./pages/Signup";
-import AdminDashboard from "./pages/AdminDashboard";
 import Pricing from "./pages/Pricing";
 import DemoScheduling from "./pages/DemoScheduling";
 
@@ -51,8 +49,6 @@ const App = () => (
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/early-access" element={<EarlyAccess />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/demo-scheduling" element={<DemoScheduling />} />
               <Route path="*" element={<NotFound />} />

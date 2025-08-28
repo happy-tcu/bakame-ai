@@ -247,7 +247,7 @@ const EnterpriseSolution = () => {
             Join leading enterprises already using Bakame AI to transform their customer experience and operational efficiency.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => navigate('/signup')} className="bg-foreground text-background px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted-foreground transition-all duration-300 hover:scale-105 group relative overflow-hidden">
+            <button onClick={() => navigate('/contact')} className="bg-foreground text-background px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted-foreground transition-all duration-300 hover:scale-105 group relative overflow-hidden">
               <span className="relative z-10">Request Free Trial</span>
             </button>
             <button className="border border-border text-foreground px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted transition-all duration-300 hover:scale-105 hover:border-muted-foreground hover:shadow-lg hover:shadow-muted/25">
