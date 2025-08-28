@@ -15,7 +15,7 @@ const About = () => {
         </div>
         <div className="hidden md:flex space-x-8">
           
-          <button onClick={() => navigate('/ivr')} className="text-muted-foreground hover:text-foreground transition-colors">Demo</button>
+          <button onClick={() => navigate('/demo-scheduling')} className="text-muted-foreground hover:text-foreground transition-colors">Demo</button>
           <button onClick={() => navigate('/team')} className="text-muted-foreground hover:text-foreground transition-colors">Team</button>
           <button onClick={() => navigate('/contact')} className="text-muted-foreground hover:text-foreground transition-colors">Contact</button>
         </div>
@@ -157,8 +157,8 @@ const About = () => {
               <Button onClick={() => navigate('/contact')} className="bg-primary hover:opacity-90 text-primary-foreground px-8 py-3 text-lg">
                 Get Started Today
               </Button>
-              <Button onClick={() => navigate('/ivr')} variant="outline" className="border-border text-foreground hover:bg-muted px-8 py-3 text-lg">
-                Try Our Demo
+              <Button onClick={() => navigate('/demo-scheduling')} variant="outline" className="border-border text-foreground hover:bg-muted px-8 py-3 text-lg">
+                Schedule Demo
               </Button>
             </div>
           </div>

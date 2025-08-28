@@ -65,12 +65,6 @@ const Index = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
-          <Link to="/ivr" className="text-foreground hover:text-primary transition-colors font-semibold">
-            <span className="flex items-center gap-1">
-              <Brain className="h-4 w-4" />
-              Try Demo
-            </span>
-          </Link>
           <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
             Pricing
           </Link>
@@ -101,7 +95,6 @@ const Index = () => {
             <Link to="/" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Home</Link>
             <Link to="/demo-scheduling" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Schedule Demo</Link>
             <Link to="/pricing" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Pricing</Link>
-            <Link to="/ivr" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Try Demo</Link>
             <Link to="/about" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">About</Link>
             <Link to="/contact" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Contact</Link>
             <div className="pt-4">
@@ -422,7 +415,7 @@ const Index = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-4">For Schools</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/ivr" className="text-muted-foreground hover:text-foreground transition-colors">Try English Learning</Link></li>
+                  <li><Link to="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Schedule Demo</Link></li>
                   <li><Link to="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Schedule Demo</Link></li>
                   <li><Link to="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link></li>
                 </ul>
