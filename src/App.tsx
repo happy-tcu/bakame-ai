@@ -14,7 +14,6 @@ import GovernmentSolution from "./pages/GovernmentSolution";
 import EnterpriseSolution from "./pages/EnterpriseSolution";
 import EducationSolution from "./pages/EducationSolution";
 import GovernmentDemo from "./pages/GovernmentDemo";
-import IVR from "./pages/IVR";
 import Blog from "./pages/Blog";
 import Support from "./pages/Support";
 import Privacy from "./pages/Privacy";
@@ -43,7 +42,6 @@ const App = () => (
               <Route path="/enterprise-solution" element={<EnterpriseSolution />} />
               <Route path="/education-solution" element={<EducationSolution />} />
               <Route path="/government-demo" element={<GovernmentDemo />} />
-              <Route path="/ivr" element={<IVR />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/support" element={<Support />} />
               <Route path="/privacy" element={<Privacy />} />
