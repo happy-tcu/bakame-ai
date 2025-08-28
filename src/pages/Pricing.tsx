@@ -40,7 +40,7 @@ const Pricing = () => {
         "Parent progress reports",
         "Pronunciation assessment"
       ],
-      cta: "Schedule Demo",
+      cta: "Try Demo",
       popular: true,
       icon: Building
     },
