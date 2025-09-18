@@ -129,9 +129,9 @@ const Index = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Button onClick={() => navigate('/demo-scheduling')} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
-                <Calendar className="mr-2 h-5 w-5" />
-                Schedule a Demo
+              <Button onClick={openEarlyAccess} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
+                <ArrowRight className="mr-2 h-5 w-5" />
+                Join Waitlist
               </Button>
               <Button onClick={() => navigate('/pricing')} variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
                 <ArrowRight className="mr-2 h-5 w-5" />
