@@ -742,6 +742,10 @@ export type Database = {
         Args: { "": unknown[] }
         Returns: number
       }
+      validate_session_access: {
+        Args: { session_user_id: string }
+        Returns: boolean
+      }
       vector_avg: {
         Args: { "": number[] }
         Returns: string

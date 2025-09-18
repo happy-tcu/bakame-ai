@@ -34,3 +34,6 @@ verify_jwt = false
 
 [functions.create-session]
 verify_jwt = false
+
+[functions.log-security-event]
+verify_jwt = false

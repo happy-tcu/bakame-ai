@@ -89,19 +89,16 @@ export const checkRateLimit = async (options: RateLimitOptions): Promise<{ allow
   }
 };
 
-// Security event logging
+// Security event logging via secure edge function
 export const logSecurityEvent = async (event: SecurityEvent): Promise<void> => {
   try {
-    const { error } = await supabase
-      .from('security_events')
-      .insert({
+    const { error } = await supabase.functions.invoke('log-security-event', {
+      body: {
         event_type: event.event_type,
-        user_id: event.user_id,
-        ip_address: event.ip_address,
-        user_agent: event.user_agent || (typeof navigator !== 'undefined' ? navigator.userAgent : null),
-        details: event.details,
-        severity: event.severity || 'info'
-      });
+        severity: event.severity || 'info',
+        details: event.details || {}
+      }
+    });
 
     if (error) {
       console.error('Security event logging error:', error);
