@@ -55,6 +55,11 @@ const Index = () => {
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-6 md:p-8">
         <div className="flex items-center space-x-4">
+          <BakameAnimation 
+            variant="brand"
+            className="w-8 h-8"
+            loop={true}
+          />
           <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
             Bakame AI
           </div>

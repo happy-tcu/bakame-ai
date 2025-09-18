@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 
 interface BakameAnimationProps {
-  variant?: 'hero' | 'brand' | 'loading';
+  variant?: 'hero' | 'brand' | 'loading' | 'background';
   className?: string;
   autoPlay?: boolean;
   loop?: boolean;
   muted?: boolean;
+  controls?: boolean;
   onEnded?: () => void;
 }
 
@@ -16,6 +17,7 @@ export const BakameAnimation: React.FC<BakameAnimationProps> = ({
   autoPlay = true,
   loop = false,
   muted = true,
+  controls = false,
   onEnded
 }) => {
   const { theme } = useTheme();
@@ -23,7 +25,6 @@ export const BakameAnimation: React.FC<BakameAnimationProps> = ({
   const [isVertical, setIsVertical] = useState(false);
 
   useEffect(() => {
-    // Check if screen is vertical
     const checkOrientation = () => {
       setIsVertical(window.innerHeight > window.innerWidth);
     };
@@ -34,28 +35,31 @@ export const BakameAnimation: React.FC<BakameAnimationProps> = ({
   }, []);
 
   useEffect(() => {
-    // Select appropriate video based on theme and orientation
     const getVideoSrc = () => {
       const isDark = theme === 'dark';
       
-      if (variant === 'loading') {
-        // Use blue animation for loading
-        return isVertical 
-          ? '/videos/bakame-intro-blue-vertical.mp4'
-          : '/videos/bakame-intro-blue.mp4';
+      switch (variant) {
+        case 'loading':
+          return isVertical 
+            ? '/videos/bakame-intro-blue-vertical.mp4'
+            : '/videos/bakame-intro-blue.mp4';
+            
+        case 'brand':
+          return isVertical
+            ? isDark ? '/videos/bakame-intro-white-vertical.mp4' : '/videos/bakame-intro-black-vertical.mp4'
+            : isDark ? '/videos/bakame-intro-white.mp4' : '/videos/bakame-intro-black.mp4';
+            
+        case 'background':
+          return isVertical 
+            ? '/videos/bakame-intro-blue-vertical.mp4'
+            : '/videos/bakame-intro-blue.mp4';
+            
+        case 'hero':
+        default:
+          return isVertical 
+            ? '/videos/bakame-intro-blue-vertical.mp4'
+            : '/videos/bakame-intro-blue.mp4';
       }
-      
-      if (variant === 'brand') {
-        // Use white/black based on theme
-        return isVertical
-          ? isDark ? '/videos/bakame-intro-white-vertical.mp4' : '/videos/bakame-intro-black-vertical.mp4'
-          : isDark ? '/videos/bakame-intro-white.mp4' : '/videos/bakame-intro-black.mp4';
-      }
-      
-      // Hero variant - use blue as primary brand color
-      return isVertical 
-        ? '/videos/bakame-intro-blue-vertical.mp4'
-        : '/videos/bakame-intro-blue.mp4';
     };
 
     setVideoSrc(getVideoSrc());
@@ -64,26 +68,28 @@ export const BakameAnimation: React.FC<BakameAnimationProps> = ({
   const getContainerClasses = () => {
     switch (variant) {
       case 'loading':
-        return 'fixed inset-0 z-50 flex items-center justify-center bg-background';
+        return 'fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-sm';
+      case 'background':
+        return 'absolute inset-0 overflow-hidden opacity-10';
       case 'brand':
-        return 'w-full h-auto';
+        return 'w-full h-auto flex justify-center';
       case 'hero':
       default:
-        return 'w-full h-auto max-w-2xl mx-auto';
+        return 'relative w-full h-auto';
     }
   };
 
   const getVideoClasses = () => {
-    const baseClasses = 'w-full h-auto object-contain';
-    
     switch (variant) {
       case 'loading':
-        return `${baseClasses} max-w-md max-h-96`;
+        return 'w-full h-auto max-w-sm max-h-80 object-contain';
+      case 'background':
+        return 'w-full h-full object-cover scale-110';
       case 'brand':
-        return `${baseClasses}`;
+        return 'w-full h-auto max-w-xs object-contain';
       case 'hero':
       default:
-        return `${baseClasses} rounded-lg shadow-2xl`;
+        return 'w-full h-auto max-w-md mx-auto object-contain drop-shadow-2xl';
     }
   };
 
@@ -97,6 +103,7 @@ export const BakameAnimation: React.FC<BakameAnimationProps> = ({
         loop={loop}
         muted={muted}
         playsInline
+        controls={controls}
         onEnded={onEnded}
       >
         <source src={videoSrc} type="video/mp4" />
