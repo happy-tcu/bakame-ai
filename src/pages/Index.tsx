@@ -11,7 +11,6 @@ import VideoModal from '@/components/VideoModal';
 import FAQ from '@/components/FAQ';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import LiveChat from '@/components/chat/LiveChat';
-import BakameAnimation from '@/components/BakameAnimation';
 const Index = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,11 +54,6 @@ const Index = () => {
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-6 md:p-8">
         <div className="flex items-center space-x-4">
-          <BakameAnimation 
-            variant="brand"
-            className="w-8 h-8"
-            loop={true}
-          />
           <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
             Bakame AI
           </div>
@@ -118,62 +112,48 @@ const Index = () => {
       {/* Main Content */}
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="container mx-auto px-6 py-12 text-center">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left side - Content */}
-              <div className="space-y-8 text-left lg:text-left">
-                <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent leading-tight">
-                  AI-Powered English Learning for Schools
-                </h1>
-                
-                <div className="text-lg md:text-xl text-muted-foreground h-12 flex items-center">
-                  <TypingAnimation text="Revolutionize English education with offline-first AI tutoring." className="text-muted-foreground" />
-                </div>
-                
-                <p className="text-base md:text-lg text-muted-foreground max-w-xl">
-                  Transform English learning with AI-powered tutoring that improves student speaking confidence, 
-                  supports teachers with progress tracking, and works reliably in any classroom.
-                </p>
+        <section className="container mx-auto px-6 py-20 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent leading-tight">
+              AI-Powered English Learning for Schools
+            </h1>
+            
+            <div className="text-xl md:text-2xl text-muted-foreground mb-8 h-16 flex items-center justify-center">
+              <TypingAnimation text="Revolutionize English education with offline-first AI tutoring that works in any classroom." className="text-muted-foreground" />
+            </div>
+            
+            <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Transform English learning in your school with AI-powered tutoring that improves student speaking confidence, 
+              supports teachers with detailed progress tracking, and works reliably in any classroom environment.
+            </p>
 
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button onClick={() => navigate('/demo-scheduling')} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-base px-6 py-3">
-                    <Calendar className="mr-2 h-4 w-4" />
-                    Schedule a Demo
-                  </Button>
-                  <Button onClick={() => navigate('/pricing')} variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300 transform hover:scale-105 text-base px-6 py-3">
-                    <ArrowRight className="mr-2 h-4 w-4" />
-                    View Pricing
-                  </Button>
-                </div>
-              </div>
-
-              {/* Right side - Animation */}
-              <div className="lg:order-2">
-                <BakameAnimation 
-                  variant="hero"
-                  className="animate-fade-in"
-                  loop={true}
-                />
-              </div>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+              <Button onClick={() => navigate('/demo-scheduling')} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule a Demo
+              </Button>
+              <Button onClick={() => navigate('/pricing')} variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
+                <ArrowRight className="mr-2 h-5 w-5" />
+                View Pricing
+              </Button>
             </div>
 
             {/* Key Benefits */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-12">
+            <div className="flex flex-wrap justify-center gap-4 mb-16">
               <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
                 <Volume2 className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground text-sm">Speaking Confidence</span>
+                <span className="text-muted-foreground">Improved Speaking Confidence</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg border border-border flex items-center gap-2">
                 <BarChart3 className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground text-sm">Progress Tracking</span>
+                <span className="text-muted-foreground">Measurable Progress</span>
               </div>
               
               <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
                 <Users className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground text-sm">Teacher Support</span>
+                <span className="text-muted-foreground">Teacher Support</span>
               </div>
             </div>
           </div>
