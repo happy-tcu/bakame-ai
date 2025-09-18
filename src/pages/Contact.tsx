@@ -60,7 +60,7 @@ const Contact = () => {
                   <div className="space-y-3 text-muted-foreground">
                     <div className="flex items-center">
                       <Mail className="w-4 h-4 mr-2 text-primary" />
-                      <span>Email: support@bakame.ai</span>
+                      <span>Email: happy@bakame.org</span>
                     </div>
                     
                     <div className="flex items-center">
