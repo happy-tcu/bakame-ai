@@ -22,6 +22,8 @@ import NotFound from "./pages/NotFound";
 import EarlyAccess from "./pages/EarlyAccess";
 import Pricing from "./pages/Pricing";
 import DemoScheduling from "./pages/DemoScheduling";
+import TryDemo from "./pages/TryDemo";
+import Features from "./pages/Features";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +51,8 @@ const App = () => (
               <Route path="/early-access" element={<EarlyAccess />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/demo-scheduling" element={<DemoScheduling />} />
+              <Route path="/try" element={<TryDemo />} />
+              <Route path="/features" element={<Features />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

@@ -123,6 +123,24 @@ All colors MUST be HSL.
   }
 }
 
+/* 3D card flip animation for flashcards */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Animation delay classes */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
 @keyframes pulse-glow {
   0%, 100% {
     box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
