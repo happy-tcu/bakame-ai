@@ -25,6 +25,7 @@ import DemoScheduling from "./pages/DemoScheduling";
 import TryDemo from "./pages/TryDemo";
 import Features from "./pages/Features";
 import Roadmap from "./pages/Roadmap";
+import Press from "./pages/Press";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
               <Route path="/try" element={<TryDemo />} />
               <Route path="/features" element={<Features />} />
               <Route path="/roadmap" element={<Roadmap />} />
+              <Route path="/press" element={<Press />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

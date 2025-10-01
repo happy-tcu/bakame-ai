@@ -85,6 +85,12 @@ const Navbar = () => {
       href: "/blog",
       icon: FileText,
       description: "Latest news and insights"
+    },
+    {
+      title: "Press",
+      href: "/press",
+      icon: FileText,
+      description: "Media resources and press kit"
     }
   ];
 
@@ -94,8 +100,12 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Link to="/" className="text-2xl font-bold text-white" data-testid="link-home">
-                Bakame AI
+              <Link to="/" className="flex items-center" data-testid="link-home">
+                <img 
+                  src="/logo-white.svg" 
+                  alt="Bakame AI" 
+                  className="h-8 w-auto"
+                />
               </Link>
               <Badge variant="outline" className="border-white/30 text-white">
                 v2.0

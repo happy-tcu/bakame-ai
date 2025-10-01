@@ -5,6 +5,7 @@ integrations = ["javascript_openai:1.0.0"]
 
 [nix]
 channel = "stable-25_05"
+packages = ["unzip"]
 
 [deployment]
 deploymentTarget = "autoscale"
@@ -52,17 +53,17 @@ waitForPort = 3001
 outputType = "console"
 
 [[ports]]
+localPort = 3001
+externalPort = 3001
+
+[[ports]]
 localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 34205
-externalPort = 3001
+localPort = 37127
+externalPort = 3002
 
 [[ports]]
 localPort = 46863
 externalPort = 3000
-
-[[ports]]
-localPort = 3001
-externalPort = 3001
