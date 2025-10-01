@@ -9,86 +9,86 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light mode colors */
+    /* Light mode colors - Pure black and white */
     --background: 0 0% 100%;      /* White background */
-    --foreground: 0 0% 3.9%;      /* Dark text */
+    --foreground: 0 0% 0%;        /* Pure black text */
 
     --card: 0 0% 100%;            /* White cards */
-    --card-foreground: 0 0% 3.9%; /* Dark text on cards */
+    --card-foreground: 0 0% 0%;   /* Pure black text on cards */
 
     --popover: 0 0% 100%;         /* White popovers */
-    --popover-foreground: 0 0% 3.9%; /* Dark text on popovers */
+    --popover-foreground: 0 0% 0%; /* Pure black text on popovers */
 
-    --primary: 0 0% 9%;           /* Dark primary */
-    --primary-foreground: 0 0% 98%; /* Light text on primary */
+    --primary: 0 0% 0%;           /* Pure black primary */
+    --primary-foreground: 0 0% 100%; /* Pure white text on primary */
 
-    --secondary: 0 0% 96.1%;      /* Light gray secondary */
-    --secondary-foreground: 0 0% 9%; /* Dark text on secondary */
+    --secondary: 0 0% 95%;        /* Light gray secondary */
+    --secondary-foreground: 0 0% 0%; /* Pure black text on secondary */
 
-    --muted: 0 0% 96.1%;          /* Light muted */
-    --muted-foreground: 0 0% 45.1%; /* Medium gray text */
+    --muted: 0 0% 96%;            /* Very light gray muted */
+    --muted-foreground: 0 0% 40%; /* Medium gray text */
 
-    --accent: 0 0% 96.1%;         /* Light accent */
-    --accent-foreground: 0 0% 9%; /* Dark text on accent */
+    --accent: 0 0% 90%;           /* Light gray accent */
+    --accent-foreground: 0 0% 0%; /* Pure black text on accent */
 
-    --destructive: 0 84.2% 60.2%; /* Red for destructive actions */
-    --destructive-foreground: 0 0% 98%; /* Light text on red */
+    --destructive: 0 0% 20%;      /* Dark gray for destructive actions */
+    --destructive-foreground: 0 0% 100%; /* White text on dark gray */
 
-    --border: 0 0% 89.8%;         /* Light borders */
-    --input: 0 0% 89.8%;          /* Light input backgrounds */
-    --ring: 0 0% 3.9%;            /* Dark focus rings */
+    --border: 0 0% 85%;           /* Light gray borders */
+    --input: 0 0% 95%;            /* Very light gray input backgrounds */
+    --ring: 0 0% 0%;              /* Pure black focus rings */
 
     --radius: 0.5rem;
 
     /* Light mode sidebar */
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 3.9%;
-    --sidebar-primary: 0 0% 9%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 0% 96.1%;
-    --sidebar-accent-foreground: 0 0% 9%;
-    --sidebar-border: 0 0% 89.8%;
-    --sidebar-ring: 0 0% 3.9%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 90%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 85%;
+    --sidebar-ring: 0 0% 0%;
   }
 
   .dark {
-    /* Dark mode: Black background, white text */
-    --background: 0 0% 0%;    /* Black background */
-    --foreground: 0 0% 100%;  /* White text */
+    /* Dark mode: Pure black background, white text */
+    --background: 0 0% 0%;        /* Pure black background */
+    --foreground: 0 0% 100%;      /* Pure white text */
 
-    --card: 214 58% 11%;      /* Dark blue cards (#081a2e) */
-    --card-foreground: 0 0% 100%; /* White text on cards */
+    --card: 0 0% 7%;              /* Very dark gray cards */
+    --card-foreground: 0 0% 100%; /* Pure white text on cards */
 
-    --popover: 214 58% 11%;   /* Dark blue popovers */
-    --popover-foreground: 0 0% 100%; /* White text on popovers */
+    --popover: 0 0% 7%;           /* Very dark gray popovers */
+    --popover-foreground: 0 0% 100%; /* Pure white text on popovers */
 
-    --primary: 0 0% 100%;     /* White primary in dark mode */
-    --primary-foreground: 0 0% 0%; /* Black text on white */
+    --primary: 0 0% 100%;         /* Pure white primary in dark mode */
+    --primary-foreground: 0 0% 0%; /* Pure black text on white */
 
-    --secondary: 27 100% 65%; /* Orange secondary */
-    --secondary-foreground: 0 0% 0%; /* Black text on orange */
+    --secondary: 0 0% 15%;        /* Dark gray secondary */
+    --secondary-foreground: 0 0% 100%; /* Pure white text on secondary */
 
-    --muted: 214 40% 15%;     /* Dark muted */
-    --muted-foreground: 0 0% 65%; /* Light gray text */
+    --muted: 0 0% 12%;            /* Dark gray muted */
+    --muted-foreground: 0 0% 60%; /* Light gray text */
 
-    --accent: 218 91% 42%;    /* Blue accent */
-    --accent-foreground: 0 0% 100%; /* White text on blue */
+    --accent: 0 0% 20%;           /* Dark gray accent */
+    --accent-foreground: 0 0% 100%; /* Pure white text on accent */
 
-    --destructive: 0 84% 60%; /* Red for destructive actions */
-    --destructive-foreground: 0 0% 100%; /* White text on red */
+    --destructive: 0 0% 80%;      /* Light gray for destructive actions */
+    --destructive-foreground: 0 0% 0%; /* Black text on light gray */
 
-    --border: 214 40% 20%;    /* Dark borders */
-    --input: 214 40% 15%;     /* Dark input backgrounds */
-    --ring: 218 91% 42%;      /* Blue focus rings */
+    --border: 0 0% 15%;           /* Dark gray borders */
+    --input: 0 0% 10%;            /* Very dark gray input backgrounds */
+    --ring: 0 0% 100%;            /* Pure white focus rings */
 
-    --sidebar-background: 214 58% 11%; /* Dark blue sidebar */
-    --sidebar-foreground: 0 0% 100%;   /* White sidebar text */
-    --sidebar-primary: 0 0% 100%;      /* White sidebar primary */
+    --sidebar-background: 0 0% 5%; /* Nearly black sidebar */
+    --sidebar-foreground: 0 0% 100%; /* Pure white sidebar text */
+    --sidebar-primary: 0 0% 100%;    /* Pure white sidebar primary */
     --sidebar-primary-foreground: 0 0% 0%; /* Black text on white */
-    --sidebar-accent: 27 100% 65%;     /* Orange sidebar accent */
-    --sidebar-accent-foreground: 0 0% 0%; /* Black text on orange */
-    --sidebar-border: 214 40% 20%;     /* Dark sidebar borders */
-    --sidebar-ring: 218 91% 42%;       /* Blue sidebar rings */
+    --sidebar-accent: 0 0% 20%;      /* Dark gray sidebar accent */
+    --sidebar-accent-foreground: 0 0% 100%; /* White text on gray */
+    --sidebar-border: 0 0% 15%;      /* Dark gray sidebar borders */
+    --sidebar-ring: 0 0% 100%;       /* White sidebar rings */
   }
 }
 
@@ -143,10 +143,10 @@ All colors MUST be HSL.
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
   50% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -169,33 +169,33 @@ All colors MUST be HSL.
   overflow: hidden;
 }
 
-/* Scale-inspired gradients and animations */
+/* Black and white gradients and animations */
 @layer utilities {
-  /* Gradient backgrounds */
+  /* Gradient backgrounds - Black and White only */
   .gradient-hero {
     background: linear-gradient(135deg, 
-      hsl(280, 100%, 20%) 0%, 
-      hsl(240, 100%, 25%) 25%,
-      hsl(220, 100%, 20%) 50%,
-      hsl(260, 100%, 20%) 100%);
+      hsl(0, 0%, 0%) 0%, 
+      hsl(0, 0%, 20%) 25%,
+      hsl(0, 0%, 15%) 50%,
+      hsl(0, 0%, 5%) 100%);
   }
   
   .gradient-purple-blue {
     background: linear-gradient(135deg, 
-      hsl(280, 100%, 60%) 0%, 
-      hsl(220, 100%, 60%) 100%);
+      hsl(0, 0%, 0%) 0%, 
+      hsl(0, 0%, 40%) 100%);
   }
   
   .gradient-card {
     background: linear-gradient(135deg,
-      rgba(139, 92, 246, 0.1) 0%,
-      rgba(59, 130, 246, 0.1) 100%);
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(0, 0, 0, 0.1) 100%);
   }
   
   .gradient-text {
     background: linear-gradient(135deg, 
-      hsl(280, 100%, 70%) 0%, 
-      hsl(220, 100%, 70%) 100%);
+      hsl(0, 0%, 0%) 0%, 
+      hsl(0, 0%, 40%) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -247,10 +247,10 @@ All colors MUST be HSL.
     animation: scaleUp 0.6s ease-out;
   }
   
-  /* Pulse glow for Scale style */
+  /* Pulse glow for Black and White style */
   @keyframes pulseGlowScale {
-    0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
-    50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.8); }
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(0, 0, 0, 0.6); }
   }
   
   .pulse-glow-scale {

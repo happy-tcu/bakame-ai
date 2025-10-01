@@ -94,10 +94,10 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Link to="/" className="text-2xl font-bold gradient-text" data-testid="link-home">
+              <Link to="/" className="text-2xl font-bold text-white" data-testid="link-home">
                 Bakame AI
               </Link>
-              <Badge variant="outline" className="border-purple-500/30 text-purple-400">
+              <Badge variant="outline" className="border-white/30 text-white">
                 v2.0
               </Badge>
             </div>
@@ -130,9 +130,9 @@ const Navbar = () => {
                               className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                               data-testid={`link-${item.href.substring(1)}`}
                             >
-                              <item.icon className="h-5 w-5 text-purple-400 mt-0.5 group-hover:text-purple-300" />
+                              <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
                               <div>
-                                <div className="text-white font-medium group-hover:text-purple-300 transition-colors">
+                                <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
                                   {item.title}
                                 </div>
                                 <div className="text-gray-400 text-sm">
@@ -150,9 +150,9 @@ const Navbar = () => {
                                 className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                                 data-testid={`link-${item.href.substring(1)}`}
                               >
-                                <item.icon className="h-5 w-5 text-blue-400 mt-0.5 group-hover:text-blue-300" />
+                                <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-white" />
                                 <div>
-                                  <div className="text-white font-medium group-hover:text-blue-300 transition-colors">
+                                  <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
                                     {item.title}
                                   </div>
                                   <div className="text-gray-400 text-sm">
@@ -207,9 +207,9 @@ const Navbar = () => {
                               className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                               data-testid={`link-${item.href.substring(1)}`}
                             >
-                              <item.icon className="h-5 w-5 text-purple-400 mt-0.5 group-hover:text-purple-300" />
+                              <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
                               <div>
-                                <div className="text-white font-medium group-hover:text-purple-300 transition-colors">
+                                <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
                                   {item.title}
                                 </div>
                                 <div className="text-gray-400 text-sm">
@@ -229,7 +229,7 @@ const Navbar = () => {
               
               <Button 
                 onClick={() => navigate('/demo-scheduling')} 
-                className="gradient-purple-blue text-white hover:opacity-90"
+                className="bg-white text-black hover:bg-gray-200"
                 data-testid="button-schedule-demo"
               >
                 <Calendar className="mr-2 h-4 w-4" />
@@ -252,7 +252,7 @@ const Navbar = () => {
               <Link 
                 to="/" 
                 onClick={closeMenu} 
-                className="block text-xl text-white hover:text-purple-400 transition-colors"
+                className="block text-xl text-white hover:text-gray-400 transition-colors"
                 data-testid="link-mobile-home"
               >
                 Home
@@ -262,7 +262,7 @@ const Navbar = () => {
               <div>
                 <button
                   onClick={() => setIsMobileSolutionsOpen(!isMobileSolutionsOpen)}
-                  className="flex items-center justify-between w-full text-xl text-white hover:text-purple-400 transition-colors"
+                  className="flex items-center justify-between w-full text-xl text-white hover:text-gray-400 transition-colors"
                 >
                   Solutions
                   <ChevronDown className={cn(
@@ -291,7 +291,7 @@ const Navbar = () => {
               <Link 
                 to="/try" 
                 onClick={closeMenu} 
-                className="block text-xl text-white hover:text-purple-400 transition-colors"
+                className="block text-xl text-white hover:text-gray-400 transition-colors"
                 data-testid="link-mobile-try-demo"
               >
                 Try Demo
@@ -300,7 +300,7 @@ const Navbar = () => {
               <Link 
                 to="/pricing" 
                 onClick={closeMenu} 
-                className="block text-xl text-white hover:text-purple-400 transition-colors"
+                className="block text-xl text-white hover:text-gray-400 transition-colors"
                 data-testid="link-mobile-pricing"
               >
                 Pricing
@@ -310,7 +310,7 @@ const Navbar = () => {
               <div>
                 <button
                   onClick={() => setIsMobileAboutOpen(!isMobileAboutOpen)}
-                  className="flex items-center justify-between w-full text-xl text-white hover:text-purple-400 transition-colors"
+                  className="flex items-center justify-between w-full text-xl text-white hover:text-gray-400 transition-colors"
                 >
                   About
                   <ChevronDown className={cn(
@@ -342,7 +342,7 @@ const Navbar = () => {
 
               <Button 
                 onClick={() => { closeMenu(); navigate('/demo-scheduling'); }}
-                className="gradient-purple-blue text-white w-full"
+                className="bg-white text-black w-full hover:bg-gray-200"
                 data-testid="button-mobile-schedule-demo"
               >
                 <Calendar className="mr-2 h-4 w-4" />

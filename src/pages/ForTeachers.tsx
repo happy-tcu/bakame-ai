@@ -45,7 +45,7 @@ const ForTeachers = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Empower Your English Classroom with AI
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -54,7 +54,7 @@ const ForTeachers = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               onClick={() => navigate("/try")}
-              className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 text-lg px-8 py-4"
+              className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4"
             >
               <Play className="mr-2 h-5 w-5" />
               See It In Action
@@ -180,7 +180,7 @@ const ForTeachers = () => {
 
           {/* Visual Demo Area */}
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl p-8 border border-border">
+            <div className="bg-bg-white text-black hover:bg-gray-200-to-br from-primary/10 to-accent/10 rounded-xl p-8 border border-border">
               <h3 className="text-2xl font-semibold mb-6">Your Daily Time Savings</h3>
               <div className="space-y-4">
                 {[
@@ -339,7 +339,7 @@ const ForTeachers = () => {
 
       {/* CTA Section */}
       <section className="container mx-auto px-6 py-20">
-        <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-3xl p-12 text-center border border-border">
+        <div className="bg-bg-white text-black hover:bg-gray-200-to-r from-primary/10 to-accent/10 rounded-3xl p-12 text-center border border-border">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Transform Your Teaching?
           </h2>
@@ -349,7 +349,7 @@ const ForTeachers = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => navigate("/demo-scheduling")}
-              className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 text-lg px-8 py-4"
+              className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4"
             >
               Schedule Your Demo
             </Button>

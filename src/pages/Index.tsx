@@ -73,14 +73,14 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Navbar />
 
-      {/* Hero Section with Gradient Background */}
-      <section className="relative min-h-screen flex items-center justify-center gradient-hero overflow-hidden">
+      {/* Hero Section with Black Background */}
+      <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
         <div className="absolute inset-0 grid-pattern"></div>
-        <div className="absolute inset-0 gradient-overlay"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black"></div>
         
         {/* Geometric shapes */}
-        <div className="geometric-shape w-96 h-96 rounded-full bg-purple-500/10 blur-3xl top-0 left-0"></div>
-        <div className="geometric-shape w-96 h-96 rounded-full bg-blue-500/10 blur-3xl bottom-0 right-0"></div>
+        <div className="geometric-shape w-96 h-96 rounded-full bg-white/5 blur-3xl top-0 left-0"></div>
+        <div className="geometric-shape w-96 h-96 rounded-full bg-gray-500/10 blur-3xl bottom-0 right-0"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
           <div 
@@ -90,7 +90,7 @@ const Index = () => {
           >
             <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
               AI-Powered English Learning
-              <span className="block gradient-text">from Voice to Victory</span>
+              <span className="block text-white font-extrabold">from Voice to Victory</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
@@ -101,7 +101,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
               <Button 
                 onClick={() => navigate('/demo-scheduling')}
-                className="gradient-purple-blue text-white text-lg px-8 py-6 hover:opacity-90 hover-depth"
+                className="bg-white text-black text-lg px-8 py-6 hover:bg-gray-200 hover-depth"
                 data-testid="button-book-demo"
               >
                 <Calendar className="mr-2 h-5 w-5" />
@@ -119,15 +119,15 @@ const Index = () => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-6">
-              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 px-4 py-2">
+              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
                 <Sparkles className="mr-2 h-4 w-4" />
                 85% Speaking Confidence Boost
               </Badge>
-              <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 px-4 py-2">
+              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
                 <Users className="mr-2 h-4 w-4" />
                 50,000+ Students
               </Badge>
-              <Badge className="bg-green-500/20 text-green-300 border-green-500/30 px-4 py-2">
+              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
                 <WifiOff className="mr-2 h-4 w-4" />
                 Works Offline
               </Badge>
@@ -137,7 +137,7 @@ const Index = () => {
       </section>
 
       {/* Trust Indicators */}
-      <section className="py-16 bg-gradient-to-b from-black to-gray-900 border-y border-white/10">
+      <section className="py-16 bg-black border-y border-white/10">
         <div className="max-w-7xl mx-auto px-6">
           <h3 className="text-center text-gray-400 mb-8 uppercase tracking-wider">
             Trusted by Schools and Governments Across Africa
@@ -161,13 +161,13 @@ const Index = () => {
         <div className="absolute inset-0 grid-pattern opacity-50"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <h2 className="text-5xl font-bold text-center mb-16">
-            Three Pillars of <span className="gradient-text">Language Mastery</span>
+            Three Pillars of <span className="text-white font-extrabold">Language Mastery</span>
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-purple-900/20 to-purple-900/10 border-purple-500/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border-white/20 hover-depth">
               <CardHeader>
-                <Brain className="h-12 w-12 text-purple-400 mb-4" />
+                <Brain className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Learn AI</CardTitle>
                 <CardDescription className="text-gray-400">
                   Voice-first learning features
@@ -176,24 +176,24 @@ const Index = () => {
               <CardContent>
                 <ul className="space-y-3">
                   <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-purple-400" />
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
                     Personalized AI conversations
                   </li>
                   <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-purple-400" />
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
                     Real-time pronunciation feedback
                   </li>
                   <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-purple-400" />
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
                     Adaptive difficulty levels
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-blue-900/20 to-blue-900/10 border-blue-500/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border-white/20 hover-depth">
               <CardHeader>
-                <Users2 className="h-12 w-12 text-blue-400 mb-4" />
+                <Users2 className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Teach AI</CardTitle>
                 <CardDescription className="text-gray-400">
                   Teacher empowerment tools
@@ -202,24 +202,24 @@ const Index = () => {
               <CardContent>
                 <ul className="space-y-3">
                   <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-blue-400" />
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
                     Student progress analytics
                   </li>
                   <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-blue-400" />
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
                     Curriculum alignment tools
                   </li>
                   <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-blue-400" />
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
                     Automated assessment reports
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-green-900/20 to-green-900/10 border-green-500/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border-white/20 hover-depth">
               <CardHeader>
-                <Rocket className="h-12 w-12 text-green-400 mb-4" />
+                <Rocket className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Scale AI</CardTitle>
                 <CardDescription className="text-gray-400">
                   School-wide deployment
@@ -228,15 +228,15 @@ const Index = () => {
               <CardContent>
                 <ul className="space-y-3">
                   <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-green-400" />
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
                     Offline-first architecture
                   </li>
                   <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-green-400" />
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
                     Multi-classroom support
                   </li>
                   <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-green-400" />
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
                     Administrative dashboard
                   </li>
                 </ul>
@@ -247,11 +247,11 @@ const Index = () => {
       </section>
 
       {/* Feature Showcase Grid */}
-      <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              Comprehensive Feature <span className="gradient-text">Arsenal</span>
+              Comprehensive Feature <span className="text-white font-extrabold">Arsenal</span>
             </h2>
             <p className="text-xl text-gray-400">
               Every tool your students need to master English
@@ -265,7 +265,7 @@ const Index = () => {
                 className="bg-white/5 border-white/10 hover:bg-white/10 transition-all duration-300 hover-depth"
               >
                 <CardContent className="p-6">
-                  <feature.icon className="h-10 w-10 text-purple-400 mb-4" />
+                  <feature.icon className="h-10 w-10 text-white mb-4" />
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {feature.name}
                   </h3>
@@ -285,7 +285,7 @@ const Index = () => {
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              Experience Bakame <span className="gradient-text">in Action</span>
+              Experience Bakame <span className="text-white font-extrabold">in Action</span>
             </h2>
             <p className="text-xl text-gray-400">
               Try our AI-powered features right now
@@ -293,16 +293,16 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-purple-900/20 to-transparent border-purple-500/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
               <CardHeader>
-                <Eye className="h-8 w-8 text-purple-400 mb-2" />
+                <Eye className="h-8 w-8 text-gray-400 mb-2" />
                 <CardTitle className="text-white">Speaking Confidence Score</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="h-32 bg-purple-500/10 rounded-lg flex items-center justify-center">
+                  <div className="h-32 bg-gray-500/10 rounded-lg flex items-center justify-center">
                     <div className="text-center">
-                      <div className="text-4xl font-bold text-purple-400 mb-2">
+                      <div className="text-4xl font-bold text-gray-400 mb-2">
                         <AnimatedCounter end="87" />%
                       </div>
                       <p className="text-sm text-gray-400">Confidence Level</p>
@@ -310,7 +310,7 @@ const Index = () => {
                   </div>
                   <Button 
                     onClick={() => navigate('/try')}
-                    className="w-full bg-purple-500/20 hover:bg-purple-500/30 border-purple-500/30"
+                    className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                   >
                     <TestTube className="mr-2 h-4 w-4" />
                     Test Your Speaking
@@ -319,20 +319,20 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-blue-900/20 to-transparent border-blue-500/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
               <CardHeader>
-                <Mic className="h-8 w-8 text-blue-400 mb-2" />
+                <Mic className="h-8 w-8 text-gray-400 mb-2" />
                 <CardTitle className="text-white">Pronunciation Test</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="h-32 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                  <div className="h-32 bg-gray-500/10 rounded-lg flex items-center justify-center">
                     <div className="space-y-2">
                       <div className="flex space-x-1">
                         {[1, 2, 3, 4, 5].map((i) => (
                           <div 
                             key={i}
-                            className="w-2 h-16 bg-blue-400 rounded animate-pulse"
+                            className="w-2 h-16 bg-gray-400 rounded animate-pulse"
                             style={{ animationDelay: `${i * 0.1}s`, height: `${Math.random() * 64}px` }}
                           ></div>
                         ))}
@@ -342,7 +342,7 @@ const Index = () => {
                   </div>
                   <Button 
                     onClick={() => navigate('/try')}
-                    className="w-full bg-blue-500/20 hover:bg-blue-500/30 border-blue-500/30"
+                    className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                   >
                     <Volume2 className="mr-2 h-4 w-4" />
                     Try Pronunciation
@@ -351,15 +351,15 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-green-900/20 to-transparent border-green-500/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
               <CardHeader>
-                <Bot className="h-8 w-8 text-green-400 mb-2" />
+                <Bot className="h-8 w-8 text-gray-400 mb-2" />
                 <CardTitle className="text-white">AI Conversation</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="h-32 bg-green-500/10 rounded-lg p-4 space-y-2">
-                    <div className="bg-green-500/20 rounded-lg p-2 text-sm text-green-300">
+                  <div className="h-32 bg-gray-500/10 rounded-lg p-4 space-y-2">
+                    <div className="bg-gray-500/20 rounded-lg p-2 text-sm text-gray-300">
                       Hello! Let's practice English together!
                     </div>
                     <div className="bg-gray-800/50 rounded-lg p-2 text-sm text-gray-300 ml-8">
@@ -368,7 +368,7 @@ const Index = () => {
                   </div>
                   <Button 
                     onClick={() => navigate('/try')}
-                    className="w-full bg-green-500/20 hover:bg-green-500/30 border-green-500/30"
+                    className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                   >
                     <MessageSquare className="mr-2 h-4 w-4" />
                     Start Conversation
@@ -385,7 +385,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              Tailored Solutions <span className="gradient-text">for Everyone</span>
+              Tailored Solutions <span className="text-white font-extrabold">for Everyone</span>
             </h2>
             <p className="text-xl text-gray-400">
               Designed for every stakeholder in the education ecosystem
@@ -393,33 +393,33 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-purple-900/20 to-transparent border-purple-500/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
               <CardHeader>
-                <GraduationCap className="h-12 w-12 text-purple-400 mb-4" />
+                <GraduationCap className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Students</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-purple-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>24/7 AI tutoring support</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-purple-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>Gamified learning experience</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-purple-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>Personalized learning paths</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-purple-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>Safe practice environment</span>
                   </li>
                 </ul>
                 <Button 
                   onClick={() => navigate('/for-students')}
-                  className="w-full bg-purple-500/20 hover:bg-purple-500/30 border-purple-500/30"
+                  className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                 >
                   Explore Student Features
                   <ChevronRight className="ml-2 h-4 w-4" />
@@ -427,33 +427,33 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-blue-900/20 to-transparent border-blue-500/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
               <CardHeader>
-                <Users className="h-12 w-12 text-blue-400 mb-4" />
+                <Users className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Teachers</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-blue-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>Real-time progress tracking</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-blue-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>Automated grading system</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-blue-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>Custom lesson creation</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-blue-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>Class performance analytics</span>
                   </li>
                 </ul>
                 <Button 
                   onClick={() => navigate('/for-teachers')}
-                  className="w-full bg-blue-500/20 hover:bg-blue-500/30 border-blue-500/30"
+                  className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                 >
                   View Teacher Dashboard
                   <ChevronRight className="ml-2 h-4 w-4" />
@@ -461,33 +461,33 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-green-900/20 to-transparent border-green-500/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
               <CardHeader>
-                <School className="h-12 w-12 text-green-400 mb-4" />
+                <School className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Schools</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-green-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>School-wide deployment</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-green-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>Administrative controls</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-green-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>ROI & impact metrics</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-green-400 mt-1" />
+                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
                     <span>Training & support included</span>
                   </li>
                 </ul>
                 <Button 
                   onClick={() => navigate('/for-schools')}
-                  className="w-full bg-green-500/20 hover:bg-green-500/30 border-green-500/30"
+                  className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                 >
                   See ROI Calculator
                   <ChevronRight className="ml-2 h-4 w-4" />
@@ -514,14 +514,14 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <FlaskConical className="h-10 w-10 text-purple-400 mb-2" />
+                <FlaskConical className="h-10 w-10 text-gray-400 mb-2" />
                 <CardTitle className="text-white">AI Research Lab</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-400 mb-4">
                   Pioneering natural language processing models optimized for African languages and accents.
                 </p>
-                <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
                   Active Research
                 </Badge>
               </CardContent>
@@ -529,14 +529,14 @@ const Index = () => {
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <Lightbulb className="h-10 w-10 text-yellow-400 mb-2" />
+                <Lightbulb className="h-10 w-10 text-gray-400 mb-2" />
                 <CardTitle className="text-white">Learning Breakthroughs</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-400 mb-4">
                   Developing adaptive learning algorithms that personalize to each student's unique needs.
                 </p>
-                <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
                   Patent Pending
                 </Badge>
               </CardContent>
@@ -544,14 +544,14 @@ const Index = () => {
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <GradCap className="h-10 w-10 text-blue-400 mb-2" />
+                <GradCap className="h-10 w-10 text-gray-400 mb-2" />
                 <CardTitle className="text-white">Academic Partnerships</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-400 mb-4">
                   Collaborating with leading universities to validate and improve our methodologies.
                 </p>
-                <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
                   5+ Universities
                 </Badge>
               </CardContent>
@@ -599,7 +599,7 @@ const Index = () => {
             </div>
           </div>
           
-          <Card className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border-purple-500/20">
+          <Card className="bg-gradient-to-r from-gray-900/20 to-gray-900/20 border-gray-500/20">
             <CardContent className="p-8">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
@@ -608,15 +608,15 @@ const Index = () => {
                   </h3>
                   <ul className="space-y-3">
                     <li className="flex items-center text-gray-300">
-                      <TrendingUp className="mr-3 h-5 w-5 text-green-400" />
+                      <TrendingUp className="mr-3 h-5 w-5 text-gray-400" />
                       30% reduction in tutoring costs
                     </li>
                     <li className="flex items-center text-gray-300">
-                      <TrendingUp className="mr-3 h-5 w-5 text-green-400" />
+                      <TrendingUp className="mr-3 h-5 w-5 text-gray-400" />
                       2x faster language proficiency gains
                     </li>
                     <li className="flex items-center text-gray-300">
-                      <TrendingUp className="mr-3 h-5 w-5 text-green-400" />
+                      <TrendingUp className="mr-3 h-5 w-5 text-gray-400" />
                       40% increase in student engagement
                     </li>
                   </ul>
@@ -667,7 +667,7 @@ const Index = () => {
           
           <p className="text-gray-400">
             Or call us directly at{' '}
-            <a href="tel:+250788888888" className="text-purple-400 hover:text-purple-300">
+            <a href="tel:+250788888888" className="text-gray-400 hover:text-gray-300">
               +250 788 888 888
             </a>
           </p>
@@ -684,7 +684,7 @@ const Index = () => {
                 Revolutionizing English education across Africa with AI-powered learning that works everywhere.
               </p>
               <div className="flex space-x-4">
-                <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
                   <Award className="mr-1 h-3 w-3" />
                   EdTech Award 2024
                 </Badge>

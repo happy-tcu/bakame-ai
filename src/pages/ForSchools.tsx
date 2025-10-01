@@ -111,10 +111,10 @@ const ForSchools = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center">
         <div className="max-w-5xl mx-auto">
-          <Badge className="mb-4 bg-blue-500/10 text-blue-500 border-blue-500/30">
+          <Badge className="mb-4 bg-gray-500/10 text-gray-500 border-gray-500/30">
             Trusted by 500+ Schools Worldwide
           </Badge>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Transform English Education Across Your School
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
@@ -123,7 +123,7 @@ const ForSchools = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               onClick={() => navigate("/government-demo")}
-              className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:opacity-90 text-lg px-8 py-4"
+              className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4"
               data-testid="button-get-quote"
             >
               <FileText className="mr-2 h-5 w-5" />
@@ -132,7 +132,7 @@ const ForSchools = () => {
             <Button
               onClick={() => navigate("/demo-scheduling")}
               variant="outline"
-              className="text-lg px-8 py-4 border-blue-500/50 hover:bg-blue-500/10"
+              className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10"
               data-testid="button-book-demo"
             >
               <Phone className="mr-2 h-5 w-5" />
@@ -148,15 +148,15 @@ const ForSchools = () => {
           Proven ROI & Impact Metrics
         </h2>
         <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
-          <Card className="text-center bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-blue-500/30">
+          <Card className="text-center bg-bg-white text-black hover:bg-gray-200-to-br from-gray-500/10 to-gray-500/10 border-gray-500/30">
             <CardContent className="pt-6">
-              <div className="text-4xl font-bold text-blue-600 mb-2">
+              <div className="text-4xl font-bold text-gray-600 mb-2">
                 {roiMetrics.teacherHours}+ hrs
               </div>
               <p className="text-sm text-muted-foreground">Teacher time saved monthly</p>
             </CardContent>
           </Card>
-          <Card className="text-center bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-500/30">
+          <Card className="text-center bg-bg-white text-black hover:bg-gray-200-to-br from-green-500/10 to-emerald-500/10 border-green-500/30">
             <CardContent className="pt-6">
               <div className="text-4xl font-bold text-green-600 mb-2">
                 {roiMetrics.costSavings}%
@@ -164,7 +164,7 @@ const ForSchools = () => {
               <p className="text-sm text-muted-foreground">Cost reduction in first year</p>
             </CardContent>
           </Card>
-          <Card className="text-center bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
+          <Card className="text-center bg-bg-white text-black hover:bg-gray-200-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
             <CardContent className="pt-6">
               <div className="text-4xl font-bold text-purple-600 mb-2">
                 {roiMetrics.studentImprovement}%
@@ -172,7 +172,7 @@ const ForSchools = () => {
               <p className="text-sm text-muted-foreground">Average score improvement</p>
             </CardContent>
           </Card>
-          <Card className="text-center bg-gradient-to-br from-orange-500/10 to-red-500/10 border-orange-500/30">
+          <Card className="text-center bg-bg-white text-black hover:bg-gray-200-to-br from-orange-500/10 to-red-500/10 border-orange-500/30">
             <CardContent className="pt-6">
               <div className="text-4xl font-bold text-orange-600 mb-2">
                 {roiMetrics.parentSatisfaction}%
@@ -183,10 +183,10 @@ const ForSchools = () => {
         </div>
 
         {/* ROI Calculator Preview */}
-        <Card className="max-w-3xl mx-auto border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-cyan-500/5">
+        <Card className="max-w-3xl mx-auto border-gray-500/30 bg-bg-white text-black hover:bg-gray-200-to-br from-gray-500/5 to-gray-500/5">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <DollarSign className="h-5 w-5 text-blue-600" />
+              <DollarSign className="h-5 w-5 text-gray-600" />
               Calculate Your School's ROI
             </CardTitle>
           </CardHeader>
@@ -194,7 +194,7 @@ const ForSchools = () => {
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <p className="text-sm text-muted-foreground mb-2">Number of Students</p>
-                <div className="text-2xl font-bold text-blue-600">1,200</div>
+                <div className="text-2xl font-bold text-gray-600">1,200</div>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-2">Estimated Annual Savings</p>
@@ -202,7 +202,7 @@ const ForSchools = () => {
               </div>
             </div>
             <Button 
-              className="w-full mt-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white"
+              className="w-full mt-6 bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600 text-white"
               onClick={() => navigate("/pricing")}
               data-testid="button-full-calculator"
             >
@@ -220,7 +220,7 @@ const ForSchools = () => {
         </h2>
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 relative">
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-600" style={{ transform: "translateY(-50%)" }} />
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600" style={{ transform: "translateY(-50%)" }} />
             
             {[
               { week: "Week 1", title: "Discovery & Planning", icon: Target, description: "Assess needs, map curriculum, set success metrics" },
@@ -236,7 +236,7 @@ const ForSchools = () => {
                   }`}
                 >
                   <CardHeader className="text-center">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-3 text-white relative z-10">
+                    <div className="w-12 h-12 bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600 rounded-full flex items-center justify-center mx-auto mb-3 text-white relative z-10">
                       <step.icon className="h-6 w-6" />
                     </div>
                     <Badge variant="outline" className="mb-2">{step.week}</Badge>
@@ -271,7 +271,7 @@ const ForSchools = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Building2 className="h-5 w-5 text-blue-600" />
+                    <Building2 className="h-5 w-5 text-gray-600" />
                     Centralized Management
                   </CardTitle>
                 </CardHeader>
@@ -406,19 +406,19 @@ const ForSchools = () => {
                     <h4 className="font-medium mb-3">Access Control</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-start gap-2">
-                        <Shield className="h-4 w-4 text-blue-500 mt-0.5" />
+                        <Shield className="h-4 w-4 text-gray-500 mt-0.5" />
                         <span>Single Sign-On (SSO) support</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <Shield className="h-4 w-4 text-blue-500 mt-0.5" />
+                        <Shield className="h-4 w-4 text-gray-500 mt-0.5" />
                         <span>Multi-factor authentication</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <Shield className="h-4 w-4 text-blue-500 mt-0.5" />
+                        <Shield className="h-4 w-4 text-gray-500 mt-0.5" />
                         <span>IP whitelisting options</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <Shield className="h-4 w-4 text-blue-500 mt-0.5" />
+                        <Shield className="h-4 w-4 text-gray-500 mt-0.5" />
                         <span>Audit logs & monitoring</span>
                       </li>
                     </ul>
@@ -432,7 +432,7 @@ const ForSchools = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Globe className="h-5 w-5 text-cyan-600" />
+                  <Globe className="h-5 w-5 text-gray-600" />
                   Seamless Integration
                 </CardTitle>
               </CardHeader>
@@ -486,10 +486,10 @@ const ForSchools = () => {
           {pricingTiers.map((tier, index) => (
             <Card
               key={index}
-              className={`relative ${tier.popular ? 'border-blue-500 border-2' : 'border-border'}`}
+              className={`relative ${tier.popular ? 'border-gray-500 border-2' : 'border-border'}`}
             >
               {tier.popular && (
-                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white">
+                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-600 text-white">
                   Most Popular
                 </Badge>
               )}
@@ -513,7 +513,7 @@ const ForSchools = () => {
                 <Button 
                   className={`w-full mt-6 ${
                     tier.popular 
-                      ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white' 
+                      ? 'bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600 text-white' 
                       : 'variant-outline'
                   }`}
                   onClick={() => navigate("/demo-scheduling")}
@@ -569,7 +569,7 @@ const ForSchools = () => {
                 <CardDescription>{study.students}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="p-3 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg">
+                <div className="p-3 bg-bg-white text-black hover:bg-gray-200-to-r from-green-500/10 to-emerald-500/10 rounded-lg">
                   <p className="text-sm font-medium text-green-600">{study.results}</p>
                 </div>
                 <blockquote className="italic text-sm text-muted-foreground">
@@ -589,7 +589,7 @@ const ForSchools = () => {
         </h2>
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
+            <Card className="bg-bg-white text-black hover:bg-gray-200-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-purple-600" />
@@ -618,10 +618,10 @@ const ForSchools = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-blue-500/30">
+            <Card className="bg-bg-white text-black hover:bg-gray-200-to-br from-gray-500/10 to-gray-500/10 border-gray-500/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <BookOpen className="h-5 w-5 text-blue-600" />
+                  <BookOpen className="h-5 w-5 text-gray-600" />
                   Professional Development
                 </CardTitle>
               </CardHeader>
@@ -652,7 +652,7 @@ const ForSchools = () => {
 
       {/* CTA Section */}
       <section className="container mx-auto px-6 py-20">
-        <div className="max-w-4xl mx-auto text-center bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-12 text-white">
+        <div className="max-w-4xl mx-auto text-center bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600 rounded-2xl p-12 text-white">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Transform Your School's English Program?
           </h2>
@@ -663,7 +663,7 @@ const ForSchools = () => {
             <Button
               size="lg"
               onClick={() => navigate("/government-demo")}
-              className="bg-white text-blue-600 hover:bg-gray-100"
+              className="bg-white text-gray-600 hover:bg-gray-100"
               data-testid="button-request-proposal"
             >
               <FileText className="mr-2 h-5 w-5" />

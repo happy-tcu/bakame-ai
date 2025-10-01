@@ -146,11 +146,11 @@ const TryDemo = () => {
       <section className="container mx-auto px-6 py-16 text-center">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center justify-center mb-4">
-            <Sparkles className="h-8 w-8 text-primary mr-2" />
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+            <Sparkles className="h-8 w-8 text-white mr-2" />
+            <h1 className="text-4xl md:text-5xl font-bold text-white font-bold">
               Try Bakame Free
             </h1>
-            <Sparkles className="h-8 w-8 text-primary ml-2" />
+            <Sparkles className="h-8 w-8 text-white ml-2" />
           </div>
           <p className="text-xl text-muted-foreground mb-2">No Signup Required</p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -168,7 +168,7 @@ const TryDemo = () => {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <Volume2 className="h-6 w-6 text-primary" />
+                  <Volume2 className="h-6 w-6 text-white" />
                   <CardTitle>Pronunciation Test</CardTitle>
                 </div>
                 <Badge variant="secondary">Interactive</Badge>
@@ -229,7 +229,7 @@ const TryDemo = () => {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <BookOpen className="h-6 w-6 text-primary" />
+                  <BookOpen className="h-6 w-6 text-white" />
                   <CardTitle>Flashcard Generator</CardTitle>
                 </div>
                 <Badge variant="secondary">AI-Powered</Badge>
@@ -264,7 +264,7 @@ const TryDemo = () => {
                     style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
                     onClick={() => setIsFlipped(!isFlipped)}
                   >
-                    <div className="absolute inset-0 p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg border border-border backface-hidden">
+                    <div className="absolute inset-0 p-6 bg-gray-100 dark:bg-gray-800 rounded-lg border border-border backface-hidden">
                       <div className="h-full flex flex-col justify-center items-center text-center">
                         <p className="text-sm text-muted-foreground mb-2">Question</p>
                         <p className="text-lg font-medium">{flashcards[currentCardIndex].front}</p>
@@ -272,7 +272,7 @@ const TryDemo = () => {
                       </div>
                     </div>
                     <div 
-                      className="absolute inset-0 p-6 bg-gradient-to-br from-accent/10 to-primary/10 rounded-lg border border-border backface-hidden"
+                      className="absolute inset-0 p-6 bg-gray-200 dark:bg-gray-700 rounded-lg border border-border backface-hidden"
                       style={{ transform: 'rotateY(180deg)' }}
                     >
                       <div className="h-full flex flex-col justify-center items-center text-center">
@@ -330,7 +330,7 @@ const TryDemo = () => {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <Mic className="h-6 w-6 text-primary" />
+                  <Mic className="h-6 w-6 text-white" />
                   <CardTitle>AI Conversation Partner</CardTitle>
                 </div>
                 <Badge variant="secondary">Chat Demo</Badge>
@@ -349,7 +349,7 @@ const TryDemo = () => {
                     <div
                       className={`max-w-[80%] p-3 rounded-lg ${
                         msg.role === 'user'
-                          ? 'bg-primary text-primary-foreground'
+                          ? 'bg-primary text-white-foreground'
                           : 'bg-card border border-border'
                       }`}
                     >
@@ -400,7 +400,7 @@ const TryDemo = () => {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <Brain className="h-6 w-6 text-primary" />
+                  <Brain className="h-6 w-6 text-white" />
                   <CardTitle>Vocabulary Builder</CardTitle>
                 </div>
                 <Badge variant="secondary">Quiz Demo</Badge>
@@ -456,7 +456,7 @@ const TryDemo = () => {
               ) : (
                 <div className="text-center p-8 bg-muted/50 rounded-lg animate-in fade-in zoom-in">
                   <h3 className="text-2xl font-bold mb-4">Quiz Complete!</h3>
-                  <p className="text-4xl font-bold text-primary mb-2">
+                  <p className="text-4xl font-bold text-white mb-2">
                     {quizScore}/{quizQuestions.length}
                   </p>
                   <p className="text-muted-foreground mb-6">
@@ -502,7 +502,7 @@ const TryDemo = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               onClick={() => setIsEarlyAccessOpen(true)}
-              className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all text-lg px-8 py-4"
+              className="bg-gradient-to-r from-primary to-accent text-white-foreground hover:opacity-90 transition-all text-lg px-8 py-4"
             >
               <Sparkles className="mr-2 h-5 w-5" />
               Join Waitlist Now
@@ -519,15 +519,15 @@ const TryDemo = () => {
           
           <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary">500+</div>
+              <div className="text-3xl font-bold text-white">500+</div>
               <p className="text-muted-foreground">Schools Using Bakame</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary">85%</div>
+              <div className="text-3xl font-bold text-white">85%</div>
               <p className="text-muted-foreground">Improvement in Speaking</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary">24/7</div>
+              <div className="text-3xl font-bold text-white">24/7</div>
               <p className="text-muted-foreground">AI Tutor Availability</p>
             </div>
           </div>

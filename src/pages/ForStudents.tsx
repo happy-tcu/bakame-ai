@@ -38,10 +38,10 @@ const ForStudents = () => {
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       {/* Fun animated background */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-20 h-20 bg-primary/10 rounded-full animate-pulse" />
-        <div className="absolute top-40 right-20 w-32 h-32 bg-accent/10 rounded-full animate-pulse delay-300" />
-        <div className="absolute bottom-20 left-1/3 w-24 h-24 bg-purple-500/10 rounded-full animate-pulse delay-500" />
-        <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-green-500/10 rounded-full animate-pulse delay-700" />
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/5 rounded-full animate-pulse" />
+        <div className="absolute top-40 right-20 w-32 h-32 bg-gray-500/10 rounded-full animate-pulse delay-300" />
+        <div className="absolute bottom-20 left-1/3 w-24 h-24 bg-white/10 rounded-full animate-pulse delay-500" />
+        <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-gray-500/10 rounded-full animate-pulse delay-700" />
       </div>
 
       <Navbar />
@@ -60,7 +60,7 @@ const ForStudents = () => {
               </span>
             ))}
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-accent bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Learn English the Fun Way with AI
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -69,16 +69,16 @@ const ForStudents = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               onClick={() => navigate("/try")}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 text-lg px-8 py-4 transform hover:scale-105 transition-all"
+              className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4 transform hover:scale-105 transition-all"
             >
               <Gamepad2 className="mr-2 h-5 w-5" />
               Start Playing Now
             </Button>
             <Button
               variant="outline"
-              className="text-lg px-8 py-4 border-purple-500/50 hover:bg-purple-500/10"
+              className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10"
             >
-              <Trophy className="mr-2 h-5 w-5 text-yellow-500" />
+              <Trophy className="mr-2 h-5 w-5 text-gray-400" />
               See Leaderboard
             </Button>
           </div>
@@ -93,7 +93,7 @@ const ForStudents = () => {
         
         {/* Progress & Level Section */}
         <div className="max-w-4xl mx-auto mb-12">
-          <Card className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
+          <Card className="bg-gradient-to-br from-gray-500/10 to-gray-500/10 border-gray-500/30">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
@@ -101,7 +101,7 @@ const ForStudents = () => {
                   <CardDescription>Level 12 • English Explorer</CardDescription>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl font-bold text-purple-500">2,450</div>
+                  <div className="text-3xl font-bold text-gray-500">2,450</div>
                   <div className="text-sm text-muted-foreground">XP Points</div>
                 </div>
               </div>
@@ -111,10 +111,10 @@ const ForStudents = () => {
                 <div>
                   <div className="flex justify-between text-sm mb-2">
                     <span>Next Level Progress</span>
-                    <span className="text-purple-500 font-medium">{currentLevel}%</span>
+                    <span className="text-gray-500 font-medium">{currentLevel}%</span>
                   </div>
-                  <Progress value={currentLevel} className="h-3 bg-purple-200 dark:bg-purple-900">
-                    <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-1000" />
+                  <Progress value={currentLevel} className="h-3 bg-gray-200 dark:bg-gray-900">
+                    <div className="h-full bg-gradient-to-r from-gray-500 to-gray-500 rounded-full transition-all duration-1000" />
                   </Progress>
                 </div>
                 
@@ -127,13 +127,13 @@ const ForStudents = () => {
                         key={index}
                         className={`flex items-center gap-2 px-3 py-2 rounded-lg border ${
                           achievement.unlocked
-                            ? "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/30"
+                            ? "bg-gradient-to-r from-gray-500/20 to-gray-500/20 border-gray-500/30"
                             : "bg-muted/50 border-border opacity-50"
                         }`}
                       >
                         <span className="text-2xl">{achievement.icon}</span>
                         <span className="text-sm font-medium">{achievement.name}</span>
-                        {achievement.unlocked && <Sparkles className="h-4 w-4 text-yellow-500" />}
+                        {achievement.unlocked && <Sparkles className="h-4 w-4 text-gray-400" />}
                       </div>
                     ))}
                   </div>
@@ -150,28 +150,28 @@ const ForStudents = () => {
               icon: Gamepad2,
               title: "Language Games",
               description: "Play word puzzles, grammar races, and vocabulary battles",
-              color: "purple",
+              color: "gray",
               features: ["Daily Challenges", "Multiplayer Modes", "Reward System"]
             },
             {
               icon: Users,
               title: "Peer Circles",
               description: "Practice with friends and students from around the world",
-              color: "pink",
+              color: "gray",
               features: ["Group Conversations", "Study Buddies", "Team Competitions"]
             },
             {
               icon: Trophy,
               title: "Achievements & Rewards",
               description: "Unlock badges, climb leaderboards, and earn certificates",
-              color: "yellow",
+              color: "gray",
               features: ["100+ Badges", "Monthly Tournaments", "Real Certificates"]
             }
           ].map((feature, index) => (
             <Card
               key={index}
               className={`border-2 hover:scale-105 transition-all duration-300 cursor-pointer ${
-                activeFeature === index ? "border-purple-500" : "border-border"
+                activeFeature === index ? "border-gray-500" : "border-border"
               }`}
               onClick={() => setActiveFeature(index)}
             >
@@ -186,7 +186,7 @@ const ForStudents = () => {
                 <div className="space-y-2">
                   {feature.features.map((item, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <Star className="h-4 w-4 text-yellow-500" />
+                      <Star className="h-4 w-4 text-gray-500" />
                       <span className="text-sm">{item}</span>
                     </div>
                   ))}
@@ -204,9 +204,9 @@ const ForStudents = () => {
         </h2>
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* AI Tutor Chat Preview */}
-          <div className="bg-card rounded-xl p-6 border-2 border-purple-500/30">
+          <div className="bg-card rounded-xl p-6 border-2 border-gray-500/30">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-gray-500 to-gray-500 rounded-full flex items-center justify-center">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -215,17 +215,17 @@ const ForStudents = () => {
               </div>
             </div>
             <div className="space-y-4">
-              <div className="bg-purple-500/10 rounded-lg p-3 max-w-[80%]">
+              <div className="bg-gray-500/10 rounded-lg p-3 max-w-[80%]">
                 <p className="text-sm">Hi! I'm Luna, your AI English buddy! 🌟 Want to practice talking about your hobbies?</p>
               </div>
               <div className="bg-muted rounded-lg p-3 max-w-[80%] ml-auto">
                 <p className="text-sm">Yes! I love playing soccer and video games!</p>
               </div>
-              <div className="bg-purple-500/10 rounded-lg p-3 max-w-[80%]">
+              <div className="bg-gray-500/10 rounded-lg p-3 max-w-[80%]">
                 <p className="text-sm">That's awesome! Tell me about your favorite video game. What makes it special? 🎮</p>
               </div>
               <div className="flex items-center gap-2 mt-4">
-                <Volume2 className="h-5 w-5 text-purple-500" />
+                <Volume2 className="h-5 w-5 text-gray-500" />
                 <span className="text-sm text-muted-foreground">Click to practice speaking</span>
               </div>
             </div>
@@ -233,10 +233,10 @@ const ForStudents = () => {
 
           {/* Learning Stats */}
           <div className="space-y-6">
-            <Card className="bg-gradient-to-br from-green-500/10 to-blue-500/10 border-green-500/30">
+            <Card className="bg-gradient-to-br from-gray-500/10 to-gray-500/10 border-gray-500/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-green-500" />
+                  <TrendingUp className="h-5 w-5 text-gray-500" />
                   Your Growth This Month
                 </CardTitle>
               </CardHeader>
@@ -251,7 +251,7 @@ const ForStudents = () => {
                     <div key={index}>
                       <div className="flex justify-between text-sm mb-1">
                         <span>{stat.skill}</span>
-                        <span className="text-green-500 font-medium">{stat.change}</span>
+                        <span className="text-gray-500 font-medium">{stat.change}</span>
                       </div>
                       <Progress value={stat.progress} className="h-2" />
                     </div>
@@ -260,10 +260,10 @@ const ForStudents = () => {
               </CardContent>
             </Card>
 
-            <Card className="border-yellow-500/30">
+            <Card className="border-gray-500/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Medal className="h-5 w-5 text-yellow-500" />
+                  <Medal className="h-5 w-5 text-gray-500" />
                   This Week's Challenge
                 </CardTitle>
               </CardHeader>
@@ -277,7 +277,7 @@ const ForStudents = () => {
                       <div
                         key={i}
                         className={`w-8 h-8 rounded-full border-2 border-background flex items-center justify-center ${
-                          i < 3 ? "bg-yellow-500" : "bg-muted"
+                          i < 3 ? "bg-gray-500" : "bg-muted"
                         }`}
                       >
                         {i < 3 ? "✓" : ""}
@@ -335,13 +335,13 @@ const ForStudents = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <Badge className="mb-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-600 dark:text-purple-400 border-purple-500/30">
+                <Badge className="mb-3 bg-gradient-to-r from-gray-500/20 to-gray-500/20 text-gray-600 dark:text-gray-400 border-gray-500/30">
                   {story.achievement}
                 </Badge>
                 <p className="text-muted-foreground italic">"{story.story}"</p>
                 <div className="flex gap-1 mt-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-500 text-yellow-500" />
+                    <Star key={i} className="h-4 w-4 fill-gray-500 text-gray-500" />
                   ))}
                 </div>
               </CardContent>
@@ -361,7 +361,7 @@ const ForStudents = () => {
               icon: MessageSquare,
               title: "Voice Messages",
               description: "Send voice notes to AI tutors and get instant feedback",
-              color: "blue"
+              color: "gray"
             },
             {
               icon: Heart,
@@ -373,18 +373,18 @@ const ForStudents = () => {
               icon: Zap,
               title: "Power-Ups",
               description: "Use special abilities to boost your learning speed",
-              color: "yellow"
+              color: "gray"
             },
             {
               icon: Users,
               title: "Study Groups",
               description: "Create or join groups with classmates and friends",
-              color: "green"
+              color: "gray"
             }
           ].map((feature, index) => (
             <div
               key={index}
-              className="bg-card rounded-xl p-6 border border-border hover:border-purple-500/50 transition-all duration-300 hover:scale-105 cursor-pointer"
+              className="bg-card rounded-xl p-6 border border-border hover:border-gray-500/50 transition-all duration-300 hover:scale-105 cursor-pointer"
             >
               <div className={`w-12 h-12 bg-${feature.color}-500/20 rounded-lg flex items-center justify-center mb-4`}>
                 <feature.icon className={`h-6 w-6 text-${feature.color}-500`} />
@@ -398,8 +398,8 @@ const ForStudents = () => {
 
       {/* CTA Section */}
       <section className="relative z-10 container mx-auto px-6 py-20">
-        <div className="bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-accent/20 rounded-3xl p-12 text-center border-2 border-purple-500/30 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 animate-pulse" />
+        <div className="bg-gradient-to-r from-gray-500/20 via-gray-500/20 to-accent/20 rounded-3xl p-12 text-center border-2 border-gray-500/30 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-500/5 to-gray-500/5 animate-pulse" />
           <div className="relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Ready to Start Your Adventure? 🎮
@@ -410,14 +410,14 @@ const ForStudents = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 onClick={() => navigate("/try")}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 text-lg px-8 py-4 transform hover:scale-105 transition-all"
+                className="bg-gradient-to-r from-gray-500 to-gray-500 text-white hover:opacity-90 text-lg px-8 py-4 transform hover:scale-105 transition-all"
               >
                 <Rocket className="mr-2 h-5 w-5" />
                 Start Learning Free
               </Button>
               <Button
                 variant="outline"
-                className="text-lg px-8 py-4 border-purple-500/50 hover:bg-purple-500/10"
+                className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10"
               >
                 <Play className="mr-2 h-5 w-5" />
                 Watch Demo Video

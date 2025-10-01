@@ -269,7 +269,7 @@ const Roadmap = () => {
               <Link to="/" className="text-2xl font-bold gradient-text">
                 Bakame AI
               </Link>
-              <Badge variant="outline" className="border-purple-500/30 text-purple-400">
+              <Badge variant="outline" className="border-gray-500/30 text-gray-400">
                 Roadmap
               </Badge>
             </div>
@@ -282,7 +282,7 @@ const Roadmap = () => {
               <ThemeToggle />
               <Button 
                 onClick={() => navigate('/try')} 
-                className="gradient-purple-blue text-white hover:opacity-90"
+                className="bg-white text-black hover:bg-gray-200"
                 data-testid="button-try-features"
               >
                 Try Features
@@ -300,14 +300,14 @@ const Roadmap = () => {
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden">
           <div className="flex flex-col items-center justify-center h-full space-y-8">
-            <Link to="/" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Home</Link>
-            <Link to="/features" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Features</Link>
-            <Link to="/pricing" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Pricing</Link>
-            <Link to="/contact" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Contact</Link>
+            <Link to="/" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Home</Link>
+            <Link to="/features" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Features</Link>
+            <Link to="/pricing" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Pricing</Link>
+            <Link to="/contact" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Contact</Link>
             <ThemeToggle />
             <Button 
               onClick={() => { closeMenu(); navigate('/try'); }}
-              className="gradient-purple-blue text-white"
+              className="gradient-gray-gray text-white"
             >
               Try Features
             </Button>
@@ -321,11 +321,11 @@ const Roadmap = () => {
         <div className="absolute inset-0 grid-pattern opacity-30"></div>
         
         {/* Animated background shapes */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gray-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gray-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <Badge className="mb-4 bg-purple-500/20 text-purple-300 border-purple-500/30">
+          <Badge className="mb-4 bg-gray-500/20 text-gray-300 border-gray-500/30">
             <Sparkles className="mr-2 h-3 w-3" />
             Product Roadmap 2025
           </Badge>
@@ -342,7 +342,7 @@ const Roadmap = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <div className="flex items-center gap-2 px-6 py-3 bg-white/5 rounded-lg border border-white/10">
-              <Users className="h-5 w-5 text-purple-400" />
+              <Users className="h-5 w-5 text-gray-400" />
               <span className="text-gray-300">Community Votes:</span>
               <span className="text-2xl font-bold text-white">
                 <AnimatedCounter end={totalVotes} />
@@ -351,7 +351,7 @@ const Roadmap = () => {
             
             <Button 
               onClick={() => navigate('/contact')}
-              className="gradient-purple-blue text-white hover:opacity-90"
+              className="gradient-gray-gray text-white hover:opacity-90"
               data-testid="button-suggest-feature"
             >
               <MessageSquare className="mr-2 h-5 w-5" />
@@ -369,10 +369,10 @@ const Roadmap = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl font-bold flex items-center gap-2">
-                  <CheckCircle className="h-6 w-6 text-green-400" />
+                  <CheckCircle className="h-6 w-6 text-gray-400" />
                   Live Now
                 </h2>
-                <Badge className="bg-green-500/20 text-green-300 border-green-500/30">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
                   Available
                 </Badge>
               </div>
@@ -380,12 +380,12 @@ const Roadmap = () => {
               {sortedFeatures('live').map((feature) => (
                 <Card 
                   key={feature.id}
-                  className="bg-gradient-to-br from-green-900/20 to-green-900/10 border-green-500/20 hover:border-green-500/40 transition-all hover:scale-105 group"
+                  className="bg-gradient-to-br from-gray-900/20 to-gray-900/10 border-gray-500/20 hover:border-gray-500/40 transition-all hover:scale-105 group"
                 >
                   <CardHeader>
                     <div className="flex items-start justify-between">
-                      <div className="p-3 bg-green-500/10 rounded-lg group-hover:bg-green-500/20 transition-colors">
-                        <feature.icon className="h-6 w-6 text-green-400" />
+                      <div className="p-3 bg-gray-500/10 rounded-lg group-hover:bg-gray-500/20 transition-colors">
+                        <feature.icon className="h-6 w-6 text-gray-400" />
                       </div>
                       {feature.id === mostRequested.id && (
                         <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
@@ -414,7 +414,7 @@ const Roadmap = () => {
                         disabled={votedFeatures.has(feature.id)}
                         className={votedFeatures.has(feature.id) 
                           ? "bg-gray-800 text-gray-400" 
-                          : "bg-green-500/20 hover:bg-green-500/30 text-green-300 border border-green-500/30"}
+                          : "bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 border border-gray-500/30"}
                         data-testid={`button-vote-${feature.id}`}
                       >
                         {votedFeatures.has(feature.id) ? 'Voted' : 'Vote'}
@@ -428,7 +428,7 @@ const Roadmap = () => {
                         </div>
                         <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500"
+                            className="h-full bg-gradient-to-r from-gray-400 to-gray-600 transition-all duration-500"
                             style={{ width: `${feature.progress}%` }}
                           />
                         </div>
@@ -443,10 +443,10 @@ const Roadmap = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl font-bold flex items-center gap-2">
-                  <Clock className="h-6 w-6 text-blue-400" />
+                  <Clock className="h-6 w-6 text-gray-400" />
                   Coming Soon
                 </h2>
-                <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
                   Q1 2025
                 </Badge>
               </div>
@@ -454,12 +454,12 @@ const Roadmap = () => {
               {sortedFeatures('coming-soon').map((feature) => (
                 <Card 
                   key={feature.id}
-                  className="bg-gradient-to-br from-blue-900/20 to-blue-900/10 border-blue-500/20 hover:border-blue-500/40 transition-all hover:scale-105 group"
+                  className="bg-gradient-to-br from-gray-900/20 to-gray-900/10 border-gray-500/20 hover:border-gray-500/40 transition-all hover:scale-105 group"
                 >
                   <CardHeader>
                     <div className="flex items-start justify-between">
-                      <div className="p-3 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors">
-                        <feature.icon className="h-6 w-6 text-blue-400" />
+                      <div className="p-3 bg-gray-500/10 rounded-lg group-hover:bg-gray-500/20 transition-colors">
+                        <feature.icon className="h-6 w-6 text-gray-400" />
                       </div>
                       {feature.id === mostRequested.id && (
                         <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
@@ -488,14 +488,14 @@ const Roadmap = () => {
                         disabled={votedFeatures.has(feature.id)}
                         className={votedFeatures.has(feature.id) 
                           ? "bg-gray-800 text-gray-400" 
-                          : "bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30"}
+                          : "bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 border border-gray-500/30"}
                         data-testid={`button-vote-${feature.id}`}
                       >
                         {votedFeatures.has(feature.id) ? 'Voted' : 'Vote'}
                       </Button>
                     </div>
                     {feature.quarter && (
-                      <Badge variant="outline" className="border-blue-500/30 text-blue-400 text-xs">
+                      <Badge variant="outline" className="border-gray-500/30 text-gray-400 text-xs">
                         <Calendar className="mr-1 h-3 w-3" />
                         {feature.quarter}
                       </Badge>
@@ -508,7 +508,7 @@ const Roadmap = () => {
                         </div>
                         <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-blue-400 to-blue-600 transition-all duration-500"
+                            className="h-full bg-gradient-to-r from-gray-400 to-gray-600 transition-all duration-500"
                             style={{ width: `${feature.progress}%` }}
                           />
                         </div>
@@ -523,10 +523,10 @@ const Roadmap = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl font-bold flex items-center gap-2">
-                  <Target className="h-6 w-6 text-purple-400" />
+                  <Target className="h-6 w-6 text-gray-400" />
                   Future Vision
                 </h2>
-                <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
                   Q2-Q3 2025
                 </Badge>
               </div>
@@ -534,12 +534,12 @@ const Roadmap = () => {
               {sortedFeatures('future').map((feature) => (
                 <Card 
                   key={feature.id}
-                  className="bg-gradient-to-br from-purple-900/20 to-purple-900/10 border-purple-500/20 hover:border-purple-500/40 transition-all hover:scale-105 group"
+                  className="bg-gradient-to-br from-gray-900/20 to-gray-900/10 border-gray-500/20 hover:border-gray-500/40 transition-all hover:scale-105 group"
                 >
                   <CardHeader>
                     <div className="flex items-start justify-between">
-                      <div className="p-3 bg-purple-500/10 rounded-lg group-hover:bg-purple-500/20 transition-colors">
-                        <feature.icon className="h-6 w-6 text-purple-400" />
+                      <div className="p-3 bg-gray-500/10 rounded-lg group-hover:bg-gray-500/20 transition-colors">
+                        <feature.icon className="h-6 w-6 text-gray-400" />
                       </div>
                       {feature.id === mostRequested.id && (
                         <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
@@ -568,14 +568,14 @@ const Roadmap = () => {
                         disabled={votedFeatures.has(feature.id)}
                         className={votedFeatures.has(feature.id) 
                           ? "bg-gray-800 text-gray-400" 
-                          : "bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30"}
+                          : "bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 border border-gray-500/30"}
                         data-testid={`button-vote-${feature.id}`}
                       >
                         {votedFeatures.has(feature.id) ? 'Voted' : 'Vote'}
                       </Button>
                     </div>
                     {feature.quarter && (
-                      <Badge variant="outline" className="border-purple-500/30 text-purple-400 text-xs">
+                      <Badge variant="outline" className="border-gray-500/30 text-gray-400 text-xs">
                         <Calendar className="mr-1 h-3 w-3" />
                         {feature.quarter}
                       </Badge>
@@ -588,7 +588,7 @@ const Roadmap = () => {
                         </div>
                         <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-purple-400 to-purple-600 transition-all duration-500"
+                            className="h-full bg-gradient-to-r from-gray-400 to-gray-600 transition-all duration-500"
                             style={{ width: `${feature.progress}%` }}
                           />
                         </div>
@@ -604,7 +604,7 @@ const Roadmap = () => {
 
       {/* CTA Section */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 to-transparent"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-6">
             Have an Idea? <span className="gradient-text">We're Listening</span>
@@ -616,7 +616,7 @@ const Roadmap = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => navigate('/contact')}
-              className="gradient-purple-blue text-white text-lg px-8 py-6 hover:opacity-90"
+              className="gradient-gray-gray text-white text-lg px-8 py-6 hover:opacity-90"
               data-testid="button-suggest-bottom"
             >
               <MessageSquare className="mr-2 h-5 w-5" />
@@ -678,7 +678,7 @@ const Roadmap = () => {
           background-size: 50px 50px;
         }
         
-        .gradient-purple-blue {
+        .gradient-gray-gray {
           background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
         }
         

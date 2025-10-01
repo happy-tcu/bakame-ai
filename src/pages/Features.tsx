@@ -239,12 +239,12 @@ const Features = () => {
         >
           <CardHeader className="space-y-3">
             <div className="flex items-center justify-between">
-              <div className="p-3 bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg group-hover:from-primary/20 group-hover:to-accent/20 transition-colors">
+              <div className="p-3 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-lg group-hover:from-primary/20 group-hover:to-accent/20 transition-colors">
                 {feature.icon}
               </div>
               <Badge 
                 variant={feature.isAvailable ? "default" : "secondary"}
-                className={feature.isAvailable ? "bg-green-500/10 text-green-500 border-green-500/20" : ""}
+                className={feature.isAvailable ? "bg-gray-400/10 text-gray-400 border-gray-400/20" : ""}
               >
                 {feature.isAvailable ? "Available Now" : "Coming Soon"}
               </Badge>
@@ -264,28 +264,28 @@ const Features = () => {
       {/* Navigation */}
       <nav className="flex items-center justify-between p-6 md:p-8 border-b border-border">
         <div className="flex items-center space-x-4">
-          <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+          <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
             Bakame AI
           </Link>
-          <Badge variant="outline" className="border-primary/30 text-primary text-xs">
+          <Badge variant="outline" className="border-gray-300 text-white text-xs">
             Features
           </Badge>
         </div>
         
         <div className="flex items-center space-x-4">
-          <Link to="/" className="hidden md:block text-foreground hover:text-primary transition-colors">
+          <Link to="/" className="hidden md:block text-foreground hover:text-white transition-colors">
             Home
           </Link>
-          <Link to="/try" className="hidden md:block text-foreground hover:text-primary transition-colors">
+          <Link to="/try" className="hidden md:block text-foreground hover:text-white transition-colors">
             Try Demo
           </Link>
-          <Link to="/pricing" className="hidden md:block text-foreground hover:text-primary transition-colors">
+          <Link to="/pricing" className="hidden md:block text-foreground hover:text-white transition-colors">
             Pricing
           </Link>
           <ThemeToggle />
           <Button 
             onClick={() => setIsEarlyAccessOpen(true)}
-            className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all"
+            className="bg-white text-black hover:bg-gray-200 transition-all"
           >
             Join Waitlist
           </Button>
@@ -296,11 +296,11 @@ const Features = () => {
       <section className="container mx-auto px-6 py-16 text-center">
         <div className="max-w-3xl mx-auto">
           <div className="flex items-center justify-center mb-4">
-            <Sparkles className="h-8 w-8 text-primary mr-2 animate-pulse" />
+            <Sparkles className="h-8 w-8 text-white mr-2 animate-pulse" />
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
               All Features
             </h1>
-            <Sparkles className="h-8 w-8 text-primary ml-2 animate-pulse" />
+            <Sparkles className="h-8 w-8 text-white ml-2 animate-pulse" />
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Discover the comprehensive capabilities of Bakame AI, designed to transform 
@@ -393,7 +393,7 @@ const Features = () => {
               <Button 
                 onClick={() => navigate('/try')}
                 size="lg"
-                className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all transform hover:scale-105"
+                className="bg-gradient-to-r from-white to-gray-300 text-white-foreground hover:opacity-90 transition-all transform hover:scale-105"
               >
                 <Gamepad2 className="mr-2 h-5 w-5" />
                 Try Demo Free
@@ -402,7 +402,7 @@ const Features = () => {
                 onClick={() => setIsEarlyAccessOpen(true)}
                 size="lg"
                 variant="outline"
-                className="border-primary/30 hover:bg-primary/10 transition-all transform hover:scale-105"
+                className="border-gray-300 hover:bg-primary/10 transition-all transform hover:scale-105"
               >
                 <Bell className="mr-2 h-5 w-5" />
                 Join Waitlist
@@ -411,7 +411,7 @@ const Features = () => {
                 onClick={() => navigate('/demo-scheduling')}
                 size="lg"
                 variant="outline"
-                className="border-primary/30 hover:bg-primary/10 transition-all transform hover:scale-105"
+                className="border-gray-300 hover:bg-primary/10 transition-all transform hover:scale-105"
               >
                 <Calendar className="mr-2 h-5 w-5" />
                 Schedule Demo
