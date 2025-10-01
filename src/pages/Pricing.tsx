@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Check, Building, Users, Shield, Zap, Phone, Star } from "lucide-react";
+import { Check, Building, Users, Shield, Zap, Phone, Star } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Navbar from "@/components/layout/Navbar";
 
 const Pricing = () => {
   const navigate = useNavigate();
@@ -92,32 +93,7 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border">
-        <div className="flex items-center space-x-4">
-          <button 
-            onClick={() => navigate('/')} 
-            className="p-2 hover:bg-muted rounded-lg transition-all duration-300 hover:scale-110"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div className="text-2xl font-bold">Bakame AI</div>
-        </div>
-        <div className="hidden md:flex space-x-8">
-          <button 
-            onClick={() => navigate('/demo-scheduling')} 
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Schedule Demo
-          </button>
-          <button 
-            onClick={() => navigate('/contact')} 
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Contact
-          </button>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="container mx-auto px-6 py-20">
         {/* Header */}

@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Mic, Volume2, BookOpen, Brain, Send, ChevronRight, Sparkles, Play, RefreshCw, Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 
 const TryDemo = () => {
@@ -140,30 +140,7 @@ const TryDemo = () => {
   
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="flex items-center justify-between p-6 md:p-8 border-b border-border">
-        <div className="flex items-center space-x-4">
-          <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            Bakame AI
-          </Link>
-          <Badge variant="outline" className="border-primary/30 text-primary text-xs">
-            Demo
-          </Badge>
-        </div>
-        
-        <div className="flex items-center space-x-4">
-          <Link to="/" className="text-foreground hover:text-primary transition-colors">
-            Back to Home
-          </Link>
-          <ThemeToggle />
-          <Button 
-            onClick={() => setIsEarlyAccessOpen(true)}
-            className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all"
-          >
-            Join Waitlist
-          </Button>
-        </div>
-      </nav>
+      <Navbar />
       
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-16 text-center">

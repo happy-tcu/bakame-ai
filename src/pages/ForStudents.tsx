@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Trophy, Gamepad2, Target, Rocket, Star, Users, TrendingUp, Zap, Medal, Heart, Sparkles, Volume2, MessageSquare, Play, ChevronRight } from "lucide-react";
+import { Trophy, Gamepad2, Target, Rocket, Star, Users, TrendingUp, Zap, Medal, Heart, Sparkles, Volume2, MessageSquare, Play, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
+import Navbar from "@/components/layout/Navbar";
 
 const ForStudents = () => {
   const navigate = useNavigate();
@@ -43,28 +44,7 @@ const ForStudents = () => {
         <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-green-500/10 rounded-full animate-pulse delay-700" />
       </div>
 
-      {/* Navigation */}
-      <nav className="relative z-50 flex justify-between items-center p-6 md:p-8 border-b border-border backdrop-blur-sm">
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={() => navigate("/")}
-            className="p-2 hover:bg-muted rounded-lg transition-all duration-300 hover:scale-105"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div className="text-2xl font-bold">Bakame AI</div>
-          <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
-            For Students
-          </Badge>
-        </div>
-        <Button
-          onClick={() => navigate("/try")}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90"
-        >
-          <Play className="mr-2 h-4 w-4" />
-          Try Demo
-        </Button>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative z-10 container mx-auto px-6 py-20 text-center">

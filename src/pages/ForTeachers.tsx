@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, Users, BarChart3, Clock, Award, CheckCircle, Star, Download, Calendar, Play, ChevronRight, GraduationCap, Target, Zap, TrendingUp, FileText, MessageSquare } from "lucide-react";
+import { BookOpen, Users, BarChart3, Clock, Award, CheckCircle, Star, Download, Calendar, Play, ChevronRight, GraduationCap, Target, Zap, TrendingUp, FileText, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
+import Navbar from "@/components/layout/Navbar";
 
 const ForTeachers = () => {
   const navigate = useNavigate();
@@ -39,27 +40,7 @@ const ForTeachers = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border sticky top-0 z-50 bg-background/95 backdrop-blur-sm">
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={() => navigate("/")}
-            className="p-2 hover:bg-muted rounded-lg transition-all duration-300 hover:scale-105"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div className="text-2xl font-bold">Bakame AI</div>
-          <Badge variant="outline" className="border-primary/30 text-primary">
-            For Teachers
-          </Badge>
-        </div>
-        <Button
-          onClick={() => navigate("/demo-scheduling")}
-          className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90"
-        >
-          Schedule Demo
-        </Button>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center">

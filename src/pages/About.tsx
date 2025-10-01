@@ -1,27 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Target, Eye, Heart, Users, Globe, Shield, Zap, MapPin, Clock, Award, TrendingUp, Lightbulb, Rocket } from "lucide-react";
+import { Target, Eye, Heart, Users, Globe, Shield, Zap, MapPin, Clock, Award, TrendingUp, Lightbulb, Rocket } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import Navbar from "@/components/layout/Navbar";
 const About = () => {
   const navigate = useNavigate();
   return <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border">
-        <div className="flex items-center space-x-4">
-          <button onClick={() => navigate('/')} className="p-2 hover:bg-muted rounded-lg transition-colors">
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div className="text-2xl font-bold">Bakame AI</div>
-        </div>
-        <div className="hidden md:flex space-x-8">
-          
-          <button onClick={() => navigate('/demo-scheduling')} className="text-muted-foreground hover:text-foreground transition-colors">Demo</button>
-          <button onClick={() => navigate('/team')} className="text-muted-foreground hover:text-foreground transition-colors">Team</button>
-          <button onClick={() => navigate('/contact')} className="text-muted-foreground hover:text-foreground transition-colors">Contact</button>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="container mx-auto px-6 py-20">
         {/* Hero Section */}

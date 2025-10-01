@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
-  ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, 
+  ChevronDown, Phone, MessageSquare, Calendar, BookOpen, 
   ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, 
   GraduationCap, Languages, Headphones, Brain, Mic, Database, 
   Globe, BarChart3, Volume2, Newspaper, Building, Award,
@@ -14,19 +14,15 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import Navbar from '@/components/layout/Navbar';
 import LiveChat from '@/components/chat/LiveChat';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import AnimatedCounter from '@/components/AnimatedCounter';
 
 const Index = () => {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
   const [isVisible, setIsVisible] = useState({});
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -75,58 +71,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="text-2xl font-bold gradient-text">
-                Bakame AI
-              </div>
-              <Badge variant="outline" className="border-purple-500/30 text-purple-400">
-                v2.0
-              </Badge>
-            </div>
-            
-            <div className="hidden md:flex items-center space-x-8">
-              <Link to="/features" className="text-gray-300 hover:text-white transition-colors">Features</Link>
-              <Link to="/pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</Link>
-              <Link to="/demo-scheduling" className="text-gray-300 hover:text-white transition-colors">Book Demo</Link>
-              <Link to="/about" className="text-gray-300 hover:text-white transition-colors">About</Link>
-              <ThemeToggle />
-              <Button 
-                onClick={() => navigate('/try')} 
-                className="gradient-purple-blue text-white hover:opacity-90"
-              >
-                Try Features
-              </Button>
-            </div>
-
-            <button onClick={toggleMenu} className="md:hidden text-white">
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden">
-          <div className="flex flex-col items-center justify-center h-full space-y-8">
-            <Link to="/features" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Features</Link>
-            <Link to="/pricing" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Pricing</Link>
-            <Link to="/demo-scheduling" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Book Demo</Link>
-            <Link to="/about" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">About</Link>
-            <ThemeToggle />
-            <Button 
-              onClick={() => { closeMenu(); navigate('/try'); }}
-              className="gradient-purple-blue text-white"
-            >
-              Try Features
-            </Button>
-          </div>
-        </div>
-      )}
+      <Navbar />
 
       {/* Hero Section with Gradient Background */}
       <section className="relative min-h-screen flex items-center justify-center gradient-hero overflow-hidden">

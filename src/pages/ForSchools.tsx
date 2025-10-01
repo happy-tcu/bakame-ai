@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Building2, Shield, BarChart3, Users, TrendingUp, CheckCircle, DollarSign, Award, Clock, Globe, BookOpen, ChevronRight, Calendar, Phone, FileText, Zap, Target, Lock, HeadphonesIcon } from "lucide-react";
+import { Building2, Shield, BarChart3, Users, TrendingUp, CheckCircle, DollarSign, Award, Clock, Globe, BookOpen, ChevronRight, Calendar, Phone, FileText, Zap, Target, Lock, HeadphonesIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useEffect } from "react";
+import Navbar from "@/components/layout/Navbar";
 
 const ForSchools = () => {
   const navigate = useNavigate();
@@ -105,30 +106,7 @@ const ForSchools = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border sticky top-0 z-50 bg-background/95 backdrop-blur-sm">
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={() => navigate("/")}
-            className="p-2 hover:bg-muted rounded-lg transition-all duration-300 hover:scale-105"
-            data-testid="button-home"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div className="text-2xl font-bold">Bakame AI</div>
-          <Badge variant="outline" className="border-blue-500/30 text-blue-500">
-            For Schools
-          </Badge>
-        </div>
-        <Button
-          onClick={() => navigate("/demo-scheduling")}
-          className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:opacity-90"
-          data-testid="button-schedule-demo"
-        >
-          <Calendar className="mr-2 h-4 w-4" />
-          Schedule Demo
-        </Button>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center">
