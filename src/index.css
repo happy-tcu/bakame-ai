@@ -52,26 +52,31 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;         /* White popovers */
     --popover-foreground: 0 0% 0%; /* Pure black text on popovers */
 
-    --primary: 0 0% 0%;           /* Pure black primary */
+    --primary: 256 87% 50%;       /* Brand blue for primary CTAs */
     --primary-foreground: 0 0% 100%; /* Pure white text on primary */
 
-    --secondary: 0 0% 95%;        /* Light gray secondary */
-    --secondary-foreground: 0 0% 0%; /* Pure black text on secondary */
+    --secondary: 0 0% 0%;         /* Black secondary buttons */
+    --secondary-foreground: 0 0% 100%; /* White text on secondary */
 
     --muted: 0 0% 96%;            /* Very light gray muted */
     --muted-foreground: 0 0% 40%; /* Medium gray text */
 
-    --accent: 0 0% 90%;           /* Light gray accent */
-    --accent-foreground: 0 0% 0%; /* Pure black text on accent */
+    --accent: 256 87% 50%;        /* Brand blue accent */
+    --accent-foreground: 0 0% 100%; /* White text on accent */
 
     --destructive: 0 0% 20%;      /* Dark gray for destructive actions */
     --destructive-foreground: 0 0% 100%; /* White text on dark gray */
 
     --border: 0 0% 85%;           /* Light gray borders */
     --input: 0 0% 95%;            /* Very light gray input backgrounds */
-    --ring: 0 0% 0%;              /* Pure black focus rings */
+    --ring: 256 87% 50%;          /* Brand blue focus rings */
 
     --radius: 0.5rem;
+    
+    /* Brand colors */
+    --brand-blue: 256 87% 50%;    /* #4c12ef - Brand signature blue */
+    --brand-blue-hover: 256 87% 45%; /* Darker blue for hover states */
+    --brand-blue-light: 256 87% 95%; /* Very light blue for backgrounds */
 
     /* Light mode sidebar */
     --sidebar-background: 0 0% 98%;
@@ -95,16 +100,16 @@ All colors MUST be HSL.
     --popover: 0 0% 7%;           /* Very dark gray popovers */
     --popover-foreground: 0 0% 100%; /* Pure white text on popovers */
 
-    --primary: 0 0% 100%;         /* Pure white primary in dark mode */
-    --primary-foreground: 0 0% 0%; /* Pure black text on white */
+    --primary: 256 87% 50%;       /* Brand blue for primary CTAs in dark mode */
+    --primary-foreground: 0 0% 100%; /* Pure white text on blue */
 
-    --secondary: 0 0% 15%;        /* Dark gray secondary */
-    --secondary-foreground: 0 0% 100%; /* Pure white text on secondary */
+    --secondary: 0 0% 100%;       /* White secondary buttons in dark mode */
+    --secondary-foreground: 0 0% 0%; /* Black text on white */
 
     --muted: 0 0% 12%;            /* Dark gray muted */
     --muted-foreground: 0 0% 60%; /* Light gray text */
 
-    --accent: 0 0% 20%;           /* Dark gray accent */
+    --accent: 256 87% 50%;        /* Brand blue accent */
     --accent-foreground: 0 0% 100%; /* Pure white text on accent */
 
     --destructive: 0 0% 80%;      /* Light gray for destructive actions */
@@ -112,7 +117,12 @@ All colors MUST be HSL.
 
     --border: 0 0% 15%;           /* Dark gray borders */
     --input: 0 0% 10%;            /* Very dark gray input backgrounds */
-    --ring: 0 0% 100%;            /* Pure white focus rings */
+    --ring: 256 87% 50%;          /* Brand blue focus rings */
+    
+    /* Brand colors */
+    --brand-blue: 256 87% 50%;    /* #4c12ef - Brand signature blue */
+    --brand-blue-hover: 256 87% 45%; /* Darker blue for hover states */
+    --brand-blue-light: 256 87% 10%; /* Dark blue for backgrounds in dark mode */
 
     --sidebar-background: 0 0% 5%; /* Nearly black sidebar */
     --sidebar-foreground: 0 0% 100%; /* Pure white sidebar text */
@@ -203,9 +213,9 @@ All colors MUST be HSL.
   overflow: hidden;
 }
 
-/* Black and white gradients and animations */
+/* Black and white gradients and animations with blue accents */
 @layer utilities {
-  /* Gradient backgrounds - Black and White only */
+  /* Gradient backgrounds - Black and White with blue accent option */
   .gradient-hero {
     background: linear-gradient(135deg, 
       hsl(0, 0%, 0%) 0%, 
@@ -216,8 +226,14 @@ All colors MUST be HSL.
   
   .gradient-purple-blue {
     background: linear-gradient(135deg, 
-      hsl(0, 0%, 0%) 0%, 
-      hsl(0, 0%, 40%) 100%);
+      hsl(256, 87%, 45%) 0%, 
+      hsl(256, 87%, 55%) 100%);
+  }
+  
+  .gradient-blue-accent {
+    background: linear-gradient(135deg, 
+      hsl(256, 87%, 50%) 0%, 
+      hsl(256, 87%, 40%) 100%);
   }
   
   .gradient-card {
@@ -322,5 +338,64 @@ All colors MUST be HSL.
   
   .animate-slide-up {
     animation: slideInFromBottom 0.8s ease-out;
+  }
+  
+  /* Brand Blue Accent Utilities */
+  .text-brand-blue {
+    color: hsl(var(--brand-blue));
+  }
+  
+  .text-brand-blue-hover:hover {
+    color: hsl(var(--brand-blue-hover));
+  }
+  
+  .bg-brand-blue {
+    background-color: hsl(var(--brand-blue));
+  }
+  
+  .bg-brand-blue-hover:hover {
+    background-color: hsl(var(--brand-blue-hover));
+  }
+  
+  .border-brand-blue {
+    border-color: hsl(var(--brand-blue));
+  }
+  
+  /* Link hover states with blue accent */
+  a:not(.no-blue-hover):hover {
+    color: hsl(var(--brand-blue));
+    transition: color 0.2s ease;
+  }
+  
+  /* Active navigation states */
+  .nav-active {
+    color: hsl(var(--brand-blue));
+    border-bottom: 2px solid hsl(var(--brand-blue));
+  }
+  
+  /* Form focus states with blue */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: hsl(var(--brand-blue));
+    outline: 2px solid hsl(var(--brand-blue) / 0.2);
+    outline-offset: 2px;
+  }
+  
+  /* Success indicators with blue */
+  .success-indicator {
+    color: hsl(var(--brand-blue));
+    background-color: hsl(var(--brand-blue) / 0.1);
+    border: 1px solid hsl(var(--brand-blue) / 0.3);
+  }
+  
+  /* Pulse glow with blue accent */
+  @keyframes pulseGlowBlue {
+    0%, 100% { box-shadow: 0 0 20px hsla(256, 87%, 50%, 0.3); }
+    50% { box-shadow: 0 0 40px hsla(256, 87%, 50%, 0.6); }
+  }
+  
+  .pulse-glow-blue {
+    animation: pulseGlowBlue 2s ease-in-out infinite;
   }
 }
