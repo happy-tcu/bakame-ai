@@ -1,36 +1,49 @@
 # Bakame AI - Project Documentation
 
 ## Overview
-Bakame AI is an AI-powered English learning platform for schools. This is a React-based single-page application built with Vite, TypeScript, and integrated with Supabase for backend services.
+Bakame AI is an AI-powered English learning platform for schools with voice-first learning experiences, AI-generated flashcards, and pronunciation testing. The platform features a React frontend with a full Express backend API, PostgreSQL database, and OpenAI integration.
 
 ## Project Architecture
 
 ### Tech Stack
 - **Frontend Framework**: React 18.3.1
+- **Backend Framework**: Express with TypeScript
 - **Build Tool**: Vite 5.4.1
 - **Language**: TypeScript
+- **Database**: PostgreSQL with Drizzle ORM
+- **AI Integration**: OpenAI API (GPT-4)
+- **Authentication**: Supabase Auth
 - **UI Components**: shadcn/ui with Radix UI primitives
-- **Styling**: Tailwind CSS with custom theming
+- **Styling**: Tailwind CSS with black & white theme (Scale.com inspired)
 - **Routing**: React Router DOM v6
 - **State Management**: TanStack Query (React Query) v5
-- **Backend/Database**: Supabase
 - **Icons**: Lucide React
 
 ### Project Structure
 ```
-├── src/
-│   ├── components/        # Reusable UI components
-│   ├── data/             # Static data files
-│   ├── hooks/            # Custom React hooks
-│   ├── integrations/     # External service integrations (Supabase)
-│   ├── lib/              # Utility functions
-│   ├── pages/            # Route page components
-│   ├── styles/           # Additional CSS files
-│   ├── utils/            # Utility modules
-│   ├── App.tsx           # Main app component with routing
-│   └── main.tsx          # Application entry point
-├── supabase/             # Supabase configuration and migrations
-└── public/               # Static assets
+├── src/                  # Frontend React application
+│   ├── components/       # Reusable UI components
+│   ├── data/            # Static data files
+│   ├── hooks/           # Custom React hooks
+│   ├── integrations/    # External service integrations (Supabase)
+│   ├── lib/             # Utility functions
+│   ├── pages/           # Route page components
+│   ├── styles/          # Additional CSS files
+│   ├── utils/           # Utility modules
+│   ├── App.tsx          # Main app component with routing
+│   └── main.tsx         # Application entry point
+├── server/              # Backend Express API
+│   ├── middleware/      # Auth and other middleware
+│   ├── db.ts           # Database connection
+│   ├── index.ts        # Express server setup
+│   ├── openai.ts       # OpenAI integration
+│   ├── routes.ts       # API route definitions
+│   └── storage.ts      # Database operations layer
+├── shared/              # Shared types and schemas
+│   └── schema.ts       # Drizzle ORM database schema
+├── supabase/           # Supabase configuration
+├── public/             # Static assets
+└── drizzle.config.ts   # Database configuration
 ```
 
 ## Configuration
@@ -93,12 +106,50 @@ This project is configured for Replit's autoscale deployment:
 - **Run command**: `npm run preview`
 - **Port**: 5000
 
+## Backend API Endpoints
+
+### Authentication
+All endpoints (except public ones) require Bearer token in Authorization header from Supabase auth.
+
+### Flashcard Endpoints
+- **POST /api/flashcards/generate** - Generate AI-powered flashcards
+  - Body: `{ topic: string, text?: string, count?: number }`
+  - Returns: Generated and saved flashcards
+  
+- **GET /api/flashcards** - Get user's flashcards
+  - Returns: Array of user's flashcards
+  
+- **POST /api/flashcards** - Create a flashcard manually
+  - Body: `{ topic: string, front: string, back: string, difficulty?: string }`
+
+### Learning Session Endpoints
+- **POST /api/sessions** - Record a learning session
+  - Body: `{ session_type: string, duration_seconds: number, score?: number }`
+  
+- **GET /api/progress** - Get user's learning progress
+  - Returns: User progress statistics
+
+### Pronunciation Endpoints  
+- **POST /api/pronunciation/check** - Check pronunciation (currently mock implementation)
+  - Returns: Score and feedback
+
+## Database Schema
+
+The application uses PostgreSQL with four main tables:
+- **users**: User accounts (id, email, name, role, created_at)
+- **flashcards**: AI-generated and user-created flashcards
+- **learning_sessions**: Records of study sessions
+- **user_progress**: Cumulative progress tracking
+
 ## Recent Changes (October 1, 2025)
-1. Configured Vite to run on port 5000 with 0.0.0.0 host for Replit compatibility
-2. Updated Supabase client to use environment variables instead of hardcoded credentials
-3. Added preview server configuration for production deployment
-4. Set up workflow for automatic development server startup
-5. Configured deployment settings for Replit autoscale
+1. Created complete backend infrastructure with Express and TypeScript
+2. Set up PostgreSQL database with Drizzle ORM
+3. Integrated OpenAI API for flashcard generation
+4. Implemented Supabase authentication middleware
+5. Created comprehensive API endpoints for all features
+6. Fixed frontend errors (Link imports, AnimatedCounter type issues)
+7. Configured dual server setup (Frontend: port 5000, Backend: port 3001)
+8. Updated project to full-stack architecture with AI capabilities
 
 ## Features
 - Dark theme by default with theme switching capability
