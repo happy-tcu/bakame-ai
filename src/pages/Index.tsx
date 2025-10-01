@@ -1,465 +1,800 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, GraduationCap, Languages, Headphones, Brain, Mic, Database, Globe, BarChart3, Volume2, Newspaper, Building } from 'lucide-react';
+import { 
+  ChevronDown, Menu, X, Phone, MessageSquare, Calendar, BookOpen, 
+  ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, 
+  GraduationCap, Languages, Headphones, Brain, Mic, Database, 
+  Globe, BarChart3, Volume2, Newspaper, Building, Award,
+  Sparkles, Rocket, TrendingUp, Users2, School, DollarSign,
+  Bot, BookOpen as BookIcon, Gamepad2, Podcast, PenTool,
+  FileText, MicVocal, Music, Map, Hand, Wifi, WifiOff,
+  Lightbulb, FlaskConical, GraduationCap as GradCap,
+  Star, ChevronRight, Eye, TestTube, MessageCircle
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import TypingAnimation from '@/components/TypingAnimation';
-import EarlyAccessModal from '@/components/EarlyAccessModal';
-import VideoModal from '@/components/VideoModal';
-import FAQ from '@/components/FAQ';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import LiveChat from '@/components/chat/LiveChat';
+import EarlyAccessModal from '@/components/EarlyAccessModal';
+import AnimatedCounter from '@/components/AnimatedCounter';
+
 const Index = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-  const openEarlyAccess = () => {
-    setIsEarlyAccessOpen(true);
-  };
-  const openVideo = () => {
-    setIsVideoOpen(true);
-  };
-  return <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
-      {/* Enhanced space-time background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <defs>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="1" result="coloredBlur" />
-              <feMerge> 
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-          <g transform="translate(0,0)">
-            <path d="M0,25 Q25,20 50,25 T100,25" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)" />
-            <path d="M0,50 Q25,45 50,50 T100,50" fill="none" stroke="rgba(59,130,246,0.3)" strokeWidth="0.2" />
-            <path d="M0,75 Q25,70 50,75 T100,75" fill="none" stroke="rgba(34,197,94,0.4)" strokeWidth="0.2" filter="url(#glow)" />
-          </g>
-        </svg>
-        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
+  const [isVisible, setIsVisible] = useState({});
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible((prev) => ({
+            ...prev,
+            [entry.target.id]: entry.isIntersecting,
+          }));
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('[data-animate]');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const features = [
+    { icon: MicVocal, name: 'Voice Clone Learning', description: 'Personalized AI voice tutoring' },
+    { icon: MessageCircle, name: 'AI Debate Partner', description: 'Practice argumentation skills' },
+    { icon: BookIcon, name: 'Smart Flashcards', description: 'Adaptive learning system' },
+    { icon: Podcast, name: 'Podcast Generator', description: 'Create custom learning content' },
+    { icon: PenTool, name: 'Story Builder', description: 'Interactive narrative creation' },
+    { icon: FileText, name: 'Document Intelligence', description: 'Smart content analysis' },
+    { icon: Mic, name: 'Voice Journal', description: 'Audio practice diary' },
+    { icon: Music, name: 'English Rap Battles', description: 'Fun rhythm-based learning' },
+    { icon: Volume2, name: 'Pronunciation Heat Maps', description: 'Visual accent coaching' },
+    { icon: Map, name: 'Virtual Field Trips', description: 'Immersive cultural exploration' },
+    { icon: Hand, name: 'Sign Language Support', description: 'Inclusive communication tools' },
+    { icon: WifiOff, name: 'Offline Learning', description: 'Works without internet' },
+  ];
+
+  const trustLogos = [
+    'Ministry of Education Rwanda',
+    'African Development Bank',
+    'UNICEF Education',
+    'Gates Foundation',
+    'Google for Education',
+    'World Bank Education',
+    'UNESCO',
+    'Save the Children',
+  ];
+
+  return (
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Navigation */}
-      <nav className="relative z-50 flex items-center justify-between p-6 md:p-8">
-        <div className="flex items-center space-x-4">
-          <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            Bakame AI
+      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="text-2xl font-bold gradient-text">
+                Bakame AI
+              </div>
+              <Badge variant="outline" className="border-purple-500/30 text-purple-400">
+                v2.0
+              </Badge>
+            </div>
+            
+            <div className="hidden md:flex items-center space-x-8">
+              <Link to="/features" className="text-gray-300 hover:text-white transition-colors">Features</Link>
+              <Link to="/pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</Link>
+              <Link to="/demo-scheduling" className="text-gray-300 hover:text-white transition-colors">Book Demo</Link>
+              <Link to="/about" className="text-gray-300 hover:text-white transition-colors">About</Link>
+              <ThemeToggle />
+              <Button 
+                onClick={() => navigate('/try')} 
+                className="gradient-purple-blue text-white hover:opacity-90"
+              >
+                Try Features
+              </Button>
+            </div>
+
+            <button onClick={toggleMenu} className="md:hidden text-white">
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
-          <Badge variant="outline" className="border-primary/30 text-primary text-xs">
-            Beta
-          </Badge>
-        </div>
-        
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
-          <Link to="/try" className="text-foreground hover:text-primary transition-colors font-semibold">
-            Try Demo
-          </Link>
-          <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
-            Pricing
-          </Link>
-          <Link to="/demo-scheduling" className="text-foreground hover:text-primary transition-colors">
-            Schedule Demo
-          </Link>
-          <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
-          <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
-          <ThemeToggle />
-        </div>
-
-        {/* Mobile menu button */}
-        <div className="md:hidden">
-          <button onClick={toggleMenu} className="text-foreground hover:text-primary transition-colors">
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Desktop CTA */}
-        <div className="hidden md:block">
-          
         </div>
       </nav>
 
-      {/* Mobile Navigation Menu */}
-      {isMenuOpen && <div className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-sm">
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden">
           <div className="flex flex-col items-center justify-center h-full space-y-8">
-            <Link to="/" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Home</Link>
-            <Link to="/try" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors font-semibold">Try Demo</Link>
-            <Link to="/demo-scheduling" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Schedule Demo</Link>
-            <Link to="/pricing" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Pricing</Link>
-            <Link to="/about" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">About</Link>
-            <Link to="/contact" onClick={closeMenu} className="text-2xl text-foreground hover:text-primary transition-colors">Contact</Link>
-            <div className="pt-4">
-              <ThemeToggle />
-            </div>
-            <Button onClick={() => {
-          closeMenu();
-          navigate('/demo-scheduling');
-        }} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105">
-              Schedule Demo
+            <Link to="/features" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Features</Link>
+            <Link to="/pricing" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Pricing</Link>
+            <Link to="/demo-scheduling" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">Book Demo</Link>
+            <Link to="/about" onClick={closeMenu} className="text-2xl text-white hover:text-purple-400 transition-colors">About</Link>
+            <ThemeToggle />
+            <Button 
+              onClick={() => { closeMenu(); navigate('/try'); }}
+              className="gradient-purple-blue text-white"
+            >
+              Try Features
             </Button>
           </div>
-        </div>}
+        </div>
+      )}
 
-      {/* Main Content */}
-      <div className="relative z-10">
-        {/* Hero Section */}
-        <section className="container mx-auto px-6 py-20 text-center">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent leading-tight">
-              AI-Powered English Learning for Schools
+      {/* Hero Section with Gradient Background */}
+      <section className="relative min-h-screen flex items-center justify-center gradient-hero overflow-hidden">
+        <div className="absolute inset-0 grid-pattern"></div>
+        <div className="absolute inset-0 gradient-overlay"></div>
+        
+        {/* Geometric shapes */}
+        <div className="geometric-shape w-96 h-96 rounded-full bg-purple-500/10 blur-3xl top-0 left-0"></div>
+        <div className="geometric-shape w-96 h-96 rounded-full bg-blue-500/10 blur-3xl bottom-0 right-0"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
+          <div 
+            id="hero-content"
+            data-animate="true"
+            className={`${isVisible['hero-content'] ? 'animate-scale-up' : 'opacity-0'}`}
+          >
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+              AI-Powered English Learning
+              <span className="block gradient-text">from Voice to Victory</span>
             </h1>
             
-            <div className="text-xl md:text-2xl text-muted-foreground mb-8 h-16 flex items-center justify-center">
-              <TypingAnimation text="Revolutionize English education with offline-first AI tutoring that works in any classroom." className="text-muted-foreground" />
-            </div>
-            
-            <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Transform English learning in your school with AI-powered tutoring that improves student speaking confidence, 
-              supports teachers with detailed progress tracking, and works reliably in any classroom environment.
+            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+              Revolutionary language education that transforms speaking confidence through AI tutoring, 
+              proven to deliver breakthrough results in schools across Africa.
             </p>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Button onClick={() => navigate('/try')} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
-                <Play className="mr-2 h-5 w-5" />
-                Try Demo Free
-              </Button>
-              <Button onClick={openEarlyAccess} variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
-                <ArrowRight className="mr-2 h-5 w-5" />
-                Join Waitlist
-              </Button>
-              <Button onClick={() => navigate('/pricing')} variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
-                <ArrowRight className="mr-2 h-5 w-5" />
-                View Pricing
-              </Button>
-            </div>
-
-            {/* Key Benefits */}
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <div className="px-4 py-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Volume2 className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Improved Speaking Confidence</span>
-              </div>
-              
-              <div className="px-4 py-2 bg-gradient-to-r from-accent/20 to-primary/20 rounded-lg border border-border flex items-center gap-2">
-                <BarChart3 className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Measurable Progress</span>
-              </div>
-              
-              <div className="px-4 py-2 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-lg border border-border flex items-center gap-2">
-                <Users className="h-4 w-4 text-foreground" />
-                <span className="text-muted-foreground">Teacher Support</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Core Benefits */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Proven Results for Schools
-            </h2>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Volume2 className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Speaking Confidence</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Students gain confidence through safe, judgment-free conversation practice with AI tutors available 24/7.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <BarChart3 className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Measurable Progress</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Track student improvement with detailed analytics on speaking fluency, pronunciation, and vocabulary growth.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Users className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Teacher Empowerment</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Empower teachers with insights and tools to personalize instruction and focus on students who need the most support.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
-                <CardHeader>
-                  <Shield className="h-8 w-8 text-foreground mb-2" />
-                  <CardTitle className="text-card-foreground">Reliable Technology</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    Works consistently in any classroom environment, with or without internet connectivity.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Implementation Benefits */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Easy Implementation, Immediate Impact
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8">
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <CheckCircle className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Quick Setup</h3>
-                    <p className="text-muted-foreground">Get started in your school within 24 hours with minimal IT requirements.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <CheckCircle className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Teacher Training Included</h3>
-                    <p className="text-muted-foreground">Comprehensive onboarding ensures teachers feel confident using the platform.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <CheckCircle className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Curriculum Alignment</h3>
-                    <p className="text-muted-foreground">Integrates seamlessly with existing English learning objectives and standards.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="space-y-8">
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <BarChart3 className="w-4 h-4 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Improved Test Scores</h3>
-                    <p className="text-muted-foreground">Schools report measurable improvements in English speaking assessments.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Users className="w-4 h-4 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Student Engagement</h3>
-                    <p className="text-muted-foreground">Interactive AI conversations increase student participation and enthusiasm.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Shield className="w-4 h-4 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">Reliable Performance</h3>
-                    <p className="text-muted-foreground">Consistent operation in any environment, ensuring uninterrupted learning.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* School Success Stories */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              Transforming English Education
-            </h2>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="bg-card border-border backdrop-blur-sm text-center p-8">
-                <div className="text-4xl font-bold text-primary mb-2">85%</div>
-                <div className="text-lg font-semibold text-foreground mb-2">Improved Speaking Confidence</div>
-                <p className="text-muted-foreground">Students show measurable improvement in speaking assessments within one semester</p>
-              </Card>
-              
-              <Card className="bg-card border-border backdrop-blur-sm text-center p-8">
-                <div className="text-4xl font-bold text-primary mb-2">30%</div>
-                <div className="text-lg font-semibold text-foreground mb-2">Increased Participation</div>
-                <p className="text-muted-foreground">More students actively participate in English class discussions and activities</p>
-              </Card>
-              
-              <Card className="bg-card border-border backdrop-blur-sm text-center p-8">
-                <div className="text-4xl font-bold text-primary mb-2">95%</div>
-                <div className="text-lg font-semibold text-foreground mb-2">Teacher Satisfaction</div>
-                <p className="text-muted-foreground">Teachers report the platform enhances their ability to support student learning</p>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* School Testimonials */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-              What Educators Are Saying
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="bg-card border-border backdrop-blur-sm">
-                <CardContent className="p-8">
-                  <p className="text-muted-foreground italic mb-4">
-                    "The AI tutoring platform has transformed how my students approach English speaking. 
-                    They're more confident and engaged than ever before."
-                  </p>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                      <span className="text-primary-foreground font-bold">MJ</span>
-                    </div>
-                    <div>
-                      <p className="text-foreground font-semibold">Maria Johnson</p>
-                      <p className="text-muted-foreground text-sm">English Department Head</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border backdrop-blur-sm">
-                <CardContent className="p-8">
-                  <p className="text-muted-foreground italic mb-4">
-                    "The detailed progress reports help me identify which students need extra support. 
-                    It's like having a teaching assistant for every student."
-                  </p>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
-                      <span className="text-secondary-foreground font-bold">DR</span>
-                    </div>
-                    <div>
-                      <p className="text-foreground font-semibold">David Rodriguez</p>
-                      <p className="text-muted-foreground text-sm">Middle School Principal</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="container mx-auto px-6 py-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-              Transform English Learning in Your School
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join schools worldwide that are improving student outcomes with AI-powered English tutoring. 
-              Schedule your personalized demo today.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button onClick={() => navigate('/demo-scheduling')} className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-4">
+              <Button 
+                onClick={() => navigate('/demo-scheduling')}
+                className="gradient-purple-blue text-white text-lg px-8 py-6 hover:opacity-90 hover-depth"
+                data-testid="button-book-demo"
+              >
                 <Calendar className="mr-2 h-5 w-5" />
-                Schedule Demo
+                Book a Demo
               </Button>
-              
-              <Button onClick={() => navigate('/pricing')} variant="outline" className="border-border text-foreground hover:bg-muted transition-all duration-300 text-lg px-8 py-4">
-                <ArrowRight className="mr-2 h-5 w-5" />
-                View Pricing
+              <Button 
+                onClick={() => navigate('/try')}
+                variant="outline" 
+                className="border-white/20 text-white hover:bg-white/10 text-lg px-8 py-6 hover-depth"
+                data-testid="button-try-features"
+              >
+                <Play className="mr-2 h-5 w-5" />
+                Try Features
               </Button>
             </div>
+
+            <div className="flex flex-wrap justify-center gap-6">
+              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 px-4 py-2">
+                <Sparkles className="mr-2 h-4 w-4" />
+                85% Speaking Confidence Boost
+              </Badge>
+              <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 px-4 py-2">
+                <Users className="mr-2 h-4 w-4" />
+                50,000+ Students
+              </Badge>
+              <Badge className="bg-green-500/20 text-green-300 border-green-500/30 px-4 py-2">
+                <WifiOff className="mr-2 h-4 w-4" />
+                Works Offline
+              </Badge>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* FAQ Section */}
-        <section className="container mx-auto px-6 py-20">
-          <FAQ />
-        </section>
+      {/* Trust Indicators */}
+      <section className="py-16 bg-gradient-to-b from-black to-gray-900 border-y border-white/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3 className="text-center text-gray-400 mb-8 uppercase tracking-wider">
+            Trusted by Schools and Governments Across Africa
+          </h3>
+          <div className="relative overflow-hidden">
+            <div className="flex space-x-12 marquee">
+              {[...trustLogos, ...trustLogos].map((logo, index) => (
+                <div key={index} className="flex-shrink-0">
+                  <div className="h-12 px-6 py-2 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center">
+                    <span className="text-gray-400 whitespace-nowrap">{logo}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
-        {/* Footer */}
-        <footer className="border-t border-border bg-card/50 backdrop-blur-sm">
-          <div className="container mx-auto px-6 py-12">
-            <div className="grid md:grid-cols-4 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Company</h3>
-                <ul className="space-y-2">
-                  <li><Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link></li>
-                  <li><Link to="/team" className="text-muted-foreground hover:text-foreground transition-colors">Team</Link></li>
-                  <li><Link to="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</Link></li>
+      {/* Core Capabilities Grid */}
+      <section className="py-24 bg-black relative">
+        <div className="absolute inset-0 grid-pattern opacity-50"></div>
+        <div className="relative max-w-7xl mx-auto px-6">
+          <h2 className="text-5xl font-bold text-center mb-16">
+            Three Pillars of <span className="gradient-text">Language Mastery</span>
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="bg-gradient-to-br from-purple-900/20 to-purple-900/10 border-purple-500/20 hover-depth">
+              <CardHeader>
+                <Brain className="h-12 w-12 text-purple-400 mb-4" />
+                <CardTitle className="text-2xl text-white">Learn AI</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Voice-first learning features
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-purple-400" />
+                    Personalized AI conversations
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-purple-400" />
+                    Real-time pronunciation feedback
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-purple-400" />
+                    Adaptive difficulty levels
+                  </li>
                 </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-blue-900/20 to-blue-900/10 border-blue-500/20 hover-depth">
+              <CardHeader>
+                <Users2 className="h-12 w-12 text-blue-400 mb-4" />
+                <CardTitle className="text-2xl text-white">Teach AI</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Teacher empowerment tools
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-blue-400" />
+                    Student progress analytics
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-blue-400" />
+                    Curriculum alignment tools
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-blue-400" />
+                    Automated assessment reports
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-green-900/20 to-green-900/10 border-green-500/20 hover-depth">
+              <CardHeader>
+                <Rocket className="h-12 w-12 text-green-400 mb-4" />
+                <CardTitle className="text-2xl text-white">Scale AI</CardTitle>
+                <CardDescription className="text-gray-400">
+                  School-wide deployment
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-green-400" />
+                    Offline-first architecture
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-green-400" />
+                    Multi-classroom support
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-green-400" />
+                    Administrative dashboard
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Showcase Grid */}
+      <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-4">
+              Comprehensive Feature <span className="gradient-text">Arsenal</span>
+            </h2>
+            <p className="text-xl text-gray-400">
+              Every tool your students need to master English
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <Card 
+                key={index}
+                className="bg-white/5 border-white/10 hover:bg-white/10 transition-all duration-300 hover-depth"
+              >
+                <CardContent className="p-6">
+                  <feature.icon className="h-10 w-10 text-purple-400 mb-4" />
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    {feature.name}
+                  </h3>
+                  <p className="text-sm text-gray-400">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Demo Section */}
+      <section className="py-24 bg-black relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern"></div>
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-4">
+              Experience Bakame <span className="gradient-text">in Action</span>
+            </h2>
+            <p className="text-xl text-gray-400">
+              Try our AI-powered features right now
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="bg-gradient-to-br from-purple-900/20 to-transparent border-purple-500/20 hover-depth">
+              <CardHeader>
+                <Eye className="h-8 w-8 text-purple-400 mb-2" />
+                <CardTitle className="text-white">Speaking Confidence Score</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="h-32 bg-purple-500/10 rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-4xl font-bold text-purple-400 mb-2">
+                        <AnimatedCounter end="87" />%
+                      </div>
+                      <p className="text-sm text-gray-400">Confidence Level</p>
+                    </div>
+                  </div>
+                  <Button 
+                    onClick={() => navigate('/try')}
+                    className="w-full bg-purple-500/20 hover:bg-purple-500/30 border-purple-500/30"
+                  >
+                    <TestTube className="mr-2 h-4 w-4" />
+                    Test Your Speaking
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-blue-900/20 to-transparent border-blue-500/20 hover-depth">
+              <CardHeader>
+                <Mic className="h-8 w-8 text-blue-400 mb-2" />
+                <CardTitle className="text-white">Pronunciation Test</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="h-32 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                    <div className="space-y-2">
+                      <div className="flex space-x-1">
+                        {[1, 2, 3, 4, 5].map((i) => (
+                          <div 
+                            key={i}
+                            className="w-2 h-16 bg-blue-400 rounded animate-pulse"
+                            style={{ animationDelay: `${i * 0.1}s`, height: `${Math.random() * 64}px` }}
+                          ></div>
+                        ))}
+                      </div>
+                      <p className="text-sm text-gray-400 text-center">Voice Analysis</p>
+                    </div>
+                  </div>
+                  <Button 
+                    onClick={() => navigate('/try')}
+                    className="w-full bg-blue-500/20 hover:bg-blue-500/30 border-blue-500/30"
+                  >
+                    <Volume2 className="mr-2 h-4 w-4" />
+                    Try Pronunciation
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-green-900/20 to-transparent border-green-500/20 hover-depth">
+              <CardHeader>
+                <Bot className="h-8 w-8 text-green-400 mb-2" />
+                <CardTitle className="text-white">AI Conversation</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="h-32 bg-green-500/10 rounded-lg p-4 space-y-2">
+                    <div className="bg-green-500/20 rounded-lg p-2 text-sm text-green-300">
+                      Hello! Let's practice English together!
+                    </div>
+                    <div className="bg-gray-800/50 rounded-lg p-2 text-sm text-gray-300 ml-8">
+                      Hi! I'd love to practice.
+                    </div>
+                  </div>
+                  <Button 
+                    onClick={() => navigate('/try')}
+                    className="w-full bg-green-500/20 hover:bg-green-500/30 border-green-500/30"
+                  >
+                    <MessageSquare className="mr-2 h-4 w-4" />
+                    Start Conversation
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Solutions by Role */}
+      <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-4">
+              Tailored Solutions <span className="gradient-text">for Everyone</span>
+            </h2>
+            <p className="text-xl text-gray-400">
+              Designed for every stakeholder in the education ecosystem
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="bg-gradient-to-br from-purple-900/20 to-transparent border-purple-500/20 hover-depth">
+              <CardHeader>
+                <GraduationCap className="h-12 w-12 text-purple-400 mb-4" />
+                <CardTitle className="text-2xl text-white">For Students</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-purple-400 mt-1" />
+                    <span>24/7 AI tutoring support</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-purple-400 mt-1" />
+                    <span>Gamified learning experience</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-purple-400 mt-1" />
+                    <span>Personalized learning paths</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-purple-400 mt-1" />
+                    <span>Safe practice environment</span>
+                  </li>
+                </ul>
+                <Button 
+                  onClick={() => navigate('/for-students')}
+                  className="w-full bg-purple-500/20 hover:bg-purple-500/30 border-purple-500/30"
+                >
+                  Explore Student Features
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-blue-900/20 to-transparent border-blue-500/20 hover-depth">
+              <CardHeader>
+                <Users className="h-12 w-12 text-blue-400 mb-4" />
+                <CardTitle className="text-2xl text-white">For Teachers</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-blue-400 mt-1" />
+                    <span>Real-time progress tracking</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-blue-400 mt-1" />
+                    <span>Automated grading system</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-blue-400 mt-1" />
+                    <span>Custom lesson creation</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-blue-400 mt-1" />
+                    <span>Class performance analytics</span>
+                  </li>
+                </ul>
+                <Button 
+                  onClick={() => navigate('/for-teachers')}
+                  className="w-full bg-blue-500/20 hover:bg-blue-500/30 border-blue-500/30"
+                >
+                  View Teacher Dashboard
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-green-900/20 to-transparent border-green-500/20 hover-depth">
+              <CardHeader>
+                <School className="h-12 w-12 text-green-400 mb-4" />
+                <CardTitle className="text-2xl text-white">For Schools</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-green-400 mt-1" />
+                    <span>School-wide deployment</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-green-400 mt-1" />
+                    <span>Administrative controls</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-green-400 mt-1" />
+                    <span>ROI & impact metrics</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <Star className="mr-2 h-4 w-4 text-green-400 mt-1" />
+                    <span>Training & support included</span>
+                  </li>
+                </ul>
+                <Button 
+                  onClick={() => navigate('/for-schools')}
+                  className="w-full bg-green-500/20 hover:bg-green-500/30 border-green-500/30"
+                >
+                  See ROI Calculator
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Research & Innovation */}
+      <section className="py-24 bg-black relative">
+        <div className="absolute inset-0 grid-pattern opacity-30"></div>
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-4">
+              Research & <span className="gradient-text">Innovation</span>
+            </h2>
+            <p className="text-xl text-gray-400">
+              Advancing the frontier of AI-powered education
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
+              <CardHeader>
+                <FlaskConical className="h-10 w-10 text-purple-400 mb-2" />
+                <CardTitle className="text-white">AI Research Lab</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-400 mb-4">
+                  Pioneering natural language processing models optimized for African languages and accents.
+                </p>
+                <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                  Active Research
+                </Badge>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
+              <CardHeader>
+                <Lightbulb className="h-10 w-10 text-yellow-400 mb-2" />
+                <CardTitle className="text-white">Learning Breakthroughs</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-400 mb-4">
+                  Developing adaptive learning algorithms that personalize to each student's unique needs.
+                </p>
+                <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
+                  Patent Pending
+                </Badge>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
+              <CardHeader>
+                <GradCap className="h-10 w-10 text-blue-400 mb-2" />
+                <CardTitle className="text-white">Academic Partnerships</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-400 mb-4">
+                  Collaborating with leading universities to validate and improve our methodologies.
+                </p>
+                <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
+                  5+ Universities
+                </Badge>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Metrics & Impact */}
+      <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-4">
+              Measurable <span className="gradient-text">Impact</span>
+            </h2>
+            <p className="text-xl text-gray-400">
+              Real results from schools using Bakame AI
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-4 gap-8 mb-16">
+            <div className="text-center">
+              <div className="text-5xl font-bold gradient-text mb-2">
+                <AnimatedCounter end="50000" />+
               </div>
-              
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">For Schools</h3>
-                <ul className="space-y-2">
-                  <li><Link to="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Schedule Demo</Link></li>
-                  <li><Link to="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Schedule Demo</Link></li>
-                  <li><Link to="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link></li>
-                </ul>
+              <p className="text-gray-400">Students Served</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold gradient-text mb-2">
+                <AnimatedCounter end="85" />%
               </div>
-              
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Support</h3>
-                <ul className="space-y-2">
-                  <li><Link to="/support" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</Link></li>
-                  <li><Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact Support</Link></li>
-                </ul>
+              <p className="text-gray-400">Confidence Improvement</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold gradient-text mb-2">
+                <AnimatedCounter end="200" />+
               </div>
-              
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Legal</h3>
-                <ul className="space-y-2">
-                  <li><Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
-                  <li><Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link></li>
-                </ul>
+              <p className="text-gray-400">Schools Deployed</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold gradient-text mb-2">
+                <AnimatedCounter end="95" />%
+              </div>
+              <p className="text-gray-400">Teacher Satisfaction</p>
+            </div>
+          </div>
+          
+          <Card className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 border-purple-500/20">
+            <CardContent className="p-8">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-4">
+                    Proven ROI for Schools
+                  </h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-300">
+                      <TrendingUp className="mr-3 h-5 w-5 text-green-400" />
+                      30% reduction in tutoring costs
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <TrendingUp className="mr-3 h-5 w-5 text-green-400" />
+                      2x faster language proficiency gains
+                    </li>
+                    <li className="flex items-center text-gray-300">
+                      <TrendingUp className="mr-3 h-5 w-5 text-green-400" />
+                      40% increase in student engagement
+                    </li>
+                  </ul>
+                </div>
+                <div className="text-center">
+                  <div className="text-6xl font-bold gradient-text mb-2">3.2x</div>
+                  <p className="text-xl text-gray-400">Return on Investment</p>
+                  <p className="text-sm text-gray-500 mt-2">Average across all schools</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Call-to-Action Footer Section */}
+      <section className="py-24 gradient-hero relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern"></div>
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+            Transform Your School's
+            <span className="block gradient-text">English Program</span>
+          </h2>
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+            Join hundreds of schools revolutionizing language education with AI. 
+            See the difference in just one semester.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <Button 
+              onClick={() => navigate('/demo-scheduling')}
+              className="bg-white text-black hover:bg-gray-100 text-lg px-8 py-6 hover-depth"
+              data-testid="button-schedule-demo-footer"
+            >
+              <Calendar className="mr-2 h-5 w-5" />
+              Schedule School Demo
+            </Button>
+            <Button 
+              onClick={() => navigate('/pricing')}
+              variant="outline" 
+              className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-6 hover-depth"
+              data-testid="button-view-pricing-footer"
+            >
+              <DollarSign className="mr-2 h-5 w-5" />
+              View Pricing Plans
+            </Button>
+          </div>
+          
+          <p className="text-gray-400">
+            Or call us directly at{' '}
+            <a href="tel:+250788888888" className="text-purple-400 hover:text-purple-300">
+              +250 788 888 888
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="grid md:grid-cols-5 gap-8">
+            <div className="md:col-span-2">
+              <div className="text-2xl font-bold gradient-text mb-4">Bakame AI</div>
+              <p className="text-gray-400 mb-4">
+                Revolutionizing English education across Africa with AI-powered learning that works everywhere.
+              </p>
+              <div className="flex space-x-4">
+                <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                  <Award className="mr-1 h-3 w-3" />
+                  EdTech Award 2024
+                </Badge>
               </div>
             </div>
             
-            <div className="border-t border-border pt-8 mt-8 text-center">
-              <p className="text-muted-foreground">© 2025 Bakame AI. All rights reserved.</p>
+            <div>
+              <h3 className="text-white font-semibold mb-4">Product</h3>
+              <ul className="space-y-2">
+                <li><Link to="/features" className="text-gray-400 hover:text-white transition-colors">Features</Link></li>
+                <li><Link to="/pricing" className="text-gray-400 hover:text-white transition-colors">Pricing</Link></li>
+                <li><Link to="/try" className="text-gray-400 hover:text-white transition-colors">Try Demo</Link></li>
+                <li><Link to="/government-solution" className="text-gray-400 hover:text-white transition-colors">Government</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-white font-semibold mb-4">Resources</h3>
+              <ul className="space-y-2">
+                <li><Link to="/resources" className="text-gray-400 hover:text-white transition-colors">Learning Hub</Link></li>
+                <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link></li>
+                <li><Link to="/support" className="text-gray-400 hover:text-white transition-colors">Support</Link></li>
+                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-white font-semibold mb-4">Company</h3>
+              <ul className="space-y-2">
+                <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
+                <li><Link to="/team" className="text-gray-400 hover:text-white transition-colors">Team</Link></li>
+                <li><Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy</Link></li>
+                <li><Link to="/terms" className="text-gray-400 hover:text-white transition-colors">Terms</Link></li>
+              </ul>
             </div>
           </div>
-        </footer>
-      </div>
+          
+          <div className="border-t border-white/10 mt-12 pt-8 text-center">
+            <p className="text-gray-500">
+              © 2025 Bakame AI. All rights reserved. Building the future of education in Africa.
+            </p>
+          </div>
+        </div>
+      </footer>
 
       {/* Modals */}
-      <EarlyAccessModal isOpen={isEarlyAccessOpen} onClose={() => setIsEarlyAccessOpen(false)} />
-      
-      <VideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} videoId="dQw4w9WgXcQ" />
+      <EarlyAccessModal 
+        isOpen={isEarlyAccessOpen} 
+        onClose={() => setIsEarlyAccessOpen(false)} 
+      />
       
       {/* Live Chat */}
       <LiveChat />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
