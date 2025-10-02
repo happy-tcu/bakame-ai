@@ -504,9 +504,9 @@ const Index = () => {
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              Research & <span className="gradient-text">Innovation</span>
+              Research & <span className="text-[#4c12ef]">Innovation</span>
             </h2>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-gray-200">
               Advancing the frontier of AI-powered education
             </p>
           </div>
@@ -514,11 +514,11 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <FlaskConical className="h-10 w-10 text-gray-400 mb-2" />
+                <FlaskConical className="h-10 w-10 text-[#4c12ef] mb-2" />
                 <CardTitle className="text-white">AI Research Lab</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-400 mb-4">
+                <p className="text-gray-300 mb-4">
                   Pioneering natural language processing models optimized for African languages and accents.
                 </p>
                 <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
@@ -529,11 +529,11 @@ const Index = () => {
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <Lightbulb className="h-10 w-10 text-gray-400 mb-2" />
+                <Lightbulb className="h-10 w-10 text-[#4c12ef] mb-2" />
                 <CardTitle className="text-white">Learning Breakthroughs</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-400 mb-4">
+                <p className="text-gray-300 mb-4">
                   Developing adaptive learning algorithms that personalize to each student's unique needs.
                 </p>
                 <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
@@ -544,11 +544,11 @@ const Index = () => {
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <GradCap className="h-10 w-10 text-gray-400 mb-2" />
+                <GradCap className="h-10 w-10 text-[#4c12ef] mb-2" />
                 <CardTitle className="text-white">Academic Partnerships</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-400 mb-4">
+                <p className="text-gray-300 mb-4">
                   Collaborating with leading universities to validate and improve our methodologies.
                 </p>
                 <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
