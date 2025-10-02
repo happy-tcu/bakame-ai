@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Mic, Volume2, BookOpen, Brain, Send, ChevronRight, Sparkles, Play, RefreshCw, Check, X } from 'lucide-react';
+import { ArrowRight, Mic, Volume2, BookOpen, Brain, Send, ChevronRight, Sparkles, Play, RefreshCw, Check, X, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -8,10 +8,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
+import { useAuth } from '@/components/auth/AuthContext';
+import { AuthModal } from '@/components/auth/AuthModal';
+import { useToast } from '@/hooks/use-toast';
+import { apiRequest } from '@/lib/queryClient';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const TryDemo = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalDefaultTab, setAuthModalDefaultTab] = useState<'login' | 'signup'>('login');
   
   // Pronunciation Test State
   const [pronunciationText, setPronunciationText] = useState('');
@@ -56,61 +65,157 @@ const TryDemo = () => {
     }
   ];
   
-  // Pronunciation Test Handler
-  const handlePronunciationTest = () => {
+  // Pronunciation Test Handler with Real API
+  const handlePronunciationTest = async () => {
     if (!pronunciationText) return;
+    
+    if (!user) {
+      setAuthModalDefaultTab('login');
+      setIsAuthModalOpen(true);
+      toast({
+        title: 'Authentication Required',
+        description: 'Please log in to use the pronunciation test.',
+      });
+      return;
+    }
     
     setIsSpeaking(true);
     setSpokenText(pronunciationText);
+    
+    try {
+      const response = await apiRequest('/api/pronunciation/check', {
+        method: 'POST',
+        body: JSON.stringify({
+          text: pronunciationText,
+        }),
+      });
+      
+      if (response.score !== undefined) {
+        toast({
+          title: 'Pronunciation Score',
+          description: `You scored ${response.score.toFixed(1)}%. ${response.feedback}`,
+        });
+        
+        // Store session for progress tracking
+        await apiRequest('/api/sessions', {
+          method: 'POST',
+          body: JSON.stringify({
+            session_type: 'pronunciation',
+            duration_seconds: 30,
+            score: response.score.toString(),
+          }),
+        });
+      }
+    } catch (error) {
+      console.error('Error checking pronunciation:', error);
+      // Don't show error toast for pronunciation check, just continue
+    }
     
     setTimeout(() => {
       setIsSpeaking(false);
     }, 2000);
   };
   
-  // Flashcard Generator Handler
-  const generateFlashcards = () => {
+  // Flashcard Generator Handler with Real API
+  const generateFlashcards = async () => {
     if (!flashcardTopic) return;
+    
+    if (!user) {
+      setAuthModalDefaultTab('signup');
+      setIsAuthModalOpen(true);
+      toast({
+        title: 'Authentication Required',
+        description: 'Please sign up or log in to generate flashcards.',
+      });
+      return;
+    }
     
     setIsGenerating(true);
     
-    setTimeout(() => {
-      const sampleFlashcards = [
-        { front: `What is ${flashcardTopic}?`, back: `${flashcardTopic} is an important concept in English learning that helps improve communication skills.` },
-        { front: `Give an example of ${flashcardTopic}`, back: `Example: "${flashcardTopic}" can be used in everyday conversations to express ideas clearly.` },
-        { front: `Common mistakes with ${flashcardTopic}`, back: `Learners often confuse the usage in formal vs informal contexts. Practice makes perfect!` },
-        { front: `Practice sentence`, back: `Try using "${flashcardTopic}" in a sentence: "I learned about ${flashcardTopic} today and it improved my English."` }
-      ];
+    try {
+      const response = await apiRequest('/api/flashcards/generate', {
+        method: 'POST',
+        body: JSON.stringify({
+          topic: flashcardTopic,
+          text: flashcardTopic,
+          count: 4
+        }),
+      });
       
-      setFlashcards(sampleFlashcards);
-      setCurrentCardIndex(0);
-      setIsFlipped(false);
+      if (response.flashcards && response.flashcards.length > 0) {
+        const formattedFlashcards = response.flashcards.map((card: any) => ({
+          front: card.front,
+          back: card.back
+        }));
+        setFlashcards(formattedFlashcards);
+        setCurrentCardIndex(0);
+        setIsFlipped(false);
+        
+        toast({
+          title: 'Flashcards Generated!',
+          description: `Created ${formattedFlashcards.length} flashcards for "${flashcardTopic}"`,
+        });
+      }
+    } catch (error) {
+      console.error('Error generating flashcards:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to generate flashcards. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
       setIsGenerating(false);
-    }, 1500);
+    }
   };
   
-  // AI Conversation Handler
-  const sendMessage = () => {
+  // AI Conversation Handler with Session Tracking
+  const sendMessage = async () => {
     if (!userMessage.trim()) return;
+    
+    if (!user) {
+      setAuthModalDefaultTab('login');
+      setIsAuthModalOpen(true);
+      toast({
+        title: 'Authentication Required',
+        description: 'Please log in to chat with the AI tutor.',
+      });
+      return;
+    }
     
     const newUserMessage = { role: 'user', message: userMessage };
     setConversation([...conversation, newUserMessage]);
     setUserMessage('');
     setIsTyping(true);
     
-    setTimeout(() => {
-      const aiResponses = [
-        "That's a great point! Can you tell me more about your experience with that?",
-        "Excellent use of vocabulary! You're making great progress. Let me ask you: how would you use this in a formal setting?",
-        "I understand what you mean. Here's a tip: try using transition words like 'however' or 'furthermore' to connect your ideas better.",
-        "Perfect grammar! You're really improving. Would you like to practice more complex sentence structures?",
-        "That's interesting! In English, we often express this idea differently. Try saying it like this..."
-      ];
+    try {
+      // Store conversation session
+      await apiRequest('/api/sessions', {
+        method: 'POST',
+        body: JSON.stringify({
+          session_type: 'conversation',
+          duration_seconds: 60,
+          score: null,
+        }),
+      });
       
-      const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-      setConversation(prev => [...prev, { role: 'ai', message: randomResponse }]);
+      // Simulate AI response (in real app, this would call an AI API)
+      setTimeout(() => {
+        const aiResponses = [
+          "That's a great point! Can you tell me more about your experience with that?",
+          "Excellent use of vocabulary! You're making great progress. Let me ask you: how would you use this in a formal setting?",
+          "I understand what you mean. Here's a tip: try using transition words like 'however' or 'furthermore' to connect your ideas better.",
+          "Perfect grammar! You're really improving. Would you like to practice more complex sentence structures?",
+          "That's interesting! In English, we often express this idea differently. Try saying it like this..."
+        ];
+        
+        const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+        setConversation(prev => [...prev, { role: 'ai', message: randomResponse }]);
+        setIsTyping(false);
+      }, 1500);
+    } catch (error) {
+      console.error('Error sending message:', error);
       setIsTyping(false);
-    }, 1500);
+    }
   };
   
   // Quiz Handler
@@ -538,6 +643,13 @@ const TryDemo = () => {
       <EarlyAccessModal 
         isOpen={isEarlyAccessOpen} 
         onClose={() => setIsEarlyAccessOpen(false)} 
+      />
+      
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        defaultTab={authModalDefaultTab}
       />
     </div>
   );

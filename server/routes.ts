@@ -116,6 +116,16 @@ router.get('/api/progress', authMiddleware, async (req: AuthRequest, res) => {
   }
 });
 
+// Get current user
+router.get('/api/user/me', authMiddleware, async (req: AuthRequest, res) => {
+  try {
+    res.json({ user: req.user });
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Failed to fetch user' });
+  }
+});
+
 // Mock pronunciation check endpoint
 router.post('/api/pronunciation/check', authMiddleware, async (req: AuthRequest, res) => {
   try {

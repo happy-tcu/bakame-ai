@@ -2,11 +2,22 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   Menu, X, ChevronDown, Calendar, Play, Users, GraduationCap, School, Building,
-  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home
+  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home, LogOut, User
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import { useAuth } from '@/components/auth/AuthContext';
+import { AuthModal } from '@/components/auth/AuthModal';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -20,15 +31,29 @@ import { cn } from "@/lib/utils";
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, signOut } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalTab, setAuthModalTab] = useState<'login' | 'signup'>('login');
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsMobileSolutionsOpen(false);
     setIsMobileAboutOpen(false);
+  };
+
+  const handleOpenAuth = (tab: 'login' | 'signup') => {
+    setAuthModalTab(tab);
+    setIsAuthModalOpen(true);
+  };
+
+  const getUserInitials = () => {
+    if (!user) return '';
+    const name = user.user_metadata?.name || user.email || '';
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'U';
   };
 
   const solutionsItems = [
@@ -237,14 +262,69 @@ const Navbar = () => {
 
               <ThemeToggle />
               
-              <Button 
-                onClick={() => navigate('/demo-scheduling')} 
-                className="bg-white text-black hover:bg-gray-200"
-                data-testid="button-schedule-demo"
-              >
-                <Calendar className="mr-2 h-4 w-4" />
-                Schedule Demo
-              </Button>
+              {user ? (
+                <>
+                  <Button 
+                    onClick={() => navigate('/demo-scheduling')} 
+                    className="bg-white text-black hover:bg-gray-200"
+                    data-testid="button-schedule-demo"
+                  >
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Schedule Demo
+                  </Button>
+                  
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="relative h-9 w-9 rounded-full" data-testid="button-user-menu">
+                        <Avatar className="h-9 w-9">
+                          <AvatarFallback className="bg-white text-black">
+                            {getUserInitials()}
+                          </AvatarFallback>
+                        </Avatar>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56" align="end" forceMount>
+                      <DropdownMenuLabel className="font-normal">
+                        <div className="flex flex-col space-y-1">
+                          <p className="text-sm font-medium leading-none">{user.user_metadata?.name || 'User'}</p>
+                          <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                        </div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => navigate('/try')} data-testid="menu-item-try-demo">
+                        <Play className="mr-2 h-4 w-4" />
+                        <span>Try Demo</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => navigate('/pricing')} data-testid="menu-item-pricing">
+                        <Sparkles className="mr-2 h-4 w-4" />
+                        <span>Pricing</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={signOut} data-testid="menu-item-logout">
+                        <LogOut className="mr-2 h-4 w-4" />
+                        <span>Log out</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </>
+              ) : (
+                <>
+                  <Button 
+                    variant="ghost"
+                    onClick={() => handleOpenAuth('login')}
+                    data-testid="button-login"
+                  >
+                    Log in
+                  </Button>
+                  <Button 
+                    onClick={() => handleOpenAuth('signup')}
+                    className="bg-white text-black hover:bg-gray-200"
+                    data-testid="button-signup"
+                  >
+                    Sign up
+                  </Button>
+                </>
+              )}
             </div>
 
             <button onClick={toggleMenu} className="md:hidden text-white" data-testid="button-menu-toggle">
@@ -350,18 +430,85 @@ const Navbar = () => {
                 <ThemeToggle />
               </div>
 
-              <Button 
-                onClick={() => { closeMenu(); navigate('/demo-scheduling'); }}
-                className="bg-white text-black w-full hover:bg-gray-200"
-                data-testid="button-mobile-schedule-demo"
-              >
-                <Calendar className="mr-2 h-4 w-4" />
-                Schedule Demo
-              </Button>
+              {user ? (
+                <>
+                  <div className="border-t border-white/10 pt-6 mt-6">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <Avatar className="h-10 w-10">
+                        <AvatarFallback className="bg-white text-black">
+                          {getUserInitials()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="text-white font-medium">{user.user_metadata?.name || 'User'}</p>
+                        <p className="text-gray-400 text-sm">{user.email}</p>
+                      </div>
+                    </div>
+                    
+                    <Button 
+                      onClick={() => {
+                        navigate('/demo-scheduling');
+                        closeMenu();
+                      }}
+                      className="w-full bg-white text-black hover:bg-gray-200"
+                      data-testid="button-mobile-schedule-demo"
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      Schedule Demo
+                    </Button>
+                    
+                    <Button 
+                      onClick={() => {
+                        signOut();
+                        closeMenu();
+                      }}
+                      variant="outline"
+                      className="w-full mt-3"
+                      data-testid="button-mobile-logout"
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Log out
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="space-y-3 mt-6">
+                    <Button 
+                      onClick={() => {
+                        handleOpenAuth('login');
+                        closeMenu();
+                      }}
+                      variant="outline"
+                      className="w-full"
+                      data-testid="button-mobile-login"
+                    >
+                      Log in
+                    </Button>
+                    
+                    <Button 
+                      onClick={() => {
+                        handleOpenAuth('signup');
+                        closeMenu();
+                      }}
+                      className="w-full bg-white text-black hover:bg-gray-200"
+                      data-testid="button-mobile-signup"
+                    >
+                      Sign up
+                    </Button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
       )}
+      
+      <AuthModal 
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        defaultTab={authModalTab}
+      />
     </>
   );
 };
