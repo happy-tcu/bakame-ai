@@ -12,10 +12,10 @@ const ForSchools = () => {
   const navigate = useNavigate();
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const [roiMetrics, setRoiMetrics] = useState({
-    teacherHours: 0,
-    costSavings: 0,
-    studentImprovement: 0,
-    parentSatisfaction: 0
+    teacherHours: "Substantial",
+    costSavings: "Significant",
+    studentImprovement: "Remarkable",
+    parentSatisfaction: "Excellent"
   });
 
   // Animate ROI metrics on scroll
@@ -27,24 +27,14 @@ const ForSchools = () => {
             const index = parseInt(entry.target.getAttribute("data-index") || "0");
             setVisibleCards((prev) => new Set(prev).add(index));
             
-            // Animate ROI metrics when visible
+            // Show ROI metrics when visible
             if (entry.target.id === "roi-section") {
-              const duration = 2000;
-              const steps = 60;
-              const stepTime = duration / steps;
-              let step = 0;
-              
-              const timer = setInterval(() => {
-                step++;
-                const progress = step / steps;
-                setRoiMetrics({
-                  teacherHours: Math.floor(320 * progress),
-                  costSavings: Math.floor(47 * progress),
-                  studentImprovement: Math.floor(68 * progress),
-                  parentSatisfaction: Math.floor(94 * progress)
-                });
-                if (step >= steps) clearInterval(timer);
-              }, stepTime);
+              setRoiMetrics({
+                teacherHours: "Substantial",
+                costSavings: "Significant",
+                studentImprovement: "Remarkable",
+                parentSatisfaction: "Excellent"
+              });
             }
           }
         });
@@ -118,7 +108,7 @@ const ForSchools = () => {
             Transform English Education Across Your School
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Empower your teachers, engage your students, and deliver measurable learning outcomes with enterprise-grade AI technology. Join leading schools achieving 68% improvement in English proficiency.
+            Empower your teachers, engage your students, and deliver measurable learning outcomes with enterprise-grade AI technology. Join leading schools achieving remarkable improvement in English proficiency.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
@@ -150,34 +140,34 @@ const ForSchools = () => {
         <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
           <Card className="text-center bg-gradient-to-br from-gray-500/10 to-gray-500/10 border-gray-500/30">
             <CardContent className="pt-6">
-              <div className="text-4xl font-bold text-gray-600 mb-2">
-                {roiMetrics.teacherHours}+ hrs
+              <div className="text-3xl font-bold text-gray-600 mb-2">
+                {roiMetrics.teacherHours}
               </div>
               <p className="text-sm text-muted-foreground">Teacher time saved monthly</p>
             </CardContent>
           </Card>
           <Card className="text-center bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-500/30">
             <CardContent className="pt-6">
-              <div className="text-4xl font-bold text-green-600 mb-2">
-                {roiMetrics.costSavings}%
+              <div className="text-3xl font-bold text-green-600 mb-2">
+                {roiMetrics.costSavings}
               </div>
-              <p className="text-sm text-muted-foreground">Cost reduction in first year</p>
+              <p className="text-sm text-muted-foreground">Cost reduction achieved</p>
             </CardContent>
           </Card>
           <Card className="text-center bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
             <CardContent className="pt-6">
-              <div className="text-4xl font-bold text-purple-600 mb-2">
-                {roiMetrics.studentImprovement}%
+              <div className="text-3xl font-bold text-purple-600 mb-2">
+                {roiMetrics.studentImprovement}
               </div>
-              <p className="text-sm text-muted-foreground">Average score improvement</p>
+              <p className="text-sm text-muted-foreground">Student improvement</p>
             </CardContent>
           </Card>
           <Card className="text-center bg-gradient-to-br from-orange-500/10 to-red-500/10 border-orange-500/30">
             <CardContent className="pt-6">
-              <div className="text-4xl font-bold text-orange-600 mb-2">
-                {roiMetrics.parentSatisfaction}%
+              <div className="text-3xl font-bold text-orange-600 mb-2">
+                {roiMetrics.parentSatisfaction}
               </div>
-              <p className="text-sm text-muted-foreground">Parent satisfaction rate</p>
+              <p className="text-sm text-muted-foreground">Parent satisfaction</p>
             </CardContent>
           </Card>
         </div>
@@ -193,12 +183,12 @@ const ForSchools = () => {
           <CardContent>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <p className="text-sm text-muted-foreground mb-2">Number of Students</p>
-                <div className="text-2xl font-bold text-gray-600">1,200</div>
+                <p className="text-sm text-muted-foreground mb-2">Your School Size</p>
+                <div className="text-2xl font-bold text-gray-600">Customizable</div>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground mb-2">Estimated Annual Savings</p>
-                <div className="text-2xl font-bold text-green-600">$124,000</div>
+                <p className="text-sm text-muted-foreground mb-2">Potential Annual Savings</p>
+                <div className="text-2xl font-bold text-green-600">Significant</div>
               </div>
             </div>
             <Button 

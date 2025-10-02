@@ -78,32 +78,7 @@ const Press = () => {
     });
   };
 
-  const pressReleases = [
-    {
-      date: "December 15, 2024",
-      title: "Bakame AI Raises $50M in Series B Funding to Revolutionize Education Technology",
-      description: "Leading AI education platform secures major investment to expand global reach and enhance AI capabilities.",
-      badge: "Funding"
-    },
-    {
-      date: "November 20, 2024",
-      title: "Bakame AI Partners with Ministry of Education in Rwanda",
-      description: "Strategic partnership to bring AI-powered learning to 2 million students across Rwanda.",
-      badge: "Partnership"
-    },
-    {
-      date: "October 5, 2024",
-      title: "Bakame AI Launches Revolutionary Voice-First Learning Platform",
-      description: "New platform enables students to learn through natural conversation in multiple languages.",
-      badge: "Product Launch"
-    },
-    {
-      date: "September 1, 2024",
-      title: "Bakame AI Reaches 5 Million Active Users Milestone",
-      description: "Platform experiences 300% growth year-over-year as demand for AI education soars.",
-      badge: "Milestone"
-    }
-  ];
+  const pressReleases = [];
 
   const brandColors = [
     { name: "Pure Black", hex: "#000000", rgb: "0, 0, 0" },
@@ -155,7 +130,7 @@ const Press = () => {
 
   const awards = [
     { year: "2024", title: "TIME Best Inventions", organization: "TIME Magazine" },
-    { year: "2024", title: "EdTech Breakthrough Award", organization: "EdTech Breakthrough" },
+    { year: "2025", title: "CREATE Award", organization: "CREATE Organization" },
     { year: "2024", title: "AI Excellence Award", organization: "Business Intelligence Group" },
     { year: "2023", title: "Innovation in Education", organization: "UNESCO" }
   ];
@@ -182,10 +157,10 @@ const Press = () => {
   ];
 
   const stats = [
-    { value: "5M+", label: "Active Users" },
-    { value: "50+", label: "Countries" },
-    { value: "98%", label: "User Satisfaction" },
-    { value: "15", label: "Languages Supported" }
+    { value: "Growing", label: "Active User Base" },
+    { value: "Multiple", label: "Countries Served" },
+    { value: "High", label: "User Satisfaction" },
+    { value: "Multilingual", label: "Language Support" }
   ];
 
   return (
@@ -238,41 +213,23 @@ const Press = () => {
           <div className="space-y-8">
             <div className="flex items-center justify-between">
               <h2 className="text-3xl md:text-4xl font-bold">Press Releases</h2>
-              <Button variant="outline" className="border-white/30 hover:bg-white hover:text-black">
-                View All <ChevronRight className="ml-2 h-4 w-4" />
-              </Button>
             </div>
             
-            <div className="grid gap-6">
-              {pressReleases.map((release, index) => (
-                <Card key={index} className="bg-gray-900/50 border-white/10 hover:border-white/30 transition-all">
-                  <CardHeader className="pb-3">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-3">
-                          <Badge variant="outline" className="border-white/30 text-white">
-                            {release.badge}
-                          </Badge>
-                          <span className="text-sm text-gray-400">{release.date}</span>
-                        </div>
-                        <CardTitle className="text-xl text-white">{release.title}</CardTitle>
-                        <CardDescription className="text-gray-400">
-                          {release.description}
-                        </CardDescription>
-                      </div>
-                      <Button 
-                        variant="ghost" 
-                        size="sm"
-                        className="text-white hover:bg-white/10"
-                        data-testid={`button-download-release-${index}`}
-                      >
-                        <Download className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                </Card>
-              ))}
-            </div>
+            <Card className="bg-gray-900/50 border-white/10">
+              <CardContent className="p-8 text-center">
+                <p className="text-gray-400 text-lg">
+                  Press releases coming soon. Check back for updates on our latest announcements and milestones.
+                </p>
+                <Button 
+                  variant="outline" 
+                  className="mt-6 border-white/30 hover:bg-white hover:text-black"
+                  onClick={handleCopyEmail}
+                >
+                  <Mail className="mr-2 h-4 w-4" />
+                  Contact Press Team
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

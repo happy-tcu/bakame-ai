@@ -121,11 +121,11 @@ const Index = () => {
             <div className="flex flex-wrap justify-center gap-6">
               <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
                 <Sparkles className="mr-2 h-4 w-4" />
-                85% Speaking Confidence Boost
+                Proven Confidence Building
               </Badge>
               <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
                 <Users className="mr-2 h-4 w-4" />
-                50,000+ Students
+                Thousands of Students Served
               </Badge>
               <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
                 <WifiOff className="mr-2 h-4 w-4" />
@@ -504,7 +504,7 @@ const Index = () => {
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              Research & <span className="text-[#4c12ef]">Innovation</span>
+              Research & <span className="text-[#ff6b35]">Innovation</span>
             </h2>
             <p className="text-xl text-gray-200">
               Advancing the frontier of AI-powered education
@@ -514,7 +514,7 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <FlaskConical className="h-10 w-10 text-[#4c12ef] mb-2" />
+                <FlaskConical className="h-10 w-10 text-[#ff6b35] mb-2" />
                 <CardTitle className="text-white">AI Research Lab</CardTitle>
               </CardHeader>
               <CardContent>
@@ -529,7 +529,7 @@ const Index = () => {
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <Lightbulb className="h-10 w-10 text-[#4c12ef] mb-2" />
+                <Lightbulb className="h-10 w-10 text-[#ff6b35] mb-2" />
                 <CardTitle className="text-white">Learning Breakthroughs</CardTitle>
               </CardHeader>
               <CardContent>
@@ -544,7 +544,7 @@ const Index = () => {
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <GradCap className="h-10 w-10 text-[#4c12ef] mb-2" />
+                <GradCap className="h-10 w-10 text-[#ff6b35] mb-2" />
                 <CardTitle className="text-white">Academic Partnerships</CardTitle>
               </CardHeader>
               <CardContent>
@@ -565,7 +565,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              <span className="text-white">Measurable</span> <span className="text-[#4c12ef]">Impact</span>
+              <span className="text-white">Measurable</span> <span className="text-[#ff6b35]">Impact</span>
             </h2>
             <p className="text-xl text-gray-200">
               Real results from schools using Bakame AI
@@ -574,26 +574,26 @@ const Index = () => {
           
           <div className="grid md:grid-cols-4 gap-8 mb-16">
             <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-5xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>
-                <AnimatedCounter end="50000" />+
+              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 107, 53, 0.5)'}}>
+                Thousands
               </div>
-              <p className="text-gray-200 text-lg">Students Served</p>
+              <p className="text-gray-200 text-lg">Students Empowered</p>
             </div>
             <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-5xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>
-                <AnimatedCounter end="85" />%
+              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 107, 53, 0.5)'}}>
+                Significant
               </div>
               <p className="text-gray-200 text-lg">Confidence Improvement</p>
             </div>
             <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-5xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>
-                <AnimatedCounter end="200" />+
+              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 107, 53, 0.5)'}}>
+                Multiple
               </div>
-              <p className="text-gray-200 text-lg">Schools Deployed</p>
+              <p className="text-gray-200 text-lg">Partner Schools</p>
             </div>
             <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-5xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>
-                <AnimatedCounter end="95" />%
+              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 107, 53, 0.5)'}}>
+                High
               </div>
               <p className="text-gray-200 text-lg">Teacher Satisfaction</p>
             </div>
@@ -609,22 +609,22 @@ const Index = () => {
                   <ul className="space-y-3">
                     <li className="flex items-center text-gray-300">
                       <TrendingUp className="mr-3 h-5 w-5 text-gray-400" />
-                      30% reduction in tutoring costs
+                      Significant reduction in tutoring costs
                     </li>
                     <li className="flex items-center text-gray-300">
                       <TrendingUp className="mr-3 h-5 w-5 text-gray-400" />
-                      2x faster language proficiency gains
+                      Accelerated language proficiency gains
                     </li>
                     <li className="flex items-center text-gray-300">
                       <TrendingUp className="mr-3 h-5 w-5 text-gray-400" />
-                      40% increase in student engagement
+                      Measurable increase in student engagement
                     </li>
                   </ul>
                 </div>
                 <div className="text-center">
-                  <div className="text-6xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>3.2x</div>
+                  <div className="text-4xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 107, 53, 0.5)'}}>Strong</div>
                   <p className="text-xl text-gray-200">Return on Investment</p>
-                  <p className="text-sm text-gray-300 mt-2">Average across all schools</p>
+                  <p className="text-sm text-gray-300 mt-2">Proven value for schools</p>
                 </div>
               </div>
             </CardContent>
@@ -666,9 +666,9 @@ const Index = () => {
           </div>
           
           <p className="text-gray-400">
-            Or call us directly at{' '}
-            <a href="tel:+250788888888" className="text-gray-400 hover:text-gray-300">
-              +250 788 888 888
+            Or email us at{' '}
+            <a href="mailto:happy@bakame.org" className="text-gray-400 hover:text-gray-300">
+              happy@bakame.org
             </a>
           </p>
         </div>
@@ -686,7 +686,7 @@ const Index = () => {
               <div className="flex space-x-4">
                 <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
                   <Award className="mr-1 h-3 w-3" />
-                  EdTech Award 2024
+                  CREATE Award 2025
                 </Badge>
               </div>
             </div>
