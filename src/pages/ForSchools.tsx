@@ -122,7 +122,7 @@ const ForSchools = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
-              onClick={() => navigate("/government-demo")}
+              onClick={() => navigate("/demo-scheduling")}
               className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4"
               data-testid="button-get-quote"
             >
@@ -148,7 +148,7 @@ const ForSchools = () => {
           Proven ROI & Impact Metrics
         </h2>
         <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
-          <Card className="text-center bg-bg-white text-black hover:bg-gray-200-to-br from-gray-500/10 to-gray-500/10 border-gray-500/30">
+          <Card className="text-center bg-gradient-to-br from-gray-500/10 to-gray-500/10 border-gray-500/30">
             <CardContent className="pt-6">
               <div className="text-4xl font-bold text-gray-600 mb-2">
                 {roiMetrics.teacherHours}+ hrs
@@ -156,7 +156,7 @@ const ForSchools = () => {
               <p className="text-sm text-muted-foreground">Teacher time saved monthly</p>
             </CardContent>
           </Card>
-          <Card className="text-center bg-bg-white text-black hover:bg-gray-200-to-br from-green-500/10 to-emerald-500/10 border-green-500/30">
+          <Card className="text-center bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-500/30">
             <CardContent className="pt-6">
               <div className="text-4xl font-bold text-green-600 mb-2">
                 {roiMetrics.costSavings}%
@@ -164,7 +164,7 @@ const ForSchools = () => {
               <p className="text-sm text-muted-foreground">Cost reduction in first year</p>
             </CardContent>
           </Card>
-          <Card className="text-center bg-bg-white text-black hover:bg-gray-200-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
+          <Card className="text-center bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
             <CardContent className="pt-6">
               <div className="text-4xl font-bold text-purple-600 mb-2">
                 {roiMetrics.studentImprovement}%
@@ -172,7 +172,7 @@ const ForSchools = () => {
               <p className="text-sm text-muted-foreground">Average score improvement</p>
             </CardContent>
           </Card>
-          <Card className="text-center bg-bg-white text-black hover:bg-gray-200-to-br from-orange-500/10 to-red-500/10 border-orange-500/30">
+          <Card className="text-center bg-gradient-to-br from-orange-500/10 to-red-500/10 border-orange-500/30">
             <CardContent className="pt-6">
               <div className="text-4xl font-bold text-orange-600 mb-2">
                 {roiMetrics.parentSatisfaction}%
@@ -183,7 +183,7 @@ const ForSchools = () => {
         </div>
 
         {/* ROI Calculator Preview */}
-        <Card className="max-w-3xl mx-auto border-gray-500/30 bg-bg-white text-black hover:bg-gray-200-to-br from-gray-500/5 to-gray-500/5">
+        <Card className="max-w-3xl mx-auto border-gray-500/30 bg-gradient-to-br from-gray-500/5 to-gray-500/5">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <DollarSign className="h-5 w-5 text-gray-600" />
@@ -202,7 +202,7 @@ const ForSchools = () => {
               </div>
             </div>
             <Button 
-              className="w-full mt-6 bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600 text-white"
+              className="w-full mt-6 bg-gradient-to-r from-gray-600 to-gray-600 text-white hover:opacity-90"
               onClick={() => navigate("/pricing")}
               data-testid="button-full-calculator"
             >
@@ -220,7 +220,7 @@ const ForSchools = () => {
         </h2>
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 relative">
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600" style={{ transform: "translateY(-50%)" }} />
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-gray-600 to-gray-600" style={{ transform: "translateY(-50%)" }} />
             
             {[
               { week: "Week 1", title: "Discovery & Planning", icon: Target, description: "Assess needs, map curriculum, set success metrics" },
@@ -236,7 +236,7 @@ const ForSchools = () => {
                   }`}
                 >
                   <CardHeader className="text-center">
-                    <div className="w-12 h-12 bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600 rounded-full flex items-center justify-center mx-auto mb-3 text-white relative z-10">
+                    <div className="w-12 h-12 bg-gradient-to-r from-gray-600 to-gray-600 rounded-full flex items-center justify-center mx-auto mb-3 text-white relative z-10">
                       <step.icon className="h-6 w-6" />
                     </div>
                     <Badge variant="outline" className="mb-2">{step.week}</Badge>
@@ -513,7 +513,7 @@ const ForSchools = () => {
                 <Button 
                   className={`w-full mt-6 ${
                     tier.popular 
-                      ? 'bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600 text-white' 
+                      ? 'bg-gradient-to-r from-gray-600 to-gray-600 text-white' 
                       : 'variant-outline'
                   }`}
                   onClick={() => navigate("/demo-scheduling")}
@@ -569,7 +569,7 @@ const ForSchools = () => {
                 <CardDescription>{study.students}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="p-3 bg-bg-white text-black hover:bg-gray-200-to-r from-green-500/10 to-emerald-500/10 rounded-lg">
+                <div className="p-3 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg">
                   <p className="text-sm font-medium text-green-600">{study.results}</p>
                 </div>
                 <blockquote className="italic text-sm text-muted-foreground">
@@ -589,7 +589,7 @@ const ForSchools = () => {
         </h2>
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="bg-bg-white text-black hover:bg-gray-200-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
+            <Card className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-purple-600" />
@@ -618,7 +618,7 @@ const ForSchools = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-bg-white text-black hover:bg-gray-200-to-br from-gray-500/10 to-gray-500/10 border-gray-500/30">
+            <Card className="bg-gradient-to-br from-gray-500/10 to-gray-500/10 border-gray-500/30">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-gray-600" />
@@ -652,7 +652,7 @@ const ForSchools = () => {
 
       {/* CTA Section */}
       <section className="container mx-auto px-6 py-20">
-        <div className="max-w-4xl mx-auto text-center bg-bg-white text-black hover:bg-gray-200-to-r from-gray-600 to-gray-600 rounded-2xl p-12 text-white">
+        <div className="max-w-4xl mx-auto text-center bg-gradient-to-r from-gray-600 to-gray-600 rounded-2xl p-12 text-white">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Transform Your School's English Program?
           </h2>
@@ -662,7 +662,7 @@ const ForSchools = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              onClick={() => navigate("/government-demo")}
+              onClick={() => navigate("/demo-scheduling")}
               className="bg-white text-gray-600 hover:bg-gray-100"
               data-testid="button-request-proposal"
             >

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Trophy, Gamepad2, Target, Rocket, Star, Users, TrendingUp, Zap, Medal, Heart, Sparkles, Volume2, MessageSquare, Play, ChevronRight } from "lucide-react";
+import { Trophy, Gamepad2, Target, Rocket, Star, Users, TrendingUp, Zap, Medal, Heart, Sparkles, Volume2, MessageSquare, Play, ChevronRight, BookOpen, Crown, Check, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,12 +12,12 @@ const ForStudents = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(65);
   const [achievements, setAchievements] = useState([
-    { unlocked: true, name: "First Steps", icon: "🎯" },
-    { unlocked: true, name: "Word Master", icon: "📚" },
-    { unlocked: true, name: "Conversation Pro", icon: "💬" },
-    { unlocked: false, name: "Grammar Guru", icon: "🏆" },
-    { unlocked: false, name: "Native Speaker", icon: "🌟" },
-    { unlocked: false, name: "English Champion", icon: "👑" }
+    { unlocked: true, name: "First Steps", icon: Target },
+    { unlocked: true, name: "Word Master", icon: BookOpen },
+    { unlocked: true, name: "Conversation Pro", icon: MessageSquare },
+    { unlocked: false, name: "Grammar Guru", icon: Trophy },
+    { unlocked: false, name: "Native Speaker", icon: Star },
+    { unlocked: false, name: "English Champion", icon: Crown }
   ]);
 
   useEffect(() => {
@@ -50,14 +50,12 @@ const ForStudents = () => {
       <section className="relative z-10 container mx-auto px-6 py-20 text-center">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center mb-6 space-x-2">
-            {["🎮", "🎯", "🏆", "🌟", "🚀"].map((emoji, index) => (
-              <span
+            {[Gamepad2, Target, Trophy, Star, Rocket].map((Icon, index) => (
+              <Icon
                 key={index}
-                className="text-4xl animate-bounce"
+                className="h-10 w-10 text-white animate-bounce"
                 style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {emoji}
-              </span>
+              />
             ))}
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
@@ -87,8 +85,8 @@ const ForStudents = () => {
 
       {/* Gamification Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Your Learning Adventure Awaits! 🎮
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
+          Your Learning Adventure Awaits! <Gamepad2 className="h-9 w-9 text-white" />
         </h2>
         
         {/* Progress & Level Section */}
@@ -131,7 +129,7 @@ const ForStudents = () => {
                             : "bg-muted/50 border-border opacity-50"
                         }`}
                       >
-                        <span className="text-2xl">{achievement.icon}</span>
+                        <achievement.icon className="h-6 w-6 text-gray-500" />
                         <span className="text-sm font-medium">{achievement.name}</span>
                         {achievement.unlocked && <Sparkles className="h-4 w-4 text-gray-400" />}
                       </div>
@@ -199,8 +197,8 @@ const ForStudents = () => {
 
       {/* Interactive Learning Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16 bg-muted/30">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Practice Without Fear 💬
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
+          Practice Without Fear <MessageSquare className="h-9 w-9 text-white" />
         </h2>
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* AI Tutor Chat Preview */}
@@ -216,13 +214,13 @@ const ForStudents = () => {
             </div>
             <div className="space-y-4">
               <div className="bg-gray-500/10 rounded-lg p-3 max-w-[80%]">
-                <p className="text-sm">Hi! I'm Luna, your AI English buddy! 🌟 Want to practice talking about your hobbies?</p>
+                <p className="text-sm flex items-center gap-2">Hi! I'm Luna, your AI English buddy! <Star className="h-4 w-4 text-gray-500 inline" /> Want to practice talking about your hobbies?</p>
               </div>
               <div className="bg-muted rounded-lg p-3 max-w-[80%] ml-auto">
                 <p className="text-sm">Yes! I love playing soccer and video games!</p>
               </div>
               <div className="bg-gray-500/10 rounded-lg p-3 max-w-[80%]">
-                <p className="text-sm">That's awesome! Tell me about your favorite video game. What makes it special? 🎮</p>
+                <p className="text-sm flex items-center gap-2">That's awesome! Tell me about your favorite video game. What makes it special? <Gamepad2 className="h-4 w-4 text-gray-500 inline" /></p>
               </div>
               <div className="flex items-center gap-2 mt-4">
                 <Volume2 className="h-5 w-5 text-gray-500" />
@@ -280,7 +278,7 @@ const ForStudents = () => {
                           i < 3 ? "bg-gray-500" : "bg-muted"
                         }`}
                       >
-                        {i < 3 ? "✓" : ""}
+                        {i < 3 ? <Check className="h-4 w-4 text-white" /> : ""}
                       </div>
                     ))}
                   </div>
@@ -294,8 +292,8 @@ const ForStudents = () => {
 
       {/* Success Stories */}
       <section className="relative z-10 container mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Students Like You Are Succeeding! 🌟
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
+          Students Like You Are Succeeding! <Star className="h-9 w-9 text-white" />
         </h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {[
@@ -305,7 +303,7 @@ const ForStudents = () => {
               country: "Brazil",
               story: "I was too shy to speak English in class. After 3 months with Bakame AI, I won my school's English speech competition!",
               achievement: "From Shy to Confident",
-              avatar: "🧑‍🎓"
+              avatarColor: "bg-blue-500"
             },
             {
               name: "Priya S.",
@@ -313,7 +311,7 @@ const ForStudents = () => {
               country: "India",
               story: "The games make learning so fun! I don't even realize I'm studying. My grades went from C to A in just one semester!",
               achievement: "Grade Improvement",
-              avatar: "👩‍🎓"
+              avatarColor: "bg-purple-500"
             },
             {
               name: "Jin W.",
@@ -321,13 +319,15 @@ const ForStudents = () => {
               country: "China",
               story: "I love competing with friends on the leaderboard. We practice together every day and help each other improve!",
               achievement: "Team Learning Champion",
-              avatar: "👨‍🎓"
+              avatarColor: "bg-green-500"
             }
           ].map((story, index) => (
             <Card key={index} className="hover:scale-105 transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <span className="text-4xl">{story.avatar}</span>
+                  <div className={`${story.avatarColor} w-12 h-12 rounded-full flex items-center justify-center`}>
+                    <GraduationCap className="h-6 w-6 text-white" />
+                  </div>
                   <div>
                     <CardTitle className="text-lg">{story.name}</CardTitle>
                     <CardDescription>{story.age} • {story.country}</CardDescription>
@@ -352,8 +352,8 @@ const ForStudents = () => {
 
       {/* Interactive Elements Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16 bg-muted/30">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Cool Features You'll Love! 🚀
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
+          Cool Features You'll Love! <Rocket className="h-9 w-9 text-white" />
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {[
@@ -401,8 +401,8 @@ const ForStudents = () => {
         <div className="bg-gradient-to-r from-gray-500/20 via-gray-500/20 to-accent/20 rounded-3xl p-12 text-center border-2 border-gray-500/30 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-gray-500/5 to-gray-500/5 animate-pulse" />
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Start Your Adventure? 🎮
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 flex items-center justify-center gap-3">
+              Ready to Start Your Adventure? <Gamepad2 className="h-9 w-9 text-white" />
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Join millions of students learning English the fun way. No more boring textbooks - just games, friends, and AI buddies!
@@ -423,8 +423,10 @@ const ForStudents = () => {
                 Watch Demo Video
               </Button>
             </div>
-            <p className="mt-6 text-sm text-muted-foreground">
-              ✨ Free to start • 🎮 No boring lessons • 🏆 Win real prizes
+            <p className="mt-6 text-sm text-muted-foreground flex items-center justify-center gap-4">
+              <span className="flex items-center gap-1"><Sparkles className="h-4 w-4" /> Free to start</span> • 
+              <span className="flex items-center gap-1"><Gamepad2 className="h-4 w-4" /> No boring lessons</span> • 
+              <span className="flex items-center gap-1"><Trophy className="h-4 w-4" /> Win real prizes</span>
             </p>
           </div>
         </div>

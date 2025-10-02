@@ -20,7 +20,9 @@ import {
   BarChart3,
   PhoneOff,
   Type,
-  Loader2
+  Loader2,
+  Trophy,
+  Lightbulb
 } from 'lucide-react';
 
 const SUBJECTS = [
@@ -725,7 +727,7 @@ What specific area would you like to focus on today?`;
                   <div className="space-y-2">
                     {subjectProgress.recentAchievements.map((achievement, index) => (
                       <div key={index} className="flex items-center gap-2 p-2 rounded bg-accent/10">
-                        <div className="text-accent">🏆</div>
+                        <Trophy className="h-4 w-4 text-accent" />
                         <span className="text-sm">{achievement}</span>
                       </div>
                     ))}
@@ -1122,7 +1124,7 @@ What specific area would you like to focus on today?`;
                     {/* Learning Insight */}
                     {message.learningInsight && (
                       <div className="mt-2 p-3 bg-muted/30 rounded text-xs text-muted-foreground border-l-2 border-primary">
-                        <span className="font-medium">💡 Learning Insight:</span> {message.learningInsight}
+                        <span className="font-medium flex items-center gap-1"><Lightbulb className="h-4 w-4" /> Learning Insight:</span> {message.learningInsight}
                       </div>
                     )}
                     
