@@ -26,6 +26,9 @@ import TryDemo from "./pages/TryDemo";
 import Features from "./pages/Features";
 import Roadmap from "./pages/Roadmap";
 import Press from "./pages/Press";
+import ForStudents from "./pages/ForStudents";
+import ForTeachers from "./pages/ForTeachers";
+import ForSchools from "./pages/ForSchools";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +60,9 @@ const App = () => (
               <Route path="/features" element={<Features />} />
               <Route path="/roadmap" element={<Roadmap />} />
               <Route path="/press" element={<Press />} />
+              <Route path="/for-students" element={<ForStudents />} />
+              <Route path="/for-teachers" element={<ForTeachers />} />
+              <Route path="/for-schools" element={<ForSchools />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

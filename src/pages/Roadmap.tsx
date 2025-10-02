@@ -345,7 +345,7 @@ const Roadmap = () => {
               <Users className="h-5 w-5 text-gray-400" />
               <span className="text-gray-300">Community Votes:</span>
               <span className="text-2xl font-bold text-white">
-                <AnimatedCounter end={totalVotes} />
+                <AnimatedCounter end={totalVotes.toString()} />
               </span>
             </div>
             
@@ -658,7 +658,7 @@ const Roadmap = () => {
         </div>
       </footer>
 
-      <style jsx>{`
+      <style>{`
         .gradient-hero {
           background: linear-gradient(135deg, 
             rgba(139, 92, 246, 0.1) 0%,
