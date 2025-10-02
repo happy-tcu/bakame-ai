@@ -565,37 +565,37 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              Measurable <span className="gradient-text">Impact</span>
+              <span className="text-white">Measurable</span> <span className="text-[#4c12ef]">Impact</span>
             </h2>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-gray-200">
               Real results from schools using Bakame AI
             </p>
           </div>
           
           <div className="grid md:grid-cols-4 gap-8 mb-16">
-            <div className="text-center">
-              <div className="text-5xl font-bold gradient-text mb-2">
+            <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
+              <div className="text-5xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>
                 <AnimatedCounter end="50000" />+
               </div>
-              <p className="text-gray-400">Students Served</p>
+              <p className="text-gray-200 text-lg">Students Served</p>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold gradient-text mb-2">
+            <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
+              <div className="text-5xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>
                 <AnimatedCounter end="85" />%
               </div>
-              <p className="text-gray-400">Confidence Improvement</p>
+              <p className="text-gray-200 text-lg">Confidence Improvement</p>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold gradient-text mb-2">
+            <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
+              <div className="text-5xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>
                 <AnimatedCounter end="200" />+
               </div>
-              <p className="text-gray-400">Schools Deployed</p>
+              <p className="text-gray-200 text-lg">Schools Deployed</p>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold gradient-text mb-2">
+            <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
+              <div className="text-5xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>
                 <AnimatedCounter end="95" />%
               </div>
-              <p className="text-gray-400">Teacher Satisfaction</p>
+              <p className="text-gray-200 text-lg">Teacher Satisfaction</p>
             </div>
           </div>
           
@@ -622,9 +622,9 @@ const Index = () => {
                   </ul>
                 </div>
                 <div className="text-center">
-                  <div className="text-6xl font-bold gradient-text mb-2">3.2x</div>
-                  <p className="text-xl text-gray-400">Return on Investment</p>
-                  <p className="text-sm text-gray-500 mt-2">Average across all schools</p>
+                  <div className="text-6xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 18, 239, 0.5)'}}>3.2x</div>
+                  <p className="text-xl text-gray-200">Return on Investment</p>
+                  <p className="text-sm text-gray-300 mt-2">Average across all schools</p>
                 </div>
               </div>
             </CardContent>
