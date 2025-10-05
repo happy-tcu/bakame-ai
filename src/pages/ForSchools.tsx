@@ -53,7 +53,7 @@ const ForSchools = () => {
     {
       name: "Starter",
       students: "Up to 500 students",
-      price: "$999",
+      price: "$99",
       features: [
         "Core AI tutoring platform",
         "Basic analytics dashboard",
@@ -65,7 +65,7 @@ const ForSchools = () => {
     {
       name: "Professional",
       students: "500-2000 students",
-      price: "$2,999",
+      price: "$499",
       popular: true,
       features: [
         "Everything in Starter, plus:",
