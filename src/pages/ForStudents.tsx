@@ -33,20 +33,27 @@ const ForStudents = () => {
   const { user } = useAuth();
   const [activeFeature, setActiveFeature] = useState(0);
   
-  // Fetch real user progress from the backend
-  const { data: progressData, isLoading } = useQuery({
+  // Fetch real user progress from the backend with error handling
+  const { data: progressData, isLoading: progressLoading, isError: progressError } = useQuery({
     queryKey: ['/api/progress'],
-    enabled: !!user
+    enabled: !!user,
+    retry: 1,
+    staleTime: 5 * 60 * 1000, // Consider data stale after 5 minutes
   });
 
-  const { data: sessionsData } = useQuery({
+  const { data: sessionsData, isLoading: sessionsLoading, isError: sessionsError } = useQuery({
     queryKey: ['/api/sessions'],
-    enabled: !!user
+    enabled: !!user,
+    retry: 1,
+    staleTime: 5 * 60 * 1000,
   });
 
   // Calculate real statistics from the backend data
   const userProgress = (progressData as any)?.progress || {};
   const sessions = (sessionsData as any)?.sessions || [];
+  
+  // Only show loading when user is authenticated and data is loading
+  const isLoading = user && (progressLoading || sessionsLoading);
   
   // Calculate current level based on XP (100 XP per level)
   const totalXP = userProgress.total_xp || 0;

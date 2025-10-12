@@ -28,23 +28,30 @@ const StudentDashboard = () => {
   const userName = user?.user_metadata?.name || "Student";
   const userInitials = userName.split(' ').map((n: string) => n[0]).join('').toUpperCase();
   
-  // Fetch real user progress from the backend
-  const { data: progressData, isLoading: progressLoading } = useQuery({
+  // Fetch real user progress from the backend with error handling
+  const { data: progressData, isLoading: progressLoading, isError: progressError } = useQuery({
     queryKey: ['/api/progress'],
-    enabled: !!user
+    enabled: !!user,
+    retry: 1,
+    staleTime: 5 * 60 * 1000, // Consider data stale after 5 minutes
   });
 
-  const { data: sessionsData, isLoading: sessionsLoading } = useQuery({
+  const { data: sessionsData, isLoading: sessionsLoading, isError: sessionsError } = useQuery({
     queryKey: ['/api/sessions'],
-    enabled: !!user
+    enabled: !!user,
+    retry: 1,
+    staleTime: 5 * 60 * 1000,
   });
   
-  const { data: flashcardsData } = useQuery({
+  const { data: flashcardsData, isError: flashcardsError } = useQuery({
     queryKey: ['/api/flashcards'],
-    enabled: !!user
+    enabled: !!user,
+    retry: 1,
+    staleTime: 5 * 60 * 1000,
   });
   
-  const isLoading = progressLoading || sessionsLoading;
+  // Only show loading when user is authenticated and data is loading
+  const isLoading = user && (progressLoading || sessionsLoading);
   
   // Get real data from the backend
   const userProgress = (progressData as any)?.progress || {};
