@@ -134,13 +134,7 @@ const ForStudents = () => {
                             : "bg-muted/50 border-border opacity-50"
                         }`}
                       >
-                        <AchievementPattern 
-                          unlocked={achievement.unlocked} 
-                          seed={achievement.seed} 
-                          size={24} 
-                        />
                         <span className="text-sm font-medium">{achievement.name}</span>
-                        {achievement.unlocked && <Starburst size={16} />}
                       </div>
                     ))}
                   </div>
