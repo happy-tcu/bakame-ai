@@ -440,7 +440,7 @@ const StudentDashboard = () => {
                     <div 
                       key={index}
                       className="flex items-center gap-4 p-4 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer"
-                      onClick={() => navigate('/try')}
+                      onClick={() => navigate('/contact')}
                       data-testid={`goal-${goal.type}-${index}`}
                     >
                       <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${

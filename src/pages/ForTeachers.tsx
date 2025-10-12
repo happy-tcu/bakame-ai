@@ -74,11 +74,11 @@ const ForTeachers = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
-              onClick={() => navigate("/try")}
+              onClick={() => navigate("/contact")}
               className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4"
             >
               <Play className="mr-2 h-5 w-5" />
-              See It In Action
+              Contact Sales
             </Button>
             <Button
               onClick={() => navigate("/demo-scheduling")}
@@ -282,11 +282,11 @@ const ForTeachers = () => {
               Schedule Your Demo
             </Button>
             <Button
-              onClick={() => navigate("/try")}
+              onClick={() => navigate("/contact")}
               variant="outline"
               className="text-lg px-8 py-4"
             >
-              Try It Free
+              Contact Sales
             </Button>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">

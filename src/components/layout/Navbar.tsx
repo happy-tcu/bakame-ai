@@ -237,14 +237,14 @@ const Navbar = () => {
               </div>
 
               <Link 
-                to="/try" 
+                to="/demo-scheduling" 
                 className={cn(
                   "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/try" && "text-white"
+                  location.pathname === "/demo-scheduling" && "text-white"
                 )}
-                data-testid="link-try-demo"
+                data-testid="link-schedule-demo"
               >
-                Try Demo
+                Schedule Demo
               </Link>
 
               <Link 
@@ -333,9 +333,9 @@ const Navbar = () => {
                         </div>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => navigate('/try')} data-testid="menu-item-try-demo">
-                        <Play className="mr-2 h-4 w-4" />
-                        <span>Try Demo</span>
+                      <DropdownMenuItem onClick={() => navigate('/demo-scheduling')} data-testid="menu-item-schedule-demo">
+                        <Calendar className="mr-2 h-4 w-4" />
+                        <span>Schedule Demo</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => navigate('/contact')} data-testid="menu-item-contact-sales">
                         <Phone className="mr-2 h-4 w-4" />
@@ -421,12 +421,12 @@ const Navbar = () => {
               </div>
 
               <Link 
-                to="/try" 
+                to="/demo-scheduling" 
                 onClick={closeMenu} 
                 className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-try-demo"
+                data-testid="link-mobile-schedule-demo"
               >
-                Try Demo
+                Schedule Demo
               </Link>
 
               <Link 

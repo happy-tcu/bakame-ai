@@ -278,13 +278,12 @@ const Roadmap = () => {
               <Link to="/features" className="text-gray-300 hover:text-white transition-colors">Features</Link>
               <Link to="/pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</Link>
               <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link>
-              <ThemeToggle />
               <Button 
-                onClick={() => navigate('/try')} 
+                onClick={() => navigate('/contact')} 
                 className="bg-white text-black hover:bg-gray-200"
-                data-testid="button-try-features"
+                data-testid="button-contact-sales"
               >
-                Try Features
+                Contact Sales
               </Button>
             </div>
 
@@ -303,12 +302,11 @@ const Roadmap = () => {
             <Link to="/features" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Features</Link>
             <Link to="/pricing" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Pricing</Link>
             <Link to="/contact" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Contact</Link>
-            <ThemeToggle />
             <Button 
-              onClick={() => { closeMenu(); navigate('/try'); }}
+              onClick={() => { closeMenu(); navigate('/contact'); }}
               className="gradient-gray-gray text-white"
             >
-              Try Features
+              Contact Sales
             </Button>
           </div>
         </div>

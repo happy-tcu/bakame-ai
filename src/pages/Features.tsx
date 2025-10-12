@@ -275,13 +275,12 @@ const Features = () => {
           <Link to="/" className="hidden md:block text-foreground hover:text-white transition-colors">
             Home
           </Link>
-          <Link to="/try" className="hidden md:block text-foreground hover:text-white transition-colors">
-            Try Demo
+          <Link to="/demo-scheduling" className="hidden md:block text-foreground hover:text-white transition-colors">
+            Schedule Demo
           </Link>
           <Link to="/pricing" className="hidden md:block text-foreground hover:text-white transition-colors">
             Pricing
           </Link>
-          <ThemeToggle />
           <Button 
             onClick={() => setIsEarlyAccessOpen(true)}
             className="bg-white text-black hover:bg-gray-200 transition-all"
@@ -390,12 +389,12 @@ const Features = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
-                onClick={() => navigate('/try')}
+                onClick={() => navigate('/contact')}
                 size="lg"
                 className="bg-gradient-to-r from-white to-gray-300 text-white-foreground hover:opacity-90 transition-all transform hover:scale-105"
               >
                 <Gamepad2 className="mr-2 h-5 w-5" />
-                Try Demo Free
+                Contact Sales
               </Button>
               <Button 
                 onClick={() => setIsEarlyAccessOpen(true)}

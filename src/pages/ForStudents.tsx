@@ -122,10 +122,10 @@ const ForStudents = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
-              onClick={() => navigate("/try")}
+              onClick={() => navigate("/contact")}
               className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4 transform hover:scale-105 transition-all"
             >
-              Start Learning Now
+              Contact Sales
             </Button>
             <Button
               variant="outline"
@@ -311,11 +311,11 @@ const ForStudents = () => {
             </p>
             <div className="flex justify-center">
               <Button
-                onClick={() => navigate("/try")}
+                onClick={() => navigate("/demo-scheduling")}
                 className="bg-gradient-to-r from-gray-500 to-gray-500 text-white hover:opacity-90 text-lg px-8 py-4 transform hover:scale-105 transition-all flex items-center"
               >
                 <DynamicWave size={20} className="mr-2" />
-                Start Learning Free
+                Schedule Demo
               </Button>
             </div>
             <p className="mt-6 text-sm text-muted-foreground flex items-center justify-center gap-4">

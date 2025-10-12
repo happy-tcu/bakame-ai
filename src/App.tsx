@@ -21,7 +21,7 @@ import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import EarlyAccess from "./pages/EarlyAccess";
 import DemoScheduling from "./pages/DemoScheduling";
-import TryDemo from "./pages/TryDemo";
+// import TryDemo from "./pages/TryDemo"; // Removed - no mock demos
 import Features from "./pages/Features";
 import Roadmap from "./pages/Roadmap";
 import Press from "./pages/Press";
@@ -57,7 +57,9 @@ const App = () => (
               <Route path="/early-access" element={<EarlyAccess />} />
               <Route path="/pricing" element={<Navigate to="/contact" replace />} />
               <Route path="/demo-scheduling" element={<DemoScheduling />} />
-              <Route path="/try" element={<TryDemo />} />
+              {/* Removed TryDemo route - no mock demos, redirecting to contact */}
+              <Route path="/try" element={<Navigate to="/contact" replace />} />
+              <Route path="/resources" element={<Navigate to="/contact" replace />} />
               <Route path="/features" element={<Features />} />
               <Route path="/roadmap" element={<Roadmap />} />
               <Route path="/press" element={<Press />} />

@@ -108,13 +108,13 @@ const Index = () => {
                 Book a Demo
               </Button>
               <Button 
-                onClick={() => navigate('/try')}
+                onClick={() => navigate('/contact')}
                 variant="outline" 
                 className="border-white/20 text-white hover:bg-white/10 text-lg px-8 py-6 hover-depth"
-                data-testid="button-try-features"
+                data-testid="button-contact-sales"
               >
                 <Play className="mr-2 h-5 w-5" />
-                Try Features
+                Contact Sales
               </Button>
             </div>
 
@@ -301,11 +301,11 @@ const Index = () => {
                     </div>
                   </div>
                   <Button 
-                    onClick={() => navigate('/try')}
+                    onClick={() => navigate('/contact')}
                     className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                   >
                     <TestTube className="mr-2 h-4 w-4" />
-                    Test Your Speaking
+                    Contact Sales
                   </Button>
                 </div>
               </CardContent>
@@ -333,11 +333,11 @@ const Index = () => {
                     </div>
                   </div>
                   <Button 
-                    onClick={() => navigate('/try')}
+                    onClick={() => navigate('/demo-scheduling')}
                     className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                   >
                     <Volume2 className="mr-2 h-4 w-4" />
-                    Try Pronunciation
+                    Schedule Demo
                   </Button>
                 </div>
               </CardContent>
@@ -359,11 +359,11 @@ const Index = () => {
                     </div>
                   </div>
                   <Button 
-                    onClick={() => navigate('/try')}
+                    onClick={() => navigate('/contact')}
                     className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                   >
                     <MessageSquare className="mr-2 h-4 w-4" />
-                    Start Conversation
+                    Contact Sales
                   </Button>
                 </div>
               </CardContent>
@@ -663,14 +663,14 @@ const Index = () => {
               <ul className="space-y-2">
                 <li><Link to="/features" className="text-gray-400 hover:text-white transition-colors">Features</Link></li>
                 <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">NGO Solutions</Link></li>
-                <li><Link to="/try" className="text-gray-400 hover:text-white transition-colors">Try Demo</Link></li>
+                <li><Link to="/demo-scheduling" className="text-gray-400 hover:text-white transition-colors">Schedule Demo</Link></li>
               </ul>
             </div>
             
             <div>
               <h3 className="text-white font-semibold mb-4">Resources</h3>
               <ul className="space-y-2">
-                <li><Link to="/resources" className="text-gray-400 hover:text-white transition-colors">Learning Hub</Link></li>
+                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
                 <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link></li>
                 <li><Link to="/support" className="text-gray-400 hover:text-white transition-colors">Support</Link></li>
                 <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>

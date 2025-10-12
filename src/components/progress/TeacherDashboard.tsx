@@ -232,7 +232,7 @@ const TeacherDashboard = () => {
                   <Button 
                     variant="outline" 
                     className="h-auto flex-col py-4"
-                    onClick={() => navigate("/try")}
+                    onClick={() => navigate("/contact")}
                   >
                     <BookOpen className="h-5 w-5 mb-2" />
                     <span className="text-sm">Create Lesson</span>
@@ -240,7 +240,7 @@ const TeacherDashboard = () => {
                   <Button 
                     variant="outline" 
                     className="h-auto flex-col py-4"
-                    onClick={() => navigate("/try")}
+                    onClick={() => navigate("/contact")}
                   >
                     <FileText className="h-5 w-5 mb-2" />
                     <span className="text-sm">Grade Work</span>
@@ -248,7 +248,7 @@ const TeacherDashboard = () => {
                   <Button 
                     variant="outline" 
                     className="h-auto flex-col py-4"
-                    onClick={() => navigate("/try")}
+                    onClick={() => navigate("/contact")}
                   >
                     <BarChart3 className="h-5 w-5 mb-2" />
                     <span className="text-sm">View Reports</span>
@@ -256,7 +256,7 @@ const TeacherDashboard = () => {
                   <Button 
                     variant="outline" 
                     className="h-auto flex-col py-4"
-                    onClick={() => navigate("/try")}
+                    onClick={() => navigate("/contact")}
                   >
                     <Calendar className="h-5 w-5 mb-2" />
                     <span className="text-sm">Schedule Class</span>

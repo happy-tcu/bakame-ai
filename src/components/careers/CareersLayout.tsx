@@ -12,7 +12,7 @@ const CareersLayout = ({ children }: CareersLayoutProps) => {
         <div className="hidden md:flex space-x-8">
           <a href="/" className="text-gray-300 hover:text-white transition-colors duration-200">Home</a>
           <a href="/blog" className="text-gray-300 hover:text-white transition-colors duration-200">Blog</a>
-          <a href="/resources" className="text-gray-300 hover:text-white transition-colors duration-200">Resources</a>
+          <a href="/contact" className="text-gray-300 hover:text-white transition-colors duration-200">Contact</a>
           <a href="/team" className="text-white font-medium border-b-2 border-blue-500">Careers</a>
         </div>
       </nav>
