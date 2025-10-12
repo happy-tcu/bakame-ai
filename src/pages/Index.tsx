@@ -118,15 +118,7 @@ const Index = () => {
               </Button>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-6">
-              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
-                <Sparkles className="mr-2 h-4 w-4" />
-                Proven Confidence Building
-              </Badge>
-              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
-                <Users className="mr-2 h-4 w-4" />
-                Thousands of Students Served
-              </Badge>
+            <div className="flex justify-center">
               <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
                 <WifiOff className="mr-2 h-4 w-4" />
                 Works Offline
