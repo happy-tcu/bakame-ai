@@ -504,7 +504,7 @@ const Index = () => {
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              Research & <span className="text-[#ffa366]">Innovation</span>
+              Research & <span className="text-[#4c9dff]">Innovation</span>
             </h2>
             <p className="text-xl text-gray-200">
               Advancing the frontier of AI-powered education
@@ -514,7 +514,7 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <FlaskConical className="h-10 w-10 text-[#ffa366] mb-2" />
+                <FlaskConical className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">AI Research Lab</CardTitle>
               </CardHeader>
               <CardContent>
@@ -529,7 +529,7 @@ const Index = () => {
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <Lightbulb className="h-10 w-10 text-[#ffa366] mb-2" />
+                <Lightbulb className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">Learning Breakthroughs</CardTitle>
               </CardHeader>
               <CardContent>
@@ -544,7 +544,7 @@ const Index = () => {
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
               <CardHeader>
-                <GradCap className="h-10 w-10 text-[#ffa366] mb-2" />
+                <GradCap className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">Academic Partnerships</CardTitle>
               </CardHeader>
               <CardContent>
@@ -565,7 +565,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              <span className="text-white">Measurable</span> <span className="text-[#ffa366]">Impact</span>
+              <span className="text-white">Measurable</span> <span className="text-[#4c9dff]">Impact</span>
             </h2>
             <p className="text-xl text-gray-200">
               Real results from schools using Bakame AI
@@ -574,25 +574,25 @@ const Index = () => {
           
           <div className="grid md:grid-cols-4 gap-8 mb-16">
             <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 163, 102, 0.5)'}}>
+              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>
                 Thousands
               </div>
               <p className="text-gray-200 text-lg">Students Empowered</p>
             </div>
             <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 163, 102, 0.5)'}}>
+              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>
                 Significant
               </div>
               <p className="text-gray-200 text-lg">Confidence Improvement</p>
             </div>
             <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 163, 102, 0.5)'}}>
+              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>
                 Multiple
               </div>
               <p className="text-gray-200 text-lg">Partner Schools</p>
             </div>
             <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 163, 102, 0.5)'}}>
+              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>
                 High
               </div>
               <p className="text-gray-200 text-lg">Teacher Satisfaction</p>
@@ -622,7 +622,7 @@ const Index = () => {
                   </ul>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(255, 163, 102, 0.5)'}}>Strong</div>
+                  <div className="text-4xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>Strong</div>
                   <p className="text-xl text-gray-200">Return on Investment</p>
                   <p className="text-sm text-gray-300 mt-2">Proven value for schools</p>
                 </div>
