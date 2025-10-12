@@ -1,8 +1,7 @@
 import ProgressChart from './ProgressChart';
+import SkillsRadar from './SkillsRadar';
 import LearningRoadmap from './LearningRoadmap';
 import StatsCards from './StatsCards';
-import { useQuery } from '@tanstack/react-query';
-import { useAuth } from '@/components/auth/AuthContext';
 
 interface ProgressDashboardProps {
   streakDays?: number;
@@ -19,28 +18,6 @@ const ProgressDashboard = ({
   lessonsCompleted = 0,
   lastPracticeDate
 }: ProgressDashboardProps) => {
-  const { user } = useAuth();
-  
-  // Fetch real data if not provided via props
-  const { data: progressData } = useQuery({
-    queryKey: ['/api/progress'],
-    enabled: !!user
-  });
-  
-  const { data: sessionsData } = useQuery({
-    queryKey: ['/api/sessions'],
-    enabled: !!user
-  });
-  
-  const progress = (progressData as any)?.progress || {};
-  const sessions = (sessionsData as any)?.sessions || [];
-  
-  // Use props if provided, otherwise use fetched data
-  const actualTotalXP = totalXP || progress.total_xp || 0;
-  const actualStreakDays = streakDays || progress.streak_days || 0;
-  const actualLessonsCompleted = lessonsCompleted || sessions.length || 0;
-  const actualCurrentLevel = currentLevel || Math.floor(actualTotalXP / 100) || 1;
-  
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -53,19 +30,20 @@ const ProgressDashboard = ({
 
       {/* Stats Overview */}
       <StatsCards 
-        streakDays={actualStreakDays}
-        totalXP={actualTotalXP}
-        currentLevel={actualCurrentLevel}
-        lessonsCompleted={actualLessonsCompleted}
+        streakDays={streakDays}
+        totalXP={totalXP}
+        currentLevel={currentLevel}
+        lessonsCompleted={lessonsCompleted}
       />
 
-      {/* Charts Section - Removed SkillsRadar, now full width ProgressChart */}
-      <div className="w-full">
-        <ProgressChart sessions={sessions} progress={progress} />
+      {/* Charts Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <ProgressChart />
+        <SkillsRadar />
       </div>
 
       {/* Learning Roadmap */}
-      <LearningRoadmap totalXP={actualTotalXP} currentLevel={actualCurrentLevel} />
+      <LearningRoadmap />
 
       {/* Quick Actions */}
       <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">

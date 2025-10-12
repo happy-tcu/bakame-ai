@@ -7,7 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import ProgressDashboard from "@/components/progress/ProgressDashboard";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/components/auth/AuthContext";
 import { Loader2 } from "lucide-react";
 import { 
@@ -31,107 +31,22 @@ import "../styles/no-animations.css";
 const ForStudents = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const queryClient = useQueryClient();
   const [activeFeature, setActiveFeature] = useState(0);
   
-  // Debug logging for auth state and force online status
-  useEffect(() => {
-    console.log('[ForStudents] Component mounted/updated');
-    console.log('[ForStudents] User state:', user);
-    console.log('[ForStudents] User exists (enabled):', !!user);
-    
-    // Check online manager status
-    const isOnline = navigator.onLine;
-    console.log('[ForStudents] Browser online status:', isOnline);
-    console.log('[ForStudents] Window focused:', document.hasFocus());
-    
-    // Force queries to refetch if user exists
-    if (user) {
-      console.log('[ForStudents] User exists, attempting to invalidate and refetch queries');
-      // Invalidate and refetch queries
-      queryClient.invalidateQueries({ queryKey: ['/api/progress'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/sessions'] });
-      queryClient.refetchQueries({ queryKey: ['/api/progress'] });
-      queryClient.refetchQueries({ queryKey: ['/api/sessions'] });
-    }
-  }, [user, queryClient]);
-  
-  // Fetch real user progress from the backend with error handling
-  const { 
-    data: progressData, 
-    isLoading: progressLoading, 
-    isError: progressError,
-    error: progressErrorDetails,
-    status: progressStatus,
-    fetchStatus: progressFetchStatus
-  } = useQuery({
+  // Fetch real user progress from the backend
+  const { data: progressData, isLoading } = useQuery({
     queryKey: ['/api/progress'],
-    enabled: !!user,
-    retry: 1,
-    staleTime: 5 * 60 * 1000, // Consider data stale after 5 minutes
-    refetchOnMount: true,
-    refetchOnWindowFocus: false,
-    networkMode: 'always', // Force query to run even if offline
+    enabled: !!user
   });
 
-  const { 
-    data: sessionsData, 
-    isLoading: sessionsLoading, 
-    isError: sessionsError,
-    error: sessionsErrorDetails,
-    status: sessionsStatus,
-    fetchStatus: sessionsFetchStatus
-  } = useQuery({
+  const { data: sessionsData } = useQuery({
     queryKey: ['/api/sessions'],
-    enabled: !!user,
-    retry: 1,
-    staleTime: 5 * 60 * 1000,
-    refetchOnMount: true,
-    refetchOnWindowFocus: false,
-    networkMode: 'always', // Force query to run even if offline
+    enabled: !!user
   });
-  
-  // Debug logging for query states
-  useEffect(() => {
-    console.log('[ForStudents] Progress Query Debug:', {
-      enabled: !!user,
-      status: progressStatus,
-      fetchStatus: progressFetchStatus,
-      isLoading: progressLoading,
-      isError: progressError,
-      error: progressErrorDetails,
-      data: progressData
-    });
-    
-    console.log('[ForStudents] Sessions Query Debug:', {
-      enabled: !!user,
-      status: sessionsStatus,
-      fetchStatus: sessionsFetchStatus,
-      isLoading: sessionsLoading,
-      isError: sessionsError,
-      error: sessionsErrorDetails,
-      data: sessionsData
-    });
-  }, [
-    user,
-    progressStatus,
-    progressFetchStatus,
-    progressLoading,
-    progressError,
-    progressData,
-    sessionsStatus,
-    sessionsFetchStatus,
-    sessionsLoading,
-    sessionsError,
-    sessionsData
-  ]);
 
   // Calculate real statistics from the backend data
   const userProgress = (progressData as any)?.progress || {};
   const sessions = (sessionsData as any)?.sessions || [];
-  
-  // Only show loading when user is authenticated and data is loading
-  const isLoading = user && (progressLoading || sessionsLoading);
   
   // Calculate current level based on XP (100 XP per level)
   const totalXP = userProgress.total_xp || 0;

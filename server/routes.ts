@@ -176,17 +176,6 @@ router.post('/api/sessions', authMiddleware, async (req: AuthRequest, res) => {
   }
 });
 
-// Get user sessions
-router.get('/api/sessions', authMiddleware, async (req: AuthRequest, res) => {
-  try {
-    const sessions = await storage.getSessionsByUser(req.user!.id);
-    res.json({ sessions });
-  } catch (error) {
-    console.error('Error fetching sessions:', error);
-    res.status(500).json({ error: 'Failed to fetch sessions' });
-  }
-});
-
 // Get user progress
 router.get('/api/progress', authMiddleware, async (req: AuthRequest, res) => {
   try {
