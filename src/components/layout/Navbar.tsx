@@ -2,15 +2,13 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   Menu, X, ChevronDown, Calendar, Play, Users, GraduationCap, School, Building,
-  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home, LogOut, User,
-  BarChart, Settings, BookOpen as BookOpenIcon, Activity, UserCog, ShieldCheck, ClipboardList
+  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home, LogOut, User
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { useAuth } from '@/components/auth/AuthContext';
 import { AuthModal } from '@/components/auth/AuthModal';
-import { getUserRole } from '@/utils/roleUtils';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,7 +32,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, signOut } = useAuth();
-  const userRole = getUserRole(user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
@@ -124,7 +121,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200">
+      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -135,7 +132,7 @@ const Navbar = () => {
                   className="h-8 w-auto"
                 />
               </Link>
-              <Badge variant="outline" className="border-gray-300 text-gray-700">
+              <Badge variant="outline" className="border-white/30 text-white">
                 v2.0
               </Badge>
             </div>
@@ -144,8 +141,8 @@ const Navbar = () => {
               <Link 
                 to="/" 
                 className={cn(
-                  "text-gray-600 hover:text-gray-900 transition-colors",
-                  location.pathname === "/" && "text-gray-900"
+                  "text-gray-300 hover:text-white transition-colors",
+                  location.pathname === "/" && "text-white"
                 )}
                 data-testid="link-home-nav"
               >
@@ -155,25 +152,25 @@ const Navbar = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-600 hover:text-gray-900 hover:bg-transparent data-[state=open]:bg-transparent">
+                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-transparent data-[state=open]:bg-transparent">
                       Solutions
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="w-[400px] bg-white backdrop-blur-xl border border-gray-200 shadow-lg">
+                      <div className="w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10">
                         <div className="p-6 space-y-4">
                           {solutionsItems.map((item) => (
                             <Link
                               key={item.href}
                               to={item.href}
-                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors group"
+                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                               data-testid={`link-${item.href.substring(1)}`}
                             >
-                              <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-gray-700" />
+                              <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
                               <div>
-                                <div className="text-gray-900 font-medium group-hover:text-gray-700 transition-colors">
+                                <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
                                   {item.title}
                                 </div>
-                                <div className="text-gray-600 text-sm">
+                                <div className="text-gray-400 text-sm">
                                   {item.description}
                                 </div>
                               </div>
@@ -185,15 +182,15 @@ const Navbar = () => {
                               <Link
                                 key={item.href}
                                 to={item.href}
-                                className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors group"
+                                className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                                 data-testid={`link-${item.href.substring(1)}`}
                               >
                                 <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-white" />
                                 <div>
-                                  <div className="text-gray-900 font-medium group-hover:text-gray-700 transition-colors">
+                                  <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
                                     {item.title}
                                   </div>
-                                  <div className="text-gray-600 text-sm">
+                                  <div className="text-gray-400 text-sm">
                                     {item.description}
                                   </div>
                                 </div>
@@ -210,8 +207,8 @@ const Navbar = () => {
               <Link 
                 to="/try" 
                 className={cn(
-                  "text-gray-600 hover:text-gray-900 transition-colors",
-                  location.pathname === "/try" && "text-gray-900"
+                  "text-gray-300 hover:text-white transition-colors",
+                  location.pathname === "/try" && "text-white"
                 )}
                 data-testid="link-try-demo"
               >
@@ -221,8 +218,8 @@ const Navbar = () => {
               <Link 
                 to="/pricing" 
                 className={cn(
-                  "text-gray-600 hover:text-gray-900 transition-colors",
-                  location.pathname === "/pricing" && "text-gray-900"
+                  "text-gray-300 hover:text-white transition-colors",
+                  location.pathname === "/pricing" && "text-white"
                 )}
                 data-testid="link-pricing"
               >
@@ -232,25 +229,25 @@ const Navbar = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-600 hover:text-gray-900 hover:bg-transparent data-[state=open]:bg-transparent">
+                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-transparent data-[state=open]:bg-transparent">
                       About
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="w-[400px] bg-white backdrop-blur-xl border border-gray-200 shadow-lg">
+                      <div className="w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10">
                         <div className="p-6 space-y-4">
                           {aboutItems.map((item) => (
                             <Link
                               key={item.href}
                               to={item.href}
-                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors group"
+                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                               data-testid={`link-${item.href.substring(1)}`}
                             >
-                              <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-gray-700" />
+                              <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
                               <div>
-                                <div className="text-gray-900 font-medium group-hover:text-gray-700 transition-colors">
+                                <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
                                   {item.title}
                                 </div>
-                                <div className="text-gray-600 text-sm">
+                                <div className="text-gray-400 text-sm">
                                   {item.description}
                                 </div>
                               </div>
@@ -267,52 +264,9 @@ const Navbar = () => {
               
               {user ? (
                 <>
-                  {/* Role-based navigation items */}
-                  {userRole === 'student' && (
-                    <Link 
-                      to="/student-dashboard" 
-                      className={cn(
-                        "text-gray-600 hover:text-gray-900 transition-colors font-medium",
-                        location.pathname === "/student-dashboard" && "text-gray-900"
-                      )}
-                      data-testid="link-student-dashboard"
-                    >
-                      <BookOpenIcon className="inline-block mr-1 h-4 w-4" />
-                      My Dashboard
-                    </Link>
-                  )}
-                  
-                  {userRole === 'admin' && (
-                    <Link 
-                      to="/admin-dashboard" 
-                      className={cn(
-                        "text-gray-600 hover:text-gray-900 transition-colors font-medium",
-                        location.pathname === "/admin-dashboard" && "text-gray-900"
-                      )}
-                      data-testid="link-admin-dashboard"
-                    >
-                      <ShieldCheck className="inline-block mr-1 h-4 w-4" />
-                      Admin Panel
-                    </Link>
-                  )}
-                  
-                  {userRole === 'teacher' && (
-                    <Link 
-                      to="/teacher-dashboard" 
-                      className={cn(
-                        "text-gray-600 hover:text-gray-900 transition-colors font-medium",
-                        location.pathname === "/teacher-dashboard" && "text-gray-900"
-                      )}
-                      data-testid="link-teacher-dashboard"
-                    >
-                      <Users className="inline-block mr-1 h-4 w-4" />
-                      Teacher Portal
-                    </Link>
-                  )}
-                  
                   <Button 
                     onClick={() => navigate('/demo-scheduling')} 
-                    className="bg-gray-900 text-white hover:bg-gray-800"
+                    className="bg-white text-black hover:bg-gray-200"
                     data-testid="button-schedule-demo"
                   >
                     <Calendar className="mr-2 h-4 w-4" />
@@ -332,85 +286,19 @@ const Navbar = () => {
                     <DropdownMenuContent className="w-56" align="end" forceMount>
                       <DropdownMenuLabel className="font-normal">
                         <div className="flex flex-col space-y-1">
-                          <div className="flex items-center gap-2">
-                            <p className="text-sm font-medium leading-none">{user.user_metadata?.name || 'User'}</p>
-                            {userRole && (
-                              <Badge variant="secondary" className="text-xs capitalize">
-                                {userRole}
-                              </Badge>
-                            )}
-                          </div>
+                          <p className="text-sm font-medium leading-none">{user.user_metadata?.name || 'User'}</p>
                           <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
                         </div>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      
-                      {/* Role-specific menu items */}
-                      {userRole === 'student' && (
-                        <>
-                          <DropdownMenuItem onClick={() => navigate('/student-dashboard')} data-testid="menu-item-my-progress">
-                            <Activity className="mr-2 h-4 w-4" />
-                            <span>My Progress</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => navigate('/try')} data-testid="menu-item-practice">
-                            <BookOpenIcon className="mr-2 h-4 w-4" />
-                            <span>Practice</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => navigate('/settings')} data-testid="menu-item-settings">
-                            <Settings className="mr-2 h-4 w-4" />
-                            <span>Settings</span>
-                          </DropdownMenuItem>
-                        </>
-                      )}
-                      
-                      {userRole === 'admin' && (
-                        <>
-                          <DropdownMenuItem onClick={() => navigate('/admin-dashboard')} data-testid="menu-item-user-management">
-                            <UserCog className="mr-2 h-4 w-4" />
-                            <span>User Management</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => navigate('/system-settings')} data-testid="menu-item-system-settings">
-                            <Settings className="mr-2 h-4 w-4" />
-                            <span>System Settings</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => navigate('/audit-logs')} data-testid="menu-item-audit-logs">
-                            <ClipboardList className="mr-2 h-4 w-4" />
-                            <span>Audit Logs</span>
-                          </DropdownMenuItem>
-                        </>
-                      )}
-                      
-                      {userRole === 'teacher' && (
-                        <>
-                          <DropdownMenuItem onClick={() => navigate('/teacher-dashboard')} data-testid="menu-item-my-classes">
-                            <Users className="mr-2 h-4 w-4" />
-                            <span>My Classes</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => navigate('/student-progress')} data-testid="menu-item-student-progress">
-                            <BarChart className="mr-2 h-4 w-4" />
-                            <span>Student Progress</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => navigate('/resources')} data-testid="menu-item-resources">
-                            <BookOpenIcon className="mr-2 h-4 w-4" />
-                            <span>Resources</span>
-                          </DropdownMenuItem>
-                        </>
-                      )}
-                      
-                      {/* Common menu items */}
-                      {!userRole && (
-                        <>
-                          <DropdownMenuItem onClick={() => navigate('/try')} data-testid="menu-item-try-demo">
-                            <Play className="mr-2 h-4 w-4" />
-                            <span>Try Demo</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => navigate('/pricing')} data-testid="menu-item-pricing">
-                            <Sparkles className="mr-2 h-4 w-4" />
-                            <span>Pricing</span>
-                          </DropdownMenuItem>
-                        </>
-                      )}
-                      
+                      <DropdownMenuItem onClick={() => navigate('/try')} data-testid="menu-item-try-demo">
+                        <Play className="mr-2 h-4 w-4" />
+                        <span>Try Demo</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => navigate('/pricing')} data-testid="menu-item-pricing">
+                        <Sparkles className="mr-2 h-4 w-4" />
+                        <span>Pricing</span>
+                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={signOut} data-testid="menu-item-logout">
                         <LogOut className="mr-2 h-4 w-4" />
@@ -430,7 +318,7 @@ const Navbar = () => {
                   </Button>
                   <Button 
                     onClick={() => handleOpenAuth('signup')}
-                    className="bg-gray-900 text-white hover:bg-gray-800"
+                    className="bg-white text-black hover:bg-gray-200"
                     data-testid="button-signup"
                   >
                     Sign up
@@ -448,7 +336,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white backdrop-blur-xl md:hidden">
+        <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden">
           <div className="flex flex-col h-full pt-20 px-6 pb-6 overflow-y-auto">
             <div className="space-y-4">
               <Link 

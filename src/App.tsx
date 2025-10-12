@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
 import { AnalyticsProvider } from "./components/analytics/AnalyticsProvider";
 import { AuthProvider } from "./components/auth/AuthContext";
-import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Team from "./pages/Team";
@@ -21,7 +20,6 @@ import Support from "./pages/Support";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
-import Login from "./pages/Login";
 import EarlyAccess from "./pages/EarlyAccess";
 import Pricing from "./pages/Pricing";
 import DemoScheduling from "./pages/DemoScheduling";
@@ -33,7 +31,6 @@ import ForStudents from "./pages/ForStudents";
 import ForTeachers from "./pages/ForTeachers";
 import ForSchools from "./pages/ForSchools";
 import StudentDashboard from "./pages/StudentDashboard";
-import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -69,31 +66,7 @@ const App = () => (
               <Route path="/for-students" element={<ForStudents />} />
               <Route path="/for-teachers" element={<ForTeachers />} />
               <Route path="/for-schools" element={<ForSchools />} />
-              <Route path="/login" element={<Login />} />
-              <Route 
-                path="/student-dashboard" 
-                element={
-                  <ProtectedRoute allowedRoles={['student']}>
-                    <StudentDashboard />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/admin-dashboard" 
-                element={
-                  <ProtectedRoute allowedRoles={['admin']}>
-                    <AdminDashboard />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/teacher-dashboard" 
-                element={
-                  <ProtectedRoute allowedRoles={['teacher']}>
-                    <StudentDashboard />
-                  </ProtectedRoute>
-                } 
-              />
+              <Route path="/student-dashboard" element={<StudentDashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

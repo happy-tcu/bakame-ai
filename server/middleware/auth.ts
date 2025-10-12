@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { createClient } from '@supabase/supabase-js';
 import { storage } from '../storage';
-import { getUserRole } from '../utils/roleAssignment';
 import dotenv from 'dotenv';
 
 // Load environment variables from .env file
@@ -42,17 +41,10 @@ export async function authMiddleware(req: AuthRequest, res: Response, next: Next
     // Get or create user in our database
     let dbUser = await storage.getUserByEmail(user.email!);
     if (!dbUser) {
-      // Intelligently determine the user's role
-      const role = getUserRole(
-        user.email!,
-        user.user_metadata || {},
-        user.user_metadata?.name
-      );
-      
       dbUser = await storage.createUser({
         email: user.email!,
         name: user.user_metadata?.name || null,
-        role: role
+        role: 'student'
       });
     }
 
