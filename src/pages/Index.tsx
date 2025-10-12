@@ -608,7 +608,7 @@ const Index = () => {
           <div className="mb-8">
             <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30 px-6 py-2 text-sm">
               <Building className="mr-2 h-4 w-4" />
-              Custom pricing tailored for government organizations
+              Custom pricing tailored for NGOs
             </Badge>
           </div>
           
@@ -633,7 +633,7 @@ const Index = () => {
           </div>
           
           <p className="text-gray-400">
-            Or contact our government sales team at{' '}
+            Or contact our NGO sales team at{' '}
             <a href="mailto:sales@bakame.org" className="text-gray-400 hover:text-gray-300">
               sales@bakame.org
             </a>
@@ -662,7 +662,7 @@ const Index = () => {
               <h3 className="text-white font-semibold mb-4">Product</h3>
               <ul className="space-y-2">
                 <li><Link to="/features" className="text-gray-400 hover:text-white transition-colors">Features</Link></li>
-                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Government Solutions</Link></li>
+                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">NGO Solutions</Link></li>
                 <li><Link to="/try" className="text-gray-400 hover:text-white transition-colors">Try Demo</Link></li>
               </ul>
             </div>

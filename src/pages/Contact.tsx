@@ -24,26 +24,26 @@ const Contact = () => {
                 Contact Our Team
               </h1>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Connect with our government solutions team for customized pricing and implementation strategies tailored to your organization's needs.
+                Connect with our NGO solutions team for customized pricing and implementation strategies tailored to your organization's needs.
               </p>
             </div>
 
-            {/* Government Sales Section */}
+            {/* NGO Sales Section */}
             <Card className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 border-blue-600/30 mb-12">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-2xl flex items-center">
                     <Building className="mr-3 h-6 w-6 text-blue-400" />
-                    Government & Enterprise Solutions
+                    NGO & Enterprise Solutions
                   </CardTitle>
                   <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30">
-                    B2G Solutions
+                    B2N Solutions
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent>
                 <p className="text-lg text-muted-foreground mb-6">
-                  For government organizations requiring custom pricing, compliance documentation, and enterprise-level support.
+                  For NGOs requiring custom pricing, compliance documentation, and enterprise-level support.
                 </p>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="bg-background/50 rounded-lg p-4">
@@ -104,7 +104,7 @@ const Contact = () => {
                     
                     <div className="flex items-center">
                       <Building className="w-4 h-4 mr-2 text-primary" />
-                      <span>Government Sales: sales@bakame.org</span>
+                      <span>NGO Sales: sales@bakame.org</span>
                     </div>
                     
                     <div className="flex items-center">

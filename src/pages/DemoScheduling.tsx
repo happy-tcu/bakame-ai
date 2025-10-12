@@ -81,7 +81,7 @@ const DemoScheduling = () => {
               <li>• 30-minute personalized demonstration</li>
               <li>• Live Q&A with our technical team</li>
               <li>• Custom use case discussion</li>
-              <li>• Implementation timeline and custom government pricing</li>
+              <li>• Implementation timeline and custom NGO pricing</li>
             </ul>
           </div>
           <Button onClick={() => navigate('/')} className="mr-4">
@@ -113,7 +113,7 @@ const DemoScheduling = () => {
             onClick={() => navigate('/contact')} 
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
-            Government Solutions
+            NGO Solutions
           </button>
           <button 
             onClick={() => navigate('/contact')} 

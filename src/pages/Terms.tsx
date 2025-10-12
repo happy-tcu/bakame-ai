@@ -6,7 +6,7 @@ const Terms = () => {
       content: [
         "Bakame AI provides Interactive Voice Response (IVR) systems and AI-powered communication solutions.",
         "Our services include offline-capable voice systems, English language education tools, and Kinyarwanda language processing capabilities.",
-        "We offer solutions tailored for educational institutions, enterprises, and government organizations.",
+        "We offer solutions tailored for educational institutions, enterprises, and NGOs.",
         "Services may include software licensing, technical support, training, and custom deployment assistance."
       ]
     },
@@ -36,7 +36,7 @@ const Terms = () => {
         "We strive to maintain high service availability but cannot guarantee uninterrupted access.",
         "Scheduled maintenance will be communicated in advance when possible.",
         "Our offline-capable IVR systems are designed to function without internet connectivity once deployed.",
-        "Service levels for enterprise and government clients are detailed in separate Service Level Agreements (SLAs)."
+        "Service levels for enterprise and NGO clients are detailed in separate Service Level Agreements (SLAs)."
       ]
     },
     {
@@ -44,7 +44,7 @@ const Terms = () => {
       content: [
         "Your use of our services is also governed by our Privacy Policy.",
         "We process voice data and personal information as described in our Privacy Policy.",
-        "For enterprise and government deployments, additional data processing agreements may apply.",
+        "For enterprise and NGO deployments, additional data processing agreements may apply.",
         "You consent to the processing of your data as necessary to provide our services."
       ]
     },
@@ -127,7 +127,7 @@ const Terms = () => {
           <p className="text-muted-foreground leading-relaxed">
             By accessing or using Bakame AI's services, you agree to be bound by these Terms of Service and our Privacy Policy. 
             If you do not agree to these terms, please do not use our services. These terms apply to all users, 
-            including individuals, educational institutions, enterprises, and government organizations.
+            including individuals, educational institutions, enterprises, and NGOs.
           </p>
         </div>
 

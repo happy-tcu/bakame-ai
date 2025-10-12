@@ -39,8 +39,8 @@ const FAQ = () => {
       answer: "We're a startup building innovative offline AI technology. While we're still in beta, we're working with select partners to validate and improve our solution. Our approach focuses on reliability and security for critical infrastructure applications."
     },
     {
-      question: "How does government pricing work?",
-      answer: "We offer custom pricing packages for government organizations that include compliance requirements, security assessments, and dedicated support. Each solution is tailored to your specific needs and scale. Contact our government sales team at sales@bakame.org to discuss your requirements and receive a detailed proposal."
+      question: "How does NGO pricing work?",
+      answer: "We offer custom pricing packages for NGOs that include compliance requirements, security assessments, and dedicated support. Each solution is tailored to your specific needs and scale. Contact our NGO sales team at sales@bakame.org to discuss your requirements and receive a detailed proposal."
     },
     {
       question: "Can you integrate with our existing phone systems?",
