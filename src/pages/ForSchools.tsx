@@ -523,60 +523,6 @@ const ForSchools = () => {
         </div>
       </section>
 
-      {/* Case Studies */}
-      <section className="container mx-auto px-6 py-16 bg-muted/30">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Success Stories from Leading Schools
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {[
-            {
-              school: "Lincoln International Academy",
-              location: "New York, USA",
-              students: "2,400 students",
-              results: "73% improvement in English proficiency scores",
-              quote: "Bakame AI transformed how we teach English. Our teachers save 15 hours weekly, and students are more engaged than ever.",
-              author: "Dr. Sarah Johnson, Principal"
-            },
-            {
-              school: "St. Mary's School Network",
-              location: "London, UK",
-              students: "5,200 students",
-              results: "£380,000 saved in first year",
-              quote: "The ROI was immediate. We reduced tutoring costs by 60% while improving outcomes across all grade levels.",
-              author: "Michael Chen, Director of Education"
-            },
-            {
-              school: "Tokyo International School",
-              location: "Tokyo, Japan",
-              students: "1,800 students",
-              results: "91% parent satisfaction rate",
-              quote: "Parents love the progress tracking and personalized support their children receive. Enrollment increased by 22%.",
-              author: "Yuki Tanaka, Head of School"
-            }
-          ].map((study, index) => (
-            <Card key={index} className="bg-card border-border">
-              <CardHeader>
-                <div className="flex items-start justify-between mb-2">
-                  <Award className="h-8 w-8 text-yellow-500" />
-                  <Badge variant="outline">{study.location}</Badge>
-                </div>
-                <CardTitle className="text-lg">{study.school}</CardTitle>
-                <CardDescription>{study.students}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="p-3 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg">
-                  <p className="text-sm font-medium text-green-600">{study.results}</p>
-                </div>
-                <blockquote className="italic text-sm text-muted-foreground">
-                  "{study.quote}"
-                </blockquote>
-                <p className="text-xs font-medium">— {study.author}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
 
       {/* Partnership Benefits */}
       <section className="container mx-auto px-6 py-16">
