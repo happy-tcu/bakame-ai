@@ -14,7 +14,7 @@ Bakame AI is an AI-powered English learning platform for schools with voice-firs
 - **AI Integration**: OpenAI API (GPT-4)
 - **Authentication**: Supabase Auth
 - **UI Components**: shadcn/ui with Radix UI primitives
-- **Styling**: Tailwind CSS with black & white theme (Scale.com inspired)
+- **Styling**: Tailwind CSS with dark-only theme
 - **Routing**: React Router DOM v6
 - **State Management**: TanStack Query (React Query) v5
 - **Icons**: Lucide React
@@ -141,25 +141,27 @@ The application uses PostgreSQL with four main tables:
 - **learning_sessions**: Records of study sessions
 - **user_progress**: Cumulative progress tracking
 
-## Recent Changes (October 2, 2025)
-1. Implemented complete authentication system with login/signup flow
-2. Connected all Try Demo features to real API endpoints
-3. Configured deployment settings for production (autoscale)
-4. Replaced all emojis with Lucide React icons throughout the app
-5. Removed government navigation tab
-6. Fixed text visibility issues across the application
-7. Updated branding and content:
-   - Changed accent color from blue to orange (#ff6b35) throughout
-   - Replaced phone contact with email: happy@bakame.org
-   - Updated award from "EdTech Award 2024" to "CREATE Award 2025"
-   - Removed specific statistics, now showing value-based descriptions
-   - Cleaned up Press page (removed press releases, kept structure)
+## Recent Changes (October 12, 2025)
+1. **Theme Update**: Made app permanently dark mode only - removed theme toggle and ThemeProvider
+2. **Color Scheme Overhaul**: Replaced all orange colors (#ffa366) with professional light blue (#4c9dff) throughout entire website including primary colors, buttons, icons, gradients, text highlights, and CSS variables
+3. **Partner Update**: Changed partner section to "Trusted by Schools and Institutions Across Africa and the US" with specific partners:
+   - Neeley's Institute
+   - Dallas Innovates
+   - US Chamber of Commerce
+   - TCU 360
+   - Fort Worth Report
+   - Kagarama SS
+   - GS Karembure
+4. **B2G Focus**: Converted platform to B2G (Business-to-Government) model - all pricing through sales@bakame.org, removed self-serve options
+5. **Role-Based Access**: Implemented comprehensive role-based access control with ProtectedRoute and RoleGuard components
+6. **Student Dashboard**: Created gamified student dashboard with learning progress tracking and achievement badges
 
 ## Features
-- Dark theme by default with theme switching capability
+- Dark theme only (permanent dark mode for consistent B2G aesthetic)
 - Responsive design with Tailwind CSS
 - Analytics integration
 - Toast notifications
 - Form handling with React Hook Form
 - Data fetching with TanStack Query
 - Supabase authentication and database integration
+- Role-based access control for different user types (student, teacher, admin, school, government, NGO)

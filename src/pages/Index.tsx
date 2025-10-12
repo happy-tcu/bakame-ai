@@ -59,14 +59,13 @@ const Index = () => {
   ];
 
   const trustLogos = [
-    'Ministry of Education Rwanda',
-    'African Development Bank',
-    'UNICEF Education',
-    'Gates Foundation',
-    'Google for Education',
-    'World Bank Education',
-    'UNESCO',
-    'Save the Children',
+    "Neeley's Institute",
+    'Dallas Innovates',
+    'US Chamber of Commerce',
+    'TCU 360',
+    'Fort Worth Report',
+    'Kagarama SS',
+    'GS Karembure',
   ];
 
   return (
@@ -140,7 +139,7 @@ const Index = () => {
       <section className="py-16 bg-black border-y border-white/10">
         <div className="max-w-7xl mx-auto px-6">
           <h3 className="text-center text-gray-400 mb-8 uppercase tracking-wider">
-            Trusted by Schools and Governments Across Africa
+            Trusted by Schools and Institutions Across Africa and the US
           </h3>
           <div className="relative overflow-hidden">
             <div className="flex space-x-12 marquee">
