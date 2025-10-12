@@ -34,8 +34,8 @@ const Support = () => {
       answer: "Yes, we implement enterprise-grade security measures. For government and enterprise clients, we offer additional security protocols and can deploy on-premises solutions. All voice data is processed securely and stored according to international privacy standards."
     },
     {
-      question: "What pricing plans do you offer?",
-      answer: "We offer tiered pricing based on usage and deployment type. Educational institutions receive special pricing. Contact us for a custom quote based on your specific needs and scale."
+      question: "How do I get pricing information for government organizations?",
+      answer: "We provide custom pricing tailored specifically for government organizations. Our B2G solutions include compliance documentation, dedicated support, and flexible deployment options. Contact our government sales team at sales@bakame.org for a personalized quote and consultation."
     },
     {
       question: "Can Bakame AI work offline?",
@@ -50,6 +50,13 @@ const Support = () => {
       description: "Get help via email within 24 hours",
       contact: "happy@bakame.org",
       action: "mailto:happy@bakame.org"
+    },
+    {
+      icon: Building,
+      title: "Government Sales",
+      description: "Custom pricing for government organizations",
+      contact: "sales@bakame.org",
+      action: "mailto:sales@bakame.org"
     },
     {
       icon: Phone,
