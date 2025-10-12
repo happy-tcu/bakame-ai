@@ -38,16 +38,6 @@ export const AnimatedResourceCard = ({ resource, onDownload, index }: AnimatedRe
 
   const ResourceIcon = getIconForType(resource.type);
 
-  const getFileSize = (type: string) => {
-    switch (type.toLowerCase()) {
-      case "pdf": return "2.5 MB";
-      case "mp3": return "8.2 MB";
-      case "mp4": return "125 MB";
-      case "zip": return "45 MB";
-      default: return "1.2 MB";
-    }
-  };
-
   return (
     <Card 
       className={`bg-white/5 border-white/10 backdrop-blur-sm transition-all duration-500 group cursor-pointer relative overflow-hidden animate-fadeInUp
@@ -74,12 +64,9 @@ export const AnimatedResourceCard = ({ resource, onDownload, index }: AnimatedRe
       <CardHeader className="relative z-10 pb-4">
         <div className="flex items-center justify-between mb-2">
           <ResourceIcon className={`h-5 w-5 transition-colors duration-300 ${isHovered ? 'text-blue-300' : 'text-blue-400'}`} />
-          <div className="flex items-center space-x-2">
-            <Badge className={`${getTypeColor(resource.type)} border transition-all duration-300`}>
-              {resource.type}
-            </Badge>
-            <span className="text-xs text-white/50">{getFileSize(resource.type)}</span>
-          </div>
+          <Badge className={`${getTypeColor(resource.type)} border transition-all duration-300`}>
+            {resource.type}
+          </Badge>
         </div>
         <CardTitle className={`text-lg transition-colors duration-300 ${isHovered ? 'text-blue-300' : 'text-white'}`}>
           {resource.title}
