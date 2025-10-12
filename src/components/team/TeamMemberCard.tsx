@@ -35,9 +35,9 @@ export const TeamMemberCard = ({ member, index }: TeamMemberCardProps) => {
       "Executive": "from-purple-500 to-pink-500",
       "Technology": "from-blue-500 to-cyan-500",
       "Research": "from-green-500 to-emerald-500",
-      "Engineering": "from-orange-500 to-red-500",
+      "Engineering": "from-blue-500 to-blue-600",
       "Operations": "from-indigo-500 to-purple-500",
-      "Partnerships": "from-yellow-500 to-orange-500"
+      "Partnerships": "from-sky-500 to-blue-500"
     };
     return colors[department as keyof typeof colors] || "from-gray-500 to-gray-600";
   };
