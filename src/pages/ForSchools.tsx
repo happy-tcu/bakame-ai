@@ -64,50 +64,6 @@ const ForSchools = () => {
     return () => observer.disconnect();
   }, []);
 
-  const pricingTiers = [
-    {
-      name: "Starter",
-      students: "Up to 500 students",
-      price: "$99",
-      features: [
-        "Core AI tutoring platform",
-        "Basic analytics dashboard",
-        "Email support",
-        "Teacher training (online)",
-        "Standard curriculum alignment"
-      ]
-    },
-    {
-      name: "Professional",
-      students: "500-2000 students",
-      price: "$499",
-      popular: true,
-      features: [
-        "Everything in Starter, plus:",
-        "Advanced analytics & reporting",
-        "Priority support (phone & chat)",
-        "On-site teacher training",
-        "Custom curriculum mapping",
-        "Parent portal access",
-        "API integration"
-      ]
-    },
-    {
-      name: "Enterprise",
-      students: "2000+ students",
-      price: "Custom",
-      features: [
-        "Everything in Professional, plus:",
-        "Dedicated success manager",
-        "Custom AI model training",
-        "White-labeling options",
-        "SLA guarantees",
-        "Compliance certifications",
-        "Multi-school management",
-        "Unlimited API access"
-      ]
-    }
-  ];
 
   // If user is authenticated as a school admin, show the school admin dashboard
   if (isSchoolAdmin) {
@@ -484,57 +440,86 @@ const ForSchools = () => {
         </Tabs>
       </section>
 
-      {/* Pricing Tiers */}
+      {/* Contact Sales Section */}
       <section className="container mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Transparent Pricing for Every School Size
-        </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Flexible pricing options designed to fit your budget and scale with your growth
-        </p>
-        
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {pricingTiers.map((tier, index) => (
-            <Card
-              key={index}
-              className={`relative ${tier.popular ? 'border-gray-500 border-2' : 'border-border'}`}
-            >
-              {tier.popular && (
-                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-600 text-white">
-                  Most Popular
-                </Badge>
-              )}
-              <CardHeader>
-                <CardTitle>{tier.name}</CardTitle>
-                <CardDescription>{tier.students}</CardDescription>
-                <div className="mt-4">
-                  <span className="text-3xl font-bold">{tier.price}</span>
-                  {tier.price !== "Custom" && <span className="text-muted-foreground">/month</span>}
-                </div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {tier.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button 
-                  className={`w-full mt-6 ${
-                    tier.popular 
-                      ? 'bg-gradient-to-r from-gray-600 to-gray-600 text-white' 
-                      : 'variant-outline'
-                  }`}
-                  onClick={() => navigate("/demo-scheduling")}
-                  data-testid={`button-select-${tier.name.toLowerCase()}`}
-                >
-                  {tier.price === "Custom" ? "Contact Sales" : "Start Free Trial"}
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Custom Pricing for Your School
+          </h2>
+          <p className="text-muted-foreground mb-8 text-lg">
+            Every school has unique needs. Let's create a tailored solution that fits your budget and requirements.
+          </p>
+          
+          <div className="bg-card border border-border rounded-lg p-8 md:p-12">
+            <div className="grid md:grid-cols-3 gap-8 mb-10">
+              <div>
+                <DollarSign className="h-10 w-10 text-green-500 mx-auto mb-3" />
+                <h3 className="font-semibold text-white mb-2">Flexible Pricing</h3>
+                <p className="text-sm text-muted-foreground">
+                  Solutions that scale with your school size and budget
+                </p>
+              </div>
+              <div>
+                <Shield className="h-10 w-10 text-blue-500 mx-auto mb-3" />
+                <h3 className="font-semibold text-white mb-2">Enterprise Security</h3>
+                <p className="text-sm text-muted-foreground">
+                  FERPA compliant with data privacy guarantees
+                </p>
+              </div>
+              <div>
+                <HeadphonesIcon className="h-10 w-10 text-purple-500 mx-auto mb-3" />
+                <h3 className="font-semibold text-white mb-2">Dedicated Support</h3>
+                <p className="text-sm text-muted-foreground">
+                  Personal success manager and 24/7 priority support
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4 mb-8">
+              <h3 className="text-xl font-semibold text-white">What's Included:</h3>
+              <div className="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto">
+                {[
+                  "Full AI tutoring platform access",
+                  "Custom curriculum alignment",
+                  "Teacher training & onboarding",
+                  "Parent portal access",
+                  "Advanced analytics dashboard",
+                  "API integration support",
+                  "Multi-school management",
+                  "White-labeling options"
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                    <span className="text-sm text-muted-foreground">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                onClick={() => navigate("/contact")}
+                className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4"
+                data-testid="button-contact-sales"
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                Contact Sales Team
+              </Button>
+              <Button
+                onClick={() => navigate("/demo-scheduling")}
+                variant="outline"
+                className="text-lg px-8 py-4 border-white/20 hover:bg-white/10"
+                data-testid="button-schedule-demo"
+              >
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule Demo
+              </Button>
+            </div>
+
+            <p className="text-sm text-muted-foreground mt-6">
+              Typical response time: Within 24 hours
+            </p>
+          </div>
         </div>
       </section>
 
