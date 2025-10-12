@@ -162,9 +162,9 @@ const ForSchools = () => {
               <p className="text-sm text-muted-foreground">Student improvement</p>
             </CardContent>
           </Card>
-          <Card className="text-center bg-gradient-to-br from-orange-500/10 to-red-500/10 border-orange-500/30">
+          <Card className="text-center bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/30">
             <CardContent className="pt-6">
-              <div className="text-3xl font-bold text-orange-600 mb-2">
+              <div className="text-3xl font-bold text-blue-600 mb-2">
                 {roiMetrics.parentSatisfaction}
               </div>
               <p className="text-sm text-muted-foreground">Parent satisfaction</p>
