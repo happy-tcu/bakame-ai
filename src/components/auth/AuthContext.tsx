@@ -90,6 +90,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       throw error;
     }
     
+    // Initialize user progress after successful signup
+    if (data.user && data.session) {
+      try {
+        // Create initial user record in our backend
+        const response = await fetch('/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.session.access_token}`
+          },
+          body: JSON.stringify({
+            email: email,
+            name: name
+          })
+        });
+        
+        if (!response.ok) {
+          console.error('Failed to initialize user progress');
+        }
+      } catch (error) {
+        console.error('Error initializing user progress:', error);
+      }
+    }
+    
     toast({
       title: 'Account created!',
       description: 'Please check your email to verify your account.',

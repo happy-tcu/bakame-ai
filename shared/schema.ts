@@ -36,6 +36,8 @@ export const learning_sessions = pgTable('learning_sessions', {
 export const user_progress = pgTable('user_progress', {
   id: serial('id').primaryKey(),
   user_id: integer('user_id').references(() => users.id).unique(),
+  total_xp: integer('total_xp').default(0),
+  current_level: integer('current_level').default(1),
   total_practice_time: integer('total_practice_time').default(0),
   flashcards_completed: integer('flashcards_completed').default(0),
   pronunciation_score: decimal('pronunciation_score', { precision: 5, scale: 2 }),
@@ -79,6 +81,8 @@ export type InsertSession = {
 
 export type InsertProgress = {
   user_id?: number | null;
+  total_xp?: number | null;
+  current_level?: number | null;
   total_practice_time?: number | null;
   flashcards_completed?: number | null;
   pronunciation_score?: string | null;

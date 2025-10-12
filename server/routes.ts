@@ -2,10 +2,58 @@ import { Router } from 'express';
 import { storage } from './storage';
 import { generateFlashcards } from './openai';
 import { authMiddleware, AuthRequest } from './middleware/auth';
-import { insertFlashcardSchema, insertSessionSchema } from '../shared/schema';
+import { insertFlashcardSchema, insertSessionSchema, insertUserSchema } from '../shared/schema';
 import { z } from 'zod';
 
 const router = Router();
+
+// Create a new user and initialize their progress
+router.post('/api/users', authMiddleware, async (req: AuthRequest, res) => {
+  try {
+    const validatedData = insertUserSchema.parse(req.body);
+    
+    // Check if user already exists
+    const existingUser = await storage.getUserByEmail(validatedData.email);
+    if (existingUser) {
+      // User already exists, just initialize their progress if needed
+      const progress = await storage.getProgress(existingUser.id);
+      if (!progress) {
+        await storage.updateProgress(existingUser.id, {
+          total_xp: 0,
+          streak_days: 0,
+          total_practice_time: 0,
+          last_practice_date: new Date()
+        });
+      }
+      res.json({ user: existingUser });
+      return;
+    }
+    
+    // Create new user
+    const user = await storage.createUser({
+      email: validatedData.email,
+      name: validatedData.name,
+      role: 'student'
+    });
+    
+    // Initialize user progress
+    await storage.updateProgress(user.id, {
+      total_xp: 0,
+      streak_days: 0,
+      total_practice_time: 0,
+      last_practice_date: new Date()
+    });
+    
+    res.json({ user });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      res.status(400).json({ error: error.errors });
+    } else {
+      console.error('Error creating user:', error);
+      res.status(500).json({ error: 'Failed to create user' });
+    }
+  }
+});
 
 // Generate flashcards with AI
 router.post('/api/flashcards/generate', authMiddleware, async (req: AuthRequest, res) => {
@@ -89,8 +137,31 @@ router.post('/api/sessions', authMiddleware, async (req: AuthRequest, res) => {
     // Update user progress
     const progress = await storage.getProgress(req.user!.id);
     const newTotalTime = (progress?.total_practice_time || 0) + (sessionData.duration_seconds || 0);
+    
+    // Award XP based on session performance (10 base + score bonus)
+    const earnedXP = 10 + Math.round((sessionData.score || 0) * 0.5);
+    const newTotalXP = (progress?.total_xp || 0) + earnedXP;
+    const newLevel = Math.floor(newTotalXP / 100) + 1;
+    
+    // Calculate streak
+    const lastPractice = progress?.last_practice_date;
+    let newStreak = 1;
+    if (lastPractice) {
+      const lastDate = new Date(lastPractice);
+      const today = new Date();
+      const daysDiff = Math.floor((today.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+      if (daysDiff === 1) {
+        newStreak = (progress?.streak_days || 0) + 1;
+      } else if (daysDiff === 0) {
+        newStreak = progress?.streak_days || 1;
+      }
+    }
+    
     await storage.updateProgress(req.user!.id, {
+      total_xp: newTotalXP,
+      current_level: newLevel,
       total_practice_time: newTotalTime,
+      streak_days: newStreak,
       last_practice_date: new Date()
     });
     
