@@ -1,23 +1,39 @@
 import { useNavigate } from "react-router-dom";
-import { Trophy, Gamepad2, Target, Rocket, Star, Users, TrendingUp, Zap, Medal, Heart, Sparkles, Volume2, MessageSquare, Play, ChevronRight, BookOpen, Crown, Check, GraduationCap } from "lucide-react";
+import { TrendingUp, Medal, Play, Check, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
+import { 
+  FlowingHexagons, 
+  RipplingCircles, 
+  AscendingTriangles, 
+  Starburst, 
+  DynamicWave,
+  PlayfulPolygons,
+  ConnectingOrbs,
+  BuildingBlocks,
+  AchievementPattern,
+  SoundWaves,
+  FlowingLine,
+  RadialBurst,
+  NodeNetwork
+} from "../components/patterns/AbstractPatterns";
+import "../styles/patterns.css";
 
 const ForStudents = () => {
   const navigate = useNavigate();
   const [activeFeature, setActiveFeature] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(65);
   const [achievements, setAchievements] = useState([
-    { unlocked: true, name: "First Steps", icon: Target },
-    { unlocked: true, name: "Word Master", icon: BookOpen },
-    { unlocked: true, name: "Conversation Pro", icon: MessageSquare },
-    { unlocked: false, name: "Grammar Guru", icon: Trophy },
-    { unlocked: false, name: "Native Speaker", icon: Star },
-    { unlocked: false, name: "English Champion", icon: Crown }
+    { unlocked: true, name: "First Steps", seed: 0 },
+    { unlocked: true, name: "Word Master", seed: 1 },
+    { unlocked: true, name: "Conversation Pro", seed: 2 },
+    { unlocked: false, name: "Grammar Guru", seed: 3 },
+    { unlocked: false, name: "Native Speaker", seed: 4 },
+    { unlocked: false, name: "English Champion", seed: 5 }
   ]);
 
   useEffect(() => {
@@ -49,14 +65,12 @@ const ForStudents = () => {
       {/* Hero Section */}
       <section className="relative z-10 container mx-auto px-6 py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center mb-6 space-x-2">
-            {[Gamepad2, Target, Trophy, Star, Rocket].map((Icon, index) => (
-              <Icon
-                key={index}
-                className="h-10 w-10 text-white animate-bounce"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              />
-            ))}
+          <div className="flex justify-center mb-6 space-x-3">
+            <FlowingHexagons className="animate-bounce" style={{ animationDelay: '0s' }} />
+            <RipplingCircles className="animate-bounce" style={{ animationDelay: '0.1s' }} />
+            <AscendingTriangles className="animate-bounce" style={{ animationDelay: '0.2s' }} />
+            <Starburst className="animate-bounce" style={{ animationDelay: '0.3s' }} />
+            <DynamicWave className="animate-bounce" style={{ animationDelay: '0.4s' }} />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Learn English the Fun Way with AI
@@ -67,16 +81,16 @@ const ForStudents = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               onClick={() => navigate("/try")}
-              className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4 transform hover:scale-105 transition-all"
+              className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4 transform hover:scale-105 transition-all flex items-center"
             >
-              <Gamepad2 className="mr-2 h-5 w-5" />
+              <PlayfulPolygons size={20} className="mr-2" />
               Start Playing Now
             </Button>
             <Button
               variant="outline"
-              className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10"
+              className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10 flex items-center"
             >
-              <Trophy className="mr-2 h-5 w-5 text-gray-400" />
+              <AscendingTriangles size={20} className="mr-2" />
               See Leaderboard
             </Button>
           </div>
@@ -86,7 +100,7 @@ const ForStudents = () => {
       {/* Gamification Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          Your Learning Adventure Awaits! <Gamepad2 className="h-9 w-9 text-white" />
+          Your Learning Adventure Awaits! <PlayfulPolygons size={36} />
         </h2>
         
         {/* Progress & Level Section */}
@@ -129,9 +143,13 @@ const ForStudents = () => {
                             : "bg-muted/50 border-border opacity-50"
                         }`}
                       >
-                        <achievement.icon className="h-6 w-6 text-gray-500" />
+                        <AchievementPattern 
+                          unlocked={achievement.unlocked} 
+                          seed={achievement.seed} 
+                          size={24} 
+                        />
                         <span className="text-sm font-medium">{achievement.name}</span>
-                        {achievement.unlocked && <Sparkles className="h-4 w-4 text-gray-400" />}
+                        {achievement.unlocked && <Starburst size={16} />}
                       </div>
                     ))}
                   </div>
@@ -145,24 +163,21 @@ const ForStudents = () => {
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {[
             {
-              icon: Gamepad2,
+              Pattern: PlayfulPolygons,
               title: "Language Games",
               description: "Play word puzzles, grammar races, and vocabulary battles",
-              color: "gray",
               features: ["Daily Challenges", "Multiplayer Modes", "Reward System"]
             },
             {
-              icon: Users,
+              Pattern: ConnectingOrbs,
               title: "Peer Circles",
               description: "Practice with friends and students from around the world",
-              color: "gray",
               features: ["Group Conversations", "Study Buddies", "Team Competitions"]
             },
             {
-              icon: Trophy,
+              Pattern: BuildingBlocks,
               title: "Achievements & Rewards",
               description: "Unlock badges, climb leaderboards, and earn certificates",
-              color: "gray",
               features: ["100+ Badges", "Monthly Tournaments", "Real Certificates"]
             }
           ].map((feature, index) => (
@@ -174,8 +189,8 @@ const ForStudents = () => {
               onClick={() => setActiveFeature(index)}
             >
               <CardHeader>
-                <div className={`w-12 h-12 bg-gradient-to-r from-${feature.color}-500/20 to-${feature.color}-400/20 rounded-lg flex items-center justify-center mb-3`}>
-                  <feature.icon className={`h-6 w-6 text-${feature.color}-500`} />
+                <div className="mb-3">
+                  <feature.Pattern size={60} />
                 </div>
                 <CardTitle>{feature.title}</CardTitle>
               </CardHeader>
@@ -184,7 +199,7 @@ const ForStudents = () => {
                 <div className="space-y-2">
                   {feature.features.map((item, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <Star className="h-4 w-4 text-gray-500" />
+                      <Starburst size={16} />
                       <span className="text-sm">{item}</span>
                     </div>
                   ))}
@@ -198,14 +213,14 @@ const ForStudents = () => {
       {/* Interactive Learning Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16 bg-muted/30">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          Practice Without Fear <MessageSquare className="h-9 w-9 text-white" />
+          Practice Without Fear <SoundWaves size={36} active={true} />
         </h2>
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* AI Tutor Chat Preview */}
           <div className="bg-card rounded-xl p-6 border-2 border-gray-500/30">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-gradient-to-r from-gray-500 to-gray-500 rounded-full flex items-center justify-center">
-                <Sparkles className="h-5 w-5 text-white" />
+                <Starburst size={20} />
               </div>
               <div>
                 <h3 className="font-semibold">AI Buddy - Luna</h3>
@@ -214,16 +229,16 @@ const ForStudents = () => {
             </div>
             <div className="space-y-4">
               <div className="bg-gray-500/10 rounded-lg p-3 max-w-[80%]">
-                <p className="text-sm flex items-center gap-2">Hi! I'm Luna, your AI English buddy! <Star className="h-4 w-4 text-gray-500 inline" /> Want to practice talking about your hobbies?</p>
+                <p className="text-sm">Hi! I'm Luna, your AI English buddy! Want to practice talking about your hobbies?</p>
               </div>
               <div className="bg-muted rounded-lg p-3 max-w-[80%] ml-auto">
                 <p className="text-sm">Yes! I love playing soccer and video games!</p>
               </div>
               <div className="bg-gray-500/10 rounded-lg p-3 max-w-[80%]">
-                <p className="text-sm flex items-center gap-2">That's awesome! Tell me about your favorite video game. What makes it special? <Gamepad2 className="h-4 w-4 text-gray-500 inline" /></p>
+                <p className="text-sm">That's awesome! Tell me about your favorite video game. What makes it special?</p>
               </div>
               <div className="flex items-center gap-2 mt-4">
-                <Volume2 className="h-5 w-5 text-gray-500" />
+                <SoundWaves size={20} active={true} />
                 <span className="text-sm text-muted-foreground">Click to practice speaking</span>
               </div>
             </div>
@@ -293,7 +308,7 @@ const ForStudents = () => {
       {/* Success Stories */}
       <section className="relative z-10 container mx-auto px-6 py-16">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          Students Like You Are Succeeding! <Star className="h-9 w-9 text-white" />
+          Students Like You Are Succeeding! <Starburst size={36} />
         </h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {[
@@ -341,7 +356,7 @@ const ForStudents = () => {
                 <p className="text-muted-foreground italic">"{story.story}"</p>
                 <div className="flex gap-1 mt-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-gray-500 text-gray-500" />
+                    <Starburst key={i} size={16} />
                   ))}
                 </div>
               </CardContent>
@@ -353,41 +368,37 @@ const ForStudents = () => {
       {/* Interactive Elements Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16 bg-muted/30">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          Cool Features You'll Love! <Rocket className="h-9 w-9 text-white" />
+          Cool Features You'll Love! <DynamicWave size={36} />
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {[
             {
-              icon: MessageSquare,
+              Pattern: SoundWaves,
               title: "Voice Messages",
-              description: "Send voice notes to AI tutors and get instant feedback",
-              color: "gray"
+              description: "Send voice notes to AI tutors and get instant feedback"
             },
             {
-              icon: Heart,
+              Pattern: FlowingLine,
               title: "Streak Counter",
-              description: "Keep your daily streak alive and earn bonus points",
-              color: "red"
+              description: "Keep your daily streak alive and earn bonus points"
             },
             {
-              icon: Zap,
+              Pattern: RadialBurst,
               title: "Power-Ups",
-              description: "Use special abilities to boost your learning speed",
-              color: "gray"
+              description: "Use special abilities to boost your learning speed"
             },
             {
-              icon: Users,
+              Pattern: NodeNetwork,
               title: "Study Groups",
-              description: "Create or join groups with classmates and friends",
-              color: "gray"
+              description: "Create or join groups with classmates and friends"
             }
           ].map((feature, index) => (
             <div
               key={index}
               className="bg-card rounded-xl p-6 border border-border hover:border-gray-500/50 transition-all duration-300 hover:scale-105 cursor-pointer"
             >
-              <div className={`w-12 h-12 bg-${feature.color}-500/20 rounded-lg flex items-center justify-center mb-4`}>
-                <feature.icon className={`h-6 w-6 text-${feature.color}-500`} />
+              <div className="mb-4">
+                <feature.Pattern size={48} />
               </div>
               <h3 className="font-semibold mb-2">{feature.title}</h3>
               <p className="text-sm text-muted-foreground">{feature.description}</p>
@@ -402,7 +413,7 @@ const ForStudents = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-gray-500/5 to-gray-500/5 animate-pulse" />
           <div className="relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 flex items-center justify-center gap-3">
-              Ready to Start Your Adventure? <Gamepad2 className="h-9 w-9 text-white" />
+              Ready to Start Your Adventure? <PlayfulPolygons size={36} />
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Join millions of students learning English the fun way. No more boring textbooks - just games, friends, and AI buddies!
@@ -410,23 +421,23 @@ const ForStudents = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 onClick={() => navigate("/try")}
-                className="bg-gradient-to-r from-gray-500 to-gray-500 text-white hover:opacity-90 text-lg px-8 py-4 transform hover:scale-105 transition-all"
+                className="bg-gradient-to-r from-gray-500 to-gray-500 text-white hover:opacity-90 text-lg px-8 py-4 transform hover:scale-105 transition-all flex items-center"
               >
-                <Rocket className="mr-2 h-5 w-5" />
+                <DynamicWave size={20} className="mr-2" />
                 Start Learning Free
               </Button>
               <Button
                 variant="outline"
-                className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10"
+                className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10 flex items-center"
               >
                 <Play className="mr-2 h-5 w-5" />
                 Watch Demo Video
               </Button>
             </div>
             <p className="mt-6 text-sm text-muted-foreground flex items-center justify-center gap-4">
-              <span className="flex items-center gap-1"><Sparkles className="h-4 w-4" /> Free to start</span> • 
-              <span className="flex items-center gap-1"><Gamepad2 className="h-4 w-4" /> No boring lessons</span> • 
-              <span className="flex items-center gap-1"><Trophy className="h-4 w-4" /> Win real prizes</span>
+              <span className="flex items-center gap-1">Free to start</span> • 
+              <span className="flex items-center gap-1">No boring lessons</span> • 
+              <span className="flex items-center gap-1">Win real prizes</span>
             </p>
           </div>
         </div>
