@@ -65,13 +65,6 @@ const ForStudents = () => {
       {/* Hero Section */}
       <section className="relative z-10 container mx-auto px-6 py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center mb-6 space-x-3">
-            <FlowingHexagons className="animate-bounce" style={{ animationDelay: '0s' }} />
-            <RipplingCircles className="animate-bounce" style={{ animationDelay: '0.1s' }} />
-            <AscendingTriangles className="animate-bounce" style={{ animationDelay: '0.2s' }} />
-            <Starburst className="animate-bounce" style={{ animationDelay: '0.3s' }} />
-            <DynamicWave className="animate-bounce" style={{ animationDelay: '0.4s' }} />
-          </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Learn English the Fun Way with AI
           </h1>
