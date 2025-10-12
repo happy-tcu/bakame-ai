@@ -176,7 +176,11 @@ const StatsCards = ({
           <div>
             <p className="text-white font-semibold mb-1">Keep up the great work!</p>
             <p className="text-gray-400 text-sm">
-              You're in the top 15% of learners this week. Your consistency is paying off!
+              {streakDays > 0 
+                ? `Your ${streakDays}-day streak shows amazing consistency. Keep learning!`
+                : lessonsCompleted > 0 
+                ? `You've completed ${lessonsCompleted} lesson${lessonsCompleted > 1 ? 's' : ''}. Great progress!`
+                : "Start your first lesson today and begin your learning journey!"}
             </p>
           </div>
         </div>
