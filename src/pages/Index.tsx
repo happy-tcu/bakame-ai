@@ -63,6 +63,7 @@ const Index = () => {
     'Dallas Innovates',
     'US Chamber of Commerce',
     'TCU 360',
+    'TCU CS Department',
     'Fort Worth Report',
     'Kagarama SS',
     'GS Karembure',
