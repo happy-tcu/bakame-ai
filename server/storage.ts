@@ -11,6 +11,9 @@ export interface IStorage {
   createUser(data: InsertUser): Promise<User>;
   getUserByEmail(email: string): Promise<User | null>;
   getUserById(id: number): Promise<User | null>;
+  updateUserRole(userId: number, role: string): Promise<User>;
+  getAllUsers(): Promise<User[]>;
+  getUsersByRole(role: string): Promise<User[]>;
 
   // Flashcard operations
   createFlashcard(data: InsertFlashcard): Promise<Flashcard>;
@@ -40,6 +43,28 @@ export class PostgresStorage implements IStorage {
   async getUserById(id: number): Promise<User | null> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
     return user || null;
+  }
+
+  async updateUserRole(userId: number, role: string): Promise<User> {
+    const [updatedUser] = await db
+      .update(users)
+      .set({ role })
+      .where(eq(users.id, userId))
+      .returning();
+    
+    if (!updatedUser) {
+      throw new Error('User not found');
+    }
+    
+    return updatedUser;
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    return db.select().from(users);
+  }
+
+  async getUsersByRole(role: string): Promise<User[]> {
+    return db.select().from(users).where(eq(users.role, role));
   }
 
   async createFlashcard(data: InsertFlashcard): Promise<Flashcard> {
