@@ -22,6 +22,7 @@ import {
   NodeNetwork
 } from "../components/patterns/AbstractPatterns";
 import "../styles/patterns.css";
+import "../styles/no-animations.css";
 
 const ForStudents = () => {
   const navigate = useNavigate();
@@ -174,7 +175,7 @@ const ForStudents = () => {
               onClick={() => setActiveFeature(index)}
             >
               <CardHeader>
-                <div className="mb-3 [&_svg]:fill-white [&_svg_*]:fill-white [&_svg_*]:stroke-white [&_svg]:opacity-100 [&_svg_*]:opacity-100 [&_svg_*]:animation-none [&_svg]:animation-none">
+                <div className="no-animations mb-3 [&_svg]:fill-white [&_svg_*]:fill-white [&_svg_*]:stroke-white [&_svg]:opacity-100 [&_svg_*]:opacity-100">
                   <feature.Pattern size={60} />
                 </div>
                 <CardTitle>{feature.title}</CardTitle>

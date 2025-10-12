@@ -1,0 +1,21 @@
+/* Disable all animations in feature pattern icons */
+.no-animations * {
+  animation: none !important;
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.no-animations svg,
+.no-animations svg * {
+  animation: none !important;
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transition: none !important;
+}
+
+.no-animations g {
+  transform: none !important;
+  animation: none !important;
+}
