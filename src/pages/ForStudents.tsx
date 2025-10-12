@@ -71,29 +71,29 @@ const ForStudents = () => {
             Learn English the Fun Way with AI
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Level up your English skills with games, challenges, and AI friends who help you practice speaking without fear. Join millions of students having fun while learning!
+            Master English through interactive lessons, AI-powered conversations, and personalized feedback. Build real communication skills while enjoying every step of your learning journey!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               onClick={() => navigate("/try")}
               className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4 transform hover:scale-105 transition-all"
             >
-              Start Playing Now
+              Start Learning Now
             </Button>
             <Button
               variant="outline"
               className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10"
             >
-              See Leaderboard
+              View Progress Tracking
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Gamification Preview */}
+      {/* Learning Progress Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Your Learning Adventure Awaits!
+          Track Your English Mastery
         </h2>
         
         {/* Progress & Level Section */}
@@ -103,11 +103,11 @@ const ForStudents = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-2xl">Your Progress</CardTitle>
-                  <CardDescription>Level 12 • English Explorer</CardDescription>
+                  <CardDescription>Intermediate • B1 Level</CardDescription>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl font-bold text-gray-500">2,450</div>
-                  <div className="text-sm text-muted-foreground">XP Points</div>
+                  <div className="text-3xl font-bold text-gray-500">450</div>
+                  <div className="text-sm text-muted-foreground">Lessons Completed</div>
                 </div>
               </div>
             </CardHeader>
