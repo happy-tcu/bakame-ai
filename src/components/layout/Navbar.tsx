@@ -68,6 +68,15 @@ const Navbar = () => {
     };
   }, []);
 
+  // Auto-open login modal when redirected from protected routes
+  useEffect(() => {
+    if (location.state?.openAuth) {
+      handleOpenAuth('login');
+      // Clear the state to prevent re-opening on navigation
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
+
   const solutionsItems = [
     {
       title: "For Students",
