@@ -146,26 +146,26 @@ const ForStudents = () => {
           </Card>
         </div>
 
-        {/* Fun Learning Features */}
+        {/* Core Learning Features */}
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {[
             {
               Pattern: PlayfulPolygons,
-              title: "Language Games",
-              description: "Play word puzzles, grammar races, and vocabulary battles",
-              features: ["Daily Challenges", "Multiplayer Modes", "Reward System"]
+              title: "Interactive Lessons",
+              description: "Engaging exercises for vocabulary, grammar, and pronunciation",
+              features: ["Adaptive Learning", "Instant Feedback", "Personalized Path"]
             },
             {
               Pattern: ConnectingOrbs,
-              title: "Peer Circles",
-              description: "Practice with friends and students from around the world",
-              features: ["Group Conversations", "Study Buddies", "Team Competitions"]
+              title: "Speaking Practice",
+              description: "Build confidence through real conversations with AI and peers",
+              features: ["Live Conversations", "Pronunciation Analysis", "Cultural Context"]
             },
             {
               Pattern: BuildingBlocks,
-              title: "Achievements & Rewards",
-              description: "Unlock badges, climb leaderboards, and earn certificates",
-              features: ["100+ Badges", "Monthly Tournaments", "Real Certificates"]
+              title: "Learning Milestones",
+              description: "Track your progress toward fluency with clear goals",
+              features: ["CEFR Levels", "Skill Assessments", "Official Certificates"]
             }
           ].map((feature, index) => (
             <Card
@@ -202,32 +202,32 @@ const ForStudents = () => {
         <ProgressDashboard />
       </section>
 
-      {/* Interactive Elements Preview */}
+      {/* Learning Tools Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16 bg-muted/30">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Cool Features You'll Love!
+          Essential Learning Tools
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {[
             {
               Icon: Mic,
-              title: "Voice Messages",
-              description: "Send voice notes to AI tutors and get instant feedback"
+              title: "Speaking Practice",
+              description: "Record yourself and receive AI-powered pronunciation feedback"
             },
             {
               Icon: Flame,
-              title: "Streak Counter",
-              description: "Keep your daily streak alive and earn bonus points"
+              title: "Daily Practice",
+              description: "Build consistency with daily learning goals and reminders"
             },
             {
               Icon: Zap,
-              title: "Power-Ups",
-              description: "Use special abilities to boost your learning speed"
+              title: "Smart Review",
+              description: "Accelerate retention with spaced repetition algorithms"
             },
             {
               Icon: Users,
               title: "Study Groups",
-              description: "Create or join groups with classmates and friends"
+              description: "Learn together with classmates and global learners"
             }
           ].map((feature, index) => (
             <div
