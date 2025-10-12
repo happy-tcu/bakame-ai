@@ -6,7 +6,6 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { useAuth } from '@/components/auth/AuthContext';
 import { AuthModal } from '@/components/auth/AuthModal';
 import {
@@ -260,7 +259,7 @@ const Navbar = () => {
                 </NavigationMenuList>
               </NavigationMenu>
 
-              <ThemeToggle />
+
               
               {user ? (
                 <>
@@ -426,9 +425,6 @@ const Navbar = () => {
                 )}
               </div>
 
-              <div className="pt-4 border-t border-white/10">
-                <ThemeToggle />
-              </div>
 
               {user ? (
                 <>
