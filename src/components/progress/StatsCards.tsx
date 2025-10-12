@@ -1,13 +1,39 @@
 import { Trophy, Flame, Target, TrendingUp, Award, BookOpen } from 'lucide-react';
 
-const StatsCards = () => {
+interface StatsCardsProps {
+  streakDays?: number;
+  totalXP?: number;
+  currentLevel?: number;
+  lessonsCompleted?: number;
+}
+
+const StatsCards = ({
+  streakDays = 0,
+  totalXP = 0,
+  currentLevel = 1,
+  lessonsCompleted = 0
+}: StatsCardsProps) => {
+  // Calculate level progress
+  const xpForNextLevel = (currentLevel + 1) * 100;
+  const currentLevelXP = currentLevel * 100;
+  const progressToNextLevel = Math.round(((totalXP - currentLevelXP) / 100) * 100);
+  
+  // Determine level label
+  const getLevelLabel = (level: number) => {
+    if (level < 5) return 'Beginner';
+    if (level < 10) return 'Elementary';
+    if (level < 15) return 'Intermediate';
+    if (level < 25) return 'Advanced';
+    return 'Master';
+  };
+  
   const stats = [
     {
       icon: Flame,
       label: 'Current Streak',
-      value: '7',
+      value: String(streakDays),
       unit: 'days',
-      change: '+2 from last week',
+      change: streakDays > 0 ? 'Keep it up!' : 'Start today!',
       color: 'text-orange-500',
       bgColor: 'bg-orange-500/20',
       borderColor: 'border-orange-500/30'
@@ -15,9 +41,9 @@ const StatsCards = () => {
     {
       icon: Trophy,
       label: 'Total XP',
-      value: '1,245',
+      value: totalXP.toLocaleString(),
       unit: 'points',
-      change: '+125 this week',
+      change: `Level ${currentLevel}`,
       color: 'text-[#4c9dff]',
       bgColor: 'bg-[#4c9dff]/20',
       borderColor: 'border-[#4c9dff]/30'
@@ -25,9 +51,9 @@ const StatsCards = () => {
     {
       icon: Target,
       label: 'Current Level',
-      value: '12',
-      unit: 'Intermediate',
-      change: '88% to Level 13',
+      value: String(currentLevel),
+      unit: getLevelLabel(currentLevel),
+      change: `${progressToNextLevel}% to Level ${currentLevel + 1}`,
       color: 'text-purple-500',
       bgColor: 'bg-purple-500/20',
       borderColor: 'border-purple-500/30'
@@ -35,9 +61,9 @@ const StatsCards = () => {
     {
       icon: BookOpen,
       label: 'Lessons Completed',
-      value: '48',
+      value: String(lessonsCompleted),
       unit: 'total',
-      change: '12 this month',
+      change: lessonsCompleted > 0 ? 'Great progress!' : 'Start learning!',
       color: 'text-green-500',
       bgColor: 'bg-green-500/20',
       borderColor: 'border-green-500/30'
@@ -45,10 +71,10 @@ const StatsCards = () => {
   ];
 
   const achievements = [
-    { id: 1, title: 'First Steps', description: 'Complete your first lesson', completed: true, icon: Award },
-    { id: 2, title: 'Week Warrior', description: '7-day streak', completed: true, icon: Flame },
-    { id: 3, title: 'Vocabulary Master', description: 'Learn 100 words', completed: false, icon: BookOpen },
-    { id: 4, title: 'Perfect Score', description: '100% accuracy in 5 lessons', completed: false, icon: Target }
+    { id: 1, title: 'First Steps', description: 'Complete your first lesson', completed: lessonsCompleted >= 1, icon: Award },
+    { id: 2, title: 'Week Warrior', description: '7-day streak', completed: streakDays >= 7, icon: Flame },
+    { id: 3, title: 'Vocabulary Master', description: 'Reach Level 10', completed: currentLevel >= 10, icon: BookOpen },
+    { id: 4, title: 'Perfect Score', description: 'Reach Level 20', completed: currentLevel >= 20, icon: Target }
   ];
 
   return (

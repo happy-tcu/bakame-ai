@@ -7,6 +7,9 @@ import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import ProgressDashboard from "@/components/progress/ProgressDashboard";
+import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/components/auth/AuthContext";
+import { Loader2 } from "lucide-react";
 import { 
   FlowingHexagons, 
   RipplingCircles, 
@@ -27,16 +30,55 @@ import "../styles/no-animations.css";
 
 const ForStudents = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [activeFeature, setActiveFeature] = useState(0);
-  const [currentLevel, setCurrentLevel] = useState(65);
-  const [achievements, setAchievements] = useState([
-    { unlocked: true, name: "First Steps", seed: 0 },
-    { unlocked: true, name: "Word Master", seed: 1 },
-    { unlocked: true, name: "Conversation Pro", seed: 2 },
-    { unlocked: false, name: "Grammar Guru", seed: 3 },
-    { unlocked: false, name: "Native Speaker", seed: 4 },
-    { unlocked: false, name: "English Champion", seed: 5 }
-  ]);
+  
+  // Fetch real user progress from the backend
+  const { data: progressData, isLoading } = useQuery({
+    queryKey: ['/api/progress'],
+    enabled: !!user
+  });
+
+  const { data: sessionsData } = useQuery({
+    queryKey: ['/api/sessions'],
+    enabled: !!user
+  });
+
+  // Calculate real statistics from the backend data
+  const userProgress = (progressData as any)?.progress || {};
+  const sessions = (sessionsData as any)?.sessions || [];
+  
+  // Calculate current level based on XP (100 XP per level)
+  const totalXP = userProgress.total_xp || 0;
+  const currentLevel = Math.floor(totalXP / 100) || 1;
+  const xpForNextLevel = ((currentLevel + 1) * 100);
+  const currentLevelProgress = ((totalXP % 100) / 100) * 100;
+  
+  // Calculate streak days
+  const streakDays = userProgress.streak_days || 0;
+  
+  // Total lessons completed (count of sessions)
+  const lessonsCompleted = sessions.length || 0;
+  
+  // Determine CEFR level based on XP
+  const getCEFRLevel = (xp: number) => {
+    if (xp < 500) return "Beginner • A1 Level";
+    if (xp < 1000) return "Elementary • A2 Level";
+    if (xp < 2000) return "Intermediate • B1 Level";
+    if (xp < 3500) return "Upper Intermediate • B2 Level";
+    if (xp < 5000) return "Advanced • C1 Level";
+    return "Mastery • C2 Level";
+  };
+  
+  // Define achievements based on real progress
+  const achievements = [
+    { unlocked: lessonsCompleted >= 1, name: "First Steps", seed: 0 },
+    { unlocked: lessonsCompleted >= 10, name: "Word Master", seed: 1 },
+    { unlocked: streakDays >= 7, name: "Week Warrior", seed: 2 },
+    { unlocked: currentLevel >= 10, name: "Grammar Guru", seed: 3 },
+    { unlocked: currentLevel >= 20, name: "Native Speaker", seed: 4 },
+    { unlocked: currentLevel >= 30, name: "English Champion", seed: 5 }
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -45,12 +87,17 @@ const ForStudents = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setCurrentLevel(78);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  // Show loading state while fetching data
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
+          <p className="text-sm text-muted-foreground">Loading your progress...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
@@ -103,10 +150,10 @@ const ForStudents = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-2xl">Your Progress</CardTitle>
-                  <CardDescription>Intermediate • B1 Level</CardDescription>
+                  <CardDescription>{getCEFRLevel(totalXP)}</CardDescription>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl font-bold text-gray-500">450</div>
+                  <div className="text-3xl font-bold text-gray-500">{lessonsCompleted}</div>
                   <div className="text-sm text-muted-foreground">Lessons Completed</div>
                 </div>
               </div>
@@ -116,9 +163,9 @@ const ForStudents = () => {
                 <div>
                   <div className="flex justify-between text-sm mb-2">
                     <span>Next Level Progress</span>
-                    <span className="text-gray-500 font-medium">{currentLevel}%</span>
+                    <span className="text-gray-500 font-medium">{Math.round(currentLevelProgress)}%</span>
                   </div>
-                  <Progress value={currentLevel} className="h-3 bg-gray-200 dark:bg-gray-900">
+                  <Progress value={currentLevelProgress} className="h-3 bg-gray-200 dark:bg-gray-900">
                     <div className="h-full bg-gradient-to-r from-gray-500 to-gray-500 rounded-full transition-all duration-1000" />
                   </Progress>
                 </div>
@@ -199,7 +246,13 @@ const ForStudents = () => {
 
       {/* Progress Dashboard Section */}
       <section className="relative z-10 container mx-auto px-6 py-16">
-        <ProgressDashboard />
+        <ProgressDashboard 
+          streakDays={streakDays}
+          totalXP={totalXP}
+          currentLevel={currentLevel}
+          lessonsCompleted={lessonsCompleted}
+          lastPracticeDate={userProgress.last_practice_date}
+        />
       </section>
 
       {/* Learning Tools Preview */}

@@ -3,7 +3,21 @@ import SkillsRadar from './SkillsRadar';
 import LearningRoadmap from './LearningRoadmap';
 import StatsCards from './StatsCards';
 
-const ProgressDashboard = () => {
+interface ProgressDashboardProps {
+  streakDays?: number;
+  totalXP?: number;
+  currentLevel?: number;
+  lessonsCompleted?: number;
+  lastPracticeDate?: string;
+}
+
+const ProgressDashboard = ({ 
+  streakDays = 0, 
+  totalXP = 0, 
+  currentLevel = 1, 
+  lessonsCompleted = 0,
+  lastPracticeDate
+}: ProgressDashboardProps) => {
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -15,7 +29,12 @@ const ProgressDashboard = () => {
       </div>
 
       {/* Stats Overview */}
-      <StatsCards />
+      <StatsCards 
+        streakDays={streakDays}
+        totalXP={totalXP}
+        currentLevel={currentLevel}
+        lessonsCompleted={lessonsCompleted}
+      />
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
