@@ -74,16 +74,14 @@ const ForStudents = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               onClick={() => navigate("/try")}
-              className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4 transform hover:scale-105 transition-all flex items-center"
+              className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4 transform hover:scale-105 transition-all"
             >
-              <PlayfulPolygons size={20} className="mr-2" />
               Start Playing Now
             </Button>
             <Button
               variant="outline"
-              className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10 flex items-center"
+              className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10"
             >
-              <AscendingTriangles size={20} className="mr-2" />
               See Leaderboard
             </Button>
           </div>
