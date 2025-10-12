@@ -29,6 +29,7 @@ import ForStudents from "./pages/ForStudents";
 import ForTeachers from "./pages/ForTeachers";
 import ForSchools from "./pages/ForSchools";
 import StudentDashboard from "./pages/StudentDashboard";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -60,7 +61,11 @@ const App = () => (
               <Route path="/features" element={<Features />} />
               <Route path="/roadmap" element={<Roadmap />} />
               <Route path="/press" element={<Press />} />
-              <Route path="/for-students" element={<ForStudents />} />
+              <Route path="/for-students" element={
+                <ProtectedRoute>
+                  <ForStudents />
+                </ProtectedRoute>
+              } />
               <Route path="/for-teachers" element={<ForTeachers />} />
               <Route path="/for-schools" element={<ForSchools />} />
               <Route path="/student-dashboard" element={<StudentDashboard />} />
