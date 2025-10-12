@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
+import ProgressDashboard from "@/components/progress/ProgressDashboard";
 import { 
   FlowingHexagons, 
   RipplingCircles, 
@@ -194,6 +195,11 @@ const ForStudents = () => {
             </Card>
           ))}
         </div>
+      </section>
+
+      {/* Progress Dashboard Section */}
+      <section className="relative z-10 container mx-auto px-6 py-16">
+        <ProgressDashboard />
       </section>
 
       {/* Interactive Learning Preview */}
