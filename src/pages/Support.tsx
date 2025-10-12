@@ -101,7 +101,7 @@ const Support = () => {
       <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border">
         <a href="/" className="text-2xl font-bold">Bakame Ai</a>
         <div className="hidden md:flex space-x-8">
-          <a href="/ivr" className="text-muted-foreground hover:text-foreground transition-colors">IVR Demo</a>
+          <a href="/try" className="text-muted-foreground hover:text-foreground transition-colors">Try Demo</a>
           <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
           <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
         </div>
