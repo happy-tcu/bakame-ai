@@ -86,7 +86,7 @@ const StudentDashboard = () => {
       title: "Vocabulary Builder",
       description: "Learn new words daily",
       icon: Book,
-      color: "from-orange-500 to-orange-600",
+      color: "from-blue-500 to-blue-600",
       link: "/try",
       badge: "15 words today",
       data: "324 total words"
@@ -127,7 +127,7 @@ const StudentDashboard = () => {
       title: "7 day learning streak! Keep it up!",
       time: "2 days ago",
       icon: Flame,
-      color: "text-orange-500"
+      color: "text-blue-500"
     }
   ];
 
@@ -198,7 +198,7 @@ const StudentDashboard = () => {
           <div className="flex items-center gap-4">
             <div className="text-center">
               <div className="flex items-center gap-2">
-                <Flame className="h-6 w-6 text-orange-500" />
+                <Flame className="h-6 w-6 text-blue-500" />
                 <span className="text-2xl font-bold">{currentStreak}</span>
               </div>
               <p className="text-sm text-muted-foreground">Day Streak</p>
@@ -266,11 +266,11 @@ const StudentDashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-orange-500/10 to-orange-600/10 border-orange-500/20">
+          <Card className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/20">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center justify-between">
                 <span>Speaking Score</span>
-                <Volume2 className="h-5 w-5 text-orange-500" />
+                <Volume2 className="h-5 w-5 text-blue-500" />
               </CardTitle>
             </CardHeader>
             <CardContent>
