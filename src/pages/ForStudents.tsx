@@ -63,7 +63,7 @@ const ForStudents = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative z-10 container mx-auto px-6 py-20 text-center">
+      <section className="relative z-10 container mx-auto px-6 pt-32 pb-20 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Learn English the Fun Way with AI
