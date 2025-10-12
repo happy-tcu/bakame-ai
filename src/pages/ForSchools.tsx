@@ -7,9 +7,13 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
+import { useAuth } from "@/components/auth/AuthContext";
+import { hasRole } from "@/utils/roleUtils";
+import SchoolAdminDashboard from "@/components/progress/SchoolAdminDashboard";
 
 const ForSchools = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const [roiMetrics, setRoiMetrics] = useState({
     teacherHours: "Substantial",
@@ -17,6 +21,17 @@ const ForSchools = () => {
     studentImprovement: "Remarkable",
     parentSatisfaction: "Excellent"
   });
+  
+  // Check if user is authenticated and has school role
+  const isSchoolAdmin = user && hasRole(user, "school");
+  
+  // Redirect to homepage with auth modal if accessing protected content
+  useEffect(() => {
+    // If user tries to access school dashboard without authentication
+    if (!user && window.location.search.includes("dashboard")) {
+      navigate("/", { state: { openAuth: true } });
+    }
+  }, [user, navigate]);
 
   // Animate ROI metrics on scroll
   useEffect(() => {
@@ -94,6 +109,12 @@ const ForSchools = () => {
     }
   ];
 
+  // If user is authenticated as a school admin, show the school admin dashboard
+  if (isSchoolAdmin) {
+    return <SchoolAdminDashboard />;
+  }
+
+  // Otherwise show the public school information page
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />

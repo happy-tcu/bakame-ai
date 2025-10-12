@@ -6,11 +6,26 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
+import { useAuth } from "@/components/auth/AuthContext";
+import { hasRole } from "@/utils/roleUtils";
+import TeacherDashboard from "@/components/progress/TeacherDashboard";
 
 const ForTeachers = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [scrollY, setScrollY] = useState(0);
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  
+  // Check if user is authenticated and has teacher role
+  const isTeacher = user && hasRole(user, "teacher");
+  
+  // Redirect to homepage with auth modal if accessing protected content
+  useEffect(() => {
+    // If user tries to access teacher dashboard without authentication
+    if (!user && window.location.search.includes("dashboard")) {
+      navigate("/", { state: { openAuth: true } });
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -38,6 +53,12 @@ const ForTeachers = () => {
     return () => observer.disconnect();
   }, []);
 
+  // If user is authenticated as a teacher, show the teacher dashboard
+  if (isTeacher) {
+    return <TeacherDashboard />;
+  }
+
+  // Otherwise show the public teacher information page
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
