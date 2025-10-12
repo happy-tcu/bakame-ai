@@ -21,6 +21,7 @@ import Support from "./pages/Support";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
 import EarlyAccess from "./pages/EarlyAccess";
 import Pricing from "./pages/Pricing";
 import DemoScheduling from "./pages/DemoScheduling";
@@ -68,6 +69,7 @@ const App = () => (
               <Route path="/for-students" element={<ForStudents />} />
               <Route path="/for-teachers" element={<ForTeachers />} />
               <Route path="/for-schools" element={<ForSchools />} />
+              <Route path="/login" element={<Login />} />
               <Route 
                 path="/student-dashboard" 
                 element={
