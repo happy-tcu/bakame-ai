@@ -149,15 +149,17 @@ The application uses PostgreSQL with four main tables:
    - Dallas Innovates
    - US Chamber of Commerce
    - TCU 360
+   - TCU CS Department
    - Fort Worth Report
    - Kagarama SS
    - GS Karembure
-4. **B2G Focus**: Converted platform to B2G (Business-to-Government) model - all pricing through sales@bakame.org, removed self-serve options
+4. **B2N Focus**: Converted platform to B2N (Business-to-NGO) model - replaced all government references with NGO throughout the website
 5. **Role-Based Access**: Implemented comprehensive role-based access control with ProtectedRoute and RoleGuard components
 6. **Student Dashboard**: Created gamified student dashboard with learning progress tracking and achievement badges
+7. **Navigation Fix**: Fixed dropdown behavior to be click-only instead of hover-triggered to prevent unexpected dropdown appearances
 
 ## Features
-- Dark theme only (permanent dark mode for consistent B2G aesthetic)
+- Dark theme only (permanent dark mode for consistent B2N aesthetic)
 - Responsive design with Tailwind CSS
 - Analytics integration
 - Toast notifications
@@ -165,3 +167,4 @@ The application uses PostgreSQL with four main tables:
 - Data fetching with TanStack Query
 - Supabase authentication and database integration
 - Role-based access control for different user types (student, teacher, admin, school, government, NGO)
+- Click-only navigation dropdowns for better user control
