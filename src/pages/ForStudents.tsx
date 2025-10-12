@@ -297,66 +297,6 @@ const ForStudents = () => {
         </div>
       </section>
 
-      {/* Success Stories */}
-      <section className="relative z-10 container mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Students Like You Are Succeeding!
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {[
-            {
-              name: "Alex M.",
-              age: "15 years old",
-              country: "Brazil",
-              story: "I was too shy to speak English in class. After 3 months with Bakame AI, I won my school's English speech competition!",
-              achievement: "From Shy to Confident",
-              avatarColor: "bg-blue-500"
-            },
-            {
-              name: "Priya S.",
-              age: "14 years old",
-              country: "India",
-              story: "The games make learning so fun! I don't even realize I'm studying. My grades went from C to A in just one semester!",
-              achievement: "Grade Improvement",
-              avatarColor: "bg-purple-500"
-            },
-            {
-              name: "Jin W.",
-              age: "16 years old",
-              country: "China",
-              story: "I love competing with friends on the leaderboard. We practice together every day and help each other improve!",
-              achievement: "Team Learning Champion",
-              avatarColor: "bg-green-500"
-            }
-          ].map((story, index) => (
-            <Card key={index} className="hover:scale-105 transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className={`${story.avatarColor} w-12 h-12 rounded-full flex items-center justify-center`}>
-                    <GraduationCap className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-lg">{story.name}</CardTitle>
-                    <CardDescription>{story.age} • {story.country}</CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Badge className="mb-3 bg-gradient-to-r from-gray-500/20 to-gray-500/20 text-gray-600 dark:text-gray-400 border-gray-500/30">
-                  {story.achievement}
-                </Badge>
-                <p className="text-muted-foreground italic">"{story.story}"</p>
-                <div className="flex gap-1 mt-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Starburst key={i} size={16} />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Interactive Elements Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16 bg-muted/30">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
