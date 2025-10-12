@@ -274,47 +274,6 @@ const ForTeachers = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="container mx-auto px-6 py-16 bg-muted/30">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Trusted by Teachers Worldwide
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {[
-            {
-              name: "Sarah Johnson",
-              role: "High School English Teacher",
-              school: "Lincoln High School",
-              quote: "Bakame AI has revolutionized my classroom. I can finally give each student the individual attention they deserve, and my evenings are mine again!",
-              rating: 5
-            },
-            {
-              name: "Michael Chen",
-              role: "ESL Instructor",
-              school: "International Academy",
-              quote: "The speaking practice feature is incredible. My shy students are now confident speakers, practicing with AI tutors until they're ready to participate in class.",
-              rating: 5
-            }
-          ].map((testimonial, index) => (
-            <Card key={index} className="bg-card border-border">
-              <CardHeader>
-                <div className="flex items-center gap-1 mb-2">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                  ))}
-                </div>
-                <CardTitle className="text-lg">{testimonial.name}</CardTitle>
-                <CardDescription>
-                  {testimonial.role} • {testimonial.school}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
 
       {/* Resources Section */}
       <section className="container mx-auto px-6 py-16">
