@@ -640,10 +640,16 @@ const Index = () => {
             Transform Your School's
             <span className="block gradient-text">English Program</span>
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Join hundreds of schools revolutionizing language education with AI. 
             See the difference in just one semester.
           </p>
+          <div className="mb-8">
+            <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30 px-6 py-2 text-sm">
+              <Building className="mr-2 h-4 w-4" />
+              Custom pricing tailored for government organizations
+            </Badge>
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Button 
