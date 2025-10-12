@@ -120,9 +120,9 @@ All colors MUST be HSL.
     --ring: 210 100% 60%;          /* Light blue focus rings */
     
     /* Brand colors */
-    --brand-blue: 256 87% 50%;    /* #4c12ef - Brand signature blue */
-    --brand-blue-hover: 256 87% 45%; /* Darker blue for hover states */
-    --brand-blue-light: 256 87% 10%; /* Dark blue for backgrounds in dark mode */
+    --brand-blue: 210 100% 60%;    /* Beautiful light blue brand color */
+    --brand-blue-hover: 210 100% 50%; /* Darker blue for hover states */
+    --brand-blue-light: 210 100% 10%; /* Dark blue for backgrounds in dark mode */
 
     --sidebar-background: 0 0% 5%; /* Nearly black sidebar */
     --sidebar-foreground: 0 0% 100%; /* Pure white sidebar text */
@@ -226,14 +226,14 @@ All colors MUST be HSL.
   
   .gradient-purple-blue {
     background: linear-gradient(135deg, 
-      hsl(256, 87%, 45%) 0%, 
-      hsl(256, 87%, 55%) 100%);
+      hsl(210, 100%, 50%) 0%, 
+      hsl(210, 100%, 60%) 100%);
   }
   
   .gradient-blue-accent {
     background: linear-gradient(135deg, 
-      hsl(256, 87%, 50%) 0%, 
-      hsl(256, 87%, 40%) 100%);
+      hsl(210, 100%, 60%) 0%, 
+      hsl(210, 100%, 50%) 100%);
   }
   
   .gradient-card {
