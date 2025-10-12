@@ -148,3 +148,68 @@
 .animate-explode {
   animation: explode 2s ease-in-out infinite;
 }
+
+/* Dashboard-specific animations */
+@keyframes subtle-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(76, 157, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(76, 157, 255, 0.5);
+  }
+}
+
+@keyframes progress-fill {
+  from {
+    width: 0%;
+  }
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-subtle-glow {
+  animation: subtle-glow 2s ease-in-out infinite;
+}
+
+.animate-progress-fill {
+  animation: progress-fill 1.5s ease-out;
+}
+
+.animate-count-up {
+  animation: count-up 0.5s ease-out;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.6s ease-out;
+}
+
+/* Chart hover effects */
+.recharts-layer:hover {
+  filter: brightness(1.1);
+  transition: filter 0.3s ease;
+}
+
+.recharts-dot:hover {
+  r: 8;
+  transition: r 0.3s ease;
+}
