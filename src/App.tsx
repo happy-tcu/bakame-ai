@@ -31,6 +31,7 @@ import ForStudents from "./pages/ForStudents";
 import ForTeachers from "./pages/ForTeachers";
 import ForSchools from "./pages/ForSchools";
 import StudentDashboard from "./pages/StudentDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +68,7 @@ const App = () => (
               <Route path="/for-teachers" element={<ForTeachers />} />
               <Route path="/for-schools" element={<ForSchools />} />
               <Route path="/student-dashboard" element={<StudentDashboard />} />
+              <Route path="/admin-dashboard" element={<AdminDashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

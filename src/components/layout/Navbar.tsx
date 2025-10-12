@@ -121,7 +121,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -132,7 +132,7 @@ const Navbar = () => {
                   className="h-8 w-auto"
                 />
               </Link>
-              <Badge variant="outline" className="border-white/30 text-white">
+              <Badge variant="outline" className="border-gray-300 text-gray-700">
                 v2.0
               </Badge>
             </div>
@@ -141,8 +141,8 @@ const Navbar = () => {
               <Link 
                 to="/" 
                 className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/" && "text-white"
+                  "text-gray-600 hover:text-gray-900 transition-colors",
+                  location.pathname === "/" && "text-gray-900"
                 )}
                 data-testid="link-home-nav"
               >
@@ -152,25 +152,25 @@ const Navbar = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-transparent data-[state=open]:bg-transparent">
+                    <NavigationMenuTrigger className="bg-transparent text-gray-600 hover:text-gray-900 hover:bg-transparent data-[state=open]:bg-transparent">
                       Solutions
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10">
+                      <div className="w-[400px] bg-white backdrop-blur-xl border border-gray-200 shadow-lg">
                         <div className="p-6 space-y-4">
                           {solutionsItems.map((item) => (
                             <Link
                               key={item.href}
                               to={item.href}
-                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors group"
                               data-testid={`link-${item.href.substring(1)}`}
                             >
-                              <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
+                              <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-gray-700" />
                               <div>
-                                <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
+                                <div className="text-gray-900 font-medium group-hover:text-gray-700 transition-colors">
                                   {item.title}
                                 </div>
-                                <div className="text-gray-400 text-sm">
+                                <div className="text-gray-600 text-sm">
                                   {item.description}
                                 </div>
                               </div>
@@ -182,15 +182,15 @@ const Navbar = () => {
                               <Link
                                 key={item.href}
                                 to={item.href}
-                                className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                                className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors group"
                                 data-testid={`link-${item.href.substring(1)}`}
                               >
                                 <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-white" />
                                 <div>
-                                  <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
+                                  <div className="text-gray-900 font-medium group-hover:text-gray-700 transition-colors">
                                     {item.title}
                                   </div>
-                                  <div className="text-gray-400 text-sm">
+                                  <div className="text-gray-600 text-sm">
                                     {item.description}
                                   </div>
                                 </div>
@@ -207,8 +207,8 @@ const Navbar = () => {
               <Link 
                 to="/try" 
                 className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/try" && "text-white"
+                  "text-gray-600 hover:text-gray-900 transition-colors",
+                  location.pathname === "/try" && "text-gray-900"
                 )}
                 data-testid="link-try-demo"
               >
@@ -218,8 +218,8 @@ const Navbar = () => {
               <Link 
                 to="/pricing" 
                 className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/pricing" && "text-white"
+                  "text-gray-600 hover:text-gray-900 transition-colors",
+                  location.pathname === "/pricing" && "text-gray-900"
                 )}
                 data-testid="link-pricing"
               >
@@ -229,25 +229,25 @@ const Navbar = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-transparent data-[state=open]:bg-transparent">
+                    <NavigationMenuTrigger className="bg-transparent text-gray-600 hover:text-gray-900 hover:bg-transparent data-[state=open]:bg-transparent">
                       About
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10">
+                      <div className="w-[400px] bg-white backdrop-blur-xl border border-gray-200 shadow-lg">
                         <div className="p-6 space-y-4">
                           {aboutItems.map((item) => (
                             <Link
                               key={item.href}
                               to={item.href}
-                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors group"
                               data-testid={`link-${item.href.substring(1)}`}
                             >
-                              <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
+                              <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-gray-700" />
                               <div>
-                                <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
+                                <div className="text-gray-900 font-medium group-hover:text-gray-700 transition-colors">
                                   {item.title}
                                 </div>
-                                <div className="text-gray-400 text-sm">
+                                <div className="text-gray-600 text-sm">
                                   {item.description}
                                 </div>
                               </div>
@@ -266,7 +266,7 @@ const Navbar = () => {
                 <>
                   <Button 
                     onClick={() => navigate('/demo-scheduling')} 
-                    className="bg-white text-black hover:bg-gray-200"
+                    className="bg-gray-900 text-white hover:bg-gray-800"
                     data-testid="button-schedule-demo"
                   >
                     <Calendar className="mr-2 h-4 w-4" />
@@ -318,7 +318,7 @@ const Navbar = () => {
                   </Button>
                   <Button 
                     onClick={() => handleOpenAuth('signup')}
-                    className="bg-white text-black hover:bg-gray-200"
+                    className="bg-gray-900 text-white hover:bg-gray-800"
                     data-testid="button-signup"
                   >
                     Sign up
@@ -336,7 +336,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden">
+        <div className="fixed inset-0 z-40 bg-white backdrop-blur-xl md:hidden">
           <div className="flex flex-col h-full pt-20 px-6 pb-6 overflow-y-auto">
             <div className="space-y-4">
               <Link 
