@@ -20,9 +20,9 @@ export const ProtectedRoute = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    // If not loading and user is not authenticated, redirect to login
+    // If not loading and user is not authenticated, redirect to home
     if (!loading && !user) {
-      navigate('/login', { replace: true });
+      navigate('/', { state: { openAuth: true } });
     }
   }, [loading, user, navigate]);
 
