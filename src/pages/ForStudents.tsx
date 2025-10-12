@@ -252,6 +252,7 @@ const ForStudents = () => {
           currentLevel={currentLevel}
           lessonsCompleted={lessonsCompleted}
           lastPracticeDate={userProgress.last_practice_date}
+          sessions={sessions}
         />
       </section>
 

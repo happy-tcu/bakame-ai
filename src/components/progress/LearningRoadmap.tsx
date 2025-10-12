@@ -1,196 +1,209 @@
-import { CheckCircle2, Lock, PlayCircle, Star } from 'lucide-react';
+import { CheckCircle2, Lock, PlayCircle, Star, BookOpen, Target } from 'lucide-react';
 
-interface RoadmapNode {
-  id: number;
-  title: string;
-  description: string;
-  xp: number;
-  status: 'completed' | 'current' | 'locked';
-  level: string;
-  duration: string;
+interface LearningRoadmapProps {
+  currentLevel?: number;
+  totalXP?: number;
+  lessonsCompleted?: number;
 }
 
-const LearningRoadmap = () => {
-  const roadmapData: RoadmapNode[] = [
+const LearningRoadmap = ({ currentLevel = 1, totalXP = 0, lessonsCompleted = 0 }: LearningRoadmapProps) => {
+  // Determine user's current learning stage based on level/XP
+  const getUserStage = () => {
+    if (totalXP < 100) return 0; // Beginner
+    if (totalXP < 300) return 1; // Elementary  
+    if (totalXP < 600) return 2; // Pre-Intermediate
+    if (totalXP < 1000) return 3; // Intermediate
+    if (totalXP < 1500) return 4; // Upper-Intermediate
+    return 5; // Advanced
+  };
+
+  const currentStage = getUserStage();
+
+  // Dynamic roadmap based on CEFR levels
+  const roadmapStages = [
     {
       id: 1,
-      title: "Getting Started",
-      description: "Learn basic greetings and introductions",
-      xp: 50,
-      status: 'completed',
+      title: "Beginner (A1)",
+      description: "Basic phrases, greetings, and simple vocabulary",
+      xpRequired: 0,
       level: 'Beginner',
-      duration: '30 min'
+      milestones: ["First words", "Basic greetings", "Numbers & colors"]
     },
     {
       id: 2,
-      title: "Essential Vocabulary",
-      description: "Master 100 most common English words",
-      xp: 75,
-      status: 'completed',
-      level: 'Beginner',
-      duration: '45 min'
+      title: "Elementary (A2)",
+      description: "Everyday expressions and basic conversation",
+      xpRequired: 100,
+      level: 'Elementary',
+      milestones: ["Daily activities", "Shopping", "Simple descriptions"]
     },
     {
       id: 3,
-      title: "Basic Conversations",
-      description: "Practice everyday dialogues",
-      xp: 100,
-      status: 'current',
-      level: 'Beginner',
-      duration: '1 hour'
+      title: "Pre-Intermediate (B1)",
+      description: "Handle travel situations and express opinions",
+      xpRequired: 300,
+      level: 'Pre-Intermediate',
+      milestones: ["Travel English", "Expressing opinions", "Past experiences"]
     },
     {
       id: 4,
-      title: "Grammar Fundamentals",
-      description: "Understand sentence structure",
-      xp: 125,
-      status: 'locked',
+      title: "Intermediate (B2)",
+      description: "Complex topics and spontaneous interaction",
+      xpRequired: 600,
       level: 'Intermediate',
-      duration: '1.5 hours'
+      milestones: ["Complex discussions", "News & media", "Professional topics"]
     },
     {
       id: 5,
-      title: "Business English",
-      description: "Professional communication skills",
-      xp: 150,
-      status: 'locked',
-      level: 'Intermediate',
-      duration: '2 hours'
+      title: "Upper-Intermediate (C1)",
+      description: "Fluent expression and academic/professional use",
+      xpRequired: 1000,
+      level: 'Upper-Intermediate',
+      milestones: ["Academic English", "Business communication", "Cultural nuances"]
     },
     {
       id: 6,
-      title: "Advanced Speaking",
-      description: "Fluent conversation techniques",
-      xp: 200,
-      status: 'locked',
+      title: "Advanced (C2)",
+      description: "Native-like proficiency and mastery",
+      xpRequired: 1500,
       level: 'Advanced',
-      duration: '2 hours'
+      milestones: ["Native fluency", "Complex literature", "Professional expertise"]
     }
   ];
 
-  const getNodeIcon = (status: string) => {
-    switch(status) {
-      case 'completed':
-        return <CheckCircle2 className="w-6 h-6 text-[#4c9dff]" />;
-      case 'current':
-        return <PlayCircle className="w-6 h-6 text-white animate-pulse" />;
-      case 'locked':
-        return <Lock className="w-5 h-5 text-gray-500" />;
-      default:
-        return null;
-    }
+  // Calculate progress percentage
+  const calculateProgress = () => {
+    const currentStageData = roadmapStages[currentStage];
+    const nextStageData = roadmapStages[currentStage + 1];
+    
+    if (!nextStageData) return 100; // Max level reached
+    
+    const xpInCurrentStage = totalXP - currentStageData.xpRequired;
+    const xpNeededForNextStage = nextStageData.xpRequired - currentStageData.xpRequired;
+    
+    return Math.min(100, Math.round((xpInCurrentStage / xpNeededForNextStage) * 100));
   };
 
-  const getNodeStyles = (status: string) => {
-    switch(status) {
-      case 'completed':
-        return 'bg-[#4c9dff]/20 border-[#4c9dff] shadow-lg shadow-[#4c9dff]/20';
-      case 'current':
-        return 'bg-gray-800 border-white shadow-lg shadow-white/20 animate-subtle-glow';
-      case 'locked':
-        return 'bg-gray-900/50 border-gray-700 opacity-60';
-      default:
-        return '';
-    }
-  };
+  const progressPercentage = calculateProgress();
 
-  const totalXP = roadmapData.filter(node => node.status === 'completed').reduce((acc, node) => acc + node.xp, 0);
-  const maxXP = roadmapData.reduce((acc, node) => acc + node.xp, 0);
-  const progressPercentage = (totalXP / maxXP) * 100;
+  // Empty state for new users
+  if (lessonsCompleted === 0) {
+    return (
+      <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+        <div className="flex flex-col items-center justify-center py-12 text-center">
+          <Target className="w-16 h-16 text-gray-600 mb-4" />
+          <h3 className="text-xl font-semibold text-white mb-2">Start Your Learning Journey</h3>
+          <p className="text-gray-400 max-w-md mb-6">
+            Your personalized learning path will appear here as you progress. 
+            Complete your first lesson to begin tracking your journey to fluency!
+          </p>
+          <button className="px-6 py-3 bg-[#4c9dff] text-white rounded-lg hover:bg-[#4c9dff]/80 transition-colors">
+            Begin First Lesson
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-xl font-semibold text-white">Learning Path</h3>
-          <span className="text-[#4c9dff] font-semibold">{totalXP} / {maxXP} XP</span>
+          <h3 className="text-xl font-semibold text-white">Your Learning Path</h3>
+          <span className="text-[#4c9dff] font-semibold">{totalXP} XP Earned</span>
         </div>
-        <p className="text-gray-400 text-sm">Your journey to English fluency</p>
+        <p className="text-gray-400 text-sm">Progress through CEFR levels to achieve fluency</p>
         
+        {/* Current Stage Progress */}
         <div className="mt-4">
+          <div className="flex justify-between text-sm mb-2">
+            <span className="text-gray-400">
+              {roadmapStages[currentStage].title}
+            </span>
+            {roadmapStages[currentStage + 1] && (
+              <span className="text-gray-400">
+                {roadmapStages[currentStage + 1].title}
+              </span>
+            )}
+          </div>
           <div className="h-3 bg-gray-800 rounded-full overflow-hidden">
             <div 
               className="h-full bg-gradient-to-r from-[#4c9dff] to-[#4c9dff]/60 rounded-full transition-all duration-700 ease-out shadow-lg shadow-[#4c9dff]/30"
               style={{ width: `${progressPercentage}%` }}
             />
           </div>
-          <p className="text-xs text-gray-400 mt-2">Overall Progress: {Math.round(progressPercentage)}% Complete</p>
+          <p className="text-xs text-gray-400 mt-2">
+            {progressPercentage}% to next level • {lessonsCompleted} lessons completed
+          </p>
         </div>
       </div>
 
-      <div className="relative">
-        {/* Connecting Line */}
-        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-700"></div>
-        <div 
-          className="absolute left-8 top-0 w-0.5 bg-gradient-to-b from-[#4c9dff] to-[#4c9dff]/20 transition-all duration-700"
-          style={{ height: `${(roadmapData.findIndex(n => n.status === 'current') / roadmapData.length) * 100}%` }}
-        ></div>
-
-        <div className="space-y-6">
-          {roadmapData.map((node, index) => (
-            <div key={node.id} className="relative flex items-start gap-4">
-              {/* Node Circle */}
-              <div className={`relative z-10 w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${getNodeStyles(node.status)}`}>
-                {getNodeIcon(node.status)}
-              </div>
-
-              {/* Content Card */}
-              <div 
-                className={`flex-1 rounded-lg border p-4 transition-all duration-300 hover:shadow-lg ${
-                  node.status === 'completed' 
-                    ? 'bg-gray-800 border-gray-700 hover:border-[#4c9dff]/50' 
-                    : node.status === 'current'
-                    ? 'bg-gray-800 border-[#4c9dff] shadow-md shadow-[#4c9dff]/20'
-                    : 'bg-gray-900/30 border-gray-800 cursor-not-allowed'
-                }`}
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <h4 className={`font-semibold mb-1 ${node.status === 'locked' ? 'text-gray-500' : 'text-white'}`}>
-                      {node.title}
+      {/* Simplified Stage Display */}
+      <div className="space-y-4">
+        {roadmapStages.map((stage, index) => {
+          const status = index < currentStage ? 'completed' : 
+                        index === currentStage ? 'current' : 'locked';
+          
+          return (
+            <div 
+              key={stage.id} 
+              className={`rounded-lg border p-4 transition-all ${
+                status === 'completed' ? 'bg-gray-800/50 border-gray-700' :
+                status === 'current' ? 'bg-gray-800 border-[#4c9dff] shadow-md shadow-[#4c9dff]/20' :
+                'bg-gray-900/30 border-gray-800 opacity-60'
+              }`}
+            >
+              <div className="flex items-start gap-3">
+                <div className="mt-1">
+                  {status === 'completed' && <CheckCircle2 className="w-5 h-5 text-[#4c9dff]" />}
+                  {status === 'current' && <PlayCircle className="w-5 h-5 text-white animate-pulse" />}
+                  {status === 'locked' && <Lock className="w-4 h-4 text-gray-500" />}
+                </div>
+                
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className={`font-semibold ${status === 'locked' ? 'text-gray-500' : 'text-white'}`}>
+                      {stage.title}
                     </h4>
-                    <p className={`text-sm mb-3 ${node.status === 'locked' ? 'text-gray-600' : 'text-gray-400'}`}>
-                      {node.description}
-                    </p>
-                    
-                    <div className="flex items-center gap-4 text-xs">
-                      <span className={`px-2 py-1 rounded ${
-                        node.level === 'Beginner' ? 'bg-green-500/20 text-green-400' :
-                        node.level === 'Intermediate' ? 'bg-yellow-500/20 text-yellow-400' :
-                        'bg-red-500/20 text-red-400'
-                      }`}>
-                        {node.level}
-                      </span>
-                      <span className="text-gray-500">{node.duration}</span>
-                      <span className="text-[#4c9dff] font-semibold">+{node.xp} XP</span>
-                    </div>
+                    <span className={`text-xs ${status === 'locked' ? 'text-gray-600' : 'text-[#4c9dff]'}`}>
+                      {stage.xpRequired} XP Required
+                    </span>
                   </div>
-
-                  {node.status === 'current' && (
-                    <button className="ml-4 px-4 py-2 bg-[#4c9dff] text-white rounded-lg font-semibold text-sm hover:bg-[#4c9dff]/80 transition-colors">
-                      Continue
-                    </button>
-                  )}
                   
-                  {node.status === 'completed' && (
-                    <Star className="ml-4 w-5 h-5 text-yellow-500" />
+                  <p className={`text-sm mb-2 ${status === 'locked' ? 'text-gray-600' : 'text-gray-400'}`}>
+                    {stage.description}
+                  </p>
+                  
+                  {status === 'current' && (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {stage.milestones.map((milestone, i) => (
+                        <span key={i} className="px-2 py-1 bg-gray-700/50 rounded text-xs text-gray-300">
+                          {milestone}
+                        </span>
+                      ))}
+                    </div>
                   )}
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
 
-      <div className="mt-8 p-4 bg-gradient-to-r from-[#4c9dff]/10 to-transparent rounded-lg border border-[#4c9dff]/20">
-        <div className="flex items-center gap-3">
-          <Star className="w-5 h-5 text-yellow-500" />
-          <div>
-            <p className="text-white font-semibold">Next Milestone</p>
-            <p className="text-gray-400 text-sm">Complete "Basic Conversations" to unlock Grammar Fundamentals</p>
+      {/* Next Goal */}
+      {roadmapStages[currentStage + 1] && (
+        <div className="mt-6 p-4 bg-gradient-to-r from-[#4c9dff]/10 to-transparent rounded-lg border border-[#4c9dff]/20">
+          <div className="flex items-center gap-3">
+            <Star className="w-5 h-5 text-yellow-500" />
+            <div>
+              <p className="text-white font-semibold">Next Goal</p>
+              <p className="text-gray-400 text-sm">
+                Earn {roadmapStages[currentStage + 1].xpRequired - totalXP} more XP to reach {roadmapStages[currentStage + 1].title}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

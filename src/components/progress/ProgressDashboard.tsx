@@ -1,7 +1,13 @@
 import ProgressChart from './ProgressChart';
-import SkillsRadar from './SkillsRadar';
 import LearningRoadmap from './LearningRoadmap';
 import StatsCards from './StatsCards';
+
+interface Session {
+  id?: string;
+  completed_at?: string;
+  xp_earned?: number;
+  accuracy?: number;
+}
 
 interface ProgressDashboardProps {
   streakDays?: number;
@@ -9,6 +15,7 @@ interface ProgressDashboardProps {
   currentLevel?: number;
   lessonsCompleted?: number;
   lastPracticeDate?: string;
+  sessions?: Session[];
 }
 
 const ProgressDashboard = ({ 
@@ -16,7 +23,8 @@ const ProgressDashboard = ({
   totalXP = 0, 
   currentLevel = 1, 
   lessonsCompleted = 0,
-  lastPracticeDate
+  lastPracticeDate,
+  sessions = []
 }: ProgressDashboardProps) => {
   return (
     <div className="space-y-8">
@@ -36,14 +44,21 @@ const ProgressDashboard = ({
         lessonsCompleted={lessonsCompleted}
       />
 
-      {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <ProgressChart />
-        <SkillsRadar />
+      {/* Chart Section */}
+      <div className="w-full">
+        <ProgressChart 
+          sessions={sessions}
+          totalXP={totalXP}
+          lessonsCompleted={lessonsCompleted}
+        />
       </div>
 
       {/* Learning Roadmap */}
-      <LearningRoadmap />
+      <LearningRoadmap 
+        currentLevel={currentLevel}
+        totalXP={totalXP}
+        lessonsCompleted={lessonsCompleted}
+      />
 
       {/* Quick Actions */}
       <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
