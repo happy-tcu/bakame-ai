@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
 import { AnalyticsProvider } from "./components/analytics/AnalyticsProvider";
 import { AuthProvider } from "./components/auth/AuthContext";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Team from "./pages/Team";
@@ -67,8 +68,30 @@ const App = () => (
               <Route path="/for-students" element={<ForStudents />} />
               <Route path="/for-teachers" element={<ForTeachers />} />
               <Route path="/for-schools" element={<ForSchools />} />
-              <Route path="/student-dashboard" element={<StudentDashboard />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route 
+                path="/student-dashboard" 
+                element={
+                  <ProtectedRoute allowedRoles={['student']}>
+                    <StudentDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/admin-dashboard" 
+                element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/teacher-dashboard" 
+                element={
+                  <ProtectedRoute allowedRoles={['teacher']}>
+                    <StudentDashboard />
+                  </ProtectedRoute>
+                } 
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

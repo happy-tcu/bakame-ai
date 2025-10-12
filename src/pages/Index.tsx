@@ -18,11 +18,35 @@ import Navbar from '@/components/layout/Navbar';
 import LiveChat from '@/components/chat/LiveChat';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import { useAuth } from '@/components/auth/AuthContext';
+import { getUserRole } from '@/utils/roleUtils';
 
 const Index = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const userRole = getUserRole(user);
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
   const [isVisible, setIsVisible] = useState({});
+
+  // Redirect authenticated users to their dashboard based on role
+  useEffect(() => {
+    if (user && userRole) {
+      switch (userRole) {
+        case 'admin':
+          navigate('/admin-dashboard', { replace: true });
+          break;
+        case 'student':
+          navigate('/student-dashboard', { replace: true });
+          break;
+        case 'teacher':
+          navigate('/teacher-dashboard', { replace: true });
+          break;
+        default:
+          // User is logged in but has no specific role - stay on homepage
+          break;
+      }
+    }
+  }, [user, userRole, navigate]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

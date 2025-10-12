@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   Menu, X, ChevronDown, Calendar, Play, Users, GraduationCap, School, Building,
-  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home, LogOut, User
+  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home, LogOut, User,
+  BarChart, Settings, BookOpen as BookOpenIcon, Activity, UserCog, ShieldCheck, ClipboardList
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { useAuth } from '@/components/auth/AuthContext';
 import { AuthModal } from '@/components/auth/AuthModal';
+import { getUserRole } from '@/utils/roleUtils';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,6 +34,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const userRole = getUserRole(user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
@@ -264,6 +267,49 @@ const Navbar = () => {
               
               {user ? (
                 <>
+                  {/* Role-based navigation items */}
+                  {userRole === 'student' && (
+                    <Link 
+                      to="/student-dashboard" 
+                      className={cn(
+                        "text-gray-600 hover:text-gray-900 transition-colors font-medium",
+                        location.pathname === "/student-dashboard" && "text-gray-900"
+                      )}
+                      data-testid="link-student-dashboard"
+                    >
+                      <BookOpenIcon className="inline-block mr-1 h-4 w-4" />
+                      My Dashboard
+                    </Link>
+                  )}
+                  
+                  {userRole === 'admin' && (
+                    <Link 
+                      to="/admin-dashboard" 
+                      className={cn(
+                        "text-gray-600 hover:text-gray-900 transition-colors font-medium",
+                        location.pathname === "/admin-dashboard" && "text-gray-900"
+                      )}
+                      data-testid="link-admin-dashboard"
+                    >
+                      <ShieldCheck className="inline-block mr-1 h-4 w-4" />
+                      Admin Panel
+                    </Link>
+                  )}
+                  
+                  {userRole === 'teacher' && (
+                    <Link 
+                      to="/teacher-dashboard" 
+                      className={cn(
+                        "text-gray-600 hover:text-gray-900 transition-colors font-medium",
+                        location.pathname === "/teacher-dashboard" && "text-gray-900"
+                      )}
+                      data-testid="link-teacher-dashboard"
+                    >
+                      <Users className="inline-block mr-1 h-4 w-4" />
+                      Teacher Portal
+                    </Link>
+                  )}
+                  
                   <Button 
                     onClick={() => navigate('/demo-scheduling')} 
                     className="bg-gray-900 text-white hover:bg-gray-800"
@@ -286,19 +332,85 @@ const Navbar = () => {
                     <DropdownMenuContent className="w-56" align="end" forceMount>
                       <DropdownMenuLabel className="font-normal">
                         <div className="flex flex-col space-y-1">
-                          <p className="text-sm font-medium leading-none">{user.user_metadata?.name || 'User'}</p>
+                          <div className="flex items-center gap-2">
+                            <p className="text-sm font-medium leading-none">{user.user_metadata?.name || 'User'}</p>
+                            {userRole && (
+                              <Badge variant="secondary" className="text-xs capitalize">
+                                {userRole}
+                              </Badge>
+                            )}
+                          </div>
                           <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
                         </div>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => navigate('/try')} data-testid="menu-item-try-demo">
-                        <Play className="mr-2 h-4 w-4" />
-                        <span>Try Demo</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => navigate('/pricing')} data-testid="menu-item-pricing">
-                        <Sparkles className="mr-2 h-4 w-4" />
-                        <span>Pricing</span>
-                      </DropdownMenuItem>
+                      
+                      {/* Role-specific menu items */}
+                      {userRole === 'student' && (
+                        <>
+                          <DropdownMenuItem onClick={() => navigate('/student-dashboard')} data-testid="menu-item-my-progress">
+                            <Activity className="mr-2 h-4 w-4" />
+                            <span>My Progress</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => navigate('/try')} data-testid="menu-item-practice">
+                            <BookOpenIcon className="mr-2 h-4 w-4" />
+                            <span>Practice</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => navigate('/settings')} data-testid="menu-item-settings">
+                            <Settings className="mr-2 h-4 w-4" />
+                            <span>Settings</span>
+                          </DropdownMenuItem>
+                        </>
+                      )}
+                      
+                      {userRole === 'admin' && (
+                        <>
+                          <DropdownMenuItem onClick={() => navigate('/admin-dashboard')} data-testid="menu-item-user-management">
+                            <UserCog className="mr-2 h-4 w-4" />
+                            <span>User Management</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => navigate('/system-settings')} data-testid="menu-item-system-settings">
+                            <Settings className="mr-2 h-4 w-4" />
+                            <span>System Settings</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => navigate('/audit-logs')} data-testid="menu-item-audit-logs">
+                            <ClipboardList className="mr-2 h-4 w-4" />
+                            <span>Audit Logs</span>
+                          </DropdownMenuItem>
+                        </>
+                      )}
+                      
+                      {userRole === 'teacher' && (
+                        <>
+                          <DropdownMenuItem onClick={() => navigate('/teacher-dashboard')} data-testid="menu-item-my-classes">
+                            <Users className="mr-2 h-4 w-4" />
+                            <span>My Classes</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => navigate('/student-progress')} data-testid="menu-item-student-progress">
+                            <BarChart className="mr-2 h-4 w-4" />
+                            <span>Student Progress</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => navigate('/resources')} data-testid="menu-item-resources">
+                            <BookOpenIcon className="mr-2 h-4 w-4" />
+                            <span>Resources</span>
+                          </DropdownMenuItem>
+                        </>
+                      )}
+                      
+                      {/* Common menu items */}
+                      {!userRole && (
+                        <>
+                          <DropdownMenuItem onClick={() => navigate('/try')} data-testid="menu-item-try-demo">
+                            <Play className="mr-2 h-4 w-4" />
+                            <span>Try Demo</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => navigate('/pricing')} data-testid="menu-item-pricing">
+                            <Sparkles className="mr-2 h-4 w-4" />
+                            <span>Pricing</span>
+                          </DropdownMenuItem>
+                        </>
+                      )}
+                      
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={signOut} data-testid="menu-item-logout">
                         <LogOut className="mr-2 h-4 w-4" />
