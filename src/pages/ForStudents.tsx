@@ -255,20 +255,13 @@ const ForStudents = () => {
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Join millions of students learning English the fun way. No more boring textbooks - just games, friends, and AI buddies!
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <Button
                 onClick={() => navigate("/try")}
                 className="bg-gradient-to-r from-gray-500 to-gray-500 text-white hover:opacity-90 text-lg px-8 py-4 transform hover:scale-105 transition-all flex items-center"
               >
                 <DynamicWave size={20} className="mr-2" />
                 Start Learning Free
-              </Button>
-              <Button
-                variant="outline"
-                className="text-lg px-8 py-4 border-gray-500/50 hover:bg-gray-500/10 flex items-center"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Watch Demo Video
               </Button>
             </div>
             <p className="mt-6 text-sm text-muted-foreground flex items-center justify-center gap-4">
