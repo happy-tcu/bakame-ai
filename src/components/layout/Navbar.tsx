@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   Menu, X, ChevronDown, Calendar, Play, Users, GraduationCap, School, Building,
@@ -17,14 +17,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -36,6 +28,10 @@ const Navbar = () => {
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalTab, setAuthModalTab] = useState<'login' | 'signup'>('login');
+  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const solutionsRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => {
@@ -54,6 +50,23 @@ const Navbar = () => {
     const name = user.user_metadata?.name || user.email || '';
     return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'U';
   };
+
+  // Handle click outside to close dropdowns
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (solutionsRef.current && !solutionsRef.current.contains(event.target as Node)) {
+        setIsSolutionsOpen(false);
+      }
+      if (aboutRef.current && !aboutRef.current.contains(event.target as Node)) {
+        setIsAboutOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const solutionsItems = [
     {
@@ -148,60 +161,71 @@ const Navbar = () => {
                 Home
               </Link>
 
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-transparent data-[state=open]:bg-transparent">
-                      Solutions
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <div className="w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10">
-                        <div className="p-6 space-y-4">
-                          {solutionsItems.map((item) => (
-                            <Link
-                              key={item.href}
-                              to={item.href}
-                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
-                              data-testid={`link-${item.href.substring(1)}`}
-                            >
-                              <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
-                              <div>
-                                <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
-                                  {item.title}
-                                </div>
-                                <div className="text-gray-400 text-sm">
-                                  {item.description}
-                                </div>
-                              </div>
-                            </Link>
-                          ))}
-                          
-                          <div className="border-t border-white/10 pt-4">
-                            {additionalSolutionsItems.map((item) => (
-                              <Link
-                                key={item.href}
-                                to={item.href}
-                                className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
-                                data-testid={`link-${item.href.substring(1)}`}
-                              >
-                                <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-white" />
-                                <div>
-                                  <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
-                                    {item.title}
-                                  </div>
-                                  <div className="text-gray-400 text-sm">
-                                    {item.description}
-                                  </div>
-                                </div>
-                              </Link>
-                            ))}
+              <div ref={solutionsRef} className="relative">
+                <button
+                  onClick={() => {
+                    setIsSolutionsOpen(!isSolutionsOpen);
+                    setIsAboutOpen(false);
+                  }}
+                  className={cn(
+                    "flex items-center text-gray-300 hover:text-white transition-colors",
+                    isSolutionsOpen && "text-white"
+                  )}
+                >
+                  Solutions
+                  <ChevronDown className={cn(
+                    "ml-1 h-4 w-4 transition-transform",
+                    isSolutionsOpen && "rotate-180"
+                  )} />
+                </button>
+                {isSolutionsOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl">
+                    <div className="p-6 space-y-4">
+                      {solutionsItems.map((item) => (
+                        <Link
+                          key={item.href}
+                          to={item.href}
+                          onClick={() => setIsSolutionsOpen(false)}
+                          className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                          data-testid={`link-${item.href.substring(1)}`}
+                        >
+                          <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
+                          <div>
+                            <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
+                              {item.title}
+                            </div>
+                            <div className="text-gray-400 text-sm">
+                              {item.description}
+                            </div>
                           </div>
-                        </div>
+                        </Link>
+                      ))}
+                      
+                      <div className="border-t border-white/10 pt-4">
+                        {additionalSolutionsItems.map((item) => (
+                          <Link
+                            key={item.href}
+                            to={item.href}
+                            onClick={() => setIsSolutionsOpen(false)}
+                            className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                            data-testid={`link-${item.href.substring(1)}`}
+                          >
+                            <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-white" />
+                            <div>
+                              <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
+                                {item.title}
+                              </div>
+                              <div className="text-gray-400 text-sm">
+                                {item.description}
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
                       </div>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <Link 
                 to="/try" 
@@ -225,39 +249,49 @@ const Navbar = () => {
                 Contact Sales
               </Link>
 
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-gray-300 hover:text-white hover:bg-transparent data-[state=open]:bg-transparent">
-                      About
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <div className="w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10">
-                        <div className="p-6 space-y-4">
-                          {aboutItems.map((item) => (
-                            <Link
-                              key={item.href}
-                              to={item.href}
-                              className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
-                              data-testid={`link-${item.href.substring(1)}`}
-                            >
-                              <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
-                              <div>
-                                <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
-                                  {item.title}
-                                </div>
-                                <div className="text-gray-400 text-sm">
-                                  {item.description}
-                                </div>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+              <div ref={aboutRef} className="relative">
+                <button
+                  onClick={() => {
+                    setIsAboutOpen(!isAboutOpen);
+                    setIsSolutionsOpen(false);
+                  }}
+                  className={cn(
+                    "flex items-center text-gray-300 hover:text-white transition-colors",
+                    isAboutOpen && "text-white"
+                  )}
+                >
+                  About
+                  <ChevronDown className={cn(
+                    "ml-1 h-4 w-4 transition-transform",
+                    isAboutOpen && "rotate-180"
+                  )} />
+                </button>
+                {isAboutOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl">
+                    <div className="p-6 space-y-4">
+                      {aboutItems.map((item) => (
+                        <Link
+                          key={item.href}
+                          to={item.href}
+                          onClick={() => setIsAboutOpen(false)}
+                          className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                          data-testid={`link-${item.href.substring(1)}`}
+                        >
+                          <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
+                          <div>
+                            <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
+                              {item.title}
+                            </div>
+                            <div className="text-gray-400 text-sm">
+                              {item.description}
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
 
 
               
