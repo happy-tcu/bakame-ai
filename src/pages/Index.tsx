@@ -590,37 +590,6 @@ const Index = () => {
               <p className="text-gray-200 text-lg">Teacher Satisfaction</p>
             </div>
           </div>
-          
-          <Card className="bg-gradient-to-r from-gray-900/20 to-gray-900/20 border-gray-500/20">
-            <CardContent className="p-8">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    Proven ROI for Schools
-                  </h3>
-                  <ul className="space-y-3">
-                    <li className="flex items-center text-gray-300">
-                      <TrendingUp className="mr-3 h-5 w-5 text-gray-400" />
-                      Significant reduction in tutoring costs
-                    </li>
-                    <li className="flex items-center text-gray-300">
-                      <TrendingUp className="mr-3 h-5 w-5 text-gray-400" />
-                      Accelerated language proficiency gains
-                    </li>
-                    <li className="flex items-center text-gray-300">
-                      <TrendingUp className="mr-3 h-5 w-5 text-gray-400" />
-                      Measurable increase in student engagement
-                    </li>
-                  </ul>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>Strong</div>
-                  <p className="text-xl text-gray-200">Return on Investment</p>
-                  <p className="text-sm text-gray-300 mt-2">Proven value for schools</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
