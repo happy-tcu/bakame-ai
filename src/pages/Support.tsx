@@ -69,8 +69,8 @@ const Support = () => {
       icon: MessageCircle,
       title: "Community Support",
       description: "Join our community discussions",
-      contact: "Join Discord",
-      action: "#"
+      contact: "Coming Soon",
+      action: null
     }
   ];
 
@@ -125,13 +125,19 @@ const Support = () => {
               <method.icon className="w-8 h-8 text-accent mb-4" />
               <h3 className="text-xl font-bold text-foreground mb-2">{method.title}</h3>
               <p className="text-muted-foreground mb-4">{method.description}</p>
-              <a 
-                href={method.action}
-                className="inline-flex items-center text-accent hover:text-accent/80 font-medium"
-              >
-                {method.contact}
-                <ChevronDown className="ml-1 w-4 h-4 rotate-[-90deg]" />
-              </a>
+              {method.action ? (
+                <a 
+                  href={method.action}
+                  className="inline-flex items-center text-accent hover:text-accent/80 font-medium"
+                >
+                  {method.contact}
+                  <ChevronDown className="ml-1 w-4 h-4 rotate-[-90deg]" />
+                </a>
+              ) : (
+                <span className="inline-flex items-center text-muted-foreground font-medium">
+                  {method.contact}
+                </span>
+              )}
             </div>
           ))}
         </div>

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Linkedin, Twitter, Mail } from "lucide-react";
+import { ArrowLeft, Mail } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 const Team = () => {
@@ -9,16 +9,12 @@ const Team = () => {
     role: "CEO",
     bio: "Civics Action leader, Startups Expert, Qatar Foundation Amb. and Founder of The Street Bridge Inc.",
     image: "/lovable-uploads/5a0d8cef-f727-4d56-8b84-f064ace377c7.png",
-    linkedin: "#",
-    twitter: "#",
     email: "happy@bakame.ai"
   }, {
     name: "Aime Byiringiro",
     role: "CTO",
     bio: "Serial Entrepreneur, Organizational Strategist, and Seasoned Software Developer. Currently works at Dell Technologies",
     image: "/lovable-uploads/a40d3f7c-3281-41fc-8a55-76ebc92497e5.png",
-    linkedin: "#",
-    twitter: "#",
     email: "aime@bakame.ai"
   }];
   const coaches = [{
@@ -34,11 +30,6 @@ const Team = () => {
     image: "/lovable-uploads/e1929865-9927-4756-b9df-1201237e6e30.png"
   }];
   const advisors = [{
-    name: "Annelise Joy",
-    role: "ADVISOR (STRATEGY)",
-    bio: "Philanthropist, Spaceship & Robotics Investor at E Space",
-    image: "AJ"
-  }, {
     name: "Natasha Harris",
     role: "ADVISOR (VENTURES)",
     bio: "Principle of Biegert Group, Inc. and Chairperson of Hope Haven",
@@ -89,12 +80,6 @@ const Team = () => {
                   </div>
                   <p className="text-muted-foreground text-sm mb-4">{member.bio}</p>
                   <div className="flex justify-center space-x-3">
-                    <a href={member.linkedin} className="p-2 hover:bg-muted rounded-lg transition-colors">
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                    <a href={member.twitter} className="p-2 hover:bg-muted rounded-lg transition-colors">
-                      <Twitter className="w-4 h-4" />
-                    </a>
                     <a href={`mailto:${member.email}`} className="p-2 hover:bg-muted rounded-lg transition-colors">
                       <Mail className="w-4 h-4" />
                     </a>
