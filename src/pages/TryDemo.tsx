@@ -614,11 +614,11 @@ const TryDemo = () => {
             </Button>
             
             <Button 
-              onClick={() => navigate('/pricing')}
+              onClick={() => navigate('/contact')}
               variant="outline"
               className="text-lg px-8 py-4"
             >
-              View Pricing Plans
+              Contact Government Sales
             </Button>
           </div>
           
