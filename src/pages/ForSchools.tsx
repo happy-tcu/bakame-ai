@@ -79,13 +79,13 @@ const ForSchools = () => {
       <section className="container mx-auto px-6 py-20 text-center">
         <div className="max-w-5xl mx-auto">
           <Badge className="mb-4 bg-gray-500/10 text-gray-500 border-gray-500/30">
-            Trusted by 500+ Schools Worldwide
+            Enterprise-Grade AI for Education
           </Badge>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
             Transform English Education Across Your School
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Empower your teachers, engage your students, and deliver measurable learning outcomes with enterprise-grade AI technology. Join leading schools achieving remarkable improvement in English proficiency.
+            Empower your teachers, engage your students, and deliver measurable learning outcomes with enterprise-grade AI technology designed specifically for educational institutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
@@ -599,7 +599,7 @@ const ForSchools = () => {
             Ready to Transform Your School's English Program?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Join 500+ schools achieving exceptional results with Bakame AI
+            Experience the power of AI-driven education designed for your school's success
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
