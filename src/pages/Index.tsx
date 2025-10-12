@@ -666,9 +666,9 @@ const Index = () => {
           </div>
           
           <p className="text-gray-400">
-            Or email us at{' '}
-            <a href="mailto:happy@bakame.org" className="text-gray-400 hover:text-gray-300">
-              happy@bakame.org
+            Or contact our government sales team at{' '}
+            <a href="mailto:sales@bakame.org" className="text-gray-400 hover:text-gray-300">
+              sales@bakame.org
             </a>
           </p>
         </div>
@@ -695,7 +695,7 @@ const Index = () => {
               <h3 className="text-white font-semibold mb-4">Product</h3>
               <ul className="space-y-2">
                 <li><Link to="/features" className="text-gray-400 hover:text-white transition-colors">Features</Link></li>
-                <li><Link to="/pricing" className="text-gray-400 hover:text-white transition-colors">Pricing</Link></li>
+                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Government Solutions</Link></li>
                 <li><Link to="/try" className="text-gray-400 hover:text-white transition-colors">Try Demo</Link></li>
               </ul>
             </div>
