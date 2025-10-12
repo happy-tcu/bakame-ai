@@ -667,7 +667,7 @@ const Roadmap = () => {
         }
         
         .gradient-text {
-          background: linear-gradient(to right, #8b5cf6, #3b82f6);
+          background: #000000;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
