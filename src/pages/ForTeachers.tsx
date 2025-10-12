@@ -70,7 +70,7 @@ const ForTeachers = () => {
             Empower Your English Classroom with AI
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Save hours on grading, track student progress effortlessly, and create engaging lessons that inspire learning. Join thousands of teachers transforming their classrooms with AI.
+            Save time on grading, track student progress effortlessly, and create engaging lessons that inspire learning with AI-powered teaching tools.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
@@ -156,16 +156,9 @@ const ForTeachers = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2">Comprehensive Teacher Dashboard</h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-muted-foreground">
                     See all your classes, student progress, and upcoming assignments in one place. Identify struggling students instantly with AI-powered insights.
                   </p>
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
-                      <span>Class Average Progress</span>
-                      <span className="text-primary font-medium">78%</span>
-                    </div>
-                    <Progress value={78} className="h-2" />
-                  </div>
                 </div>
               </div>
             </div>
@@ -202,29 +195,26 @@ const ForTeachers = () => {
           {/* Visual Demo Area */}
           <div className="space-y-6">
             <div className="bg-bg-white text-black hover:bg-gray-200-to-br from-primary/10 to-accent/10 rounded-xl p-8 border border-border">
-              <h3 className="text-2xl font-semibold mb-6">Your Daily Time Savings</h3>
+              <h3 className="text-2xl font-semibold mb-6">How AI Can Help You</h3>
               <div className="space-y-4">
-                {[
-                  { task: "Grading assignments", saved: "3 hours/week", percentage: 85 },
-                  { task: "Progress tracking", saved: "2 hours/week", percentage: 70 },
-                  { task: "Lesson preparation", saved: "4 hours/week", percentage: 60 },
-                  { task: "Parent communication", saved: "1 hour/week", percentage: 50 }
-                ].map((item, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span>{item.task}</span>
-                      <span className="text-primary font-medium">{item.saved}</span>
-                    </div>
-                    <Progress value={item.percentage} className="h-2" />
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 p-4 bg-primary/10 rounded-lg">
-                <p className="text-center">
-                  <span className="text-3xl font-bold text-primary">10+ hours</span>
-                  <br />
-                  <span className="text-muted-foreground">saved every week</span>
-                </p>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <h4 className="font-medium mb-2">Streamline Your Workflow</h4>
+                  <p className="text-muted-foreground text-sm">
+                    Automate repetitive tasks like grading and progress tracking to focus more on teaching and student interaction.
+                  </p>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <h4 className="font-medium mb-2">Personalized Learning Support</h4>
+                  <p className="text-muted-foreground text-sm">
+                    AI provides individualized feedback and practice for each student, helping them improve at their own pace.
+                  </p>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <h4 className="font-medium mb-2">Data-Driven Insights</h4>
+                  <p className="text-muted-foreground text-sm">
+                    Get actionable insights about student performance to make informed teaching decisions.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -275,48 +265,6 @@ const ForTeachers = () => {
       </section>
 
 
-      {/* Resources Section */}
-      <section className="container mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Resources to Support Your Teaching
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {[
-            {
-              icon: BookOpen,
-              title: "Lesson Plan Library",
-              description: "1000+ ready-to-use lesson plans aligned with curriculum standards",
-              action: "Browse Library"
-            },
-            {
-              icon: Award,
-              title: "Professional Development",
-              description: "Free webinars and courses on AI-enhanced teaching methods",
-              action: "View Schedule"
-            },
-            {
-              icon: MessageSquare,
-              title: "Teacher Community",
-              description: "Connect with other educators, share tips, and get support",
-              action: "Join Community"
-            }
-          ].map((resource, index) => (
-            <Card key={index} className="bg-card border-border hover:border-primary transition-colors">
-              <CardHeader>
-                <resource.icon className="h-8 w-8 text-primary mb-2" />
-                <CardTitle>{resource.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4">{resource.description}</CardDescription>
-                <Button variant="link" className="p-0 h-auto text-primary">
-                  {resource.action} <ChevronRight className="ml-1 h-4 w-4" />
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="container mx-auto px-6 py-20">
         <div className="bg-bg-white text-black hover:bg-gray-200-to-r from-primary/10 to-accent/10 rounded-3xl p-12 text-center border border-border">
@@ -324,7 +272,7 @@ const ForTeachers = () => {
             Ready to Transform Your Teaching?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join thousands of teachers who are saving time, improving student outcomes, and rekindling their passion for teaching.
+            Discover how AI can help you save time, improve student outcomes, and rekindle your passion for teaching.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
