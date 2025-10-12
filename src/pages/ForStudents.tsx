@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { TrendingUp, Medal, Play, Check, GraduationCap } from "lucide-react";
+import { TrendingUp, Medal, Play, Check, GraduationCap, Mic, Flame, Zap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -365,22 +365,22 @@ const ForStudents = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {[
             {
-              Pattern: SoundWaves,
+              Icon: Mic,
               title: "Voice Messages",
               description: "Send voice notes to AI tutors and get instant feedback"
             },
             {
-              Pattern: FlowingLine,
+              Icon: Flame,
               title: "Streak Counter",
               description: "Keep your daily streak alive and earn bonus points"
             },
             {
-              Pattern: RadialBurst,
+              Icon: Zap,
               title: "Power-Ups",
               description: "Use special abilities to boost your learning speed"
             },
             {
-              Pattern: NodeNetwork,
+              Icon: Users,
               title: "Study Groups",
               description: "Create or join groups with classmates and friends"
             }
@@ -390,7 +390,7 @@ const ForStudents = () => {
               className="bg-card rounded-xl p-6 border border-border hover:border-gray-500/50 transition-all duration-300 hover:scale-105 cursor-pointer"
             >
               <div className="mb-4">
-                <feature.Pattern size={48} />
+                <feature.Icon className="w-12 h-12 text-white" />
               </div>
               <h3 className="font-semibold mb-2">{feature.title}</h3>
               <p className="text-sm text-muted-foreground">{feature.description}</p>
