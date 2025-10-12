@@ -90,8 +90,8 @@ const ForStudents = () => {
 
       {/* Gamification Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          Your Learning Adventure Awaits! <PlayfulPolygons size={36} />
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Your Learning Adventure Awaits!
         </h2>
         
         {/* Progress & Level Section */}
@@ -197,8 +197,8 @@ const ForStudents = () => {
 
       {/* Interactive Learning Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16 bg-muted/30">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          Practice Without Fear <SoundWaves size={36} active={true} />
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Practice Without Fear
         </h2>
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* AI Tutor Chat Preview */}
@@ -292,8 +292,8 @@ const ForStudents = () => {
 
       {/* Success Stories */}
       <section className="relative z-10 container mx-auto px-6 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          Students Like You Are Succeeding! <Starburst size={36} />
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Students Like You Are Succeeding!
         </h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {[
@@ -352,8 +352,8 @@ const ForStudents = () => {
 
       {/* Interactive Elements Preview */}
       <section className="relative z-10 container mx-auto px-6 py-16 bg-muted/30">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-          Cool Features You'll Love! <DynamicWave size={36} />
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Cool Features You'll Love!
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {[
@@ -397,8 +397,8 @@ const ForStudents = () => {
         <div className="bg-gradient-to-r from-gray-500/20 via-gray-500/20 to-accent/20 rounded-3xl p-12 text-center border-2 border-gray-500/30 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-gray-500/5 to-gray-500/5 animate-pulse" />
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 flex items-center justify-center gap-3">
-              Ready to Start Your Adventure? <PlayfulPolygons size={36} />
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+              Ready to Start Your Adventure?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Join millions of students learning English the fun way. No more boring textbooks - just games, friends, and AI buddies!
