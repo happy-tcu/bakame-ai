@@ -6,13 +6,16 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       queryFn: async ({ queryKey, signal }) => {
+        console.log('[QueryClient] queryFn called with queryKey:', queryKey);
         const path = queryKey[0] as string;
         
         // Create full URL with backend base URL
         const url = createApiUrl(path);
+        console.log('[QueryClient] URL created:', url);
         
         // Get the auth token from Supabase
         const { data: { session } } = await supabase.auth.getSession();
+        console.log('[QueryClient] Session retrieved:', !!session, 'Has token:', !!session?.access_token);
         
         const headers: HeadersInit = {
           'Content-Type': 'application/json',
