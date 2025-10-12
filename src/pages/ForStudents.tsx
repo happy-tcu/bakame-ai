@@ -250,10 +250,10 @@ const ForStudents = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-gray-500/5 to-gray-500/5 animate-pulse" />
           <div className="relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-              Ready to Start Your Adventure?
+              Ready to Master English?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join millions of students learning English the fun way. No more boring textbooks - just games, friends, and AI buddies!
+              Join millions of students achieving fluency through personalized lessons, AI conversations, and proven learning methods that make progress enjoyable!
             </p>
             <div className="flex justify-center">
               <Button
@@ -266,8 +266,8 @@ const ForStudents = () => {
             </div>
             <p className="mt-6 text-sm text-muted-foreground flex items-center justify-center gap-4">
               <span className="flex items-center gap-1">Free to start</span> • 
-              <span className="flex items-center gap-1">No boring lessons</span> • 
-              <span className="flex items-center gap-1">Win real prizes</span>
+              <span className="flex items-center gap-1">Personalized learning</span> • 
+              <span className="flex items-center gap-1">Official certificates</span>
             </p>
           </div>
         </div>
