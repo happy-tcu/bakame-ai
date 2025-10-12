@@ -1,56 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Building2, Shield, Clock, BarChart3 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 const EnterpriseSolution = () => {
   const navigate = useNavigate();
   const [activeUseCase, setActiveUseCase] = useState<number | null>(null);
-  const [statsVisible, setStatsVisible] = useState(false);
-  const [animatedStats, setAnimatedStats] = useState({
-    cost: 0,
-    response: 0,
-    uptime: 0,
-    satisfaction: 0
-  });
 
-  // Animate counters when stats section becomes visible
-  useEffect(() => {
-    if (statsVisible) {
-      const duration = 2000;
-      const steps = 60;
-      const stepTime = duration / steps;
-      let step = 0;
-      const timer = setInterval(() => {
-        step++;
-        const progress = step / steps;
-        setAnimatedStats({
-          cost: Math.floor(60 * progress),
-          response: Math.floor(40 * progress),
-          uptime: Math.floor(99.9 * progress * 10) / 10,
-          satisfaction: Math.floor(85 * progress)
-        });
-        if (step >= steps) {
-          clearInterval(timer);
-        }
-      }, stepTime);
-      return () => clearInterval(timer);
-    }
-  }, [statsVisible]);
-
-  // Observer for stats animation
-  useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setStatsVisible(true);
-        }
-      });
-    }, {
-      threshold: 0.3
-    });
-    const statsElement = document.getElementById('stats-section');
-    if (statsElement) observer.observe(statsElement);
-    return () => observer.disconnect();
-  }, []);
   const toggleUseCase = (index: number) => {
     setActiveUseCase(activeUseCase === index ? null : index);
   };
@@ -209,33 +163,31 @@ const EnterpriseSolution = () => {
           </div>
         </div>
 
-        {/* ROI Section */}
-        <div className="mb-20" id="stats-section">
-          <h2 className="text-3xl font-bold mb-12 text-center animate-fade-in">Return on Investment</h2>
+        {/* Value Proposition Section */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold mb-12 text-center animate-fade-in">The Value We Bring</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[{
-            value: animatedStats.cost,
-            suffix: "%",
-            label: "Cost Reduction"
+            title: "Reduce Operational Costs",
+            description: "Automate routine inquiries and free up your team for high-value tasks"
           }, {
-            value: animatedStats.response,
-            suffix: "%",
-            label: "Faster Response"
+            title: "Accelerate Response Times",
+            description: "Instant responses to customer queries without wait times or queues"
           }, {
-            value: animatedStats.uptime,
-            suffix: "%",
-            label: "Uptime"
+            title: "Reliable Infrastructure",
+            description: "Built for enterprise-grade reliability with robust failover systems"
           }, {
-            value: animatedStats.satisfaction,
-            suffix: "%",
-            label: "Customer Satisfaction"
-          }].map((stat, index) => <div key={index} className="text-center bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-border/50 transition-all duration-300 hover:bg-card group animate-fade-in" style={{
+            title: "Improve Customer Experience",
+            description: "Consistent, professional service delivery across all touchpoints"
+          }].map((value, index) => <div key={index} className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border hover:border-border/50 transition-all duration-300 hover:bg-card group animate-fade-in" style={{
             animationDelay: `${index * 0.1}s`
           }}>
-                <div className="text-3xl font-bold text-foreground mb-2 group-hover:scale-110 transition-transform duration-300">
-                  {stat.value}{stat.suffix}
-                </div>
-                <div className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{stat.label}</div>
+                <h3 className="text-lg font-semibold text-foreground mb-3 group-hover:scale-105 transition-transform duration-300">
+                  {value.title}
+                </h3>
+                <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                  {value.description}
+                </p>
               </div>)}
           </div>
         </div>
