@@ -20,11 +20,11 @@ const CompanyBenefits = () => {
           </div>
           <div className="group hover:translate-x-1 transition-transform duration-200">
             <h3 className="font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">Learning & development</h3>
-            <p className="text-gray-300">$3,000 annual budget for conferences and courses</p>
+            <p className="text-gray-300">Annual budget for conferences and professional development</p>
           </div>
           <div className="group hover:translate-x-1 transition-transform duration-200">
             <h3 className="font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">Innovation time</h3>
-            <p className="text-gray-300">20% time for personal projects and research</p>
+            <p className="text-gray-300">Dedicated time for innovation and research projects</p>
           </div>
         </div>
         <div className="space-y-6">

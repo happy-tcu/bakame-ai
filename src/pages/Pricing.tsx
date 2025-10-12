@@ -30,7 +30,7 @@ const Pricing = () => {
       name: "Professional",
       price: "$499",
       period: "/month", 
-      description: "Ideal for medium to large schools with 500+ students",
+      description: "Ideal for medium to large schools",
       features: [
         "Up to 2,500 students",
         "Advanced English curriculum integration",
@@ -59,7 +59,7 @@ const Pricing = () => {
         "Advanced security & compliance",
         "On-premise deployment options",
         "Custom AI tutor training",
-        "SLA guarantees (99.9% uptime)",
+        "Service level agreements",
         "Dedicated account manager"
       ],
       cta: "Contact Sales",
@@ -82,7 +82,7 @@ const Pricing = () => {
     {
       icon: Zap,
       title: "Quick Implementation", 
-      description: "Get up and running in your school within 24 hours"
+      description: "Quick and efficient implementation process"
     },
     {
       icon: Users,
@@ -205,7 +205,7 @@ const Pricing = () => {
               <Card className="bg-card border-border">
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2">What happens if I exceed my monthly interaction limit?</h3>
-                  <p className="text-muted-foreground">We'll notify you when you reach 80% of your limit. If exceeded, additional interactions are charged at $0.10 per interaction, or you can upgrade your plan.</p>
+                  <p className="text-muted-foreground">We'll notify you when approaching your limit. Additional interactions may incur extra charges, or you can upgrade your plan.</p>
                 </CardContent>
               </Card>
               

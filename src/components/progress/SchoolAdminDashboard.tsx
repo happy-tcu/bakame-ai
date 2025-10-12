@@ -334,7 +334,7 @@ const SchoolAdminDashboard = () => {
           <TabsContent value="departments">
             <Card>
               <CardContent className="pt-6">
-                <p className="text-muted-foreground">Detailed department management coming soon...</p>
+                <p className="text-muted-foreground">This feature is not yet available. Contact support for more information.</p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -342,7 +342,7 @@ const SchoolAdminDashboard = () => {
           <TabsContent value="teachers">
             <Card>
               <CardContent className="pt-6">
-                <p className="text-muted-foreground">Teacher management and performance tracking coming soon...</p>
+                <p className="text-muted-foreground">This feature is not yet available. Contact support for more information.</p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -350,7 +350,7 @@ const SchoolAdminDashboard = () => {
           <TabsContent value="analytics">
             <Card>
               <CardContent className="pt-6">
-                <p className="text-muted-foreground">Advanced analytics and reporting coming soon...</p>
+                <p className="text-muted-foreground">This feature is not yet available. Contact support for more information.</p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -358,7 +358,7 @@ const SchoolAdminDashboard = () => {
           <TabsContent value="settings">
             <Card>
               <CardContent className="pt-6">
-                <p className="text-muted-foreground">School settings and configuration coming soon...</p>
+                <p className="text-muted-foreground">This feature is not yet available. Contact support for more information.</p>
               </CardContent>
             </Card>
           </TabsContent>

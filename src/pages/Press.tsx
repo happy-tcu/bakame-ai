@@ -199,7 +199,7 @@ const Press = () => {
                 data-testid="button-copy-phone"
               >
                 <Phone className="mr-2 h-4 w-4" />
-                +1 (555) 123-4567
+                Contact for phone number
                 {copiedPhone ? <Check className="ml-2 h-4 w-4" /> : <Copy className="ml-2 h-4 w-4" />}
               </Button>
             </div>
@@ -218,7 +218,7 @@ const Press = () => {
             <Card className="bg-gray-900/50 border-white/10">
               <CardContent className="p-8 text-center">
                 <p className="text-gray-400 text-lg">
-                  Press releases coming soon. Check back for updates on our latest announcements and milestones.
+                  Press releases will be posted here when available. For immediate inquiries, please contact our press team.
                 </p>
                 <Button 
                   variant="outline" 
@@ -423,7 +423,7 @@ const Press = () => {
                   </div>
                   <div>
                     <h4 className="text-sm text-gray-400 mb-1">Total Funding</h4>
-                    <p className="text-white">$75 Million</p>
+                    <p className="text-white">Private funding information available upon request</p>
                   </div>
                   <Button 
                     variant="outline" 

@@ -26,41 +26,11 @@ const JobListings = ({ onApply }: JobListingsProps) => {
 
   const jobListings = [
     {
-      title: "Senior AI Engineer",
-      team: "Engineering",
-      location: "San Francisco, CA",
-      type: "Full-time",
-      description: "Lead the development of our offline AI communication systems and work with cutting-edge technology to revolutionize how people communicate without traditional infrastructure."
-    }, {
-      title: "Product Manager - AI Solutions",
-      team: "Product",
-      location: "New York, NY",
-      type: "Full-time",
-      description: "Drive product strategy for our innovative offline IVR systems. Shape the future of communication technology and make it accessible to everyone, everywhere."
-    }, {
-      title: "Machine Learning Research Scientist",
-      team: "Research",
-      location: "Remote",
-      type: "Full-time",
-      description: "Conduct groundbreaking research in offline AI communication. Publish papers and contribute to the advancement of accessible AI technology."
-    }, {
-      title: "UX Designer",
-      team: "Design",
-      location: "Austin, TX",
-      type: "Full-time",
-      description: "Design intuitive interfaces for complex AI systems. Create user experiences that make advanced technology accessible to users with varying technical backgrounds."
-    }, {
-      title: "DevOps Engineer",
-      team: "Engineering",
-      location: "Remote",
-      type: "Full-time",
-      description: "Build and maintain the infrastructure that powers our AI systems. Ensure scalability, reliability, and security of our offline communication platforms."
-    }, {
-      title: "AI Research Intern",
-      team: "Research",
-      location: "Remote",
-      type: "Internship",
-      description: "Contribute to groundbreaking research in offline AI communication. Perfect for students passionate about AI innovation and social impact."
+      title: "Check Back Soon",
+      team: "All Teams",
+      location: "Various Locations",
+      type: "Multiple Positions",
+      description: "We're currently evaluating our hiring needs. Please check back regularly for new opportunities as we grow our team. If you're passionate about AI-powered education and making learning accessible, we'd love to hear from you when positions become available."
     }
   ];
 

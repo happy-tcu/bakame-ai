@@ -269,7 +269,7 @@ const TeacherDashboard = () => {
           <TabsContent value="classes">
             <Card>
               <CardContent className="pt-6">
-                <p className="text-muted-foreground">Detailed class management coming soon...</p>
+                <p className="text-muted-foreground">This feature is not yet available. Contact support for more information.</p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -277,7 +277,7 @@ const TeacherDashboard = () => {
           <TabsContent value="students">
             <Card>
               <CardContent className="pt-6">
-                <p className="text-muted-foreground">Student roster and progress tracking coming soon...</p>
+                <p className="text-muted-foreground">This feature is not yet available. Contact support for more information.</p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -285,7 +285,7 @@ const TeacherDashboard = () => {
           <TabsContent value="assignments">
             <Card>
               <CardContent className="pt-6">
-                <p className="text-muted-foreground">Assignment management and grading tools coming soon...</p>
+                <p className="text-muted-foreground">This feature is not yet available. Contact support for more information.</p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -293,7 +293,7 @@ const TeacherDashboard = () => {
           <TabsContent value="analytics">
             <Card>
               <CardContent className="pt-6">
-                <p className="text-muted-foreground">Advanced analytics and insights coming soon...</p>
+                <p className="text-muted-foreground">This feature is not yet available. Contact support for more information.</p>
               </CardContent>
             </Card>
           </TabsContent>

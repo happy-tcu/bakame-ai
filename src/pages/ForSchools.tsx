@@ -190,10 +190,10 @@ const ForSchools = () => {
             <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-gray-600 to-gray-600" style={{ transform: "translateY(-50%)" }} />
             
             {[
-              { week: "Week 1", title: "Discovery & Planning", icon: Target, description: "Assess needs, map curriculum, set success metrics" },
-              { week: "Week 2-3", title: "Setup & Integration", icon: Zap, description: "Platform deployment, data migration, system integration" },
-              { week: "Week 4", title: "Teacher Training", icon: Users, description: "Comprehensive training, best practices, certification" },
-              { week: "Week 5+", title: "Launch & Support", icon: HeadphonesIcon, description: "Go-live support, ongoing optimization, success tracking" }
+              { week: "Phase 1", title: "Discovery & Planning", icon: Target, description: "Assess needs, map curriculum, set success metrics" },
+              { week: "Phase 2", title: "Setup & Integration", icon: Zap, description: "Platform deployment, data migration, system integration" },
+              { week: "Phase 3", title: "Teacher Training", icon: Users, description: "Comprehensive training, best practices, certification" },
+              { week: "Phase 4", title: "Launch & Support", icon: HeadphonesIcon, description: "Go-live support, ongoing optimization, success tracking" }
             ].map((step, index) => (
               <div key={index} className="relative">
                 <Card 

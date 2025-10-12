@@ -173,7 +173,7 @@ const Blog = () => {
           {/* More Coverage */}
           <div className="text-center mt-12">
             <p className="text-muted-foreground text-sm">
-              More media coverage coming soon as Bakame AI continues to innovate
+              Follow our social media channels for the latest updates
             </p>
           </div>
         </div>

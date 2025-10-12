@@ -19,8 +19,8 @@ const FAQ = () => {
       answer: "Our system runs entirely on local hardware without requiring internet connectivity. This means your voice services remain operational during network outages, natural disasters, or cyber attacks. All processing happens on-premises, ensuring complete data privacy and security."
     },
     {
-      question: "How does the beta program work?",
-      answer: "We're currently working with select partners to test and refine our offline AI technology. Beta participants get early access to our platform, direct support from our team, and the opportunity to influence product development. Join our waitlist to be considered for the next beta phase."
+      question: "How can I get started with Bakame AI?",
+      answer: "We work closely with schools and educational institutions to implement our AI tutoring platform. Contact our team for a consultation to discuss your specific needs and how we can help improve English learning outcomes at your institution."
     },
     {
       question: "What hardware requirements are needed?",
@@ -28,15 +28,15 @@ const FAQ = () => {
     },
     {
       question: "How long does implementation take?",
-      answer: "Implementation timelines vary based on your specific requirements and existing infrastructure. During our beta phase, we work closely with each partner to ensure a smooth deployment. Typical implementations range from a few weeks to a few months."
+      answer: "Implementation timelines vary based on your specific requirements and existing infrastructure. We work closely with each partner to ensure a smooth deployment tailored to your needs."
     },
     {
       question: "What kind of support do you provide?",
-      answer: "As a growing startup, we provide personalized support to all our beta partners. This includes technical guidance, implementation assistance, and ongoing support. Our team is committed to ensuring your success with our platform."
+      answer: "We provide comprehensive support to all our partners. This includes technical guidance, implementation assistance, and ongoing support. Our team is committed to ensuring your success with our platform."
     },
     {
       question: "Is this technology proven?",
-      answer: "We're a startup building innovative offline AI technology. While we're still in beta, we're working with select partners to validate and improve our solution. Our approach focuses on reliability and security for critical infrastructure applications."
+      answer: "Our technology is built on proven AI principles with a focus on offline capability and reliability. We work closely with educational institutions to ensure our solution meets their specific needs for secure and dependable English learning tools."
     },
     {
       question: "How does NGO pricing work?",
