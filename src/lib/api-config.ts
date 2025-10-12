@@ -3,7 +3,7 @@
 // In production, the backend and frontend are served from the same port
 
 const isDevelopment = import.meta.env.DEV;
-const isReplit = !!import.meta.env.VITE_REPLIT_DEV_DOMAIN;
+const isReplit = !!import.meta.env.VITE_REPLIT_DEV_DOMAIN || window.location.hostname.includes('replit');
 
 // Get the API base URL based on environment
 export const getApiBaseUrl = () => {
@@ -12,7 +12,13 @@ export const getApiBaseUrl = () => {
     return import.meta.env.VITE_API_URL;
   }
   
-  // In development, use the backend server port
+  // In Replit environment, backend runs on port 3001
+  if (isReplit && isDevelopment) {
+    // Use port 3001 for backend API calls in Replit
+    return 'http://localhost:3001';
+  }
+  
+  // In regular development, use the backend server port
   if (isDevelopment) {
     // Use localhost:3001 for backend API calls
     return 'http://localhost:3001';

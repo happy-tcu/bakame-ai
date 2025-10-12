@@ -5,7 +5,7 @@ import { createApiUrl } from './api-config';
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      queryFn: async ({ queryKey }) => {
+      queryFn: async ({ queryKey, signal }) => {
         const path = queryKey[0] as string;
         
         // Create full URL with backend base URL
@@ -24,17 +24,35 @@ export const queryClient = new QueryClient({
         
         console.log(`[API] Fetching: ${url}`);
         
-        const response = await fetch(url, { headers });
+        // Create timeout controller
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
         
-        if (!response.ok) {
-          const error = await response.json().catch(() => ({ error: 'Request failed' }));
-          console.error(`[API] Error fetching ${url}:`, error);
-          throw new Error(error.error || `Request failed with status ${response.status}`);
+        try {
+          const response = await fetch(url, { 
+            headers,
+            credentials: 'include', // Include cookies for cross-origin requests
+            signal: signal || controller.signal // Use provided signal or our timeout controller
+          });
+          
+          clearTimeout(timeoutId);
+          
+          if (!response.ok) {
+            const error = await response.json().catch(() => ({ error: 'Request failed' }));
+            console.error(`[API] Error fetching ${url}:`, error);
+            throw new Error(error.error || `Request failed with status ${response.status}`);
+          }
+          
+          const data = await response.json();
+          console.log(`[API] Success fetching ${url}`);
+          return data;
+        } catch (error) {
+          clearTimeout(timeoutId);
+          if (error instanceof Error && error.name === 'AbortError') {
+            throw new Error(`Request timeout after 10 seconds: ${url}`);
+          }
+          throw error;
         }
-        
-        const data = await response.json();
-        console.log(`[API] Success fetching ${url}`);
-        return data;
       },
       // Add retry and error handling configuration
       retry: (failureCount, error) => {
@@ -75,6 +93,7 @@ export const apiRequest = async (
   const response = await fetch(url, {
     ...options,
     headers,
+    credentials: 'include', // Include cookies for cross-origin requests
   });
   
   if (!response.ok) {
