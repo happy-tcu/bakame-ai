@@ -92,7 +92,7 @@ const Privacy = () => {
       <div className="container mx-auto px-6 py-12 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-orange-400 to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400 bg-clip-text text-transparent">
             Privacy Policy
           </h1>
           <p className="text-lg text-muted-foreground">
@@ -129,7 +129,7 @@ const Privacy = () => {
         </div>
 
         {/* Contact Information */}
-        <div className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 via-orange-500/10 to-blue-500/10 rounded-lg border border-accent/20">
+        <div className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 via-blue-600/10 to-blue-500/10 rounded-lg border border-accent/20">
           <h2 className="text-2xl font-bold text-white mb-4">Contact Us About Privacy</h2>
           <p className="text-muted-foreground mb-4">
             If you have questions about this Privacy Policy or want to exercise your privacy rights, please contact us:
