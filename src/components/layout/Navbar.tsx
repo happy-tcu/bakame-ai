@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   Menu, X, ChevronDown, Calendar, Play, Users, GraduationCap, School, Building,
-  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home, LogOut, User
+  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home, LogOut, User, Phone
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -216,14 +216,14 @@ const Navbar = () => {
               </Link>
 
               <Link 
-                to="/pricing" 
+                to="/contact" 
                 className={cn(
                   "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/pricing" && "text-white"
+                  location.pathname === "/contact" && "text-white"
                 )}
-                data-testid="link-pricing"
+                data-testid="link-contact-sales"
               >
-                Pricing
+                Contact Sales
               </Link>
 
               <NavigationMenu>
@@ -295,9 +295,9 @@ const Navbar = () => {
                         <Play className="mr-2 h-4 w-4" />
                         <span>Try Demo</span>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => navigate('/pricing')} data-testid="menu-item-pricing">
-                        <Sparkles className="mr-2 h-4 w-4" />
-                        <span>Pricing</span>
+                      <DropdownMenuItem onClick={() => navigate('/contact')} data-testid="menu-item-contact-sales">
+                        <Phone className="mr-2 h-4 w-4" />
+                        <span>Contact Sales</span>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={signOut} data-testid="menu-item-logout">
@@ -388,12 +388,12 @@ const Navbar = () => {
               </Link>
 
               <Link 
-                to="/pricing" 
+                to="/contact" 
                 onClick={closeMenu} 
                 className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-pricing"
+                data-testid="link-mobile-contact-sales"
               >
-                Pricing
+                Contact Sales
               </Link>
 
               {/* Mobile About Dropdown */}

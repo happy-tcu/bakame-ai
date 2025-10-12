@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
 import { AnalyticsProvider } from "./components/analytics/AnalyticsProvider";
 import { AuthProvider } from "./components/auth/AuthContext";
@@ -21,7 +21,6 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import EarlyAccess from "./pages/EarlyAccess";
-import Pricing from "./pages/Pricing";
 import DemoScheduling from "./pages/DemoScheduling";
 import TryDemo from "./pages/TryDemo";
 import Features from "./pages/Features";
@@ -57,7 +56,7 @@ const App = () => (
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/early-access" element={<EarlyAccess />} />
-              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/pricing" element={<Navigate to="/contact" replace />} />
               <Route path="/demo-scheduling" element={<DemoScheduling />} />
               <Route path="/try" element={<TryDemo />} />
               <Route path="/features" element={<Features />} />
