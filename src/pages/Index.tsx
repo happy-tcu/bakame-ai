@@ -638,7 +638,7 @@ const Index = () => {
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">
             Transform Your School's
-            <span className="block gradient-text">English Program</span>
+            <span className="block text-[#4c9dff]">English Program</span>
           </h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Join hundreds of schools revolutionizing language education with AI. 
