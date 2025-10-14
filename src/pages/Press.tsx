@@ -137,22 +137,16 @@ const Press = () => {
 
   const executives = [
     {
-      name: "Dr. Jean-Claude Muhirwa",
-      role: "CEO & Co-Founder",
-      bio: "Former Google AI researcher with 15 years of experience in machine learning and education technology.",
-      image: "/api/placeholder/150/150"
+      name: "Happy Herman",
+      role: "CEO",
+      bio: "Civics Action leader, Startups Expert, Qatar Foundation Ambassador, and Founder of The Street Bridge Inc.",
+      image: "/lovable-uploads/5a0d8cef-f727-4d56-8b84-f064ace377c7.png"
     },
     {
-      name: "Ange Uwimana",
-      role: "CTO & Co-Founder",
-      bio: "MIT graduate and former Tesla engineer, specializing in voice AI and natural language processing.",
-      image: "/api/placeholder/150/150"
-    },
-    {
-      name: "Dr. Sarah Johnson",
-      role: "Chief Learning Officer",
-      bio: "Harvard Education PhD with 20 years of experience in curriculum development and learning sciences.",
-      image: "/api/placeholder/150/150"
+      name: "Aime Byiringiro",
+      role: "CTO",
+      bio: "Serial Entrepreneur, Organizational Strategist, and Seasoned Software Developer. Currently works at Dell Technologies.",
+      image: "/lovable-uploads/a40d3f7c-3281-41fc-8a55-76ebc92497e5.png"
     }
   ];
 
@@ -457,13 +451,13 @@ const Press = () => {
             {/* Executive Bios */}
             <div className="space-y-4">
               <h3 className="text-2xl font-bold">Executive Team</h3>
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 {executives.map((exec, index) => (
                   <Card key={index} className="bg-gray-900/50 border-white/10">
                     <CardHeader>
                       <div className="flex items-start gap-4">
-                        <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center">
-                          <User className="h-8 w-8 text-white/50" />
+                        <div className="w-16 h-16 rounded-full overflow-hidden">
+                          <img src={exec.image} alt={exec.name} className="w-full h-full object-cover grayscale" />
                         </div>
                         <div className="flex-1">
                           <CardTitle className="text-lg text-white">{exec.name}</CardTitle>
