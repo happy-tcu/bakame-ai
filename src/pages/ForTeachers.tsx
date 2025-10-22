@@ -247,37 +247,6 @@ const ForTeachers = () => {
           ))}
         </div>
       </section>
-
-
-      {/* CTA Section */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="bg-bg-white text-black hover:bg-gray-200-to-r from-primary/10 to-accent/10 rounded-3xl p-12 text-center border border-border">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Transform Your Teaching?
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Discover how AI can help you save time, improve student outcomes, and rekindle your passion for teaching.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={() => navigate("/demo-scheduling")}
-              className="bg-white text-black hover:bg-gray-200 text-lg px-8 py-4"
-            >
-              Schedule Your Demo
-            </Button>
-            <Button
-              onClick={() => navigate("/contact")}
-              variant="outline"
-              className="text-lg px-8 py-4"
-            >
-              Contact Sales
-            </Button>
-          </div>
-          <p className="mt-6 text-sm text-muted-foreground">
-            No credit card required • Setup in minutes • Full support included
-          </p>
-        </div>
-      </section>
     </div>
   );
 };
