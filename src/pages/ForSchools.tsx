@@ -149,7 +149,7 @@ const ForSchools = () => {
           </Card>
         </div>
 
-        {/* ROI Calculator Preview */}
+        {/* ROI Overview Preview */}
         <Card className="max-w-3xl mx-auto border-gray-500/30 bg-gradient-to-br from-gray-500/5 to-gray-500/5">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -173,7 +173,7 @@ const ForSchools = () => {
               onClick={() => navigate("/pricing")}
               data-testid="button-full-calculator"
             >
-              Access Full ROI Calculator
+              Access Full ROI Overview
               <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           </CardContent>

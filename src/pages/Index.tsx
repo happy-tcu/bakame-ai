@@ -481,7 +481,7 @@ const Index = () => {
                   onClick={() => navigate('/for-schools')}
                   className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                 >
-                  See ROI Calculator
+                  See ROI Overview
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
               </CardContent>
