@@ -194,7 +194,7 @@ const ForTeachers = () => {
 
           {/* Visual Demo Area */}
           <div className="space-y-6">
-            <div className="bg-bg-white text-black hover:bg-gray-200-to-br from-primary/10 to-accent/10 rounded-xl p-8 border border-border">
+            <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl p-8 border border-border">
               <h3 className="text-2xl font-semibold mb-6">How AI Can Help You</h3>
               <div className="space-y-4">
                 <div className="p-4 bg-muted/30 rounded-lg">
