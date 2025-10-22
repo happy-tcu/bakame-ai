@@ -167,20 +167,6 @@ const StatsCards = ({
         </div>
       </div>
 
-      {/* Motivational Quote */}
-      <div className="bg-gradient-to-r from-[#4c9dff]/10 to-purple-500/10 rounded-xl p-6 border border-[#4c9dff]/20">
-        <div className="flex items-center gap-4">
-          <div className="p-3 bg-white/10 rounded-lg">
-            <Trophy className="w-6 h-6 text-yellow-500" />
-          </div>
-          <div>
-            <p className="text-white font-semibold mb-1">Keep up the great work!</p>
-            <p className="text-gray-400 text-sm">
-              You're in the top 15% of learners this week. Your consistency is paying off!
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
