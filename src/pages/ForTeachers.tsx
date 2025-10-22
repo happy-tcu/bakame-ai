@@ -148,44 +148,44 @@ const ForTeachers = () => {
         </h2>
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Teacher Dashboard */}
-          <div className="space-y-6">
-            <div className="bg-card rounded-xl p-6 border border-border">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
-                  <BarChart3 className="h-6 w-6 text-primary" />
+          <div className="space-y-4">
+            <div className="bg-card rounded-xl p-4 border border-border">
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <BarChart3 className="h-5 w-5 text-primary" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">Comprehensive Teacher Dashboard</h3>
-                  <p className="text-muted-foreground">
-                    See all your classes, student progress, and upcoming assignments in one place. Identify struggling students instantly with AI-powered insights.
+                  <h3 className="text-lg font-semibold mb-1">Comprehensive Teacher Dashboard</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Track all classes, student progress, and assignments in one dashboard. AI-powered insights identify struggling students instantly.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-card rounded-xl p-6 border border-border">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-accent" />
+            <div className="bg-card rounded-xl p-4 border border-border">
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FileText className="h-5 w-5 text-accent" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">Smart Lesson Planning</h3>
-                  <p className="text-muted-foreground">
-                    Generate complete lesson plans aligned with curriculum standards. Customize activities based on your students' proficiency levels and learning styles.
+                  <h3 className="text-lg font-semibold mb-1">Smart Lesson Planning</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Generate curriculum-aligned lesson plans. Customize activities for different proficiency levels and learning styles.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-card rounded-xl p-6 border border-border">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                  <Zap className="h-6 w-6 text-green-500" />
+            <div className="bg-card rounded-xl p-4 border border-border">
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Zap className="h-5 w-5 text-green-500" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">Automated Grading & Feedback</h3>
-                  <p className="text-muted-foreground">
-                    Grade speaking exercises, essays, and homework instantly. Provide personalized, constructive feedback that helps students improve.
+                  <h3 className="text-lg font-semibold mb-1">Automated Grading & Feedback</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Instantly grade exercises, essays, and homework. Deliver personalized feedback that drives student improvement.
                   </p>
                 </div>
               </div>
