@@ -194,28 +194,12 @@ const ForTeachers = () => {
 
           {/* Visual Demo Area */}
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl p-8 border border-border">
-              <h3 className="text-2xl font-semibold mb-6">How AI Can Help You</h3>
-              <div className="space-y-4">
-                <div className="p-4 bg-muted/30 rounded-lg">
-                  <h4 className="font-medium mb-2">Streamline Your Workflow</h4>
-                  <p className="text-muted-foreground text-sm">
-                    Automate repetitive tasks like grading and progress tracking to focus more on teaching and student interaction.
-                  </p>
-                </div>
-                <div className="p-4 bg-muted/30 rounded-lg">
-                  <h4 className="font-medium mb-2">Personalized Learning Support</h4>
-                  <p className="text-muted-foreground text-sm">
-                    AI provides individualized feedback and practice for each student, helping them improve at their own pace.
-                  </p>
-                </div>
-                <div className="p-4 bg-muted/30 rounded-lg">
-                  <h4 className="font-medium mb-2">Data-Driven Insights</h4>
-                  <p className="text-muted-foreground text-sm">
-                    Get actionable insights about student performance to make informed teaching decisions.
-                  </p>
-                </div>
-              </div>
+            <div className="rounded-xl overflow-hidden border border-border">
+              <img 
+                src="/attached_assets/clever-girl-standing-by-blackboard-and-describing-2025-03-15-19-45-13-utc_1761133877448.JPG"
+                alt="AI-powered classroom teaching"
+                className="w-full h-auto object-cover"
+              />
             </div>
           </div>
         </div>
