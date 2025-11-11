@@ -264,7 +264,6 @@ const Roadmap = () => {
             <div className="hidden md:flex items-center space-x-8">
               <Link to="/" className="text-gray-300 hover:text-white transition-colors">Home</Link>
               <Link to="/features" className="text-gray-300 hover:text-white transition-colors">Features</Link>
-              <Link to="/pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</Link>
               <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link>
               <Button 
                 onClick={() => navigate('/contact')} 
@@ -288,7 +287,6 @@ const Roadmap = () => {
           <div className="flex flex-col items-center justify-center h-full space-y-8">
             <Link to="/" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Home</Link>
             <Link to="/features" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Features</Link>
-            <Link to="/pricing" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Pricing</Link>
             <Link to="/contact" onClick={closeMenu} className="text-2xl text-white hover:text-gray-400 transition-colors">Contact</Link>
             <Button 
               onClick={() => { closeMenu(); navigate('/contact'); }}
@@ -477,58 +475,25 @@ const Roadmap = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 to-transparent"></div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Have an Idea? <span className="gradient-text">We're Listening</span>
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Your feedback drives our innovation. Share your feature ideas and help shape 
-            the future of AI-powered education in Africa.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={() => navigate('/contact')}
-              className="gradient-gray-gray text-white text-lg px-8 py-6 hover:opacity-90"
-              data-testid="button-suggest-bottom"
-            >
-              <MessageSquare className="mr-2 h-5 w-5" />
-              Suggest a Feature
-            </Button>
-            <Button
-              onClick={() => navigate('/demo-scheduling')}
-              variant="outline"
-              className="border-white/20 text-white hover:bg-white/10 text-lg px-8 py-6"
-              data-testid="button-demo-bottom"
-            >
-              <Calendar className="mr-2 h-5 w-5" />
-              Demo
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="py-12 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-4 md:mb-0">
-              <div className="text-2xl font-bold gradient-text mb-2">Bakame AI</div>
-              <p className="text-gray-400 text-sm">Building the future of education, together</p>
+      <footer className="bg-black border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="mb-8">
+            <p className="text-gray-400 mb-4 max-w-2xl">
+              Revolutionizing English education across Africa with AI-powered learning that works everywhere.
+            </p>
+            <div className="flex">
+              <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
+                <Award className="mr-1 h-3 w-3" />
+                CREATE Award 2025
+              </Badge>
             </div>
-            <div className="flex items-center space-x-6">
-              <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">
-                Privacy
-              </Link>
-              <Link to="/terms" className="text-gray-400 hover:text-white transition-colors text-sm">
-                Terms
-              </Link>
-              <Link to="/contact" className="text-gray-400 hover:text-white transition-colors text-sm">
-                Contact
-              </Link>
-            </div>
+          </div>
+          
+          <div className="border-t border-white/10 pt-8">
+            <p className="text-gray-500">
+              © 2025 Bakame AI. All rights reserved. Building the future of education in Africa.
+            </p>
           </div>
         </div>
       </footer>
