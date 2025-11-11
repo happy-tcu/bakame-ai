@@ -1,375 +1,319 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, User, Building, Mail, Phone, CheckCircle } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeft, Mic, MicOff, Volume2, Send, Loader2, Play, Pause } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import Navbar from "@/components/layout/Navbar";
+
+interface Message {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+  audioUrl?: string;
+}
 
 const DemoScheduling = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    company: "",
-    role: "",
-    useCase: "",
-    preferredDate: "",
-    preferredTime: "",
-    requirements: ""
-  });
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      role: 'assistant',
+      content: "Hello! I'm your AI English tutor. I'm here to help you practice speaking, pronunciation, vocabulary, and conversation skills. How would you like to practice today?",
+      timestamp: new Date()
+    }
+  ]);
+  const [isRecording, setIsRecording] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const useCases = [
-    "Elementary School English Program",
-    "Middle School English Learning", 
-    "High School English Enhancement",
-    "ESL/EFL Programs",
-    "Special Education English Support",
-    "After-School English Programs",
-    "District-Wide Implementation",
-    "Other"
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleMicClick = async () => {
+    if (isRecording) {
+      // Stop recording
+      setIsRecording(false);
+      setIsProcessing(true);
+      
+      // Simulate processing (will be replaced with actual ElevenLabs integration)
+      setTimeout(() => {
+        const newUserMessage: Message = {
+          id: Date.now().toString(),
+          role: 'user',
+          content: "Hi! I'd like to practice pronunciation.",
+          timestamp: new Date()
+        };
+        
+        const newAssistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: "Great choice! Let's start with some common words that English learners find challenging. Could you please say the word 'thought' for me?",
+          timestamp: new Date()
+        };
+        
+        setMessages(prev => [...prev, newUserMessage, newAssistantMessage]);
+        setIsProcessing(false);
+        
+        toast({
+          title: "Demo Mode",
+          description: "This is a preview. Connect your ElevenLabs agent to enable real conversations.",
+        });
+      }, 2000);
+    } else {
+      // Start recording
+      setIsRecording(true);
+    }
+  };
+
+  const samplePrompts = [
+    "Help me practice pronunciation",
+    "Can you quiz me on vocabulary?",
+    "Let's have a conversation about daily activities",
+    "How do I pronounce 'schedule'?",
   ];
 
-  const timeSlots = [
-    "9:00 AM - 10:00 AM",
-    "10:00 AM - 11:00 AM", 
-    "11:00 AM - 12:00 PM",
-    "2:00 PM - 3:00 PM",
-    "3:00 PM - 4:00 PM",
-    "4:00 PM - 5:00 PM"
-  ];
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handlePromptClick = (prompt: string) => {
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: prompt,
+      timestamp: new Date()
+    };
     
-    // Simulate form submission
+    setMessages(prev => [...prev, newMessage]);
+    setIsProcessing(true);
+    
+    // Simulate AI response
     setTimeout(() => {
-      setIsSubmitted(true);
-      toast({
-        title: "Demo Scheduled Successfully!",
-        description: "We'll send you a calendar invite within 15 minutes.",
-      });
-    }, 1000);
+      const responses: { [key: string]: string } = {
+        "Help me practice pronunciation": "Excellent! Pronunciation practice is so important. Let's start with some challenging sounds in English. Try saying 'th' as in 'think' - place your tongue between your teeth. Would you like to try that?",
+        "Can you quiz me on vocabulary?": "I'd love to! Let's start with everyday vocabulary. Can you tell me what 'refrigerator' means? And try to use it in a sentence.",
+        "Let's have a conversation about daily activities": "Perfect! Let's talk about your morning routine. Can you describe what you typically do when you wake up?",
+        "How do I pronounce 'schedule'?": "Great question! In American English, it's pronounced 'SKED-jool', while in British English it's 'SHED-yool'. Try saying it: 'My schedule is busy today.' Give it a try!"
+      };
+      
+      const responseContent = responses[prompt] || "That's a great topic! Let's practice together. Can you tell me more about what you'd like to learn?";
+      
+      const aiMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: responseContent,
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, aiMessage]);
+      setIsProcessing(false);
+    }, 1500);
   };
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  if (isSubmitted) {
-    return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="max-w-2xl mx-auto text-center p-8">
-          <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-10 h-10 text-primary" />
-          </div>
-          <h1 className="text-3xl font-bold mb-4">Demo Scheduled Successfully!</h1>
-          <p className="text-muted-foreground mb-8">
-            Thank you for your interest in Bakame AI. We've received your demo request and will send you a calendar invite within 15 minutes.
-          </p>
-          <div className="bg-card border border-border rounded-lg p-6 mb-8">
-            <h3 className="font-semibold mb-4">What to Expect:</h3>
-            <ul className="text-left space-y-2 text-muted-foreground">
-              <li>• 30-minute personalized demonstration</li>
-              <li>• Live Q&A with our technical team</li>
-              <li>• Custom use case discussion</li>
-              <li>• Implementation timeline and custom NGO pricing</li>
-            </ul>
-          </div>
-          <Button onClick={() => navigate('/')} className="mr-4">
-            Return Home
-          </Button>
-          <Button onClick={() => navigate('/contact')} variant="outline">
-            Contact Sales Team
-          </Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border">
-        <div className="flex items-center space-x-4">
-          <button 
-            onClick={() => navigate('/')} 
-            className="p-2 hover:bg-muted rounded-lg transition-all duration-300 hover:scale-110"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div className="text-2xl font-bold">Bakame AI</div>
-        </div>
-        <div className="hidden md:flex space-x-8">
-          <button 
-            onClick={() => navigate('/contact')} 
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            NGO Solutions
-          </button>
-          <button 
-            onClick={() => navigate('/contact')} 
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Contact
-          </button>
-        </div>
-      </nav>
+      <Navbar />
 
-      <div className="container mx-auto px-6 py-20">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Schedule Your School Demo
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              See how Bakame AI transforms English learning in schools with a live demonstration tailored to your educational needs.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Badge variant="outline" className="border-primary/30 text-primary">
-                <Calendar className="w-3 h-3 mr-1" />
-                30-minute session
-              </Badge>
-              <Badge variant="outline" className="border-primary/30 text-primary">
-                <User className="w-3 h-3 mr-1" />
-                No commitment required
-              </Badge>
-              <Badge variant="outline" className="border-primary/30 text-primary">
-                <Clock className="w-3 h-3 mr-1" />
-                Available within 24 hours
-              </Badge>
-            </div>
+      <div className="container mx-auto px-6 py-12 max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+            Try Bakame AI Now
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
+            Have a real conversation with your AI English tutor. Practice speaking, get instant feedback, and improve your pronunciation.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Badge variant="outline" className="border-primary/30 text-primary">
+              <Volume2 className="w-3 h-3 mr-1" />
+              Voice-powered
+            </Badge>
+            <Badge variant="outline" className="border-primary/30 text-primary">
+              <Mic className="w-3 h-3 mr-1" />
+              Instant feedback
+            </Badge>
+            <Badge variant="outline" className="border-primary/30 text-primary">
+              Works offline
+            </Badge>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* Chat Interface */}
+          <div className="lg:col-span-2">
+            <Card className="bg-card border-border h-[600px] flex flex-col">
+              <CardContent className="flex-1 flex flex-col p-0">
+                {/* Messages Area */}
+                <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                  {messages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div
+                        className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                          message.role === 'user'
+                            ? 'bg-primary text-primary-foreground ml-12'
+                            : 'bg-muted mr-12'
+                        }`}
+                      >
+                        <p className="text-sm">{message.content}</p>
+                        {message.audioUrl && (
+                          <button className="mt-2 flex items-center gap-2 text-xs opacity-70 hover:opacity-100">
+                            <Volume2 className="w-3 h-3" />
+                            Play audio
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {isProcessing && (
+                    <div className="flex justify-start">
+                      <div className="bg-muted rounded-2xl px-4 py-3 mr-12">
+                        <div className="flex items-center gap-2">
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span className="text-sm text-muted-foreground">AI is thinking...</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div ref={messagesEndRef} />
+                </div>
+
+                {/* Voice Controls */}
+                <div className="border-t border-border p-6">
+                  <div className="flex flex-col items-center gap-4">
+                    {/* Voice Visualizer (when recording) */}
+                    {isRecording && (
+                      <div className="flex items-center gap-1 h-12">
+                        {[...Array(20)].map((_, i) => (
+                          <div
+                            key={i}
+                            className="w-1 bg-primary rounded-full animate-pulse"
+                            style={{
+                              height: `${Math.random() * 100}%`,
+                              animationDelay: `${i * 0.05}s`,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Microphone Button */}
+                    <button
+                      onClick={handleMicClick}
+                      disabled={isProcessing}
+                      className={`relative w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        isRecording
+                          ? 'bg-red-500 hover:bg-red-600 scale-110 animate-pulse'
+                          : 'bg-primary hover:bg-primary/90'
+                      } ${isProcessing ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
+                      data-testid="button-voice-record"
+                    >
+                      {isProcessing ? (
+                        <Loader2 className="w-8 h-8 text-primary-foreground animate-spin" />
+                      ) : isRecording ? (
+                        <MicOff className="w-8 h-8 text-white" />
+                      ) : (
+                        <Mic className="w-8 h-8 text-primary-foreground" />
+                      )}
+                      
+                      {isRecording && (
+                        <span className="absolute -bottom-8 text-sm text-muted-foreground animate-pulse">
+                          Listening...
+                        </span>
+                      )}
+                    </button>
+
+                    <p className="text-sm text-muted-foreground text-center">
+                      {isRecording ? 'Click to stop recording' : 'Click the microphone to start speaking'}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Form */}
+          {/* Sidebar - Sample Prompts & Info */}
+          <div className="space-y-6">
+            {/* Sample Prompts */}
             <Card className="bg-card border-border">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-primary" />
-                  Demo Request Form
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="firstName">First Name *</Label>
-                      <Input 
-                        id="firstName"
-                        required
-                        value={formData.firstName}
-                        onChange={(e) => handleInputChange('firstName', e.target.value)}
-                        className="mt-1"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="lastName">Last Name *</Label>
-                      <Input 
-                        id="lastName"
-                        required
-                        value={formData.lastName}
-                        onChange={(e) => handleInputChange('lastName', e.target.value)}
-                        className="mt-1"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="email">Business Email *</Label>
-                    <Input 
-                      id="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input 
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="company">School/District *</Label>
-                      <Input 
-                        id="company"
-                        required
-                        value={formData.company}
-                        onChange={(e) => handleInputChange('company', e.target.value)}
-                        className="mt-1"
-                        placeholder="e.g., Lincoln Elementary School"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="role">Your Role *</Label>
-                      <Input 
-                        id="role"
-                        required
-                        value={formData.role}
-                        onChange={(e) => handleInputChange('role', e.target.value)}
-                        className="mt-1"
-                        placeholder="e.g., English Teacher, Principal, IT Coordinator"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="useCase">Primary Use Case *</Label>
-                    <Select onValueChange={(value) => handleInputChange('useCase', value)} required>
-                      <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="Select your primary use case" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {useCases.map((useCase) => (
-                          <SelectItem key={useCase} value={useCase}>
-                            {useCase}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="preferredDate">Preferred Date *</Label>
-                      <Input 
-                        id="preferredDate"
-                        type="date"
-                        required
-                        value={formData.preferredDate}
-                        onChange={(e) => handleInputChange('preferredDate', e.target.value)}
-                        className="mt-1"
-                        min={new Date().toISOString().split('T')[0]}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="preferredTime">Preferred Time (EST) *</Label>
-                      <Select onValueChange={(value) => handleInputChange('preferredTime', value)} required>
-                        <SelectTrigger className="mt-1">
-                          <SelectValue placeholder="Select time slot" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {timeSlots.map((slot) => (
-                            <SelectItem key={slot} value={slot}>
-                              {slot}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="requirements">Specific Requirements or Questions</Label>
-                    <Textarea 
-                      id="requirements"
-                      value={formData.requirements}
-                      onChange={(e) => handleInputChange('requirements', e.target.value)}
-                      className="mt-1"
-                      placeholder="Tell us about your English curriculum, number of students, current challenges, integration needs, etc."
-                      rows={4}
-                    />
-                  </div>
-
-                  <Button type="submit" className="w-full bg-primary hover:opacity-90 text-primary-foreground">
-                    Actual Demo
-                  </Button>
-                </form>
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-4">Try saying:</h3>
+                <div className="space-y-2">
+                  {samplePrompts.map((prompt, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handlePromptClick(prompt)}
+                      className="w-full text-left px-4 py-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors text-sm"
+                      data-testid={`button-prompt-${index}`}
+                    >
+                      "{prompt}"
+                    </button>
+                  ))}
+                </div>
               </CardContent>
             </Card>
 
-            {/* Demo Details */}
-            <div className="space-y-6">
-              <Card className="bg-card border-border">
-                <CardHeader>
-                  <CardTitle>What You'll See in the Demo</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Phone className="w-3 h-3 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">Student English Conversation</h4>
-                      <p className="text-muted-foreground text-sm">Watch students interact with AI tutors for speaking and pronunciation practice</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Building className="w-3 h-3 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">Teacher Dashboard</h4>
-                      <p className="text-muted-foreground text-sm">Explore progress tracking, analytics, and lesson planning features for educators</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Mail className="w-3 h-3 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">Curriculum Integration</h4>
-                      <p className="text-muted-foreground text-sm">Learn how to integrate with your existing English curriculum and LMS</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            {/* Features */}
+            <Card className="bg-card border-border">
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-4">What You Can Practice</h3>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <Volume2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>Pronunciation with instant feedback</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Mic className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>Natural conversation practice</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Send className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>Vocabulary and grammar</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
-              <Card className="bg-card border-border">
-                <CardHeader>
-                  <CardTitle>Demo Preparation</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">
-                    To make the most of your demo session, please prepare:
-                  </p>
-                  <ul className="space-y-2 text-muted-foreground text-sm">
-                    <li>• Current English curriculum and learning objectives</li>
-                    <li>• Number of students and grade levels</li>
-                    <li>• Existing technology infrastructure and LMS</li>
-                    <li>• Timeline for implementation</li>
-                    <li>• Key teachers and administrators to include</li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Need District-Wide Solutions?</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    For large school districts requiring custom curriculum integration, white-labeling, or dedicated deployment, 
-                    our education specialists can provide specialized demonstrations.
-                  </p>
-                  <Button 
-                    onClick={() => navigate('/contact')} 
-                    variant="outline" 
-                    size="sm"
-                  >
-                    Contact Education Team
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+            {/* CTA Card */}
+            <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Like what you see?</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Bring this AI-powered learning to your school or organization.
+                </p>
+                <Button 
+                  onClick={() => navigate('/contact')} 
+                  className="w-full"
+                  variant="outline"
+                >
+                  Contact Sales
+                </Button>
+              </CardContent>
+            </Card>
           </div>
+        </div>
+
+        {/* Demo Notice */}
+        <div className="mt-8 text-center">
+          <p className="text-sm text-muted-foreground">
+            This is a demo preview. To enable full voice conversations, connect your ElevenLabs agent.
+            <button 
+              onClick={() => navigate('/contact')}
+              className="ml-2 text-primary hover:underline"
+            >
+              Learn more
+            </button>
+          </p>
         </div>
       </div>
     </div>
