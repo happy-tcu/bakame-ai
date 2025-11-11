@@ -174,14 +174,24 @@ const DemoScheduling = () => {
       ws.onopen = async () => {
         console.log('Connected to ElevenLabs agent');
         
-        // Request HD audio quality (24kHz PCM for both input and output)
+        // Request HD audio quality - send as top-level config
         ws.send(JSON.stringify({
           type: "conversation_initiation_client_data",
-          conversation_config_override: {
-            agent: {
-              output_audio_format: "pcm_24000",  // HD output: 24kHz instead of 16kHz
-            },
-            input_audio_format: "pcm_16000",  // HD input: 16kHz PCM instead of 8kHz μ-law
+          conversation_initiation_client_data: {
+            conversation_config_override: {
+              agent: {
+                prompt: {
+                  llm: "gpt-4o-mini"
+                }
+              },
+              tts: {
+                output_format: "pcm_24000"  // HD output: 24kHz
+              },
+              asr: {
+                quality: "high",
+                input_format: "pcm_16000"  // HD input: 16kHz PCM
+              }
+            }
           }
         }));
         
@@ -273,7 +283,7 @@ const DemoScheduling = () => {
       >
         <iframe
           className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
-          src="https://www.youtube.com/embed/bVbRBLaTMpI?autoplay=1&mute=0&loop=1&playlist=bVbRBLaTMpI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+          src="https://www.youtube.com/embed/bVbRBLaTMpI?autoplay=1&mute=1&loop=1&playlist=bVbRBLaTMpI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
           title="Background video"
           allow="autoplay; encrypted-media; microphone"
           style={{ pointerEvents: 'none' }}
