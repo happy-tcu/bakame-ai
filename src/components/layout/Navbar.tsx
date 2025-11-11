@@ -141,7 +141,8 @@ const Navbar = () => {
     <>
       <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="grid grid-cols-3 items-center">
+            {/* Left: Logo */}
             <div className="flex items-center space-x-4">
               <Link to="/" className="flex items-center" data-testid="link-home">
                 <img 
@@ -155,7 +156,8 @@ const Navbar = () => {
               </Badge>
             </div>
             
-            <div className="hidden md:flex items-center space-x-8">
+            {/* Center: Navigation */}
+            <div className="hidden md:flex items-center justify-center space-x-8">
               <Link 
                 to="/" 
                 className={cn(
@@ -185,7 +187,7 @@ const Navbar = () => {
                   )} />
                 </button>
                 {isSolutionsOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl">
                     <div className="p-6 space-y-4">
                       {solutionsItems.map((item, index) => (
                         <div
@@ -249,7 +251,7 @@ const Navbar = () => {
                   )} />
                 </button>
                 {isAboutOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl">
                     <div className="p-6 space-y-4">
                       {aboutItems.map((item) => (
                         <Link
@@ -274,9 +276,10 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
+            </div>
 
-
-              
+            {/* Right: Auth buttons */}
+            <div className="hidden md:flex items-center justify-end space-x-4">
               {user ? (
                 <>
                   <Button 
@@ -338,9 +341,12 @@ const Navbar = () => {
               )}
             </div>
 
-            <button onClick={toggleMenu} className="md:hidden text-white" data-testid="button-menu-toggle">
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {/* Mobile menu toggle */}
+            <div className="flex md:hidden justify-end">
+              <button onClick={toggleMenu} className="text-white" data-testid="button-menu-toggle">
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
