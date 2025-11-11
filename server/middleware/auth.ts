@@ -10,6 +10,10 @@ dotenv.config();
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
+// Bypass authentication constants (DEVELOPMENT ONLY)
+const BYPASS_TOKEN = 'bypass-admin-token';
+const BYPASS_EMAIL = 'niyorurema1@gmail.com';
+
 // Check if required environment variables are present
 if (!supabaseUrl || !supabaseKey) {
   console.error('Missing required Supabase environment variables');
@@ -32,6 +36,27 @@ export async function authMiddleware(req: AuthRequest, res: Response, next: Next
     }
 
     const token = authHeader.substring(7);
+    
+    // DEVELOPMENT ONLY: Check for bypass token
+    if (token === BYPASS_TOKEN) {
+      console.warn('⚠️  WARNING: Using bypass authentication (development only)');
+      
+      // Get or create bypass admin user
+      let dbUser = await storage.getUserByEmail(BYPASS_EMAIL);
+      if (!dbUser) {
+        dbUser = await storage.createUser({
+          email: BYPASS_EMAIL,
+          name: 'Admin',
+          role: 'admin'
+        });
+      }
+      
+      req.user = dbUser;
+      next();
+      return;
+    }
+
+    // Normal Supabase authentication
     const { data: { user }, error } = await supabase.auth.getUser(token);
 
     if (error || !user) {

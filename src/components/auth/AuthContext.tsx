@@ -15,6 +15,27 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// DEVELOPMENT ONLY: Hardcoded admin credentials for bypass
+const BYPASS_EMAIL = 'niyorurema1@gmail.com';
+const BYPASS_PASSWORD = 'Bakame@AI123';
+const BYPASS_TOKEN = 'bypass-admin-token';
+
+// Create a fake user object for bypass
+const createFakeUser = (email: string): User => {
+  console.warn('⚠️  WARNING: Using bypass authentication (development only)');
+  return {
+    id: 'bypass-admin-id',
+    email: email,
+    app_metadata: {},
+    user_metadata: {
+      name: 'Admin',
+      role: 'admin'
+    },
+    aud: 'authenticated',
+    created_at: new Date().toISOString(),
+  } as User;
+};
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
@@ -30,7 +51,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Get initial session
+    // Check for bypass session first
+    const bypassSession = localStorage.getItem('bypass_session');
+    if (bypassSession) {
+      const fakeUser = createFakeUser(BYPASS_EMAIL);
+      setUser(fakeUser);
+      setLoading(false);
+      return;
+    }
+
+    // Get initial session from Supabase
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
@@ -50,6 +80,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const signIn = async (email: string, password: string) => {
+    // Check for bypass credentials
+    if (email === BYPASS_EMAIL && password === BYPASS_PASSWORD) {
+      const fakeUser = createFakeUser(email);
+      setUser(fakeUser);
+      localStorage.setItem('bypass_session', 'true');
+      
+      toast({
+        title: 'Welcome back, Admin!',
+        description: 'You have successfully signed in.',
+      });
+      return;
+    }
+
+    // Normal Supabase authentication
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -121,6 +165,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const signOut = async () => {
+    // Check if using bypass session
+    const bypassSession = localStorage.getItem('bypass_session');
+    if (bypassSession) {
+      localStorage.removeItem('bypass_session');
+      setUser(null);
+      setSession(null);
+      
+      toast({
+        title: 'Signed out',
+        description: 'You have been successfully signed out.',
+      });
+      return;
+    }
+
+    // Normal Supabase sign out
     const { error } = await supabase.auth.signOut();
     
     if (error) {
