@@ -170,12 +170,15 @@ The application uses PostgreSQL with four main tables:
    - YouTube video (https://youtu.be/bVbRBLaTMpI) fades in over 1 second when mic is clicked
    - Subtle dark overlay (30% opacity) maintains text visibility
    - Responsive video background covers full viewport
-3. **ElevenLabs Conversational Agent Integration**: WebSocket-based voice conversation
-   - Backend endpoint `/api/elevenlabs/start-conversation` gets signed WebSocket URL
+3. **ElevenLabs Conversational Agent Integration**: WebSocket API implementation (FIXED)
+   - Backend makes GET request to `/v1/convai/conversation/get-signed-url?agent_id={id}`
+   - Returns signed WebSocket URL with conversation signature
    - Frontend establishes WebSocket connection to ElevenLabs agent
    - Real-time bidirectional voice conversation with AI English tutor
-   - Proper error handling and connection status indicators
+   - Proper error handling, validation, and connection status indicators
    - Uses environment variables: `ELEVENLABS_API_KEY` and `ELEVENLABS_AGENT_ID`
+   - **Fix**: Changed from POST to GET request per ElevenLabs documentation
+   - **Fix**: Added validation to ensure signed_url is present before returning
 4. **Status Indicators**: Clear visual feedback for connection state
    - "Connecting..." message shown during WebSocket setup
    - "AI Tutor is listening..." with pulsing green dot when active
