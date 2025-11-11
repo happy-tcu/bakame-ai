@@ -149,6 +149,28 @@ The application uses PostgreSQL with four main tables:
 
 ## Recent Changes
 
+### November 11, 2025 - Navigation Simplification & Demo Branding
+1. **Navigation Cleanup**: Simplified main navigation to show only essential links
+   - Removed "Actual Demo" and "Contact Sales" from navbar
+   - Navigation now displays: Home, Solutions, About (plus Log in/Sign up)
+   - Cleaner, more focused user experience
+2. **Demo Branding Consistency**: Changed all "Actual Demo" references to simply "Demo"
+   - Updated navbar button text
+   - Changed hero section button from "Book a Demo" to "Demo"
+   - Unified all demo buttons across homepage to say "Demo"
+   - Removed redundant "Contact Sales" buttons throughout homepage
+3. **Conversational Demo UI**: Built interactive voice-powered demo interface
+   - Real-time chat UI with message bubbles for user and AI
+   - Large microphone button for voice recording
+   - Voice visualizer animation during recording
+   - Sample conversation prompts to help users get started
+   - Sidebar with practice topics and feature highlights
+4. **ElevenLabs Backend Integration**: Added voice conversation API endpoints
+   - Created `server/elevenlabs.ts` service for text-to-speech and conversation
+   - New `/api/elevenlabs/conversation` endpoint for AI conversations
+   - New `/api/elevenlabs/tts` endpoint for direct text-to-speech
+   - Integration combines OpenAI GPT-4 for conversation with ElevenLabs for voice synthesis
+
 ### November 11, 2025 - Code Cleanup & Optimization
 1. **Hero Section Update**: Changed homepage heading from "AI-Powered English Learning from Voice to Victory" to simply "Voice and Victory"
 2. **YouTube Video Background**: Implemented YouTube video background (https://youtu.be/luiE5rZKhzg) for hero section with autoplay, mute, and loop
