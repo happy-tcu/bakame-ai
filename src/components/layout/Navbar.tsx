@@ -276,21 +276,23 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
+
+              <Link 
+                to="/demo-scheduling" 
+                className={cn(
+                  "text-gray-300 hover:text-white transition-colors",
+                  location.pathname === "/demo-scheduling" && "text-white"
+                )}
+                data-testid="link-demo-nav"
+              >
+                Demo
+              </Link>
             </div>
 
             {/* Right: Auth buttons */}
             <div className="hidden md:flex items-center justify-end space-x-4">
               {user ? (
                 <>
-                  <Button 
-                    onClick={() => navigate('/demo-scheduling')} 
-                    className="bg-white text-black hover:bg-gray-200"
-                    data-testid="button-demo"
-                  >
-                    <Play className="mr-2 h-4 w-4" />
-                    Demo
-                  </Button>
-                  
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="relative h-9 w-9 rounded-full" data-testid="button-user-menu">
