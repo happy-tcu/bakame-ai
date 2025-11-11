@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
+const ELEVENLABS_AGENT_ID = process.env.ELEVENLABS_AGENT_ID;
 const ELEVENLABS_API_URL = 'https://api.elevenlabs.io/v1';
 
 interface ConversationMessage {
@@ -101,4 +102,36 @@ export async function conversationWithVoice(messages: ConversationMessage[], voi
     text: responseText,
     audio: audioBuffer
   };
+}
+
+export async function startConversationalAgent(): Promise<{ signedUrl: string }> {
+  if (!ELEVENLABS_API_KEY) {
+    throw new Error('ELEVENLABS_API_KEY is not configured');
+  }
+  
+  if (!ELEVENLABS_AGENT_ID) {
+    throw new Error('ELEVENLABS_AGENT_ID is not configured');
+  }
+
+  try {
+    const response = await axios.post(
+      `${ELEVENLABS_API_URL}/convai/conversation/get_signed_url`,
+      {
+        agent_id: ELEVENLABS_AGENT_ID
+      },
+      {
+        headers: {
+          'xi-api-key': ELEVENLABS_API_KEY,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    return {
+      signedUrl: response.data.signed_url
+    };
+  } catch (error: any) {
+    console.error('ElevenLabs Conversational Agent error:', error.response?.data || error.message);
+    throw new Error('Failed to start conversational agent');
+  }
 }

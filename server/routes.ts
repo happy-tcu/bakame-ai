@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { storage } from './storage';
 import { generateFlashcards } from './openai';
-import { conversationWithVoice, textToSpeech } from './elevenlabs';
+import { conversationWithVoice, textToSpeech, startConversationalAgent } from './elevenlabs';
 import { authMiddleware, AuthRequest } from './middleware/auth';
 import { insertFlashcardSchema, insertSessionSchema, insertUserSchema } from '../shared/schema';
 import { z } from 'zod';
@@ -263,6 +263,20 @@ router.post('/api/elevenlabs/tts', async (req, res) => {
     console.error('TTS error:', error);
     res.status(500).json({ 
       error: error.message || 'Failed to generate speech',
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
+  }
+});
+
+// Start ElevenLabs Conversational Agent (no auth required for demo)
+router.post('/api/elevenlabs/start-conversation', async (req, res) => {
+  try {
+    const result = await startConversationalAgent();
+    res.json(result);
+  } catch (error: any) {
+    console.error('Start conversation error:', error);
+    res.status(500).json({ 
+      error: error.message || 'Failed to start conversation',
       details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
