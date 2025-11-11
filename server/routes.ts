@@ -118,7 +118,9 @@ router.get('/api/admin/conversations', authMiddleware, async (req: AuthRequest, 
       userId,
       agentId,
       minDuration,
-      maxDuration
+      maxDuration,
+      minCost,
+      maxCost
     } = req.query;
 
     const filters: any = {};
@@ -129,6 +131,8 @@ router.get('/api/admin/conversations', authMiddleware, async (req: AuthRequest, 
     if (agentId) filters.agentId = agentId as string;
     if (minDuration) filters.minDuration = parseInt(minDuration as string);
     if (maxDuration) filters.maxDuration = parseInt(maxDuration as string);
+    if (minCost) filters.minCost = parseFloat(minCost as string);
+    if (maxCost) filters.maxCost = parseFloat(maxCost as string);
 
     const conversations = await storage.getAllConversations(filters);
     res.json({ conversations });

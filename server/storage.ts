@@ -47,7 +47,24 @@ export class PostgresStorage implements IStorage {
   }
 
   async createConversation(data: InsertConversation): Promise<Conversation> {
-    const [conversation] = await db.insert(conversations).values(data).returning();
+    // Upsert to handle duplicate webhook deliveries
+    const [conversation] = await db
+      .insert(conversations)
+      .values(data)
+      .onConflictDoUpdate({
+        target: conversations.conversation_id,
+        set: {
+          status: data.status,
+          start_time: data.start_time,
+          call_duration_seconds: data.call_duration_seconds,
+          cost: data.cost,
+          transcript: data.transcript,
+          analysis: data.analysis,
+          metadata: data.metadata,
+          conversation_initiation_data: data.conversation_initiation_data,
+        },
+      })
+      .returning();
     return conversation;
   }
 
@@ -86,6 +103,12 @@ export class PostgresStorage implements IStorage {
     }
     if (filters?.maxDuration) {
       conditions.push(lte(conversations.call_duration_seconds, filters.maxDuration));
+    }
+    if (filters?.minCost) {
+      conditions.push(sql`CAST(${conversations.cost} as decimal) >= ${filters.minCost}`);
+    }
+    if (filters?.maxCost) {
+      conditions.push(sql`CAST(${conversations.cost} as decimal) <= ${filters.maxCost}`);
     }
     
     if (conditions.length > 0) {

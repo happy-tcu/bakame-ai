@@ -1,7 +1,7 @@
 # Bakame AI - Project Documentation
 
 ## Overview
-Bakame AI is an AI-powered English learning platform for schools with voice-first learning experiences. The platform features a React frontend with a full Express backend API, PostgreSQL database, and ElevenLabs voice integration.
+Bakame AI is an AI-powered English learning platform for schools with voice-first learning experiences and comprehensive conversation analytics. The platform features a React frontend with a full Express backend API, PostgreSQL database, and ElevenLabs voice integration.
 
 ## Project Architecture
 
@@ -23,13 +23,12 @@ Bakame AI is an AI-powered English learning platform for schools with voice-firs
 ```
 ├── src/                  # Frontend React application
 │   ├── components/       # Reusable UI components
-│   ├── data/            # Static data files
-│   ├── hooks/           # Custom React hooks
-│   ├── integrations/    # External service integrations (Supabase)
-│   ├── lib/             # Utility functions
+│   │   ├── auth/        # Authentication components (AuthContext, RoleGuard, etc.)
+│   │   ├── layout/      # Layout components (Navbar)
+│   │   └── ui/          # shadcn/ui components
 │   ├── pages/           # Route page components
-│   ├── styles/          # Additional CSS files
-│   ├── utils/           # Utility modules
+│   │   ├── AdminDashboard.tsx  # Admin analytics dashboard
+│   │   └── ...          # Other pages
 │   ├── App.tsx          # Main app component with routing
 │   └── main.tsx         # Application entry point
 ├── server/              # Backend Express API
@@ -37,7 +36,7 @@ Bakame AI is an AI-powered English learning platform for schools with voice-firs
 │   ├── db.ts           # Database connection
 │   ├── elevenlabs.ts   # ElevenLabs integration
 │   ├── index.ts        # Express server setup
-│   ├── routes.ts       # API route definitions
+│   ├── routes.ts       # API route definitions + webhook handler
 │   └── storage.ts      # Database operations layer
 ├── shared/              # Shared types and schemas
 │   └── schema.ts       # Drizzle ORM database schema
@@ -60,6 +59,8 @@ The following environment variables are configured in `.env`:
 - `VITE_SUPABASE_PROJECT_ID`: Supabase project identifier
 - `ELEVENLABS_API_KEY`: ElevenLabs API key for voice AI
 - `ELEVENLABS_AGENT_ID`: ElevenLabs conversational agent ID
+- `ELEVENLABS_WEBHOOK_SECRET`: Secret for validating webhook signatures
+- `DATABASE_URL`: PostgreSQL connection string
 
 ### Vite Configuration
 - Development server on port 5000 with 0.0.0.0 host
@@ -88,6 +89,7 @@ The following environment variables are configured in `.env`:
 - `/features` - All features page
 - `/roadmap` - Product roadmap page
 - `/press` - Press and media page
+- `/admin` - Admin dashboard (authenticated, admin-only)
 
 ## Development
 
@@ -107,6 +109,12 @@ npm run build
 npm run preview
 ```
 
+### Database Migrations
+```bash
+npm run db:push
+```
+Use `--force` flag if prompted for confirmations.
+
 ## Deployment
 This project is configured for Replit's autoscale deployment:
 - **Build command**: `npm run build`
@@ -123,6 +131,17 @@ User authentication is handled through Supabase Auth. The authMiddleware validat
   - Requires: Bearer token in Authorization header
   - Returns: User object with id, email, name, role
 
+### Admin Endpoints (Admin-only)
+- **GET /api/admin/conversations** - Get all conversations with filters
+  - Query params: `startDate`, `endDate`, `userId`, `agentId`, `minDuration`, `maxDuration`, `minCost`, `maxCost`
+  - Returns: Array of conversations
+  
+- **GET /api/admin/stats** - Get conversation statistics
+  - Returns: `{ totalCalls, totalDuration, totalCost, uniqueUsers }`
+  
+- **GET /api/admin/conversations/:id** - Get single conversation details
+  - Returns: Full conversation with transcript and analysis
+
 ### ElevenLabs Endpoints (No Auth Required for Demo)
 - **POST /api/elevenlabs/start-conversation** - Start ElevenLabs Conversational Agent
   - Returns: `{ signedUrl: string }` - WebSocket URL for real-time voice conversation
@@ -135,12 +154,109 @@ User authentication is handled through Supabase Auth. The authMiddleware validat
   - Body: `{ text: string, voiceId?: string }`
   - Returns: Audio buffer (audio/mpeg)
 
+### Webhook Endpoints
+- **POST /api/webhooks/elevenlabs** - Receive ElevenLabs post-call webhooks
+  - Validates HMAC signature using `ELEVENLABS_WEBHOOK_SECRET`
+  - Stores conversation data (transcript, analysis, metadata)
+  - Handles duplicate deliveries via upsert
+
 ## Database Schema
 
-The application uses PostgreSQL with a single table:
-- **users**: User accounts (id, email, name, role, created_at)
+The application uses PostgreSQL with two main tables:
+
+### users
+- `id` (serial, primary key)
+- `email` (varchar, unique, not null)
+- `name` (varchar)
+- `role` (varchar) - e.g., 'student', 'teacher', 'admin'
+- `created_at` (timestamp)
+
+### conversations
+- `id` (serial, primary key)
+- `conversation_id` (varchar, unique) - ElevenLabs conversation ID
+- `agent_id` (varchar) - ElevenLabs agent ID
+- `user_id` (varchar) - Optional user identifier
+- `status` (varchar)
+- `start_time` (timestamp)
+- `call_duration_seconds` (integer)
+- `cost` (decimal)
+- `transcript` (jsonb) - Full conversation turns
+- `analysis` (jsonb) - AI analysis results
+- `metadata` (jsonb) - Call metadata from ElevenLabs
+- `conversation_initiation_data` (jsonb) - Config and variables
+- `created_at` (timestamp)
+
+## Admin Dashboard Features
+
+The admin dashboard (`/admin`) provides comprehensive analytics for ElevenLabs conversations:
+
+### Overview Statistics
+- **Total Calls**: Number of conversations
+- **Total Duration**: Cumulative speaking time
+- **Total Cost**: Sum of all conversation costs
+- **Unique Users**: Number of distinct users
+
+### Filtering & Search
+- **Search**: By conversation ID, user ID, or agent ID
+- **Date Range**: Pick start and end dates
+- **Cost Range**: Filter by minimum and maximum cost
+- **Duration Range**: Filter by call length
+- **Clear Filters**: Reset all filters at once
+
+### Data Table
+- View all conversations with key metrics
+- Sort by date (newest first)
+- Click to view full details including transcript and analysis
+
+### Export Capabilities
+- **CSV Export**: Download filtered data as CSV for Excel/Sheets
+- **JSON Export**: Download raw data for further processing
+
+### Conversation Details
+- Full transcript with user/agent turns
+- Analysis results from ElevenLabs
+- Metadata including costs, duration, timestamps
+- Configuration and dynamic variables
+
+## ElevenLabs Webhook Integration
+
+### Setup Instructions
+1. Configure webhook URL in ElevenLabs dashboard: `https://your-app.repl.co/api/webhooks/elevenlabs`
+2. Set `ELEVENLABS_WEBHOOK_SECRET` environment variable with the shared secret from ElevenLabs
+3. Enable post-call transcription webhooks in ElevenLabs settings
+
+### Webhook Data Flow
+1. ElevenLabs sends POST request when call ends
+2. Backend validates HMAC signature
+3. Data is stored/updated in conversations table (upsert on conversation_id)
+4. Admin dashboard displays updated stats and conversation list
+
+### Security
+- HMAC signature validation using SHA256
+- Timestamp validation (30-minute tolerance)
+- Admin endpoints protected by role-based access control
+- Idempotent upsert prevents duplicate data issues
 
 ## Recent Changes
+
+### November 11, 2025 - Admin Dashboard for ElevenLabs Analytics
+1. **Database Schema**: Added `conversations` table to store webhook data
+   - Stores full transcripts, analysis, metadata from ElevenLabs
+   - Supports filtering by date, user, agent, duration, and cost
+2. **Webhook Handler**: Secure endpoint for ElevenLabs post-call webhooks
+   - HMAC signature validation
+   - Idempotent upsert to handle duplicate deliveries
+   - Stores complete conversation data
+3. **Admin Dashboard**: Comprehensive analytics interface (admin-only)
+   - Overview statistics cards
+   - Advanced filtering (date range, cost, duration, search)
+   - Sortable data table
+   - Conversation detail view with full transcripts
+   - CSV and JSON download for reporting
+4. **API Endpoints**: Admin-only endpoints for querying conversation data
+   - GET `/api/admin/conversations` - Filtered conversation list
+   - GET `/api/admin/stats` - Aggregate statistics
+   - GET `/api/admin/conversations/:id` - Single conversation details
 
 ### November 11, 2025 - Code Cleanup (Learning Features Removed)
 1. **Removed Learning Functionality**: Cleaned up all learning-related features
@@ -149,93 +265,30 @@ The application uses PostgreSQL with a single table:
    - Removed progress tracking and gamification
    - Removed pronunciation checking
    - Deleted student dashboard and all progress components
-2. **Database Schema Simplified**: Only users table remains
-3. **API Routes Cleaned**: Only authentication and ElevenLabs endpoints remain
+2. **Database Schema Simplified**: Only users and conversations tables remain
+3. **API Routes Cleaned**: Only authentication, admin, and ElevenLabs endpoints remain
 4. **Codebase Optimization**: Removed unused OpenAI integration code
-   - Authentication system remains intact for future features
-   - ElevenLabs voice AI demo functionality preserved
 
 ### November 11, 2025 - Audio Quality & Playback Fix
-1. **Fixed Chipmunk Voice Issue**: Resolved sample rate mismatch causing fast, high-pitched audio
-   - Demo now dynamically detects audio formats from agent's metadata instead of hardcoding values
-   - Playback uses agent's actual output sample rate (e.g., 16kHz) instead of incorrect 24kHz
-   - Microphone capture matches agent's expected input format automatically
-   - Voice now plays at correct pace and pitch, matching ElevenLabs dashboard settings exactly
-2. **Removed Audio Hallucinations**: Fixed microphone picking up background audio
-   - YouTube background video now muted to prevent audio feedback loop
-   - Microphone only captures user's voice, not AI responses or video audio
-   - Eliminates phantom transcriptions of background sounds
-3. **Agent Settings Respect**: Removed all audio format overrides
-   - Demo uses exact voice, pace, and quality configured in ElevenLabs agent dashboard
-   - No client-side modifications to agent behavior
-   - Full compatibility with agent's configured settings
+1. **Fixed Chipmunk Voice Issue**: Resolved sample rate mismatch
+2. **Removed Audio Hallucinations**: Fixed microphone feedback
+3. **Agent Settings Respect**: Uses exact ElevenLabs agent configuration
 
-### November 11, 2025 - Minimal Demo Page with ElevenLabs Conversational Agent
-1. **Simplified Demo Interface**: Redesigned demo page for maximum impact with minimal UI
-   - Removed all chat UI, prompts, and complex interface elements
-   - Clean black background with single centered white microphone button
-   - Focused user experience: click mic to talk to AI tutor immediately
-2. **Video Fade-In Effect**: Smooth visual transition when starting conversation
-   - YouTube video (https://youtu.be/bVbRBLaTMpI) fades in over 1 second when mic is clicked
-   - Subtle dark overlay (30% opacity) maintains text visibility
-   - Responsive video background covers full viewport
-3. **ElevenLabs Conversational Agent Integration**: WebSocket API implementation (FIXED)
-   - Backend makes GET request to `/v1/convai/conversation/get-signed-url?agent_id={id}`
-   - Returns signed WebSocket URL with conversation signature
-   - Frontend establishes WebSocket connection to ElevenLabs agent
-   - Real-time bidirectional voice conversation with AI English tutor
-   - Proper error handling, validation, and connection status indicators
-   - Uses environment variables: `ELEVENLABS_API_KEY` and `ELEVENLABS_AGENT_ID`
-4. **Status Indicators**: Clear visual feedback for connection state
-   - "Connecting..." message shown during WebSocket setup
-   - "AI Tutor is listening..." with pulsing green dot when active
-   - Microphone button scales and pulses when conversation is active
-
-### November 11, 2025 - Navigation Simplification & Demo Branding
-1. **Navigation Cleanup**: Simplified main navigation to show only essential links
-   - Removed "Actual Demo" and "Contact Sales" from navbar
-   - Navigation now displays: Home, Solutions, About (plus Log in/Sign up)
-   - Cleaner, more focused user experience
-2. **Demo Branding Consistency**: Changed all "Actual Demo" references to simply "Demo"
-   - Updated navbar button text
-   - Changed hero section button from "Book a Demo" to "Demo"
-   - Unified all demo buttons across homepage to say "Demo"
-   - Removed redundant "Contact Sales" buttons throughout homepage
-
-### November 11, 2025 - Code Cleanup & Optimization
-1. **Hero Section Update**: Changed homepage heading from "AI-Powered English Learning from Voice to Victory" to simply "Voice and Victory"
-2. **YouTube Video Background**: Implemented YouTube video background (https://youtu.be/luiE5rZKhzg) for hero section with autoplay, mute, and loop
-3. **For Teachers Page Cleanup**: 
-   - Replaced "How AI Can Help You" section with classroom image
-   - Compressed teacher dashboard features section for better visual balance
-   - Removed "Ready to Transform Your Teaching?" CTA section
-4. **Solution Pages Removal** (lightweight code approach):
-   - Deleted `ForStudents.tsx`, `ForTeachers.tsx`, and `ForSchools.tsx` page files
-   - Updated Solutions dropdown to show "For Students", "For Teachers", "For Schools" as non-clickable informational items
-   - Removed routes from `App.tsx` for deleted solution pages
-   - Applied muted styling (opacity-60, gray colors) to visually distinguish non-interactive items from clickable links
-   - "All Features" and "Roadmap" remain clickable in Solutions dropdown
-5. **Codebase Cleanup** (making application lighter):
-   - Deleted unused `TryDemo.tsx` page (was commented out and redirected)
-   - Deleted unused `teamData.ts` file containing fake team data (real team hardcoded in Team.tsx)
-   - Removed commented import line in `App.tsx`
-   - Optimized lucide-react icon imports in `Index.tsx` - removed 17 unused icons
-
-### October 12, 2025
-1. **Theme Update**: Made app permanently dark mode only - removed theme toggle and ThemeProvider
-2. **Color Scheme Overhaul**: Replaced all orange colors (#ffa366) with professional light blue (#4c9dff) throughout entire website
-3. **Partner Update**: Changed partner section to "Trusted by Schools and Institutions Across Africa and the US" with specific partners
-4. **B2N Focus**: Converted platform to B2N (Business-to-NGO) model - replaced all government references with NGO throughout the website
-5. **Role-Based Access**: Implemented comprehensive role-based access control with ProtectedRoute and RoleGuard components
+### November 11, 2025 - Minimal Demo Page
+1. **Simplified Demo Interface**: Clean black background with centered microphone
+2. **Video Fade-In Effect**: YouTube video background on conversation start
+3. **ElevenLabs Integration**: WebSocket API for real-time voice conversation
+4. **Status Indicators**: Clear connection state feedback
 
 ## Features
-- Dark theme only (permanent dark mode for consistent B2N aesthetic)
+- Dark theme only (permanent dark mode for consistent aesthetic)
 - Responsive design with Tailwind CSS
 - Analytics integration
 - Toast notifications
 - Form handling with React Hook Form
 - Data fetching with TanStack Query
 - Supabase authentication
-- Role-based access control for different user types (student, teacher, admin, school, government, NGO)
+- Role-based access control for different user types
 - Click-only navigation dropdowns for better user control
 - ElevenLabs Conversational AI for voice-first learning experiences
+- Comprehensive admin analytics with filtering and export capabilities

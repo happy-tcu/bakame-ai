@@ -16,6 +16,8 @@ import type { Conversation } from "../../shared/schema";
 export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [dateRange, setDateRange] = useState<{ from?: Date; to?: Date }>({});
+  const [minCost, setMinCost] = useState("");
+  const [maxCost, setMaxCost] = useState("");
   const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(null);
 
   // Fetch conversation stats
@@ -26,6 +28,13 @@ export default function AdminDashboard() {
     uniqueUsers: number;
   }>({
     queryKey: ["/api/admin/stats"],
+    queryFn: async () => {
+      const response = await fetch("/api/admin/stats", {
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error("Failed to fetch stats");
+      return response.json();
+    },
   });
 
   // Fetch all conversations with filters
@@ -35,11 +44,15 @@ export default function AdminDashboard() {
       dateRange.from?.toISOString(),
       dateRange.to?.toISOString(),
       searchTerm,
+      minCost,
+      maxCost,
     ],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (dateRange.from) params.append("startDate", dateRange.from.toISOString());
       if (dateRange.to) params.append("endDate", dateRange.to.toISOString());
+      if (minCost) params.append("minCost", minCost);
+      if (maxCost) params.append("maxCost", maxCost);
       
       const response = await fetch(`/api/admin/conversations?${params}`, {
         credentials: "include",
@@ -178,21 +191,22 @@ export default function AdminDashboard() {
             <CardTitle>Filters & Actions</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="flex-1">
-                <div className="relative">
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
-                    placeholder="Search by conversation ID, user ID, or agent ID..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 bg-gray-800 border-gray-700"
-                    data-testid="input-search"
-                  />
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Input
+                      placeholder="Search by conversation ID, user ID, or agent ID..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10 bg-gray-800 border-gray-700"
+                      data-testid="input-search"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <Popover>
+                <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -246,6 +260,50 @@ export default function AdminDashboard() {
                 <FileJson className="mr-2 h-4 w-4" />
                 Download JSON
               </Button>
+              </div>
+              
+              {/* Cost Filters */}
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1">
+                  <label className="text-sm text-gray-400 mb-2 block">Min Cost ($)</label>
+                  <Input
+                    type="number"
+                    step="0.0001"
+                    placeholder="0.0000"
+                    value={minCost}
+                    onChange={(e) => setMinCost(e.target.value)}
+                    className="bg-gray-800 border-gray-700"
+                    data-testid="input-min-cost"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="text-sm text-gray-400 mb-2 block">Max Cost ($)</label>
+                  <Input
+                    type="number"
+                    step="0.0001"
+                    placeholder="1.0000"
+                    value={maxCost}
+                    onChange={(e) => setMaxCost(e.target.value)}
+                    className="bg-gray-800 border-gray-700"
+                    data-testid="input-max-cost"
+                  />
+                </div>
+                <div className="flex-1 flex items-end">
+                  <Button
+                    onClick={() => {
+                      setMinCost("");
+                      setMaxCost("");
+                      setSearchTerm("");
+                      setDateRange({});
+                    }}
+                    variant="outline"
+                    className="bg-gray-800 border-gray-700 w-full"
+                    data-testid="button-clear-filters"
+                  >
+                    Clear All Filters
+                  </Button>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
