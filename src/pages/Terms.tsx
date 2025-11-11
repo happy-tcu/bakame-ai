@@ -100,7 +100,7 @@ const Terms = () => {
       <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border">
         <a href="/" className="text-2xl font-bold">Bakame Ai</a>
         <div className="hidden md:flex space-x-8">
-          <a href="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Actual Demo</a>
+          <a href="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Demo</a>
           <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
           <a href="/support" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
         </div>

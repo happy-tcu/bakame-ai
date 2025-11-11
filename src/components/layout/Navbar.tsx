@@ -231,28 +231,6 @@ const Navbar = () => {
                 )}
               </div>
 
-              <Link 
-                to="/demo-scheduling" 
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/demo-scheduling" && "text-white"
-                )}
-                data-testid="link-actual-demo"
-              >
-                Actual Demo
-              </Link>
-
-              <Link 
-                to="/contact" 
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/contact" && "text-white"
-                )}
-                data-testid="link-contact-sales"
-              >
-                Contact Sales
-              </Link>
-
               <div ref={aboutRef} className="relative">
                 <button
                   onClick={() => {
@@ -304,10 +282,10 @@ const Navbar = () => {
                   <Button 
                     onClick={() => navigate('/demo-scheduling')} 
                     className="bg-white text-black hover:bg-gray-200"
-                    data-testid="button-actual-demo"
+                    data-testid="button-demo"
                   >
                     <Play className="mr-2 h-4 w-4" />
-                    Actual Demo
+                    Demo
                   </Button>
                   
                   <DropdownMenu>
@@ -328,13 +306,9 @@ const Navbar = () => {
                         </div>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => navigate('/demo-scheduling')} data-testid="menu-item-actual-demo">
+                      <DropdownMenuItem onClick={() => navigate('/demo-scheduling')} data-testid="menu-item-demo">
                         <Play className="mr-2 h-4 w-4" />
-                        <span>Actual Demo</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => navigate('/contact')} data-testid="menu-item-contact-sales">
-                        <Phone className="mr-2 h-4 w-4" />
-                        <span>Contact Sales</span>
+                        <span>Demo</span>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={signOut} data-testid="menu-item-logout">
@@ -425,24 +399,6 @@ const Navbar = () => {
                 )}
               </div>
 
-              <Link 
-                to="/demo-scheduling" 
-                onClick={closeMenu} 
-                className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-actual-demo"
-              >
-                Actual Demo
-              </Link>
-
-              <Link 
-                to="/contact" 
-                onClick={closeMenu} 
-                className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-contact-sales"
-              >
-                Contact Sales
-              </Link>
-
               {/* Mobile About Dropdown */}
               <div>
                 <button
@@ -495,10 +451,10 @@ const Navbar = () => {
                         closeMenu();
                       }}
                       className="w-full bg-white text-black hover:bg-gray-200"
-                      data-testid="button-mobile-schedule-demo"
+                      data-testid="button-mobile-demo"
                     >
-                      <Calendar className="mr-2 h-4 w-4" />
-                      Schedule Demo
+                      <Play className="mr-2 h-4 w-4" />
+                      Demo
                     </Button>
                     
                     <Button 
