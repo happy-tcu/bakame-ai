@@ -352,135 +352,67 @@ const Roadmap = () => {
       {/* Features Grid */}
       <section className="relative py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Coming Soon Column */}
-            <div className="space-y-6">
-              
-              {sortedFeatures('coming-soon').map((feature) => (
-                <Card 
-                  key={feature.id}
-                  className="bg-gradient-to-br from-gray-900/20 to-gray-900/10 border-gray-500/20 hover:border-gray-500/40 transition-all hover:scale-105 group"
-                >
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="p-3 bg-gray-500/10 rounded-lg group-hover:bg-gray-500/20 transition-colors">
-                        <feature.icon className="h-6 w-6 text-gray-400" />
-                      </div>
-                      {feature.id === mostRequested.id && (
-                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
-                          <Star className="mr-1 h-3 w-3" />
-                          Most Requested
-                        </Badge>
-                      )}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...sortedFeatures('coming-soon'), ...sortedFeatures('future')].map((feature) => (
+              <Card 
+                key={feature.id}
+                className="bg-gradient-to-br from-gray-900/20 to-gray-900/10 border-gray-500/20 hover:border-gray-500/40 transition-all hover:scale-105 group"
+              >
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="p-3 bg-gray-500/10 rounded-lg group-hover:bg-gray-500/20 transition-colors">
+                      <feature.icon className="h-6 w-6 text-gray-400" />
                     </div>
-                    <CardTitle className="text-xl text-white mt-4">{feature.title}</CardTitle>
-                    <CardDescription className="text-gray-400">
-                      {feature.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <ThumbsUp className="h-4 w-4 text-gray-400" />
-                        <span className="text-lg font-semibold text-white">
-                          {feature.votes}
-                        </span>
-                        <span className="text-sm text-gray-400">votes</span>
-                      </div>
-                      <Button
-                        size="sm"
-                        onClick={() => handleVote(feature.id)}
-                        disabled={votedFeatures.has(feature.id)}
-                        className={votedFeatures.has(feature.id) 
-                          ? "bg-gray-800 text-gray-400" 
-                          : "bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 border border-gray-500/30"}
-                        data-testid={`button-vote-${feature.id}`}
-                      >
-                        {votedFeatures.has(feature.id) ? 'Voted' : 'Vote'}
-                      </Button>
-                    </div>
-                    {feature.progress !== undefined && (
-                      <div className="mt-4">
-                        <div className="flex justify-between text-xs text-gray-400 mb-1">
-                          <span>Development Progress</span>
-                          <span>{feature.progress}%</span>
-                        </div>
-                        <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full bg-gradient-to-r from-gray-400 to-gray-600 transition-all duration-500"
-                            style={{ width: `${feature.progress}%` }}
-                          />
-                        </div>
-                      </div>
+                    {feature.id === mostRequested.id && (
+                      <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
+                        <Star className="mr-1 h-3 w-3" />
+                        Most Requested
+                      </Badge>
                     )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Future Vision Column */}
-            <div className="space-y-6">
-              {sortedFeatures('future').map((feature) => (
-                <Card 
-                  key={feature.id}
-                  className="bg-gradient-to-br from-gray-900/20 to-gray-900/10 border-gray-500/20 hover:border-gray-500/40 transition-all hover:scale-105 group"
-                >
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="p-3 bg-gray-500/10 rounded-lg group-hover:bg-gray-500/20 transition-colors">
-                        <feature.icon className="h-6 w-6 text-gray-400" />
-                      </div>
-                      {feature.id === mostRequested.id && (
-                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
-                          <Star className="mr-1 h-3 w-3" />
-                          Most Requested
-                        </Badge>
-                      )}
+                  </div>
+                  <CardTitle className="text-xl text-white mt-4">{feature.title}</CardTitle>
+                  <CardDescription className="text-gray-400">
+                    {feature.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <ThumbsUp className="h-4 w-4 text-gray-400" />
+                      <span className="text-lg font-semibold text-white">
+                        {feature.votes}
+                      </span>
+                      <span className="text-sm text-gray-400">votes</span>
                     </div>
-                    <CardTitle className="text-xl text-white mt-4">{feature.title}</CardTitle>
-                    <CardDescription className="text-gray-400">
-                      {feature.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <ThumbsUp className="h-4 w-4 text-gray-400" />
-                        <span className="text-lg font-semibold text-white">
-                          {feature.votes}
-                        </span>
-                        <span className="text-sm text-gray-400">votes</span>
+                    <Button
+                      size="sm"
+                      onClick={() => handleVote(feature.id)}
+                      disabled={votedFeatures.has(feature.id)}
+                      className={votedFeatures.has(feature.id) 
+                        ? "bg-gray-800 text-gray-400" 
+                        : "bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 border border-gray-500/30"}
+                      data-testid={`button-vote-${feature.id}`}
+                    >
+                      {votedFeatures.has(feature.id) ? 'Voted' : 'Vote'}
+                    </Button>
+                  </div>
+                  {feature.progress !== undefined && (
+                    <div className="mt-4">
+                      <div className="flex justify-between text-xs text-gray-400 mb-1">
+                        <span>{feature.status === 'coming-soon' ? 'Development Progress' : 'Planning Progress'}</span>
+                        <span>{feature.progress}%</span>
                       </div>
-                      <Button
-                        size="sm"
-                        onClick={() => handleVote(feature.id)}
-                        disabled={votedFeatures.has(feature.id)}
-                        className={votedFeatures.has(feature.id) 
-                          ? "bg-gray-800 text-gray-400" 
-                          : "bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 border border-gray-500/30"}
-                        data-testid={`button-vote-${feature.id}`}
-                      >
-                        {votedFeatures.has(feature.id) ? 'Voted' : 'Vote'}
-                      </Button>
+                      <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-gray-400 to-gray-600 transition-all duration-500"
+                          style={{ width: `${feature.progress}%` }}
+                        />
+                      </div>
                     </div>
-                    {feature.progress !== undefined && (
-                      <div className="mt-4">
-                        <div className="flex justify-between text-xs text-gray-400 mb-1">
-                          <span>Planning Progress</span>
-                          <span>{feature.progress}%</span>
-                        </div>
-                        <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full bg-gradient-to-r from-gray-400 to-gray-600 transition-all duration-500"
-                            style={{ width: `${feature.progress}%` }}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
