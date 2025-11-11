@@ -623,13 +623,19 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-black border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="text-center space-y-4">
-            <div className="flex justify-center">
+          <div className="mb-8">
+            <p className="text-gray-400 mb-4 max-w-2xl">
+              Revolutionizing English education across Africa with AI-powered learning that works everywhere.
+            </p>
+            <div className="flex">
               <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
                 <Award className="mr-1 h-3 w-3" />
                 CREATE Award 2025
               </Badge>
             </div>
+          </div>
+          
+          <div className="border-t border-white/10 pt-8">
             <p className="text-gray-500">
               © 2025 Bakame AI. All rights reserved. Building the future of education in Africa.
             </p>
