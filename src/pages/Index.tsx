@@ -73,14 +73,22 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Navbar />
 
-      {/* Hero Section with Black Background */}
+      {/* Hero Section with YouTube Video Background */}
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
-        <div className="absolute inset-0 grid-pattern"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black"></div>
+        {/* YouTube Video Background */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/luiE5rZKhzg?autoplay=1&mute=1&loop=1&playlist=luiE5rZKhzg&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+            title="Background video"
+            allow="autoplay; encrypted-media"
+            style={{ pointerEvents: 'none' }}
+          />
+        </div>
         
-        {/* Geometric shapes */}
-        <div className="geometric-shape w-96 h-96 rounded-full bg-white/5 blur-3xl top-0 left-0"></div>
-        <div className="geometric-shape w-96 h-96 rounded-full bg-gray-500/10 blur-3xl bottom-0 right-0"></div>
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
           <div 
@@ -88,11 +96,11 @@ const Index = () => {
             data-animate="true"
             className={`${isVisible['hero-content'] ? 'animate-scale-up' : 'opacity-0'}`}
           >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight drop-shadow-2xl">
               <span className="block text-white font-extrabold">Voice and Victory</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto drop-shadow-lg">
               Revolutionary language education that transforms speaking confidence through AI tutoring, 
               proven to deliver breakthrough results in schools across Africa.
             </p>
@@ -100,7 +108,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
               <Button 
                 onClick={() => navigate('/demo-scheduling')}
-                className="bg-white text-black text-lg px-8 py-6 hover:bg-gray-200 hover-depth"
+                className="bg-white text-black text-lg px-8 py-6 hover:bg-gray-200 hover-depth shadow-xl"
                 data-testid="button-book-demo"
               >
                 <Calendar className="mr-2 h-5 w-5" />
@@ -109,7 +117,7 @@ const Index = () => {
               <Button 
                 onClick={() => navigate('/contact')}
                 variant="outline" 
-                className="border-white/20 text-white hover:bg-white/10 text-lg px-8 py-6 hover-depth"
+                className="border-white/20 text-white hover:bg-white/10 text-lg px-8 py-6 hover-depth backdrop-blur-sm"
                 data-testid="button-contact-sales"
               >
                 <Play className="mr-2 h-5 w-5" />
@@ -118,7 +126,7 @@ const Index = () => {
             </div>
 
             <div className="flex justify-center">
-              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
+              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2 backdrop-blur-sm">
                 <WifiOff className="mr-2 h-4 w-4" />
                 Works Offline
               </Badge>
