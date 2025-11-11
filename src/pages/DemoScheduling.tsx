@@ -15,6 +15,8 @@ const DemoScheduling = () => {
   const processorRef = useRef<ScriptProcessorNode | null>(null);
   const audioQueueRef = useRef<Float32Array[]>([]);
   const isPlayingRef = useRef(false);
+  const outputSampleRateRef = useRef<number>(16000); // Will be set from metadata
+  const inputSampleRateRef = useRef<number>(8000); // Will be set from metadata
   const { toast } = useToast();
 
   useEffect(() => {
@@ -70,15 +72,16 @@ const DemoScheduling = () => {
     const audioData = audioQueueRef.current.shift()!;
     
     try {
-      // Create or reuse playback audio context (24kHz for HD output)
+      // Create or reuse playback audio context with agent's output sample rate
+      const sampleRate = outputSampleRateRef.current;
       if (!playbackAudioContextRef.current) {
-        playbackAudioContextRef.current = new AudioContext({ sampleRate: 24000 });
+        playbackAudioContextRef.current = new AudioContext({ sampleRate });
       }
       
       const audioContext = playbackAudioContextRef.current;
       
-      // Create audio buffer from raw PCM data at 24kHz
-      const audioBuffer = audioContext.createBuffer(1, audioData.length, 24000);
+      // Create audio buffer from raw PCM data at the correct sample rate
+      const audioBuffer = audioContext.createBuffer(1, audioData.length, sampleRate);
       audioBuffer.getChannelData(0).set(audioData);
       
       const source = audioContext.createBufferSource();
@@ -98,17 +101,18 @@ const DemoScheduling = () => {
 
   const startMicrophoneCapture = async (ws: WebSocket) => {
     try {
+      const sampleRate = inputSampleRateRef.current;
       const stream = await navigator.mediaDevices.getUserMedia({ 
         audio: {
           channelCount: 1,
-          sampleRate: 16000,  // HD input: 16kHz instead of 8kHz
+          sampleRate,  // Use agent's expected input sample rate
           echoCancellation: true,
           noiseSuppression: true,
         } 
       });
       
       mediaStreamRef.current = stream;
-      const audioContext = new AudioContext({ sampleRate: 16000 });  // Match 16kHz
+      const audioContext = new AudioContext({ sampleRate });
       audioContextRef.current = audioContext;
       
       const source = audioContext.createMediaStreamSource(stream);
@@ -174,31 +178,10 @@ const DemoScheduling = () => {
       ws.onopen = async () => {
         console.log('Connected to ElevenLabs agent');
         
-        // Request HD audio quality - send as top-level config
+        // Send minimal initialization - use agent's dashboard settings
         ws.send(JSON.stringify({
-          type: "conversation_initiation_client_data",
-          conversation_initiation_client_data: {
-            conversation_config_override: {
-              agent: {
-                prompt: {
-                  llm: "gpt-4o-mini"
-                }
-              },
-              tts: {
-                output_format: "pcm_24000"  // HD output: 24kHz
-              },
-              asr: {
-                quality: "high",
-                input_format: "pcm_16000"  // HD input: 16kHz PCM
-              }
-            }
-          }
+          type: "conversation_initiation_client_data"
         }));
-        
-        await startMicrophoneCapture(ws);
-        
-        setIsActive(true);
-        setIsConnecting(false);
       };
 
       ws.onmessage = async (event) => {
@@ -207,7 +190,29 @@ const DemoScheduling = () => {
           console.log('Received message type:', message.type);
           
           if (message.type === 'conversation_initiation_metadata') {
-            console.log('Conversation started:', message.conversation_initiation_metadata_event);
+            const metadata = message.conversation_initiation_metadata_event;
+            console.log('Conversation started:', metadata);
+            
+            // Parse and set sample rates from agent's actual formats
+            const outputFormat = metadata.agent_output_audio_format; // e.g. "pcm_16000" or "pcm_24000"
+            const inputFormat = metadata.user_input_audio_format; // e.g. "ulaw_8000" or "pcm_16000"
+            
+            // Extract sample rate from format string
+            if (outputFormat.includes('_')) {
+              const rate = parseInt(outputFormat.split('_')[1]);
+              if (rate) outputSampleRateRef.current = rate;
+            }
+            if (inputFormat.includes('_')) {
+              const rate = parseInt(inputFormat.split('_')[1]);
+              if (rate) inputSampleRateRef.current = rate;
+            }
+            
+            console.log('Using sample rates - Output:', outputSampleRateRef.current, 'Input:', inputSampleRateRef.current);
+            
+            // Now start microphone with the correct sample rate
+            await startMicrophoneCapture(ws);
+            setIsActive(true);
+            setIsConnecting(false);
           }
           
           if (message.type === 'audio') {
