@@ -468,20 +468,35 @@ const Index = () => {
       </section>
 
       {/* Research & Innovation */}
-      <section className="py-24 bg-black relative">
+      <section className="py-24 bg-black relative overflow-hidden">
+        {/* YouTube Video Background */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/37zwJuI8hSs?autoplay=1&mute=1&loop=1&playlist=37zwJuI8hSs&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
+            title="Research & Innovation Background"
+            allow="autoplay; encrypted-media"
+            style={{ pointerEvents: 'none' }}
+          />
+        </div>
+        
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
+        
         <div className="absolute inset-0 grid-pattern opacity-30"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">
+            <h2 className="text-5xl font-bold mb-4 drop-shadow-2xl">
               Research & <span className="text-[#4c9dff]">Innovation</span>
             </h2>
-            <p className="text-xl text-gray-200">
+            <p className="text-xl text-gray-200 drop-shadow-lg">
               Advancing the frontier of AI-powered education
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
+            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
               <CardHeader>
                 <FlaskConical className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">AI Research Lab</CardTitle>
@@ -496,7 +511,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
+            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
               <CardHeader>
                 <Lightbulb className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">Learning Breakthroughs</CardTitle>
@@ -511,7 +526,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth">
+            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
               <CardHeader>
                 <GradCap className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">Academic Partnerships</CardTitle>
@@ -525,47 +540,6 @@ const Index = () => {
                 </Badge>
               </CardContent>
             </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Metrics & Impact */}
-      <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">
-              <span className="text-white">Measurable</span> <span className="text-[#4c9dff]">Impact</span>
-            </h2>
-            <p className="text-xl text-gray-200">
-              Real results from schools using Bakame AI
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-4 gap-8 mb-16">
-            <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>
-                Thousands
-              </div>
-              <p className="text-gray-200 text-lg">Students Empowered</p>
-            </div>
-            <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>
-                Significant
-              </div>
-              <p className="text-gray-200 text-lg">Confidence Improvement</p>
-            </div>
-            <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>
-                Multiple
-              </div>
-              <p className="text-gray-200 text-lg">Partner Schools</p>
-            </div>
-            <div className="text-center p-6 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800/50">
-              <div className="text-3xl font-bold text-white mb-2" style={{textShadow: '0 0 30px rgba(76, 157, 255, 0.5)'}}>
-                High
-              </div>
-              <p className="text-gray-200 text-lg">Teacher Satisfaction</p>
-            </div>
           </div>
         </div>
       </section>
