@@ -150,7 +150,12 @@ The application uses PostgreSQL with four main tables:
    - Replaced "How AI Can Help You" section with classroom image
    - Compressed teacher dashboard features section for better visual balance
    - Removed "Ready to Transform Your Teaching?" CTA section
-4. **Codebase Cleanup** (making application lighter):
+4. **Navigation Simplification**: 
+   - Removed "Solutions" dropdown menu entirely
+   - Added direct navigation links: For Students, For Teachers, For Schools, All Features, Roadmap
+   - Kept "About" dropdown for Team, Contact, Blog, Press
+   - Applied changes to both desktop and mobile navigation
+5. **Codebase Cleanup** (making application lighter):
    - Deleted unused `TryDemo.tsx` page (was commented out and redirected)
    - Deleted unused `teamData.ts` file containing fake team data (real team hardcoded in Team.tsx)
    - Removed commented import line in `App.tsx`
