@@ -1,0 +1,27 @@
+Hey there. I'm El from ElevenLabs support. How can I help you today?
+Tell me about Eleven Labs post-call webhooks.
+AI agent avatar
+Oh, absolutely! Post-call webhooks are super handy for getting detailed information about a call after it's ended and the analysis is complete. Essentially, ElevenLabs sends a POST request to your specified endpoint with all the comprehensive call data. There are three types of post-call webhooks: transcription webhooks, audio webhooks, and call initiation failure webhooks. They each provide different levels of detail, from full conversation transcripts to just the audio or information about why a call might have failed to start. Would you like me to direct you to the documentation page for more in-depth information on how to enable and configure them, or perhaps discuss a specific type of webhook?
+Can you tell me about, like, can you repeat that again, please?
+AI agent avatar
+Of course, I can definitely repeat that for you. So, ElevenLabs post-call webhooks are a way for you to receive detailed information about a call once it's finished and all the analysis is done. When enabled, ElevenLabs sends a POST request to an endpoint you specify, containing all the call data. There are three main types: One, transcription webhooks, which give you the full conversation data, including transcripts and analysis results. Two, audio webhooks, which provide the full conversation audio in a base six four encoded MP three format. And three, call initiation failure webhooks, which tell you why a call might have failed to connect. Does that make a bit more sense?
+Can I get more data in terms of, like, who is calling, how long they are calling, some analytics, like what data can I extract from the post-call webhook?
+AI agent avatar
+That's a great question! With the `post_call_transcription` webhook, you can actually get quite a bit of rich data. The `data` object within the webhook payload includes fields like the `agent_id` and `conversation_id`, a `user_id` if available, and the full `transcript` of the conversation. For analytics, you'll find a `metadata` object that contains details such as the `start_time_unix_secs`, the `call_duration_secs`, and even the `cost` of the call. There's also an `analysis` object that provides evaluation results, data collection results, whether the call was successful, and a `transcript_summary`. So, you get a pretty comprehensive overview of each call.
+Tell me more that I can get from the call.
+AI agent avatar
+You're looking for all the juicy details, I love it! Beyond the basics, the `post_call_transcription` webhook offers a treasure trove of information. Within the `data` object, you'll find the `agent_id` and `conversation_id` to identify the specific interaction, and a `user_id` if that's something you're tracking. The `transcript` array gives you a turn-by-turn breakdown of the conversation, including who said what and when. The `metadata` object is quite detailed, providing the exact `start_time_unix_secs`, the `call_duration_secs`, and even the `cost` of the call. It also includes `deletion_settings`, `feedback` if any was provided, and the `termination_reason`. Then there's the `analysis` object, which is fantastic for understanding call outcomes. It includes `evaluation_criteria_results`, `data_collection_results` (which can capture specific pieces of information you've configured your agent to collect), whether the `call_successful` was a success or not, and a `transcript_summary` for a quick overview. And just to quickly recap, the `post_call_audio` webhook gives you the full audio as a base six four encoded MP three, and the `call_initiation_failure` webhook provides details like the `failure_reason` and telephony provider metadata if a call didn't connect.
+Can I have all that in one thing?
+AI agent avatar
+Absolutely! Let me consolidate all that information for you into one clear picture. When you use the `post_call_transcription` webhook, you'll receive a comprehensive `data` object. This object includes identifiers like the `agent_id`, `conversation_id`, and `user_id`. You'll also get the full `transcript` of the conversation, showing each turn. For analytics, the `metadata` object provides details such as the call's `start_time_unix_secs`, `call_duration_secs`, and `cost`, along with `deletion_settings`, `feedback`, and the `termination_reason`. The `analysis` object is also very useful, offering `evaluation_criteria_results`, `data_collection_results`, the `call_successful` status, and a `transcript_summary`. So, in essence, you get a complete breakdown of the conversation, its duration, cost, and even structured data extracted from it.
+Okay.
+AI agent avatar
+Great! I'm glad that made sense. Is there anything else I can help you with regarding post-call webhooks, or perhaps another ElevenLabs feature?
+Oh, it's all good. Thank you. Where can I get the documentation?
+AI agent avatar
+You're very welcome! I can definitely point you to the documentation for post-call webhooks.
+AI agent avatar
+I've just redirected you to the relevant page in our documentation. You should find all the details you need there, including how to enable and configure them. Let me know if you have any other questions!
+...
+AI agent avatar
+Are you still there? Do you have any other questions or need further assistance with the documentation?
