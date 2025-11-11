@@ -139,6 +139,18 @@ All endpoints (except public ones) require Bearer token in Authorization header 
 - **POST /api/pronunciation/check** - Check pronunciation (currently mock implementation)
   - Returns: Score and feedback
 
+### ElevenLabs Endpoints (No Auth Required for Demo)
+- **POST /api/elevenlabs/start-conversation** - Start ElevenLabs Conversational Agent
+  - Returns: `{ signedUrl: string }` - WebSocket URL for real-time voice conversation
+  
+- **POST /api/elevenlabs/conversation** - Process conversation with voice synthesis
+  - Body: `{ messages: Array, voiceId?: string }`
+  - Returns: `{ text: string, audio: base64, timestamp: string }`
+  
+- **POST /api/elevenlabs/tts** - Text-to-speech conversion
+  - Body: `{ text: string, voiceId?: string }`
+  - Returns: Audio buffer (audio/mpeg)
+
 ## Database Schema
 
 The application uses PostgreSQL with four main tables:
@@ -148,6 +160,26 @@ The application uses PostgreSQL with four main tables:
 - **user_progress**: Cumulative progress tracking
 
 ## Recent Changes
+
+### November 11, 2025 - Minimal Demo Page with ElevenLabs Conversational Agent
+1. **Simplified Demo Interface**: Redesigned demo page for maximum impact with minimal UI
+   - Removed all chat UI, prompts, and complex interface elements
+   - Clean black background with single centered white microphone button
+   - Focused user experience: click mic to talk to AI tutor immediately
+2. **Video Fade-In Effect**: Smooth visual transition when starting conversation
+   - YouTube video (https://youtu.be/bVbRBLaTMpI) fades in over 1 second when mic is clicked
+   - Subtle dark overlay (30% opacity) maintains text visibility
+   - Responsive video background covers full viewport
+3. **ElevenLabs Conversational Agent Integration**: WebSocket-based voice conversation
+   - Backend endpoint `/api/elevenlabs/start-conversation` gets signed WebSocket URL
+   - Frontend establishes WebSocket connection to ElevenLabs agent
+   - Real-time bidirectional voice conversation with AI English tutor
+   - Proper error handling and connection status indicators
+   - Uses environment variables: `ELEVENLABS_API_KEY` and `ELEVENLABS_AGENT_ID`
+4. **Status Indicators**: Clear visual feedback for connection state
+   - "Connecting..." message shown during WebSocket setup
+   - "AI Tutor is listening..." with pulsing green dot when active
+   - Microphone button scales and pulses when conversation is active
 
 ### November 11, 2025 - Navigation Simplification & Demo Branding
 1. **Navigation Cleanup**: Simplified main navigation to show only essential links
@@ -159,17 +191,6 @@ The application uses PostgreSQL with four main tables:
    - Changed hero section button from "Book a Demo" to "Demo"
    - Unified all demo buttons across homepage to say "Demo"
    - Removed redundant "Contact Sales" buttons throughout homepage
-3. **Conversational Demo UI**: Built interactive voice-powered demo interface
-   - Real-time chat UI with message bubbles for user and AI
-   - Large microphone button for voice recording
-   - Voice visualizer animation during recording
-   - Sample conversation prompts to help users get started
-   - Sidebar with practice topics and feature highlights
-4. **ElevenLabs Backend Integration**: Added voice conversation API endpoints
-   - Created `server/elevenlabs.ts` service for text-to-speech and conversation
-   - New `/api/elevenlabs/conversation` endpoint for AI conversations
-   - New `/api/elevenlabs/tts` endpoint for direct text-to-speech
-   - Integration combines OpenAI GPT-4 for conversation with ElevenLabs for voice synthesis
 
 ### November 11, 2025 - Code Cleanup & Optimization
 1. **Hero Section Update**: Changed homepage heading from "AI-Powered English Learning from Voice to Victory" to simply "Voice and Victory"
