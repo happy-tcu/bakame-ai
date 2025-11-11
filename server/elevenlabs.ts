@@ -114,23 +114,29 @@ export async function startConversationalAgent(): Promise<{ signedUrl: string }>
   }
 
   try {
-    console.log('Creating ElevenLabs conversation...');
+    console.log('Getting signed URL from ElevenLabs...');
     console.log('Agent ID:', ELEVENLABS_AGENT_ID);
     
-    // Try the agent-specific endpoint format
-    const response = await axios.post(
-      `${ELEVENLABS_API_URL}/convai/agents/${ELEVENLABS_AGENT_ID}/sessions`,
-      {},
+    // GET request with agent_id as query parameter (as per documentation)
+    const response = await axios.get(
+      `${ELEVENLABS_API_URL}/convai/conversation/get-signed-url`,
       {
+        params: {
+          agent_id: ELEVENLABS_AGENT_ID
+        },
         headers: {
-          'xi-api-key': ELEVENLABS_API_KEY,
-          'Content-Type': 'application/json'
+          'xi-api-key': ELEVENLABS_API_KEY
         }
       }
     );
 
-    console.log('ElevenLabs conversation created successfully');
+    console.log('ElevenLabs response received');
     console.log('Response data:', response.data);
+    
+    // Validate that we received a signed URL
+    if (!response.data?.signed_url || typeof response.data.signed_url !== 'string') {
+      throw new Error('ElevenLabs did not provide a valid signed URL');
+    }
     
     return {
       signedUrl: response.data.signed_url
