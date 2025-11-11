@@ -300,12 +300,22 @@ const Roadmap = () => {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 gradient-hero"></div>
-        <div className="absolute inset-0 grid-pattern opacity-30"></div>
+        {/* YouTube Video Background */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-w-full min-h-full transform -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/ta8D8UYELfs?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&modestbranding=1&playlist=ta8D8UYELfs&vq=hd2160&playsinline=1"
+            title="Background video"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
         
-        {/* Animated background shapes */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gray-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gray-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
+        
+        <div className="absolute inset-0 grid-pattern opacity-30"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
@@ -342,7 +352,7 @@ const Roadmap = () => {
       {/* Features Grid */}
       <section className="relative py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-3 gap-8">
             {/* Coming Soon Column */}
             <div className="space-y-6">
               
