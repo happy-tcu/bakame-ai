@@ -10,12 +10,12 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 import { format, parseISO, startOfDay, eachDayOfInterval, subDays } from "date-fns";
-import { Download, Calendar as CalendarIcon, Search, FileJson, FileText, Phone, Clock, DollarSign, Users, TrendingUp, MessageSquare, Target, GraduationCap, BookOpen, Award } from "lucide-react";
+import { Calendar as CalendarIcon, Search, FileJson, FileText, Phone, Clock, DollarSign, Users, TrendingUp, MessageSquare, ArrowUp, ArrowDown, BookOpen, Award, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
+import { LineChart, Line, BarChart, Bar, AreaChart, Area, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
 import type { Conversation } from "../../shared/schema";
 
-const COLORS = ['#4c9dff', '#60a5fa', '#93c5fd', '#bfdbfe', '#dbeafe', '#fbbf24'];
+const COLORS = ['#5b7cff', '#7c3aed', '#06b6d4', '#10b981', '#f59e0b', '#ef4444'];
 
 interface AIAnalysis {
   englishLevel?: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
@@ -46,7 +46,6 @@ export default function AdminDashboard() {
   const [maxCost, setMaxCost] = useState("");
   const [selectedConversation, setSelectedConversation] = useState<ConversationWithAI | null>(null);
 
-  // Fetch conversation stats
   const { data: stats } = useQuery<{
     totalCalls: number;
     totalDuration: number;
@@ -63,7 +62,6 @@ export default function AdminDashboard() {
     },
   });
 
-  // Fetch all conversations with filters
   const { data: conversationsData, isLoading } = useQuery<{ conversations: ConversationWithAI[] }>({
     queryKey: [
       "/api/admin/conversations",
@@ -90,7 +88,6 @@ export default function AdminDashboard() {
 
   const conversations = conversationsData?.conversations || [];
 
-  // Filter conversations by search term
   const filteredConversations = conversations.filter((conv) => {
     if (!searchTerm) return true;
     const search = searchTerm.toLowerCase();
@@ -101,9 +98,7 @@ export default function AdminDashboard() {
     );
   });
 
-  // Calculate analytics from conversations
   const analytics = useMemo(() => {
-    // Calls over time (last 7 days)
     const last7Days = eachDayOfInterval({
       start: subDays(new Date(), 6),
       end: new Date()
@@ -117,7 +112,6 @@ export default function AdminDashboard() {
       return { date: dayStr, calls: count };
     });
 
-    // Duration distribution
     const durationRanges = [
       { range: '0-30s', min: 0, max: 30 },
       { range: '30s-1m', min: 30, max: 60 },
@@ -135,7 +129,6 @@ export default function AdminDashboard() {
       ).length
     }));
 
-    // Average metrics
     const avgDuration = conversations.length > 0
       ? conversations.reduce((sum, conv) => sum + (conv.call_duration_seconds || 0), 0) / conversations.length
       : 0;
@@ -144,7 +137,6 @@ export default function AdminDashboard() {
       ? conversations.reduce((sum, conv) => sum + parseFloat(conv.cost || '0'), 0) / conversations.length
       : 0;
 
-    // Engagement metrics
     const transcriptLengths = conversations.map(conv => 
       Array.isArray(conv.transcript) ? conv.transcript.length : 0
     );
@@ -152,10 +144,8 @@ export default function AdminDashboard() {
       ? transcriptLengths.reduce((sum, len) => sum + len, 0) / transcriptLengths.length
       : 0;
 
-    // AI Analysis metrics
     const conversationsWithAI = conversations.filter(conv => conv.analysis?.ai);
     
-    // English Level Distribution
     const levelCounts: Record<string, number> = {};
     conversationsWithAI.forEach(conv => {
       const level = conv.analysis?.ai?.englishLevel || 'Unknown';
@@ -166,7 +156,6 @@ export default function AdminDashboard() {
       count
     }));
 
-    // Topic Complexity Distribution
     const complexityCounts: Record<string, number> = {};
     conversationsWithAI.forEach(conv => {
       const complexity = conv.analysis?.ai?.topicComplexity || 'Unknown';
@@ -177,7 +166,6 @@ export default function AdminDashboard() {
       count
     }));
 
-    // Average Quality Metrics
     const avgGrammar = conversationsWithAI.length > 0
       ? conversationsWithAI.reduce((sum, conv) => sum + (conv.analysis?.ai?.grammarAccuracy || 0), 0) / conversationsWithAI.length
       : 0;
@@ -198,7 +186,6 @@ export default function AdminDashboard() {
       ? conversationsWithAI.reduce((sum, conv) => sum + (conv.analysis?.ai?.conversationQuality || 0), 0) / conversationsWithAI.length
       : 0;
 
-    // Radar chart data for quality metrics
     const qualityMetricsData = [
       { metric: 'Grammar', value: avgGrammar },
       { metric: 'Vocabulary', value: avgVocabulary },
@@ -207,7 +194,6 @@ export default function AdminDashboard() {
       { metric: 'Overall', value: avgQuality }
     ];
 
-    // Most common topics
     const topicsMap: Record<string, number> = {};
     conversationsWithAI.forEach(conv => {
       const topics = conv.analysis?.ai?.topics || [];
@@ -239,7 +225,6 @@ export default function AdminDashboard() {
     };
   }, [conversations]);
 
-  // Download as CSV
   const downloadCSV = () => {
     const headers = [
       "Conversation ID", "User ID", "Agent ID", "Duration (s)", "Cost", "Start Time", "Status",
@@ -276,7 +261,6 @@ export default function AdminDashboard() {
     URL.revokeObjectURL(url);
   };
 
-  // Download as JSON
   const downloadJSON = () => {
     const blob = new Blob([JSON.stringify(filteredConversations, null, 2)], {
       type: "application/json",
@@ -289,7 +273,6 @@ export default function AdminDashboard() {
     URL.revokeObjectURL(url);
   };
 
-  // Format duration to minutes and seconds
   const formatDuration = (seconds: number | null) => {
     if (!seconds) return "0s";
     const mins = Math.floor(seconds / 60);
@@ -298,73 +281,87 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-6 py-8 mt-16">
+        {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2" data-testid="heading-admin-dashboard">Admin Dashboard</h1>
-          <p className="text-gray-400" data-testid="text-dashboard-description">
-            Comprehensive analytics and insights from your AI conversations
+          <h1 className="text-3xl font-bold text-gray-900 mb-2" data-testid="heading-admin-dashboard">
+            Dashboard
+          </h1>
+          <p className="text-gray-500" data-testid="text-dashboard-description">
+            {dateRange.from 
+              ? `${format(dateRange.from, 'MM/dd/yyyy')} to ${dateRange.to ? format(dateRange.to, 'MM/dd/yyyy') : 'now'}`
+              : 'Overview of all conversation analytics'}
           </p>
         </div>
 
-        {/* Stats Cards */}
+        {/* Top Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Conversations</CardTitle>
-              <Phone className="h-4 w-4 text-blue-500" />
+          <Card className="bg-white border-0 shadow-sm hover:shadow-md transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Total Conversations</CardTitle>
+              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
+                <Phone className="h-5 w-5 text-blue-600" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="stat-total-calls">
+              <div className="text-3xl font-bold text-gray-900" data-testid="stat-total-calls">
                 {stats?.totalCalls || 0}
               </div>
-              <p className="text-xs text-gray-400 mt-1">
-                {analytics.aiAnalyzedCount} AI-analyzed
+              <p className="text-xs text-green-600 flex items-center mt-2">
+                <ArrowUp className="h-3 w-3 mr-1" />
+                {analytics.aiAnalyzedCount} analyzed
               </p>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Speaking Time</CardTitle>
-              <Clock className="h-4 w-4 text-green-500" />
+          <Card className="bg-white border-0 shadow-sm hover:shadow-md transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Total Speaking Time</CardTitle>
+              <div className="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center">
+                <Clock className="h-5 w-5 text-purple-600" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="stat-total-duration">
+              <div className="text-3xl font-bold text-gray-900" data-testid="stat-total-duration">
                 {formatDuration(stats?.totalDuration || 0)}
               </div>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-gray-500 mt-2">
                 Avg: {formatDuration(analytics.avgDuration)}
               </p>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Cost</CardTitle>
-              <DollarSign className="h-4 w-4 text-yellow-500" />
+          <Card className="bg-white border-0 shadow-sm hover:shadow-md transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Total Cost</CardTitle>
+              <div className="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center">
+                <DollarSign className="h-5 w-5 text-amber-600" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="stat-total-cost">
-                ${(stats?.totalCost || 0).toFixed(4)}
+              <div className="text-3xl font-bold text-gray-900" data-testid="stat-total-cost">
+                ${(stats?.totalCost || 0).toFixed(2)}
               </div>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-gray-500 mt-2">
                 Avg: ${analytics.avgCost.toFixed(4)}/call
               </p>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-              <Users className="h-4 w-4 text-purple-500" />
+          <Card className="bg-white border-0 shadow-sm hover:shadow-md transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Active Users</CardTitle>
+              <div className="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
+                <Users className="h-5 w-5 text-green-600" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="stat-unique-users">
+              <div className="text-3xl font-bold text-gray-900" data-testid="stat-unique-users">
                 {stats?.uniqueUsers || 0}
               </div>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-gray-500 mt-2">
                 Unique participants
               </p>
             </CardContent>
@@ -373,120 +370,143 @@ export default function AdminDashboard() {
 
         {/* AI Learning Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Avg Grammar Score</CardTitle>
-              <BookOpen className="h-4 w-4 text-blue-400" />
+          <Card className="bg-white border-0 shadow-sm">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Grammar Score</CardTitle>
+              <BookOpen className="h-4 w-4 text-blue-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
-                {analytics.avgGrammar.toFixed(1)}/10
+              <div className="text-2xl font-bold text-gray-900">
+                {analytics.avgGrammar.toFixed(1)}<span className="text-lg text-gray-400">/10</span>
               </div>
-              <p className="text-xs text-gray-400 mt-1">
-                Accuracy across all conversations
-              </p>
+              <div className="w-full bg-gray-100 rounded-full h-2 mt-3">
+                <div 
+                  className="bg-blue-500 h-2 rounded-full transition-all" 
+                  style={{ width: `${(analytics.avgGrammar / 10) * 100}%` }}
+                />
+              </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Avg Vocabulary</CardTitle>
-              <Award className="h-4 w-4 text-green-400" />
+          <Card className="bg-white border-0 shadow-sm">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Vocabulary</CardTitle>
+              <Award className="h-4 w-4 text-purple-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
-                {analytics.avgVocabulary.toFixed(1)}/10
+              <div className="text-2xl font-bold text-gray-900">
+                {analytics.avgVocabulary.toFixed(1)}<span className="text-lg text-gray-400">/10</span>
               </div>
-              <p className="text-xs text-gray-400 mt-1">
-                Richness and variety
-              </p>
+              <div className="w-full bg-gray-100 rounded-full h-2 mt-3">
+                <div 
+                  className="bg-purple-500 h-2 rounded-full transition-all" 
+                  style={{ width: `${(analytics.avgVocabulary / 10) * 100}%` }}
+                />
+              </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Avg Conversation Quality</CardTitle>
-              <Target className="h-4 w-4 text-orange-400" />
+          <Card className="bg-white border-0 shadow-sm">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Overall Quality</CardTitle>
+              <Target className="h-4 w-4 text-amber-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
-                {analytics.avgQuality.toFixed(1)}/10
+              <div className="text-2xl font-bold text-gray-900">
+                {analytics.avgQuality.toFixed(1)}<span className="text-lg text-gray-400">/10</span>
               </div>
-              <p className="text-xs text-gray-400 mt-1">
-                Overall engagement score
-              </p>
+              <div className="w-full bg-gray-100 rounded-full h-2 mt-3">
+                <div 
+                  className="bg-amber-500 h-2 rounded-full transition-all" 
+                  style={{ width: `${(analytics.avgQuality / 10) * 100}%` }}
+                />
+              </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Charts Section 1 */}
+        {/* Charts Row 1 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Calls Over Time */}
-          <Card className="bg-gray-900 border-gray-800">
+          <Card className="bg-white border-0 shadow-sm">
             <CardHeader>
-              <CardTitle>Conversation Trends (Last 7 Days)</CardTitle>
-              <CardDescription>Daily conversation volume</CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-gray-900">Conversation Trends</CardTitle>
+                  <CardDescription className="text-gray-500">Last 7 days</CardDescription>
+                </div>
+                <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50">
+                  View
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={analytics.callsByDay}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                  <XAxis dataKey="date" stroke="#9ca3af" />
-                  <YAxis stroke="#9ca3af" />
+              <ResponsiveContainer width="100%" height={250}>
+                <AreaChart data={analytics.callsByDay}>
+                  <defs>
+                    <linearGradient id="colorCalls" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#5b7cff" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#5b7cff" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+                  <XAxis dataKey="date" stroke="#9ca3af" style={{ fontSize: '12px' }} />
+                  <YAxis stroke="#9ca3af" style={{ fontSize: '12px' }} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
-                    labelStyle={{ color: '#fff' }}
+                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+                    labelStyle={{ color: '#111827', fontWeight: 600 }}
                   />
-                  <Legend />
-                  <Line type="monotone" dataKey="calls" stroke="#4c9dff" strokeWidth={2} name="Calls" />
-                </LineChart>
+                  <Area type="monotone" dataKey="calls" stroke="#5b7cff" strokeWidth={2} fillOpacity={1} fill="url(#colorCalls)" />
+                </AreaChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
 
-          {/* Duration Distribution */}
-          <Card className="bg-gray-900 border-gray-800">
+          <Card className="bg-white border-0 shadow-sm">
             <CardHeader>
-              <CardTitle>Call Duration Distribution</CardTitle>
-              <CardDescription>How long conversations typically last</CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-gray-900">Duration Distribution</CardTitle>
+                  <CardDescription className="text-gray-500">Call length breakdown</CardDescription>
+                </div>
+                <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50">
+                  View
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={analytics.durationData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                  <XAxis dataKey="range" stroke="#9ca3af" />
-                  <YAxis stroke="#9ca3af" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+                  <XAxis dataKey="range" stroke="#9ca3af" style={{ fontSize: '12px' }} />
+                  <YAxis stroke="#9ca3af" style={{ fontSize: '12px' }} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
-                    labelStyle={{ color: '#fff' }}
+                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
+                    labelStyle={{ color: '#111827', fontWeight: 600 }}
                   />
-                  <Legend />
-                  <Bar dataKey="count" fill="#4c9dff" name="Conversations" />
+                  <Bar dataKey="count" fill="#5b7cff" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
         </div>
 
-        {/* Charts Section 2 - AI Analysis */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* English Level Distribution */}
-          <Card className="bg-gray-900 border-gray-800">
+        {/* Charts Row 2 - AI Analysis */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <Card className="bg-white border-0 shadow-sm">
             <CardHeader>
-              <CardTitle>English Proficiency Levels (CEFR)</CardTitle>
-              <CardDescription>Student language proficiency distribution</CardDescription>
+              <CardTitle className="text-gray-900">English Levels (CEFR)</CardTitle>
+              <CardDescription className="text-gray-500">Proficiency distribution</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                   <Pie
                     data={analytics.englishLevelData}
                     cx="50%"
                     cy="50%"
-                    labelLine={false}
-                    label={({ level, count }) => `${level}: ${count}`}
-                    outerRadius={100}
-                    fill="#8884d8"
+                    innerRadius={50}
+                    outerRadius={80}
+                    paddingAngle={2}
                     dataKey="count"
                   >
                     {analytics.englishLevelData.map((entry, index) => (
@@ -494,93 +514,65 @@ export default function AdminDashboard() {
                     ))}
                   </Pie>
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
                   />
                 </PieChart>
               </ResponsiveContainer>
+              <div className="flex flex-wrap gap-2 justify-center mt-4">
+                {analytics.englishLevelData.map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-1">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
+                    <span className="text-xs text-gray-600">{item.level}</span>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
 
-          {/* Topic Complexity */}
-          <Card className="bg-gray-900 border-gray-800">
+          <Card className="bg-white border-0 shadow-sm">
             <CardHeader>
-              <CardTitle>Topic Complexity Breakdown</CardTitle>
-              <CardDescription>Difficulty of conversation topics</CardDescription>
+              <CardTitle className="text-gray-900">Topic Complexity</CardTitle>
+              <CardDescription className="text-gray-500">Difficulty levels</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={analytics.topicComplexityData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                  <XAxis dataKey="complexity" stroke="#9ca3af" />
-                  <YAxis stroke="#9ca3af" />
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart data={analytics.topicComplexityData} layout="vertical">
+                  <XAxis type="number" stroke="#9ca3af" style={{ fontSize: '12px' }} />
+                  <YAxis dataKey="complexity" type="category" stroke="#9ca3af" style={{ fontSize: '12px' }} width={80} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
-                    labelStyle={{ color: '#fff' }}
+                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
                   />
-                  <Legend />
-                  <Bar dataKey="count" fill="#60a5fa" name="Conversations" />
+                  <Bar dataKey="count" fill="#7c3aed" radius={[0, 8, 8, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
-        </div>
 
-        {/* Charts Section 3 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Quality Metrics Radar */}
-          <Card className="bg-gray-900 border-gray-800">
+          <Card className="bg-white border-0 shadow-sm">
             <CardHeader>
-              <CardTitle>Learning Quality Metrics</CardTitle>
-              <CardDescription>Comprehensive performance analysis</CardDescription>
+              <CardTitle className="text-gray-900">Quality Metrics</CardTitle>
+              <CardDescription className="text-gray-500">Performance radar</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={220}>
                 <RadarChart data={analytics.qualityMetricsData}>
-                  <PolarGrid stroke="#374151" />
-                  <PolarAngleAxis dataKey="metric" stroke="#9ca3af" />
-                  <PolarRadiusAxis angle={90} domain={[0, 10]} stroke="#9ca3af" />
-                  <Radar name="Score" dataKey="value" stroke="#4c9dff" fill="#4c9dff" fillOpacity={0.6} />
+                  <PolarGrid stroke="#e5e7eb" />
+                  <PolarAngleAxis dataKey="metric" stroke="#6b7280" style={{ fontSize: '11px' }} />
+                  <PolarRadiusAxis angle={90} domain={[0, 10]} stroke="#9ca3af" style={{ fontSize: '10px' }} />
+                  <Radar name="Score" dataKey="value" stroke="#5b7cff" fill="#5b7cff" fillOpacity={0.5} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
                   />
                 </RadarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
-
-          {/* Top Topics */}
-          <Card className="bg-gray-900 border-gray-800">
-            <CardHeader>
-              <CardTitle>Most Discussed Topics</CardTitle>
-              <CardDescription>Popular conversation subjects</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {analytics.topTopics.length > 0 ? (
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={analytics.topTopics} layout="horizontal">
-                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                    <XAxis type="number" stroke="#9ca3af" />
-                    <YAxis dataKey="topic" type="category" stroke="#9ca3af" width={100} />
-                    <Tooltip 
-                      contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
-                      labelStyle={{ color: '#fff' }}
-                    />
-                    <Bar dataKey="count" fill="#93c5fd" name="Mentions" />
-                  </BarChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="flex items-center justify-center h-[300px] text-gray-400">
-                  No topic data available yet
-                </div>
-              )}
-            </CardContent>
-          </Card>
         </div>
 
-        {/* Filters and Actions */}
-        <Card className="bg-gray-900 border-gray-800 mb-6">
+        {/* Filters */}
+        <Card className="bg-white border-0 shadow-sm mb-6">
           <CardHeader>
-            <CardTitle>Filters & Actions</CardTitle>
+            <CardTitle className="text-gray-900">Filters & Export</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">
@@ -589,10 +581,10 @@ export default function AdminDashboard() {
                   <div className="relative">
                     <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                     <Input
-                      placeholder="Search by conversation ID, user ID, or agent ID..."
+                      placeholder="Search conversations..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 bg-gray-800 border-gray-700"
+                      className="pl-10 border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       data-testid="input-search"
                     />
                   </div>
@@ -603,8 +595,8 @@ export default function AdminDashboard() {
                     <Button
                       variant="outline"
                       className={cn(
-                        "justify-start text-left font-normal bg-gray-800 border-gray-700",
-                        !dateRange.from && "text-gray-400"
+                        "justify-start text-left font-normal border-gray-200",
+                        !dateRange.from && "text-gray-500"
                       )}
                       data-testid="button-date-filter"
                     >
@@ -612,23 +604,21 @@ export default function AdminDashboard() {
                       {dateRange.from ? (
                         dateRange.to ? (
                           <>
-                            {format(dateRange.from, "MMM dd, yyyy")} -{" "}
-                            {format(dateRange.to, "MMM dd, yyyy")}
+                            {format(dateRange.from, "MMM dd")} - {format(dateRange.to, "MMM dd")}
                           </>
                         ) : (
                           format(dateRange.from, "MMM dd, yyyy")
                         )
                       ) : (
-                        "Pick a date range"
+                        "Date range"
                       )}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-gray-900 border-gray-700" align="start">
+                  <PopoverContent className="w-auto p-0 bg-white border-gray-200" align="start">
                     <Calendar
                       mode="range"
                       selected={{ from: dateRange.from, to: dateRange.to }}
                       onSelect={(range) => setDateRange({ from: range?.from, to: range?.to })}
-                      className="bg-gray-900"
                     />
                   </PopoverContent>
                 </Popover>
@@ -636,103 +626,60 @@ export default function AdminDashboard() {
                 <Button
                   onClick={downloadCSV}
                   variant="outline"
-                  className="bg-gray-800 border-gray-700"
+                  className="border-gray-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-600"
                   data-testid="button-download-csv"
                 >
                   <FileText className="mr-2 h-4 w-4" />
-                  Download CSV
+                  CSV
                 </Button>
 
                 <Button
                   onClick={downloadJSON}
                   variant="outline"
-                  className="bg-gray-800 border-gray-700"
+                  className="border-gray-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-600"
                   data-testid="button-download-json"
                 >
                   <FileJson className="mr-2 h-4 w-4" />
-                  Download JSON
+                  JSON
                 </Button>
-              </div>
-              
-              {/* Cost Filters */}
-              <div className="flex flex-col md:flex-row gap-4">
-                <div className="flex-1">
-                  <label className="text-sm text-gray-400 mb-2 block">Min Cost ($)</label>
-                  <Input
-                    type="number"
-                    step="0.0001"
-                    placeholder="0.0000"
-                    value={minCost}
-                    onChange={(e) => setMinCost(e.target.value)}
-                    className="bg-gray-800 border-gray-700"
-                    data-testid="input-min-cost"
-                  />
-                </div>
-                <div className="flex-1">
-                  <label className="text-sm text-gray-400 mb-2 block">Max Cost ($)</label>
-                  <Input
-                    type="number"
-                    step="0.0001"
-                    placeholder="1.0000"
-                    value={maxCost}
-                    onChange={(e) => setMaxCost(e.target.value)}
-                    className="bg-gray-800 border-gray-700"
-                    data-testid="input-max-cost"
-                  />
-                </div>
-                <div className="flex-1 flex items-end">
-                  <Button
-                    onClick={() => {
-                      setMinCost("");
-                      setMaxCost("");
-                      setSearchTerm("");
-                      setDateRange({});
-                    }}
-                    variant="outline"
-                    className="bg-gray-800 border-gray-700 w-full"
-                    data-testid="button-clear-filters"
-                  >
-                    Clear All Filters
-                  </Button>
-                </div>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Conversations Table */}
-        <Card className="bg-gray-900 border-gray-800">
+        <Card className="bg-white border-0 shadow-sm">
           <CardHeader>
-            <CardTitle>Conversations</CardTitle>
-            <CardDescription>
-              {filteredConversations.length} conversation{filteredConversations.length !== 1 ? "s" : ""} found
+            <CardTitle className="text-gray-900">Recent Conversations</CardTitle>
+            <CardDescription className="text-gray-500">
+              {filteredConversations.length} conversation{filteredConversations.length !== 1 ? "s" : ""}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-gray-800">
-                    <TableHead>Conversation ID</TableHead>
-                    <TableHead>User ID</TableHead>
-                    <TableHead>Duration</TableHead>
-                    <TableHead>Cost</TableHead>
-                    <TableHead>English Level</TableHead>
-                    <TableHead>Complexity</TableHead>
-                    <TableHead>Quality</TableHead>
-                    <TableHead>Actions</TableHead>
+                  <TableRow className="border-gray-200 hover:bg-transparent">
+                    <TableHead className="text-gray-600">ID</TableHead>
+                    <TableHead className="text-gray-600">User</TableHead>
+                    <TableHead className="text-gray-600">Duration</TableHead>
+                    <TableHead className="text-gray-600">Cost</TableHead>
+                    <TableHead className="text-gray-600">Level</TableHead>
+                    <TableHead className="text-gray-600">Complexity</TableHead>
+                    <TableHead className="text-gray-600">Quality</TableHead>
+                    <TableHead className="text-gray-600">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell colSpan={8} className="text-center text-gray-400">
+                      <TableCell colSpan={8} className="text-center text-gray-400 py-8">
                         Loading...
                       </TableCell>
                     </TableRow>
                   ) : filteredConversations.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={8} className="text-center text-gray-400">
+                      <TableCell colSpan={8} className="text-center text-gray-400 py-8">
                         No conversations found
                       </TableCell>
                     </TableRow>
@@ -740,51 +687,51 @@ export default function AdminDashboard() {
                     filteredConversations.map((conv) => (
                       <TableRow
                         key={conv.id}
-                        className="border-gray-800 hover:bg-gray-800/50"
+                        className="border-gray-100 hover:bg-gray-50"
                         data-testid={`row-conversation-${conv.id}`}
                       >
-                        <TableCell className="font-mono text-sm">
-                          {conv.conversation_id.substring(0, 12)}...
+                        <TableCell className="font-mono text-xs text-gray-600">
+                          {conv.conversation_id.substring(0, 8)}...
                         </TableCell>
-                        <TableCell>{conv.user_id || "N/A"}</TableCell>
-                        <TableCell>{formatDuration(conv.call_duration_seconds)}</TableCell>
-                        <TableCell>${(parseFloat(conv.cost || "0")).toFixed(4)}</TableCell>
+                        <TableCell className="text-sm text-gray-900">{conv.user_id || "Guest"}</TableCell>
+                        <TableCell className="text-sm text-gray-600">{formatDuration(conv.call_duration_seconds)}</TableCell>
+                        <TableCell className="text-sm text-gray-900 font-medium">${(parseFloat(conv.cost || "0")).toFixed(4)}</TableCell>
                         <TableCell>
                           {conv.analysis?.ai?.englishLevel ? (
-                            <Badge variant="outline" className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+                            <Badge className="bg-blue-50 text-blue-700 border-0 hover:bg-blue-100">
                               {conv.analysis.ai.englishLevel}
                             </Badge>
                           ) : (
-                            <span className="text-gray-500">-</span>
+                            <span className="text-gray-400 text-sm">-</span>
                           )}
                         </TableCell>
                         <TableCell>
                           {conv.analysis?.ai?.topicComplexity ? (
-                            <Badge variant="outline" className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                            <Badge className="bg-purple-50 text-purple-700 border-0 hover:bg-purple-100">
                               {conv.analysis.ai.topicComplexity}
                             </Badge>
                           ) : (
-                            <span className="text-gray-500">-</span>
+                            <span className="text-gray-400 text-sm">-</span>
                           )}
                         </TableCell>
                         <TableCell>
                           {conv.analysis?.ai?.conversationQuality ? (
-                            <span className="text-sm">
+                            <span className="text-sm font-medium text-gray-900">
                               {conv.analysis.ai.conversationQuality}/10
                             </span>
                           ) : (
-                            <span className="text-gray-500">-</span>
+                            <span className="text-gray-400 text-sm">-</span>
                           )}
                         </TableCell>
                         <TableCell>
                           <Button
                             size="sm"
-                            variant="outline"
+                            variant="ghost"
                             onClick={() => setSelectedConversation(conv)}
-                            className="bg-gray-800 border-gray-700"
+                            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
                             data-testid={`button-view-${conv.id}`}
                           >
-                            View Details
+                            View
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -799,90 +746,88 @@ export default function AdminDashboard() {
 
       {/* Conversation Detail Dialog */}
       <Dialog open={!!selectedConversation} onOpenChange={() => setSelectedConversation(null)}>
-        <DialogContent className="bg-gray-900 border-gray-700 text-white max-w-4xl max-h-[80vh] overflow-y-auto">
+        <DialogContent className="bg-white text-gray-900 max-w-4xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Conversation Details</DialogTitle>
-            <DialogDescription className="text-gray-400">
+            <DialogTitle className="text-gray-900">Conversation Details</DialogTitle>
+            <DialogDescription className="text-gray-500 font-mono text-xs">
               {selectedConversation?.conversation_id}
             </DialogDescription>
           </DialogHeader>
 
           {selectedConversation && (
             <div className="space-y-6">
-              {/* Metadata */}
               <div>
-                <h3 className="text-lg font-semibold mb-3">Metadata</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Metadata</h3>
+                <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg">
                   <div>
-                    <p className="text-sm text-gray-400">User ID</p>
-                    <p className="font-mono">{selectedConversation.user_id || "N/A"}</p>
+                    <p className="text-sm text-gray-500">User ID</p>
+                    <p className="font-mono text-sm text-gray-900">{selectedConversation.user_id || "N/A"}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400">Duration</p>
-                    <p>{formatDuration(selectedConversation.call_duration_seconds)}</p>
+                    <p className="text-sm text-gray-500">Duration</p>
+                    <p className="text-gray-900">{formatDuration(selectedConversation.call_duration_seconds)}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400">Cost</p>
-                    <p>${parseFloat(selectedConversation.cost || "0").toFixed(6)}</p>
+                    <p className="text-sm text-gray-500">Cost</p>
+                    <p className="text-gray-900 font-medium">${parseFloat(selectedConversation.cost || "0").toFixed(6)}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400">Status</p>
-                    <Badge className="bg-green-500/20 text-green-400">
+                    <p className="text-sm text-gray-500">Status</p>
+                    <Badge className="bg-green-50 text-green-700 border-0">
                       {selectedConversation.status || "completed"}
                     </Badge>
                   </div>
                 </div>
               </div>
 
-              {/* AI Analysis */}
               {selectedConversation.analysis?.ai && (
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">AI Analysis</h3>
-                  <div className="bg-gray-800/50 p-4 rounded-lg space-y-4">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">AI Analysis</h3>
+                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-lg space-y-4">
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                       <div>
-                        <p className="text-sm text-gray-400">English Level</p>
-                        <Badge className="mt-1 bg-blue-500/20 text-blue-400">
+                        <p className="text-sm text-gray-600">English Level</p>
+                        <Badge className="mt-1 bg-blue-100 text-blue-800 border-0">
                           {selectedConversation.analysis.ai.englishLevel}
                         </Badge>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-400">Topic Complexity</p>
-                        <Badge className="mt-1 bg-purple-500/20 text-purple-400">
+                        <p className="text-sm text-gray-600">Complexity</p>
+                        <Badge className="mt-1 bg-purple-100 text-purple-800 border-0">
                           {selectedConversation.analysis.ai.topicComplexity}
                         </Badge>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-400">Quality Score</p>
-                        <p className="text-lg font-bold">{selectedConversation.analysis.ai.conversationQuality}/10</p>
+                        <p className="text-sm text-gray-600">Quality</p>
+                        <p className="text-2xl font-bold text-gray-900 mt-1">{selectedConversation.analysis.ai.conversationQuality}/10</p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-400">Grammar</p>
-                        <p className="text-lg font-bold">{selectedConversation.analysis.ai.grammarAccuracy}/10</p>
+                        <p className="text-sm text-gray-600">Grammar</p>
+                        <p className="text-2xl font-bold text-gray-900 mt-1">{selectedConversation.analysis.ai.grammarAccuracy}/10</p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-400">Vocabulary</p>
-                        <p className="text-lg font-bold">{selectedConversation.analysis.ai.vocabularyRichness}/10</p>
+                        <p className="text-sm text-gray-600">Vocabulary</p>
+                        <p className="text-2xl font-bold text-gray-900 mt-1">{selectedConversation.analysis.ai.vocabularyRichness}/10</p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-400">Fluency</p>
-                        <p className="text-lg font-bold">{selectedConversation.analysis.ai.fluency}/10</p>
+                        <p className="text-sm text-gray-600">Fluency</p>
+                        <p className="text-2xl font-bold text-gray-900 mt-1">{selectedConversation.analysis.ai.fluency}/10</p>
                       </div>
                     </div>
 
                     {selectedConversation.analysis.ai.summary && (
-                      <div>
-                        <p className="text-sm text-gray-400 mb-2">Summary</p>
-                        <p className="text-sm">{selectedConversation.analysis.ai.summary}</p>
+                      <div className="bg-white p-4 rounded-lg">
+                        <p className="text-sm text-gray-600 mb-2">Summary</p>
+                        <p className="text-sm text-gray-900">{selectedConversation.analysis.ai.summary}</p>
                       </div>
                     )}
 
                     {selectedConversation.analysis.ai.topics && selectedConversation.analysis.ai.topics.length > 0 && (
                       <div>
-                        <p className="text-sm text-gray-400 mb-2">Topics Discussed</p>
+                        <p className="text-sm text-gray-600 mb-2">Topics</p>
                         <div className="flex flex-wrap gap-2">
                           {selectedConversation.analysis.ai.topics.map((topic: string, idx: number) => (
-                            <Badge key={idx} variant="outline" className="bg-gray-700/50">
+                            <Badge key={idx} className="bg-white text-gray-700 border-0">
                               {topic}
                             </Badge>
                           ))}
@@ -891,22 +836,22 @@ export default function AdminDashboard() {
                     )}
 
                     {selectedConversation.analysis.ai.strengths && selectedConversation.analysis.ai.strengths.length > 0 && (
-                      <div>
-                        <p className="text-sm text-gray-400 mb-2">Strengths</p>
+                      <div className="bg-white p-4 rounded-lg">
+                        <p className="text-sm text-gray-600 mb-2">✅ Strengths</p>
                         <ul className="list-disc list-inside text-sm space-y-1">
                           {selectedConversation.analysis.ai.strengths.map((strength: string, idx: number) => (
-                            <li key={idx} className="text-green-400">{strength}</li>
+                            <li key={idx} className="text-green-700">{strength}</li>
                           ))}
                         </ul>
                       </div>
                     )}
 
                     {selectedConversation.analysis.ai.areasForImprovement && selectedConversation.analysis.ai.areasForImprovement.length > 0 && (
-                      <div>
-                        <p className="text-sm text-gray-400 mb-2">Areas for Improvement</p>
+                      <div className="bg-white p-4 rounded-lg">
+                        <p className="text-sm text-gray-600 mb-2">📈 Areas for Improvement</p>
                         <ul className="list-disc list-inside text-sm space-y-1">
                           {selectedConversation.analysis.ai.areasForImprovement.map((area: string, idx: number) => (
-                            <li key={idx} className="text-yellow-400">{area}</li>
+                            <li key={idx} className="text-amber-700">{area}</li>
                           ))}
                         </ul>
                       </div>
@@ -915,25 +860,24 @@ export default function AdminDashboard() {
                 </div>
               )}
 
-              {/* Transcript */}
               {selectedConversation.transcript && (
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Transcript</h3>
-                  <div className="space-y-3 bg-gray-800/50 p-4 rounded-lg max-h-96 overflow-y-auto">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Transcript</h3>
+                  <div className="space-y-3 bg-gray-50 p-4 rounded-lg max-h-96 overflow-y-auto">
                     {Array.isArray(selectedConversation.transcript) &&
                       selectedConversation.transcript.map((turn: any, idx: number) => (
                         <div key={idx} className="flex gap-3">
                           <span
                             className={cn(
-                              "px-2 py-1 rounded text-xs font-semibold h-fit",
+                              "px-3 py-1 rounded-full text-xs font-semibold h-fit",
                               turn.role === "user"
-                                ? "bg-blue-500/20 text-blue-400"
-                                : "bg-green-500/20 text-green-400"
+                                ? "bg-blue-100 text-blue-700"
+                                : "bg-purple-100 text-purple-700"
                             )}
                           >
                             {turn.role === "user" ? "Student" : "AI Tutor"}
                           </span>
-                          <p className="flex-1">{turn.message || turn.content}</p>
+                          <p className="flex-1 text-sm text-gray-900">{turn.message || turn.content}</p>
                         </div>
                       ))}
                   </div>
