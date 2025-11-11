@@ -24,15 +24,19 @@ const Navbar = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalTab, setAuthModalTab] = useState<'login' | 'signup'>('login');
+  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const solutionsRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setIsMobileSolutionsOpen(false);
     setIsMobileAboutOpen(false);
   };
 
@@ -50,6 +54,9 @@ const Navbar = () => {
   // Handle click outside to close dropdowns
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
+      if (solutionsRef.current && !solutionsRef.current.contains(event.target as Node)) {
+        setIsSolutionsOpen(false);
+      }
       if (aboutRef.current && !aboutRef.current.contains(event.target as Node)) {
         setIsAboutOpen(false);
       }
@@ -70,6 +77,41 @@ const Navbar = () => {
     }
   }, [location.state]);
 
+  const solutionsItems = [
+    {
+      title: "For Students",
+      href: "/for-students",
+      icon: GraduationCap,
+      description: "Interactive AI learning for student success"
+    },
+    {
+      title: "For Teachers", 
+      href: "/for-teachers",
+      icon: Users,
+      description: "Empower educators with AI tools"
+    },
+    {
+      title: "For Schools",
+      href: "/for-schools", 
+      icon: School,
+      description: "Enterprise solutions for institutions"
+    }
+  ];
+
+  const additionalSolutionsItems = [
+    {
+      title: "All Features",
+      href: "/features",
+      icon: Sparkles,
+      description: "Explore complete feature set"
+    },
+    {
+      title: "Roadmap",
+      href: "/roadmap",
+      icon: Map,
+      description: "See what's coming next"
+    }
+  ];
 
   const aboutItems = [
     {
@@ -128,60 +170,71 @@ const Navbar = () => {
                 Home
               </Link>
 
-              <Link 
-                to="/for-students" 
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/for-students" && "text-white"
+              <div ref={solutionsRef} className="relative">
+                <button
+                  onClick={() => {
+                    setIsSolutionsOpen(!isSolutionsOpen);
+                    setIsAboutOpen(false);
+                  }}
+                  className={cn(
+                    "flex items-center text-gray-300 hover:text-white transition-colors",
+                    isSolutionsOpen && "text-white"
+                  )}
+                >
+                  Solutions
+                  <ChevronDown className={cn(
+                    "ml-1 h-4 w-4 transition-transform",
+                    isSolutionsOpen && "rotate-180"
+                  )} />
+                </button>
+                {isSolutionsOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl">
+                    <div className="p-6 space-y-4">
+                      {solutionsItems.map((item) => (
+                        <Link
+                          key={item.href}
+                          to={item.href}
+                          onClick={() => setIsSolutionsOpen(false)}
+                          className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                          data-testid={`link-${item.href.substring(1)}`}
+                        >
+                          <item.icon className="h-5 w-5 text-gray-400 mt-0.5 group-hover:text-white" />
+                          <div>
+                            <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
+                              {item.title}
+                            </div>
+                            <div className="text-gray-400 text-sm">
+                              {item.description}
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                      
+                      <div className="border-t border-white/10 pt-4">
+                        {additionalSolutionsItems.map((item) => (
+                          <Link
+                            key={item.href}
+                            to={item.href}
+                            onClick={() => setIsSolutionsOpen(false)}
+                            className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                            data-testid={`link-${item.href.substring(1)}`}
+                          >
+                            <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-white" />
+                            <div>
+                              <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
+                                {item.title}
+                              </div>
+                              <div className="text-gray-400 text-sm">
+                                {item.description}
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 )}
-                data-testid="link-for-students"
-              >
-                For Students
-              </Link>
-
-              <Link 
-                to="/for-teachers" 
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/for-teachers" && "text-white"
-                )}
-                data-testid="link-for-teachers"
-              >
-                For Teachers
-              </Link>
-
-              <Link 
-                to="/for-schools" 
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/for-schools" && "text-white"
-                )}
-                data-testid="link-for-schools"
-              >
-                For Schools
-              </Link>
-
-              <Link 
-                to="/features" 
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/features" && "text-white"
-                )}
-                data-testid="link-features"
-              >
-                All Features
-              </Link>
-
-              <Link 
-                to="/roadmap" 
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/roadmap" && "text-white"
-                )}
-                data-testid="link-roadmap"
-              >
-                Roadmap
-              </Link>
+              </div>
 
               <Link 
                 to="/demo-scheduling" 
@@ -207,7 +260,10 @@ const Navbar = () => {
 
               <div ref={aboutRef} className="relative">
                 <button
-                  onClick={() => setIsAboutOpen(!isAboutOpen)}
+                  onClick={() => {
+                    setIsAboutOpen(!isAboutOpen);
+                    setIsSolutionsOpen(false);
+                  }}
                   className={cn(
                     "flex items-center text-gray-300 hover:text-white transition-colors",
                     isAboutOpen && "text-white"
@@ -334,50 +390,35 @@ const Navbar = () => {
                 Home
               </Link>
 
-              <Link 
-                to="/for-students" 
-                onClick={closeMenu} 
-                className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-for-students"
-              >
-                For Students
-              </Link>
-
-              <Link 
-                to="/for-teachers" 
-                onClick={closeMenu} 
-                className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-for-teachers"
-              >
-                For Teachers
-              </Link>
-
-              <Link 
-                to="/for-schools" 
-                onClick={closeMenu} 
-                className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-for-schools"
-              >
-                For Schools
-              </Link>
-
-              <Link 
-                to="/features" 
-                onClick={closeMenu} 
-                className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-features"
-              >
-                All Features
-              </Link>
-
-              <Link 
-                to="/roadmap" 
-                onClick={closeMenu} 
-                className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-roadmap"
-              >
-                Roadmap
-              </Link>
+              {/* Mobile Solutions Dropdown */}
+              <div>
+                <button
+                  onClick={() => setIsMobileSolutionsOpen(!isMobileSolutionsOpen)}
+                  className="flex items-center justify-between w-full text-xl text-white hover:text-gray-400 transition-colors"
+                >
+                  Solutions
+                  <ChevronDown className={cn(
+                    "h-5 w-5 transition-transform",
+                    isMobileSolutionsOpen && "rotate-180"
+                  )} />
+                </button>
+                {isMobileSolutionsOpen && (
+                  <div className="mt-4 ml-4 space-y-3">
+                    {[...solutionsItems, ...additionalSolutionsItems].map((item) => (
+                      <Link
+                        key={item.href}
+                        to={item.href}
+                        onClick={closeMenu}
+                        className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors"
+                        data-testid={`link-mobile-${item.href.substring(1)}`}
+                      >
+                        <item.icon className="h-4 w-4" />
+                        <span>{item.title}</span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               <Link 
                 to="/demo-scheduling" 
