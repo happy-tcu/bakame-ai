@@ -79,8 +79,14 @@ The following environment variables are configured in `.env`:
 - `/privacy` - Privacy policy
 - `/terms` - Terms of service
 - `/early-access` - Early access signup
-- `/pricing` - Pricing page
+- `/pricing` - Redirects to /contact
 - `/demo-scheduling` - Demo scheduling page
+- `/try` - Redirects to /contact
+- `/resources` - Redirects to /contact
+- `/features` - All features page
+- `/roadmap` - Product roadmap page
+- `/press` - Press and media page
+- `/student-dashboard` - Student dashboard (authenticated)
 
 ## Development
 
@@ -150,7 +156,13 @@ The application uses PostgreSQL with four main tables:
    - Replaced "How AI Can Help You" section with classroom image
    - Compressed teacher dashboard features section for better visual balance
    - Removed "Ready to Transform Your Teaching?" CTA section
-4. **Codebase Cleanup** (making application lighter):
+4. **Solution Pages Removal** (lightweight code approach):
+   - Deleted `ForStudents.tsx`, `ForTeachers.tsx`, and `ForSchools.tsx` page files
+   - Updated Solutions dropdown to show "For Students", "For Teachers", "For Schools" as non-clickable informational items
+   - Removed routes from `App.tsx` for deleted solution pages
+   - Applied muted styling (opacity-60, gray colors) to visually distinguish non-interactive items from clickable links
+   - "All Features" and "Roadmap" remain clickable in Solutions dropdown
+5. **Codebase Cleanup** (making application lighter):
    - Deleted unused `TryDemo.tsx` page (was commented out and redirected)
    - Deleted unused `teamData.ts` file containing fake team data (real team hardcoded in Team.tsx)
    - Removed commented import line in `App.tsx`
