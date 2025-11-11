@@ -79,24 +79,6 @@ const Navbar = () => {
 
   const solutionsItems = [
     {
-      title: "For Students",
-      icon: GraduationCap,
-      description: "Interactive AI learning for student success"
-    },
-    {
-      title: "For Teachers", 
-      icon: Users,
-      description: "Empower educators with AI tools"
-    },
-    {
-      title: "For Schools",
-      icon: School,
-      description: "Enterprise solutions for institutions"
-    }
-  ];
-
-  const additionalSolutionsItems = [
-    {
       title: "All Features",
       href: "/features",
       icon: Sparkles,
@@ -189,45 +171,25 @@ const Navbar = () => {
                 {isSolutionsOpen && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[400px] bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl">
                     <div className="p-6 space-y-4">
-                      {solutionsItems.map((item, index) => (
-                        <div
-                          key={index}
-                          className="flex items-start space-x-3 p-3 rounded-lg cursor-default opacity-60"
-                          data-testid={`text-${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                      {solutionsItems.map((item) => (
+                        <Link
+                          key={item.href}
+                          to={item.href}
+                          onClick={() => setIsSolutionsOpen(false)}
+                          className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                          data-testid={`link-${item.href.substring(1)}`}
                         >
-                          <item.icon className="h-5 w-5 text-gray-500 mt-0.5" />
+                          <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-white" />
                           <div>
-                            <div className="text-gray-300 font-medium">
+                            <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
                               {item.title}
                             </div>
-                            <div className="text-gray-500 text-sm">
+                            <div className="text-gray-400 text-sm">
                               {item.description}
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       ))}
-                      
-                      <div className="border-t border-white/10 pt-4">
-                        {additionalSolutionsItems.map((item) => (
-                          <Link
-                            key={item.href}
-                            to={item.href}
-                            onClick={() => setIsSolutionsOpen(false)}
-                            className="flex items-start space-x-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
-                            data-testid={`link-${item.href.substring(1)}`}
-                          >
-                            <item.icon className="h-5 w-5 text-gray-500 mt-0.5 group-hover:text-white" />
-                            <div>
-                              <div className="text-white font-medium group-hover:text-gray-300 transition-colors">
-                                {item.title}
-                              </div>
-                              <div className="text-gray-400 text-sm">
-                                {item.description}
-                              </div>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 )}
@@ -387,17 +349,7 @@ const Navbar = () => {
                 </button>
                 {isMobileSolutionsOpen && (
                   <div className="mt-4 ml-4 space-y-3">
-                    {solutionsItems.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center space-x-3 text-gray-500 cursor-default opacity-60"
-                        data-testid={`text-mobile-${item.title.toLowerCase().replace(/\s+/g, '-')}`}
-                      >
-                        <item.icon className="h-4 w-4" />
-                        <span>{item.title}</span>
-                      </div>
-                    ))}
-                    {additionalSolutionsItems.map((item) => (
+                    {solutionsItems.map((item) => (
                       <Link
                         key={item.href}
                         to={item.href}
