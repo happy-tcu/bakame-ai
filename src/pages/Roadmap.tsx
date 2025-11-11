@@ -35,7 +35,7 @@ const Roadmap = () => {
       title: 'Voice Journal',
       description: 'Daily speaking practice with AI feedback',
       icon: Mic,
-      votes: 342,
+      votes: 0,
       status: 'live' as const,
       progress: 100
     },
@@ -44,7 +44,7 @@ const Roadmap = () => {
       title: 'Smart Flashcards',
       description: 'Adaptive learning system with spaced repetition',
       icon: BookOpen,
-      votes: 289,
+      votes: 0,
       status: 'live' as const,
       progress: 100
     },
@@ -53,7 +53,7 @@ const Roadmap = () => {
       title: 'AI Conversation Partner',
       description: 'Practice real conversations with intelligent AI',
       icon: MessageSquare,
-      votes: 456,
+      votes: 0,
       status: 'live' as const,
       progress: 100
     },
@@ -62,7 +62,7 @@ const Roadmap = () => {
       title: 'Pronunciation Score',
       description: 'Real-time accent and pronunciation analysis',
       icon: Volume2,
-      votes: 378,
+      votes: 0,
       status: 'live' as const,
       progress: 100
     },
@@ -71,7 +71,7 @@ const Roadmap = () => {
       title: 'Teacher Dashboard',
       description: 'Complete classroom management and analytics',
       icon: BarChart3,
-      votes: 267,
+      votes: 0,
       status: 'live' as const,
       progress: 100
     },
@@ -81,7 +81,7 @@ const Roadmap = () => {
       title: 'Voice Clone Learning',
       description: 'Personalized AI tutor with your voice characteristics',
       icon: MicVocal,
-      votes: 523,
+      votes: 0,
       status: 'coming-soon' as const,
       quarter: 'Q1 2025',
       progress: 75
@@ -91,7 +91,7 @@ const Roadmap = () => {
       title: 'English Rap Battles',
       description: 'Fun rhythm-based vocabulary and pronunciation games',
       icon: Music,
-      votes: 412,
+      votes: 0,
       status: 'coming-soon' as const,
       quarter: 'Q1 2025',
       progress: 60
@@ -101,7 +101,7 @@ const Roadmap = () => {
       title: 'Document Intelligence',
       description: 'Smart document analysis and summarization',
       icon: FileText,
-      votes: 389,
+      votes: 0,
       status: 'coming-soon' as const,
       quarter: 'Q1 2025',
       progress: 80
@@ -111,7 +111,7 @@ const Roadmap = () => {
       title: 'Pronunciation Heat Maps',
       description: 'Visual analytics for pronunciation patterns',
       icon: Map,
-      votes: 334,
+      votes: 0,
       status: 'coming-soon' as const,
       quarter: 'Q1 2025',
       progress: 70
@@ -121,7 +121,7 @@ const Roadmap = () => {
       title: 'Podcast Generator',
       description: 'Create custom learning podcasts for students',
       icon: Podcast,
-      votes: 445,
+      votes: 0,
       status: 'coming-soon' as const,
       quarter: 'Q1 2025',
       progress: 55
@@ -132,7 +132,7 @@ const Roadmap = () => {
       title: 'Virtual Field Trips',
       description: 'Immersive cultural and language exploration',
       icon: MapPin,
-      votes: 687,
+      votes: 0,
       status: 'future' as const,
       quarter: 'Q2 2025',
       progress: 25
@@ -142,7 +142,7 @@ const Roadmap = () => {
       title: 'AI Debate Partner',
       description: 'Practice argumentation and critical thinking',
       icon: MessageCircle,
-      votes: 512,
+      votes: 0,
       status: 'future' as const,
       quarter: 'Q2 2025',
       progress: 30
@@ -152,7 +152,7 @@ const Roadmap = () => {
       title: 'Story Chain Collaboration',
       description: 'Collaborative storytelling with classmates',
       icon: Edit3,
-      votes: 423,
+      votes: 0,
       status: 'future' as const,
       quarter: 'Q2 2025',
       progress: 20
@@ -162,7 +162,7 @@ const Roadmap = () => {
       title: 'Sign Language Support',
       description: 'Inclusive communication tools for all learners',
       icon: Hand,
-      votes: 556,
+      votes: 0,
       status: 'future' as const,
       quarter: 'Q3 2025',
       progress: 15
@@ -172,7 +172,7 @@ const Roadmap = () => {
       title: 'Skill Exchange Marketplace',
       description: 'Connect with peers for language exchange',
       icon: Users,
-      votes: 398,
+      votes: 0,
       status: 'future' as const,
       quarter: 'Q3 2025',
       progress: 10
@@ -182,7 +182,7 @@ const Roadmap = () => {
       title: 'Business English Simulator',
       description: 'Professional communication scenarios',
       icon: Building,
-      votes: 476,
+      votes: 0,
       status: 'future' as const,
       quarter: 'Q3 2025',
       progress: 18
@@ -322,14 +322,9 @@ const Roadmap = () => {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gray-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <Badge className="mb-4 bg-gray-500/20 text-gray-300 border-gray-500/30">
-            <Sparkles className="mr-2 h-3 w-3" />
-            Product Roadmap 2025
-          </Badge>
-          
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
             Shape the Future of
-            <span className="block gradient-text">Bakame AI</span>
+            <span className="block">Bakame AI</span>
           </h1>
           
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
@@ -361,92 +356,9 @@ const Roadmap = () => {
       {/* Features Grid */}
       <section className="relative py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Live Now Column */}
-            <div className="space-y-6">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-bold flex items-center gap-2">
-                  <CheckCircle className="h-6 w-6 text-gray-400" />
-                  Live Now
-                </h2>
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                  Available
-                </Badge>
-              </div>
-              
-              {sortedFeatures('live').map((feature) => (
-                <Card 
-                  key={feature.id}
-                  className="bg-gradient-to-br from-gray-900/20 to-gray-900/10 border-gray-500/20 hover:border-gray-500/40 transition-all hover:scale-105 group"
-                >
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="p-3 bg-gray-500/10 rounded-lg group-hover:bg-gray-500/20 transition-colors">
-                        <feature.icon className="h-6 w-6 text-gray-400" />
-                      </div>
-                      {feature.id === mostRequested.id && (
-                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
-                          <Star className="mr-1 h-3 w-3" />
-                          Most Requested
-                        </Badge>
-                      )}
-                    </div>
-                    <CardTitle className="text-xl text-white mt-4">{feature.title}</CardTitle>
-                    <CardDescription className="text-gray-400">
-                      {feature.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <ThumbsUp className="h-4 w-4 text-gray-400" />
-                        <span className="text-lg font-semibold text-white">
-                          {feature.votes}
-                        </span>
-                        <span className="text-sm text-gray-400">votes</span>
-                      </div>
-                      <Button
-                        size="sm"
-                        onClick={() => handleVote(feature.id)}
-                        disabled={votedFeatures.has(feature.id)}
-                        className={votedFeatures.has(feature.id) 
-                          ? "bg-gray-800 text-gray-400" 
-                          : "bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 border border-gray-500/30"}
-                        data-testid={`button-vote-${feature.id}`}
-                      >
-                        {votedFeatures.has(feature.id) ? 'Voted' : 'Vote'}
-                      </Button>
-                    </div>
-                    {feature.progress !== undefined && (
-                      <div className="mt-4">
-                        <div className="flex justify-between text-xs text-gray-400 mb-1">
-                          <span>Completion</span>
-                          <span>{feature.progress}%</span>
-                        </div>
-                        <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full bg-gradient-to-r from-gray-400 to-gray-600 transition-all duration-500"
-                            style={{ width: `${feature.progress}%` }}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Coming Soon Column */}
             <div className="space-y-6">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-bold flex items-center gap-2">
-                  <Clock className="h-6 w-6 text-gray-400" />
-                  Coming Soon
-                </h2>
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                  Q1 2025
-                </Badge>
-              </div>
               
               {sortedFeatures('coming-soon').map((feature) => (
                 <Card 
@@ -491,12 +403,6 @@ const Roadmap = () => {
                         {votedFeatures.has(feature.id) ? 'Voted' : 'Vote'}
                       </Button>
                     </div>
-                    {feature.quarter && (
-                      <Badge variant="outline" className="border-gray-500/30 text-gray-400 text-xs">
-                        <Calendar className="mr-1 h-3 w-3" />
-                        {feature.quarter}
-                      </Badge>
-                    )}
                     {feature.progress !== undefined && (
                       <div className="mt-4">
                         <div className="flex justify-between text-xs text-gray-400 mb-1">
@@ -518,16 +424,6 @@ const Roadmap = () => {
 
             {/* Future Vision Column */}
             <div className="space-y-6">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-bold flex items-center gap-2">
-                  <Target className="h-6 w-6 text-gray-400" />
-                  Future Vision
-                </h2>
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                  Q2-Q3 2025
-                </Badge>
-              </div>
-              
               {sortedFeatures('future').map((feature) => (
                 <Card 
                   key={feature.id}
@@ -571,12 +467,6 @@ const Roadmap = () => {
                         {votedFeatures.has(feature.id) ? 'Voted' : 'Vote'}
                       </Button>
                     </div>
-                    {feature.quarter && (
-                      <Badge variant="outline" className="border-gray-500/30 text-gray-400 text-xs">
-                        <Calendar className="mr-1 h-3 w-3" />
-                        {feature.quarter}
-                      </Badge>
-                    )}
                     {feature.progress !== undefined && (
                       <div className="mt-4">
                         <div className="flex justify-between text-xs text-gray-400 mb-1">
