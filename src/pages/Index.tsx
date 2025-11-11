@@ -102,17 +102,6 @@ const Index = () => {
               proven to deliver breakthrough results in schools across Africa.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Button 
-                onClick={() => navigate('/demo-scheduling')}
-                className="bg-white text-black text-lg px-8 py-6 hover:bg-gray-200 hover-depth shadow-xl"
-                data-testid="button-demo"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Demo
-              </Button>
-            </div>
-
             <div className="flex justify-center">
               <Badge className="bg-white/10 text-white border-white/30 px-4 py-2 backdrop-blur-sm">
                 <WifiOff className="mr-2 h-4 w-4" />
