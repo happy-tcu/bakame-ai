@@ -622,52 +622,8 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="bg-black border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid md:grid-cols-5 gap-8">
-            <div className="md:col-span-2">
-              <div className="text-2xl font-bold gradient-text mb-4">Bakame AI</div>
-              <p className="text-gray-400 mb-4">
-                Revolutionizing English education across Africa with AI-powered learning that works everywhere.
-              </p>
-              <div className="flex space-x-4">
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                  <Award className="mr-1 h-3 w-3" />
-                  CREATE Award 2025
-                </Badge>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-white font-semibold mb-4">Product</h3>
-              <ul className="space-y-2">
-                <li><Link to="/features" className="text-gray-400 hover:text-white transition-colors">Features</Link></li>
-                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">NGO Solutions</Link></li>
-                <li><Link to="/demo-scheduling" className="text-gray-400 hover:text-white transition-colors">Demo</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-white font-semibold mb-4">Resources</h3>
-              <ul className="space-y-2">
-                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
-                <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link></li>
-                <li><Link to="/support" className="text-gray-400 hover:text-white transition-colors">Support</Link></li>
-                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-white font-semibold mb-4">Company</h3>
-              <ul className="space-y-2">
-                <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
-                <li><Link to="/team" className="text-gray-400 hover:text-white transition-colors">Team</Link></li>
-                <li><Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy</Link></li>
-                <li><Link to="/terms" className="text-gray-400 hover:text-white transition-colors">Terms</Link></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-white/10 mt-12 pt-8 text-center">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="text-center">
             <p className="text-gray-500">
               © 2025 Bakame AI. All rights reserved. Building the future of education in Africa.
             </p>
