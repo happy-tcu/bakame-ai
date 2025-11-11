@@ -105,7 +105,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
               <Button 
                 onClick={() => navigate('/demo-scheduling')}
-                className="bg-white text-black text-lg px-8 py-6 hover:bg-gray-200 hover-depth shadow-xl"
+                className="bg-white text-black text-lg px-8 py-6 hover:bg-gray-200 hover-depth shadow-xl opacity-85"
                 data-testid="button-demo"
               >
                 <Play className="mr-2 h-5 w-5" />
