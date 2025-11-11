@@ -161,6 +161,21 @@ The application uses PostgreSQL with four main tables:
 
 ## Recent Changes
 
+### November 11, 2025 - Audio Quality & Playback Fix
+1. **Fixed Chipmunk Voice Issue**: Resolved sample rate mismatch causing fast, high-pitched audio
+   - Demo now dynamically detects audio formats from agent's metadata instead of hardcoding values
+   - Playback uses agent's actual output sample rate (e.g., 16kHz) instead of incorrect 24kHz
+   - Microphone capture matches agent's expected input format automatically
+   - Voice now plays at correct pace and pitch, matching ElevenLabs dashboard settings exactly
+2. **Removed Audio Hallucinations**: Fixed microphone picking up background audio
+   - YouTube background video now muted to prevent audio feedback loop
+   - Microphone only captures user's voice, not AI responses or video audio
+   - Eliminates phantom transcriptions of background sounds
+3. **Agent Settings Respect**: Removed all audio format overrides
+   - Demo uses exact voice, pace, and quality configured in ElevenLabs agent dashboard
+   - No client-side modifications to agent behavior
+   - Full compatibility with agent's configured settings
+
 ### November 11, 2025 - Minimal Demo Page with ElevenLabs Conversational Agent
 1. **Simplified Demo Interface**: Redesigned demo page for maximum impact with minimal UI
    - Removed all chat UI, prompts, and complex interface elements
