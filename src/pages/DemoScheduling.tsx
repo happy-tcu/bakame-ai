@@ -9,6 +9,11 @@ const DemoScheduling = () => {
   const [showVideo, setShowVideo] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const processorRef = useRef<ScriptProcessorNode | null>(null);
+  const audioQueueRef = useRef<ArrayBuffer[]>([]);
+  const isPlayingRef = useRef(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -16,8 +21,105 @@ const DemoScheduling = () => {
       if (wsRef.current) {
         wsRef.current.close();
       }
+      if (mediaStreamRef.current) {
+        mediaStreamRef.current.getTracks().forEach(track => track.stop());
+      }
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
     };
   }, []);
+
+  const playAudioChunk = async (audioBase64: string) => {
+    try {
+      const audioData = Uint8Array.from(atob(audioBase64), c => c.charCodeAt(0));
+      audioQueueRef.current.push(audioData.buffer);
+      
+      if (!isPlayingRef.current) {
+        playNextInQueue();
+      }
+    } catch (error) {
+      console.error('Error playing audio chunk:', error);
+    }
+  };
+
+  const playNextInQueue = async () => {
+    if (audioQueueRef.current.length === 0) {
+      isPlayingRef.current = false;
+      return;
+    }
+
+    isPlayingRef.current = true;
+    const audioBuffer = audioQueueRef.current.shift()!;
+    
+    try {
+      const audioContext = new AudioContext({ sampleRate: 16000 });
+      const decodedBuffer = await audioContext.decodeAudioData(audioBuffer);
+      const source = audioContext.createBufferSource();
+      source.buffer = decodedBuffer;
+      source.connect(audioContext.destination);
+      
+      source.onended = () => {
+        audioContext.close();
+        playNextInQueue();
+      };
+      
+      source.start(0);
+    } catch (error) {
+      console.error('Error decoding/playing audio:', error);
+      playNextInQueue();
+    }
+  };
+
+  const startMicrophoneCapture = async (ws: WebSocket) => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: {
+          channelCount: 1,
+          sampleRate: 8000,
+          echoCancellation: true,
+          noiseSuppression: true,
+        } 
+      });
+      
+      mediaStreamRef.current = stream;
+      const audioContext = new AudioContext({ sampleRate: 8000 });
+      audioContextRef.current = audioContext;
+      
+      const source = audioContext.createMediaStreamSource(stream);
+      const processor = audioContext.createScriptProcessor(2048, 1, 1);
+      processorRef.current = processor;
+
+      processor.onaudioprocess = (e) => {
+        if (ws.readyState !== WebSocket.OPEN) return;
+        
+        const inputData = e.inputBuffer.getChannelData(0);
+        const pcm16 = new Int16Array(inputData.length);
+        
+        for (let i = 0; i < inputData.length; i++) {
+          const s = Math.max(-1, Math.min(1, inputData[i]));
+          pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+        }
+        
+        const audioBase64 = btoa(String.fromCharCode(...new Uint8Array(pcm16.buffer)));
+        
+        ws.send(JSON.stringify({
+          user_audio_chunk: audioBase64
+        }));
+      };
+
+      source.connect(processor);
+      processor.connect(audioContext.destination);
+      
+    } catch (error) {
+      console.error('Error accessing microphone:', error);
+      toast({
+        title: "Microphone Error",
+        description: "Failed to access microphone. Please grant permission and try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleMicClick = async () => {
     if (isConnecting || isActive) return;
@@ -44,19 +146,47 @@ const DemoScheduling = () => {
       const ws = new WebSocket(signedUrl);
       wsRef.current = ws;
 
-      ws.onopen = () => {
+      ws.onopen = async () => {
         console.log('Connected to ElevenLabs agent');
+        
+        ws.send(JSON.stringify({
+          type: "conversation_initiation_client_data"
+        }));
+        
+        await startMicrophoneCapture(ws);
+        
         setIsActive(true);
         setIsConnecting(false);
       };
 
-      ws.onmessage = (event) => {
+      ws.onmessage = async (event) => {
         try {
           const message = JSON.parse(event.data);
-          console.log('Received from agent:', message);
+          console.log('Received message type:', message.type);
           
           if (message.type === 'conversation_initiation_metadata') {
-            console.log('Conversation started');
+            console.log('Conversation started:', message.conversation_initiation_metadata_event);
+          }
+          
+          if (message.type === 'audio') {
+            const audioBase64 = message.audio_event.audio_base_64;
+            await playAudioChunk(audioBase64);
+          }
+          
+          if (message.type === 'user_transcript') {
+            console.log('You said:', message.user_transcription_event.user_transcript);
+          }
+          
+          if (message.type === 'agent_response') {
+            console.log('Agent said:', message.agent_response_event.agent_response);
+          }
+          
+          if (message.type === 'ping') {
+            const eventId = message.ping_event.event_id;
+            ws.send(JSON.stringify({
+              type: 'pong',
+              event_id: eventId
+            }));
           }
         } catch (error) {
           console.error('Error parsing message:', error);
@@ -76,6 +206,12 @@ const DemoScheduling = () => {
 
       ws.onclose = () => {
         console.log('Disconnected from ElevenLabs agent');
+        if (mediaStreamRef.current) {
+          mediaStreamRef.current.getTracks().forEach(track => track.stop());
+        }
+        if (audioContextRef.current) {
+          audioContextRef.current.close();
+        }
         setIsActive(false);
         setIsConnecting(false);
       };
