@@ -70,15 +70,15 @@ const DemoScheduling = () => {
     const audioData = audioQueueRef.current.shift()!;
     
     try {
-      // Create or reuse playback audio context
+      // Create or reuse playback audio context (24kHz for HD output)
       if (!playbackAudioContextRef.current) {
-        playbackAudioContextRef.current = new AudioContext({ sampleRate: 16000 });
+        playbackAudioContextRef.current = new AudioContext({ sampleRate: 24000 });
       }
       
       const audioContext = playbackAudioContextRef.current;
       
-      // Create audio buffer from raw PCM data
-      const audioBuffer = audioContext.createBuffer(1, audioData.length, 16000);
+      // Create audio buffer from raw PCM data at 24kHz
+      const audioBuffer = audioContext.createBuffer(1, audioData.length, 24000);
       audioBuffer.getChannelData(0).set(audioData);
       
       const source = audioContext.createBufferSource();
@@ -101,14 +101,14 @@ const DemoScheduling = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ 
         audio: {
           channelCount: 1,
-          sampleRate: 8000,
+          sampleRate: 16000,  // HD input: 16kHz instead of 8kHz
           echoCancellation: true,
           noiseSuppression: true,
         } 
       });
       
       mediaStreamRef.current = stream;
-      const audioContext = new AudioContext({ sampleRate: 8000 });
+      const audioContext = new AudioContext({ sampleRate: 16000 });  // Match 16kHz
       audioContextRef.current = audioContext;
       
       const source = audioContext.createMediaStreamSource(stream);
@@ -174,8 +174,15 @@ const DemoScheduling = () => {
       ws.onopen = async () => {
         console.log('Connected to ElevenLabs agent');
         
+        // Request HD audio quality (24kHz PCM for both input and output)
         ws.send(JSON.stringify({
-          type: "conversation_initiation_client_data"
+          type: "conversation_initiation_client_data",
+          conversation_config_override: {
+            agent: {
+              output_audio_format: "pcm_24000",  // HD output: 24kHz instead of 16kHz
+            },
+            input_audio_format: "pcm_16000",  // HD input: 16kHz PCM instead of 8kHz μ-law
+          }
         }));
         
         await startMicrophoneCapture(ws);
