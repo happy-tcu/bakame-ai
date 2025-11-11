@@ -34,7 +34,8 @@ const DemoScheduling = () => {
       });
       
       if (!response.ok) {
-        throw new Error('Failed to start conversation');
+        const errorData = await response.json().catch(() => ({ error: 'Failed to start conversation' }));
+        throw new Error(errorData.error || 'Failed to start conversation');
       }
 
       const data = await response.json();
@@ -79,11 +80,12 @@ const DemoScheduling = () => {
         setIsConnecting(false);
       };
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error starting conversation:', error);
+      const errorMessage = error.message || "Failed to start conversation. Please check your API credentials.";
       toast({
         title: "Error",
-        description: "Failed to start conversation. Please check your API credentials.",
+        description: errorMessage,
         variant: "destructive",
       });
       setIsConnecting(false);
