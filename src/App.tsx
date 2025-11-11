@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AnalyticsProvider } from "./components/analytics/AnalyticsProvider";
 import { AuthProvider } from "./components/auth/AuthContext";
+import { RoleGuard } from "./components/auth/RoleGuard";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Team from "./pages/Team";
@@ -24,6 +25,7 @@ import DemoScheduling from "./pages/DemoScheduling";
 import Features from "./pages/Features";
 import Roadmap from "./pages/Roadmap";
 import Press from "./pages/Press";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +58,14 @@ const App = () => (
               <Route path="/features" element={<Features />} />
               <Route path="/roadmap" element={<Roadmap />} />
               <Route path="/press" element={<Press />} />
+              <Route
+                path="/admin"
+                element={
+                  <RoleGuard allowedRoles={["admin"]}>
+                    <AdminDashboard />
+                  </RoleGuard>
+                }
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
