@@ -1,0 +1,104 @@
+import axios from 'axios';
+
+const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
+const ELEVENLABS_API_URL = 'https://api.elevenlabs.io/v1';
+
+interface ConversationMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+export async function textToSpeech(text: string, voiceId: string = 'pNInz6obpgDQGcFmaJgB'): Promise<Buffer> {
+  if (!ELEVENLABS_API_KEY) {
+    throw new Error('ELEVENLABS_API_KEY is not configured');
+  }
+
+  try {
+    const response = await axios.post(
+      `${ELEVENLABS_API_URL}/text-to-speech/${voiceId}`,
+      {
+        text,
+        model_id: 'eleven_monolingual_v1',
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 0.5
+        }
+      },
+      {
+        headers: {
+          'xi-api-key': ELEVENLABS_API_KEY,
+          'Content-Type': 'application/json',
+          'Accept': 'audio/mpeg'
+        },
+        responseType: 'arraybuffer'
+      }
+    );
+
+    return Buffer.from(response.data);
+  } catch (error: any) {
+    console.error('ElevenLabs TTS error:', error.response?.data || error.message);
+    throw new Error('Failed to generate speech');
+  }
+}
+
+export async function getConversationResponse(messages: ConversationMessage[]): Promise<string> {
+  const lastUserMessage = messages.filter(m => m.role === 'user').pop();
+  if (!lastUserMessage) {
+    throw new Error('No user message found');
+  }
+
+  const openAIKey = process.env.OPENAI_API_KEY;
+  if (!openAIKey) {
+    throw new Error('OPENAI_API_KEY is not configured');
+  }
+
+  try {
+    const systemPrompt = `You are an enthusiastic, encouraging AI English tutor. Your goal is to help students practice English speaking, pronunciation, vocabulary, and conversation skills.
+
+Guidelines:
+- Keep responses SHORT (1-2 sentences max) for conversational flow
+- Be encouraging and positive
+- Correct pronunciation gently without being discouraging
+- Ask follow-up questions to keep the conversation going
+- Focus on practical, everyday English
+- If a student asks to practice pronunciation, give them specific words to say
+- If asked about vocabulary, provide definitions and example sentences
+- Make learning fun and engaging
+
+Remember: You're having a CONVERSATION, not giving a lecture. Keep it natural and brief!`;
+
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
+      {
+        model: 'gpt-4',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          ...messages.map(m => ({ role: m.role, content: m.content }))
+        ],
+        max_tokens: 150,
+        temperature: 0.7
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${openAIKey}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    return response.data.choices[0].message.content;
+  } catch (error: any) {
+    console.error('OpenAI conversation error:', error.response?.data || error.message);
+    throw new Error('Failed to generate conversation response');
+  }
+}
+
+export async function conversationWithVoice(messages: ConversationMessage[], voiceId?: string): Promise<{ text: string; audio: Buffer }> {
+  const responseText = await getConversationResponse(messages);
+  const audioBuffer = await textToSpeech(responseText, voiceId);
+  
+  return {
+    text: responseText,
+    audio: audioBuffer
+  };
+}
