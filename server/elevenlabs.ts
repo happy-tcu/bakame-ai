@@ -114,15 +114,13 @@ export async function startConversationalAgent(): Promise<{ signedUrl: string }>
   }
 
   try {
-    console.log('Attempting to get signed URL from ElevenLabs...');
+    console.log('Creating ElevenLabs conversation...');
     console.log('Agent ID:', ELEVENLABS_AGENT_ID);
-    console.log('API Key length:', ELEVENLABS_API_KEY.length);
     
+    // Try the agent-specific endpoint format
     const response = await axios.post(
-      `${ELEVENLABS_API_URL}/convai/conversation/get_signed_url`,
-      {
-        agent_id: ELEVENLABS_AGENT_ID
-      },
+      `${ELEVENLABS_API_URL}/convai/agents/${ELEVENLABS_AGENT_ID}/sessions`,
+      {},
       {
         headers: {
           'xi-api-key': ELEVENLABS_API_KEY,
@@ -131,7 +129,9 @@ export async function startConversationalAgent(): Promise<{ signedUrl: string }>
       }
     );
 
-    console.log('ElevenLabs response received:', response.status);
+    console.log('ElevenLabs conversation created successfully');
+    console.log('Response data:', response.data);
+    
     return {
       signedUrl: response.data.signed_url
     };
@@ -141,7 +141,6 @@ export async function startConversationalAgent(): Promise<{ signedUrl: string }>
     console.error('Status Text:', error.response?.statusText);
     console.error('Response data:', JSON.stringify(error.response?.data, null, 2));
     console.error('Error message:', error.message);
-    console.error('Full error:', error);
     
     const errorMessage = error.response?.data?.detail?.message 
       || error.response?.data?.message 
