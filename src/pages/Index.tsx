@@ -82,62 +82,46 @@ const Index = () => {
         <div className="geometric-shape w-96 h-96 rounded-full bg-white/5 blur-3xl top-0 left-0"></div>
         <div className="geometric-shape w-96 h-96 rounded-full bg-gray-500/10 blur-3xl bottom-0 right-0"></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
           <div 
             id="hero-content"
             data-animate="true"
             className={`${isVisible['hero-content'] ? 'animate-scale-up' : 'opacity-0'}`}
           >
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left side - Text content */}
-              <div className="text-center lg:text-left">
-                <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-                  <span className="block text-white font-extrabold">Voice and Victory</span>
-                </h1>
-                
-                <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl lg:mx-0 mx-auto">
-                  Revolutionary language education that transforms speaking confidence through AI tutoring, 
-                  proven to deliver breakthrough results in schools across Africa.
-                </p>
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+              <span className="block text-white font-extrabold">Voice and Victory</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+              Revolutionary language education that transforms speaking confidence through AI tutoring, 
+              proven to deliver breakthrough results in schools across Africa.
+            </p>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-16">
-                  <Button 
-                    onClick={() => navigate('/demo-scheduling')}
-                    className="bg-white text-black text-lg px-8 py-6 hover:bg-gray-200 hover-depth"
-                    data-testid="button-book-demo"
-                  >
-                    <Calendar className="mr-2 h-5 w-5" />
-                    Book a Demo
-                  </Button>
-                  <Button 
-                    onClick={() => navigate('/contact')}
-                    variant="outline" 
-                    className="border-white/20 text-white hover:bg-white/10 text-lg px-8 py-6 hover-depth"
-                    data-testid="button-contact-sales"
-                  >
-                    <Play className="mr-2 h-5 w-5" />
-                    Contact Sales
-                  </Button>
-                </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+              <Button 
+                onClick={() => navigate('/demo-scheduling')}
+                className="bg-white text-black text-lg px-8 py-6 hover:bg-gray-200 hover-depth"
+                data-testid="button-book-demo"
+              >
+                <Calendar className="mr-2 h-5 w-5" />
+                Book a Demo
+              </Button>
+              <Button 
+                onClick={() => navigate('/contact')}
+                variant="outline" 
+                className="border-white/20 text-white hover:bg-white/10 text-lg px-8 py-6 hover-depth"
+                data-testid="button-contact-sales"
+              >
+                <Play className="mr-2 h-5 w-5" />
+                Contact Sales
+              </Button>
+            </div>
 
-                <div className="flex justify-center lg:justify-start">
-                  <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
-                    <WifiOff className="mr-2 h-4 w-4" />
-                    Works Offline
-                  </Badge>
-                </div>
-              </div>
-
-              {/* Right side - Hero Image */}
-              <div className="flex items-center justify-center">
-                <div className="rounded-xl overflow-hidden border border-white/20">
-                  <img 
-                    src="/attached_assets/abstract-connected-dots-on-blue-background-techno-2025-10-15-03-15-40-utc_1762824974952.jpg"
-                    alt="AI-powered network visualization"
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-              </div>
+            <div className="flex justify-center">
+              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2">
+                <WifiOff className="mr-2 h-4 w-4" />
+                Works Offline
+              </Badge>
             </div>
           </div>
         </div>
