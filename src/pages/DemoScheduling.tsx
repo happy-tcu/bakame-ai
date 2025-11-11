@@ -11,8 +11,9 @@ const DemoScheduling = () => {
   const wsRef = useRef<WebSocket | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const playbackAudioContextRef = useRef<AudioContext | null>(null);
   const processorRef = useRef<ScriptProcessorNode | null>(null);
-  const audioQueueRef = useRef<ArrayBuffer[]>([]);
+  const audioQueueRef = useRef<Float32Array[]>([]);
   const isPlayingRef = useRef(false);
   const { toast } = useToast();
 
@@ -27,19 +28,35 @@ const DemoScheduling = () => {
       if (audioContextRef.current) {
         audioContextRef.current.close();
       }
+      if (playbackAudioContextRef.current) {
+        playbackAudioContextRef.current.close();
+      }
     };
   }, []);
 
   const playAudioChunk = async (audioBase64: string) => {
     try {
-      const audioData = Uint8Array.from(atob(audioBase64), c => c.charCodeAt(0));
-      audioQueueRef.current.push(audioData.buffer);
+      // Decode base64 to get raw PCM16 data
+      const binaryString = atob(audioBase64);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      
+      // Convert PCM16 (Int16) to Float32
+      const pcm16 = new Int16Array(bytes.buffer);
+      const float32 = new Float32Array(pcm16.length);
+      for (let i = 0; i < pcm16.length; i++) {
+        float32[i] = pcm16[i] / 32768.0; // Convert to -1.0 to 1.0 range
+      }
+      
+      audioQueueRef.current.push(float32);
       
       if (!isPlayingRef.current) {
         playNextInQueue();
       }
     } catch (error) {
-      console.error('Error playing audio chunk:', error);
+      console.error('Error queueing audio chunk:', error);
     }
   };
 
@@ -50,23 +67,31 @@ const DemoScheduling = () => {
     }
 
     isPlayingRef.current = true;
-    const audioBuffer = audioQueueRef.current.shift()!;
+    const audioData = audioQueueRef.current.shift()!;
     
     try {
-      const audioContext = new AudioContext({ sampleRate: 16000 });
-      const decodedBuffer = await audioContext.decodeAudioData(audioBuffer);
+      // Create or reuse playback audio context
+      if (!playbackAudioContextRef.current) {
+        playbackAudioContextRef.current = new AudioContext({ sampleRate: 16000 });
+      }
+      
+      const audioContext = playbackAudioContextRef.current;
+      
+      // Create audio buffer from raw PCM data
+      const audioBuffer = audioContext.createBuffer(1, audioData.length, 16000);
+      audioBuffer.getChannelData(0).set(audioData);
+      
       const source = audioContext.createBufferSource();
-      source.buffer = decodedBuffer;
+      source.buffer = audioBuffer;
       source.connect(audioContext.destination);
       
       source.onended = () => {
-        audioContext.close();
         playNextInQueue();
       };
       
       source.start(0);
     } catch (error) {
-      console.error('Error decoding/playing audio:', error);
+      console.error('Error playing audio:', error);
       playNextInQueue();
     }
   };
