@@ -2,6 +2,7 @@ import { Router, Request } from 'express';
 import { conversationWithVoice, textToSpeech, startConversationalAgent } from './elevenlabs';
 import { authMiddleware, AuthRequest } from './middleware/auth';
 import { storage } from './storage';
+import { analyzeConversation } from './ai-analysis';
 import crypto from 'crypto';
 
 const router = Router();
@@ -63,6 +64,25 @@ router.post('/api/webhooks/elevenlabs', async (req, res) => {
         conversation_initiation_client_data
       } = data;
 
+      // AI-powered analysis of the conversation
+      let aiAnalysis: any = null;
+      try {
+        if (transcript && Array.isArray(transcript) && transcript.length > 0) {
+          console.log(`Analyzing conversation ${conversation_id} with OpenAI...`);
+          aiAnalysis = await analyzeConversation(transcript);
+          console.log(`AI analysis completed for ${conversation_id}`);
+        }
+      } catch (error: any) {
+        console.error(`AI analysis failed for ${conversation_id}:`, error.message);
+        // Continue storing conversation even if analysis fails
+      }
+
+      // Combine ElevenLabs analysis with AI analysis
+      const combinedAnalysis = {
+        ...(analysis || {}),
+        ai: aiAnalysis
+      };
+
       // Store conversation in database
       await storage.createConversation({
         conversation_id,
@@ -75,12 +95,12 @@ router.post('/api/webhooks/elevenlabs', async (req, res) => {
         call_duration_seconds: metadata?.call_duration_secs || null,
         cost: metadata?.cost?.toString() || null,
         transcript,
-        analysis,
+        analysis: combinedAnalysis,
         metadata,
         conversation_initiation_data: conversation_initiation_client_data
       });
 
-      console.log(`Stored conversation ${conversation_id}`);
+      console.log(`Stored conversation ${conversation_id} with AI analysis`);
     }
 
     res.status(200).json({ received: true });
