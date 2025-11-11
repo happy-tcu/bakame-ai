@@ -6,7 +6,7 @@ import {
   MicVocal, Music, FileText, Map, Podcast,
   MapPin, MessageCircle, Edit3, Hand, Building,
   DollarSign, CheckCircle, Clock, Calendar, ThumbsUp,
-  Star, Award, Zap, Target, Home, Menu, X
+  Star, Award, Zap, Target, Home, Menu, X, Newspaper
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -186,6 +186,16 @@ const Roadmap = () => {
       status: 'future' as const,
       quarter: 'Q3 2025',
       progress: 18
+    },
+    {
+      id: 'news-api',
+      title: 'News API',
+      description: 'Curated African news articles for reading practice',
+      icon: Newspaper,
+      votes: 0,
+      status: 'future' as const,
+      quarter: 'Q3 2025',
+      progress: 12
     }
   ]);
 
