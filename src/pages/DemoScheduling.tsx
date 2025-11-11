@@ -291,7 +291,7 @@ const DemoScheduling = () => {
                   </div>
 
                   <Button type="submit" className="w-full bg-primary hover:opacity-90 text-primary-foreground">
-                    Schedule Demo
+                    Actual Demo
                   </Button>
                 </form>
               </CardContent>

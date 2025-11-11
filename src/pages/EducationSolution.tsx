@@ -155,7 +155,7 @@ const EducationSolution = () => {
                 Get Started Today
               </button>
               <button className="border border-border text-foreground px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted transition-all duration-300 hover:scale-105 hover:border-muted-foreground">
-                Schedule Demo
+                Actual Demo
               </button>
             </div>
           </div>

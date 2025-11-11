@@ -626,7 +626,7 @@ const Roadmap = () => {
               data-testid="button-demo-bottom"
             >
               <Calendar className="mr-2 h-5 w-5" />
-              Schedule Demo
+              Actual Demo
             </Button>
           </div>
         </div>

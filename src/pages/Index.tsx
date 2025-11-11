@@ -341,7 +341,7 @@ const Index = () => {
                     className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                   >
                     <Volume2 className="mr-2 h-4 w-4" />
-                    Schedule Demo
+                    Actual Demo
                   </Button>
                 </div>
               </CardContent>
@@ -660,7 +660,7 @@ const Index = () => {
               <ul className="space-y-2">
                 <li><Link to="/features" className="text-gray-400 hover:text-white transition-colors">Features</Link></li>
                 <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">NGO Solutions</Link></li>
-                <li><Link to="/demo-scheduling" className="text-gray-400 hover:text-white transition-colors">Schedule Demo</Link></li>
+                <li><Link to="/demo-scheduling" className="text-gray-400 hover:text-white transition-colors">Actual Demo</Link></li>
               </ul>
             </div>
             

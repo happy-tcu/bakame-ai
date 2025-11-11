@@ -276,7 +276,7 @@ const Features = () => {
             Home
           </Link>
           <Link to="/demo-scheduling" className="hidden md:block text-foreground hover:text-white transition-colors">
-            Schedule Demo
+            Actual Demo
           </Link>
           <Link to="/pricing" className="hidden md:block text-foreground hover:text-white transition-colors">
             Pricing
@@ -412,7 +412,7 @@ const Features = () => {
                 className="border-gray-300 hover:bg-primary/10 transition-all transform hover:scale-105"
               >
                 <Calendar className="mr-2 h-5 w-5" />
-                Schedule Demo
+                Actual Demo
               </Button>
             </div>
           </CardContent>

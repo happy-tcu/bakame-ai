@@ -218,7 +218,7 @@ const About = () => {
                 Contact Us
               </Button>
               <Button onClick={() => navigate('/demo-scheduling')} variant="outline" className="border-border text-foreground hover:bg-muted px-6 py-2">
-                Schedule Demo
+                Actual Demo
               </Button>
             </div>
           </div>

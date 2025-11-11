@@ -62,8 +62,8 @@ const Support = () => {
       icon: Phone,
       title: "Schedule a Call",
       description: "Book a consultation with our team",
-      contact: "Schedule Demo",
-      action: "mailto:happy@bakame.org?subject=Schedule Demo Request"
+      contact: "Actual Demo",
+      action: "mailto:happy@bakame.org?subject=Actual Demo Request"
     },
     {
       icon: MessageCircle,
@@ -101,7 +101,7 @@ const Support = () => {
       <nav className="flex justify-between items-center p-6 md:p-8 border-b border-border">
         <a href="/" className="text-2xl font-bold">Bakame Ai</a>
         <div className="hidden md:flex space-x-8">
-          <a href="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Schedule Demo</a>
+          <a href="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Actual Demo</a>
           <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
           <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
         </div>

@@ -237,9 +237,9 @@ const Navbar = () => {
                   "text-gray-300 hover:text-white transition-colors",
                   location.pathname === "/demo-scheduling" && "text-white"
                 )}
-                data-testid="link-schedule-demo"
+                data-testid="link-actual-demo"
               >
-                Schedule Demo
+                Actual Demo
               </Link>
 
               <Link 
@@ -304,10 +304,10 @@ const Navbar = () => {
                   <Button 
                     onClick={() => navigate('/demo-scheduling')} 
                     className="bg-white text-black hover:bg-gray-200"
-                    data-testid="button-schedule-demo"
+                    data-testid="button-actual-demo"
                   >
-                    <Calendar className="mr-2 h-4 w-4" />
-                    Schedule Demo
+                    <Play className="mr-2 h-4 w-4" />
+                    Actual Demo
                   </Button>
                   
                   <DropdownMenu>
@@ -328,9 +328,9 @@ const Navbar = () => {
                         </div>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => navigate('/demo-scheduling')} data-testid="menu-item-schedule-demo">
-                        <Calendar className="mr-2 h-4 w-4" />
-                        <span>Schedule Demo</span>
+                      <DropdownMenuItem onClick={() => navigate('/demo-scheduling')} data-testid="menu-item-actual-demo">
+                        <Play className="mr-2 h-4 w-4" />
+                        <span>Actual Demo</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => navigate('/contact')} data-testid="menu-item-contact-sales">
                         <Phone className="mr-2 h-4 w-4" />
@@ -429,9 +429,9 @@ const Navbar = () => {
                 to="/demo-scheduling" 
                 onClick={closeMenu} 
                 className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-schedule-demo"
+                data-testid="link-mobile-actual-demo"
               >
-                Schedule Demo
+                Actual Demo
               </Link>
 
               <Link 
