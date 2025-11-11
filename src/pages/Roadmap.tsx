@@ -192,21 +192,9 @@ const Roadmap = () => {
   const [totalVotes, setTotalVotes] = useState(0);
 
   useEffect(() => {
-    // Load voted features from localStorage
-    const saved = localStorage.getItem('bakame-roadmap-votes');
-    if (saved) {
-      setVotedFeatures(new Set(JSON.parse(saved)));
-    }
-
-    // Load feature vote counts from localStorage
-    const savedVotes = localStorage.getItem('bakame-feature-votes');
-    if (savedVotes) {
-      const voteData = JSON.parse(savedVotes);
-      setFeatures(prev => prev.map(feature => ({
-        ...feature,
-        votes: voteData[feature.id] || feature.votes
-      })));
-    }
+    // Clear localStorage to reset votes
+    localStorage.removeItem('bakame-roadmap-votes');
+    localStorage.removeItem('bakame-feature-votes');
   }, []);
 
   useEffect(() => {
