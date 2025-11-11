@@ -106,19 +106,10 @@ const Index = () => {
               <Button 
                 onClick={() => navigate('/demo-scheduling')}
                 className="bg-white text-black text-lg px-8 py-6 hover:bg-gray-200 hover-depth shadow-xl"
-                data-testid="button-book-demo"
-              >
-                <Calendar className="mr-2 h-5 w-5" />
-                Book a Demo
-              </Button>
-              <Button 
-                onClick={() => navigate('/contact')}
-                variant="outline" 
-                className="border-white/20 text-white hover:bg-white/10 text-lg px-8 py-6 hover-depth backdrop-blur-sm"
-                data-testid="button-contact-sales"
+                data-testid="button-demo"
               >
                 <Play className="mr-2 h-5 w-5" />
-                Contact Sales
+                Demo
               </Button>
             </div>
 
@@ -305,11 +296,11 @@ const Index = () => {
                     </div>
                   </div>
                   <Button 
-                    onClick={() => navigate('/contact')}
+                    onClick={() => navigate('/demo-scheduling')}
                     className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                   >
                     <TestTube className="mr-2 h-4 w-4" />
-                    Contact Sales
+                    Demo
                   </Button>
                 </div>
               </CardContent>
@@ -363,11 +354,11 @@ const Index = () => {
                     </div>
                   </div>
                   <Button 
-                    onClick={() => navigate('/contact')}
+                    onClick={() => navigate('/demo-scheduling')}
                     className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
                   >
                     <MessageSquare className="mr-2 h-4 w-4" />
-                    Contact Sales
+                    Demo
                   </Button>
                 </div>
               </CardContent>
@@ -613,19 +604,10 @@ const Index = () => {
             <Button 
               onClick={() => navigate('/demo-scheduling')}
               className="bg-white text-black hover:bg-gray-100 text-lg px-8 py-6 hover-depth"
-              data-testid="button-schedule-demo-footer"
+              data-testid="button-demo-footer"
             >
-              <Calendar className="mr-2 h-5 w-5" />
-              Schedule School Demo
-            </Button>
-            <Button 
-              onClick={() => navigate('/contact')}
-              variant="outline" 
-              className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-6 hover-depth"
-              data-testid="button-contact-sales-footer"
-            >
-              <Phone className="mr-2 h-5 w-5" />
-              Contact Sales Team
+              <Play className="mr-2 h-5 w-5" />
+              Demo
             </Button>
           </div>
           
