@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
-  ChevronDown, Phone, MessageSquare, Calendar, BookOpen, 
-  ArrowRight, Play, Users, Shield, Zap, Target, CheckCircle, 
-  GraduationCap, Languages, Headphones, Brain, Mic, Database, 
-  Globe, BarChart3, Volume2, Newspaper, Building, Award,
-  Sparkles, Rocket, TrendingUp, Users2, School, DollarSign,
-  Bot, BookOpen as BookIcon, Gamepad2, Podcast, PenTool,
-  FileText, MicVocal, Music, Map, Hand, Wifi, WifiOff,
+  Phone, MessageSquare, Calendar, Play, Users, CheckCircle, 
+  GraduationCap, Brain, Mic, Volume2, Building, Award,
+  Rocket, Users2, School, Bot, BookOpen as BookIcon, Podcast, PenTool,
+  FileText, MicVocal, Music, Map, Hand, WifiOff,
   Lightbulb, FlaskConical, GraduationCap as GradCap,
   Star, ChevronRight, Eye, TestTube, MessageCircle
 } from 'lucide-react';
