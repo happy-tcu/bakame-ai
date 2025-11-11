@@ -128,10 +128,14 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Right side - Image placeholder */}
+              {/* Right side - Hero Image */}
               <div className="flex items-center justify-center">
-                <div className="w-full h-[500px] bg-white/5 border-2 border-dashed border-white/20 rounded-xl flex items-center justify-center">
-                  <p className="text-gray-400 text-lg">Image Placeholder</p>
+                <div className="rounded-xl overflow-hidden border border-white/20">
+                  <img 
+                    src="/attached_assets/abstract-connected-dots-on-blue-background-techno-2025-10-15-03-15-40-utc_1762824974952.jpg"
+                    alt="AI-powered network visualization"
+                    className="w-full h-auto object-cover"
+                  />
                 </div>
               </div>
             </div>
