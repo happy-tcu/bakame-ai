@@ -141,7 +141,22 @@ The application uses PostgreSQL with four main tables:
 - **learning_sessions**: Records of study sessions
 - **user_progress**: Cumulative progress tracking
 
-## Recent Changes (October 12, 2025)
+## Recent Changes
+
+### November 11, 2025 - Code Cleanup & Optimization
+1. **Hero Section Update**: Changed homepage heading from "AI-Powered English Learning from Voice to Victory" to simply "Voice and Victory"
+2. **YouTube Video Background**: Implemented YouTube video background (https://youtu.be/luiE5rZKhzg) for hero section with autoplay, mute, and loop
+3. **For Teachers Page Cleanup**: 
+   - Replaced "How AI Can Help You" section with classroom image
+   - Compressed teacher dashboard features section for better visual balance
+   - Removed "Ready to Transform Your Teaching?" CTA section
+4. **Codebase Cleanup** (making application lighter):
+   - Deleted unused `TryDemo.tsx` page (was commented out and redirected)
+   - Deleted unused `teamData.ts` file containing fake team data (real team hardcoded in Team.tsx)
+   - Removed commented import line in `App.tsx`
+   - Optimized lucide-react icon imports in `Index.tsx` - removed 17 unused icons (ChevronDown, BookOpen, ArrowRight, Shield, Zap, Target, Languages, Headphones, Database, Globe, BarChart3, Newspaper, Sparkles, TrendingUp, DollarSign, Gamepad2, Wifi)
+
+### October 12, 2025
 1. **Theme Update**: Made app permanently dark mode only - removed theme toggle and ThemeProvider
 2. **Color Scheme Overhaul**: Replaced all orange colors (#ffa366) with professional light blue (#4c9dff) throughout entire website including primary colors, buttons, icons, gradients, text highlights, and CSS variables
 3. **Partner Update**: Changed partner section to "Trusted by Schools and Institutions Across Africa and the US" with specific partners:
