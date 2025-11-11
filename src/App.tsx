@@ -24,8 +24,6 @@ import DemoScheduling from "./pages/DemoScheduling";
 import Features from "./pages/Features";
 import Roadmap from "./pages/Roadmap";
 import Press from "./pages/Press";
-import StudentDashboard from "./pages/StudentDashboard";
-import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -53,13 +51,11 @@ const App = () => (
               <Route path="/early-access" element={<EarlyAccess />} />
               <Route path="/pricing" element={<Navigate to="/contact" replace />} />
               <Route path="/demo-scheduling" element={<DemoScheduling />} />
-              {/* Removed TryDemo route - no mock demos, redirecting to contact */}
               <Route path="/try" element={<Navigate to="/contact" replace />} />
               <Route path="/resources" element={<Navigate to="/contact" replace />} />
               <Route path="/features" element={<Features />} />
               <Route path="/roadmap" element={<Roadmap />} />
               <Route path="/press" element={<Press />} />
-              <Route path="/student-dashboard" element={<StudentDashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

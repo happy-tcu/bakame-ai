@@ -1,7 +1,7 @@
 # Bakame AI - Project Documentation
 
 ## Overview
-Bakame AI is an AI-powered English learning platform for schools with voice-first learning experiences, AI-generated flashcards, and pronunciation testing. The platform features a React frontend with a full Express backend API, PostgreSQL database, and OpenAI integration.
+Bakame AI is an AI-powered English learning platform for schools with voice-first learning experiences. The platform features a React frontend with a full Express backend API, PostgreSQL database, and ElevenLabs voice integration.
 
 ## Project Architecture
 
@@ -11,7 +11,7 @@ Bakame AI is an AI-powered English learning platform for schools with voice-firs
 - **Build Tool**: Vite 5.4.1
 - **Language**: TypeScript
 - **Database**: PostgreSQL with Drizzle ORM
-- **AI Integration**: OpenAI API (GPT-4)
+- **AI Integration**: ElevenLabs Conversational AI
 - **Authentication**: Supabase Auth
 - **UI Components**: shadcn/ui with Radix UI primitives
 - **Styling**: Tailwind CSS with dark-only theme
@@ -35,8 +35,8 @@ Bakame AI is an AI-powered English learning platform for schools with voice-firs
 ├── server/              # Backend Express API
 │   ├── middleware/      # Auth and other middleware
 │   ├── db.ts           # Database connection
+│   ├── elevenlabs.ts   # ElevenLabs integration
 │   ├── index.ts        # Express server setup
-│   ├── openai.ts       # OpenAI integration
 │   ├── routes.ts       # API route definitions
 │   └── storage.ts      # Database operations layer
 ├── shared/              # Shared types and schemas
@@ -58,6 +58,8 @@ The following environment variables are configured in `.env`:
 - `VITE_SUPABASE_URL`: Supabase project URL
 - `VITE_SUPABASE_PUBLISHABLE_KEY`: Supabase public API key
 - `VITE_SUPABASE_PROJECT_ID`: Supabase project identifier
+- `ELEVENLABS_API_KEY`: ElevenLabs API key for voice AI
+- `ELEVENLABS_AGENT_ID`: ElevenLabs conversational agent ID
 
 ### Vite Configuration
 - Development server on port 5000 with 0.0.0.0 host
@@ -73,7 +75,7 @@ The following environment variables are configured in `.env`:
 - `/government-solution` - Government solution page
 - `/enterprise-solution` - Enterprise solution page
 - `/education-solution` - Education solution page
-- `/government-demo` - Government demo page
+- `/government-demo` - Government demo page (ElevenLabs voice AI demo)
 - `/blog` - Blog page
 - `/support` - Support page
 - `/privacy` - Privacy policy
@@ -86,7 +88,6 @@ The following environment variables are configured in `.env`:
 - `/features` - All features page
 - `/roadmap` - Product roadmap page
 - `/press` - Press and media page
-- `/student-dashboard` - Student dashboard (authenticated)
 
 ## Development
 
@@ -115,29 +116,12 @@ This project is configured for Replit's autoscale deployment:
 ## Backend API Endpoints
 
 ### Authentication
-All endpoints (except public ones) require Bearer token in Authorization header from Supabase auth.
+User authentication is handled through Supabase Auth. The authMiddleware validates Bearer tokens.
 
-### Flashcard Endpoints
-- **POST /api/flashcards/generate** - Generate AI-powered flashcards
-  - Body: `{ topic: string, text?: string, count?: number }`
-  - Returns: Generated and saved flashcards
-  
-- **GET /api/flashcards** - Get user's flashcards
-  - Returns: Array of user's flashcards
-  
-- **POST /api/flashcards** - Create a flashcard manually
-  - Body: `{ topic: string, front: string, back: string, difficulty?: string }`
-
-### Learning Session Endpoints
-- **POST /api/sessions** - Record a learning session
-  - Body: `{ session_type: string, duration_seconds: number, score?: number }`
-  
-- **GET /api/progress** - Get user's learning progress
-  - Returns: User progress statistics
-
-### Pronunciation Endpoints  
-- **POST /api/pronunciation/check** - Check pronunciation (currently mock implementation)
-  - Returns: Score and feedback
+### User Endpoints
+- **GET /api/user/me** - Get current authenticated user
+  - Requires: Bearer token in Authorization header
+  - Returns: User object with id, email, name, role
 
 ### ElevenLabs Endpoints (No Auth Required for Demo)
 - **POST /api/elevenlabs/start-conversation** - Start ElevenLabs Conversational Agent
@@ -153,13 +137,23 @@ All endpoints (except public ones) require Bearer token in Authorization header 
 
 ## Database Schema
 
-The application uses PostgreSQL with four main tables:
+The application uses PostgreSQL with a single table:
 - **users**: User accounts (id, email, name, role, created_at)
-- **flashcards**: AI-generated and user-created flashcards
-- **learning_sessions**: Records of study sessions
-- **user_progress**: Cumulative progress tracking
 
 ## Recent Changes
+
+### November 11, 2025 - Code Cleanup (Learning Features Removed)
+1. **Removed Learning Functionality**: Cleaned up all learning-related features
+   - Deleted flashcard system (AI generation and manual creation)
+   - Removed learning sessions tracking
+   - Removed progress tracking and gamification
+   - Removed pronunciation checking
+   - Deleted student dashboard and all progress components
+2. **Database Schema Simplified**: Only users table remains
+3. **API Routes Cleaned**: Only authentication and ElevenLabs endpoints remain
+4. **Codebase Optimization**: Removed unused OpenAI integration code
+   - Authentication system remains intact for future features
+   - ElevenLabs voice AI demo functionality preserved
 
 ### November 11, 2025 - Audio Quality & Playback Fix
 1. **Fixed Chipmunk Voice Issue**: Resolved sample rate mismatch causing fast, high-pitched audio
@@ -192,8 +186,6 @@ The application uses PostgreSQL with four main tables:
    - Real-time bidirectional voice conversation with AI English tutor
    - Proper error handling, validation, and connection status indicators
    - Uses environment variables: `ELEVENLABS_API_KEY` and `ELEVENLABS_AGENT_ID`
-   - **Fix**: Changed from POST to GET request per ElevenLabs documentation
-   - **Fix**: Added validation to ensure signed_url is present before returning
 4. **Status Indicators**: Clear visual feedback for connection state
    - "Connecting..." message shown during WebSocket setup
    - "AI Tutor is listening..." with pulsing green dot when active
@@ -227,24 +219,14 @@ The application uses PostgreSQL with four main tables:
    - Deleted unused `TryDemo.tsx` page (was commented out and redirected)
    - Deleted unused `teamData.ts` file containing fake team data (real team hardcoded in Team.tsx)
    - Removed commented import line in `App.tsx`
-   - Optimized lucide-react icon imports in `Index.tsx` - removed 17 unused icons (ChevronDown, BookOpen, ArrowRight, Shield, Zap, Target, Languages, Headphones, Database, Globe, BarChart3, Newspaper, Sparkles, TrendingUp, DollarSign, Gamepad2, Wifi)
+   - Optimized lucide-react icon imports in `Index.tsx` - removed 17 unused icons
 
 ### October 12, 2025
 1. **Theme Update**: Made app permanently dark mode only - removed theme toggle and ThemeProvider
-2. **Color Scheme Overhaul**: Replaced all orange colors (#ffa366) with professional light blue (#4c9dff) throughout entire website including primary colors, buttons, icons, gradients, text highlights, and CSS variables
-3. **Partner Update**: Changed partner section to "Trusted by Schools and Institutions Across Africa and the US" with specific partners:
-   - Neeley's Institute
-   - Dallas Innovates
-   - US Chamber of Commerce
-   - TCU 360
-   - TCU CS Department
-   - Fort Worth Report
-   - Kagarama SS
-   - GS Karembure
+2. **Color Scheme Overhaul**: Replaced all orange colors (#ffa366) with professional light blue (#4c9dff) throughout entire website
+3. **Partner Update**: Changed partner section to "Trusted by Schools and Institutions Across Africa and the US" with specific partners
 4. **B2N Focus**: Converted platform to B2N (Business-to-NGO) model - replaced all government references with NGO throughout the website
 5. **Role-Based Access**: Implemented comprehensive role-based access control with ProtectedRoute and RoleGuard components
-6. **Student Dashboard**: Created gamified student dashboard with learning progress tracking and achievement badges
-7. **Navigation Fix**: Fixed dropdown behavior to be click-only instead of hover-triggered to prevent unexpected dropdown appearances
 
 ## Features
 - Dark theme only (permanent dark mode for consistent B2N aesthetic)
@@ -253,6 +235,7 @@ The application uses PostgreSQL with four main tables:
 - Toast notifications
 - Form handling with React Hook Form
 - Data fetching with TanStack Query
-- Supabase authentication and database integration
+- Supabase authentication
 - Role-based access control for different user types (student, teacher, admin, school, government, NGO)
 - Click-only navigation dropdowns for better user control
+- ElevenLabs Conversational AI for voice-first learning experiences
