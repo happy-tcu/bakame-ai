@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/layout/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,10 +8,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { format } from "date-fns";
-import { Download, Calendar as CalendarIcon, Search, FileJson, FileText, Phone, Clock, DollarSign, Users } from "lucide-react";
+import { format, parseISO, startOfDay, eachDayOfInterval, subDays } from "date-fns";
+import { Download, Calendar as CalendarIcon, Search, FileJson, FileText, Phone, Clock, DollarSign, Users, TrendingUp, MessageSquare, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import type { Conversation } from "../../shared/schema";
+
+const COLORS = ['#4c9dff', '#60a5fa', '#93c5fd', '#bfdbfe', '#dbeafe'];
 
 export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -75,6 +78,66 @@ export default function AdminDashboard() {
     );
   });
 
+  // Calculate analytics from conversations
+  const analytics = useMemo(() => {
+    // Calls over time (last 7 days)
+    const last7Days = eachDayOfInterval({
+      start: subDays(new Date(), 6),
+      end: new Date()
+    });
+
+    const callsByDay = last7Days.map(day => {
+      const dayStr = format(day, 'MMM dd');
+      const count = conversations.filter(conv => 
+        conv.start_time && startOfDay(parseISO(conv.start_time.toString())).getTime() === startOfDay(day).getTime()
+      ).length;
+      return { date: dayStr, calls: count };
+    });
+
+    // Duration distribution
+    const durationRanges = [
+      { range: '0-30s', min: 0, max: 30 },
+      { range: '30s-1m', min: 30, max: 60 },
+      { range: '1-2m', min: 60, max: 120 },
+      { range: '2-5m', min: 120, max: 300 },
+      { range: '5m+', min: 300, max: Infinity }
+    ];
+
+    const durationData = durationRanges.map(({ range, min, max }) => ({
+      range,
+      count: conversations.filter(conv => 
+        conv.call_duration_seconds && 
+        conv.call_duration_seconds >= min && 
+        conv.call_duration_seconds < max
+      ).length
+    }));
+
+    // Average metrics
+    const avgDuration = conversations.length > 0
+      ? conversations.reduce((sum, conv) => sum + (conv.call_duration_seconds || 0), 0) / conversations.length
+      : 0;
+
+    const avgCost = conversations.length > 0
+      ? conversations.reduce((sum, conv) => sum + parseFloat(conv.cost || '0'), 0) / conversations.length
+      : 0;
+
+    // Engagement metrics
+    const transcriptLengths = conversations.map(conv => 
+      Array.isArray(conv.transcript) ? conv.transcript.length : 0
+    );
+    const avgTurns = transcriptLengths.length > 0
+      ? transcriptLengths.reduce((sum, len) => sum + len, 0) / transcriptLengths.length
+      : 0;
+
+    return {
+      callsByDay,
+      durationData,
+      avgDuration,
+      avgCost,
+      avgTurns
+    };
+  }, [conversations]);
+
   // Download as CSV
   const downloadCSV = () => {
     const headers = ["Conversation ID", "User ID", "Agent ID", "Duration (s)", "Cost", "Start Time", "Status"];
@@ -130,7 +193,7 @@ export default function AdminDashboard() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2" data-testid="heading-admin-dashboard">Admin Dashboard</h1>
           <p className="text-gray-400" data-testid="text-dashboard-description">
-            View and analyze all ElevenLabs conversations
+            Comprehensive analytics and insights from your AI conversations
           </p>
         </div>
 
@@ -138,25 +201,31 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="bg-gray-900 border-gray-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Calls</CardTitle>
+              <CardTitle className="text-sm font-medium">Total Conversations</CardTitle>
               <Phone className="h-4 w-4 text-blue-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold" data-testid="stat-total-calls">
                 {stats?.totalCalls || 0}
               </div>
+              <p className="text-xs text-gray-400 mt-1">
+                Across all users
+              </p>
             </CardContent>
           </Card>
 
           <Card className="bg-gray-900 border-gray-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Duration</CardTitle>
+              <CardTitle className="text-sm font-medium">Total Speaking Time</CardTitle>
               <Clock className="h-4 w-4 text-green-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold" data-testid="stat-total-duration">
                 {formatDuration(stats?.totalDuration || 0)}
               </div>
+              <p className="text-xs text-gray-400 mt-1">
+                Avg: {formatDuration(analytics.avgDuration)}
+              </p>
             </CardContent>
           </Card>
 
@@ -169,18 +238,123 @@ export default function AdminDashboard() {
               <div className="text-2xl font-bold" data-testid="stat-total-cost">
                 ${(stats?.totalCost || 0).toFixed(4)}
               </div>
+              <p className="text-xs text-gray-400 mt-1">
+                Avg: ${analytics.avgCost.toFixed(4)}/call
+              </p>
             </CardContent>
           </Card>
 
           <Card className="bg-gray-900 border-gray-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Unique Users</CardTitle>
+              <CardTitle className="text-sm font-medium">Active Users</CardTitle>
               <Users className="h-4 w-4 text-purple-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold" data-testid="stat-unique-users">
                 {stats?.uniqueUsers || 0}
               </div>
+              <p className="text-xs text-gray-400 mt-1">
+                Unique participants
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Additional Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card className="bg-gray-900 border-gray-800">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Avg Conversation Turns</CardTitle>
+              <MessageSquare className="h-4 w-4 text-blue-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {analytics.avgTurns.toFixed(1)}
+              </div>
+              <p className="text-xs text-gray-400 mt-1">
+                Back-and-forth exchanges
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-900 border-gray-800">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Engagement Rate</CardTitle>
+              <TrendingUp className="h-4 w-4 text-green-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {conversations.length > 0 ? '100%' : '0%'}
+              </div>
+              <p className="text-xs text-gray-400 mt-1">
+                Completed conversations
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-900 border-gray-800">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Success Rate</CardTitle>
+              <Target className="h-4 w-4 text-orange-400" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {conversations.filter(c => c.status === 'done').length > 0 
+                  ? ((conversations.filter(c => c.status === 'done').length / conversations.length) * 100).toFixed(0)
+                  : 0}%
+              </div>
+              <p className="text-xs text-gray-400 mt-1">
+                Successfully completed
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Calls Over Time */}
+          <Card className="bg-gray-900 border-gray-800">
+            <CardHeader>
+              <CardTitle>Conversation Trends (Last 7 Days)</CardTitle>
+              <CardDescription>Daily conversation volume</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={analytics.callsByDay}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                  <XAxis dataKey="date" stroke="#9ca3af" />
+                  <YAxis stroke="#9ca3af" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                    labelStyle={{ color: '#fff' }}
+                  />
+                  <Legend />
+                  <Line type="monotone" dataKey="calls" stroke="#4c9dff" strokeWidth={2} name="Calls" />
+                </LineChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* Duration Distribution */}
+          <Card className="bg-gray-900 border-gray-800">
+            <CardHeader>
+              <CardTitle>Call Duration Distribution</CardTitle>
+              <CardDescription>How long conversations typically last</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={analytics.durationData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                  <XAxis dataKey="range" stroke="#9ca3af" />
+                  <YAxis stroke="#9ca3af" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151' }}
+                    labelStyle={{ color: '#fff' }}
+                  />
+                  <Legend />
+                  <Bar dataKey="count" fill="#4c9dff" name="Conversations" />
+                </BarChart>
+              </ResponsiveContainer>
             </CardContent>
           </Card>
         </div>
