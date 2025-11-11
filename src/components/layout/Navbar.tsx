@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   Menu, X, ChevronDown, Calendar, Play, Users, GraduationCap, School, Building,
-  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home, LogOut, User, Phone
+  Sparkles, BookOpen, Map, Info, MessageSquare, FileText, Home, LogOut, User, Phone, BarChart3
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -315,6 +315,12 @@ const Navbar = () => {
                         <Play className="mr-2 h-4 w-4" />
                         <span>Demo</span>
                       </DropdownMenuItem>
+                      {user.user_metadata?.role === 'admin' && (
+                        <DropdownMenuItem onClick={() => navigate('/admin')} data-testid="menu-item-admin">
+                          <BarChart3 className="mr-2 h-4 w-4" />
+                          <span>Admin Dashboard</span>
+                        </DropdownMenuItem>
+                      )}
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={signOut} data-testid="menu-item-logout">
                         <LogOut className="mr-2 h-4 w-4" />
