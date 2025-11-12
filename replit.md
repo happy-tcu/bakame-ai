@@ -117,9 +117,16 @@ Use `--force` flag if prompted for confirmations.
 
 ## Deployment
 This project is configured for Replit's autoscale deployment:
-- **Build command**: `npm run build`
-- **Run command**: `npm run preview`
-- **Port**: 5000
+- **Build command**: `npm run build` - Compiles React/Vite frontend to static files in `dist/`
+- **Run command**: `tsx server/index.ts` - Starts production Express server
+- **Port**: 5000 (via PORT environment variable)
+- **Server Configuration**:
+  - Binds to `0.0.0.0` for external access
+  - Serves API routes at `/api/*`
+  - Serves built static files from `dist/` folder in production mode
+  - Handles React Router client-side routing
+  - Returns JSON for API errors (including 404s)
+  - Returns `index.html` for SPA navigation
 
 ## Backend API Endpoints
 
