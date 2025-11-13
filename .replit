@@ -9,8 +9,8 @@ packages = ["unzip"]
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["tsx", "server/index.ts"]
-build = ["npm", "run", "build"]
+run = ["sh", "-c", "NODE_ENV=production tsx server/index.ts"]
+build = ["sh", "-c", "NODE_ENV=production npm run build"]
 
 [workflows]
 runButton = "Project"
