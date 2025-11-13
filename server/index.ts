@@ -11,7 +11,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = parseInt(process.env.PORT || '5000', 10);
+// Use port 5000 for production deployment, 3001 for development
+const PORT = parseInt(process.env.PORT || (process.env.NODE_ENV === 'production' ? '5000' : '3001'), 10);
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Core middleware
