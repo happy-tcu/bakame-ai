@@ -31,6 +31,10 @@ app.use('/api', (req, res) => {
 if (isProduction) {
   const distPath = path.join(__dirname, '..', 'dist');
   
+  console.log('Production mode enabled');
+  console.log('Serving static files from:', distPath);
+  console.log('Directory exists:', require('fs').existsSync(distPath));
+  
   // Serve static assets
   app.use(express.static(distPath));
   
@@ -40,7 +44,9 @@ if (isProduction) {
     if (req.path.startsWith('/api')) {
       return next();
     }
-    res.sendFile(path.join(distPath, 'index.html'));
+    const indexPath = path.join(distPath, 'index.html');
+    console.log('Serving index.html from:', indexPath);
+    res.sendFile(indexPath);
   });
 }
 
