@@ -19,12 +19,19 @@ export const conversations = pgTable('conversations', {
   status: varchar('status', { length: 50 }),
   start_time: timestamp('start_time'),
   call_duration_seconds: integer('call_duration_seconds'),
-  call_summary: text('call_summary'), // Call summary from ElevenLabs
+  call_summary: text('call_summary'),
   cost: decimal('cost', { precision: 10, scale: 6 }),
-  transcript: jsonb('transcript'), // Array of conversation turns
-  analysis: jsonb('analysis'), // Analysis results and summary
-  metadata: jsonb('metadata'), // Full metadata from webhook
-  conversation_initiation_data: jsonb('conversation_initiation_data'), // Config and variables
+  transcript: jsonb('transcript'),
+  analysis: jsonb('analysis'),
+  metadata: jsonb('metadata'),
+  conversation_initiation_data: jsonb('conversation_initiation_data'),
+  cefr_level: varchar('cefr_level', { length: 10 }),
+  topic_complexity: varchar('topic_complexity', { length: 50 }),
+  grammar_score: decimal('grammar_score', { precision: 4, scale: 2 }),
+  vocabulary_score: decimal('vocabulary_score', { precision: 4, scale: 2 }),
+  fluency_score: decimal('fluency_score', { precision: 4, scale: 2 }),
+  coherence_score: decimal('coherence_score', { precision: 4, scale: 2 }),
+  key_insights: jsonb('key_insights'),
   created_at: timestamp('created_at').defaultNow()
 });
 
@@ -56,4 +63,11 @@ export type InsertConversation = {
   analysis?: any;
   metadata?: any;
   conversation_initiation_data?: any;
+  cefr_level?: string | null;
+  topic_complexity?: string | null;
+  grammar_score?: string | null;
+  vocabulary_score?: string | null;
+  fluency_score?: string | null;
+  coherence_score?: string | null;
+  key_insights?: any;
 };
