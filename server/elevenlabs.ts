@@ -157,3 +157,92 @@ export async function startConversationalAgent(): Promise<{ signedUrl: string }>
     throw new Error(errorMessage);
   }
 }
+
+export interface ElevenLabsConversation {
+  conversation_id: string;
+  agent_id: string;
+  user_id?: string;
+  status?: string;
+  start_time?: number;
+  transcript?: any[];
+  analysis?: any;
+  metadata?: {
+    start_time_unix_secs?: number;
+    call_duration_secs?: number;
+    cost?: number;
+    [key: string]: any;
+  };
+  [key: string]: any;
+}
+
+export async function fetchConversations(agentId?: string): Promise<ElevenLabsConversation[]> {
+  if (!ELEVENLABS_API_KEY) {
+    throw new Error('ELEVENLABS_API_KEY is not configured');
+  }
+
+  try {
+    const params: any = {};
+    if (agentId) {
+      params.agent_id = agentId;
+    }
+
+    const response = await axios.get(
+      `${ELEVENLABS_API_URL}/convai/conversations`,
+      {
+        params,
+        headers: {
+          'xi-api-key': ELEVENLABS_API_KEY
+        }
+      }
+    );
+
+    // ElevenLabs returns conversations in different formats depending on the API version
+    // Handle both array and paginated responses
+    if (Array.isArray(response.data)) {
+      return response.data;
+    } else if (response.data.conversations && Array.isArray(response.data.conversations)) {
+      return response.data.conversations;
+    } else if (response.data.data && Array.isArray(response.data.data)) {
+      return response.data.data;
+    }
+
+    return [];
+  } catch (error: any) {
+    console.error('ElevenLabs fetch conversations error:');
+    console.error('Status:', error.response?.status);
+    console.error('Response data:', JSON.stringify(error.response?.data, null, 2));
+    console.error('Error message:', error.message);
+    
+    throw new Error('Failed to fetch conversations from ElevenLabs');
+  }
+}
+
+export async function fetchConversationById(conversationId: string): Promise<ElevenLabsConversation | null> {
+  if (!ELEVENLABS_API_KEY) {
+    throw new Error('ELEVENLABS_API_KEY is not configured');
+  }
+
+  try {
+    const response = await axios.get(
+      `${ELEVENLABS_API_URL}/convai/conversations/${conversationId}`,
+      {
+        headers: {
+          'xi-api-key': ELEVENLABS_API_KEY
+        }
+      }
+    );
+
+    return response.data;
+  } catch (error: any) {
+    if (error.response?.status === 404) {
+      return null;
+    }
+    
+    console.error('ElevenLabs fetch conversation error:');
+    console.error('Status:', error.response?.status);
+    console.error('Response data:', JSON.stringify(error.response?.data, null, 2));
+    console.error('Error message:', error.message);
+    
+    throw new Error('Failed to fetch conversation from ElevenLabs');
+  }
+}

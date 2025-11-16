@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/components/auth/AuthContext";
 import Navbar from "@/components/layout/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -40,6 +41,7 @@ interface ConversationWithAI extends Omit<Conversation, 'analysis'> {
 }
 
 export default function AdminDashboard() {
+  const { loading: authLoading } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [dateRange, setDateRange] = useState<{ from?: Date; to?: Date }>({});
   const [minCost, setMinCost] = useState("");
@@ -53,37 +55,22 @@ export default function AdminDashboard() {
     uniqueUsers: number;
   }>({
     queryKey: ["/api/admin/stats"],
-    queryFn: async () => {
-      const response = await fetch("/api/admin/stats", {
-        credentials: "include",
-      });
-      if (!response.ok) throw new Error("Failed to fetch stats");
-      return response.json();
-    },
+    enabled: !authLoading, // Only run query after auth is ready
   });
 
+  // Build query params
+  const queryParams = new URLSearchParams();
+  if (dateRange.from) queryParams.append("startDate", dateRange.from.toISOString());
+  if (dateRange.to) queryParams.append("endDate", dateRange.to.toISOString());
+  if (minCost) queryParams.append("minCost", minCost);
+  if (maxCost) queryParams.append("maxCost", maxCost);
+  
+  const conversationsUrl = queryParams.toString() 
+    ? `/api/admin/conversations?${queryParams}`
+    : "/api/admin/conversations";
+
   const { data: conversationsData, isLoading } = useQuery<{ conversations: ConversationWithAI[] }>({
-    queryKey: [
-      "/api/admin/conversations",
-      dateRange.from?.toISOString(),
-      dateRange.to?.toISOString(),
-      searchTerm,
-      minCost,
-      maxCost,
-    ],
-    queryFn: async () => {
-      const params = new URLSearchParams();
-      if (dateRange.from) params.append("startDate", dateRange.from.toISOString());
-      if (dateRange.to) params.append("endDate", dateRange.to.toISOString());
-      if (minCost) params.append("minCost", minCost);
-      if (maxCost) params.append("maxCost", maxCost);
-      
-      const response = await fetch(`/api/admin/conversations?${params}`, {
-        credentials: "include",
-      });
-      if (!response.ok) throw new Error("Failed to fetch conversations");
-      return response.json();
-    },
+    queryKey: [conversationsUrl],
   });
 
   const conversations = conversationsData?.conversations || [];

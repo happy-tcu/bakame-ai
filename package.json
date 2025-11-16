@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "server": "tsx server/index.ts",
     "server:dev": "tsx watch server/index.ts",
+    "sync": "tsx server/elevenlabs-sync.ts",
     "dev:all": "concurrently \"npm run dev\" \"npm run server:dev\"",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
