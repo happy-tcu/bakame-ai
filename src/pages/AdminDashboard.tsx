@@ -56,6 +56,7 @@ export default function AdminDashboard() {
   }>({
     queryKey: ["/api/admin/stats"],
     enabled: !authLoading,
+    refetchInterval: 5000,
   });
 
   const { data: analyticsData } = useQuery<{
@@ -71,6 +72,7 @@ export default function AdminDashboard() {
   }>({
     queryKey: ["/api/admin/analytics"],
     enabled: !authLoading,
+    refetchInterval: 5000,
   });
 
   // Build query params
@@ -86,6 +88,7 @@ export default function AdminDashboard() {
 
   const { data: conversationsData, isLoading } = useQuery<{ conversations: ConversationWithAI[] }>({
     queryKey: [conversationsUrl],
+    refetchInterval: 5000,
   });
 
   const conversations = conversationsData?.conversations || [];
