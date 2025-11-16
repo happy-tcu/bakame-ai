@@ -2,11 +2,12 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AnalyticsProvider } from "./components/analytics/AnalyticsProvider";
 import { AuthProvider } from "./components/auth/AuthContext";
 import { RoleGuard } from "./components/auth/RoleGuard";
+import { queryClient } from "@/lib/queryClient";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Team from "./pages/Team";
@@ -26,8 +27,6 @@ import Features from "./pages/Features";
 import Roadmap from "./pages/Roadmap";
 import Press from "./pages/Press";
 import AdminDashboard from "./pages/AdminDashboard";
-
-const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

@@ -51,20 +51,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // DEVELOPMENT ONLY: Auto-enable bypass auth for admin route BEFORE any other logic
-    if (import.meta.env.DEV && window.location.pathname === '/admin') {
-      // Set bypass session IMMEDIATELY and SYNCHRONOUSLY
-      localStorage.setItem('bypass_session', 'true');
-      console.warn('⚠️  Auto-enabling bypass authentication for admin route');
-      const fakeUser = createFakeUser(BYPASS_EMAIL);
-      setUser(fakeUser);
-      setLoading(false);
-      return;
-    }
-
-    // Check for bypass session first
+    // Check for bypass session (set in main.tsx for development)
     const bypassSession = localStorage.getItem('bypass_session');
     if (bypassSession) {
+      console.warn('⚠️  WARNING: Using bypass authentication (development only)');
       const fakeUser = createFakeUser(BYPASS_EMAIL);
       setUser(fakeUser);
       setLoading(false);
