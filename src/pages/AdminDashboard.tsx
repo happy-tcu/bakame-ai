@@ -146,91 +146,19 @@ export default function AdminDashboard() {
       ? transcriptLengths.reduce((sum, len) => sum + len, 0) / transcriptLengths.length
       : 0;
 
-    const conversationsWithAI = conversations.filter(conv => conv.analysis?.ai);
-    
-    const levelCounts: Record<string, number> = {};
-    conversationsWithAI.forEach(conv => {
-      const level = conv.analysis?.ai?.englishLevel || 'Unknown';
-      levelCounts[level] = (levelCounts[level] || 0) + 1;
-    });
-    const englishLevelData = Object.entries(levelCounts).map(([level, count]) => ({
-      level,
-      count
-    }));
-
-    const complexityCounts: Record<string, number> = {};
-    conversationsWithAI.forEach(conv => {
-      const complexity = conv.analysis?.ai?.topicComplexity || 'Unknown';
-      complexityCounts[complexity] = (complexityCounts[complexity] || 0) + 1;
-    });
-    const topicComplexityData = Object.entries(complexityCounts).map(([complexity, count]) => ({
-      complexity,
-      count
-    }));
-
-    const avgGrammar = conversationsWithAI.length > 0
-      ? conversationsWithAI.reduce((sum, conv) => sum + (conv.analysis?.ai?.grammarAccuracy || 0), 0) / conversationsWithAI.length
-      : 0;
-
-    const avgVocabulary = conversationsWithAI.length > 0
-      ? conversationsWithAI.reduce((sum, conv) => sum + (conv.analysis?.ai?.vocabularyRichness || 0), 0) / conversationsWithAI.length
-      : 0;
-
-    const avgFluency = conversationsWithAI.length > 0
-      ? conversationsWithAI.reduce((sum, conv) => sum + (conv.analysis?.ai?.fluency || 0), 0) / conversationsWithAI.length
-      : 0;
-
-    const avgComprehension = conversationsWithAI.length > 0
-      ? conversationsWithAI.reduce((sum, conv) => sum + (conv.analysis?.ai?.comprehension || 0), 0) / conversationsWithAI.length
-      : 0;
-
-    const avgQuality = conversationsWithAI.length > 0
-      ? conversationsWithAI.reduce((sum, conv) => sum + (conv.analysis?.ai?.conversationQuality || 0), 0) / conversationsWithAI.length
-      : 0;
-
-    const qualityMetricsData = [
-      { metric: 'Grammar', value: avgGrammar },
-      { metric: 'Vocabulary', value: avgVocabulary },
-      { metric: 'Fluency', value: avgFluency },
-      { metric: 'Comprehension', value: avgComprehension },
-      { metric: 'Overall', value: avgQuality }
-    ];
-
-    const topicsMap: Record<string, number> = {};
-    conversationsWithAI.forEach(conv => {
-      const topics = conv.analysis?.ai?.topics || [];
-      topics.forEach((topic: string) => {
-        topicsMap[topic] = (topicsMap[topic] || 0) + 1;
-      });
-    });
-    const topTopics = Object.entries(topicsMap)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5)
-      .map(([topic, count]) => ({ topic, count }));
-
     return {
       callsByDay,
       durationData,
       avgDuration,
       avgCost,
-      avgTurns,
-      englishLevelData,
-      topicComplexityData,
-      avgGrammar,
-      avgVocabulary,
-      avgFluency,
-      avgComprehension,
-      avgQuality,
-      qualityMetricsData,
-      topTopics,
-      aiAnalyzedCount: conversationsWithAI.length
+      avgTurns
     };
   }, [conversations]);
 
   const downloadCSV = () => {
     const headers = [
       "Conversation ID", "User ID", "Agent ID", "Duration (s)", "Cost", "Start Time", "Status",
-      "English Level", "Topic Complexity", "Grammar", "Vocabulary", "Fluency", "Comprehension", "Quality"
+      "CEFR Level", "Topic Complexity", "Grammar", "Vocabulary", "Fluency", "Coherence"
     ];
     const rows = filteredConversations.map((conv) => [
       conv.conversation_id,
@@ -240,13 +168,12 @@ export default function AdminDashboard() {
       conv.cost || 0,
       conv.start_time ? new Date(conv.start_time).toISOString() : "N/A",
       conv.status || "N/A",
-      conv.analysis?.ai?.englishLevel || "N/A",
-      conv.analysis?.ai?.topicComplexity || "N/A",
-      conv.analysis?.ai?.grammarAccuracy || "N/A",
-      conv.analysis?.ai?.vocabularyRichness || "N/A",
-      conv.analysis?.ai?.fluency || "N/A",
-      conv.analysis?.ai?.comprehension || "N/A",
-      conv.analysis?.ai?.conversationQuality || "N/A"
+      conv.cefr_level || "N/A",
+      conv.topic_complexity || "N/A",
+      conv.grammar_score || "N/A",
+      conv.vocabulary_score || "N/A",
+      conv.fluency_score || "N/A",
+      conv.coherence_score || "N/A"
     ]);
 
     const csvContent = [
@@ -311,9 +238,8 @@ export default function AdminDashboard() {
               <div className="text-3xl font-bold text-gray-900" data-testid="stat-total-calls">
                 {stats?.totalCalls || 0}
               </div>
-              <p className="text-xs text-green-600 flex items-center mt-2">
-                <ArrowUp className="h-3 w-3 mr-1" />
-                {analytics.aiAnalyzedCount} analyzed
+              <p className="text-xs text-gray-500 mt-2">
+                Total conversations
               </p>
             </CardContent>
           </Card>
@@ -750,27 +676,27 @@ export default function AdminDashboard() {
                         <TableCell className="text-sm text-gray-600">{formatDuration(conv.call_duration_seconds)}</TableCell>
                         <TableCell className="text-sm text-gray-900 font-medium">${(parseFloat(conv.cost || "0")).toFixed(4)}</TableCell>
                         <TableCell>
-                          {conv.analysis?.ai?.englishLevel ? (
+                          {conv.cefr_level ? (
                             <Badge className="bg-blue-50 text-blue-700 border-0 hover:bg-blue-100">
-                              {conv.analysis.ai.englishLevel}
+                              {conv.cefr_level}
                             </Badge>
                           ) : (
                             <span className="text-gray-400 text-sm">-</span>
                           )}
                         </TableCell>
                         <TableCell>
-                          {conv.analysis?.ai?.topicComplexity ? (
+                          {conv.topic_complexity ? (
                             <Badge className="bg-purple-50 text-purple-700 border-0 hover:bg-purple-100">
-                              {conv.analysis.ai.topicComplexity}
+                              {conv.topic_complexity}
                             </Badge>
                           ) : (
                             <span className="text-gray-400 text-sm">-</span>
                           )}
                         </TableCell>
                         <TableCell>
-                          {conv.analysis?.ai?.conversationQuality ? (
+                          {conv.grammar_score ? (
                             <span className="text-sm font-medium text-gray-900">
-                              {conv.analysis.ai.conversationQuality}/10
+                              {parseFloat(conv.grammar_score).toFixed(1)}/10
                             </span>
                           ) : (
                             <span className="text-gray-400 text-sm">-</span>
