@@ -163,15 +163,16 @@ export interface ElevenLabsConversation {
   agent_id: string;
   user_id?: string;
   status?: string;
-  start_time?: number;
+  // Top-level fields from API response
+  start_time_unix_secs?: number;
+  call_duration_secs?: number;
+  call_summary_title?: string;
   transcript?: any[];
   analysis?: any;
   metadata?: {
-    start_time_unix_secs?: number;
-    call_duration_secs?: number;
-    cost?: number;
     [key: string]: any;
   };
+  conversation_initiation_client_data?: any;
   [key: string]: any;
 }
 

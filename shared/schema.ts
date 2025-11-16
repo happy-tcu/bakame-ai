@@ -19,6 +19,7 @@ export const conversations = pgTable('conversations', {
   status: varchar('status', { length: 50 }),
   start_time: timestamp('start_time'),
   call_duration_seconds: integer('call_duration_seconds'),
+  call_summary: text('call_summary'), // Call summary from ElevenLabs
   cost: decimal('cost', { precision: 10, scale: 6 }),
   transcript: jsonb('transcript'), // Array of conversation turns
   analysis: jsonb('analysis'), // Analysis results and summary
@@ -49,6 +50,7 @@ export type InsertConversation = {
   status?: string | null;
   start_time?: Date | null;
   call_duration_seconds?: number | null;
+  call_summary?: string | null;
   cost?: string | null;
   transcript?: any;
   analysis?: any;
