@@ -27,7 +27,6 @@ import Features from "./pages/Features";
 import Roadmap from "./pages/Roadmap";
 import Press from "./pages/Press";
 import AdminDashboard from "./pages/AdminDashboard";
-import Presentation from "./pages/Presentation";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -66,7 +65,6 @@ const App = () => (
                   </RoleGuard>
                 }
               />
-              <Route path="/presentation" element={<Presentation />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
