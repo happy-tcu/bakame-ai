@@ -99,11 +99,12 @@ class ElevenLabsSync {
       agent_id: conv.agent_id,
       user_id: conv.user_id || null,
       status: conv.status || null,
-      start_time: conv.metadata?.start_time_unix_secs 
-        ? new Date(conv.metadata.start_time_unix_secs * 1000) 
+      start_time: conv.start_time_unix_secs 
+        ? new Date(conv.start_time_unix_secs * 1000) 
         : null,
-      call_duration_seconds: conv.metadata?.call_duration_secs || null,
-      cost: conv.metadata?.cost?.toString() || null,
+      call_duration_seconds: conv.call_duration_secs || null,
+      call_summary: conv.call_summary_title || null,
+      cost: null, // Cost not provided by ElevenLabs API
       transcript: conv.transcript || null,
       analysis: combinedAnalysis,
       metadata: conv.metadata || null,
