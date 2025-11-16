@@ -2,7 +2,7 @@ import { Router, Request } from 'express';
 import { conversationWithVoice, textToSpeech, startConversationalAgent } from './elevenlabs';
 import { authMiddleware, AuthRequest } from './middleware/auth';
 import { storage } from './storage';
-import { analyzeConversation } from './ai-analysis';
+import { analyzeConversation } from './openai-analysis';
 import crypto from 'crypto';
 
 const router = Router();
@@ -70,7 +70,7 @@ router.post('/api/webhooks/elevenlabs', async (req, res) => {
         if (transcript && Array.isArray(transcript) && transcript.length > 0) {
           console.log(`Analyzing conversation ${conversation_id} with OpenAI...`);
           aiAnalysis = await analyzeConversation(transcript);
-          console.log(`AI analysis completed for ${conversation_id}`);
+          console.log(`AI analysis completed for ${conversation_id}:`, aiAnalysis);
         }
       } catch (error: any) {
         console.error(`AI analysis failed for ${conversation_id}:`, error.message);
@@ -83,7 +83,7 @@ router.post('/api/webhooks/elevenlabs', async (req, res) => {
         ai: aiAnalysis
       };
 
-      // Store conversation in database
+      // Store conversation in database with structured analysis fields
       await storage.createConversation({
         conversation_id,
         agent_id,
@@ -97,7 +97,14 @@ router.post('/api/webhooks/elevenlabs', async (req, res) => {
         transcript,
         analysis: combinedAnalysis,
         metadata,
-        conversation_initiation_data: conversation_initiation_client_data
+        conversation_initiation_data: conversation_initiation_client_data,
+        cefr_level: aiAnalysis?.cefr_level || null,
+        topic_complexity: aiAnalysis?.topic_complexity || null,
+        grammar_score: aiAnalysis?.grammar_score?.toString() || null,
+        vocabulary_score: aiAnalysis?.vocabulary_score?.toString() || null,
+        fluency_score: aiAnalysis?.fluency_score?.toString() || null,
+        coherence_score: aiAnalysis?.coherence_score?.toString() || null,
+        key_insights: aiAnalysis?.key_insights || null
       });
 
       console.log(`Stored conversation ${conversation_id} with AI analysis`);
