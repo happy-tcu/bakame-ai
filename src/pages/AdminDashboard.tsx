@@ -55,7 +55,22 @@ export default function AdminDashboard() {
     uniqueUsers: number;
   }>({
     queryKey: ["/api/admin/stats"],
-    enabled: !authLoading, // Only run query after auth is ready
+    enabled: !authLoading,
+  });
+
+  const { data: analyticsData } = useQuery<{
+    cefrDistribution: Array<{ level: string; count: number }>;
+    topicComplexityDistribution: Array<{ complexity: string; count: number }>;
+    averageScores: {
+      grammar: number;
+      vocabulary: number;
+      fluency: number;
+      coherence: number;
+    };
+    topInsights: string[];
+  }>({
+    queryKey: ["/api/admin/analytics"],
+    enabled: !authLoading,
   });
 
   // Build query params
@@ -355,8 +370,8 @@ export default function AdminDashboard() {
           </Card>
         </div>
 
-        {/* AI Learning Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {/* AI Quality Metrics from OpenAI */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="bg-white border-0 shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Grammar Score</CardTitle>
@@ -364,12 +379,12 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
-                {analytics.avgGrammar.toFixed(1)}<span className="text-lg text-gray-400">/10</span>
+                {(analyticsData?.averageScores.grammar || 0).toFixed(1)}<span className="text-lg text-gray-400">/10</span>
               </div>
               <div className="w-full bg-gray-100 rounded-full h-2 mt-3">
                 <div 
                   className="bg-blue-500 h-2 rounded-full transition-all" 
-                  style={{ width: `${(analytics.avgGrammar / 10) * 100}%` }}
+                  style={{ width: `${((analyticsData?.averageScores.grammar || 0) / 10) * 100}%` }}
                 />
               </div>
             </CardContent>
@@ -382,12 +397,12 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
-                {analytics.avgVocabulary.toFixed(1)}<span className="text-lg text-gray-400">/10</span>
+                {(analyticsData?.averageScores.vocabulary || 0).toFixed(1)}<span className="text-lg text-gray-400">/10</span>
               </div>
               <div className="w-full bg-gray-100 rounded-full h-2 mt-3">
                 <div 
                   className="bg-purple-500 h-2 rounded-full transition-all" 
-                  style={{ width: `${(analytics.avgVocabulary / 10) * 100}%` }}
+                  style={{ width: `${((analyticsData?.averageScores.vocabulary || 0) / 10) * 100}%` }}
                 />
               </div>
             </CardContent>
@@ -395,17 +410,35 @@ export default function AdminDashboard() {
 
           <Card className="bg-white border-0 shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Overall Quality</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-600">Fluency</CardTitle>
+              <MessageSquare className="h-4 w-4 text-green-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-gray-900">
+                {(analyticsData?.averageScores.fluency || 0).toFixed(1)}<span className="text-lg text-gray-400">/10</span>
+              </div>
+              <div className="w-full bg-gray-100 rounded-full h-2 mt-3">
+                <div 
+                  className="bg-green-500 h-2 rounded-full transition-all" 
+                  style={{ width: `${((analyticsData?.averageScores.fluency || 0) / 10) * 100}%` }}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white border-0 shadow-sm">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Coherence</CardTitle>
               <Target className="h-4 w-4 text-amber-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-gray-900">
-                {analytics.avgQuality.toFixed(1)}<span className="text-lg text-gray-400">/10</span>
+                {(analyticsData?.averageScores.coherence || 0).toFixed(1)}<span className="text-lg text-gray-400">/10</span>
               </div>
               <div className="w-full bg-gray-100 rounded-full h-2 mt-3">
                 <div 
                   className="bg-amber-500 h-2 rounded-full transition-all" 
-                  style={{ width: `${(analytics.avgQuality / 10) * 100}%` }}
+                  style={{ width: `${((analyticsData?.averageScores.coherence || 0) / 10) * 100}%` }}
                 />
               </div>
             </CardContent>
@@ -477,7 +510,7 @@ export default function AdminDashboard() {
           </Card>
         </div>
 
-        {/* Charts Row 2 - AI Analysis */}
+        {/* Charts Row 2 - AI Analysis with API Data */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           <Card className="bg-white border-0 shadow-sm">
             <CardHeader>
@@ -488,15 +521,16 @@ export default function AdminDashboard() {
               <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                   <Pie
-                    data={analytics.englishLevelData}
+                    data={analyticsData?.cefrDistribution || []}
                     cx="50%"
                     cy="50%"
                     innerRadius={50}
                     outerRadius={80}
                     paddingAngle={2}
                     dataKey="count"
+                    nameKey="level"
                   >
-                    {analytics.englishLevelData.map((entry, index) => (
+                    {(analyticsData?.cefrDistribution || []).map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
@@ -506,10 +540,10 @@ export default function AdminDashboard() {
                 </PieChart>
               </ResponsiveContainer>
               <div className="flex flex-wrap gap-2 justify-center mt-4">
-                {analytics.englishLevelData.map((item, idx) => (
+                {(analyticsData?.cefrDistribution || []).map((item, idx) => (
                   <div key={idx} className="flex items-center gap-1">
                     <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
-                    <span className="text-xs text-gray-600">{item.level}</span>
+                    <span className="text-xs text-gray-600">{item.level} ({item.count})</span>
                   </div>
                 ))}
               </div>
@@ -523,9 +557,9 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={analytics.topicComplexityData} layout="vertical">
+                <BarChart data={analyticsData?.topicComplexityDistribution || []} layout="vertical">
                   <XAxis type="number" stroke="#9ca3af" style={{ fontSize: '12px' }} />
-                  <YAxis dataKey="complexity" type="category" stroke="#9ca3af" style={{ fontSize: '12px' }} width={80} />
+                  <YAxis dataKey="complexity" type="category" stroke="#9ca3af" style={{ fontSize: '12px' }} width={100} />
                   <Tooltip 
                     contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
                   />
@@ -542,7 +576,12 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={220}>
-                <RadarChart data={analytics.qualityMetricsData}>
+                <RadarChart data={[
+                  { metric: 'Grammar', value: analyticsData?.averageScores.grammar || 0 },
+                  { metric: 'Vocabulary', value: analyticsData?.averageScores.vocabulary || 0 },
+                  { metric: 'Fluency', value: analyticsData?.averageScores.fluency || 0 },
+                  { metric: 'Coherence', value: analyticsData?.averageScores.coherence || 0 }
+                ]}>
                   <PolarGrid stroke="#e5e7eb" />
                   <PolarAngleAxis dataKey="metric" stroke="#6b7280" style={{ fontSize: '11px' }} />
                   <PolarRadiusAxis angle={90} domain={[0, 10]} stroke="#9ca3af" style={{ fontSize: '10px' }} />
@@ -555,6 +594,33 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Key Insights Section */}
+        {analyticsData?.topInsights && analyticsData.topInsights.length > 0 && (
+          <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 shadow-sm mb-8">
+            <CardHeader>
+              <CardTitle className="text-gray-900 flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-blue-600" />
+                Key Insights
+              </CardTitle>
+              <CardDescription className="text-gray-600">AI-powered analysis and recommendations</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {analyticsData.topInsights.map((insight, idx) => (
+                  <div key={idx} className="flex gap-3 p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
+                        <span className="text-xs font-semibold text-blue-600">{idx + 1}</span>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-700">{insight}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Filters */}
         <Card className="bg-white border-0 shadow-sm mb-6">
