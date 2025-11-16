@@ -201,6 +201,23 @@ router.get('/api/admin/conversations/:id', authMiddleware, async (req: AuthReque
   }
 });
 
+// Admin API - Get analytics aggregates
+router.get('/api/admin/analytics', authMiddleware, async (req: AuthRequest, res) => {
+  try {
+    // Check if user is admin
+    if (req.user?.role !== 'admin') {
+      res.status(403).json({ error: 'Admin access required' });
+      return;
+    }
+
+    const analytics = await storage.getAnalytics();
+    res.json(analytics);
+  } catch (error) {
+    console.error('Error fetching analytics:', error);
+    res.status(500).json({ error: 'Failed to fetch analytics' });
+  }
+});
+
 // ElevenLabs conversation endpoint (no auth required for demo)
 router.post('/api/elevenlabs/conversation', async (req, res) => {
   try {

@@ -1,6 +1,6 @@
 import { fetchConversations, ElevenLabsConversation } from './elevenlabs';
 import { storage } from './storage';
-import { analyzeConversation } from './ai-analysis';
+import { analyzeConversation } from './openai-analysis';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -78,11 +78,11 @@ class ElevenLabsSync {
     let aiAnalysis: any = null;
     if (conv.transcript && Array.isArray(conv.transcript) && conv.transcript.length > 0) {
       try {
-        console.log(`  🤖 Running AI analysis...`);
+        console.log(`  🤖 Running OpenAI analysis...`);
         aiAnalysis = await analyzeConversation(conv.transcript);
-        console.log(`  ✅ AI analysis complete`);
+        console.log(`  ✅ OpenAI analysis complete: ${aiAnalysis?.cefr_level} level, ${aiAnalysis?.topic_complexity} complexity`);
       } catch (error: any) {
-        console.error(`  ⚠️  AI analysis failed:`, error.message);
+        console.error(`  ⚠️  OpenAI analysis failed:`, error.message);
         // Continue storing conversation even if analysis fails
       }
     }
@@ -93,7 +93,7 @@ class ElevenLabsSync {
       ai: aiAnalysis
     };
 
-    // Store in database
+    // Store in database with structured analytics fields
     await storage.createConversation({
       conversation_id: conv.conversation_id,
       agent_id: conv.agent_id,
@@ -104,11 +104,18 @@ class ElevenLabsSync {
         : null,
       call_duration_seconds: conv.call_duration_secs || null,
       call_summary: conv.call_summary_title || null,
-      cost: null, // Cost not provided by ElevenLabs API
+      cost: null,
       transcript: conv.transcript || null,
       analysis: combinedAnalysis,
       metadata: conv.metadata || null,
       conversation_initiation_data: conv.conversation_initiation_client_data || null,
+      cefr_level: aiAnalysis?.cefr_level || null,
+      topic_complexity: aiAnalysis?.topic_complexity || null,
+      grammar_score: aiAnalysis?.grammar_score?.toString() || null,
+      vocabulary_score: aiAnalysis?.vocabulary_score?.toString() || null,
+      fluency_score: aiAnalysis?.fluency_score?.toString() || null,
+      coherence_score: aiAnalysis?.coherence_score?.toString() || null,
+      key_insights: aiAnalysis?.key_insights || null,
     });
 
     console.log(`  💾 Stored in database`);
