@@ -72,16 +72,7 @@ const Navbar = () => {
             
             {/* Center: Navigation */}
             <div className="hidden md:flex items-center justify-center space-x-8">
-              <Link 
-                to="/demo-scheduling" 
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/demo-scheduling" && "text-white"
-                )}
-                data-testid="link-demo-nav"
-              >
-                Demo
-              </Link>
+              {/* Navigation links removed - hero contains primary CTA */}
             </div>
 
             {/* Right: Auth buttons */}
@@ -159,15 +150,6 @@ const Navbar = () => {
         <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden">
           <div className="flex flex-col h-full pt-20 px-6 pb-6 overflow-y-auto">
             <div className="space-y-4">
-              <Link 
-                to="/demo-scheduling" 
-                onClick={closeMenu} 
-                className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-demo"
-              >
-                Demo
-              </Link>
-
               {user ? (
                 <>
                   <div className="border-t border-white/10 pt-6 mt-6">
@@ -182,18 +164,6 @@ const Navbar = () => {
                         <p className="text-gray-400 text-sm">{user.email}</p>
                       </div>
                     </div>
-                    
-                    <Button 
-                      onClick={() => {
-                        navigate('/demo-scheduling');
-                        closeMenu();
-                      }}
-                      className="w-full bg-white text-black hover:bg-gray-200"
-                      data-testid="button-mobile-demo"
-                    >
-                      <Play className="mr-2 h-4 w-4" />
-                      Demo
-                    </Button>
                     
                     <Button 
                       onClick={() => {
