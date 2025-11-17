@@ -83,7 +83,7 @@ const Index = () => {
                 Works Offline
               </Badge>
               <Badge className="bg-white/10 text-white border-white/30 px-4 py-2 backdrop-blur-sm">
-                Kigali, Rwanda
+                EdTech AI
               </Badge>
               <Badge className="bg-white/10 text-white border-white/30 px-4 py-2 backdrop-blur-sm">
                 Seed Fundraising
@@ -98,7 +98,23 @@ const Index = () => {
                 data-testid="button-hero-demo"
               >
                 <Play className="mr-2 h-5 w-5" />
-                Book a Demo
+                Demo
+              </Button>
+              <Button 
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg backdrop-blur-sm"
+                data-testid="button-hero-pitch-deck"
+              >
+                <a 
+                  href="https://drive.google.com/file/d/18Rg9k9SzzVOcATfc_6tGwkD2of8wwqWz/view?usp=sharing" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <FileText className="mr-2 h-5 w-5" />
+                  Pitch Deck
+                </a>
               </Button>
             </div>
           </div>
