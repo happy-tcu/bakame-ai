@@ -42,51 +42,53 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light mode colors - Pure black and white */
-    --background: 0 0% 100%;      /* White background */
-    --foreground: 0 0% 0%;        /* Pure black text */
+    /* Professional corporate light theme - MTN inspired */
+    --background: 0 0% 100%;      /* Pure white background */
+    --foreground: 0 0% 13%;       /* Professional dark gray text */
 
     --card: 0 0% 100%;            /* White cards */
-    --card-foreground: 0 0% 0%;   /* Pure black text on cards */
+    --card-foreground: 0 0% 13%;  /* Dark gray text on cards */
 
     --popover: 0 0% 100%;         /* White popovers */
-    --popover-foreground: 0 0% 0%; /* Pure black text on popovers */
+    --popover-foreground: 0 0% 13%; /* Dark gray text */
 
-    --primary: 210 100% 60%;       /* Beautiful light blue for primary CTAs */
-    --primary-foreground: 0 0% 100%; /* Pure white text on primary */
+    --primary: 217 91% 45%;       /* Professional blue (MTN-inspired corporate blue) */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
 
-    --secondary: 0 0% 0%;         /* Black secondary buttons */
-    --secondary-foreground: 0 0% 100%; /* White text on secondary */
+    --secondary: 50 100% 50%;     /* Warm yellow accent (MTN-inspired) */
+    --secondary-foreground: 0 0% 13%; /* Dark text on yellow */
 
-    --muted: 0 0% 96%;            /* Very light gray muted */
-    --muted-foreground: 0 0% 40%; /* Medium gray text */
+    --muted: 0 0% 96%;            /* Light gray muted backgrounds */
+    --muted-foreground: 0 0% 45%; /* Medium gray text */
 
-    --accent: 210 100% 60%;        /* Light blue accent */
+    --accent: 217 91% 45%;        /* Professional blue accent */
     --accent-foreground: 0 0% 100%; /* White text on accent */
 
-    --destructive: 0 0% 20%;      /* Dark gray for destructive actions */
-    --destructive-foreground: 0 0% 100%; /* White text on dark gray */
+    --destructive: 0 85% 55%;     /* Professional red */
+    --destructive-foreground: 0 0% 100%; /* White text */
 
-    --border: 0 0% 85%;           /* Light gray borders */
-    --input: 0 0% 95%;            /* Very light gray input backgrounds */
-    --ring: 210 100% 60%;          /* Light blue focus rings */
+    --border: 0 0% 90%;           /* Light gray borders */
+    --input: 0 0% 97%;            /* Very light gray inputs */
+    --ring: 217 91% 45%;          /* Blue focus rings */
 
-    --radius: 0.5rem;
+    --radius: 0.375rem;           /* Slightly smaller, more corporate radius */
     
-    /* Brand colors */
-    --brand-blue: 210 100% 60%;    /* Beautiful light blue brand color */
-    --brand-blue-hover: 210 100% 50%; /* Darker blue for hover states */
-    --brand-blue-light: 210 100% 95%; /* Very light blue for backgrounds */
+    /* Brand colors - Professional corporate palette */
+    --brand-blue: 217 91% 45%;    /* Professional corporate blue */
+    --brand-blue-hover: 217 91% 35%; /* Darker blue for hover */
+    --brand-blue-light: 217 91% 96%; /* Very light blue backgrounds */
+    --brand-yellow: 50 100% 50%;  /* Warm yellow accent */
+    --brand-yellow-hover: 45 100% 45%; /* Darker yellow */
 
-    /* Light mode sidebar */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 0 0% 0%;
+    /* Professional sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 13%;
+    --sidebar-primary: 217 91% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 90%;
-    --sidebar-accent-foreground: 0 0% 0%;
-    --sidebar-border: 0 0% 85%;
-    --sidebar-ring: 0 0% 0%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 13%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 217 91% 45%;
   }
 
   .dark {
@@ -338,7 +340,7 @@ All colors MUST be HSL.
     animation: slideInFromBottom 0.8s ease-out;
   }
   
-  /* Brand Blue Accent Utilities */
+  /* Corporate Brand Utilities */
   .text-brand-blue {
     color: hsl(var(--brand-blue));
   }
@@ -357,6 +359,28 @@ All colors MUST be HSL.
   
   .border-brand-blue {
     border-color: hsl(var(--brand-blue));
+  }
+  
+  /* Yellow Accent Utilities */
+  .text-brand-yellow {
+    color: hsl(var(--brand-yellow));
+  }
+  
+  .bg-brand-yellow {
+    background-color: hsl(var(--brand-yellow));
+  }
+  
+  .bg-brand-yellow-hover:hover {
+    background-color: hsl(var(--brand-yellow-hover));
+  }
+  
+  /* Professional section spacing */
+  .section-padding {
+    padding: 5rem 0;
+  }
+  
+  .section-padding-lg {
+    padding: 8rem 0;
   }
   
   /* Link hover states with blue accent */

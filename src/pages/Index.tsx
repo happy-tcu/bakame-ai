@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
-  Phone, MessageSquare, Calendar, Play, Users, CheckCircle, 
-  GraduationCap, Brain, Mic, Volume2, Building, Award,
+  Phone, MessageSquare, Calendar, Users, CheckCircle, 
+  GraduationCap, Brain, Mic, Volume2, Award,
   Rocket, Users2, School, Bot, BookOpen as BookIcon, Podcast, PenTool,
   FileText, MicVocal, Music, Map, Hand, WifiOff,
-  Lightbulb, FlaskConical, GraduationCap as GradCap,
-  Star, ChevronRight, Eye, TestTube, MessageCircle
+  Lightbulb, FlaskConical,
+  Star, ChevronRight, ArrowRight, Building2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,35 +14,14 @@ import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
 import LiveChat from '@/components/chat/LiveChat';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
-import AnimatedCounter from '@/components/AnimatedCounter';
 
 const Index = () => {
   const navigate = useNavigate();
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState({});
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible((prev) => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting,
-          }));
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('[data-animate]');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   const features = [
     { icon: MicVocal, name: 'Voice Clone Learning', description: 'Personalized AI voice tutoring' },
-    { icon: MessageCircle, name: 'AI Debate Partner', description: 'Practice argumentation skills' },
+    { icon: MessageSquare, name: 'AI Debate Partner', description: 'Practice argumentation skills' },
     { icon: BookIcon, name: 'Smart Flashcards', description: 'Adaptive learning system' },
     { icon: Podcast, name: 'Podcast Generator', description: 'Create custom learning content' },
     { icon: PenTool, name: 'Story Builder', description: 'Interactive narrative creation' },
@@ -67,153 +46,187 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white">
       <Navbar />
 
-      {/* Hero Section with YouTube Video Background */}
-      <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
-        {/* YouTube Video Background */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <iframe
-            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
-            src="https://www.youtube.com/embed/pB3otRKMFAc?autoplay=1&mute=1&loop=1&playlist=pB3otRKMFAc&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
-            title="Background video"
-            allow="autoplay; encrypted-media"
-            style={{ pointerEvents: 'none' }}
-          />
-        </div>
-        
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
-          <div 
-            id="hero-content"
-            data-animate="true"
-            className={`${isVisible['hero-content'] ? 'animate-scale-up' : 'opacity-0'}`}
-          >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight drop-shadow-2xl">
-              <span className="block text-white font-extrabold">Voice and Victory</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto drop-shadow-lg">
-              Revolutionary language education that transforms speaking confidence through AI tutoring, 
-              proven to deliver breakthrough results in schools across Africa.
-            </p>
-
-            <div className="flex justify-center">
-              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2 backdrop-blur-sm">
+      {/* Professional Hero Section */}
+      <section className="relative bg-white pt-32 pb-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <Badge className="bg-brand-blue-light text-brand-blue border-0 px-4 py-2" data-testid="badge-offline">
                 <WifiOff className="mr-2 h-4 w-4" />
                 Works Offline
               </Badge>
-            </div>
-          </div>
-        </div>
-      </section>
+              
+              <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
+                Transform English Learning Through{' '}
+                <span className="text-brand-blue">AI-Powered Voice Technology</span>
+              </h1>
+              
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Revolutionary language education platform that delivers proven results in schools across Africa through personalized AI tutoring, voice-first learning, and offline capability.
+              </p>
 
-      {/* Trust Indicators */}
-      <section className="py-16 bg-black border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-center text-gray-400 mb-8 uppercase tracking-wider">
-            Trusted by Schools and Institutions Across Africa and the US
-          </h3>
-          <div className="relative overflow-hidden">
-            <div className="flex space-x-12 marquee">
-              {[...trustLogos, ...trustLogos].map((logo, index) => (
-                <div key={index} className="flex-shrink-0">
-                  <div className="h-12 px-6 py-2 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center">
-                    <span className="text-gray-400 whitespace-nowrap">{logo}</span>
-                  </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  onClick={() => navigate('/demo-scheduling')}
+                  size="lg"
+                  className="bg-brand-blue hover:bg-brand-blue-hover text-white px-8 py-6 text-lg"
+                  data-testid="button-schedule-demo"
+                >
+                  Schedule a Demo
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button 
+                  onClick={() => setIsEarlyAccessOpen(true)}
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-brand-blue text-brand-blue hover:bg-brand-blue-light px-8 py-6 text-lg"
+                  data-testid="button-early-access"
+                >
+                  Get Early Access
+                </Button>
+              </div>
+
+              <div className="flex items-center gap-8 pt-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-brand-blue">10,000+</div>
+                  <div className="text-sm text-muted-foreground">Students Reached</div>
                 </div>
-              ))}
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-brand-blue">50+</div>
+                  <div className="text-sm text-muted-foreground">Partner Schools</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-brand-blue">2</div>
+                  <div className="text-sm text-muted-foreground">Countries</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="aspect-square bg-brand-blue-light rounded-2xl flex items-center justify-center">
+                <div className="text-center space-y-4 p-12">
+                  <Bot className="h-24 w-24 text-brand-blue mx-auto" />
+                  <p className="text-lg text-brand-blue font-medium">AI-Powered Learning Platform</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Core Capabilities Grid */}
-      <section className="py-24 bg-black relative">
-        <div className="absolute inset-0 grid-pattern opacity-50"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl font-bold text-center mb-16">
-            Three Pillars of <span className="text-white font-extrabold">Language Mastery</span>
-          </h2>
+      {/* Trust Indicators - Corporate Style */}
+      <section className="py-16 bg-[#F7F7F7] border-y border-border">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3 className="text-center text-muted-foreground mb-8 uppercase tracking-wider text-sm font-medium">
+            Trusted by Leading Schools and Institutions
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {trustLogos.map((logo, index) => (
+              <div key={index} className="flex items-center justify-center">
+                <div className="h-16 px-6 py-4 bg-white rounded-lg border border-border flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+                  <span className="text-foreground font-medium text-sm text-center">{logo}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What Bakame Does - Value Proposition */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              AI-Powered English Learning Platform
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Bakame transforms how students learn English through innovative voice technology, bilingual support, and offline accessibility.
+            </p>
+          </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border-white/20 hover-depth">
-              <CardHeader>
-                <Brain className="h-12 w-12 text-white mb-4" />
-                <CardTitle className="text-2xl text-white">Learn AI</CardTitle>
-                <CardDescription className="text-gray-400">
+            <Card className="border-2 hover:border-brand-blue hover:shadow-lg transition-all">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto mb-4 h-16 w-16 bg-brand-blue-light rounded-full flex items-center justify-center">
+                  <Brain className="h-8 w-8 text-brand-blue" />
+                </div>
+                <CardTitle className="text-2xl">Learn AI</CardTitle>
+                <CardDescription className="text-base">
                   Voice-first learning features
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Personalized AI conversations
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Personalized AI conversations</span>
                   </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Real-time pronunciation feedback
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Real-time pronunciation feedback</span>
                   </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Adaptive difficulty levels
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Adaptive difficulty levels</span>
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border-white/20 hover-depth">
-              <CardHeader>
-                <Users2 className="h-12 w-12 text-white mb-4" />
-                <CardTitle className="text-2xl text-white">Teach AI</CardTitle>
-                <CardDescription className="text-gray-400">
+            <Card className="border-2 hover:border-brand-blue hover:shadow-lg transition-all">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto mb-4 h-16 w-16 bg-brand-blue-light rounded-full flex items-center justify-center">
+                  <Users2 className="h-8 w-8 text-brand-blue" />
+                </div>
+                <CardTitle className="text-2xl">Teach AI</CardTitle>
+                <CardDescription className="text-base">
                   Teacher empowerment tools
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Student progress analytics
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Student progress analytics</span>
                   </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Curriculum alignment tools
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Curriculum alignment tools</span>
                   </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Automated assessment reports
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Automated assessment reports</span>
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border-white/20 hover-depth">
-              <CardHeader>
-                <Rocket className="h-12 w-12 text-white mb-4" />
-                <CardTitle className="text-2xl text-white">Scale AI</CardTitle>
-                <CardDescription className="text-gray-400">
+            <Card className="border-2 hover:border-brand-blue hover:shadow-lg transition-all">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto mb-4 h-16 w-16 bg-brand-blue-light rounded-full flex items-center justify-center">
+                  <Rocket className="h-8 w-8 text-brand-blue" />
+                </div>
+                <CardTitle className="text-2xl">Scale AI</CardTitle>
+                <CardDescription className="text-base">
                   School-wide deployment
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Offline-first architecture
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Offline-first architecture</span>
                   </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Multi-classroom support
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Multi-classroom support</span>
                   </li>
-                  <li className="flex items-center text-gray-300">
-                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Administrative dashboard
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Administrative dashboard</span>
                   </li>
                 </ul>
               </CardContent>
@@ -222,15 +235,67 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Feature Showcase Grid */}
-      <section className="py-24 bg-black">
+      {/* How It Works */}
+      <section className="py-24 bg-[#F7F7F7]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">
-              Comprehensive Feature <span className="text-white font-extrabold">Arsenal</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              How Bakame Works
             </h2>
-            <p className="text-xl text-gray-400">
-              Every tool your students need to master English
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              A simple, effective approach to language learning that works anywhere, anytime
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-xl border-2 border-border">
+              <div className="mb-6">
+                <div className="h-12 w-12 bg-brand-yellow text-white rounded-lg flex items-center justify-center font-bold text-xl mb-4">
+                  1
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-2">Voice-First Learning</h3>
+                <p className="text-muted-foreground">
+                  Students practice speaking English with AI tutors through natural conversations, receiving instant feedback on pronunciation and fluency.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 rounded-xl border-2 border-border">
+              <div className="mb-6">
+                <div className="h-12 w-12 bg-brand-yellow text-white rounded-lg flex items-center justify-center font-bold text-xl mb-4">
+                  2
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-2">Bilingual Support</h3>
+                <p className="text-muted-foreground">
+                  Seamlessly switch between Kinyarwanda and English. Our AI understands both languages, making learning accessible and culturally relevant.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 rounded-xl border-2 border-border">
+              <div className="mb-6">
+                <div className="h-12 w-12 bg-brand-yellow text-white rounded-lg flex items-center justify-center font-bold text-xl mb-4">
+                  3
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-2">Offline Capable</h3>
+                <p className="text-muted-foreground">
+                  No internet? No problem. Bakame works offline, ensuring continuous learning even in areas with limited connectivity.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comprehensive Features Grid */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Comprehensive Feature Set
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Everything your students need to master English
             </p>
           </div>
           
@@ -238,14 +303,17 @@ const Index = () => {
             {features.map((feature, index) => (
               <Card 
                 key={index}
-                className="bg-white/5 border-white/10 hover:bg-white/10 transition-all duration-300 hover-depth"
+                className="border-2 hover:border-brand-blue hover:shadow-lg transition-all"
+                data-testid={`card-feature-${index}`}
               >
                 <CardContent className="p-6">
-                  <feature.icon className="h-10 w-10 text-white mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">
+                  <div className="mb-4 h-12 w-12 bg-brand-blue-light rounded-lg flex items-center justify-center">
+                    <feature.icon className="h-6 w-6 text-brand-blue" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     {feature.name}
                   </h3>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     {feature.description}
                   </p>
                 </CardContent>
@@ -255,147 +323,49 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Interactive Demo Section */}
-      <section className="py-24 bg-black relative overflow-hidden">
-        <div className="absolute inset-0 grid-pattern"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">
-              Experience Bakame <span className="text-white font-extrabold">in Action</span>
-            </h2>
-            <p className="text-xl text-gray-400">
-              Try our AI-powered features right now
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
-              <CardHeader>
-                <Eye className="h-8 w-8 text-gray-400 mb-2" />
-                <CardTitle className="text-white">Speaking Confidence Score</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="h-32 bg-gray-500/10 rounded-lg flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-4xl font-bold text-gray-400 mb-2">
-                        <AnimatedCounter end="87" />%
-                      </div>
-                      <p className="text-sm text-gray-400">Confidence Level</p>
-                    </div>
-                  </div>
-                  <Button 
-                    onClick={() => navigate('/demo-scheduling')}
-                    className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
-                  >
-                    <TestTube className="mr-2 h-4 w-4" />
-                    Demo
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
-              <CardHeader>
-                <Mic className="h-8 w-8 text-gray-400 mb-2" />
-                <CardTitle className="text-white">Pronunciation Test</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="h-32 bg-gray-500/10 rounded-lg flex items-center justify-center">
-                    <div className="space-y-2">
-                      <div className="flex space-x-1">
-                        {[1, 2, 3, 4, 5].map((i) => (
-                          <div 
-                            key={i}
-                            className="w-2 h-16 bg-gray-400 rounded animate-pulse"
-                            style={{ animationDelay: `${i * 0.1}s`, height: `${Math.random() * 64}px` }}
-                          ></div>
-                        ))}
-                      </div>
-                      <p className="text-sm text-gray-400 text-center">Voice Analysis</p>
-                    </div>
-                  </div>
-                  <Button 
-                    onClick={() => navigate('/demo-scheduling')}
-                    className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
-                  >
-                    <Volume2 className="mr-2 h-4 w-4" />
-                    Demo
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
-              <CardHeader>
-                <Bot className="h-8 w-8 text-gray-400 mb-2" />
-                <CardTitle className="text-white">AI Conversation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="h-32 bg-gray-500/10 rounded-lg p-4 space-y-2">
-                    <div className="bg-gray-500/20 rounded-lg p-2 text-sm text-gray-300">
-                      Hello! Let's practice English together!
-                    </div>
-                    <div className="bg-gray-800/50 rounded-lg p-2 text-sm text-gray-300 ml-8">
-                      Hi! I'd love to practice.
-                    </div>
-                  </div>
-                  <Button 
-                    onClick={() => navigate('/demo-scheduling')}
-                    className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
-                  >
-                    <MessageSquare className="mr-2 h-4 w-4" />
-                    Demo
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Solutions by Role */}
-      <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
+      <section className="py-24 bg-[#F7F7F7]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">
-              Tailored Solutions <span className="text-white font-extrabold">for Everyone</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Tailored Solutions for Every Stakeholder
             </h2>
-            <p className="text-xl text-gray-400">
-              Designed for every stakeholder in the education ecosystem
+            <p className="text-xl text-muted-foreground">
+              Designed for the entire education ecosystem
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
+            <Card className="bg-white border-2 hover:border-brand-blue hover:shadow-lg transition-all">
               <CardHeader>
-                <GraduationCap className="h-12 w-12 text-gray-400 mb-4" />
-                <CardTitle className="text-2xl text-white">For Students</CardTitle>
+                <div className="mb-4 h-16 w-16 bg-brand-blue-light rounded-full flex items-center justify-center">
+                  <GraduationCap className="h-8 w-8 text-brand-blue" />
+                </div>
+                <CardTitle className="text-2xl">For Students</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>24/7 AI tutoring support</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">24/7 AI tutoring support</span>
                   </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Gamified learning experience</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Gamified learning experience</span>
                   </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Personalized learning paths</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Personalized learning paths</span>
                   </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Safe practice environment</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Safe practice environment</span>
                   </li>
                 </ul>
                 <Button 
-                  onClick={() => navigate('/for-students')}
-                  className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
+                  onClick={() => navigate('/features')}
+                  className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white"
+                  data-testid="button-explore-student"
                 >
                   Explore Student Features
                   <ChevronRight className="ml-2 h-4 w-4" />
@@ -403,64 +373,77 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
+            <Card className="bg-white border-2 hover:border-brand-blue hover:shadow-lg transition-all">
               <CardHeader>
-                <Users className="h-12 w-12 text-gray-400 mb-4" />
-                <CardTitle className="text-2xl text-white">For Teachers</CardTitle>
+                <div className="mb-4 h-16 w-16 bg-brand-blue-light rounded-full flex items-center justify-center">
+                  <Users className="h-8 w-8 text-brand-blue" />
+                </div>
+                <CardTitle className="text-2xl">For Teachers</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Real-time progress tracking</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Real-time progress tracking</span>
                   </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Automated grading system</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Automated grading system</span>
                   </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Custom lesson creation</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Custom lesson creation</span>
                   </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Class performance analytics</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Class performance analytics</span>
                   </li>
                 </ul>
                 <Button 
-                  onClick={() => navigate('/for-teachers')}
-                  className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
+                  onClick={() => navigate('/features')}
+                  className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white"
+                  data-testid="button-view-teacher"
                 >
-                  View Teacher Dashboard
+                  View Teacher Tools
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
+            <Card className="bg-white border-2 hover:border-brand-blue hover:shadow-lg transition-all">
               <CardHeader>
-                <School className="h-12 w-12 text-gray-400 mb-4" />
-                <CardTitle className="text-2xl text-white">For Schools</CardTitle>
+                <div className="mb-4 h-16 w-16 bg-brand-blue-light rounded-full flex items-center justify-center">
+                  <School className="h-8 w-8 text-brand-blue" />
+                </div>
+                <CardTitle className="text-2xl">For Schools</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>School-wide deployment</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">School-wide deployment</span>
                   </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Administrative controls</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Administrative controls</span>
                   </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>ROI & impact metrics</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">ROI & impact metrics</span>
                   </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Training & support included</span>
+                  <li className="flex items-start">
+                    <CheckCircle className="mr-3 h-5 w-5 text-brand-blue mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground">Training & support included</span>
                   </li>
                 </ul>
+                <Button 
+                  onClick={() => navigate('/education-solution')}
+                  className="w-full bg-brand-blue hover:bg-brand-blue-hover text-white"
+                  data-testid="button-school-solutions"
+                >
+                  School Solutions
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
               </CardContent>
             </Card>
           </div>
@@ -468,75 +451,65 @@ const Index = () => {
       </section>
 
       {/* Research & Innovation */}
-      <section className="py-24 bg-black relative overflow-hidden">
-        {/* YouTube Video Background */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <iframe
-            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
-            src="https://www.youtube.com/embed/37zwJuI8hSs?autoplay=1&mute=1&loop=1&playlist=37zwJuI8hSs&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
-            title="Research & Innovation Background"
-            allow="autoplay; encrypted-media"
-            style={{ pointerEvents: 'none' }}
-          />
-        </div>
-        
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
-        
-        <div className="absolute inset-0 grid-pattern opacity-30"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4 drop-shadow-2xl">
-              Research & <span className="text-[#4c9dff]">Innovation</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Research & <span className="text-brand-blue">Innovation</span>
             </h2>
-            <p className="text-xl text-gray-200 drop-shadow-lg">
+            <p className="text-xl text-muted-foreground">
               Advancing the frontier of AI-powered education
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
+            <Card className="border-2 hover:border-brand-blue hover:shadow-lg transition-all">
               <CardHeader>
-                <FlaskConical className="h-10 w-10 text-[#4c9dff] mb-2" />
-                <CardTitle className="text-white">AI Research Lab</CardTitle>
+                <div className="mb-4 h-12 w-12 bg-brand-blue-light rounded-lg flex items-center justify-center">
+                  <FlaskConical className="h-6 w-6 text-brand-blue" />
+                </div>
+                <CardTitle>AI Research Lab</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 mb-4">
+                <p className="text-muted-foreground mb-4">
                   Pioneering natural language processing models optimized for African languages and accents.
                 </p>
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
+                <Badge className="bg-brand-blue-light text-brand-blue border-0">
                   Active Research
                 </Badge>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
+            <Card className="border-2 hover:border-brand-blue hover:shadow-lg transition-all">
               <CardHeader>
-                <Lightbulb className="h-10 w-10 text-[#4c9dff] mb-2" />
-                <CardTitle className="text-white">Learning Breakthroughs</CardTitle>
+                <div className="mb-4 h-12 w-12 bg-brand-blue-light rounded-lg flex items-center justify-center">
+                  <Lightbulb className="h-6 w-6 text-brand-blue" />
+                </div>
+                <CardTitle>Educational Innovation</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 mb-4">
-                  Developing adaptive learning algorithms that personalize to each student's unique needs.
+                <p className="text-muted-foreground mb-4">
+                  Developing cutting-edge pedagogical methods that combine traditional teaching with AI technology.
                 </p>
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                  Patent Pending
+                <Badge className="bg-brand-blue-light text-brand-blue border-0">
+                  In Development
                 </Badge>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
+            <Card className="border-2 hover:border-brand-blue hover:shadow-lg transition-all">
               <CardHeader>
-                <GradCap className="h-10 w-10 text-[#4c9dff] mb-2" />
-                <CardTitle className="text-white">Academic Partnerships</CardTitle>
+                <div className="mb-4 h-12 w-12 bg-brand-blue-light rounded-lg flex items-center justify-center">
+                  <Award className="h-6 w-6 text-brand-blue" />
+                </div>
+                <CardTitle>Academic Partnerships</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 mb-4">
-                  Collaborating with leading universities to validate and improve our methodologies.
+                <p className="text-muted-foreground mb-4">
+                  Collaborating with leading universities to validate our impact and refine our methodology.
                 </p>
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                  5+ Universities
+                <Badge className="bg-brand-blue-light text-brand-blue border-0">
+                  Global Network
                 </Badge>
               </CardContent>
             </Card>
@@ -544,76 +517,95 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Call-to-Action Footer Section */}
-      <section className="py-24 gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 grid-pattern"></div>
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
-            Transform Your School's
-            <span className="block text-[#4c9dff]">English Program</span>
-          </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join hundreds of schools revolutionizing language education with AI. 
-            See the difference in just one semester.
-          </p>
-          <div className="mb-8">
-            <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30 px-6 py-2 text-sm">
-              <Building className="mr-2 h-4 w-4" />
-              Custom pricing tailored for NGOs
-            </Badge>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <Button 
-              onClick={() => navigate('/demo-scheduling')}
-              className="bg-white text-black hover:bg-gray-100 text-lg px-8 py-6 hover-depth"
-              data-testid="button-demo-footer"
-            >
-              <Play className="mr-2 h-5 w-5" />
-              Demo
-            </Button>
-          </div>
-          
-          <p className="text-gray-400">
-            Or contact our NGO sales team at{' '}
-            <a href="mailto:sales@bakame.org" className="text-gray-400 hover:text-gray-300">
-              sales@bakame.org
-            </a>
-          </p>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-black border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="mb-8">
-            <p className="text-gray-400 mb-4 max-w-2xl">
-              Revolutionizing English education across Africa with AI-powered learning that works everywhere.
+      {/* Impact Statistics */}
+      <section className="py-24 bg-brand-blue text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Proven Impact
+            </h2>
+            <p className="text-xl opacity-90">
+              Real results from real classrooms
             </p>
-            <div className="flex">
-              <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                <Award className="mr-1 h-3 w-3" />
-                CREATE Award 2025
-              </Badge>
+          </div>
+          
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2 text-brand-yellow">87%</div>
+              <p className="text-lg opacity-90">Speaking Confidence Increase</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2 text-brand-yellow">10,000+</div>
+              <p className="text-lg opacity-90">Students Impacted</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2 text-brand-yellow">50+</div>
+              <p className="text-lg opacity-90">Partner Schools</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2 text-brand-yellow">95%</div>
+              <p className="text-lg opacity-90">Teacher Satisfaction</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            Ready to Transform English Learning at Your School?
+          </h2>
+          <p className="text-xl text-muted-foreground mb-8">
+            Join leading schools across Africa in revolutionizing language education with Bakame's AI-powered platform.
+          </p>
           
-          <div className="border-t border-white/10 pt-8">
-            <p className="text-gray-500">
-              © 2025 Bakame AI. All rights reserved. Building the future of education in Africa.
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              onClick={() => navigate('/demo-scheduling')}
+              size="lg"
+              className="bg-brand-blue hover:bg-brand-blue-hover text-white px-8 py-6 text-lg"
+              data-testid="button-schedule-demo-cta"
+            >
+              <Calendar className="mr-2 h-5 w-5" />
+              Schedule a Demo
+            </Button>
+            <Button 
+              onClick={() => navigate('/contact')}
+              size="lg"
+              variant="outline"
+              className="border-2 border-brand-blue text-brand-blue hover:bg-brand-blue-light px-8 py-6 text-lg"
+              data-testid="button-contact-sales"
+            >
+              <Phone className="mr-2 h-5 w-5" />
+              Contact Sales
+            </Button>
+          </div>
+
+          <div className="mt-12 pt-12 border-t border-border">
+            <p className="text-muted-foreground mb-4">
+              Questions? Our team is here to help.
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm text-muted-foreground">
+              <a href="mailto:info@bakame.rw" className="flex items-center hover:text-brand-blue transition-colors">
+                <MessageSquare className="mr-2 h-4 w-4" />
+                info@bakame.rw
+              </a>
+              <span className="hidden sm:inline">•</span>
+              <a href="tel:+250788123456" className="flex items-center hover:text-brand-blue transition-colors">
+                <Phone className="mr-2 h-4 w-4" />
+                +250 788 123 456
+              </a>
+            </div>
           </div>
         </div>
-      </footer>
+      </section>
 
-      {/* Modals */}
-      <EarlyAccessModal 
-        isOpen={isEarlyAccessOpen} 
-        onClose={() => setIsEarlyAccessOpen(false)} 
-      />
-      
-      {/* Live Chat */}
       <LiveChat />
+      <EarlyAccessModal 
+        isOpen={isEarlyAccessOpen}
+        onClose={() => setIsEarlyAccessOpen(false)}
+      />
     </div>
   );
 };
