@@ -14,6 +14,12 @@ import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import tcuResearchLogo from '../../attached_assets/image_1763422681093.png';
+import chamberLogo from '../../attached_assets/image_1763422713001.png';
+import tcu360Logo from '../../attached_assets/image_1763422733564.png';
+import dallasInnovatesLogo from '../../attached_assets/image_1763422762344.png';
+import fwrLogo from '../../attached_assets/image_1763422791463.png';
+import neeleyLogo from '../../attached_assets/image_1763422877347.png';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -67,14 +73,12 @@ const Index = () => {
   ];
 
   const trustLogos = [
-    "Neeley's Institute",
-    'Dallas Innovates',
-    'US Chamber of Commerce',
-    'TCU 360',
-    'TCU CS Department',
-    'Fort Worth Report',
-    'Kagarama SS',
-    'GS Karembure',
+    { src: neeleyLogo, alt: "TCU Neeley School of Business" },
+    { src: dallasInnovatesLogo, alt: "Dallas Innovates" },
+    { src: chamberLogo, alt: "U.S. Chamber of Commerce" },
+    { src: tcu360Logo, alt: "TCU 360" },
+    { src: tcuResearchLogo, alt: "TCU reSEaRCh" },
+    { src: fwrLogo, alt: "Fort Worth Report" },
   ];
 
   return (
@@ -120,8 +124,13 @@ const Index = () => {
             <div className="flex space-x-12 marquee">
               {[...trustLogos, ...trustLogos].map((logo, index) => (
                 <div key={index} className="flex-shrink-0">
-                  <div className="h-12 px-6 py-2 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center">
-                    <span className="text-gray-400 whitespace-nowrap">{logo}</span>
+                  <div className="h-16 px-8 py-3 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center">
+                    <img 
+                      src={logo.src} 
+                      alt={logo.alt}
+                      className="h-12 w-auto object-contain filter brightness-90 hover:brightness-110 transition-all"
+                      data-testid={`logo-${index}`}
+                    />
                   </div>
                 </div>
               ))}
