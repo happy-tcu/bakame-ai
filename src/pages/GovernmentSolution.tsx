@@ -18,9 +18,9 @@ const GovernmentSolution = () => {
           <div className="text-2xl font-bold">Bakame Ai</div>
         </div>
         <div className="hidden md:flex space-x-8">
-          <a href="/press" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105">Blog</a>
+          <a href="/blog" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105">Blog</a>
           
-          <a href="/press" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105">Team</a>
+          <a href="/team" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105">Team</a>
           
         </div>
       </nav>

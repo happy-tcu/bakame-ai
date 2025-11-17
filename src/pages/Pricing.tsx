@@ -241,7 +241,7 @@ const Pricing = () => {
                 Schedule a Demo
               </Button>
               <Button 
-                onClick={() => navigate('/demo-scheduling')}
+                onClick={() => navigate('/contact')}
                 variant="outline" 
                 className="border-border text-foreground hover:bg-muted px-8 py-3 text-lg"
               >
