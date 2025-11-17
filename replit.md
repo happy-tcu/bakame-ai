@@ -1,7 +1,7 @@
 # Bakame AI - Project Documentation
 
 ## Overview
-Bakame AI is an AI-powered English learning platform for schools, offering voice-first learning experiences and in-depth conversation analytics. The platform aims to provide comprehensive tools for educators and administrators to monitor and improve student language proficiency through AI-driven insights. It leverages a modern web stack to deliver a scalable and robust solution.
+Bakame AI is the first voice-AI platform for offline programs, delivering education, health, and civic services through basic phone calls powered by AI. Like Duolingo — but for civics, weather, health... and no internet required. We serve 2.7 billion people without internet access, starting with Rwanda and expanding across Africa. The platform leverages AI (Whisper + GPT-4 + TTS) to provide real-time, personalized learning experiences via IVR, with <4s latency for natural conversations.
 
 ## User Preferences
 I prefer detailed explanations and comprehensive documentation. I also prefer an iterative development approach where I can provide feedback often. Please ask before making major architectural changes or introducing new dependencies.
@@ -21,4 +21,13 @@ Key architectural decisions include:
 - **ElevenLabs**: Conversational AI for voice-first learning experiences, including real-time voice synthesis and post-call webhooks for conversation data.
 - **Supabase Auth**: User authentication and authorization services.
 - **PostgreSQL**: Relational database for storing user and conversation data.
-- **OpenAI GPT-5**: Used for advanced AI analysis of conversation transcripts to determine CEFR levels, topic complexity, quality scores, and key insights.
+- **OpenAI GPT-4**: Used for AI-powered adaptive learning and conversation analysis.
+- **Twilio/Telco APIs**: IVR infrastructure for offline voice-based program delivery.
+
+## Recent Changes (November 2025)
+- **About Page Overhaul**: Completely redesigned About page with specific metrics, leadership team information, company milestones, and strategic priorities based on content audit principles.
+- **SEO Improvements**: Updated meta description to be specific and keyword-rich, highlighting key achievements (15K students, 10 schools, $30K invoiced, $20K raised).
+- **Team Section**: Added full leadership team (CEO Happy Herman, CTO Aime Byiringiro, Designer Chretien Igiraneza) and advisory board.
+- **Traction Metrics**: Prominently displayed real numbers from current operations across Rwanda.
+- **Strategic Priorities**: Added concrete, measurable goals (100 schools by Dec 2025, $500K ARR Q4 2025, 30% cost reduction, 3 countries by 2026).
+- **Company Timeline**: Added milestone-based journey section from founding through planned 2026 expansion.
