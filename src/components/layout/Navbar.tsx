@@ -94,6 +94,12 @@ const Navbar = () => {
 
   const aboutItems = [
     {
+      title: "About Us",
+      href: "/about",
+      icon: Info,
+      description: "Our mission, team, and impact"
+    },
+    {
       title: "Team",
       href: "/team",
       icon: Users,
