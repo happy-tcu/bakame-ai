@@ -254,10 +254,10 @@ const Index = () => {
       </section>
 
       {/* Interactive Demo Section */}
-      <section className="py-24 bg-black relative overflow-hidden">
+      <section className="py-24 bg-black relative overflow-hidden" data-testid="section-demo">
         <div className="absolute inset-0 grid-pattern"></div>
         <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16" data-animate>
             <h2 className="text-5xl font-bold mb-4">
               Experience Bakame <span className="text-white font-extrabold">in Action</span>
             </h2>
@@ -267,85 +267,122 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
+            {/* Speaking Confidence Score Card */}
+            <Card 
+              className="bg-gradient-to-br from-purple-900/30 via-gray-900/20 to-transparent border-purple-500/30 hover-depth hover:border-purple-500/50 transition-all duration-300"
+              data-animate
+              data-testid="card-confidence-score"
+            >
               <CardHeader>
-                <Eye className="h-8 w-8 text-gray-400 mb-2" />
-                <CardTitle className="text-white">Speaking Confidence Score</CardTitle>
+                <Eye className="h-8 w-8 text-purple-400 mb-2" />
+                <CardTitle className="text-white text-xl">Speaking Confidence Score</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div className="h-32 bg-gray-500/10 rounded-lg flex items-center justify-center">
+                <div className="space-y-6">
+                  <div className="bg-gradient-to-br from-purple-500/10 to-purple-900/5 rounded-xl p-6 border border-purple-500/20">
                     <div className="text-center">
-                      <div className="text-4xl font-bold text-gray-400 mb-2">
-                        <AnimatedCounter end="87" />%
+                      <div className="text-6xl font-bold text-white mb-3 drop-shadow-lg" data-testid="text-confidence-percentage">
+                        <AnimatedCounter end="87" />
+                        <span className="text-purple-400">%</span>
                       </div>
-                      <p className="text-sm text-gray-400">Confidence Level</p>
+                      <div className="h-2 bg-gray-800 rounded-full overflow-hidden mb-3">
+                        <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 w-[87%] rounded-full"></div>
+                      </div>
+                      <p className="text-sm text-gray-300 font-medium">Confidence Level</p>
                     </div>
                   </div>
                   <Button 
                     onClick={() => navigate('/demo-scheduling')}
-                    className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
+                    className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-6 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/50"
+                    data-testid="button-demo-confidence"
                   >
-                    <TestTube className="mr-2 h-4 w-4" />
-                    Demo
+                    <TestTube className="mr-2 h-5 w-5" />
+                    Try Demo
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
+            {/* Pronunciation Test Card */}
+            <Card 
+              className="bg-gradient-to-br from-blue-900/30 via-gray-900/20 to-transparent border-blue-500/30 hover-depth hover:border-blue-500/50 transition-all duration-300"
+              data-animate
+              data-testid="card-pronunciation"
+            >
               <CardHeader>
-                <Mic className="h-8 w-8 text-gray-400 mb-2" />
-                <CardTitle className="text-white">Pronunciation Test</CardTitle>
+                <Mic className="h-8 w-8 text-blue-400 mb-2" />
+                <CardTitle className="text-white text-xl">Pronunciation Test</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div className="h-32 bg-gray-500/10 rounded-lg flex items-center justify-center">
-                    <div className="space-y-2">
-                      <div className="flex space-x-1">
-                        {[1, 2, 3, 4, 5].map((i) => (
+                <div className="space-y-6">
+                  <div className="bg-gradient-to-br from-blue-500/10 to-blue-900/5 rounded-xl p-6 border border-blue-500/20">
+                    <div className="space-y-3">
+                      <div className="flex justify-center items-end space-x-2 h-24">
+                        {[40, 70, 55, 85, 60, 75, 50, 90, 65].map((height, i) => (
                           <div 
                             key={i}
-                            className="w-2 h-16 bg-gray-400 rounded animate-pulse"
-                            style={{ animationDelay: `${i * 0.1}s`, height: `${Math.random() * 64}px` }}
+                            className="w-3 bg-gradient-to-t from-blue-500 to-cyan-400 rounded-full animate-pulse"
+                            style={{ 
+                              animationDelay: `${i * 0.15}s`,
+                              height: `${height}%`,
+                              animationDuration: '1.5s'
+                            }}
+                            data-testid={`bar-voice-${i}`}
                           ></div>
                         ))}
                       </div>
-                      <p className="text-sm text-gray-400 text-center">Voice Analysis</p>
+                      <p className="text-sm text-gray-300 text-center font-medium">Voice Analysis</p>
                     </div>
                   </div>
                   <Button 
                     onClick={() => navigate('/demo-scheduling')}
-                    className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-6 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/50"
+                    data-testid="button-demo-pronunciation"
                   >
-                    <Volume2 className="mr-2 h-4 w-4" />
-                    Demo
+                    <Volume2 className="mr-2 h-5 w-5" />
+                    Try Demo
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
+            {/* AI Conversation Card */}
+            <Card 
+              className="bg-gradient-to-br from-green-900/30 via-gray-900/20 to-transparent border-green-500/30 hover-depth hover:border-green-500/50 transition-all duration-300"
+              data-animate
+              data-testid="card-conversation"
+            >
               <CardHeader>
-                <Bot className="h-8 w-8 text-gray-400 mb-2" />
-                <CardTitle className="text-white">AI Conversation</CardTitle>
+                <Bot className="h-8 w-8 text-green-400 mb-2" />
+                <CardTitle className="text-white text-xl">AI Conversation</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div className="h-32 bg-gray-500/10 rounded-lg p-4 space-y-2">
-                    <div className="bg-gray-500/20 rounded-lg p-2 text-sm text-gray-300">
+                <div className="space-y-6">
+                  <div className="bg-gradient-to-br from-green-500/10 to-green-900/5 rounded-xl p-4 border border-green-500/20 space-y-3 min-h-[140px]">
+                    <div 
+                      className="bg-green-600/20 border border-green-500/30 rounded-2xl rounded-tl-sm p-3 text-sm text-white shadow-lg"
+                      data-testid="text-ai-message"
+                    >
                       Hello! Let's practice English together!
                     </div>
-                    <div className="bg-gray-800/50 rounded-lg p-2 text-sm text-gray-300 ml-8">
+                    <div 
+                      className="bg-gray-700/50 border border-gray-600/30 rounded-2xl rounded-tr-sm p-3 text-sm text-white ml-6 shadow-lg"
+                      data-testid="text-user-message"
+                    >
                       Hi! I'd love to practice.
+                    </div>
+                    <div className="flex items-center space-x-2 text-gray-400 text-xs ml-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span>AI is typing...</span>
                     </div>
                   </div>
                   <Button 
                     onClick={() => navigate('/demo-scheduling')}
-                    className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-6 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/50"
+                    data-testid="button-demo-conversation"
                   >
-                    <MessageSquare className="mr-2 h-4 w-4" />
-                    Demo
+                    <MessageSquare className="mr-2 h-5 w-5" />
+                    Try Demo
                   </Button>
                 </div>
               </CardContent>
