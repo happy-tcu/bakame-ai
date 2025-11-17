@@ -134,30 +134,30 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-students">
-              <div className="text-5xl mb-3">⚫</div>
-              <div className="text-5xl font-bold mb-2 text-white">15,000</div>
-              <p className="text-gray-400">Students Registered</p>
+            <div className="text-center p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-students">
+              <div className="text-4xl mb-3">👥</div>
+              <div className="text-3xl md:text-4xl font-bold mb-2 text-white">15,000</div>
+              <p className="text-sm text-gray-400">Students Registered</p>
             </div>
-            <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-schools">
-              <div className="text-5xl mb-3">⬛</div>
-              <div className="text-5xl font-bold mb-2 text-white">10</div>
-              <p className="text-gray-400">Schools in Pilot</p>
+            <div className="text-center p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-schools">
+              <div className="text-4xl mb-3">🏫</div>
+              <div className="text-3xl md:text-4xl font-bold mb-2 text-white">10</div>
+              <p className="text-sm text-gray-400">Schools in Pilot</p>
             </div>
-            <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-revenue">
-              <div className="text-5xl mb-3">⚪</div>
-              <div className="text-5xl font-bold mb-2 text-white">$30,000</div>
-              <p className="text-gray-400">Pre-Invoiced</p>
+            <div className="text-center p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-revenue">
+              <div className="text-4xl mb-3">💵</div>
+              <div className="text-3xl md:text-4xl font-bold mb-2 text-white">$30,000</div>
+              <p className="text-sm text-gray-400">Pre-Invoiced</p>
             </div>
-            <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-funding">
-              <div className="text-5xl mb-3">◾</div>
-              <div className="text-5xl font-bold mb-2 text-white">$20,000</div>
-              <p className="text-gray-400">Raised in Pre-Safe</p>
+            <div className="text-center p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-funding">
+              <div className="text-4xl mb-3">🚀</div>
+              <div className="text-3xl md:text-4xl font-bold mb-2 text-white">$20,000</div>
+              <p className="text-sm text-gray-400">Raised in Pre-Safe</p>
             </div>
-            <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-committed">
-              <div className="text-5xl mb-3">⬜</div>
-              <div className="text-5xl font-bold mb-2 text-white">145,000,000</div>
-              <p className="text-gray-400">RWF Committed</p>
+            <div className="text-center p-6 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-committed">
+              <div className="text-4xl mb-3">🤝</div>
+              <div className="text-2xl md:text-3xl font-bold mb-2 text-white">145,000,000</div>
+              <p className="text-sm text-gray-400">RWF Committed</p>
             </div>
           </div>
         </div>
