@@ -73,17 +73,6 @@ const Navbar = () => {
             {/* Center: Navigation */}
             <div className="hidden md:flex items-center justify-center space-x-8">
               <Link 
-                to="/" 
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors",
-                  location.pathname === "/" && "text-white"
-                )}
-                data-testid="link-home-nav"
-              >
-                Home
-              </Link>
-
-              <Link 
                 to="/demo-scheduling" 
                 className={cn(
                   "text-gray-300 hover:text-white transition-colors",
@@ -170,15 +159,6 @@ const Navbar = () => {
         <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden">
           <div className="flex flex-col h-full pt-20 px-6 pb-6 overflow-y-auto">
             <div className="space-y-4">
-              <Link 
-                to="/" 
-                onClick={closeMenu} 
-                className="block text-xl text-white hover:text-gray-400 transition-colors"
-                data-testid="link-mobile-home"
-              >
-                Home
-              </Link>
-
               <Link 
                 to="/demo-scheduling" 
                 onClick={closeMenu} 

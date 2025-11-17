@@ -61,9 +61,9 @@ const EnterpriseSolution = () => {
           <div className="text-2xl font-bold">Bakame Ai</div>
         </div>
         <div className="hidden md:flex space-x-8">
-          <a href="/blog" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-foreground after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Blog</a>
+          <a href="/press" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-foreground after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Blog</a>
           
-          <a href="/team" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-foreground after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Team</a>
+          <a href="/press" className="text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-foreground after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">Team</a>
           
         </div>
       </nav>
@@ -199,7 +199,7 @@ const EnterpriseSolution = () => {
             Join leading enterprises already using Bakame AI to transform their customer experience and operational efficiency.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => navigate('/contact')} className="bg-foreground text-background px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted-foreground transition-all duration-300 hover:scale-105 group relative overflow-hidden">
+            <button onClick={() => navigate('/demo-scheduling')} className="bg-foreground text-background px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted-foreground transition-all duration-300 hover:scale-105 group relative overflow-hidden">
               <span className="relative z-10">Request Free Trial</span>
             </button>
             <button className="border border-border text-foreground px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted transition-all duration-300 hover:scale-105 hover:border-muted-foreground hover:shadow-lg hover:shadow-muted/25">

@@ -100,16 +100,6 @@ const Index = () => {
                 <Play className="mr-2 h-5 w-5" />
                 Book a Demo
               </Button>
-              <Button 
-                onClick={() => navigate('/about')}
-                size="lg"
-                variant="outline"
-                className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg backdrop-blur-sm"
-                data-testid="button-hero-about"
-              >
-                Learn More
-                <ChevronRight className="ml-2 h-5 w-5" />
-              </Button>
             </div>
           </div>
         </div>
@@ -348,16 +338,6 @@ const Index = () => {
             >
               <Calendar className="mr-2 h-5 w-5" />
               Schedule a Demo
-            </Button>
-            <Button 
-              onClick={() => navigate('/contact')}
-              size="lg"
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg"
-              data-testid="button-cta-contact"
-            >
-              <MessageSquare className="mr-2 h-5 w-5" />
-              Contact Sales
             </Button>
           </div>
         </div>

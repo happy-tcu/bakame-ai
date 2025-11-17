@@ -22,7 +22,7 @@ const EducationSolution = () => {
           <div className="text-2xl font-bold">Bakame Ai</div>
         </div>
         <div className="hidden md:flex space-x-8">
-          <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors hover:scale-105 transform duration-200">Blog</a>
+          <a href="/press" className="text-muted-foreground hover:text-foreground transition-colors hover:scale-105 transform duration-200">Blog</a>
           
         </div>
       </nav>
@@ -151,7 +151,7 @@ const EducationSolution = () => {
               Join schools and universities already using Bakame AI to provide accessible, offline education to their students.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button onClick={() => navigate('/contact')} className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25">
+              <button onClick={() => navigate('/demo-scheduling')} className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25">
                 Get Started Today
               </button>
               <button className="border border-border text-foreground px-8 py-4 rounded-full font-semibold text-lg hover:bg-muted transition-all duration-300 hover:scale-105 hover:border-muted-foreground">

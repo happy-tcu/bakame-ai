@@ -282,7 +282,7 @@ const Resources = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link to="/contact">
+                  <Link to="/demo-scheduling">
                     <Button className="bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
                       Contact Support
                     </Button>

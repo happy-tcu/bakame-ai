@@ -101,8 +101,8 @@ const Terms = () => {
         <a href="/" className="text-2xl font-bold">Bakame Ai</a>
         <div className="hidden md:flex space-x-8">
           <a href="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Demo</a>
-          <a href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
-          <a href="/support" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
+          <a href="/press" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
+          <a href="/demo-scheduling" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
         </div>
       </nav>
 
@@ -183,7 +183,7 @@ const Terms = () => {
         <div className="container mx-auto text-center">
           <p className="text-muted-foreground text-sm">
             © 2025 Bakame AI. All rights reserved. | 
-            <a href="/support" className="hover:text-foreground ml-1">Support</a> | 
+            <a href="/demo-scheduling" className="hover:text-foreground ml-1">Support</a> | 
             <a href="/privacy" className="hover:text-foreground ml-1">Privacy</a>
           </p>
         </div>

@@ -11,9 +11,9 @@ const CareersLayout = ({ children }: CareersLayoutProps) => {
         <div className="text-2xl font-bold text-white">Bakame AI</div>
         <div className="hidden md:flex space-x-8">
           <a href="/" className="text-gray-300 hover:text-white transition-colors duration-200">Home</a>
-          <a href="/blog" className="text-gray-300 hover:text-white transition-colors duration-200">Blog</a>
-          <a href="/contact" className="text-gray-300 hover:text-white transition-colors duration-200">Contact</a>
-          <a href="/team" className="text-white font-medium border-b-2 border-blue-500">Careers</a>
+          <a href="/press" className="text-gray-300 hover:text-white transition-colors duration-200">Blog</a>
+          <a href="/demo-scheduling" className="text-gray-300 hover:text-white transition-colors duration-200">Contact</a>
+          <a href="/press" className="text-white font-medium border-b-2 border-blue-500">Careers</a>
         </div>
       </nav>
 
@@ -27,9 +27,9 @@ const CareersLayout = ({ children }: CareersLayoutProps) => {
           <div className="text-xl font-bold text-white mb-4 md:mb-0">Bakame AI</div>
           <div className="flex space-x-8 text-gray-300">
             <a href="/" className="hover:text-white transition-colors duration-200">Home</a>
-            <a href="/blog" className="hover:text-white transition-colors duration-200">Blog</a>
-            <a href="/resources" className="hover:text-white transition-colors duration-200">Resources</a>
-            <a href="/team" className="hover:text-white transition-colors duration-200">Careers</a>
+            <a href="/press" className="hover:text-white transition-colors duration-200">Blog</a>
+            <a href="/press" className="hover:text-white transition-colors duration-200">Resources</a>
+            <a href="/press" className="hover:text-white transition-colors duration-200">Careers</a>
           </div>
         </div>
         <div className="max-w-4xl mx-auto px-6 mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
