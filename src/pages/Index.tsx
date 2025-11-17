@@ -60,13 +60,9 @@ const Index = () => {
     { icon: MessageCircle, name: 'AI Debate Partner', description: 'Practice argumentation skills' },
     { icon: BookIcon, name: 'Smart Flashcards', description: 'Adaptive learning system' },
     { icon: Podcast, name: 'Podcast Generator', description: 'Create custom learning content' },
-    { icon: PenTool, name: 'Story Builder', description: 'Interactive narrative creation' },
     { icon: FileText, name: 'Document Intelligence', description: 'Smart content analysis' },
     { icon: Mic, name: 'Voice Journal', description: 'Audio practice diary' },
-    { icon: Music, name: 'English Rap Battles', description: 'Fun rhythm-based learning' },
     { icon: Volume2, name: 'Pronunciation Heat Maps', description: 'Visual accent coaching' },
-    { icon: Map, name: 'Virtual Field Trips', description: 'Immersive cultural exploration' },
-    { icon: Hand, name: 'Sign Language Support', description: 'Inclusive communication tools' },
     { icon: WifiOff, name: 'Offline Learning', description: 'Works without internet' },
   ];
 
