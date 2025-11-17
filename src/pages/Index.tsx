@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import LiveChat from '@/components/chat/LiveChat';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import AnimatedCounter from '@/components/AnimatedCounter';
@@ -362,6 +363,7 @@ const Index = () => {
         </div>
       </section>
 
+      <Footer />
       <LiveChat />
       <EarlyAccessModal isOpen={isEarlyAccessOpen} onClose={() => setIsEarlyAccessOpen(false)} />
     </div>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const About = () => {
   const navigate = useNavigate();
@@ -542,6 +543,7 @@ const About = () => {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 };
