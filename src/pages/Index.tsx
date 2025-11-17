@@ -12,7 +12,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
-import LiveChat from '@/components/chat/LiveChat';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import AnimatedCounter from '@/components/AnimatedCounter';
 
@@ -38,6 +37,22 @@ const Index = () => {
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    // Load ElevenLabs Conversational AI widget script
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+    script.async = true;
+    script.type = 'text/javascript';
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup script on unmount
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
   }, []);
 
   const features = [
@@ -86,30 +101,6 @@ const Index = () => {
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
-          <div 
-            id="hero-content"
-            data-animate="true"
-            className={`${isVisible['hero-content'] ? 'animate-scale-up' : 'opacity-0'}`}
-          >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight drop-shadow-2xl">
-              <span className="block text-white font-extrabold">Voice and Victory</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto drop-shadow-lg">
-              Revolutionary language education that transforms speaking confidence through AI tutoring, 
-              proven to deliver breakthrough results in schools across Africa.
-            </p>
-
-            <div className="flex justify-center">
-              <Badge className="bg-white/10 text-white border-white/30 px-4 py-2 backdrop-blur-sm">
-                <WifiOff className="mr-2 h-4 w-4" />
-                Works Offline
-              </Badge>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Trust Indicators */}
@@ -612,8 +603,8 @@ const Index = () => {
         onClose={() => setIsEarlyAccessOpen(false)} 
       />
       
-      {/* Live Chat */}
-      <LiveChat />
+      {/* ElevenLabs Conversational AI */}
+      <div dangerouslySetInnerHTML={{ __html: '<elevenlabs-convai agent-id="agent_0301k3y6dwrve63sb37n6f4ffkrj"></elevenlabs-convai>' }} />
     </div>
   );
 };
