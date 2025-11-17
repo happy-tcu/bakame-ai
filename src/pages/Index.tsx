@@ -101,6 +101,17 @@ const Index = () => {
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
+        
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl text-white">
+            Empowering School Districts with Offline-AI
+          </h1>
+          
+          <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto drop-shadow-lg">
+            We are Dallas-based start-up specializing in developing cool AI tools and integrations for remote schools in Africa.
+          </p>
+        </div>
       </section>
 
       {/* Trust Indicators */}
