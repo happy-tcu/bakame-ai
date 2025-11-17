@@ -25,9 +25,12 @@ Key architectural decisions include:
 - **Twilio/Telco APIs**: IVR infrastructure for offline voice-based program delivery.
 
 ## Recent Changes (November 2025)
+- **Homepage Condensed**: Streamlined home page to remove redundant content and focus on core value proposition. Reduced from 8+ sections to 5 clean sections: Hero, Traction Metrics, How It Works, Core Capabilities, and CTA.
+- **Navigation Fix**: Added "About Us" link to the About dropdown menu, making the comprehensive About page accessible to users.
 - **About Page Overhaul**: Completely redesigned About page with specific metrics, leadership team information, company milestones, and strategic priorities based on content audit principles.
 - **SEO Improvements**: Updated meta description to be specific and keyword-rich, highlighting key achievements (15K students, 10 schools, $30K invoiced, $20K raised).
 - **Team Section**: Added full leadership team (CEO Happy Herman, CTO Aime Byiringiro, Designer Chretien Igiraneza) and advisory board.
-- **Traction Metrics**: Prominently displayed real numbers from current operations across Rwanda.
+- **Traction Metrics**: Real numbers displayed on both Home and About pages (15K students, 10 schools, $30K invoiced, $20K raised).
 - **Strategic Priorities**: Added concrete, measurable goals (100 schools by Dec 2025, $500K ARR Q4 2025, 30% cost reduction, 3 countries by 2026).
 - **Company Timeline**: Added milestone-based journey section from founding through planned 2026 expansion.
+- **Content Strategy**: Home page focuses on quick value prop and CTAs; About page has detailed company story, team, and metrics.
