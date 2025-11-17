@@ -135,22 +135,27 @@ const Index = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-students">
+              <div className="text-5xl mb-3">🎓</div>
               <div className="text-5xl font-bold mb-2 text-white">15K</div>
               <p className="text-gray-400">Students Registered</p>
             </div>
             <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-schools">
+              <div className="text-5xl mb-3">🏫</div>
               <div className="text-5xl font-bold mb-2 text-white">10</div>
               <p className="text-gray-400">Schools in Pilot</p>
             </div>
             <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-revenue">
+              <div className="text-5xl mb-3">💰</div>
               <div className="text-5xl font-bold mb-2 text-white">$30K</div>
               <p className="text-gray-400">Pre-Invoiced</p>
             </div>
             <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-funding">
+              <div className="text-5xl mb-3">🚀</div>
               <div className="text-5xl font-bold mb-2 text-white">$20K</div>
               <p className="text-gray-400">Raised in Pre-Safe</p>
             </div>
             <div className="text-center p-8 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors" data-testid="metric-committed">
+              <div className="text-5xl mb-3">🤝</div>
               <div className="text-5xl font-bold mb-2 text-white">145M</div>
               <p className="text-gray-400">RWF Committed</p>
             </div>
