@@ -155,7 +155,7 @@ const Index = () => {
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border-white/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/30 to-gray-900/15 border-white/20 hover-depth">
               <CardHeader>
                 <Brain className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Learn AI</CardTitle>
@@ -181,7 +181,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border-white/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/30 to-gray-900/15 border-white/20 hover-depth">
               <CardHeader>
                 <Users2 className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Teach AI</CardTitle>
@@ -207,7 +207,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border-white/20 hover-depth">
+            <Card className="bg-gradient-to-br from-gray-900/30 to-gray-900/15 border-white/20 hover-depth">
               <CardHeader>
                 <Rocket className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Scale AI</CardTitle>
