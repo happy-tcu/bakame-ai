@@ -9,7 +9,6 @@ packages = ["unzip"]
 
 [deployment]
 deploymentTarget = "static"
-run = ["sh", "-c", "NODE_ENV=production tsx server/index.ts"]
 build = ["npm", "run", "build"]
 publicDir = "dist"
 
