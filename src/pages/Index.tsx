@@ -15,6 +15,9 @@ import tcuResearchLogo from '../../attached_assets/3_1763424292140.png';
 import fwrLogo from '../../attached_assets/4_1763424292143.png';
 import dallasInnovatesLogo from '../../attached_assets/5_1763424292143.png';
 import neeleyLogo from '../../attached_assets/6_1763424292142.png';
+import privacyPolicyPdf from '../../attached_assets/Bakame AI Privacy Policy_1763450785833.pdf';
+import dpaPdf from '../../attached_assets/Bakame AI Data Processing Agreement (DPA)_1763450778716.pdf';
+import subprocessorsPdf from '../../attached_assets/Bakame AI — List of Subprocessors_1763450775731.pdf';
 
 const Index = () => {
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
@@ -474,15 +477,56 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-black border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="mb-8">
-            <p className="text-gray-400 mb-4 max-w-2xl">
-              Revolutionizing English education across Africa with AI-powered learning that works everywhere.
-            </p>
-            <div className="flex">
-              <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                <Award className="mr-1 h-3 w-3" />
-                CREATE Award 2025
-              </Badge>
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div>
+              <p className="text-gray-400 mb-4 max-w-2xl">
+                Revolutionizing English education across Africa with AI-powered learning that works everywhere.
+              </p>
+              <div className="flex">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
+                  <Award className="mr-1 h-3 w-3" />
+                  CREATE Award 2025
+                </Badge>
+              </div>
+            </div>
+            
+            <div className="md:text-right">
+              <h3 className="text-white font-semibold mb-3">Legal</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a 
+                    href={privacyPolicyPdf} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-gray-300 transition-colors"
+                    data-testid="link-privacy-policy"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href={dpaPdf} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-gray-300 transition-colors"
+                    data-testid="link-dpa"
+                  >
+                    DPA
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href={subprocessorsPdf} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-gray-300 transition-colors"
+                    data-testid="link-subprocessors"
+                  >
+                    Subprocessors
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
           
