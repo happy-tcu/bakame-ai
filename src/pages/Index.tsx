@@ -15,9 +15,6 @@ import tcuResearchLogo from '../../attached_assets/3_1763424292140.png';
 import fwrLogo from '../../attached_assets/4_1763424292143.png';
 import dallasInnovatesLogo from '../../attached_assets/5_1763424292143.png';
 import neeleyLogo from '../../attached_assets/6_1763424292142.png';
-import privacyPolicyPdf from '../../attached_assets/Bakame AI Privacy Policy_1763450785833.pdf';
-import dpaPdf from '../../attached_assets/Bakame AI Data Processing Agreement (DPA)_1763450778716.pdf';
-import subprocessorsPdf from '../../attached_assets/Bakame AI — List of Subprocessors_1763450775731.pdf';
 
 const Index = () => {
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
@@ -495,7 +492,7 @@ const Index = () => {
               <ul className="space-y-2">
                 <li>
                   <a 
-                    href={subprocessorsPdf} 
+                    href="/legal/subprocessors.html" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-gray-300 transition-colors"
@@ -506,7 +503,7 @@ const Index = () => {
                 </li>
                 <li>
                   <a 
-                    href={privacyPolicyPdf} 
+                    href="/legal/privacy-policy.html" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-gray-300 transition-colors"
@@ -517,7 +514,7 @@ const Index = () => {
                 </li>
                 <li>
                   <a 
-                    href={dpaPdf} 
+                    href="/legal/dpa.html" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-gray-300 transition-colors"
