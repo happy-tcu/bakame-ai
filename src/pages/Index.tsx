@@ -14,12 +14,12 @@ import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import AnimatedCounter from '@/components/AnimatedCounter';
-import tcuResearchLogo from '../../attached_assets/image_1763422681093.png';
-import chamberLogo from '../../attached_assets/image_1763422713001.png';
-import tcu360Logo from '../../attached_assets/image_1763422733564.png';
-import dallasInnovatesLogo from '../../attached_assets/image_1763422762344.png';
-import fwrLogo from '../../attached_assets/image_1763422791463.png';
-import neeleyLogo from '../../attached_assets/image_1763422877347.png';
+import chamberLogo from '../../attached_assets/1_1763424292144.png';
+import tcu360Logo from '../../attached_assets/2_1763424292144.png';
+import tcuResearchLogo from '../../attached_assets/3_1763424292140.png';
+import fwrLogo from '../../attached_assets/4_1763424292143.png';
+import dallasInnovatesLogo from '../../attached_assets/5_1763424292143.png';
+import neeleyLogo from '../../attached_assets/6_1763424292142.png';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -73,12 +73,12 @@ const Index = () => {
   ];
 
   const trustLogos = [
-    { src: neeleyLogo, alt: "TCU Neeley School of Business" },
-    { src: dallasInnovatesLogo, alt: "Dallas Innovates" },
-    { src: chamberLogo, alt: "U.S. Chamber of Commerce" },
+    { src: chamberLogo, alt: "US India Chamber of Commerce Dallas/Fort Worth" },
     { src: tcu360Logo, alt: "TCU 360" },
-    { src: tcuResearchLogo, alt: "TCU reSEaRCh" },
+    { src: tcuResearchLogo, alt: "TCU reSEaRCh Science and Engineering Research Center" },
     { src: fwrLogo, alt: "Fort Worth Report" },
+    { src: dallasInnovatesLogo, alt: "Dallas Innovates" },
+    { src: neeleyLogo, alt: "TCU Neeley School of Business" },
   ];
 
   return (
