@@ -469,17 +469,6 @@ const Index = () => {
             </Badge>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <Button 
-              onClick={() => navigate('/demo-scheduling')}
-              className="bg-white text-black hover:bg-gray-100 text-lg px-8 py-6 hover-depth"
-              data-testid="button-demo-footer"
-            >
-              <Play className="mr-2 h-5 w-5" />
-              Demo
-            </Button>
-          </div>
-          
           <p className="text-gray-400">
             Or contact our NGO sales team at{' '}
             <a href="mailto:sales@bakame.org" className="text-gray-400 hover:text-gray-300">
