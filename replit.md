@@ -7,33 +7,37 @@ Bakame AI is the first voice-AI platform for offline programs, delivering educat
 I prefer detailed explanations and comprehensive documentation. I also prefer an iterative development approach where I can provide feedback often. Please ask before making major architectural changes or introducing new dependencies.
 
 ## System Architecture
-The project uses a React frontend with a Vite build tool, an Express backend API with TypeScript, and a PostgreSQL database managed by Drizzle ORM. UI components are built with shadcn/ui and Radix UI primitives, styled using Tailwind CSS with a dark-only theme. Routing is handled by React Router DOM, and state management by TanStack Query. Authentication is provided by Supabase Auth, integrating role-based access control.
+The project is a static landing page built with React and Vite. UI components are built with shadcn/ui and Radix UI primitives, styled using Tailwind CSS with a dark-only theme.
 
 Key architectural decisions include:
 - **UI/UX**: Consistent dark theme, responsive design, and accessible components using shadcn/ui and Radix UI.
-- **Backend**: A modular Express API with clear separation of concerns (middleware, routes, database operations).
-- **Database**: PostgreSQL with Drizzle ORM for type-safe schema definition and queries.
-- **AI Integration**: Deep integration with ElevenLabs Conversational AI for real-time voice interactions and OpenAI GPT-5 for post-conversation analysis.
-- **Deployment**: Configured for Replit's autoscale deployment, serving static frontend assets and dynamic API routes.
-- **Admin Dashboard**: Provides comprehensive analytics, including CEFR level distribution, topic complexity, quality scores (grammar, vocabulary, fluency, coherence), and AI-generated key insights, with filtering and export capabilities.
+- **Static Site**: Single-page application with no backend, database, or server-side rendering.
+- **AI Integration**: Client-side ElevenLabs Conversational AI widget embedded in the landing page for voice interactions.
+- **Deployment**: Configured for Replit's static deployment, serving only frontend assets.
 
 ## External Dependencies
-- **ElevenLabs**: Conversational AI for voice-first learning experiences, including real-time voice synthesis and post-call webhooks for conversation data.
-- **Supabase Auth**: User authentication and authorization services.
-- **PostgreSQL**: Relational database for storing user and conversation data.
-- **OpenAI GPT-4**: Used for AI-powered adaptive learning and conversation analysis.
-- **Twilio/Telco APIs**: IVR infrastructure for offline voice-based program delivery.
+- **ElevenLabs**: Conversational AI widget embedded in the landing page for voice-first demo experiences.
 
 ## Recent Changes (November 2025)
+- **Transformation to Static Landing Page (November 18, 2025)**: Converted the application from a full-stack system to a pure static landing page:
+  - Deleted all backend server files (server/, shared/, db/)
+  - Removed AdminDashboard and NotFound pages
+  - Eliminated authentication system (auth components and Supabase Auth integration)
+  - Removed analytics provider and tracking components
+  - Deleted database configuration (Drizzle ORM, PostgreSQL)
+  - Removed Backend Server and ElevenLabs Sync workflows
+  - Simplified App.tsx to directly render Index component (no routing)
+  - Updated Navbar to minimal logo display only
+  - Modified EarlyAccessModal to work without backend (UI only)
+  - Cleaned up package.json scripts (removed server, sync, and database commands)
+  - Result: Lightweight static landing page with ElevenLabs widget integration
 - **Major Codebase Cleanup (November 18, 2025)**: Streamlined the application to be as lightweight as possible while preserving all essential functionality:
   - Deleted 18 unused page files (About, Blog, Contact, Team, Features, Roadmap, Press, Support, Privacy, Terms, DemoScheduling, EarlyAccess, GovernmentDemo, GovernmentSolution, EnterpriseSolution, EducationSolution, Pricing, Resources)
-  - Simplified App.tsx routing to only essential routes: Index (landing page), AdminDashboard (protected), and NotFound (404)
   - Removed 6 unused component directories (careers, government, resources, team, bakame, forms)
   - Deleted 6 old replaced logo images from attached_assets
   - Removed 7 unused Supabase functions (ai-chat, bakame-llama-chat, create-session, ivr-chat, realtime-chat, text-to-speech, voice-to-text)
   - Cleaned up all unused imports from Index.tsx (Button, Link, useNavigate, AnimatedCounter, and 20+ unused icons)
   - Removed navigation buttons that were causing 404 errors to deleted pages
-  - Result: Minimal, focused codebase with single-page landing site + admin dashboard + backend services
 - **Features Section Update**: Updated "Features & Integrations" section title to "Tools your students need to gain the command of English Language" with new subtitle
 - **Features Content**: Replaced "Voice Clone Learning" feature with "Subject Convos" for personalized AI voice tutoring
 - **Trust Indicators**: Replaced all 6 trust indicator logos with new partner images and applied grayscale filter for consistent black and white appearance
