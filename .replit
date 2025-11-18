@@ -22,27 +22,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Backend Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "Start application"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "ElevenLabs Sync"
-
-[[workflows.workflow]]
-name = "Backend Server"
-author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "console"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run server"
-waitForPort = 3001
 
 [[workflows.workflow]]
 name = "Start application"
@@ -56,17 +36,6 @@ waitForPort = 5000
 [workflows.workflow.metadata]
 outputType = "webview"
 
-[[workflows.workflow]]
-name = "ElevenLabs Sync"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run sync"
-
-[workflows.workflow.metadata]
-outputType = "console"
-
 [[ports]]
 localPort = 3001
 externalPort = 3001
@@ -74,6 +43,10 @@ externalPort = 3001
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 36697
+externalPort = 8008
 
 [[ports]]
 localPort = 36715
@@ -86,10 +59,6 @@ externalPort = 5000
 [[ports]]
 localPort = 37715
 externalPort = 6800
-
-[[ports]]
-localPort = 38289
-externalPort = 8008
 
 [[ports]]
 localPort = 43087
