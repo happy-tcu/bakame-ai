@@ -285,7 +285,7 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
+            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
               <CardHeader>
                 <GraduationCap className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Students</CardTitle>
@@ -312,7 +312,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
+            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
               <CardHeader>
                 <Users className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Teachers</CardTitle>
@@ -339,7 +339,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/20 to-transparent border-gray-500/20 hover-depth">
+            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
               <CardHeader>
                 <School className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Schools</CardTitle>
