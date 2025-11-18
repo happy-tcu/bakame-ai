@@ -104,7 +104,7 @@ const Index = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto drop-shadow-lg">
-            We are Dallas-based start-up specializing in developing cool AI tools and integrations for remote schools in Africa.
+            We are a Dallas Fort Worth-based start-up specializing in developing language AI tools and integrations for remote schools and Ed-NGOs in Africa.
           </p>
         </div>
       </section>
