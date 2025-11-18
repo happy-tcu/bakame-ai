@@ -128,7 +128,7 @@ const Index = () => {
                     <img 
                       src={logo.src} 
                       alt={logo.alt}
-                      className="h-12 w-auto object-contain filter brightness-90 hover:brightness-110 transition-all"
+                      className="h-12 w-auto object-contain grayscale brightness-90 hover:brightness-110 transition-all"
                       data-testid={`logo-${index}`}
                     />
                   </div>
