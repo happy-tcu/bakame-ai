@@ -56,12 +56,42 @@ const Index = () => {
   }, []);
 
   const features = [
-    { icon: MicVocal, name: 'Subject Convos', description: 'Personalized AI voice tutoring' },
-    { icon: MessageCircle, name: 'AI Debate Partner', description: 'Practice argumentation skills' },
-    { icon: Podcast, name: 'Podcast Generator', description: 'Create custom learning content' },
-    { icon: FileText, name: 'Document Intelligence', description: 'Smart content analysis' },
-    { icon: Mic, name: 'Voice Journal', description: 'Audio practice diary' },
-    { icon: WifiOff, name: 'Offline Learning', description: 'Works without internet' },
+    { 
+      icon: MicVocal, 
+      name: 'Subject Convos', 
+      description: 'Engage in personalized AI-powered voice conversations that adapt to your learning level and help build confidence in speaking English.',
+      color: 'from-blue-500 to-cyan-500'
+    },
+    { 
+      icon: MessageCircle, 
+      name: 'AI Debate Partner', 
+      description: 'Practice critical thinking and argumentation skills through structured debates with AI that provides real-time feedback on your reasoning.',
+      color: 'from-purple-500 to-pink-500'
+    },
+    { 
+      icon: Podcast, 
+      name: 'Podcast Generator', 
+      description: 'Transform any lesson or topic into engaging audio content, making learning accessible anytime and perfect for auditory learners.',
+      color: 'from-orange-500 to-red-500'
+    },
+    { 
+      icon: FileText, 
+      name: 'Document Intelligence', 
+      description: 'Upload any text and get instant summaries, vocabulary breakdowns, and comprehension questions tailored to student reading levels.',
+      color: 'from-green-500 to-emerald-500'
+    },
+    { 
+      icon: Mic, 
+      name: 'Voice Journal', 
+      description: 'Students record daily reflections to practice speaking naturally while building a personal audio diary of their language journey.',
+      color: 'from-yellow-500 to-amber-500'
+    },
+    { 
+      icon: WifiOff, 
+      name: 'Offline Learning', 
+      description: 'All features work without internet connectivity, ensuring uninterrupted learning even in remote areas with limited infrastructure.',
+      color: 'from-indigo-500 to-blue-500'
+    },
   ];
 
   const trustLogos = [
@@ -240,26 +270,29 @@ const Index = () => {
       <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">
-              Features & <span className="text-white font-extrabold">Integrations</span>
+            <h2 className="text-5xl font-bold mb-6">
+              AI-Powered <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-extrabold">Learning Tools</span>
             </h2>
-            <p className="text-xl text-gray-400">
-              Tools your students need to gain the command of English Language
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Comprehensive features designed to help students master the English language through interactive, voice-first experiences
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card 
                 key={index}
-                className="bg-white/5 border-white/10 hover:bg-white/10 transition-all duration-300 hover-depth"
+                className="bg-white/5 border-white/10 hover:border-white/20 transition-all duration-300 hover-depth group overflow-hidden"
+                data-testid={`feature-card-${index}`}
               >
-                <CardContent className="p-6">
-                  <feature.icon className="h-10 w-10 text-white mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">
+                <CardContent className="p-8">
+                  <div className={`inline-flex p-3 rounded-lg bg-gradient-to-br ${feature.color} bg-opacity-10 mb-5`}>
+                    <feature.icon className={`h-8 w-8 bg-gradient-to-br ${feature.color} bg-clip-text text-transparent`} style={{filter: 'brightness(2)'}} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
                     {feature.name}
                   </h3>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-gray-400 leading-relaxed">
                     {feature.description}
                   </p>
                 </CardContent>
