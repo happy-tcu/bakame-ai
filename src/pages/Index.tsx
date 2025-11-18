@@ -60,37 +60,37 @@ const Index = () => {
       icon: MicVocal, 
       name: 'Subject Convos', 
       description: 'Engage in personalized AI-powered voice conversations that adapt to your learning level and help build confidence in speaking English.',
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-blue-700 to-cyan-700'
     },
     { 
       icon: MessageCircle, 
       name: 'AI Debate Partner', 
       description: 'Practice critical thinking and argumentation skills through structured debates with AI that provides real-time feedback on your reasoning.',
-      color: 'from-purple-500 to-pink-500'
+      color: 'from-purple-700 to-pink-700'
     },
     { 
       icon: Podcast, 
       name: 'Podcast Generator', 
       description: 'Transform any lesson or topic into engaging audio content, making learning accessible anytime and perfect for auditory learners.',
-      color: 'from-orange-500 to-red-500'
+      color: 'from-orange-700 to-red-700'
     },
     { 
       icon: FileText, 
       name: 'Document Intelligence', 
       description: 'Upload any text and get instant summaries, vocabulary breakdowns, and comprehension questions tailored to student reading levels.',
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-green-700 to-emerald-700'
     },
     { 
       icon: Mic, 
       name: 'Voice Journal', 
       description: 'Students record daily reflections to practice speaking naturally while building a personal audio diary of their language journey.',
-      color: 'from-yellow-500 to-amber-500'
+      color: 'from-yellow-700 to-amber-700'
     },
     { 
       icon: WifiOff, 
       name: 'Offline Learning', 
       description: 'All features work without internet connectivity, ensuring uninterrupted learning even in remote areas with limited infrastructure.',
-      color: 'from-indigo-500 to-blue-500'
+      color: 'from-indigo-700 to-blue-700'
     },
   ];
 
@@ -271,7 +271,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-6">
-              AI-Powered <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-extrabold">Learning Tools</span>
+              AI-Powered <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-extrabold">Learning Tools</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Comprehensive features designed to help students master the English language through interactive, voice-first experiences
@@ -287,7 +287,7 @@ const Index = () => {
               >
                 <CardContent className="p-8">
                   <div className={`inline-flex p-3 rounded-lg bg-gradient-to-br ${feature.color} bg-opacity-10 mb-5`}>
-                    <feature.icon className={`h-8 w-8 bg-gradient-to-br ${feature.color} bg-clip-text text-transparent`} style={{filter: 'brightness(2)'}} />
+                    <feature.icon className={`h-8 w-8 bg-gradient-to-br ${feature.color} bg-clip-text text-transparent`} style={{filter: 'brightness(1.2)'}} />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
                     {feature.name}
