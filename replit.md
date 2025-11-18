@@ -19,6 +19,11 @@ Key architectural decisions include:
 - **ElevenLabs**: Conversational AI widget embedded in the landing page for voice-first demo experiences.
 
 ## Recent Changes (November 2025)
+- **Static Deployment Configuration (November 18, 2025)**: Configured deployment for static hosting:
+  - Set deployment target to "static" (no server needed)
+  - Build command: `npm run build` (compiles Vite app)
+  - Public directory: `dist` (Vite build output)
+  - Removed server dependencies from deployment configuration
 - **Transformation to Static Landing Page (November 18, 2025)**: Converted the application from a full-stack system to a pure static landing page:
   - Deleted all backend server files (server/, shared/, db/)
   - Removed AdminDashboard and NotFound pages
