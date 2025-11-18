@@ -286,14 +286,7 @@ const Index = () => {
                 data-testid={`feature-card-${index}`}
               >
                 <CardContent className="p-8">
-                  <div className="flex items-center justify-between mb-5">
-                    <img 
-                      src="/icon-white.png" 
-                      alt="Bakame AI" 
-                      className="h-10 w-10 opacity-30 group-hover:opacity-50 transition-opacity"
-                    />
-                    <feature.icon className="h-8 w-8 text-white/40" />
-                  </div>
+                  <feature.icon className="h-10 w-10 text-white mb-4" />
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
                     {feature.name}
                   </h3>
