@@ -22,7 +22,6 @@ import subprocessorsPdf from '../../attached_assets/Bakame AI — List of Subpro
 const Index = () => {
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
   const [isVisible, setIsVisible] = useState({});
-  const heroPlayerRef = React.useRef<any>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,77 +58,6 @@ const Index = () => {
     };
   }, []);
 
-  useEffect(() => {
-    // Guard against re-initialization
-    if (heroPlayerRef.current) return;
-
-    // Load YouTube IFrame API if not already loaded
-    if (!(window as any).YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-    }
-
-    // Initialize player when API is ready
-    const initPlayer = () => {
-      if (heroPlayerRef.current) return;
-      
-      const element = document.getElementById('hero-video');
-      if (!element) {
-        console.warn('Hero video element not found');
-        return;
-      }
-
-      try {
-        heroPlayerRef.current = new (window as any).YT.Player('hero-video', {
-          videoId: '-A32bZkp7GA',
-          playerVars: {
-            autoplay: 1,
-            mute: 1,
-            loop: 1,
-            playlist: '-A32bZkp7GA',
-            controls: 0,
-            showinfo: 0,
-            rel: 0,
-            modestbranding: 1,
-            playsinline: 1,
-            disablekb: 1,
-            fs: 0,
-            iv_load_policy: 3,
-          },
-          events: {
-            onReady: (event: any) => {
-              try {
-                event.target.mute();
-                event.target.setPlaybackRate(0.75); // Slow down to 75% speed
-                event.target.playVideo();
-              } catch (error) {
-                console.error('Error setting playback rate:', error);
-              }
-            },
-            onError: (event: any) => {
-              console.error('YouTube Player Error:', event.data);
-            },
-          },
-        });
-      } catch (error) {
-        console.error('Error initializing YouTube Player:', error);
-      }
-    };
-
-    // Delay initialization to ensure DOM is ready
-    const timeoutId = setTimeout(() => {
-      if ((window as any).YT && (window as any).YT.Player) {
-        initPlayer();
-      } else {
-        (window as any).onYouTubeIframeAPIReady = initPlayer;
-      }
-    }, 100);
-
-    return () => clearTimeout(timeoutId);
-  }, []);
-
   const features = [
     { icon: MicVocal, name: 'Subject Convos', description: 'Personalized AI voice tutoring' },
     { icon: MessageCircle, name: 'AI Debate Partner', description: 'Practice argumentation skills' },
@@ -156,9 +84,11 @@ const Index = () => {
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
         {/* YouTube Video Background */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <div
-            id="hero-video"
+          <iframe
             className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/-A32bZkp7GA?autoplay=1&mute=1&loop=1&playlist=-A32bZkp7GA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
+            title="Background video"
+            allow="autoplay; encrypted-media"
             style={{ pointerEvents: 'none' }}
           />
         </div>
