@@ -25,9 +25,22 @@ Key architectural decisions include:
 - **Twilio/Telco APIs**: IVR infrastructure for offline voice-based program delivery.
 
 ## Recent Changes (November 2025)
-- **About Page Overhaul**: Completely redesigned About page with specific metrics, leadership team information, company milestones, and strategic priorities based on content audit principles.
-- **SEO Improvements**: Updated meta description to be specific and keyword-rich, highlighting key achievements (15K students, 10 schools, $30K invoiced, $20K raised).
-- **Team Section**: Added full leadership team (CEO Happy Herman, CTO Aime Byiringiro, Designer Chretien Igiraneza) and advisory board.
-- **Traction Metrics**: Prominently displayed real numbers from current operations across Rwanda.
-- **Strategic Priorities**: Added concrete, measurable goals (100 schools by Dec 2025, $500K ARR Q4 2025, 30% cost reduction, 3 countries by 2026).
-- **Company Timeline**: Added milestone-based journey section from founding through planned 2026 expansion.
+- **Major Codebase Cleanup (November 18, 2025)**: Streamlined the application to be as lightweight as possible while preserving all essential functionality:
+  - Deleted 18 unused page files (About, Blog, Contact, Team, Features, Roadmap, Press, Support, Privacy, Terms, DemoScheduling, EarlyAccess, GovernmentDemo, GovernmentSolution, EnterpriseSolution, EducationSolution, Pricing, Resources)
+  - Simplified App.tsx routing to only essential routes: Index (landing page), AdminDashboard (protected), and NotFound (404)
+  - Removed 6 unused component directories (careers, government, resources, team, bakame, forms)
+  - Deleted 6 old replaced logo images from attached_assets
+  - Removed 7 unused Supabase functions (ai-chat, bakame-llama-chat, create-session, ivr-chat, realtime-chat, text-to-speech, voice-to-text)
+  - Cleaned up all unused imports from Index.tsx (Button, Link, useNavigate, AnimatedCounter, and 20+ unused icons)
+  - Removed navigation buttons that were causing 404 errors to deleted pages
+  - Result: Minimal, focused codebase with single-page landing site + admin dashboard + backend services
+- **Features Section Update**: Updated "Features & Integrations" section title to "Tools your students need to gain the command of English Language" with new subtitle
+- **Features Content**: Replaced "Voice Clone Learning" feature with "Subject Convos" for personalized AI voice tutoring
+- **Trust Indicators**: Replaced all 6 trust indicator logos with new partner images and applied grayscale filter for consistent black and white appearance
+- **ES Module Fix**: Converted CommonJS require() to ES import in server/index.ts to resolve deployment errors
+- **About Page Overhaul**: Completely redesigned About page with specific metrics, leadership team information, company milestones, and strategic priorities based on content audit principles
+- **SEO Improvements**: Updated meta description to be specific and keyword-rich, highlighting key achievements (15K students, 10 schools, $30K invoiced, $20K raised)
+- **Team Section**: Added full leadership team (CEO Happy Herman, CTO Aime Byiringiro, Designer Chretien Igiraneza) and advisory board
+- **Traction Metrics**: Prominently displayed real numbers from current operations across Rwanda
+- **Strategic Priorities**: Added concrete, measurable goals (100 schools by Dec 2025, $500K ARR Q4 2025, 30% cost reduction, 3 countries by 2026)
+- **Company Timeline**: Added milestone-based journey section from founding through planned 2026 expansion
