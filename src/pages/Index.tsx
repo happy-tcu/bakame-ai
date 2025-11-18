@@ -455,8 +455,8 @@ const Index = () => {
             <span className="block text-[#4c9dff]">English Program</span>
           </h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join hundreds of schools revolutionizing language education with AI. 
-            See the difference in just one semester.
+            Join the force of school districts revolutionizing language education with AI. 
+            Students own their learning, and instructors notice real-time results.
           </p>
           <div className="mb-8">
             <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30 px-6 py-2 text-sm">
