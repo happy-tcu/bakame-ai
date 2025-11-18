@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { existsSync } from 'fs';
 import routes from './routes';
 
 dotenv.config();
@@ -33,7 +34,7 @@ if (isProduction) {
   
   console.log('Production mode enabled');
   console.log('Serving static files from:', distPath);
-  console.log('Directory exists:', require('fs').existsSync(distPath));
+  console.log('Directory exists:', existsSync(distPath));
   
   // Serve static assets
   app.use(express.static(distPath));
