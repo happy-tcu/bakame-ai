@@ -3,7 +3,7 @@ import {
   Users, CheckCircle, GraduationCap, Brain, Building, Award,
   Rocket, Users2, School, Lightbulb, FlaskConical, 
   GraduationCap as GradCap, Star, MicVocal, MessageCircle,
-  BookOpen as BookIcon, Podcast, FileText, Mic, Volume2, WifiOff
+  Podcast, FileText, Mic, WifiOff
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -58,11 +58,9 @@ const Index = () => {
   const features = [
     { icon: MicVocal, name: 'Subject Convos', description: 'Personalized AI voice tutoring' },
     { icon: MessageCircle, name: 'AI Debate Partner', description: 'Practice argumentation skills' },
-    { icon: BookIcon, name: 'Smart Flashcards', description: 'Adaptive learning system' },
     { icon: Podcast, name: 'Podcast Generator', description: 'Create custom learning content' },
     { icon: FileText, name: 'Document Intelligence', description: 'Smart content analysis' },
     { icon: Mic, name: 'Voice Journal', description: 'Audio practice diary' },
-    { icon: Volume2, name: 'Pronunciation Heat Maps', description: 'Visual accent coaching' },
     { icon: WifiOff, name: 'Offline Learning', description: 'Works without internet' },
   ];
 
