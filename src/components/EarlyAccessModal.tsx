@@ -7,8 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
-import { useAnalytics } from '@/components/analytics/AnalyticsProvider';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 
 interface EarlyAccessModalProps {
@@ -18,7 +16,6 @@ interface EarlyAccessModalProps {
 
 const EarlyAccessModal = ({ isOpen, onClose }: EarlyAccessModalProps) => {
   const { toast } = useToast();
-  const { trackEvent } = useAnalytics();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -34,43 +31,29 @@ const EarlyAccessModal = ({ isOpen, onClose }: EarlyAccessModalProps) => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
-        .from('waitlist')
-        .insert([{
-          email: formData.email,
-          name: formData.name,
-          company: formData.company,
-          solution_interest: `${formData.productUse} | ${formData.additionalInfo}`
-        }]);
-
-      if (error) {
-        console.error('Error submitting early access request:', error);
-        toast({
-          title: "Error",
-          description: "Failed to submit your request. Please try again.",
-          variant: "destructive",
+      // Form submission logic removed - this is now a static landing page
+      // In production, connect this to your preferred form handling service
+      console.log('Early access request:', formData);
+      
+      toast({
+        title: "Thank you!",
+        description: "We've received your request and will be in touch soon.",
+      });
+      
+      setStep(3); // Success step
+      
+      // Reset form after a delay
+      setTimeout(() => {
+        setFormData({
+          email: '',
+          name: '',
+          company: '',
+          productUse: '',
+          additionalInfo: ''
         });
-      } else {
-        trackEvent('early_access_request', { 
-          product_use: formData.productUse,
-          company: formData.company
-        });
-        
-        setStep(3); // Success step
-        
-        // Reset form after a delay
-        setTimeout(() => {
-          setFormData({
-            email: '',
-            name: '',
-            company: '',
-            productUse: '',
-            additionalInfo: ''
-          });
-          setStep(1);
-          onClose();
-        }, 3000);
-      }
+        setStep(1);
+        onClose();
+      }, 3000);
     } catch (error) {
       console.error('Error submitting form:', error);
       toast({
