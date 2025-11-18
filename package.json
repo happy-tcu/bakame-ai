@@ -8,13 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "server": "tsx server/index.ts",
-    "server:dev": "tsx watch server/index.ts",
-    "sync": "tsx server/elevenlabs-sync.ts",
-    "dev:all": "concurrently \"npm run dev\" \"npm run server:dev\"",
-    "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
