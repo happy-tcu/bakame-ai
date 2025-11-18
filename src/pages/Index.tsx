@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { 
-  Phone, MessageSquare, Calendar, Play, Users, CheckCircle, 
-  GraduationCap, Brain, Mic, Volume2, Building, Award,
-  Rocket, Users2, School, Bot, BookOpen as BookIcon, Podcast, PenTool,
-  FileText, MicVocal, Music, Map, Hand, WifiOff,
-  Lightbulb, FlaskConical, GraduationCap as GradCap,
-  Star, ChevronRight, Eye, TestTube, MessageCircle
+  Users, CheckCircle, GraduationCap, Brain, Building, Award,
+  Rocket, Users2, School, Lightbulb, FlaskConical, 
+  GraduationCap as GradCap, Star, MicVocal, MessageCircle,
+  BookOpen as BookIcon, Podcast, FileText, Mic, Volume2, WifiOff
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
-import AnimatedCounter from '@/components/AnimatedCounter';
 import chamberLogo from '../../attached_assets/1_1763424292144.png';
 import tcu360Logo from '../../attached_assets/2_1763424292144.png';
 import tcuResearchLogo from '../../attached_assets/3_1763424292140.png';
@@ -22,7 +17,6 @@ import dallasInnovatesLogo from '../../attached_assets/5_1763424292143.png';
 import neeleyLogo from '../../attached_assets/6_1763424292142.png';
 
 const Index = () => {
-  const navigate = useNavigate();
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
   const [isVisible, setIsVisible] = useState({});
 
@@ -299,13 +293,6 @@ const Index = () => {
                     <span>Safe practice environment</span>
                   </li>
                 </ul>
-                <Button 
-                  onClick={() => navigate('/for-students')}
-                  className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
-                >
-                  Explore Student Features
-                  <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
               </CardContent>
             </Card>
 
@@ -333,13 +320,6 @@ const Index = () => {
                     <span>Class performance analytics</span>
                   </li>
                 </ul>
-                <Button 
-                  onClick={() => navigate('/for-teachers')}
-                  className="w-full bg-gray-500/20 hover:bg-gray-500/30 border-gray-500/30"
-                >
-                  View Teacher Dashboard
-                  <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
               </CardContent>
             </Card>
 
