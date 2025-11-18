@@ -62,7 +62,7 @@ const Index = () => {
   }, []);
 
   const features = [
-    { icon: MicVocal, name: 'Voice Clone Learning', description: 'Personalized AI voice tutoring' },
+    { icon: MicVocal, name: 'Subject Convos', description: 'Personalized AI voice tutoring' },
     { icon: MessageCircle, name: 'AI Debate Partner', description: 'Practice argumentation skills' },
     { icon: BookIcon, name: 'Smart Flashcards', description: 'Adaptive learning system' },
     { icon: Podcast, name: 'Podcast Generator', description: 'Create custom learning content' },
@@ -234,10 +234,10 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              Comprehensive Feature <span className="text-white font-extrabold">Arsenal</span>
+              Features & <span className="text-white font-extrabold">Integrations</span>
             </h2>
             <p className="text-xl text-gray-400">
-              Every tool your students need to master English
+              Tools your students need to gain the command of English Language
             </p>
           </div>
           
