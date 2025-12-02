@@ -7,30 +7,16 @@ Bakame AI is the first voice-AI platform for offline programs, delivering educat
 I prefer detailed explanations and comprehensive documentation. I also prefer an iterative development approach where I can provide feedback often. Please ask before making major architectural changes or introducing new dependencies.
 
 ## System Architecture
-The project is a static landing page built with React and Vite. UI components are built with shadcn/ui and Radix UI primitives, styled using Tailwind CSS with a light/corporate theme.
+The project is a static landing page built with React and Vite. UI components are built with shadcn/ui and Radix UI primitives, styled using Tailwind CSS with a dark-only theme.
 
 Key architectural decisions include:
-- **UI/UX**: Clean corporate design with light theme, responsive layout, and accessible components using shadcn/ui and Radix UI. Inspired by Shaddock National Holdings website style.
+- **UI/UX**: Consistent dark theme, responsive design, and accessible components using shadcn/ui and Radix UI.
 - **Static Site**: Single-page application with no backend, database, or server-side rendering.
+- **AI Integration**: Client-side ElevenLabs Conversational AI widget embedded in the landing page for voice interactions.
 - **Deployment**: Configured for Replit's static deployment, serving only frontend assets.
 
 ## External Dependencies
 - **ElevenLabs**: Conversational AI widget embedded in the landing page for voice-first demo experiences.
-
-## Recent Changes (December 2025)
-- **Complete Website Redesign (December 2, 2025)**: Redesigned the entire website to match corporate style similar to Shaddock National Holdings:
-  - Changed from dark theme to light/white background with clean corporate aesthetic
-  - New hero section with dark gradient background and two prominent CTA buttons (Learn More, Contact Us)
-  - Added image-based service cards for Education, Civic, Health, and Public Information programs
-  - Added testimonials section with partner quotes and navigation controls
-  - Added "Our Story" about section with company description
-  - Added coverage map section showing deployment regions (Rwanda, Kenya, Uganda)
-  - Added contact form with name, email, subject, and message fields
-  - Updated affiliates section with hover effects on logos
-  - Added strong "Let's Work Together" CTA section at bottom
-  - Updated footer with location info, contact details, and legal links
-  - Created dark logo variant (logo.svg) for white navbar
-  - Downloaded stock images for service cards (education, civic, health, public info)
 
 ## Recent Changes (November 2025)
 - **Static Deployment Configuration (November 18, 2025)**: Configured deployment for static hosting:
