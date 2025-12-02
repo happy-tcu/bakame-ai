@@ -138,14 +138,14 @@ const Index = () => {
             Trusted by Institutions Across Africa and the US
           </h3>
           <div className="relative overflow-hidden">
-            <div className="flex space-x-12 marquee">
+            <div className="flex space-x-12 marquee items-center">
               {[...trustLogos, ...trustLogos].map((logo, index) => (
                 <div key={index} className="flex-shrink-0">
-                  <div className="h-16 px-8 py-3 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center">
+                  <div className="px-4 py-2 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center">
                     <img 
                       src={logo.src} 
                       alt={logo.alt}
-                      className="h-12 w-auto object-contain grayscale brightness-90 hover:brightness-110 transition-all"
+                      className="h-8 w-auto object-contain grayscale brightness-90 hover:brightness-110 transition-all"
                       data-testid={`logo-${index}`}
                     />
                   </div>
