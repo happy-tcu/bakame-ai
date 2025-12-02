@@ -252,27 +252,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Trust Indicators */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-center text-gray-500 mb-12 uppercase tracking-wider text-sm">
-            Trusted by Institutions Across Africa and the US
-          </h3>
-          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-8 items-center justify-items-center">
-            {trustLogos.map((logo, index) => (
-              <div key={index} className="flex items-center justify-center">
-                <img 
-                  src={logo.src} 
-                  alt={logo.alt}
-                  className="h-12 md:h-16 w-auto object-contain"
-                  data-testid={`logo-${index}`}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Voice-AI Programs Section */}
       <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6">
@@ -481,6 +460,27 @@ const Index = () => {
                 </p>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Indicators */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3 className="text-center text-gray-500 mb-12 uppercase tracking-wider text-sm">
+            Trusted by Institutions Across Africa and the US
+          </h3>
+          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-8 items-center justify-items-center">
+            {trustLogos.map((logo, index) => (
+              <div key={index} className="flex items-center justify-center">
+                <img 
+                  src={logo.src} 
+                  alt={logo.alt}
+                  className="h-12 md:h-16 w-auto object-contain"
+                  data-testid={`logo-${index}`}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
