@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Users, CheckCircle, GraduationCap, Brain, Building, Award,
   Rocket, Users2, School, Lightbulb, FlaskConical, 
-  GraduationCap as GradCap, Star, MicVocal, MessageCircle,
-  Podcast, FileText, Mic, WifiOff
+  Phone, BarChart3, Shield, Globe, Mic, Clock,
+  Heart, Vote, Cloud, Radio, Settings, FileCheck
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -40,7 +40,6 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    // Load ElevenLabs Conversational AI widget script
     const script = document.createElement('script');
     script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
     script.async = true;
@@ -48,50 +47,45 @@ const Index = () => {
     document.body.appendChild(script);
 
     return () => {
-      // Cleanup script on unmount
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }
     };
   }, []);
 
-  const features = [
+  const programs = [
     { 
-      icon: MicVocal, 
-      name: 'Subject Convos', 
-      description: 'Engage in personalized AI-powered voice conversations that adapt to your learning level and help build confidence in speaking English.',
+      icon: GraduationCap, 
+      name: 'Education Programs', 
+      description: 'AI-powered lessons, quizzes, and speaking practice for students in offline areas.',
       color: 'from-blue-700 to-cyan-700'
     },
     { 
-      icon: MessageCircle, 
-      name: 'AI Debate Partner', 
-      description: 'Practice critical thinking and argumentation skills through structured debates with AI that provides real-time feedback on your reasoning.',
+      icon: Vote, 
+      name: 'Civic Programs', 
+      description: 'Engagement tools for voter education, local governance, and public information.',
       color: 'from-purple-700 to-pink-700'
     },
     { 
-      icon: Podcast, 
-      name: 'Podcast Generator', 
-      description: 'Transform any lesson or topic into engaging audio content, making learning accessible anytime and perfect for auditory learners.',
-      color: 'from-orange-700 to-red-700'
+      icon: Heart, 
+      name: 'Health Programs', 
+      description: 'Voice-based health guidance, wellness check-ins, and awareness campaigns.',
+      color: 'from-red-700 to-orange-700'
     },
     { 
-      icon: FileText, 
-      name: 'Document Intelligence', 
-      description: 'Upload any text and get instant summaries, vocabulary breakdowns, and comprehension questions tailored to student reading levels.',
+      icon: Radio, 
+      name: 'Public Information Services', 
+      description: 'Weather alerts, safety updates, agriculture tips, and remote community messaging.',
       color: 'from-green-700 to-emerald-700'
     },
-    { 
-      icon: Mic, 
-      name: 'Voice Journal', 
-      description: 'Students record daily reflections to practice speaking naturally while building a personal audio diary of their language journey.',
-      color: 'from-yellow-700 to-amber-700'
-    },
-    { 
-      icon: WifiOff, 
-      name: 'Offline Learning', 
-      description: 'All features work without internet connectivity, ensuring uninterrupted learning even in remote areas with limited infrastructure.',
-      color: 'from-indigo-700 to-blue-700'
-    },
+  ];
+
+  const infrastructureFeatures = [
+    { icon: Mic, text: 'AI listens, processes, and responds instantly' },
+    { icon: Phone, text: 'Works on basic feature phones' },
+    { icon: Cloud, text: 'No mobile data required' },
+    { icon: Settings, text: 'Runs on Whisper + GPT + high-reliability TTS' },
+    { icon: BarChart3, text: 'All interactions sync to dashboards for admins' },
   ];
 
   const trustLogos = [
@@ -107,9 +101,8 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Navbar />
 
-      {/* Hero Section with YouTube Video Background */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
-        {/* YouTube Video Background */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
@@ -120,18 +113,20 @@ const Index = () => {
           />
         </div>
         
-        {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
         
-        {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl text-white">
-            Empowering School Districts with Offline-AI
+            The First Voice-AI Platform for Offline Programs
           </h1>
           
-          <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto drop-shadow-lg">
-            We are a Dallas Fort Worth-based start-up specializing in developing language AI tools and integrations for remote schools and Ed-NGOs in Africa.
+          <p className="text-lg md:text-xl text-gray-200 max-w-4xl mx-auto drop-shadow-lg mb-4">
+            AI that delivers learning, health, and civic content through simple phone calls — no internet required.
+          </p>
+          
+          <p className="text-md md:text-lg text-gray-300 max-w-3xl mx-auto drop-shadow-lg">
+            We build offline-native voice infrastructure for schools, governments, and NGOs to reach communities that traditional digital services cannot.
           </p>
         </div>
       </section>
@@ -140,7 +135,7 @@ const Index = () => {
       <section className="py-16 bg-black border-y border-white/10">
         <div className="max-w-7xl mx-auto px-6">
           <h3 className="text-center text-gray-400 mb-8 uppercase tracking-wider">
-            Trusted by Schools and Institutions Across Africa and the US
+            Trusted by Institutions Across Africa and the US
           </h3>
           <div className="relative overflow-hidden">
             <div className="flex space-x-12 marquee">
@@ -161,9 +156,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Core Capabilities Grid */}
+      {/* Three Pillars of Offline Voice-AI Infrastructure */}
       <section className="py-24 bg-black relative overflow-hidden">
-        {/* YouTube Video Background */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
@@ -174,14 +168,13 @@ const Index = () => {
           />
         </div>
         
-        {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
         
         <div className="absolute inset-0 grid-pattern opacity-30"></div>
         <div className="relative max-w-7xl mx-auto px-6">
           <h2 className="text-5xl font-bold text-center mb-16 drop-shadow-2xl">
-            Three Pillars of <span className="text-white font-extrabold">Language Mastery</span>
+            Three Pillars of <span className="text-white font-extrabold">Offline Voice-AI Infrastructure</span>
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -190,22 +183,26 @@ const Index = () => {
                 <Brain className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Learn AI</CardTitle>
                 <CardDescription className="text-gray-400">
-                  Voice-first learning features
+                  Voice-based programs delivered through basic phone calls
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
                   <li className="flex items-center text-gray-300">
                     <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Personalized AI conversations
+                    Personalized conversations
                   </li>
                   <li className="flex items-center text-gray-300">
                     <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Real-time pronunciation feedback
+                    &lt;4s response time
                   </li>
                   <li className="flex items-center text-gray-300">
                     <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Adaptive difficulty levels
+                    Localizable + accent-aware
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Works on any feature phone
                   </li>
                 </ul>
               </CardContent>
@@ -214,24 +211,28 @@ const Index = () => {
             <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
               <CardHeader>
                 <Users2 className="h-12 w-12 text-white mb-4" />
-                <CardTitle className="text-2xl text-white">Teach AI</CardTitle>
+                <CardTitle className="text-2xl text-white">Operate AI</CardTitle>
                 <CardDescription className="text-gray-400">
-                  Teacher empowerment tools
+                  Tools for teams deploying voice programs
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
                   <li className="flex items-center text-gray-300">
                     <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Student progress analytics
+                    Real-time dashboards
                   </li>
                   <li className="flex items-center text-gray-300">
                     <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Curriculum alignment tools
+                    Usage + impact metrics
                   </li>
                   <li className="flex items-center text-gray-300">
                     <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Automated assessment reports
+                    Compliance-friendly data
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Automated reporting
                   </li>
                 </ul>
               </CardContent>
@@ -242,7 +243,7 @@ const Index = () => {
                 <Rocket className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Scale AI</CardTitle>
                 <CardDescription className="text-gray-400">
-                  School-wide deployment
+                  Built for national and regional outreach
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -253,11 +254,15 @@ const Index = () => {
                   </li>
                   <li className="flex items-center text-gray-300">
                     <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Multi-classroom support
+                    Multi-school + multi-district support
                   </li>
                   <li className="flex items-center text-gray-300">
                     <CheckCircle className="mr-2 h-4 w-4 text-white" />
-                    Administrative dashboard
+                    Government & NGO integrations
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    High-volume telephony pipelines
                   </li>
                 </ul>
               </CardContent>
@@ -266,102 +271,80 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Feature Showcase Grid */}
+      {/* Voice-AI Programs Section */}
       <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-6">
-              AI-Powered <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-extrabold">Learning Tools</span>
+              Voice-AI Programs <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-extrabold">That Work Anywhere</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Comprehensive features designed to help students master the English language through interactive, voice-first experiences
+              We deliver voice-based programs across sectors — all through a toll-free number.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            {programs.map((program, index) => (
               <Card 
                 key={index}
                 className="bg-white/5 border-white/10 hover:border-white/20 transition-all duration-300 hover-depth group overflow-hidden"
-                data-testid={`feature-card-${index}`}
+                data-testid={`program-card-${index}`}
               >
                 <CardContent className="p-8">
-                  <feature.icon className="h-10 w-10 text-white mb-4" />
+                  <program.icon className="h-10 w-10 text-white mb-4" />
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
-                    {feature.name}
+                    {program.name}
                   </h3>
                   <p className="text-sm text-gray-400 leading-relaxed">
-                    {feature.description}
+                    {program.description}
                   </p>
                 </CardContent>
               </Card>
             ))}
           </div>
+
+          {/* Infrastructure Features */}
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">Infrastructure Features</h3>
+            <div className="grid md:grid-cols-5 gap-6">
+              {infrastructureFeatures.map((feature, index) => (
+                <div key={index} className="flex flex-col items-center text-center">
+                  <feature.icon className="h-8 w-8 text-blue-400 mb-3" />
+                  <p className="text-sm text-gray-300">{feature.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Solutions by Role */}
+      {/* Solutions for Every Partner */}
       <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4">
-              Tailored Solutions <span className="text-white font-extrabold">for Everyone</span>
+              Solutions for <span className="text-white font-extrabold">Every Partner</span>
             </h2>
-            <p className="text-xl text-gray-400">
-              Designed for every stakeholder in the education ecosystem
-            </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
               <CardHeader>
-                <GraduationCap className="h-12 w-12 text-gray-400 mb-4" />
-                <CardTitle className="text-2xl text-white">For Students</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>24/7 AI tutoring support</span>
-                  </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Gamified learning experience</span>
-                  </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Personalized learning paths</span>
-                  </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Safe practice environment</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
-              <CardHeader>
                 <Users className="h-12 w-12 text-gray-400 mb-4" />
-                <CardTitle className="text-2xl text-white">For Teachers</CardTitle>
+                <CardTitle className="text-2xl text-white">For Students & Citizens</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Access learning and information through simple phone calls
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Real-time progress tracking</span>
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Personalized conversations</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Automated grading system</span>
-                  </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Custom lesson creation</span>
-                  </li>
-                  <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Class performance analytics</span>
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Local language + accent support</span>
                   </li>
                 </ul>
               </CardContent>
@@ -371,24 +354,49 @@ const Index = () => {
               <CardHeader>
                 <School className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Schools</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Offline learning experiences
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>School-wide deployment</span>
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Usage-based analytics</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Administrative controls</span>
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Multi-classroom support</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>ROI & impact metrics</span>
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Dashboard for teachers & administrators</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
+              <CardHeader>
+                <Building className="h-12 w-12 text-gray-400 mb-4" />
+                <CardTitle className="text-2xl text-white">For Governments & NGOs</CardTitle>
+                <CardDescription className="text-gray-400">
+                  National-scale voice outreach
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Health, civic, and education programs</span>
                   </li>
                   <li className="flex items-start text-gray-300">
-                    <Star className="mr-2 h-4 w-4 text-gray-400 mt-1" />
-                    <span>Training & support included</span>
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Data for audits and reporting</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Secure deployments + compliance tools</span>
                   </li>
                 </ul>
               </CardContent>
@@ -399,7 +407,6 @@ const Index = () => {
 
       {/* Research & Innovation */}
       <section className="py-24 bg-black relative overflow-hidden">
-        {/* YouTube Video Background */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
             className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
@@ -410,7 +417,6 @@ const Index = () => {
           />
         </div>
         
-        {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
         
@@ -421,81 +427,83 @@ const Index = () => {
               Research & <span className="text-[#4c9dff]">Innovation</span>
             </h2>
             <p className="text-xl text-gray-200 drop-shadow-lg">
-              Advancing the frontier of AI-powered education
+              We build AI optimized for offline environments and underserved communities.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-4 gap-8">
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
               <CardHeader>
                 <FlaskConical className="h-10 w-10 text-[#4c9dff] mb-2" />
-                <CardTitle className="text-white">AI Research Lab</CardTitle>
+                <CardTitle className="text-white">Voice-AI Infrastructure Lab</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 mb-4">
-                  Pioneering natural language processing models optimized for African languages and accents.
+                <p className="text-gray-300">
+                  Developing low-latency voice interactions for regions with limited connectivity.
                 </p>
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                  Active Research
-                </Badge>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
+              <CardHeader>
+                <Globe className="h-10 w-10 text-[#4c9dff] mb-2" />
+                <CardTitle className="text-white">Localizable AI</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300">
+                  Systems tuned for African accents, environments, and learning contexts.
+                </p>
               </CardContent>
             </Card>
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
               <CardHeader>
                 <Lightbulb className="h-10 w-10 text-[#4c9dff] mb-2" />
-                <CardTitle className="text-white">Learning Breakthroughs</CardTitle>
+                <CardTitle className="text-white">Adaptive Interaction Models</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 mb-4">
-                  Developing adaptive learning algorithms that personalize to each student's unique needs.
+                <p className="text-gray-300">
+                  AI that adjusts to user responses in real time — even over basic phone lines.
                 </p>
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                  Patent Pending
-                </Badge>
               </CardContent>
             </Card>
 
             <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
               <CardHeader>
-                <GradCap className="h-10 w-10 text-[#4c9dff] mb-2" />
-                <CardTitle className="text-white">Academic Partnerships</CardTitle>
+                <GraduationCap className="h-10 w-10 text-[#4c9dff] mb-2" />
+                <CardTitle className="text-white">Academic + Government Partnerships</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 mb-4">
-                  Collaborating with leading universities to validate and improve our methodologies.
+                <p className="text-gray-300">
+                  Collaborating with universities and public agencies to validate and scale impact.
                 </p>
-                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30">
-                  5+ Universities
-                </Badge>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Call-to-Action Footer Section */}
+      {/* Call-to-Action Section */}
       <section className="py-24 gradient-hero relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern"></div>
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">
-            Transform Your School's
-            <span className="block text-[#4c9dff]">English Program</span>
+            Bring Offline Voice-AI to Your
+            <span className="block text-[#4c9dff]">School, District, or Organization</span>
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join the force of school districts revolutionizing language education with AI. 
-            Students own their learning, and instructors notice real-time results.
+          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            Bakame helps governments, NGOs, and schools deliver programs directly to offline communities — through the phones people already own.
           </p>
           <div className="mb-8">
             <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30 px-6 py-2 text-sm">
               <Building className="mr-2 h-4 w-4" />
-              Custom pricing tailored for NGOs
+              Custom pricing for national, regional, and NGO partners
             </Badge>
           </div>
           
           <p className="text-gray-400">
-            Or contact our NGO sales team at{' '}
-            <a href="mailto:sales@bakame.org" className="text-gray-400 hover:text-gray-300">
+            Contact us at{' '}
+            <a href="mailto:sales@bakame.org" className="text-blue-400 hover:text-blue-300" data-testid="link-email">
               sales@bakame.org
             </a>
           </p>
@@ -508,7 +516,7 @@ const Index = () => {
           <div className="grid md:grid-cols-[1fr_auto] gap-8 mb-8">
             <div>
               <p className="text-sm text-gray-400 mb-3 max-w-md">
-                Revolutionizing English education across Africa with AI-powered learning that works everywhere.
+                AI-powered outreach for the offline world.
               </p>
               <div className="flex">
                 <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30 text-xs">
@@ -522,36 +530,13 @@ const Index = () => {
               <h3 className="text-white font-semibold mb-3">Legal</h3>
               <ul className="space-y-2">
                 <li>
-                  <a 
-                    href="/legal/subprocessors.html" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-300 transition-colors"
-                    data-testid="link-subprocessors"
-                  >
-                    Subprocessors
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="/legal/privacy-policy.html" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-300 transition-colors"
-                    data-testid="link-privacy-policy"
-                  >
+                  <a href="/privacy" className="text-gray-400 hover:text-gray-300 text-sm" data-testid="link-privacy">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a 
-                    href="/legal/dpa.html" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-300 transition-colors"
-                    data-testid="link-dpa"
-                  >
-                    DPA
+                  <a href="/terms" className="text-gray-400 hover:text-gray-300 text-sm" data-testid="link-terms">
+                    Terms of Service
                   </a>
                 </li>
               </ul>
@@ -559,14 +544,13 @@ const Index = () => {
           </div>
           
           <div className="border-t border-white/10 pt-8">
-            <p className="text-gray-500 text-sm">
-              © 2025 Bakame AI. All rights reserved. Building the future of education in Africa.
+            <p className="text-center text-gray-500 text-sm">
+              © 2025 Bakame AI. All rights reserved.
             </p>
           </div>
         </div>
       </footer>
 
-      {/* Modals */}
       <EarlyAccessModal 
         isOpen={isEarlyAccessOpen} 
         onClose={() => setIsEarlyAccessOpen(false)} 

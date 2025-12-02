@@ -1,0 +1,159 @@
+1. HERO SECTION (Top Banner)
+
+The First Voice-AI Platform for Offline Programs
+AI that delivers learning, health, and civic content through simple phone calls — no internet required.
+
+We build offline-native voice infrastructure for schools, governments, and NGOs to reach communities that traditional digital services cannot.
+
+2. TRUST LOGOS SECTION
+
+Trusted by Institutions Across Africa and the US
+
+(keep your logos; heading updated)
+
+3. PILLARS SECTION — rewritten to reflect infrastructure, not English learning
+
+Three Pillars of Offline Voice-AI Infrastructure
+
+1. Learn AI
+
+Voice-based programs delivered through basic phone calls
+
+Personalized conversations
+
+<4s response time
+
+Localizable + accent-aware
+
+Works on any feature phone
+
+2. Teach AI / Operate AI
+
+Tools for teams deploying voice programs
+
+Real-time dashboards
+
+Usage + impact metrics
+
+Compliance-friendly data
+
+Automated reporting
+
+3. Scale AI
+
+Built for national and regional outreach
+
+Offline-first architecture
+
+Multi-school + multi-district support
+
+Government & NGO integrations
+
+High-volume telephony pipelines
+
+4. PRODUCT FEATURES (Aligned to the pitch deck features page)
+
+Voice-AI Programs That Work Anywhere
+
+We deliver voice-based programs across sectors — all through a toll-free number.
+
+Education Programs
+AI-powered lessons, quizzes, and speaking practice for students in offline areas.
+
+Civic Programs
+Engagement tools for voter education, local governance, and public information.
+
+Health Programs
+Voice-based health guidance, wellness check-ins, and awareness campaigns.
+
+Public Information Services
+Weather alerts, safety updates, agriculture tips, and remote community messaging.
+
+Infrastructure Features
+
+AI listens, processes, and responds instantly
+
+Works on basic feature phones
+
+No mobile data required
+
+Runs on Whisper + GPT + high-reliability TTS
+
+All interactions sync to dashboards for admins
+
+5. SOLUTIONS FOR STAKEHOLDERS (Aligned to your market slide)
+
+Solutions for Every Partner
+
+For Students & Citizens
+
+Access learning and information through simple phone calls
+
+Personalized conversations
+
+Local language + accent support
+
+For Schools
+
+Offline learning experiences
+
+Usage-based analytics
+
+Multi-classroom support
+
+Dashboard for teachers & administrators
+
+For Governments & NGOs
+
+National-scale voice outreach
+
+Health, civic, and education programs
+
+Data for audits and reporting
+
+Secure deployments + compliance tools
+
+6. RESEARCH & INNOVATION — align with deck’s “tech stack” + expertise
+
+Research & Innovation
+
+We build AI optimized for offline environments and underserved communities.
+
+Voice-AI Infrastructure Lab
+Developing low-latency voice interactions for regions with limited connectivity.
+
+Localizable AI
+Systems tuned for African accents, environments, and learning contexts.
+
+Adaptive Interaction Models
+AI that adjusts to user responses in real time — even over basic phone lines.
+
+Academic + Government Partnerships
+Collaborating with universities and public agencies to validate and scale impact.
+
+7. CALL TO ACTION — aligned to your deck, not just English learning
+
+Bring Offline Voice-AI to Your School, District, or Organization
+
+Bakame helps governments, NGOs, and schools deliver programs directly to offline communities — through the phones people already own.
+
+Custom pricing for national, regional, and NGO partners.
+Contact: sales@bakame.org
+
+8. FOOTER — slightly updated
+
+AI-powered outreach for the offline world.
+© 2025 Bakame AI. All rights reserved.
+
+✔️ Key Fixes This Rewrite Achieves
+
+This version:
+
+✓ Matches your pitch deck perfectly
+✓ Shifts you away from “English-learning startup” → “voice-AI infrastructure company”
+✓ Makes it clear you serve schools, NGOs, and governments
+✓ Adds civic, health, public info use cases
+✓ Moves you to national-scale positioning
+✓ Adds your differentiators: works on feature phones, <4s latency, offline-native
+✓ Removes anything that traps you in "language mastery" framing
+✓ Makes you look like a seed-stage, infrastructure-first AI company
