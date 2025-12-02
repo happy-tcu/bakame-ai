@@ -9,12 +9,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
-import chamberLogo from '../../attached_assets/1_1763424292144.png';
-import tcu360Logo from '../../attached_assets/2_1763424292144.png';
-import tcuResearchLogo from '../../attached_assets/3_1763424292140.png';
-import fwrLogo from '../../attached_assets/4_1763424292143.png';
-import dallasInnovatesLogo from '../../attached_assets/5_1763424292143.png';
-import neeleyLogo from '../../attached_assets/6_1763424292142.png';
+import drcLogo from '../../attached_assets/1_1764635764642.png';
+import shaddockLogo from '../../attached_assets/2_1764635764642.png';
+import createLogo from '../../attached_assets/3_1764635764642.png';
+import dallasInnovatesLogo from '../../attached_assets/4_1764635764642.png';
+import replicateLogo from '../../attached_assets/5_1764635764642.png';
+import tcuLogo from '../../attached_assets/6_1764635764642.png';
+import twilioLogo from '../../attached_assets/7_1764635764639.png';
+import openaiLogo from '../../attached_assets/8_1764635764642.png';
+import elevenlabsLogo from '../../attached_assets/9_1764635764641.png';
 
 const Index = () => {
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
@@ -89,12 +92,15 @@ const Index = () => {
   ];
 
   const trustLogos = [
-    { src: chamberLogo, alt: "US India Chamber of Commerce Dallas/Fort Worth" },
-    { src: tcu360Logo, alt: "TCU 360" },
-    { src: tcuResearchLogo, alt: "TCU reSEaRCh Science and Engineering Research Center" },
-    { src: fwrLogo, alt: "Fort Worth Report" },
+    { src: drcLogo, alt: "Dallas Regional Chamber" },
+    { src: shaddockLogo, alt: "Shaddock National Holdings" },
+    { src: createLogo, alt: "Create" },
     { src: dallasInnovatesLogo, alt: "Dallas Innovates" },
-    { src: neeleyLogo, alt: "TCU Neeley School of Business" },
+    { src: replicateLogo, alt: "Replicate" },
+    { src: tcuLogo, alt: "TCU" },
+    { src: twilioLogo, alt: "Twilio" },
+    { src: openaiLogo, alt: "OpenAI" },
+    { src: elevenlabsLogo, alt: "ElevenLabs" },
   ];
 
   return (
@@ -132,20 +138,20 @@ const Index = () => {
       </section>
 
       {/* Trust Indicators */}
-      <section className="py-16 bg-black border-y border-white/10">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-center text-gray-400 mb-8 uppercase tracking-wider">
+          <h3 className="text-center text-gray-500 mb-8 uppercase tracking-wider text-sm">
             Trusted by Institutions Across Africa and the US
           </h3>
           <div className="relative overflow-hidden">
             <div className="flex space-x-12 marquee items-center">
               {[...trustLogos, ...trustLogos].map((logo, index) => (
                 <div key={index} className="flex-shrink-0">
-                  <div className="px-4 py-2 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center">
+                  <div className="px-4 py-2 flex items-center justify-center">
                     <img 
                       src={logo.src} 
                       alt={logo.alt}
-                      className="h-8 w-auto object-contain grayscale brightness-90 hover:brightness-110 transition-all"
+                      className="h-8 w-auto object-contain opacity-80 hover:opacity-100 transition-all"
                       data-testid={`logo-${index}`}
                     />
                   </div>
