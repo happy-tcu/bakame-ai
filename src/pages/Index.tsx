@@ -83,14 +83,6 @@ const Index = () => {
     },
   ];
 
-  const infrastructureFeatures = [
-    { icon: Mic, text: 'AI listens, processes, and responds instantly' },
-    { icon: Phone, text: 'Works on basic feature phones' },
-    { icon: Cloud, text: 'No mobile data required' },
-    { icon: Settings, text: 'Runs on Whisper + GPT + high-reliability TTS' },
-    { icon: BarChart3, text: 'All interactions sync to dashboards for admins' },
-  ];
-
   const trustLogos = [
     { src: drcLogo, alt: "Dallas Regional Chamber" },
     { src: shaddockLogo, alt: "Shaddock National Holdings" },
@@ -282,19 +274,6 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
-
-          {/* Infrastructure Features */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">Infrastructure Features</h3>
-            <div className="grid md:grid-cols-5 gap-6">
-              {infrastructureFeatures.map((feature, index) => (
-                <div key={index} className="flex flex-col items-center text-center">
-                  <feature.icon className="h-8 w-8 text-blue-400 mb-3" />
-                  <p className="text-sm text-gray-300">{feature.text}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
