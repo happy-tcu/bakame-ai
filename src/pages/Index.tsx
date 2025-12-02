@@ -467,7 +467,7 @@ const Index = () => {
       {/* Trust Indicators */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-center text-gray-500 mb-12 uppercase tracking-wider text-sm">
+          <h3 className="text-center text-gray-500 mb-12 uppercase tracking-wider text-xl md:text-2xl font-semibold">
             Trusted by Institutions Across Africa and the US
           </h3>
           <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-8 items-center justify-items-center">
