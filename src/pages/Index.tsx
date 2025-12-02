@@ -137,31 +137,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Trust Indicators */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-center text-gray-500 mb-8 uppercase tracking-wider text-sm">
-            Trusted by Institutions Across Africa and the US
-          </h3>
-          <div className="relative overflow-hidden">
-            <div className="flex space-x-12 marquee items-center">
-              {[...trustLogos, ...trustLogos].map((logo, index) => (
-                <div key={index} className="flex-shrink-0">
-                  <div className="px-4 py-2 flex items-center justify-center">
-                    <img 
-                      src={logo.src} 
-                      alt={logo.alt}
-                      className="h-8 w-auto object-contain opacity-80 hover:opacity-100 transition-all"
-                      data-testid={`logo-${index}`}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Three Pillars of Offline Voice-AI Infrastructure */}
       <section className="py-24 bg-black relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -273,6 +248,27 @@ const Index = () => {
                 </ul>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Indicators */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3 className="text-center text-gray-500 mb-12 uppercase tracking-wider text-sm">
+            Trusted by Institutions Across Africa and the US
+          </h3>
+          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-8 items-center justify-items-center">
+            {trustLogos.map((logo, index) => (
+              <div key={index} className="flex items-center justify-center">
+                <img 
+                  src={logo.src} 
+                  alt={logo.alt}
+                  className="h-12 md:h-16 w-auto object-contain"
+                  data-testid={`logo-${index}`}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
