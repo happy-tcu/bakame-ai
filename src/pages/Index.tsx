@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
+import FloatingVoiceButton from '@/components/FloatingVoiceButton';
 import drcLogo from '../../attached_assets/1_1764635764642.png';
 import shaddockLogo from '../../attached_assets/2_1764635764642.png';
 import createLogo from '../../attached_assets/3_1764635764642.png';
@@ -42,19 +43,6 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
-    script.async = true;
-    script.type = 'text/javascript';
-    document.body.appendChild(script);
-
-    return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, []);
 
   const programs = [
     { 
@@ -537,8 +525,7 @@ const Index = () => {
         onClose={() => setIsEarlyAccessOpen(false)} 
       />
       
-      {/* ElevenLabs Conversational AI */}
-      <div dangerouslySetInnerHTML={{ __html: '<elevenlabs-convai agent-id="agent_0301k3y6dwrve63sb37n6f4ffkrj"></elevenlabs-convai>' }} />
+      <FloatingVoiceButton agentId="agent_0301k3y6dwrve63sb37n6f4ffkrj" />
     </div>
   );
 };
