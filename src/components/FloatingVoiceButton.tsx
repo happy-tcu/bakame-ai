@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Phone, X, WifiOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -12,7 +12,6 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
   const [isHovered, setIsHovered] = useState(false);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(!triggerSectionId);
-  const hasTriggered = useRef(false);
 
   useEffect(() => {
     if (!triggerSectionId) return;
@@ -23,11 +22,9 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
 
       const rect = section.getBoundingClientRect();
       const sectionBottom = rect.bottom;
+      const shouldBeVisible = sectionBottom < window.innerHeight * 0.5;
       
-      if (sectionBottom < window.innerHeight * 0.5 && !hasTriggered.current) {
-        hasTriggered.current = true;
-        setIsVisible(true);
-      }
+      setIsVisible(shouldBeVisible);
     };
 
     window.addEventListener('scroll', checkScrollPosition, { passive: true });
