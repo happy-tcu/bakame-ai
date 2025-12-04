@@ -13,7 +13,7 @@ import FloatingVoiceButton from '@/components/FloatingVoiceButton';
 import drcLogo from '../../attached_assets/1_1764635764642.png';
 import shaddockLogo from '../../attached_assets/2_1764635764642.png';
 import createLogo from '../../attached_assets/3_1764635764642.png';
-import dallasInnovatesLogo from '../../attached_assets/4_1764635764642.png';
+import newPartnerLogo from '../../attached_assets/idWoQcnvgi_logos_1764890345667.png';
 import replicateLogo from '../../attached_assets/5_1764635764642.png';
 import tcuLogo from '../../attached_assets/6_1764635764642.png';
 import twilioLogo from '../../attached_assets/7_1764635764639.png';
@@ -75,7 +75,7 @@ const Index = () => {
     { src: drcLogo, alt: "Dallas Regional Chamber" },
     { src: shaddockLogo, alt: "Shaddock National Holdings" },
     { src: createLogo, alt: "Create" },
-    { src: dallasInnovatesLogo, alt: "Dallas Innovates" },
+    { src: newPartnerLogo, alt: "Partner" },
     { src: replicateLogo, alt: "Replicate" },
     { src: tcuLogo, alt: "TCU" },
     { src: twilioLogo, alt: "Twilio" },
