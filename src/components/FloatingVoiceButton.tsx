@@ -11,20 +11,26 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-  const [isVisible, setIsVisible] = useState(!triggerSectionId);
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    if (!triggerSectionId) return;
+    if (!triggerSectionId) {
+      setShowButton(true);
+      return;
+    }
 
     const checkScrollPosition = () => {
       const section = document.getElementById(triggerSectionId);
-      if (!section) return;
+      if (!section) {
+        setShowButton(true);
+        return;
+      }
 
       const rect = section.getBoundingClientRect();
       const sectionBottom = rect.bottom;
-      const shouldBeVisible = sectionBottom < window.innerHeight * 0.5;
+      const shouldShow = sectionBottom < window.innerHeight * 0.5;
       
-      setIsVisible(shouldBeVisible);
+      setShowButton(shouldShow);
     };
 
     window.addEventListener('scroll', checkScrollPosition, { passive: true });
@@ -38,25 +44,12 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.top = `-${window.scrollY}px`;
     } else {
-      const scrollY = document.body.style.top;
       document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.top = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
     }
 
     return () => {
       document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.top = '';
     };
   }, [isOpen]);
 
@@ -81,15 +74,17 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
     };
   }, []);
 
-  const toggleWidget = () => {
-    setIsOpen(!isOpen);
+  const openWidget = () => {
+    setIsOpen(true);
   };
 
-  if (!isVisible) return null;
+  const closeWidget = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>
-      {!isOpen && (
+      {showButton && !isOpen && (
         <div 
           className={cn(
             "fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3",
@@ -110,18 +105,19 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
           </div>
           
           <button
-            onClick={toggleWidget}
+            onClick={openWidget}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className={cn(
               "group relative flex items-center justify-center",
-              "w-16 h-16 rounded-full shadow-2xl",
+              "w-16 h-16 rounded-full shadow-2xl cursor-pointer",
               "transition-all duration-300 ease-out",
               "hover:scale-110 active:scale-95",
               "bg-gradient-to-br from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500"
             )}
             data-testid="button-floating-voice"
             aria-label="Talk to Bakame AI"
+            type="button"
           >
             <div className={cn(
               "absolute inset-0 rounded-full",
@@ -140,14 +136,14 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
 
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center"
+          className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center"
           data-testid="widget-overlay"
         >
           <button
-            onClick={toggleWidget}
+            onClick={closeWidget}
             className={cn(
-              "absolute top-6 right-6 z-60",
-              "w-12 h-12 rounded-full",
+              "absolute top-6 right-6",
+              "w-12 h-12 rounded-full cursor-pointer",
               "bg-white/10 hover:bg-white/20 border border-white/20",
               "flex items-center justify-center",
               "transition-all duration-300",
@@ -155,11 +151,12 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
             )}
             data-testid="button-close-widget"
             aria-label="Close voice assistant"
+            type="button"
           >
             <X className="h-6 w-6 text-white" />
           </button>
 
-          <div className="text-center mb-4 absolute top-6 left-6">
+          <div className="absolute top-6 left-6">
             <h2 className="text-white text-xl font-semibold">Bakame AI</h2>
             <p className="text-gray-400 text-sm">Voice AI - No internet needed</p>
           </div>
@@ -167,7 +164,7 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
           {isScriptLoaded && (
             <div 
               className={cn(
-                "w-full max-w-2xl h-[80vh] max-h-[600px]",
+                "w-full max-w-2xl h-[70vh]",
                 "flex items-center justify-center",
                 "animate-in zoom-in-95 fade-in duration-300"
               )}
