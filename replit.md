@@ -18,6 +18,15 @@ Key architectural decisions include:
 ## External Dependencies
 - **ElevenLabs**: Conversational AI widget embedded in the landing page for voice-first demo experiences.
 
+## Recent Changes (December 2025)
+- **Floating Voice Button (December 4, 2025)**: Converted the ElevenLabs widget from an always-visible element to a floating action button:
+  - Created FloatingVoiceButton component with phone icon in bottom-right corner
+  - Widget is now hidden by default and opens when user clicks the floating button
+  - Added tooltip on hover: "Try Bakame AI - No internet needed"
+  - Smooth animations for opening/closing widget with backdrop overlay
+  - Blue-purple gradient button with pulse animation to attract attention
+  - Moved ElevenLabs script loading to the component for better encapsulation
+
 ## Recent Changes (November 2025)
 - **Static Deployment Configuration (November 18, 2025)**: Configured deployment for static hosting:
   - Set deployment target to "static" (no server needed)
