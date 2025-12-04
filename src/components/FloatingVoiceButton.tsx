@@ -1,15 +1,42 @@
-import { useState, useEffect } from 'react';
-import { Phone, X, Wifi, WifiOff } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Phone, X, WifiOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface FloatingVoiceButtonProps {
   agentId: string;
+  triggerSectionId?: string;
 }
 
-const FloatingVoiceButton = ({ agentId }: FloatingVoiceButtonProps) => {
+const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(!triggerSectionId);
+  const hasTriggered = useRef(false);
+
+  useEffect(() => {
+    if (!triggerSectionId) return;
+
+    const checkScrollPosition = () => {
+      const section = document.getElementById(triggerSectionId);
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const sectionBottom = rect.bottom;
+      
+      if (sectionBottom < window.innerHeight * 0.5 && !hasTriggered.current) {
+        hasTriggered.current = true;
+        setIsVisible(true);
+      }
+    };
+
+    window.addEventListener('scroll', checkScrollPosition, { passive: true });
+    checkScrollPosition();
+
+    return () => {
+      window.removeEventListener('scroll', checkScrollPosition);
+    };
+  }, [triggerSectionId]);
 
   useEffect(() => {
     const existingScript = document.querySelector('script[src*="elevenlabs/convai-widget-embed"]');
@@ -36,9 +63,16 @@ const FloatingVoiceButton = ({ agentId }: FloatingVoiceButtonProps) => {
     setIsOpen(!isOpen);
   };
 
+  if (!isVisible) return null;
+
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      <div 
+        className={cn(
+          "fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3",
+          "animate-in slide-in-from-bottom-6 fade-in duration-500"
+        )}
+      >
         {!isOpen && (
           <div 
             className={cn(

@@ -432,7 +432,7 @@ const Index = () => {
       </section>
 
       {/* Trust Indicators */}
-      <section className="py-16 bg-white">
+      <section id="trust-section" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <h3 className="text-center text-black mb-12 uppercase tracking-wider text-xl md:text-2xl font-semibold">
             Trusted by Institutions Across Africa and the US
@@ -525,7 +525,7 @@ const Index = () => {
         onClose={() => setIsEarlyAccessOpen(false)} 
       />
       
-      <FloatingVoiceButton agentId="agent_0301k3y6dwrve63sb37n6f4ffkrj" />
+      <FloatingVoiceButton agentId="agent_0301k3y6dwrve63sb37n6f4ffkrj" triggerSectionId="trust-section" />
     </div>
   );
 };

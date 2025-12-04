@@ -21,9 +21,10 @@ Key architectural decisions include:
 ## Recent Changes (December 2025)
 - **Floating Voice Button (December 4, 2025)**: Converted the ElevenLabs widget from an always-visible element to a floating action button:
   - Created FloatingVoiceButton component with phone icon in bottom-right corner
-  - Widget is now hidden by default and opens when user clicks the floating button
+  - Button is hidden initially and appears after scrolling past "Trusted by Institutions" section
+  - Widget is hidden by default and opens when user clicks the floating button
   - Added tooltip on hover: "Try Bakame AI - No internet needed"
-  - Smooth animations for opening/closing widget with backdrop overlay
+  - Smooth slide-in animation when button appears after scroll trigger
   - Blue-purple gradient button with pulse animation to attract attention
   - Moved ElevenLabs script loading to the component for better encapsulation
 
