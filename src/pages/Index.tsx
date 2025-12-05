@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
-  Users, CheckCircle, GraduationCap, Brain, Building, Award,
-  Rocket, Users2, School, Lightbulb, FlaskConical, 
-  Phone, BarChart3, Shield, Globe, Mic, Clock,
-  Heart, Vote, Cloud, Radio, Settings, FileCheck
+  Users, CheckCircle, GraduationCap, Brain, Building,
+  Rocket, Users2, School, FlaskConical, Globe, Lightbulb, Award,
+  Heart, Vote, Radio
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import FloatingVoiceButton from '@/components/FloatingVoiceButton';
+import AnimatedSection from '@/components/AnimatedSection';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import drcLogo from '../../attached_assets/1_1764635764642.png';
 import shaddockLogo from '../../attached_assets/2_1764635764642.png';
 import createLogo from '../../attached_assets/3_1764635764642.png';
@@ -22,26 +23,13 @@ import elevenlabsLogo from '../../attached_assets/9_1764635764641.png';
 
 const Index = () => {
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState({});
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible((prev) => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting,
-          }));
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('[data-animate]');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  
+  const pillarsAnimation = useScrollAnimation({ threshold: 0.15 });
+  const programsAnimation = useScrollAnimation({ threshold: 0.15 });
+  const partnersAnimation = useScrollAnimation({ threshold: 0.15 });
+  const researchAnimation = useScrollAnimation({ threshold: 0.15 });
+  const trustAnimation = useScrollAnimation({ threshold: 0.2 });
+  const ctaAnimation = useScrollAnimation({ threshold: 0.2 });
 
 
   const programs = [
@@ -133,13 +121,13 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
         
         <div className="absolute inset-0 grid-pattern opacity-30"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl font-bold text-center mb-16 drop-shadow-2xl">
+        <div ref={pillarsAnimation.ref} className="relative max-w-7xl mx-auto px-6">
+          <h2 className={`text-5xl font-bold text-center mb-16 drop-shadow-2xl scroll-hidden ${pillarsAnimation.isVisible ? 'scroll-visible' : ''}`}>
             Three Pillars of <span className="text-white font-extrabold">Offline Voice-AI Infrastructure</span>
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-slide-left ${pillarsAnimation.isVisible ? 'scroll-visible stagger-1' : ''}`}>
               <CardHeader>
                 <Brain className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Learn AI</CardTitle>
@@ -169,7 +157,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-hidden ${pillarsAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
               <CardHeader>
                 <Users2 className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Operate AI</CardTitle>
@@ -199,7 +187,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-slide-right ${pillarsAnimation.isVisible ? 'scroll-visible stagger-3' : ''}`}>
               <CardHeader>
                 <Rocket className="h-12 w-12 text-white mb-4" />
                 <CardTitle className="text-2xl text-white">Scale AI</CardTitle>
@@ -234,8 +222,8 @@ const Index = () => {
 
       {/* Voice-AI Programs Section */}
       <section className="py-24 bg-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+        <div ref={programsAnimation.ref} className="max-w-7xl mx-auto px-6">
+          <div className={`text-center mb-16 scroll-hidden ${programsAnimation.isVisible ? 'scroll-visible' : ''}`}>
             <h2 className="text-5xl font-bold mb-6">
               Voice-AI Programs <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-extrabold">That Work Anywhere</span>
             </h2>
@@ -248,7 +236,7 @@ const Index = () => {
             {programs.map((program, index) => (
               <Card 
                 key={index}
-                className="bg-white/5 border-white/10 hover:border-white/20 transition-all duration-300 hover-depth group overflow-hidden"
+                className={`bg-white/5 border-white/10 hover:border-white/20 transition-all duration-300 hover-depth group overflow-hidden scroll-scale ${programsAnimation.isVisible ? `scroll-visible stagger-${index + 1}` : ''}`}
                 data-testid={`program-card-${index}`}
               >
                 <CardContent className="p-8">
@@ -268,15 +256,15 @@ const Index = () => {
 
       {/* Solutions for Every Partner */}
       <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+        <div ref={partnersAnimation.ref} className="max-w-7xl mx-auto px-6">
+          <div className={`text-center mb-16 scroll-hidden ${partnersAnimation.isVisible ? 'scroll-visible' : ''}`}>
             <h2 className="text-5xl font-bold mb-4">
               Solutions for <span className="text-white font-extrabold">Every Partner</span>
             </h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-slide-left ${partnersAnimation.isVisible ? 'scroll-visible stagger-1' : ''}`}>
               <CardHeader>
                 <Users className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Students & Citizens</CardTitle>
@@ -298,7 +286,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-hidden ${partnersAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
               <CardHeader>
                 <School className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Schools</CardTitle>
@@ -324,7 +312,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/20 hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-slide-right ${partnersAnimation.isVisible ? 'scroll-visible stagger-3' : ''}`}>
               <CardHeader>
                 <Building className="h-12 w-12 text-gray-400 mb-4" />
                 <CardTitle className="text-2xl text-white">For Governments & NGOs</CardTitle>
@@ -369,8 +357,8 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
         
         <div className="absolute inset-0 grid-pattern opacity-30"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+        <div ref={researchAnimation.ref} className="relative max-w-7xl mx-auto px-6">
+          <div className={`text-center mb-16 scroll-hidden ${researchAnimation.isVisible ? 'scroll-visible' : ''}`}>
             <h2 className="text-5xl font-bold mb-4 drop-shadow-2xl">
               Research & <span className="text-[#4c9dff]">Innovation</span>
             </h2>
@@ -380,7 +368,7 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-4 gap-8">
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-1' : ''}`}>
               <CardHeader>
                 <FlaskConical className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">Voice-AI Infrastructure Lab</CardTitle>
@@ -392,7 +380,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
               <CardHeader>
                 <Globe className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">Localizable AI</CardTitle>
@@ -404,7 +392,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-3' : ''}`}>
               <CardHeader>
                 <Lightbulb className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">Adaptive Interaction Models</CardTitle>
@@ -416,7 +404,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm">
+            <Card className={`bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-4' : ''}`}>
               <CardHeader>
                 <GraduationCap className="h-10 w-10 text-[#4c9dff] mb-2" />
                 <CardTitle className="text-white">Academic + Government Partnerships</CardTitle>
@@ -433,13 +421,16 @@ const Index = () => {
 
       {/* Trust Indicators */}
       <section id="trust-section" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-center text-black mb-12 uppercase tracking-wider text-xl md:text-2xl font-semibold">
+        <div ref={trustAnimation.ref} className="max-w-7xl mx-auto px-6">
+          <h3 className={`text-center text-black mb-12 uppercase tracking-wider text-xl md:text-2xl font-semibold scroll-hidden ${trustAnimation.isVisible ? 'scroll-visible' : ''}`}>
             Trusted by Institutions Across Africa and the US
           </h3>
           <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-8 items-center justify-items-center">
             {trustLogos.map((logo, index) => (
-              <div key={index} className="flex items-center justify-center">
+              <div 
+                key={index} 
+                className={`flex items-center justify-center scroll-scale ${trustAnimation.isVisible ? `scroll-visible stagger-${index + 1}` : ''}`}
+              >
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
@@ -455,12 +446,12 @@ const Index = () => {
       {/* Call-to-Action Section */}
       <section className="py-24 gradient-hero relative overflow-hidden">
         <div className="absolute inset-0 grid-pattern"></div>
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+        <div ref={ctaAnimation.ref} className="relative max-w-4xl mx-auto px-6 text-center">
+          <h2 className={`text-5xl md:text-6xl font-bold mb-6 scroll-hidden ${ctaAnimation.isVisible ? 'scroll-visible' : ''}`}>
             Bring Offline Voice-AI to Your
             <span className="block text-[#4c9dff]">School, District, or Organization</span>
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          <p className={`text-xl text-gray-300 mb-8 max-w-3xl mx-auto scroll-fade-in ${ctaAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
             Bakame helps governments, NGOs, and schools deliver programs directly to offline communities — through the phones people already own.
           </p>
           <div className="mb-8">
