@@ -31,26 +31,31 @@ const Index = () => {
   const trustAnimation = useScrollAnimation({ threshold: 0.2 });
   const ctaAnimation = useScrollAnimation({ threshold: 0.2 });
 
+
   const programs = [
     { 
       icon: GraduationCap, 
       name: 'Education Programs', 
-      description: 'AI-powered lessons, quizzes, and speaking practice for students in offline areas.'
+      description: 'AI-powered lessons, quizzes, and speaking practice for students in offline areas.',
+      color: 'from-blue-700 to-cyan-700'
     },
     { 
       icon: Vote, 
       name: 'Civic Programs', 
-      description: 'Engagement tools for voter education, local governance, and public information.'
+      description: 'Engagement tools for voter education, local governance, and public information.',
+      color: 'from-purple-700 to-pink-700'
     },
     { 
       icon: Heart, 
       name: 'Health Programs', 
-      description: 'Voice-based health guidance, wellness check-ins, and awareness campaigns.'
+      description: 'Voice-based health guidance, wellness check-ins, and awareness campaigns.',
+      color: 'from-red-700 to-orange-700'
     },
     { 
       icon: Radio, 
       name: 'Public Information Services', 
-      description: 'Weather alerts, safety updates, agriculture tips, and remote community messaging.'
+      description: 'Weather alerts, safety updates, agriculture tips, and remote community messaging.',
+      color: 'from-green-700 to-emerald-700'
     },
   ];
 
@@ -67,288 +72,359 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Navbar />
 
-      {/* Hero Section - Blocky Black & White */}
-      <section className="min-h-screen flex items-center justify-center bg-foreground text-background relative">
-        <div className="absolute inset-0 grid-pattern opacity-20"></div>
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/77GEyS8xfts?autoplay=1&mute=1&loop=1&playlist=77GEyS8xfts&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
+            title="Background video"
+            allow="autoplay; encrypted-media"
+            style={{ pointerEvents: 'none' }}
+          />
+        </div>
         
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-32">
-          <div className="border-4 border-background p-12 md:p-20">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-[1.1] uppercase tracking-tight">
-              The First Voice-AI Platform for Offline Programs
-            </h1>
-            
-            <p className="text-lg md:text-xl max-w-3xl mb-6 font-medium">
-              AI that delivers learning, health, and civic content through simple phone calls — no internet required.
-            </p>
-            
-            <p className="text-base md:text-lg max-w-2xl opacity-80">
-              We build offline-native voice infrastructure for schools, governments, and NGOs to reach communities that traditional digital services cannot.
-            </p>
-          </div>
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl text-white">
+            The First Voice-AI Platform for Offline Programs
+          </h1>
+          
+          <p className="text-lg md:text-xl text-gray-200 max-w-4xl mx-auto drop-shadow-lg mb-4">
+            AI that delivers learning, health, and civic content through simple phone calls — no internet required.
+          </p>
+          
+          <p className="text-md md:text-lg text-gray-300 max-w-3xl mx-auto drop-shadow-lg">
+            We build offline-native voice infrastructure for schools, governments, and NGOs to reach communities that traditional digital services cannot.
+          </p>
         </div>
       </section>
 
-      {/* Three Pillars - Blocky Cards */}
-      <section className="py-24 bg-background border-b-4 border-foreground">
-        <div ref={pillarsAnimation.ref} className="max-w-7xl mx-auto px-6">
-          <div className="border-4 border-foreground p-8 mb-16">
-            <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tight scroll-hidden ${pillarsAnimation.isVisible ? 'scroll-visible' : ''}`}>
-              Three Pillars of Offline Voice-AI Infrastructure
-            </h2>
-          </div>
+      {/* Three Pillars of Offline Voice-AI Infrastructure */}
+      <section className="py-24 bg-black relative overflow-hidden">
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/f4Lzbqu1z-k?autoplay=1&mute=1&loop=1&playlist=f4Lzbqu1z-k&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
+            title="Three Pillars Background"
+            allow="autoplay; encrypted-media"
+            style={{ pointerEvents: 'none' }}
+          />
+        </div>
+        
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
+        
+        <div className="absolute inset-0 grid-pattern opacity-30"></div>
+        <div ref={pillarsAnimation.ref} className="relative max-w-7xl mx-auto px-6">
+          <h2 className={`text-5xl font-bold text-center mb-16 drop-shadow-2xl scroll-hidden ${pillarsAnimation.isVisible ? 'scroll-visible' : ''}`}>
+            Three Pillars of <span className="text-white font-extrabold">Offline Voice-AI Infrastructure</span>
+          </h2>
           
-          <div className="grid md:grid-cols-3 gap-0">
-            <div className={`border-4 border-foreground p-8 hover-depth scroll-slide-left ${pillarsAnimation.isVisible ? 'scroll-visible stagger-1' : ''}`}>
-              <Brain className="h-16 w-16 mb-6" />
-              <h3 className="text-2xl font-black uppercase mb-4">Learn AI</h3>
-              <p className="text-muted-foreground mb-6">
-                Voice-based programs delivered through basic phone calls
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Personalized conversations
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  &lt;4s response time
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Localizable + accent-aware
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Works on any feature phone
-                </li>
-              </ul>
-            </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-slide-left ${pillarsAnimation.isVisible ? 'scroll-visible stagger-1' : ''}`}>
+              <CardHeader>
+                <Brain className="h-12 w-12 text-white mb-4" />
+                <CardTitle className="text-2xl text-white">Learn AI</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Voice-based programs delivered through basic phone calls
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Personalized conversations
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    &lt;4s response time
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Localizable + accent-aware
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Works on any feature phone
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
-            <div className={`border-4 border-foreground border-l-0 md:border-l-0 p-8 bg-foreground text-background hover-depth scroll-hidden ${pillarsAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
-              <Users2 className="h-16 w-16 mb-6" />
-              <h3 className="text-2xl font-black uppercase mb-4">Operate AI</h3>
-              <p className="opacity-70 mb-6">
-                Tools for teams deploying voice programs
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Real-time dashboards
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Usage + impact metrics
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Compliance-friendly data
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Automated reporting
-                </li>
-              </ul>
-            </div>
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-hidden ${pillarsAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
+              <CardHeader>
+                <Users2 className="h-12 w-12 text-white mb-4" />
+                <CardTitle className="text-2xl text-white">Operate AI</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Tools for teams deploying voice programs
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Real-time dashboards
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Usage + impact metrics
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Compliance-friendly data
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Automated reporting
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
-            <div className={`border-4 border-foreground border-l-0 md:border-l-0 p-8 hover-depth scroll-slide-right ${pillarsAnimation.isVisible ? 'scroll-visible stagger-3' : ''}`}>
-              <Rocket className="h-16 w-16 mb-6" />
-              <h3 className="text-2xl font-black uppercase mb-4">Scale AI</h3>
-              <p className="text-muted-foreground mb-6">
-                Built for national and regional outreach
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Offline-first architecture
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Multi-school + multi-district support
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  Government & NGO integrations
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-3 h-5 w-5" />
-                  High-volume telephony pipelines
-                </li>
-              </ul>
-            </div>
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-slide-right ${pillarsAnimation.isVisible ? 'scroll-visible stagger-3' : ''}`}>
+              <CardHeader>
+                <Rocket className="h-12 w-12 text-white mb-4" />
+                <CardTitle className="text-2xl text-white">Scale AI</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Built for national and regional outreach
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Offline-first architecture
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Multi-school + multi-district support
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    Government & NGO integrations
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-white" />
+                    High-volume telephony pipelines
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Voice-AI Programs Section */}
-      <section className="py-24 bg-foreground text-background">
+      <section className="py-24 bg-black">
         <div ref={programsAnimation.ref} className="max-w-7xl mx-auto px-6">
-          <div className={`mb-16 scroll-hidden ${programsAnimation.isVisible ? 'scroll-visible' : ''}`}>
-            <div className="border-4 border-background p-8 inline-block mb-6">
-              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">
-                Voice-AI Programs That Work Anywhere
-              </h2>
-            </div>
-            <p className="text-xl opacity-80 max-w-2xl">
+          <div className={`text-center mb-16 scroll-hidden ${programsAnimation.isVisible ? 'scroll-visible' : ''}`}>
+            <h2 className="text-5xl font-bold mb-6">
+              Voice-AI Programs <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-extrabold">That Work Anywhere</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
               We deliver voice-based programs across sectors — all through a toll-free number.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-0">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {programs.map((program, index) => (
-              <div 
+              <Card 
                 key={index}
-                className={`border-4 border-background ${index > 0 ? 'border-l-0 md:border-l-0' : ''} p-8 hover-depth scroll-scale ${programsAnimation.isVisible ? `scroll-visible stagger-${index + 1}` : ''}`}
+                className={`bg-white/5 border-white/10 hover:border-white/20 transition-all duration-300 hover-depth group overflow-hidden scroll-scale ${programsAnimation.isVisible ? `scroll-visible stagger-${index + 1}` : ''}`}
                 data-testid={`program-card-${index}`}
               >
-                <program.icon className="h-12 w-12 mb-4" />
-                <h3 className="text-xl font-black uppercase mb-3">
-                  {program.name}
-                </h3>
-                <p className="text-sm opacity-70">
-                  {program.description}
-                </p>
-              </div>
+                <CardContent className="p-8">
+                  <program.icon className="h-10 w-10 text-white mb-4" />
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                    {program.name}
+                  </h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">
+                    {program.description}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
       {/* Solutions for Every Partner */}
-      <section className="py-24 bg-background border-b-4 border-foreground">
+      <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
         <div ref={partnersAnimation.ref} className="max-w-7xl mx-auto px-6">
-          <div className={`border-4 border-foreground p-8 mb-16 scroll-hidden ${partnersAnimation.isVisible ? 'scroll-visible' : ''}`}>
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">
-              Solutions for Every Partner
+          <div className={`text-center mb-16 scroll-hidden ${partnersAnimation.isVisible ? 'scroll-visible' : ''}`}>
+            <h2 className="text-5xl font-bold mb-4">
+              Solutions for <span className="text-white font-extrabold">Every Partner</span>
             </h2>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-0">
-            <div className={`border-4 border-foreground p-8 hover-depth scroll-slide-left ${partnersAnimation.isVisible ? 'scroll-visible stagger-1' : ''}`}>
-              <Users className="h-14 w-14 mb-6" />
-              <h3 className="text-2xl font-black uppercase mb-4">For Students & Citizens</h3>
-              <p className="text-muted-foreground mb-6">
-                Access learning and information through simple phone calls
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 h-5 w-5 mt-0.5" />
-                  <span>Personalized conversations</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 h-5 w-5 mt-0.5" />
-                  <span>Local language + accent support</span>
-                </li>
-              </ul>
-            </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-slide-left ${partnersAnimation.isVisible ? 'scroll-visible stagger-1' : ''}`}>
+              <CardHeader>
+                <Users className="h-12 w-12 text-gray-400 mb-4" />
+                <CardTitle className="text-2xl text-white">For Students & Citizens</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Access learning and information through simple phone calls
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Personalized conversations</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Local language + accent support</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
-            <div className={`border-4 border-foreground border-l-0 p-8 bg-foreground text-background hover-depth scroll-hidden ${partnersAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
-              <School className="h-14 w-14 mb-6" />
-              <h3 className="text-2xl font-black uppercase mb-4">For Schools</h3>
-              <p className="opacity-70 mb-6">
-                Offline learning experiences
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 h-5 w-5 mt-0.5" />
-                  <span>Usage-based analytics</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 h-5 w-5 mt-0.5" />
-                  <span>Multi-classroom support</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 h-5 w-5 mt-0.5" />
-                  <span>Dashboard for teachers & administrators</span>
-                </li>
-              </ul>
-            </div>
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-hidden ${partnersAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
+              <CardHeader>
+                <School className="h-12 w-12 text-gray-400 mb-4" />
+                <CardTitle className="text-2xl text-white">For Schools</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Offline learning experiences
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Usage-based analytics</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Multi-classroom support</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Dashboard for teachers & administrators</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
-            <div className={`border-4 border-foreground border-l-0 p-8 hover-depth scroll-slide-right ${partnersAnimation.isVisible ? 'scroll-visible stagger-3' : ''}`}>
-              <Building className="h-14 w-14 mb-6" />
-              <h3 className="text-2xl font-black uppercase mb-4">For Governments & NGOs</h3>
-              <p className="text-muted-foreground mb-6">
-                National-scale voice outreach
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 h-5 w-5 mt-0.5" />
-                  <span>Health, civic, and education programs</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 h-5 w-5 mt-0.5" />
-                  <span>Data for audits and reporting</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="mr-3 h-5 w-5 mt-0.5" />
-                  <span>Secure deployments + compliance tools</span>
-                </li>
-              </ul>
-            </div>
+            <Card className={`bg-white/5 border-white/20 hover-depth backdrop-blur-sm scroll-slide-right ${partnersAnimation.isVisible ? 'scroll-visible stagger-3' : ''}`}>
+              <CardHeader>
+                <Building className="h-12 w-12 text-gray-400 mb-4" />
+                <CardTitle className="text-2xl text-white">For Governments & NGOs</CardTitle>
+                <CardDescription className="text-gray-400">
+                  National-scale voice outreach
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Health, civic, and education programs</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Data for audits and reporting</span>
+                  </li>
+                  <li className="flex items-start text-gray-300">
+                    <CheckCircle className="mr-2 h-4 w-4 text-gray-400 mt-1" />
+                    <span>Secure deployments + compliance tools</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Research & Innovation */}
-      <section className="py-24 bg-foreground text-background">
-        <div ref={researchAnimation.ref} className="max-w-7xl mx-auto px-6">
-          <div className={`mb-16 scroll-hidden ${researchAnimation.isVisible ? 'scroll-visible' : ''}`}>
-            <div className="border-4 border-background p-8 inline-block mb-6">
-              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">
-                Research & Innovation
-              </h2>
-            </div>
-            <p className="text-xl opacity-80">
+      <section className="py-24 bg-black relative overflow-hidden">
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/37zwJuI8hSs?autoplay=1&mute=1&loop=1&playlist=37zwJuI8hSs&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
+            title="Research & Innovation Background"
+            allow="autoplay; encrypted-media"
+            style={{ pointerEvents: 'none' }}
+          />
+        </div>
+        
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
+        
+        <div className="absolute inset-0 grid-pattern opacity-30"></div>
+        <div ref={researchAnimation.ref} className="relative max-w-7xl mx-auto px-6">
+          <div className={`text-center mb-16 scroll-hidden ${researchAnimation.isVisible ? 'scroll-visible' : ''}`}>
+            <h2 className="text-5xl font-bold mb-4 drop-shadow-2xl">
+              Research & <span className="text-[#4c9dff]">Innovation</span>
+            </h2>
+            <p className="text-xl text-gray-200 drop-shadow-lg">
               We build AI optimized for offline environments and underserved communities.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-0">
-            <div className={`border-4 border-background p-8 hover-depth scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-1' : ''}`}>
-              <FlaskConical className="h-12 w-12 mb-4" />
-              <h3 className="text-lg font-black uppercase mb-3">Voice-AI Infrastructure Lab</h3>
-              <p className="text-sm opacity-70">
-                Developing low-latency voice interactions for regions with limited connectivity.
-              </p>
-            </div>
+          <div className="grid md:grid-cols-4 gap-8">
+            <Card className={`bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-1' : ''}`}>
+              <CardHeader>
+                <FlaskConical className="h-10 w-10 text-[#4c9dff] mb-2" />
+                <CardTitle className="text-white">Voice-AI Infrastructure Lab</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300">
+                  Developing low-latency voice interactions for regions with limited connectivity.
+                </p>
+              </CardContent>
+            </Card>
 
-            <div className={`border-4 border-background border-l-0 p-8 bg-background text-foreground hover-depth scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
-              <Globe className="h-12 w-12 mb-4" />
-              <h3 className="text-lg font-black uppercase mb-3">Localizable AI</h3>
-              <p className="text-sm text-muted-foreground">
-                Systems tuned for African accents, environments, and learning contexts.
-              </p>
-            </div>
+            <Card className={`bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
+              <CardHeader>
+                <Globe className="h-10 w-10 text-[#4c9dff] mb-2" />
+                <CardTitle className="text-white">Localizable AI</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300">
+                  Systems tuned for African accents, environments, and learning contexts.
+                </p>
+              </CardContent>
+            </Card>
 
-            <div className={`border-4 border-background border-l-0 p-8 hover-depth scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-3' : ''}`}>
-              <Lightbulb className="h-12 w-12 mb-4" />
-              <h3 className="text-lg font-black uppercase mb-3">Adaptive Interaction Models</h3>
-              <p className="text-sm opacity-70">
-                AI that adjusts to user responses in real time — even over basic phone lines.
-              </p>
-            </div>
+            <Card className={`bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-3' : ''}`}>
+              <CardHeader>
+                <Lightbulb className="h-10 w-10 text-[#4c9dff] mb-2" />
+                <CardTitle className="text-white">Adaptive Interaction Models</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300">
+                  AI that adjusts to user responses in real time — even over basic phone lines.
+                </p>
+              </CardContent>
+            </Card>
 
-            <div className={`border-4 border-background border-l-0 p-8 bg-background text-foreground hover-depth scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-4' : ''}`}>
-              <GraduationCap className="h-12 w-12 mb-4" />
-              <h3 className="text-lg font-black uppercase mb-3">Academic + Government Partnerships</h3>
-              <p className="text-sm text-muted-foreground">
-                Collaborating with universities and public agencies to validate and scale impact.
-              </p>
-            </div>
+            <Card className={`bg-white/5 border-white/10 hover:bg-white/10 transition-all hover-depth backdrop-blur-sm scroll-scale ${researchAnimation.isVisible ? 'scroll-visible stagger-4' : ''}`}>
+              <CardHeader>
+                <GraduationCap className="h-10 w-10 text-[#4c9dff] mb-2" />
+                <CardTitle className="text-white">Academic + Government Partnerships</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300">
+                  Collaborating with universities and public agencies to validate and scale impact.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Trust Indicators */}
-      <section id="trust-section" className="py-20 bg-background border-b-4 border-foreground">
+      <section id="trust-section" className="py-16 bg-white">
         <div ref={trustAnimation.ref} className="max-w-7xl mx-auto px-6">
-          <div className={`border-4 border-foreground p-6 mb-12 scroll-hidden ${trustAnimation.isVisible ? 'scroll-visible' : ''}`}>
-            <h3 className="text-center uppercase tracking-widest text-lg md:text-xl font-black">
-              Trusted by Institutions Across Africa and the US
-            </h3>
-          </div>
+          <h3 className={`text-center text-black mb-12 uppercase tracking-wider text-xl md:text-2xl font-semibold scroll-hidden ${trustAnimation.isVisible ? 'scroll-visible' : ''}`}>
+            Trusted by Institutions Across Africa and the US
+          </h3>
           <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-8 items-center justify-items-center">
             {trustLogos.map((logo, index) => (
               <div 
@@ -358,7 +434,7 @@ const Index = () => {
                 <img 
                   src={logo.src} 
                   alt={logo.alt}
-                  className="h-12 md:h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all"
+                  className="h-12 md:h-16 w-auto object-contain"
                   data-testid={`logo-${index}`}
                 />
               </div>
@@ -368,60 +444,58 @@ const Index = () => {
       </section>
 
       {/* Call-to-Action Section */}
-      <section className="py-24 bg-foreground text-background">
-        <div ref={ctaAnimation.ref} className="max-w-4xl mx-auto px-6">
-          <div className="border-4 border-background p-12 md:p-16">
-            <h2 className={`text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight mb-8 scroll-hidden ${ctaAnimation.isVisible ? 'scroll-visible' : ''}`}>
-              Bring Offline Voice-AI to Your School, District, or Organization
-            </h2>
-            <p className={`text-xl opacity-80 mb-8 scroll-fade-in ${ctaAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
-              Bakame helps governments, NGOs, and schools deliver programs directly to offline communities — through the phones people already own.
-            </p>
-            <div className="mb-8">
-              <span className="inline-block border-2 border-background px-6 py-3 text-sm uppercase tracking-wider font-bold">
-                <Building className="inline mr-2 h-4 w-4" />
-                Custom pricing for national, regional, and NGO partners
-              </span>
-            </div>
-            
-            <p className="opacity-70">
-              Contact us at{' '}
-              <a 
-                href="mailto:sales@bakame.org" 
-                className="underline underline-offset-4 hover:opacity-100 transition-opacity font-bold"
-                data-testid="link-email"
-              >
-                sales@bakame.org
-              </a>
-            </p>
+      <section className="py-24 gradient-hero relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern"></div>
+        <div ref={ctaAnimation.ref} className="relative max-w-4xl mx-auto px-6 text-center">
+          <h2 className={`text-5xl md:text-6xl font-bold mb-6 scroll-hidden ${ctaAnimation.isVisible ? 'scroll-visible' : ''}`}>
+            Bring Offline Voice-AI to Your
+            <span className="block text-[#4c9dff]">School, District, or Organization</span>
+          </h2>
+          <p className={`text-xl text-gray-300 mb-8 max-w-3xl mx-auto scroll-fade-in ${ctaAnimation.isVisible ? 'scroll-visible stagger-2' : ''}`}>
+            Bakame helps governments, NGOs, and schools deliver programs directly to offline communities — through the phones people already own.
+          </p>
+          <div className="mb-8">
+            <Badge className="bg-blue-600/20 text-blue-300 border-blue-600/30 px-6 py-2 text-sm">
+              <Building className="mr-2 h-4 w-4" />
+              Custom pricing for national, regional, and NGO partners
+            </Badge>
           </div>
+          
+          <p className="text-gray-400">
+            Contact us at{' '}
+            <a href="mailto:sales@bakame.org" className="text-blue-400 hover:text-blue-300" data-testid="link-email">
+              sales@bakame.org
+            </a>
+          </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-background border-t-4 border-foreground">
+      <footer className="bg-black border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="grid md:grid-cols-[1fr_auto] gap-8 mb-8">
             <div>
-              <p className="text-sm text-muted-foreground mb-4 max-w-md font-medium">
+              <p className="text-sm text-gray-400 mb-3 max-w-md">
                 AI-powered outreach for the offline world.
               </p>
-              <div className="inline-block border-2 border-foreground px-4 py-2">
-                <Award className="inline mr-2 h-4 w-4" />
-                <span className="text-sm font-bold uppercase">CREATE Award 2025</span>
+              <div className="flex">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30 text-xs">
+                  <Award className="mr-1 h-3 w-3" />
+                  CREATE Award 2025
+                </Badge>
               </div>
             </div>
             
             <div className="md:text-right">
-              <h3 className="font-black uppercase mb-4">Legal</h3>
+              <h3 className="text-white font-semibold mb-3">Legal</h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="/privacy" className="text-muted-foreground hover:text-foreground text-sm font-medium underline-offset-4 hover:underline" data-testid="link-privacy">
+                  <a href="/privacy" className="text-gray-400 hover:text-gray-300 text-sm" data-testid="link-privacy">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="/terms" className="text-muted-foreground hover:text-foreground text-sm font-medium underline-offset-4 hover:underline" data-testid="link-terms">
+                  <a href="/terms" className="text-gray-400 hover:text-gray-300 text-sm" data-testid="link-terms">
                     Terms of Service
                   </a>
                 </li>
@@ -429,8 +503,8 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="border-t-2 border-foreground pt-8">
-            <p className="text-center text-muted-foreground text-sm font-medium">
+          <div className="border-t border-white/10 pt-8">
+            <p className="text-center text-gray-500 text-sm">
               © 2025 Bakame AI. All rights reserved.
             </p>
           </div>
