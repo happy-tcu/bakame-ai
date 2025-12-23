@@ -75,34 +75,40 @@ const Index = () => {
       <Navbar />
 
       {/* Hero Section - Scale AI Style */}
-      <section className="relative min-h-screen flex flex-col justify-center bg-black overflow-hidden pt-20">
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 w-full">
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
+      <section className="relative min-h-screen flex items-center bg-black overflow-hidden">
+        {/* Grid pattern background */}
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+        
+        <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen pt-24 pb-20">
             {/* Left content */}
-            <div className="flex-1 max-w-2xl">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light mb-8 leading-[1.1] tracking-tight">
-                <span className="bg-gradient-to-r from-cyan-300 via-sky-200 to-white bg-clip-text text-transparent">Breakthrough</span>
-                <span className="text-white"> AI for</span>
+            <div className="flex flex-col justify-center">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight mb-8">
+                <span className="text-white">Accelerate the</span>
                 <br />
-                <span className="text-white">Offline Communities</span>
+                <span className="text-white">Development of</span>
+                <br />
+                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                  AI Applications
+                </span>
               </h1>
               
-              <p className="text-lg md:text-xl text-gray-400 max-w-xl mb-10 leading-relaxed font-light">
-                Bakame delivers proven voice-AI infrastructure and outcomes to schools, governments, and NGOs — all through simple phone calls.
+              <p className="text-lg md:text-xl text-gray-400 max-w-lg mb-10 leading-relaxed font-light">
+                Bakame delivers proven voice-AI infrastructure to schools, governments, and NGOs — all through simple phone calls.
               </p>
               
-              {/* CTA Buttons - Scale style */}
-              <div className="flex flex-wrap items-center gap-6">
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap items-center gap-5">
                 <button
                   onClick={() => setIsEarlyAccessOpen(true)}
-                  className="group px-6 py-3 bg-transparent text-white font-light rounded-full border border-white/40 hover:bg-white/10 transition-all duration-300 flex items-center gap-2"
+                  className="group px-7 py-3.5 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center gap-2"
                 >
                   Book a Demo
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
                 <button
                   onClick={() => setIsEarlyAccessOpen(true)}
-                  className="text-gray-400 hover:text-white font-light transition-colors flex items-center gap-2 group"
+                  className="px-7 py-3.5 text-white font-medium rounded-full border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300 flex items-center gap-2 group"
                 >
                   Learn More
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -111,20 +117,29 @@ const Index = () => {
             </div>
             
             {/* Right side - 3D Geometry */}
-            <div className="hidden lg:block relative flex-1">
+            <div className="hidden lg:block relative h-full min-h-[500px]">
               <HeroGeometry />
             </div>
           </div>
         </div>
         
-        {/* Bottom partner text */}
-        <div className="absolute bottom-8 left-0 right-0 text-center">
-          <p className="text-sm text-gray-400 font-light">
-            Bakame works with{' '}
-            <span className="text-white underline underline-offset-4 decoration-white/30">Schools</span>,{' '}
-            <span className="text-white underline underline-offset-4 decoration-white/30">Governments</span>{' '}
-            & NGOs
-          </p>
+        {/* Bottom partner logos section */}
+        <div className="absolute bottom-8 left-0 right-0">
+          <div className="max-w-7xl mx-auto px-6">
+            <p className="text-xs text-gray-500 uppercase tracking-widest mb-4 font-medium">
+              Trusted by leading organizations
+            </p>
+            <div className="flex items-center gap-8 opacity-50">
+              {trustLogos.slice(0, 5).map((logo, index) => (
+                <img 
+                  key={index}
+                  src={logo.src} 
+                  alt={logo.alt}
+                  className="h-6 w-auto grayscale brightness-200"
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
