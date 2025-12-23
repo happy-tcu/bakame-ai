@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import { 
   Users, CheckCircle, GraduationCap, Brain, Building,
-  Rocket, Users2, School, FlaskConical, Globe, Lightbulb,
+  Rocket, Users2, School, FlaskConical, Globe, Lightbulb, Award,
   Heart, Vote, Radio
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import HeroSection from '@/components/sections/HeroSection';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import FloatingVoiceButton from '@/components/FloatingVoiceButton';
+import AnimatedSection from '@/components/AnimatedSection';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import drcLogo from '../../attached_assets/1_1764635764642.png';
 import shaddockLogo from '../../attached_assets/2_1764635764642.png';
@@ -73,11 +72,30 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Navbar />
 
       {/* Hero Section */}
-      <HeroSection onGetStarted={() => setIsEarlyAccessOpen(true)} />
+      <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900"></div>
+        
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl text-white">
+            The First Voice-AI Platform for Offline Programs
+          </h1>
+          
+          <p className="text-lg md:text-xl text-gray-200 max-w-4xl mx-auto drop-shadow-lg mb-4">
+            AI that delivers learning, health, and civic content through simple phone calls — no internet required.
+          </p>
+          
+          <p className="text-md md:text-lg text-gray-300 max-w-3xl mx-auto drop-shadow-lg">
+            We build offline-native voice infrastructure for schools, governments, and NGOs to reach communities that traditional digital services cannot.
+          </p>
+        </div>
+      </section>
 
       {/* Three Pillars of Offline Voice-AI Infrastructure */}
       <section className="py-24 bg-black relative overflow-hidden">
@@ -444,7 +462,46 @@ const Index = () => {
         </div>
       </section>
 
-      <Footer />
+      {/* Footer */}
+      <footer className="bg-black border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="grid md:grid-cols-[1fr_auto] gap-8 mb-8">
+            <div>
+              <p className="text-sm text-gray-400 mb-3 max-w-md">
+                AI-powered outreach for the offline world.
+              </p>
+              <div className="flex">
+                <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30 text-xs">
+                  <Award className="mr-1 h-3 w-3" />
+                  CREATE Award 2025
+                </Badge>
+              </div>
+            </div>
+            
+            <div className="md:text-right">
+              <h3 className="text-white font-semibold mb-3">Legal</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="/privacy" className="text-gray-400 hover:text-gray-300 text-sm" data-testid="link-privacy">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/terms" className="text-gray-400 hover:text-gray-300 text-sm" data-testid="link-terms">
+                    Terms of Service
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-white/10 pt-8">
+            <p className="text-center text-gray-500 text-sm">
+              © 2025 Bakame AI. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
 
       <EarlyAccessModal 
         isOpen={isEarlyAccessOpen} 

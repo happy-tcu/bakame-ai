@@ -87,7 +87,7 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
       {showButton && !isOpen && (
         <div 
           className={cn(
-            "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3",
+            "fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3",
             "animate-in slide-in-from-bottom-6 fade-in duration-500"
           )}
         >
