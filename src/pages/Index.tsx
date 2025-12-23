@@ -123,24 +123,6 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Bottom partner logos section */}
-        <div className="absolute bottom-8 left-0 right-0">
-          <div className="max-w-7xl mx-auto px-6">
-            <p className="text-xs text-gray-500 uppercase tracking-widest mb-4 font-medium">
-              Trusted by leading organizations
-            </p>
-            <div className="flex items-center gap-8 opacity-50">
-              {trustLogos.slice(0, 5).map((logo, index) => (
-                <img 
-                  key={index}
-                  src={logo.src} 
-                  alt={logo.alt}
-                  className="h-6 w-auto grayscale brightness-200"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Three Pillars Section */}
