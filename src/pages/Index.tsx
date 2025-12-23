@@ -77,35 +77,112 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <iframe
-            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
-            src="https://www.youtube.com/embed/77GEyS8xfts?autoplay=1&mute=1&loop=1&playlist=77GEyS8xfts&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
-            title="Background video"
-            allow="autoplay; encrypted-media"
-            style={{ pointerEvents: 'none' }}
-          />
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 w-full h-full">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-purple-600/15 via-transparent to-transparent"></div>
         </div>
         
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/80"></div>
+        {/* Grid overlay */}
+        <div className="absolute inset-0 grid-pattern opacity-20"></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl text-white">
-            The First Voice-AI Platform for Offline Programs
-          </h1>
-          
-          <p className="text-lg md:text-xl text-gray-200 max-w-4xl mx-auto drop-shadow-lg mb-4">
-            AI that delivers learning, health, and civic content through simple phone calls — no internet required.
-          </p>
-          
-          <p className="text-md md:text-lg text-gray-300 max-w-3xl mx-auto drop-shadow-lg">
-            We build offline-native voice infrastructure for schools, governments, and NGOs to reach communities that traditional digital services cannot.
-          </p>
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70"></div>
+        
+        {/* Floating orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            {/* Left content */}
+            <div className="flex-1 text-center lg:text-left">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                <span className="text-sm text-gray-300 font-medium">The First Voice-AI Platform for Offline Programs</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tight">
+                <span className="text-white drop-shadow-2xl">AI That Reaches</span>
+                <br />
+                <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">Where Internet Cannot</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+                Deliver learning, health, and civic content through simple phone calls — no smartphone or internet required.
+              </p>
+              
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
+                <button
+                  onClick={() => setIsEarlyAccessOpen(true)}
+                  className="group px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg shadow-white/20"
+                >
+                  Partner With Us
+                  <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
+                </button>
+                <button
+                  onClick={() => setIsEarlyAccessOpen(true)}
+                  className="px-8 py-4 bg-white/10 text-white font-semibold rounded-full border border-white/30 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+                >
+                  Contact Sales
+                </button>
+              </div>
+              
+              {/* Stats row */}
+              <div className="flex flex-wrap gap-8 justify-center lg:justify-start">
+                <div className="text-center lg:text-left">
+                  <div className="text-3xl font-black text-white">&lt;4s</div>
+                  <div className="text-sm text-gray-400">Response time</div>
+                </div>
+                <div className="w-px h-12 bg-white/20 hidden sm:block"></div>
+                <div className="text-center lg:text-left">
+                  <div className="text-3xl font-black text-white">100%</div>
+                  <div className="text-sm text-gray-400">Offline capable</div>
+                </div>
+                <div className="w-px h-12 bg-white/20 hidden sm:block"></div>
+                <div className="text-center lg:text-left">
+                  <div className="text-3xl font-black text-white">10+</div>
+                  <div className="text-sm text-gray-400">Languages</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right side - Feature cards */}
+            <div className="flex-1 flex flex-col gap-4 max-w-md w-full">
+              <div className="group p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 hover:border-white/30 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                    <Globe className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">Offline First</h3>
+                    <p className="text-sm text-gray-400">No internet needed</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="group p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 hover:border-white/30 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                    <Brain className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">Voice AI</h3>
+                    <p className="text-sm text-gray-400">Natural conversations</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
       </section>
 
-      {/* Three Pillars of Offline Voice-AI Infrastructure */}
       <section className="py-24 bg-black relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <iframe
