@@ -1,16 +1,11 @@
 import { useState } from 'react';
-import { 
-  Users, CheckCircle, GraduationCap, Brain, Building,
-  Rocket, Users2, School, FlaskConical, Globe, Lightbulb, Award,
-  Heart, Vote, Radio, ArrowRight
-} from 'lucide-react';
+import { Users, CheckCircle, GraduationCap, Brain, Building, Rocket, Users2, School, FlaskConical, Globe, Lightbulb, Award, Heart, Vote, Radio, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import FloatingVoiceButton from '@/components/FloatingVoiceButton';
 import HeroGeometry from '@/components/HeroGeometry';
-
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import drcLogo from '../../attached_assets/1_1764635764642.png';
 import shaddockLogo from '../../attached_assets/2_1764635764642.png';
@@ -21,58 +16,76 @@ import tcuLogo from '../../attached_assets/6_1764635764642.png';
 import twilioLogo from '../../attached_assets/7_1764635764639.png';
 import openaiLogo from '../../attached_assets/8_1764635764642.png';
 import elevenlabsLogo from '../../attached_assets/9_1764635764641.png';
-
 const Index = () => {
   const [isEarlyAccessOpen, setIsEarlyAccessOpen] = useState(false);
-  
-  const pillarsAnimation = useScrollAnimation({ threshold: 0.15 });
-  const programsAnimation = useScrollAnimation({ threshold: 0.15 });
-  const partnersAnimation = useScrollAnimation({ threshold: 0.15 });
-  const researchAnimation = useScrollAnimation({ threshold: 0.15 });
-  const trustAnimation = useScrollAnimation({ threshold: 0.2 });
-  const ctaAnimation = useScrollAnimation({ threshold: 0.2 });
-
-  const programs = [
-    { 
-      icon: GraduationCap, 
-      name: 'Education Programs', 
-      description: 'AI-powered lessons, quizzes, and speaking practice for students in offline areas.',
-      color: 'from-blue-700 to-cyan-700'
-    },
-    { 
-      icon: Vote, 
-      name: 'Civic Programs', 
-      description: 'Engagement tools for voter education, local governance, and public information.',
-      color: 'from-purple-700 to-pink-700'
-    },
-    { 
-      icon: Heart, 
-      name: 'Health Programs', 
-      description: 'Voice-based health guidance, wellness check-ins, and awareness campaigns.',
-      color: 'from-red-700 to-orange-700'
-    },
-    { 
-      icon: Radio, 
-      name: 'Public Information Services', 
-      description: 'Weather alerts, safety updates, agriculture tips, and remote community messaging.',
-      color: 'from-green-700 to-emerald-700'
-    },
-  ];
-
-  const trustLogos = [
-    { src: drcLogo, alt: "Dallas Regional Chamber" },
-    { src: shaddockLogo, alt: "Shaddock National Holdings" },
-    { src: createLogo, alt: "Create" },
-    { src: newPartnerLogo, alt: "Partner" },
-    { src: replicateLogo, alt: "Replicate" },
-    { src: tcuLogo, alt: "TCU" },
-    { src: twilioLogo, alt: "Twilio" },
-    { src: openaiLogo, alt: "OpenAI" },
-    { src: elevenlabsLogo, alt: "ElevenLabs" },
-  ];
-
-  return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+  const pillarsAnimation = useScrollAnimation({
+    threshold: 0.15
+  });
+  const programsAnimation = useScrollAnimation({
+    threshold: 0.15
+  });
+  const partnersAnimation = useScrollAnimation({
+    threshold: 0.15
+  });
+  const researchAnimation = useScrollAnimation({
+    threshold: 0.15
+  });
+  const trustAnimation = useScrollAnimation({
+    threshold: 0.2
+  });
+  const ctaAnimation = useScrollAnimation({
+    threshold: 0.2
+  });
+  const programs = [{
+    icon: GraduationCap,
+    name: 'Education Programs',
+    description: 'AI-powered lessons, quizzes, and speaking practice for students in offline areas.',
+    color: 'from-blue-700 to-cyan-700'
+  }, {
+    icon: Vote,
+    name: 'Civic Programs',
+    description: 'Engagement tools for voter education, local governance, and public information.',
+    color: 'from-purple-700 to-pink-700'
+  }, {
+    icon: Heart,
+    name: 'Health Programs',
+    description: 'Voice-based health guidance, wellness check-ins, and awareness campaigns.',
+    color: 'from-red-700 to-orange-700'
+  }, {
+    icon: Radio,
+    name: 'Public Information Services',
+    description: 'Weather alerts, safety updates, agriculture tips, and remote community messaging.',
+    color: 'from-green-700 to-emerald-700'
+  }];
+  const trustLogos = [{
+    src: drcLogo,
+    alt: "Dallas Regional Chamber"
+  }, {
+    src: shaddockLogo,
+    alt: "Shaddock National Holdings"
+  }, {
+    src: createLogo,
+    alt: "Create"
+  }, {
+    src: newPartnerLogo,
+    alt: "Partner"
+  }, {
+    src: replicateLogo,
+    alt: "Replicate"
+  }, {
+    src: tcuLogo,
+    alt: "TCU"
+  }, {
+    src: twilioLogo,
+    alt: "Twilio"
+  }, {
+    src: openaiLogo,
+    alt: "OpenAI"
+  }, {
+    src: elevenlabsLogo,
+    alt: "ElevenLabs"
+  }];
+  return <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Navbar />
 
       {/* Hero Section - Scale AI Style */}
@@ -86,13 +99,11 @@ const Index = () => {
             {/* Left content */}
             <div className="flex flex-col justify-center">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight mb-8">
-                <span className="text-white">Accelerate the</span>
+                <span className="text-white">Accelerate your</span>
                 <br />
-                <span className="text-white">Development of</span>
+                <span className="text-white">Language Learning</span>
                 <br />
-                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                  AI Applications
-                </span>
+                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">with Bakame AI</span>
               </h1>
               
               <p className="text-lg md:text-xl text-gray-400 max-w-lg mb-10 leading-relaxed font-light">
@@ -101,17 +112,11 @@ const Index = () => {
               
               {/* CTA Buttons */}
               <div className="flex flex-wrap items-center gap-5">
-                <button
-                  onClick={() => setIsEarlyAccessOpen(true)}
-                  className="group px-7 py-3.5 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center gap-2"
-                >
+                <button onClick={() => setIsEarlyAccessOpen(true)} className="group px-7 py-3.5 bg-white text-black font-medium rounded-full hover:bg-gray-100 transition-all duration-300 flex items-center gap-2">
                   Book a Demo
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
-                <button
-                  onClick={() => setIsEarlyAccessOpen(true)}
-                  className="px-7 py-3.5 text-white font-medium rounded-full border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300 flex items-center gap-2 group"
-                >
+                <button onClick={() => setIsEarlyAccessOpen(true)} className="px-7 py-3.5 text-white font-medium rounded-full border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300 flex items-center gap-2 group">
                   Learn More
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
@@ -130,13 +135,9 @@ const Index = () => {
       {/* Three Pillars Section */}
       <section className="py-24 bg-black relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <iframe
-            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
-            src="https://www.youtube.com/embed/f4Lzbqu1z-k?autoplay=1&mute=1&loop=1&playlist=f4Lzbqu1z-k&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
-            title="Three Pillars Background"
-            allow="autoplay; encrypted-media"
-            style={{ pointerEvents: 'none' }}
-          />
+          <iframe className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2" src="https://www.youtube.com/embed/f4Lzbqu1z-k?autoplay=1&mute=1&loop=1&playlist=f4Lzbqu1z-k&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3" title="Three Pillars Background" allow="autoplay; encrypted-media" style={{
+          pointerEvents: 'none'
+        }} />
         </div>
         
         <div className="absolute inset-0 bg-black/70"></div>
@@ -253,12 +254,7 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {programs.map((program, index) => (
-              <Card 
-                key={index}
-                className={`bg-white/5 border-white/10 hover:border-white/20 transition-all duration-300 group overflow-hidden scroll-scale ${programsAnimation.isVisible ? `scroll-visible stagger-${index + 1}` : ''}`}
-                data-testid={`program-card-${index}`}
-              >
+            {programs.map((program, index) => <Card key={index} className={`bg-white/5 border-white/10 hover:border-white/20 transition-all duration-300 group overflow-hidden scroll-scale ${programsAnimation.isVisible ? `scroll-visible stagger-${index + 1}` : ''}`} data-testid={`program-card-${index}`}>
                 <CardContent className="p-6">
                   <program.icon className="h-8 w-8 text-white/80 mb-4" />
                   <h3 className="text-lg font-medium text-white mb-2">
@@ -268,8 +264,7 @@ const Index = () => {
                     {program.description}
                   </p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -364,13 +359,9 @@ const Index = () => {
       {/* Research & Innovation */}
       <section id="research" className="py-24 bg-black relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <iframe
-            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2"
-            src="https://www.youtube.com/embed/37zwJuI8hSs?autoplay=1&mute=1&loop=1&playlist=37zwJuI8hSs&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3"
-            title="Research & Innovation Background"
-            allow="autoplay; encrypted-media"
-            style={{ pointerEvents: 'none' }}
-          />
+          <iframe className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2" src="https://www.youtube.com/embed/37zwJuI8hSs?autoplay=1&mute=1&loop=1&playlist=37zwJuI8hSs&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&vq=hd2160&disablekb=1&fs=0&iv_load_policy=3" title="Research & Innovation Background" allow="autoplay; encrypted-media" style={{
+          pointerEvents: 'none'
+        }} />
         </div>
         
         <div className="absolute inset-0 bg-black/70"></div>
@@ -444,19 +435,9 @@ const Index = () => {
             Trusted by Institutions Across Africa and the US
           </h3>
           <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-8 items-center justify-items-center">
-            {trustLogos.map((logo, index) => (
-              <div 
-                key={index} 
-                className={`flex items-center justify-center scroll-scale ${trustAnimation.isVisible ? `scroll-visible stagger-${index + 1}` : ''}`}
-              >
-                <img 
-                  src={logo.src} 
-                  alt={logo.alt}
-                  className="h-10 md:h-14 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                  data-testid={`logo-${index}`}
-                />
-              </div>
-            ))}
+            {trustLogos.map((logo, index) => <div key={index} className={`flex items-center justify-center scroll-scale ${trustAnimation.isVisible ? `scroll-visible stagger-${index + 1}` : ''}`}>
+                <img src={logo.src} alt={logo.alt} className="h-10 md:h-14 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" data-testid={`logo-${index}`} />
+              </div>)}
           </div>
         </div>
       </section>
@@ -528,14 +509,9 @@ const Index = () => {
         </div>
       </footer>
 
-      <EarlyAccessModal 
-        isOpen={isEarlyAccessOpen} 
-        onClose={() => setIsEarlyAccessOpen(false)} 
-      />
+      <EarlyAccessModal isOpen={isEarlyAccessOpen} onClose={() => setIsEarlyAccessOpen(false)} />
       
       <FloatingVoiceButton agentId="agent_0301k3y6dwrve63sb37n6f4ffkrj" triggerSectionId="partners" />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
