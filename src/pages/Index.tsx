@@ -101,7 +101,7 @@ const Index = () => {
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight mb-8">
                 <span className="text-white">Accelerate your</span>
                 <br />
-                <span className="text-white">Language Learning</span>
+                <span className="text-white">Learning</span>
                 <br />
                 <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">with Bakame AI</span>
               </h1>
