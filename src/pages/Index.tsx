@@ -80,16 +80,17 @@ const Index = () => {
         {/* Grid pattern background */}
         <div className="absolute inset-0 grid-pattern opacity-30" />
         
-        {/* Left side - Glowing Sphere */}
-        <div className="hidden lg:block">
-          <GlowingSphere />
-        </div>
         
         <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen pt-24 pb-20">
-            {/* Left content */}
-            <div className="flex flex-col justify-center">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight mb-8">
+            {/* Left content with sphere */}
+            <div className="flex flex-col justify-center relative">
+              {/* Glowing Sphere behind text */}
+              <div className="absolute -left-32 top-1/2 -translate-y-1/2 hidden lg:flex">
+                <GlowingSphere />
+              </div>
+              
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight mb-8 relative z-10">
                 <span className="text-white">Accelerate the</span>
                 <br />
                 <span className="text-white">Development of</span>
