@@ -1,5 +1,57 @@
 import type { Config } from "tailwindcss";
 
+// Custom keyframes for the glowing sphere
+const sphereKeyframes = {
+  'sphere-warp': {
+    '0%, 100%': { 
+      transform: 'translate(-50%, -50%) scale(1) rotate(0deg)',
+      borderRadius: '50%',
+    },
+    '25%': { 
+      transform: 'translate(-50%, -50%) scale(1.05, 0.95) rotate(2deg)',
+      borderRadius: '48% 52% 50% 50%',
+    },
+    '50%': { 
+      transform: 'translate(-50%, -50%) scale(0.95, 1.05) rotate(-1deg)',
+      borderRadius: '52% 48% 48% 52%',
+    },
+    '75%': { 
+      transform: 'translate(-50%, -50%) scale(1.03, 0.97) rotate(1deg)',
+      borderRadius: '50% 50% 52% 48%',
+    },
+  },
+  'pulse-glow': {
+    '0%, 100%': { 
+      opacity: '0.6',
+      transform: 'translate(-50%, -50%) scale(1)',
+    },
+    '50%': { 
+      opacity: '1',
+      transform: 'translate(-50%, -50%) scale(1.1)',
+    },
+  },
+  'ring-pulse': {
+    '0%, 100%': { 
+      opacity: '0.5',
+      transform: 'translate(-50%, -50%) scale(1)',
+    },
+    '50%': { 
+      opacity: '0.8',
+      transform: 'translate(-50%, -50%) scale(1.05)',
+    },
+  },
+  'ring-pulse-delayed': {
+    '0%, 100%': { 
+      opacity: '0.3',
+      transform: 'translate(-50%, -50%) scale(1)',
+    },
+    '50%': { 
+      opacity: '0.6',
+      transform: 'translate(-50%, -50%) scale(1.03)',
+    },
+  },
+};
+
 export default {
 	darkMode: ["class"],
 	content: [
@@ -84,11 +136,16 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+				...sphereKeyframes
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'sphere-warp': 'sphere-warp 3s ease-in-out infinite',
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+				'ring-pulse': 'ring-pulse 2.5s ease-in-out infinite',
+				'ring-pulse-delayed': 'ring-pulse-delayed 2.5s ease-in-out infinite 0.5s'
 			}
 		}
 	},
