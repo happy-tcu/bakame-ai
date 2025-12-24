@@ -10,7 +10,7 @@ import Navbar from '@/components/layout/Navbar';
 import EarlyAccessModal from '@/components/EarlyAccessModal';
 import FloatingVoiceButton from '@/components/FloatingVoiceButton';
 import HeroGeometry from '@/components/HeroGeometry';
-import GlowingSphere from '@/components/GlowingSphere';
+
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import drcLogo from '../../attached_assets/1_1764635764642.png';
 import shaddockLogo from '../../attached_assets/2_1764635764642.png';
@@ -80,10 +80,6 @@ const Index = () => {
         {/* Grid pattern background */}
         <div className="absolute inset-0 grid-pattern opacity-30" />
         
-        {/* Glowing Sphere - positioned on far left, always visible */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 z-0" style={{ transform: 'translateY(-50%) translateX(-20%)' }}>
-          <GlowingSphere />
-        </div>
         
         <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen pt-24 pb-20">
