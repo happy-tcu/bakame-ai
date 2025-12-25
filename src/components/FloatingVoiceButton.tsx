@@ -175,6 +175,7 @@ const FloatingVoiceButton = ({ agentId, triggerSectionId }: FloatingVoiceButtonP
                 dangerouslySetInnerHTML={{ 
                   __html: `<elevenlabs-convai 
                     agent-id="${agentId}"
+                    avatar-image-url="/brand-assets/Icon Blue.png"
                     avatar-orb-color-1="#2563eb"
                     avatar-orb-color-2="#9333ea"
                     action-text="Talk to Bakame AI"
